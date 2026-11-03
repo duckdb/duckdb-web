@@ -9,14 +9,14 @@ excerpt: "Today we are releasing DuckDB 1.4.1, the first patch release of our LT
 tag: release
 ---
 
-In this blog post, we highlight a few important fixes and convenience improvements in DuckDB v1.4.1, the first patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}).
+In this blog post, we highlight a few important fixes and convenience improvements in DuckDB 1.4.1, the first patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}).
 You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.1).
 
-To install the new version, please visit the [installation page]({% link install/index.html %}#version=lts).
+To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}#version=lts).
 
 ## Iceberg Improvements
 
-The DuckDB [`iceberg` extension]({% link docs/1.5/core_extensions/iceberg/overview.md %}) received a number of patches:
+The DuckDB [`iceberg` extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}) received a number of patches:
 
 * You can now attach to an Iceberg REST Catalog and specify an access delegation mode. This fixes a bug when using catalogs that did not vend credentials. The `ATTACH` statement will now look like this:
 
@@ -38,11 +38,11 @@ The DuckDB [`iceberg` extension]({% link docs/1.5/core_extensions/iceberg/overvi
 ## AWS Improvements
 
 The `aws` extension received a number of changes, which makes it easier to configure and troubleshoot.
-See the [`aws` documentation page]({% link docs/1.5/core_extensions/aws.md %}) for more details.
+See the [`aws` documentation page]({% link docs/2.0/core_extensions/aws.md %}) for more details.
 
 ### Secret Validation
 
-Since DuckDB v1.4.0, the AWS `credential_chain` provider looks for any required credentials during `CREATE SECRET` time, failing if absent/unavailable. Since v1.4.1 this behavior can also be configured via the `VALIDATION` option as follows:
+Since DuckDB 1.4.0, the AWS `credential_chain` provider looks for any required credentials during `CREATE SECRET` time, failing if absent/unavailable. Since v1.4.1 this behavior can also be configured via the `VALIDATION` option as follows:
 
 ```sql
 CREATE OR REPLACE SECRET secret (
@@ -61,20 +61,20 @@ Two validation modes are supported:
 
 Previously, setting the S3 region incorrectly could result in difficult-to-debug situations (`Unknown error for HTTP HEAD to ...`).
 
-DuckDB v1.4.1 [removes `us-east-1` as the default S3 region](https://github.com/duckdb/duckdb/pull/19087) and returns a 301 error code if an incorrect region is used.
+DuckDB 1.4.1 [removes `us-east-1` as the default S3 region](https://github.com/duckdb/duckdb/pull/19087) and returns a 301 error code if an incorrect region is used.
 
 ## Fixes for Missing Data
 
 Users reported two cases where DuckDB omitted some data:
 
 * The Parquet reader had a [regression which caused it to omit some rows](https://github.com/duckdb/duckdb/issues/19131) when using predicate pushdown on certain string columns.
-* In certain edge cases, DuckDB’s ART index could [omit rows](https://github.com/duckdb/duckdb/issues/19190) rows non-deterministically when running on multiple threads. Note that this index is only used when you manually specify an index with [`CREATE INDEX`]({% link docs/1.5/sql/indexes.md %}).
+* In certain edge cases, DuckDB’s ART index could [omit rows](https://github.com/duckdb/duckdb/issues/19190) rows non-deterministically when running on multiple threads. Note that this index is only used when you manually specify an index with [`CREATE INDEX`]({% link docs/2.0/sql/indexes.md %}).
 
-DuckDB v1.4.1 fixes both of these issues.
+DuckDB 1.4.1 fixes both of these issues.
 
 ## Autoloading
 
-In DuckDB v1.4.0, the [`httpfs` extension]({% link docs/1.5/core_extensions/httpfs/overview.md %}) was not always autoloaded. For example, running:
+In DuckDB 1.4.0, the [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/overview.md %}) was not always autoloaded. For example, running:
 
 ```sql
 COPY (SELECT 42 AS answer) TO 's3://my_bucket/my_file.parquet';
@@ -104,4 +104,4 @@ Use ".open FILENAME" to reopen on a persistent database.
 D
 ```
 
-For more details including operational considerations and using the UI, read the [Docker image page]({% link docs/1.5/operations_manual/duckdb_docker.md %}).
+For more details including operational considerations and using the UI, read the [Docker image page]({% link docs/2.0/operations_manual/duckdb_docker.md %}).

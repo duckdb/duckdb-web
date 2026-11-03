@@ -44,10 +44,10 @@ docs:
 
 
 
-extension_star_count: 87
-extension_star_count_pretty: 87
-extension_download_count: 56991
-extension_download_count_pretty: 57.0k
+extension_star_count: 92
+extension_star_count_pretty: 92
+extension_download_count: 50231
+extension_download_count_pretty: 50.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_nanoarrow.png'
 layout: community_extension_doc
 ---
@@ -61,7 +61,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -89,6 +89,7 @@ LOAD {{ page.extension.name }};
 
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
+| arrow_kv_metadata | table         | NULL        | NULL    |          |
 | nanoarrow_version | scalar        | NULL        | NULL    |          |
 | read_arrow        | table         | NULL        | NULL    |          |
 | scan_arrow_ipc    | table         | NULL        | NULL    |          |
@@ -110,6 +111,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

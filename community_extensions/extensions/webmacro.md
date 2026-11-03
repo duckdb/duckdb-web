@@ -91,8 +91,8 @@ repo:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 6937
-extension_download_count_pretty: 6.9k
+extension_download_count: 977
+extension_download_count_pretty: 977
 image: '/images/community_extensions/social_preview/preview_community_extension_webmacro.png'
 layout: community_extension_doc
 ---
@@ -106,7 +106,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -132,9 +132,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| load_macro_from_url | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

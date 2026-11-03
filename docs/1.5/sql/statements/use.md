@@ -22,6 +22,6 @@ USE main;
 
 <div id="rrdiagram1"></div>
 
-The `USE` statement sets a default database, schema or database/schema combination to use for
+The `USE` statement sets a default database, schema, or database/schema combination to use for
 future operations. For instance, tables created without providing a fully qualified
 table name will be created in the default database.

@@ -7,13 +7,14 @@ redirect_from:
 - /docs/lts/guides/performance/join_operations
 - /docs/preview/guides/performance/join_operations
 title: Join Operations
+how_to_topic: performance
 ---
 
 ## How to Force a Join Order
 
 DuckDB has a cost-based query optimizer, which uses statistics in the base tables (stored in a DuckDB database or Parquet files) to estimate the cardinality of operations.
 
-### Turn off the Join Order Optimizer
+### Turn Off the Join Order Optimizer
 
 To turn off the join order optimizer, set the following [`PRAGMA`s]({% link docs/2.0/configuration/pragmas.md %}):
 

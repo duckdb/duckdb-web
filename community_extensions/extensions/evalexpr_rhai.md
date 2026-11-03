@@ -26,8 +26,8 @@ repo:
 
 extension_star_count: 27
 extension_star_count_pretty: 27
-extension_download_count: 9109
-extension_download_count_pretty: 9.1k
+extension_download_count: 958
+extension_download_count_pretty: 958
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---
@@ -41,7 +41,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -67,10 +67,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                                           description                                            | comment |                                                           examples                                                           |
-|---------------|---------------|--------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------|
-| evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression and return the result as JSON                      | NULL    | [evalexpr_rhai('40 + 2'), evalexpr_rhai('[1, 2, 3].map(\|x\| x * 2)')]                                                       |
-| evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression with a JSON context object accessible as 'context' | NULL    | [evalexpr_rhai('context.x + context.y', '{"x": 10, "y": 20}'), evalexpr_rhai('context.items.len()', '{"items": [1, 2, 3]}')] |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

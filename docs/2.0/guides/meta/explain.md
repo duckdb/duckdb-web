@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/meta/explain
 - /docs/preview/guides/meta/explain
 title: 'EXPLAIN: Inspect Query Plans'
+how_to_topic: tools-meta
 ---
 
 ```sql

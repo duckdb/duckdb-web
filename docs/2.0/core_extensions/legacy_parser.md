@@ -5,6 +5,7 @@ redirect_from:
 - /docs/current/core_extensions/legacy_parser
 - /docs/lts/core_extensions/legacy_parser
 - /docs/preview/core_extensions/legacy_parser
+- /docs/stable/core_extensions/legacy_parser
 title: Legacy Parser Extension
 ---
 

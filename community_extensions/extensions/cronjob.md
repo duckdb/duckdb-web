@@ -77,8 +77,8 @@ repo:
 
 extension_star_count: 57
 extension_star_count_pretty: 57
-extension_download_count: 7338
-extension_download_count_pretty: 7.3k
+extension_download_count: 1038
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'
 layout: community_extension_doc
 ---
@@ -92,7 +92,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -118,11 +118,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| cron          | scalar        | NULL        | NULL    |          |
-| cron_delete   | scalar        | NULL        | NULL    |          |
-| cron_jobs     | table         | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

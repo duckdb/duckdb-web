@@ -32,7 +32,7 @@ The last few weeks since the release were quite eventful:
 2. We added support to DuckDB for [Delta Lake](https://delta.io/), an open-source lakehouse framework.
     This feature was described in Sam Ansmink's [blog post]({% post_url 2024-06-10-delta %}) and Hannes Mühleisen's [keynote segment at the DATA+AI summit](https://www.youtube.com/watch?v=wuP6iEYH11E).
 
-    With extensions for both [Delta Lake]({% link docs/1.5/core_extensions/delta.md %}) and [Iceberg]({% link docs/1.5/core_extensions/iceberg/overview.md %}),
+    With extensions for both [Delta Lake]({% link docs/2.0/core_extensions/delta.md %}) and [Iceberg]({% link docs/2.0/core_extensions/iceberg/overview.md %}),
     DuckDB can now read the two most popular data lake formats.
 
 3. We ran a poster campaign for DuckDB in Amsterdam:
@@ -42,7 +42,7 @@ The last few weeks since the release were quite eventful:
         <br/>
     </div>
 
-4. [DuckLabs](https://ducklabs.com) sponsored the [Hack4Her event](https://hack4her.github.io/), a female-focused student hackathon in the Netherlands. During the DuckDB Challenge of the event, teams built a community-driven app providing safe walking routes in Amsterdam using DuckDB and its [geospatial library]({% link docs/1.5/core_extensions/spatial/overview.md %}).
+4. [DuckLabs](https://ducklabs.com) sponsored the [Hack4Her event](https://hack4her.github.io/), a female-focused student hackathon in the Netherlands. During the DuckDB Challenge of the event, teams built a community-driven app providing safe walking routes in Amsterdam using DuckDB and its [geospatial library]({% link docs/2.0/core_extensions/spatial/overview.md %}).
 
     <div align="center">
         <img src="{% link images/blog/hack4her-duckdb-amsterdam.jpg %}" alt="Hack4Her Event" width="700"/>
@@ -56,7 +56,7 @@ There are several interesting events lined up for the summer.
 First, two books about DuckDB are expected to be released:
 
 * [**Getting Started with DuckDB**](https://www.packtpub.com/product/getting-started-with-duckdb/9781803241005), authored by Simon Aubury and Ned Letcher, and published by Packt Publishing
-* [**DuckDB in Action**](https://www.manning.com/books/duckdb-in-action), authored by Mark Needham, Michael Hunger and Michael Simons, and published by Manning Publications
+* [**DuckDB in Action**](https://www.manning.com/books/duckdb-in-action), authored by Mark Needham, Michael Hunger, and Michael Simons, and published by Manning Publications
 
 Second, we are holding our next user community meeting, [DuckCon #5]({% link _events/2024-08-15-duckcon5.md %}) in Seattle on August 15 with the regular “State of the Duck” update as well as three regular talks and several lightning talks.
 

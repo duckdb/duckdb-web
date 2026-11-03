@@ -122,7 +122,7 @@ con = duckdb.connect()
 con.execute("SET max_temp_directory_size = '10GB'")
 ```
 
-### Arrow Readers Hang on Windows after a Subinterpreter Was Created
+### Arrow Readers Hang on Windows After a Subinterpreter Was Created
 
 On Windows, once the process has created a subinterpreter, a query that scans a `pyarrow.RecordBatchReader` whose batches come from a Python generator can hang.
 

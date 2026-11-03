@@ -27,10 +27,10 @@ docs:
   extended_description: |
     Adds support for the Lua embedded scripting language to DuckDB.
 
-extension_star_count: 13
-extension_star_count_pretty: 13
-extension_download_count: 10428
-extension_download_count_pretty: 10.4k
+extension_star_count: 14
+extension_star_count_pretty: 14
+extension_download_count: 994
+extension_download_count_pretty: 994
 image: '/images/community_extensions/social_preview/preview_community_extension_lua.png'
 layout: community_extension_doc
 ---
@@ -91,6 +91,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

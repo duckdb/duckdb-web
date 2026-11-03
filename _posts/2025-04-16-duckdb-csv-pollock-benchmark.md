@@ -28,7 +28,7 @@ For example, Rabobank, one of the biggest banks in the Netherlands, exports the 
 />
 
 If a big financial institute cannot write proper CSV files, imagine the errors occurring in CSV files exported by decades-old legacy software, in hand-written CSV files, files exported from spreadsheet software, and so on!
-These sorts of errors are so prevalent that spreadsheet software, [dataframe libraries](https://news.ycombinator.com/item?id=39665312) and specialized CSV tools go above and beyond to salvage these files and hammer them into tables that users can work with.
+These sorts of errors are so prevalent that spreadsheet software, [dataframe libraries](https://news.ycombinator.com/item?id=39665312), and specialized CSV tools go above and beyond to salvage these files and hammer them into tables that users can work with.
 
 ## DuckDB's CSV Parser
 
@@ -100,7 +100,7 @@ We can see that the sniffer decided that quotes and escape characters are not pr
 Consequently, it decided to skip the first 4 rows (including the header) in order to read the file according to the dialect.
 
 > Tip DuckDB allows users to retrieve all errors that occur when reading a CSV file using the `reject_errors` table.
-> This is beyond the scope of this blog post, but you can find more details in the [“Reading Faulty CSV Files” documentation page]({% link docs/1.5/data/csv/reading_faulty_csv_files.md %}).
+> This is beyond the scope of this blog post, but you can find more details in the [“Reading Faulty CSV Files” documentation page]({% link docs/2.0/data/csv/reading_faulty_csv_files.md %}).
 
 ### Loading the Example with a User-Defined CSV Dialect
 

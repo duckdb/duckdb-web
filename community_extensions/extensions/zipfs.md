@@ -25,10 +25,10 @@ docs:
   extended_description: |
     The zipfs extension adds support for reading files from within zip files and other archives.
 
-extension_star_count: 71
-extension_star_count_pretty: 71
-extension_download_count: 25780
-extension_download_count_pretty: 25.8k
+extension_star_count: 72
+extension_star_count_pretty: 72
+extension_download_count: 30415
+extension_download_count_pretty: 30.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_zipfs.png'
 layout: community_extension_doc
 ---
@@ -42,7 +42,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -89,9 +89,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|      name       |                                                                             description                                                                             | input_type | scope  | aliases |
-|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| zipfs_extension | Extension to look for splitting the zip path and the file path within the zip. To specify an artificial seperator, instead set: `set zipfs_split = '!!';`           | VARCHAR    | GLOBAL | []      |
-| zipfs_split     | Extension to look for splitting the zip path and the file path within the zip. Will be removed from the zip file name. Overrides zipfs_extension. Defaults to NULL. | VARCHAR    | GLOBAL | []      |
+|      name       |                                                                             description                                                                             | input_type | scope  | aliases | typed_value |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory  | Set the directory to which temporary files are written.                                                                                                             | VARCHAR    | GLOBAL | []      | post.db.tmp |
+| zipfs_extension | Extension to look for splitting the zip path and the file path within the zip. To specify an artificial seperator, instead set: `set zipfs_split = '!!';`           | VARCHAR    | GLOBAL | []      | .zip        |
+| zipfs_split     | Extension to look for splitting the zip path and the file path within the zip. Will be removed from the zip file name. Overrides zipfs_extension. Defaults to NULL. | VARCHAR    | GLOBAL | []      | NULL        |
 
 

@@ -51,8 +51,8 @@ repo:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 9675
-extension_download_count_pretty: 9.7k
+extension_download_count: 977
+extension_download_count_pretty: 977
 image: '/images/community_extensions/social_preview/preview_community_extension_quickjs.png'
 layout: community_extension_doc
 ---
@@ -66,7 +66,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -92,11 +92,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                                       description                                       | comment |                                 examples                                  |
-|---------------|---------------|-----------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------|
-| quickjs       | scalar        | Execute JavaScript code and return the result as a string                               | NULL    | [quickjs('1 + 2'), quickjs('"hello".toUpperCase()')]                      |
-| quickjs       | table         | Execute JavaScript code that returns an array, with each element becoming a row         | NULL    | [SELECT * FROM quickjs('[1, 2, 3].map(x => x * 2)')]                      |
-| quickjs_eval  | scalar        | Execute a JavaScript function with the provided arguments and return the result as JSON | NULL    | [quickjs_eval('(a, b) => a + b', 1, 2), quickjs_eval('(x) => x * 2', 21)] |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

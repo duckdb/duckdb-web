@@ -363,7 +363,7 @@ The table below shows the available table functions for `TIMESTAMP WITH TIME ZON
 | **Description** | Generate a table of timestamps in the half open range (including the starting timestamp, but stopping before the ending timestamp), stepping by the interval. |
 | **Example** | `range(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '2001-04-11', INTERVAL 30 MINUTE)` |
 
-## ICU Timestamp Without Time Zone Functions
+## ICU Timestamp without Time Zone Functions
 
 The table below shows the ICU provided scalar functions that operate on plain `TIMESTAMP` values.
 These functions assume that the `TIMESTAMP` is a “local timestamp”.

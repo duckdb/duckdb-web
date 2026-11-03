@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sitemap
   description: Parse XML sitemaps from websites with automatic discovery via robots.txt
-  version: '2026020501'
+  version: '2026102301'
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,8 @@ extension:
 repo:
   github: midwork-finds-jobs/duckdb-sitemap
   andium: 4c873c85c3f7c8dcab6154de51aa218f61677634
-  ref: 15e96dfd6e5dfb6d70a9b7cc5a2675b3969e16b3
+  variegata: 15e96dfd6e5dfb6d70a9b7cc5a2675b3969e16b3
+  ref: ab4c5718d2eda09b6123a7e7915ebef2266b3e3b
 
 docs:
   hello_world: |
@@ -123,10 +124,10 @@ docs:
     LIMIT 10;
     ```
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 6966
-extension_download_count_pretty: 7.0k
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 967
+extension_download_count_pretty: 967
 image: '/images/community_extensions/social_preview/preview_community_extension_sitemap.png'
 layout: community_extension_doc
 ---
@@ -138,13 +139,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -166,7 +167,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-This extension does not add any functions.
+|      function_name      | function_type | description | comment | examples |
+|-------------------------|---------------|-------------|---------|----------|
+| bruteforce_find_sitemap | scalar        | NULL        | NULL    |          |
+| sitemap_urls            | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -184,6 +188,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|        name        |                       description                       | input_type | scope  | aliases |    typed_value     |
+|--------------------|---------------------------------------------------------|------------|--------|---------|--------------------|
+| sitemap_max_size   | Maximum (decompressed) sitemap size in bytes            | UBIGINT    | GLOBAL | []      | 67108864           |
+| sitemap_user_agent | User agent string for sitemap HTTP requests             | VARCHAR    | GLOBAL | []      | DuckDB-Sitemap/1.0 |
+| temp_directory     | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp        |
 
 

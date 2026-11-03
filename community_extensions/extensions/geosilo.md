@@ -23,8 +23,8 @@ repo:
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 5217
-extension_download_count_pretty: 5.2k
+extension_download_count: 971
+extension_download_count_pretty: 971
 image: '/images/community_extensions/social_preview/preview_community_extension_geosilo.png'
 layout: community_extension_doc
 ---
@@ -38,7 +38,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -64,26 +64,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples |
-|------------------|---------------|-------------|---------|----------|
-| ST_Area          | scalar        | NULL        | NULL    | NULL     |
-| ST_GeometryType  | scalar        | NULL        | NULL    | NULL     |
-| ST_IsEmpty       | scalar        | NULL        | NULL    | NULL     |
-| ST_Length        | scalar        | NULL        | NULL    | NULL     |
-| ST_NPoints       | scalar        | NULL        | NULL    | NULL     |
-| ST_Perimeter     | scalar        | NULL        | NULL    | NULL     |
-| ST_X             | scalar        | NULL        | NULL    | NULL     |
-| ST_XMax          | scalar        | NULL        | NULL    | NULL     |
-| ST_XMin          | scalar        | NULL        | NULL    | NULL     |
-| ST_Y             | scalar        | NULL        | NULL    | NULL     |
-| ST_YMax          | scalar        | NULL        | NULL    | NULL     |
-| ST_YMin          | scalar        | NULL        | NULL    | NULL     |
-| geosilo_decode   | scalar        | NULL        | NULL    | NULL     |
-| geosilo_decode   | scalar        | NULL        | NULL    | NULL     |
-| geosilo_encode   | scalar        | NULL        | NULL    | NULL     |
-| geosilo_encode   | scalar        | NULL        | NULL    | NULL     |
-| geosilo_metadata | scalar        | NULL        | NULL    | NULL     |
-| geosilo_metadata | scalar        | NULL        | NULL    | NULL     |
+This extension does not add any functions.
 
 ### Overloaded Functions
 
@@ -95,9 +76,7 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-| type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|----------|
-| GEOSILO   | 16        | BLOB         | NULL          | true     |
+This extension does not add any types.
 
 ### Added Settings
 

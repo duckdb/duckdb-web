@@ -63,10 +63,10 @@ docs:
     Development notes and the full function table live in the repository:
     <https://github.com/shijianjs/duckfn-statrs>.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 3044
-extension_download_count_pretty: 3.0k
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 762
+extension_download_count_pretty: 762
 image: '/images/community_extensions/social_preview/preview_community_extension_duckfn_statrs.png'
 layout: community_extension_doc
 ---
@@ -80,7 +80,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -663,6 +663,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

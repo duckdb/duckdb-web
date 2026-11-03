@@ -6,7 +6,7 @@ authors:
   - Gábor Szárnyas
 thumb: "/images/blog/thumbs/time-based-analysis-in-duckdb.svg"
 image: "/images/blog/thumbs/time-based-analysis-in-duckdb.png"
-excerpt: "DuckDB can perform time-based analytics using windows with different semantics (e.g., tumbling, hopping and sliding windows). In this post, we demonstrate these by detecting trends and anomalies in the railway service at Amsterdam Centraal Station."
+excerpt: "DuckDB can perform time-based analytics using windows with different semantics (e.g., tumbling, hopping, and sliding windows). In this post, we demonstrate these by detecting trends and anomalies in the railway service at Amsterdam Centraal Station."
 tag: using-duckdb
 ---
 
@@ -15,7 +15,7 @@ tag: using-duckdb
 In data platforms, we usually categorize the data into dimension and fact data. While dimensions contain information about entities (name, address, serial number, etc.), facts contain events related to such entities (clicks, sales, bank transactions, readings from IoT devices, etc.). In general, fact data includes a timestamp attribute, denoting the moment when the event happened (or was observed).
 
 When the timestamped data is processed on a streaming platform, it is often processed with _stream windowing functions_ in order to organize the data into time windows.
-In this post, we will show how to apply stream windows on static timestamped fact data in DuckDB, as part of a data analysis task to compute train service summaries, trends and interruptions at Amsterdam Centraal Station.
+In this post, we will show how to apply stream windows on static timestamped fact data in DuckDB, as part of a data analysis task to compute train service summaries, trends, and interruptions at Amsterdam Centraal Station.
 
 > In a future post, we'll cover streaming design patterns with DuckDB.
 
@@ -36,7 +36,7 @@ USE dutch_railway_network.main_main;
 
 [_Tumbling windows_](https://learn.microsoft.com/en-us/stream-analytics-query/tumbling-window-azure-stream-analytics) are fixed-size **[left-closed, right-open)** time intervals, used to calculate summaries at a certain time unit level (year, day, hour, etc.). Tumbling windows are also used to transform (irregular) fact data into time series data, by aggregating it at a regular time interval.
 
-One way of implementing tumbling windows is to use the [`date_trunc` function]({% link docs/1.5/sql/functions/timestamp.md %}#date_truncpart-timestamp), which will truncate the timestamp to the specified precision. For example, in the following, we retrieve the number of services for each hour and each day in 2024:
+One way of implementing tumbling windows is to use the [`date_trunc` function]({% link docs/2.0/sql/functions/timestamp.md %}#date_truncpart-timestamp), which will truncate the timestamp to the specified precision. For example, in the following, we retrieve the number of services for each hour and each day in 2024:
 
 ```sql
 SELECT
@@ -78,7 +78,7 @@ ORDER BY 1;
     </a>
 </div>
 
-Another approach is to use the [`time_bucket` function]({% link docs/1.5/sql/functions/timestamp.md %}#time_bucketbucket_width-timestamp-offset), which will truncate the timestamp to the bucket width provided, starting from the specified offset. For example, we calculate the number of services each quarter of an hour, starting with `00`:
+Another approach is to use the [`time_bucket` function]({% link docs/2.0/sql/functions/timestamp.md %}#time_bucketbucket_width-timestamp-offset), which will truncate the timestamp to the bucket width provided, starting from the specified offset. For example, we calculate the number of services each quarter of an hour, starting with `00`:
 
 ```sql
 SELECT
@@ -208,7 +208,7 @@ Can you imagine how it must have been like in the control room when within 15 mi
 ## Sliding Windows
 
 [_Sliding windows_](https://learn.microsoft.com/en-us/stream-analytics-query/sliding-window-azure-stream-analytics) are overlapping intervals, but, compared to hopping windows, they are dynamically generated from the time column analyzed, therefore changing when new records are inserted.
-Sliding windows can be implemented by using the [`RANGE` window framing]({% link docs/1.5/sql/functions/window_functions.md %}#framing):
+Sliding windows can be implemented by using the [`RANGE` window framing]({% link docs/2.0/sql/functions/window_functions.md %}#framing):
 
 ```sql
 SELECT
@@ -246,7 +246,7 @@ A [_session window_](https://learn.microsoft.com/en-us/stream-analytics-query/se
 
 We continue the data analysis by identifying the days in which there were periods of time larger than 10 minutes in which no train was arriving/departing in/from the Amsterdam Centraal Station. In this context, a session window is the period of time in which train services run without a service inactivity gap longer than 10 minutes.
 
-We start by calculating, for each record, the previous service time, by using the [`lag` window function]({% link docs/1.5/sql/functions/window_functions.md %}#lagexpr-offset-default-order-by-ordering-ignore-nulls). We observed above that there is almost no traffic during the night, therefore we include only services between 6 AM and 11 PM:
+We start by calculating, for each record, the previous service time, by using the [`lag` window function]({% link docs/2.0/sql/functions/window_functions.md %}#lagexpr-offset-default-order-by-ordering-ignore-nulls). We observed above that there is almost no traffic during the night, therefore we include only services between 6 AM and 11 PM:
 
 ```sql
 SELECT
@@ -261,7 +261,7 @@ FROM ams_traffic_v
 WHERE hour(station_service_time) BETWEEN 6 AND 23
 ```
 
-In the above query we also calculate the gap, in minutes, between the current service and the previous service, with [`date_diff`]({% link docs/1.5/sql/functions/time.md %}#date_diffpart-starttime-endtime). If there is no previous service, the column will be `NULL`, depicting the first service session in the day:
+In the above query we also calculate the gap, in minutes, between the current service and the previous service, with [`date_diff`]({% link docs/2.0/sql/functions/time.md %}#date_diffpart-starttime-endtime). If there is no previous service, the column will be `NULL`, depicting the first service session in the day:
 
 ```text
 ┌──────────────────────┬───────────────────────┬─────────────┐
@@ -387,4 +387,4 @@ Something must have happened on 29 April 2024! We observe that, during the 18 ho
 
 ## Conclusion
 
-In this post we have demonstrated how stream windowing functions can be implemented on historical timestamped data in DuckDB, offering a starting point in time (series) data analysis. We also recommend [“Catching up with Windowing”]({% post_url 2025-02-10-window-catchup %}), a post about DuckDB's windowing features, which can be adopted in the functions presented herein.
+In this post we have demonstrated how stream windowing functions can be implemented on historical timestamped data in DuckDB, offering a starting point in time (series) data analysis. We also recommend [“Catching Up with Windowing”]({% post_url 2025-02-10-window-catchup %}), a post about DuckDB's windowing features, which can be adopted in the functions presented herein.

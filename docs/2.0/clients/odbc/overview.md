@@ -10,7 +10,7 @@ redirect_from:
 title: ODBC API Overview
 ---
 
-> Installation To use the DuckDB ODBC client, visit the [ODBC installation page]({% link install/index.html %}?environment=odbc).
+> Installation To use the DuckDB ODBC client, visit the [ODBC installation page]({% link docs/2.0/installation.html %}?environment=odbc).
 >
 > The latest stable version of the DuckDB ODBC client is {% include install/latest_client.html client="odbc" %}{{ latest_version }}.
 
@@ -30,4 +30,4 @@ The DM maps user application calls of ODBC functions to the correct ODBC driver 
 
 DuckDB supports the ODBC version 3.0 according to the [Core Interface Conformance](https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/core-interface-conformance?view=sql-server-ver15).
 
-The ODBC driver is available for all operating systems. Visit the [installation page]({% link install/index.html %}) for direct links.
+The ODBC driver is available for all operating systems. Visit the [installation page]({% link docs/2.0/installation.html %}) for direct links.

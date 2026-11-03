@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 10798
-extension_download_count_pretty: 10.8k
+extension_download_count: 5233
+extension_download_count_pretty: 5.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_curl_httpfs.png'
 layout: community_extension_doc
 ---
@@ -48,7 +48,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -95,9 +95,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                name                |                                                     description                                                      | input_type | scope  | aliases |
-|------------------------------------|----------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| curl_httpfs_client_implementation  | Select the HTTPUtil implementation to be used. Supports `multi_curl`, `curl`, `httplib`, and `default` (multi_curl). | VARCHAR    | GLOBAL | []      |
-| curl_httpfs_enable_verbose_logging | Turn on and off curl-based http util verbose logging.                                                                | BOOLEAN    | GLOBAL | []      |
+|                name                |                                                     description                                                      | input_type | scope  | aliases | typed_value |
+|------------------------------------|----------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| curl_httpfs_client_implementation  | Select the HTTPUtil implementation to be used. Supports `multi_curl`, `curl`, `httplib`, and `default` (multi_curl). | VARCHAR    | GLOBAL | []      | default     |
+| curl_httpfs_enable_verbose_logging | Turn on and off curl-based http util verbose logging.                                                                | BOOLEAN    | GLOBAL | []      | 0           |
+| temp_directory                     | Set the directory to which temporary files are written.                                                              | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

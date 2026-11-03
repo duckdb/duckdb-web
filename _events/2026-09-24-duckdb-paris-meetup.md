@@ -13,7 +13,7 @@ category: community
 location: "Algolia, Paris"
 ---
 
-The DuckDB Paris meetup is hosted by DuckDB and Altertable at Algolia’s Paris office, and features talks, demos, food and drinks.
+The DuckDB Paris meetup is hosted by DuckDB and Altertable at Algolia’s Paris office, and features talks, demos, food, and drinks.
 
 ## Venue
 

@@ -6,7 +6,7 @@ title: SHOW, SHOW DATABASES, and SHOW SCHEMAS Statements
 ## `SHOW` Statement
 
 The `SHOW` statement is an alias for [`DESCRIBE`]({% link docs/1.5/sql/statements/describe.md %}).
-It shows the schema of a table, view or query.
+It shows the schema of a table, view, or query.
 
 ## `SHOW DATABASES` Statement
 
@@ -33,7 +33,7 @@ SHOW DATABASES;
 
 ## `SHOW SCHEMAS` Statement
 
-> This statement was introduced in DuckDB v1.5.
+> This statement was introduced in DuckDB 1.5.
 
 The `SHOW SCHEMAS` statement shows a list of all schemas across non-internal databases:
 

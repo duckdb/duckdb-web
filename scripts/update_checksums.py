@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""Update the SHA-256 hashes in _data/checksums_XY.yml from a DuckDB GitHub release.
+"""Update the SHA-256 hashes in _data/checksums_XY.yml from DuckDB GitHub releases and Maven Central.
 
 Usage: python scripts/update_checksums.py 1.5.6
 
 For version X.Y.Z, the default file is _data/checksums_XY.yml (e.g., checksums_15.yml for 1.5.6).
-Artifacts that are not published in the duckdb/duckdb release (e.g., the JDBC and ODBC drivers)
+The JDBC driver's hash is fetched from Maven Central, using the version in its filename
+(e.g., duckdb_jdbc-1.5.6.0.jar). The ODBC drivers' hashes are fetched from the duckdb/duckdb-odbc
+release whose version is set in _config.yml (e.g., latest_duckdb_odbc_version: "2.0.0.1"), using
+the config_prefix of the X.Y release in _data/releases.yml. Other artifacts that are not found
 are left unchanged and reported.
 """
 
@@ -17,7 +20,10 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "_data"
+ROOT_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = ROOT_DIR / "_data"
+MAVEN_URL = "https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc"
+JDBC_FILENAME = re.compile(r"duckdb_jdbc-(.+)\.jar")
 
 
 def default_file(version):
@@ -25,8 +31,26 @@ def default_file(version):
     return DATA_DIR / f"checksums_{major}{minor}.yml"
 
 
-def fetch_digests(version):
-    url = f"https://api.github.com/repos/duckdb/duckdb/releases/tags/v{version}"
+def odbc_version(version):
+    # Parse the YAML files with regexes to avoid a dependency on PyYAML
+    short_version = ".".join(version.split(".")[:2])
+    releases = (DATA_DIR / "releases.yml").read_text()
+    m = re.search(
+        rf'^- version:\s*"{re.escape(short_version)}"\s*\n\s+config_prefix:\s*(\w+)',
+        releases,
+        re.MULTILINE,
+    )
+    if not m:
+        return None
+    config = (ROOT_DIR / "_config.yml").read_text()
+    m = re.search(
+        rf'^{m.group(1)}_duckdb_odbc_version:\s*"([^"]*)"', config, re.MULTILINE
+    )
+    return m.group(1) if m and m.group(1) else None
+
+
+def fetch_digests(repo, tag):
+    url = f"https://api.github.com/repos/duckdb/{repo}/releases/tags/{tag}"
     request = urllib.request.Request(
         url, headers={"Accept": "application/vnd.github+json"}
     )
@@ -44,6 +68,16 @@ def fetch_digests(version):
     return digests
 
 
+def fetch_maven_digest(filename):
+    jdbc_version = JDBC_FILENAME.fullmatch(filename).group(1)
+    url = f"{MAVEN_URL}/{jdbc_version}/{filename}.sha256"
+    with urllib.request.urlopen(url) as response:
+        digest = response.read().decode().split()[0].lower()
+    if not re.fullmatch(r"[0-9a-f]{64}", digest):
+        raise ValueError(f"Unexpected SHA-256 digest from {url}: {digest}")
+    return digest
+
+
 def update_file(path, digests):
     # Edit line by line to preserve the file's comments and formatting
     lines = path.read_text().splitlines(keepends=True)
@@ -52,6 +86,11 @@ def update_file(path, digests):
     for i, line in enumerate(lines):
         if m := re.match(r'\s*filename:\s*"?([^"\s]+)"?', line):
             filename = m.group(1)
+            if JDBC_FILENAME.fullmatch(filename) and filename not in digests:
+                try:
+                    digests[filename] = fetch_maven_digest(filename)
+                except (urllib.error.HTTPError, ValueError) as e:
+                    print(f"Failed to fetch {filename} from Maven Central: {e}")
         elif filename and (m := re.match(r'(\s*sha256:\s*)"?[^"\s]*"?\s*$', line)):
             if filename in digests:
                 lines[i] = f'{m.group(1)}"{digests[filename]}"\n'
@@ -80,16 +119,25 @@ def main():
     if not path.exists():
         sys.exit(f"Checksums file {path} does not exist")
     try:
-        digests = fetch_digests(version)
+        digests = fetch_digests("duckdb", f"v{version}")
     except urllib.error.HTTPError as e:
         sys.exit(f"Failed to fetch release v{version}: {e}")
     if not digests:
         sys.exit(f"Release v{version} has no SHA-256 digests")
 
+    if odbc := odbc_version(version):
+        # The ODBC drivers are downloaded from duckdb/duckdb-odbc, so its digests take precedence
+        try:
+            digests.update(fetch_digests("duckdb-odbc", f"v{odbc}"))
+        except urllib.error.HTTPError as e:
+            print(f"Failed to fetch duckdb-odbc release v{odbc}: {e}")
+    else:
+        print(f"No ODBC version found in _config.yml for {version}")
+
     updated, missing = update_file(path, digests)
     print(f"Updated {len(updated)} hashes in {path}")
     for filename in sorted(set(missing)):
-        print(f"Not found in release v{version}, left unchanged: {filename}")
+        print(f"Not found, left unchanged: {filename}")
 
 
 if __name__ == "__main__":

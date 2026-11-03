@@ -89,7 +89,7 @@ FROM tbl;
 ## `COLUMNS` Expression
 
 
-The `COLUMNS` expression is similar to the regular star expression, but additionally allows us to execute the same expression on the resulting columns. 
+The `COLUMNS` expression is similar to the regular star expression, but additionally allows us to execute the same expression on the resulting columns.
 
 ```sql
 CREATE TABLE numbers (id INTEGER, number INTEGER);

@@ -92,10 +92,10 @@ docs:
     extension. Run `INSTALL spatial; LOAD spatial;` before calling one; spatial is
     not needed for anything else.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 4908
-extension_download_count_pretty: 4.9k
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 940
+extension_download_count_pretty: 940
 image: '/images/community_extensions/social_preview/preview_community_extension_duckrouting.png'
 layout: community_extension_doc
 ---
@@ -109,7 +109,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -245,6 +245,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

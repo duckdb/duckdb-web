@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/python/pytorch
 - /docs/preview/guides/python/pytorch
 title: Integration with PyTorch
+how_to_topic: python
 ---
 
 [PyTorch](https://pytorch.org/) tensors can be built from DuckDB query results by exporting each result batch as [Apache Arrow](https://arrow.apache.org/docs/format/Columnar.html). This pattern is useful when training or serving models on Parquet data because DuckDB can filter and project the input before the batches are converted to tensors.
@@ -19,7 +20,7 @@ pip install -U duckdb numpy pyarrow torch
 
 ## DuckDB to PyTorch
 
-This example queries a Parquet-backed Arrow dataset, streams the result as `RecordBatch` objects and converts each batch into feature and label tensors.
+This example queries a Parquet-backed Arrow dataset, streams the result as `RecordBatch` objects, and converts each batch into feature and label tensors.
 
 ```python
 import pathlib

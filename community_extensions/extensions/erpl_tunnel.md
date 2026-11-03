@@ -29,10 +29,10 @@ repo:
   # serves both (and v1.4.5 via the ref fallback).
   variegata: 470fa6499b689c50fc323f589fcf73c6a86518ef
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 4673
-extension_download_count_pretty: 4.7k
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 926
+extension_download_count_pretty: 926
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_tunnel.png'
 layout: community_extension_doc
 ---
@@ -46,7 +46,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -100,10 +100,11 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|          name          |                                                         description                                                         | input_type | scope  | aliases |
-|------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| datazoo_banner         | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
-| erpl_telemetry_enabled | Enable ERPL telemetry, see https://erpl.io/telemetry for details.                                                           | BOOLEAN    | GLOBAL | []      |
-| erpl_telemetry_key     | Telemetry key, see https://erpl.io/telemetry for details.                                                                   | VARCHAR    | GLOBAL | []      |
+|          name          |                                                         description                                                         | input_type | scope  | aliases |                   typed_value                   |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------------------------------------------|
+| datazoo_banner         | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      | true                                            |
+| erpl_telemetry_enabled | Enable ERPL telemetry, see https://erpl.io/telemetry for details.                                                           | BOOLEAN    | GLOBAL | []      | true                                            |
+| erpl_telemetry_key     | Telemetry key, see https://erpl.io/telemetry for details.                                                                   | VARCHAR    | GLOBAL | []      | phc_t3wwRLtpyEmLHYaZCSszG0MqVr74J6wnCrj9D41zk2t |
+| temp_directory         | Set the directory to which temporary files are written.                                                                     | VARCHAR    | GLOBAL | []      | post.db.tmp                                     |
 
 

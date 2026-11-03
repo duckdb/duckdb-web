@@ -124,10 +124,10 @@ docs:
     For more information see the [documentation](https://github.com/columnar-tech/duckdb-adbc-client).
 
 
-extension_star_count: 50
-extension_star_count_pretty: 50
-extension_download_count: 7849
-extension_download_count_pretty: 7.8k
+extension_star_count: 51
+extension_star_count_pretty: 51
+extension_download_count: 1104
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc.png'
 layout: community_extension_doc
 ---
@@ -141,7 +141,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ✅ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ✅ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ✅ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -189,11 +189,12 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                                        description                                                         | input_type | scope  | aliases |
-|------------------------------|----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| adbc_connection_pool_size    | The number of connections (default 50) to pool (cache) before the catalog creates ephemeral connections to serve requests. | BIGINT     | GLOBAL | []      |
-| adbc_insert_buffer_size      | The number of chunks (default 1000) to buffer in memory before inserting via ADBC.                                         | BIGINT     | GLOBAL | []      |
-| adbc_materialize_insert_rows | Whether input rows for INSERTs are materialized before inserting via ADBC.                                                 | BOOLEAN    | GLOBAL | []      |
-| adbc_mix_reads_writes        | Whether ADBC reads and writes can be mixed within the same SQL statement (default false).                                  | BOOLEAN    | GLOBAL | []      |
+|             name             |                                                        description                                                         | input_type | scope  | aliases | typed_value |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| adbc_connection_pool_size    | The number of connections (default 50) to pool (cache) before the catalog creates ephemeral connections to serve requests. | BIGINT     | GLOBAL | []      | 50          |
+| adbc_insert_buffer_size      | The number of chunks (default 1000) to buffer in memory before inserting via ADBC.                                         | BIGINT     | GLOBAL | []      | 1000        |
+| adbc_materialize_insert_rows | Whether input rows for INSERTs are materialized before inserting via ADBC.                                                 | BOOLEAN    | GLOBAL | []      | false       |
+| adbc_mix_reads_writes        | Whether ADBC reads and writes can be mixed within the same SQL statement (default false).                                  | BOOLEAN    | GLOBAL | []      | false       |
+| temp_directory               | Set the directory to which temporary files are written.                                                                    | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

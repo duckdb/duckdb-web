@@ -47,7 +47,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/1.5/sq
 | [`monthname(date)`](#monthnamedate)                                                 | The (English) name of the month.                                                                                                                                                                                                                            |
 | [`strftime(date, format)`](#strftimedate-format)                                    | Converts a date to a string according to the [format string]({% link docs/1.5/sql/functions/dateformat.md %}).                                                                                                                                          |
 | [`time_bucket(bucket_width, date[, offset])`](#time_bucketbucket_width-date-offset) | Truncate `date` to a grid of width `bucket_width`. The grid is anchored at `2000-01-01[ + offset]` when `bucket_width` is a number of months or coarser units, else `2000-01-03[ + offset]`. Note that `2000-01-03` is a Monday.                            |
-| [`time_bucket(bucket_width, date[, origin])`](#time_bucketbucket_width-date-origin) | Truncate `timestamptz` to a grid of width `bucket_width`. The grid is anchored at the `origin` timestamp, which defaults to `2000-01-01` when `bucket_width` is a number of months or coarser units, else `2000-01-03`. Note that `2000-01-03` is a Monday. |
+| [`time_bucket(bucket_width, date[, origin])`](#time_bucketbucket_width-date-origin) | Truncate `date` to a grid of width `bucket_width`. The grid is anchored at the `origin` timestamp, which defaults to `2000-01-01` when `bucket_width` is a number of months or coarser units, else `2000-01-03`. Note that `2000-01-03` is a Monday. |
 | [`today()`](#today)                                                                 | Current date (start of current transaction) in the local time zone.                                                                                                                                                                                         |
 
 #### `date_add(date, interval)`
@@ -202,7 +202,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/1.5/sq
 
 <div class="nostroke_table"></div>
 
-| **Description** | Truncate `timestamptz` to a grid of width `bucket_width`. The grid is anchored at the `origin` timestamp, which defaults to `2000-01-01` when `bucket_width` is a number of months or coarser units, else `2000-01-03`. Note that `2000-01-03` is a Monday. |
+| **Description** | Truncate `date` to a grid of width `bucket_width`. The grid is anchored at the `origin` timestamp, which defaults to `2000-01-01` when `bucket_width` is a number of months or coarser units, else `2000-01-03`. Note that `2000-01-03` is a Monday. |
 | **Example** | `time_bucket(INTERVAL '2 weeks', DATE '1992-04-20', DATE '1992-04-01')` |
 | **Result** | `1992-04-15` |
 

@@ -27,7 +27,7 @@ DuckDB parallelizes the workload based on _[row groups]({% link docs/1.5/interna
 The default row group size in DuckDB's database format is 122,880 rows.
 Parallelism starts at the level of row groups, therefore, for a query to run on _k_ threads, it needs to scan at least _k_ \* 122,880 rows.
 
-The row group size can be specified as an option of the `ATTACH` statement: 
+The row group size can be specified as an option of the `ATTACH` statement:
 
 ```sql
 ATTACH '/tmp/somefile.db' AS db (ROW_GROUP_SIZE 16384);

@@ -153,8 +153,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 5689
-extension_download_count_pretty: 5.7k
+extension_download_count: 973
+extension_download_count_pretty: 973
 image: '/images/community_extensions/social_preview/preview_community_extension_ducktinycc.png'
 layout: community_extension_doc
 ---
@@ -244,6 +244,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

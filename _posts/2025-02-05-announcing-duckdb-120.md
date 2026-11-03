@@ -9,7 +9,7 @@ excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB
 tag: release
 ---
 
-To install the new version, please visit the [installation guide]({% link install/index.html %}).
+To install the new version, please visit the [installation guide]({% link docs/2.0/installation.html %}).
 For the release notes, see the [release page](https://github.com/duckdb/duckdb/releases/tag/v1.2.0).
 
 > Some packages (Go, R, Java) take a few extra days to release due to the reviews required in the release pipelines.
@@ -28,18 +28,18 @@ This means that it's _even more random_™ now. Due to this change fixed seeds w
 
 [**`map['entry']` now returns a value, instead of a *list* of entries.**](https://github.com/duckdb/duckdb/pull/14175)
 For example, `map(['k'], ['v'])['k']` now returns `'v'`, while previously it returned `['v']`. We also introduced the `map_extract_value` function, which is now the alias for the bracket operator `[]`.
-If you would like to return a list, use the [`map_extract` function]({% link docs/1.5/sql/functions/map.md %}#map_extractmap-key): `map_extract(map(['k'], ['v']), 'k') = ['v']`.
+If you would like to return a list, use the [`map_extract` function]({% link docs/2.0/sql/functions/map.md %}#map_extractmap-key): `map_extract(map(['k'], ['v']), 'k') = ['v']`.
 
-[**The indexing of `list_reduce` is fixed.**](https://github.com/duckdb/duckdb/pull/15614) When indexing is applied in `list_reduce`, the index points to the [last parameter of the lambda function]({% link docs/1.5/sql/functions/lambda.md %}#reduce) and indexing starts from 1. Therefore, `list_reduce(['a', 'b'], lambda x, y, i: x || y || i)` returns `ab2`.
+[**The indexing of `list_reduce` is fixed.**](https://github.com/duckdb/duckdb/pull/15614) When indexing is applied in `list_reduce`, the index points to the [last parameter of the lambda function]({% link docs/2.0/sql/functions/lambda.md %}#reduce) and indexing starts from 1. Therefore, `list_reduce(['a', 'b'], lambda x, y, i: x || y || i)` returns `ab2`.
 
 [**The `current_time` and `current_date` functions are now with respect to local timezone.**](https://github.com/duckdb/duckdb/pull/15125) This makes both functions compatible with PostgreSQL at the price of requiring ICU to be loaded to use these functions and their aliases `get_current_time()` and `today()`.
 
 ### Explicit Storage Versions
 
-DuckDB v1.2.0 ships new compression methods but *they are not yet enabled by default* to ensure that older DuckDB versions can read files produced by DuckDB v1.2.0.
+DuckDB 1.2.0 ships new compression methods but *they are not yet enabled by default* to ensure that older DuckDB versions can read files produced by DuckDB 1.2.0.
 
-In practice, this means that DuckDB v1.2.0 can read database files written by past stable DuckDB versions such as v1.0.0.
-When using DuckDB v1.2.0 with default settings, older versions can read files written by DuckDB v1.2.0.
+In practice, this means that DuckDB 1.2.0 can read database files written by past stable DuckDB versions such as v1.0.0.
+When using DuckDB 1.2.0 with default settings, older versions can read files written by DuckDB 1.2.0.
 
 You can *opt-in to newer forwards-incompatible features* using the following syntax:
 
@@ -70,7 +70,7 @@ This shows the storage versions:
 
 This means that `file2` can be opened by past DuckDB versions while `file1` is compatible only with `v1.2.0` (or future versions).
 
-To convert from the new format to the old format for compatibility, use the following sequence in DuckDB v1.2.0:
+To convert from the new format to the old format for compatibility, use the following sequence in DuckDB 1.2.0:
 
 ```sql
 ATTACH 'file1.db';
@@ -173,7 +173,7 @@ DuckDB now supports the `DELTA_BINARY_PACKED` compression as well as the `DELTA_
 ### CLI Improvements
 
 [**Safe mode.**](https://github.com/duckdb/duckdb/pull/14509)
-The DuckDB command line client now supports *safe mode*, which can be activated with the `-safe` flag or the `.safe_mode` [dot command]({% link docs/1.5/clients/cli/dot_commands.md %}). In this mode, the CLI client is prevented from accessing external files other than the database file that it was initially connected to and prevented from interacting with the host file system. For more information, see the [Securing DuckDB page in the Operations Manual]({% link docs/1.5/operations_manual/securing_duckdb/overview.md %}).
+The DuckDB command line client now supports *safe mode*, which can be activated with the `-safe` flag or the `.safe_mode` [dot command]({% link docs/2.0/clients/cli/dot_commands.md %}). In this mode, the CLI client is prevented from accessing external files other than the database file that it was initially connected to and prevented from interacting with the host file system. For more information, see the [Securing DuckDB page in the Operations Manual]({% link docs/2.0/operations_manual/securing_duckdb/overview.md %}).
 
 [**Better autocomplete.**](https://github.com/duckdb/duckdb/pull/15003)
 The autocomplete in CLI now uses a [Parsing Expression Grammar (PEG)]({% post_url 2024-11-22-runtime-extensible-parsers %}) for better autocomplete, as well as improved error messages and suggestions.
@@ -214,7 +214,7 @@ A separate blog post will follow soon.
 **Update:** the [blog post on prefix aliases]({% post_url 2025-02-25-prefix-aliases-in-sql %}) is out.
 
 [**`RENAME` clause**.](https://github.com/duckdb/duckdb/pull/14650)
-DuckDB now supports the `RENAME` clause in `SELECT`. This allows renaming fields emitted by the [`*` expression]({% link docs/1.5/sql/expressions/star.md %}):
+DuckDB now supports the `RENAME` clause in `SELECT`. This allows renaming fields emitted by the [`*` expression]({% link docs/2.0/sql/expressions/star.md %}):
 
 ```sql
 CREATE TABLE integers (col1 INTEGER, col2 INTEGER);
@@ -253,12 +253,12 @@ It is hard to quantify optimizer improvements, but as a result of these optimiza
 
 ### C API for Extensions
 
-Currently, DuckDB extensions use DuckDB’s internal C++ structures. This – along with some fun linking issues – requires a lock-step development of extensions with mainline DuckDB and constant updates. Starting with this release, we expose a new C-style API for extensions in [`duckdb_extension.h`](https://github.com/duckdb/duckdb/blob/v1.2.0/src/include/duckdb_extension.h). This API can be used to create for example scalar, aggregate or table functions in DuckDB. There are two main advantages of using this API: first, many programming languages (e.g., Go, Rust and even Java) have direct bindings to C APIs, making it rather easy to integrate. Secondly, the C Extension API is stable and backwards-compatible, meaning that extensions that target this API will keep working for new DuckDB versions. We will follow up with a new extension template.
+Currently, DuckDB extensions use DuckDB’s internal C++ structures. This – along with some fun linking issues – requires a lock-step development of extensions with mainline DuckDB and constant updates. Starting with this release, we expose a new C-style API for extensions in [`duckdb_extension.h`](https://github.com/duckdb/duckdb/blob/v1.2.0/src/include/duckdb_extension.h). This API can be used to create for example scalar, aggregate, or table functions in DuckDB. There are two main advantages of using this API: first, many programming languages (e.g., Go, Rust, and even Java) have direct bindings to C APIs, making it rather easy to integrate. Secondly, the C Extension API is stable and backwards-compatible, meaning that extensions that target this API will keep working for new DuckDB versions. We will follow up with a new extension template.
 
 ### musl Extensions
 
 [**Distributing extensions for musl.**](https://github.com/duckdb/duckdb/pull/15607)
-The [`musl` C library](https://musl.libc.org/) is often used in lightweight setups such as Docker setups running Alpine Linux. Starting with this release, we officially support musl and we distribute extensions for the `linux_amd64_musl` platform (but not yet for `linux_arm64_musl`). Note that DuckDB binaries (e.g., the CLI client) are not yet distributed for musl platforms, so you have to [build them from source]({% link docs/1.5/dev/building/linux.md %}).
+The [`musl` C library](https://musl.libc.org/) is often used in lightweight setups such as Docker setups running Alpine Linux. Starting with this release, we officially support musl and we distribute extensions for the `linux_amd64_musl` platform (but not yet for `linux_arm64_musl`). Note that DuckDB binaries (e.g., the CLI client) are not yet distributed for musl platforms, so you have to [build them from source]({% link docs/2.0/dev/building/linux.md %}).
 
 ### Zstd Compression
 
@@ -276,4 +276,4 @@ CREATE TABLE t (
 
 These were a few highlights – but there are many more features and improvements in this release.  There have been **over 5 000 commits** by over 70 contributors since we released 1.1.3. The full – very long – release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.2.0).
 
-We would like to thank again our amazing community for using DuckDB, building cool projects on DuckDB and improving DuckDB by providing us feedback. Your contributions truly mean a lot!
+We would like to thank again our amazing community for using DuckDB, building cool projects on DuckDB, and improving DuckDB by providing us feedback. Your contributions truly mean a lot!

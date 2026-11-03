@@ -6,6 +6,7 @@ redirect_from:
 - /docs/current/core_extensions/iceberg/writing_to_iceberg
 - /docs/lts/core_extensions/iceberg/writing_to_iceberg
 - /docs/preview/core_extensions/iceberg/writing_to_iceberg
+- /docs/stable/core_extensions/iceberg/writing_to_iceberg
 title: Writing to Iceberg
 ---
 

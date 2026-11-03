@@ -104,8 +104,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 5905
-extension_download_count_pretty: 5.9k
+extension_download_count: 976
+extension_download_count_pretty: 976
 image: '/images/community_extensions/social_preview/preview_community_extension_miint.png'
 layout: community_extension_doc
 ---
@@ -387,9 +387,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                                                                        description                                                                                         | input_type | scope  | aliases |
-|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| miint_ena_validate_only      | When true, the next INSERT INTO ena.* is sent as a Webin V2 VALIDATE (server-side dry-run) instead of ADD. No accessions are returned. Default false.                                      | BOOLEAN    | GLOBAL | []      |
-| miint_rype_arrow_batch_bytes | Byte ceiling on one Arrow record batch's sequence payload in rype_classify / rype_log_ratio / rype_extract_*. 0 disables the ceiling, restoring a single unbounded batch. Default 256 MiB. | BIGINT     | GLOBAL | []      |
+|             name             |                                                                                        description                                                                                         | input_type | scope  | aliases | typed_value |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| miint_ena_validate_only      | When true, the next INSERT INTO ena.* is sent as a Webin V2 VALIDATE (server-side dry-run) instead of ADD. No accessions are returned. Default false.                                      | BOOLEAN    | GLOBAL | []      | false       |
+| miint_rype_arrow_batch_bytes | Byte ceiling on one Arrow record batch's sequence payload in rype_classify / rype_log_ratio / rype_extract_*. 0 disables the ceiling, restoring a single unbounded batch. Default 256 MiB. | BIGINT     | GLOBAL | []      | 268435456   |
+| temp_directory               | Set the directory to which temporary files are written.                                                                                                                                    | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

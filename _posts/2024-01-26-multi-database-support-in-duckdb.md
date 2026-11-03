@@ -20,7 +20,7 @@ DuckDB supports advanced operations on its own native storage format – such as
 
 DuckDB now has a pluggable storage and transactional layer. This flexible layer allows new storage back-ends to be created by DuckDB extensions. These storage back-ends can support all database operations in the same way that DuckDB supports them, including inserting data and even modifying schemas.
 
-The [MySQL]({% link docs/1.5/core_extensions/mysql.md %}), [Postgres]({% link docs/1.5/core_extensions/postgres/overview.md %}), and [SQLite]({% link docs/1.5/core_extensions/sqlite.md %}) extensions implement this new pluggable storage and transactional layer, allowing DuckDB to connect to those systems and operate on them in the same way that it operates on its own native storage engine.
+The [MySQL]({% link docs/2.0/core_extensions/mysql.md %}), [Postgres]({% link docs/2.0/core_extensions/postgres/overview.md %}), and [SQLite]({% link docs/2.0/core_extensions/sqlite.md %}) extensions implement this new pluggable storage and transactional layer, allowing DuckDB to connect to those systems and operate on them in the same way that it operates on its own native storage engine.
 
 These extensions enable a number of useful features. For example, using these extensions you can:
 
@@ -33,7 +33,7 @@ These extensions enable a number of useful features. For example, using these ex
 
 ## Attaching Databases
 
-The [`ATTACH` statement]({% link docs/1.5/sql/statements/attach.md %}) can be used to attach a new database to the system. By default, a native DuckDB file will be attached. The `TYPE` parameter can be used to specify a different storage type. Alternatively, the `{type}:` prefix can be used.
+The [`ATTACH` statement]({% link docs/2.0/sql/statements/attach.md %}) can be used to attach a new database to the system. By default, a native DuckDB file will be attached. The `TYPE` parameter can be used to specify a different storage type. Alternatively, the `{type}:` prefix can be used.
 
 For example, using the SQLite extension, we can open [a SQLite database file](https://github.com/duckdb/duckdb-sqlite/raw/main/data/db/sakila.db) and query it as we would query a DuckDB database.
 
@@ -75,7 +75,7 @@ SELECT first_name, last_name FROM actor LIMIT 5;
 └────────────┴──────────────┘
 ```
 
-The SQLite database can be manipulated as if it were a native DuckDB database. For example, we can create a new table, populate it with values from a Parquet file, delete a few rows from the table and alter the schema of the table.
+The SQLite database can be manipulated as if it were a native DuckDB database. For example, we can create a new table, populate it with values from a Parquet file, delete a few rows from the table, and alter the schema of the table.
 
 ```sql
 CREATE TABLE lineitem AS FROM 'lineitem.parquet' LIMIT 1000;
@@ -101,7 +101,7 @@ SELECT database_name, path, type FROM duckdb_databases;
 
 ## Mix and Match
 
-While attaching to different database types is useful – it becomes even more powerful when used in combination. For example, we can attach both a SQLite, MySQL and a Postgres database.
+While attaching to different database types is useful – it becomes even more powerful when used in combination. For example, we can attach both a SQLite, MySQL, and a Postgres database.
 
 ```sql
 ATTACH 'sqlite:sakila.db' AS sqlite;
@@ -141,18 +141,18 @@ WHERE title = 'ACE GOLDFINGER';
 Running `EXPLAIN` on the query shows how the data from the different engines is combined into the final query result.
 
 ```text
-┌───────────────────────────┐                                                          
-│         PROJECTION        │                                                          
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │                                                          
-│         first_name        │                                                          
-│         last_name         │                                                          
-└─────────────┬─────────────┘                                                          
-┌─────────────┴─────────────┐                                                          
-│         HASH_JOIN         │                                                          
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │                                                          
-│           INNER           │                                                          
-│     film_id = film_id     ├───────────────────────────────────────────┐              
-└─────────────┬─────────────┘                                           │              
+┌───────────────────────────┐
+│         PROJECTION        │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│         first_name        │
+│         last_name         │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│           INNER           │
+│     film_id = film_id     ├───────────────────────────────────────────┐
+└─────────────┬─────────────┘                                           │
 ┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐
 │         HASH_JOIN         │                             │           FILTER          │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
@@ -172,7 +172,7 @@ Running `EXPLAIN` on the query shows how the data from the different engines is 
 
 ## Transactions
 
-All statements executed within DuckDB are executed within a transaction. If an explicit `BEGIN TRANSACTION` is not called, every statement will execute in its own transaction. This also applies to queries that are executed over other storage engines. These storage engines also support explicit `BEGIN`, `COMMIT` and `ROLLBACK` statements.
+All statements executed within DuckDB are executed within a transaction. If an explicit `BEGIN TRANSACTION` is not called, every statement will execute in its own transaction. This also applies to queries that are executed over other storage engines. These storage engines also support explicit `BEGIN`, `COMMIT`, and `ROLLBACK` statements.
 
 For example, we can begin a transaction within our attached `SQLite` database, make a change, and then roll it back. The original data will be restored.
 
@@ -233,7 +233,7 @@ to a single attached database.
 
 ## Copying Data between Databases
 
-`CREATE TABLE AS`, `INSERT INTO` and `COPY` can be used to copy data between different attached databases. The dedicated [`COPY FROM DATABASE ... TO`]({% link docs/1.5/sql/statements/copy.md %}#copy-from-database--to) can be used to copy all data from one database to another. This includes all tables and views that are stored in the source database.
+`CREATE TABLE AS`, `INSERT INTO`, and `COPY` can be used to copy data between different attached databases. The dedicated [`COPY FROM DATABASE ... TO`]({% link docs/2.0/sql/statements/copy.md %}#copy-from-database--to) can be used to copy all data from one database to another. This includes all tables and views that are stored in the source database.
 
 ```sql
 -- attach a Postgres database

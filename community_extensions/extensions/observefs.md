@@ -34,10 +34,10 @@ docs:
     - Provides cache access insight to duckdb external file cache
     - Allows registering ANY duckdb compatible filesystems (i.e., azure filesystem)
 
-extension_star_count: 18
-extension_star_count_pretty: 18
-extension_download_count: 8878
-extension_download_count_pretty: 8.9k
+extension_star_count: 17
+extension_star_count_pretty: 17
+extension_download_count: 7399
+extension_download_count_pretty: 7.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---
@@ -51,7 +51,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -102,8 +102,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                    name                    |                       description                       | input_type | scope  | aliases |
-|--------------------------------------------|---------------------------------------------------------|------------|--------|---------|
-| observefs_enable_external_file_cache_stats | Whether to enable stats record for external file cache. | BOOLEAN    | GLOBAL | []      |
+|                    name                    |                       description                       | input_type | scope  | aliases | typed_value |
+|--------------------------------------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| observefs_enable_external_file_cache_stats | Whether to enable stats record for external file cache. | BOOLEAN    | GLOBAL | []      | 1           |
+| temp_directory                             | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

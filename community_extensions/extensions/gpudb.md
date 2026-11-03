@@ -225,10 +225,10 @@ docs:
     * Whole-column min / max on a stored table stays a native win —
       DuckDB answers it from zonemap statistics without scanning.
 
-extension_star_count: 30
-extension_star_count_pretty: 30
-extension_download_count: 3886
-extension_download_count_pretty: 3.9k
+extension_star_count: 31
+extension_star_count_pretty: 31
+extension_download_count: 882
+extension_download_count_pretty: 882
 image: '/images/community_extensions/social_preview/preview_community_extension_gpudb.png'
 layout: community_extension_doc
 ---
@@ -352,6 +352,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

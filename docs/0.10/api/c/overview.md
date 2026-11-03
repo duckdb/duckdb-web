@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/archive/0.10/api/c
-- /docs/archive/0.10/api/c/
 title: Overview
 ---
 

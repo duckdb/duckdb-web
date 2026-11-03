@@ -24,4 +24,4 @@ venue: "Talk Python to Me"
 
 ## Description
 
-This episode features a conversation with Alex Monahan, who works on documentation, tutorials and training at DuckDB Labs. It explores why DuckDB is gaining momentum among Python and data enthusiasts, from its in-process database design to its fast, columnar architecture. The episode also covers indexing strategies, concurrency considerations and how MotherDuck, the cloud companion to DuckDB, handles large-scale data.
+This episode features a conversation with Alex Monahan, who works on documentation, tutorials, and training at DuckDB Labs. It explores why DuckDB is gaining momentum among Python and data enthusiasts, from its in-process database design to its fast, columnar architecture. The episode also covers indexing strategies, concurrency considerations, and how MotherDuck, the cloud companion to DuckDB, handles large-scale data.

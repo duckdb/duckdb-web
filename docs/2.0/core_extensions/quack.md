@@ -6,6 +6,7 @@ redirect_from:
 - /docs/current/core_extensions/quack
 - /docs/lts/core_extensions/quack
 - /docs/preview/core_extensions/quack
+- /docs/stable/core_extensions/quack
 title: Quack Extension
 ---
 

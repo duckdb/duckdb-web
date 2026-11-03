@@ -15,7 +15,7 @@ tag: release
      width="200"
      />
 
-To install the new version, please visit the [installation guide]({% link install/index.html %}). The full release notes can be found [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.10.0).
+To install the new version, please visit the [installation guide]({% link docs/2.0/installation.html %}). The full release notes can be found [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.10.0).
 
 ## What's New in 0.10.0
 
@@ -100,7 +100,7 @@ Cannot compare values of type DATE and type VARCHAR – an explicit cast is requ
 
 ## Backward Compatibility
 
-Backward compatibility refers to the ability of a newer DuckDB version to read storage files created by an older DuckDB version. This release is the first release of DuckDB that supports backward compatibility in the storage format. DuckDB v0.10 can read and operate on files created by the previous DuckDB version – DuckDB v0.9. [This is made possible by the implementation of a new serialization framework](https://github.com/duckdb/duckdb/pull/8156).
+Backward compatibility refers to the ability of a newer DuckDB version to read storage files created by an older DuckDB version. This release is the first release of DuckDB that supports backward compatibility in the storage format. DuckDB 0.10 can read and operate on files created by the previous DuckDB version – DuckDB 0.9. [This is made possible by the implementation of a new serialization framework](https://github.com/duckdb/duckdb/pull/8156).
 
 Write with v0.9:
 
@@ -138,7 +138,7 @@ For future DuckDB versions, our goal is to ensure that any DuckDB version releas
 
 ## Forward Compatibility
 
-Forward compatibility refers to the ability of an older DuckDB version to read storage files produced by a newer DuckDB version. DuckDB v0.9 is **partially** forward compatible with DuckDB v0.10. Certain files created by DuckDB v0.10 can be read by DuckDB v0.9.
+Forward compatibility refers to the ability of an older DuckDB version to read storage files produced by a newer DuckDB version. DuckDB 0.9 is **partially** forward compatible with DuckDB 0.10. Certain files created by DuckDB 0.10 can be read by DuckDB 0.9.
 
 Write with v0.10:
 
@@ -174,7 +174,7 @@ LIMIT 1;
 
 Forward compatibility is provided on a **best effort** basis. While stability of the storage format is important – there are still many improvements and innovations that we want to make to the storage format in the future. As such, forward compatibility may be (partially) broken on occasion.
 
-For this release, DuckDB v0.9 is able to read files created by DuckDB v0.10 provided that:
+For this release, DuckDB 0.9 is able to read files created by DuckDB 0.10 provided that:
 
 * The database file does not contain views
 * The database file does not contain new types (`ARRAY`, `UHUGEINT`)
@@ -228,7 +228,7 @@ FROM vectors;
 └───────────────────┘
 ```
 
-See the [Array Type page]({% link docs/1.5/sql/data_types/array.md %}) in the documentation for more information.
+See the [Array Type page]({% link docs/2.0/sql/data_types/array.md %}) in the documentation for more information.
 
 ## Multi-Database Support
 
@@ -246,7 +246,7 @@ DuckDB integrates with several cloud storage systems such as S3 that require acc
 
 With this release, DuckDB adds a new [“Secrets Manager”](https://github.com/duckdb/duckdb/pull/10042) to manage secrets in a better way. We now have a unified user interface for secrets across all backends that use them. Secrets can be scoped, so different storage prefixes can have different secrets, allowing, for example, joining across organizations in a single query. Secrets can also be persisted, so that they do not need to be specified every time DuckDB is launched.
 
-Secrets are typed, their type identifies which service they are for. For example, this release can manage secrets for S3, Google Cloud Storage, Cloudflare R2 and Azure Blob Storage. For each type, there are one or more “secret providers” that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
+Secrets are typed, their type identifies which service they are for. For example, this release can manage secrets for S3, Google Cloud Storage, Cloudflare R2, and Azure Blob Storage. For each type, there are one or more “secret providers” that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 
 Finally, secrets can be temporary or persistent. Temporary secrets are used by default – and are stored in-memory for the life span of the DuckDB instance similar to how settings worked previously. Persistent secrets are stored in unencrypted binary format in the `~/.duckdb/stored_secrets` directory. On startup of DuckDB, persistent secrets are read from this directory and automatically loaded.
 
@@ -295,7 +295,7 @@ CREATE PERSISTENT SECRET my_persistent_secret (
 
 As mentioned, this will write the secret (unencrypted, so beware) to the `~/.duckdb/stored_secrets` directory.
 
-See the [Create Secret page]({% link docs/1.5/sql/statements/create_secret.md %}) in the documentation for more information.
+See the [Create Secret page]({% link docs/2.0/sql/statements/create_secret.md %}) in the documentation for more information.
 
 ## Temporary Memory Manager
 
@@ -333,7 +333,7 @@ With the new version 0.10.0, this query completes in ca. 5 s on a MacBook, while
 
 ## Adaptive Lossless Floating-Point Compression (ALP)
 
-Floating point numbers are notoriously difficult to compress efficiently, both in terms of compression ratio as well as speed of compression and decompression. In the past, DuckDB had support for the then state-of-the-art [“Chimp”](https://github.com/duckdb/duckdb/pull/4878) and the [“Patas”](https://github.com/duckdb/duckdb/pull/5044) compression methods. Turns out, those were not the last word in floating point compression. Researchers [Azim Afroozeh](https://www.cwi.nl/en/people/azim-afroozeh/), [Leonard Kuffo](https://www.cwi.nl/en/people/leonardo-xavier-kuffo-rivero/) and (the one and only) [Peter Boncz](https://homepages.cwi.nl/~boncz/) have recently published a paper titled [“ALP: Adaptive Lossless floating-Point Compression”](https://dl.acm.org/doi/pdf/10.1145/3626717) at SIGMOD, a top-tier academic conference for data management research. In an uncommon yet highly commendable move, they have also sent a [pull request](https://github.com/duckdb/duckdb/pull/9635) to DuckDB. The new compression scheme replaces Chimp and Patas. Inside DuckDB, ALP is **x2-4 times faster** than Patas (at decompression) achieving **compression ratios twice as high** (sometimes even much more).
+Floating point numbers are notoriously difficult to compress efficiently, both in terms of compression ratio as well as speed of compression and decompression. In the past, DuckDB had support for the then state-of-the-art [“Chimp”](https://github.com/duckdb/duckdb/pull/4878) and the [“Patas”](https://github.com/duckdb/duckdb/pull/5044) compression methods. Turns out, those were not the last word in floating point compression. Researchers [Azim Afroozeh](https://www.cwi.nl/en/people/azim-afroozeh/), [Leonard Kuffo](https://www.cwi.nl/en/people/leonardo-xavier-kuffo-rivero/), and (the one and only) [Peter Boncz](https://homepages.cwi.nl/~boncz/) have recently published a paper titled [“ALP: Adaptive Lossless floating-Point Compression”](https://dl.acm.org/doi/pdf/10.1145/3626717) at SIGMOD, a top-tier academic conference for data management research. In an uncommon yet highly commendable move, they have also sent a [pull request](https://github.com/duckdb/duckdb/pull/9635) to DuckDB. The new compression scheme replaces Chimp and Patas. Inside DuckDB, ALP is **x2-4 times faster** than Patas (at decompression) achieving **compression ratios twice as high** (sometimes even much more).
 
 
 | Compression  |    Load |   Query |   Size |
@@ -346,14 +346,14 @@ As a user, you don't have to do anything to make use of the new ALP compression 
 
 ## CLI Improvements
 
-The command line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/1.5/clients/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/1.5/clients/cli/editing.md %}).
+The command line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/2.0/clients/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/2.0/clients/cli/editing.md %}).
 
 <img src="{% link images/syntax_highlighting_screenshot.png %}"
      alt="Image showing syntax highlighting in the shell"
      width="700"
      />
 
-See the [extended CLI docs for more information]({% link docs/1.5/clients/cli/overview.md %}).
+See the [extended CLI docs for more information]({% link docs/2.0/clients/cli/overview.md %}).
 
 ## Final Thoughts
 

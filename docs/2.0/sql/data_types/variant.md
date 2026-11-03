@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/sql/data_types/variant
 - /docs/lts/sql/data_types/variant
 - /docs/preview/sql/data_types/variant
+- /docs/stable/sql/data_types/variant
 title: Variant Type
 ---
 

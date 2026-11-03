@@ -26,8 +26,8 @@ repo:
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 14140
-extension_download_count_pretty: 14.1k
+extension_download_count: 3260
+extension_download_count_pretty: 3.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc_scanner.png'
 layout: community_extension_doc
 ---
@@ -41,7 +41,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -67,19 +67,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples |
-|------------------|---------------|-------------|---------|----------|
-| adbc_clear_cache | table         | NULL        | NULL    | NULL     |
-| adbc_columns     | table         | NULL        | NULL    | NULL     |
-| adbc_execute     | table         | NULL        | NULL    | NULL     |
-| adbc_info        | table         | NULL        | NULL    | NULL     |
-| adbc_insert      | table         | NULL        | NULL    | NULL     |
-| adbc_profiles    | table         | NULL        | NULL    | NULL     |
-| adbc_scan        | table         | NULL        | NULL    | NULL     |
-| adbc_scan_table  | table         | NULL        | NULL    | NULL     |
-| adbc_schema      | table         | NULL        | NULL    | NULL     |
-| adbc_table_types | table         | NULL        | NULL    | NULL     |
-| adbc_tables      | table         | NULL        | NULL    | NULL     |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

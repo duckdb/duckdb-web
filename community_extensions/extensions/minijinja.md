@@ -26,8 +26,8 @@ repo:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 9142
-extension_download_count_pretty: 9.1k
+extension_download_count: 1081
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_minijinja.png'
 layout: community_extension_doc
 ---
@@ -41,7 +41,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -67,10 +67,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|         function_name         | function_type |                             description                              | comment |                                                      examples                                                       |
-|-------------------------------|---------------|----------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------|
-| minijinja_render              | scalar        | Render a Jinja2-style template using the MiniJinja templating engine | NULL    | [minijinja_render('Hello World!')]                                                                                  |
-| minijinja_render_with_context | scalar        | Render a Jinja2-style template with a JSON context                   | NULL    | [minijinja_render_with_context('Hello {% raw %}{{{% endraw %} name {% raw %}}}{% endraw %}!', '{"name": "World"}')] |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

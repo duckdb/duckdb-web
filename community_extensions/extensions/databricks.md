@@ -53,10 +53,10 @@ docs:
     - writes with `INSERT`, `COPY`, `CREATE TABLE AS`, `UPDATE`, `DELETE`, and `TRUNCATE`
     - `databricks_query` and `databricks_execute` for Databricks SQL that DuckDB cannot express
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 2650
-extension_download_count_pretty: 2.6k
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 1433
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_databricks.png'
 layout: community_extension_doc
 ---
@@ -70,7 +70,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -119,15 +119,16 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|              name              |                              description                               | input_type | scope  | aliases |
-|--------------------------------|------------------------------------------------------------------------|------------|--------|---------|
-| dbx_ca_cert                    | PEM bundle to trust, or 'system'                                       | VARCHAR    | GLOBAL | []      |
-| dbx_debug_show_queries         | Print each statement text and id                                       | BOOLEAN    | GLOBAL | []      |
-| dbx_filter_pushdown            | Push filters into Databricks SQL                                       | BOOLEAN    | GLOBAL | []      |
-| dbx_http_retries               | Retries for HTTP 429, 503, and connection errors                       | UBIGINT    | GLOBAL | []      |
-| dbx_http_timeout_ms            | Per-request HTTP timeout in milliseconds                               | UBIGINT    | GLOBAL | []      |
-| dbx_insert_max_statement_bytes | Maximum SQL text of one INSERT statement, at most 16 MiB               | UBIGINT    | GLOBAL | []      |
-| dbx_order_pushdown             | Push ORDER BY ... LIMIT into Databricks SQL                            | BOOLEAN    | GLOBAL | []      |
-| dbx_statement_timeout_ms       | Cancel a statement still running after this many milliseconds. 0 waits | UBIGINT    | GLOBAL | []      |
+|              name              |                              description                               | input_type | scope  | aliases | typed_value |
+|--------------------------------|------------------------------------------------------------------------|------------|--------|---------|-------------|
+| dbx_ca_cert                    | PEM bundle to trust, or 'system'                                       | VARCHAR    | GLOBAL | []      | system      |
+| dbx_debug_show_queries         | Print each statement text and id                                       | BOOLEAN    | GLOBAL | []      | false       |
+| dbx_filter_pushdown            | Push filters into Databricks SQL                                       | BOOLEAN    | GLOBAL | []      | true        |
+| dbx_http_retries               | Retries for HTTP 429, 503, and connection errors                       | UBIGINT    | GLOBAL | []      | 5           |
+| dbx_http_timeout_ms            | Per-request HTTP timeout in milliseconds                               | UBIGINT    | GLOBAL | []      | 60000       |
+| dbx_insert_max_statement_bytes | Maximum SQL text of one INSERT statement, at most 16 MiB               | UBIGINT    | GLOBAL | []      | 12582912    |
+| dbx_order_pushdown             | Push ORDER BY ... LIMIT into Databricks SQL                            | BOOLEAN    | GLOBAL | []      | true        |
+| dbx_statement_timeout_ms       | Cancel a statement still running after this many milliseconds. 0 waits | UBIGINT    | GLOBAL | []      | 0           |
+| temp_directory                 | Set the directory to which temporary files are written.                | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

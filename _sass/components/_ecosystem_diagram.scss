@@ -18,7 +18,7 @@
   max-width: 1150px;
 
   h2 {
-    font-size: var(--type-display-2, 45px);
+    font-size: var(--type-display-1, 44px);
     font-weight: 600;
     line-height: 1.2;
     color: var(--main-text-primary-color, #0d0d0d);
@@ -26,7 +26,7 @@
   }
 
   p {
-    font-size: var(--type-body-normal, 16px);
+    font-size: var(--type-body-normal, 15px);
     line-height: 1.5;
     color: var(--main-text-secondary-color, #666);
     margin: 18px 0 0;
@@ -83,7 +83,7 @@
 
 .ecosystem-box {
   background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
-  border: 1px solid var(--main-codebox-border-color, rgba(13, 13, 13, 0.08));
+  border: 1px solid var(--border-color);
   border-radius: var(--page-radius-box);
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.03);
   -webkit-backdrop-filter: blur(3.5px);
@@ -108,7 +108,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: var(--type-title-3, 16px);
+  font-size: var(--type-headline-4, 15px);
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0.014px;
@@ -157,7 +157,7 @@
 .ecosystem-icon {
   width: 54.8px;
   height: 54.8px;
-  border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
+  border: 1px solid var(--border-color);
   background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
   border-radius: var(--page-radius-box-inner);
   display: flex;
@@ -179,7 +179,7 @@
   }
 
   &:hover {
-    border: 1px solid var(--interactive-folderbox-border-color-hover, #CCC);
+    border: 1px solid var(--border-color);
     background: var(--interactive-folderbox-background-color-hover, rgba(242, 242, 242, 0.6));
   }
 
@@ -210,7 +210,7 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
+  border: 1px solid var(--border-color);
   background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.6));
   border-radius: var(--page-radius-box);
   padding: 24px 10px;
@@ -243,7 +243,7 @@
 }
 
 .eco-base-path {
-  stroke: var(--doc-codebox-border-color, #e6e6e6);
+  stroke: var(--border-color);
   stroke-width: 1.5;
   fill: none;
 }
@@ -333,11 +333,11 @@
 
   .ecosystem-header {
     h2 {
-      font-size: var(--type-display-2, 34px);
+      font-size: var(--type-display-1, 44px);
     }
 
     p {
-      font-size: var(--type-body-normal, 14px);
+      font-size: var(--type-body-normal, 15px);
     }
   }
 

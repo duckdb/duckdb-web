@@ -6,6 +6,7 @@ redirect_from:
 - /docs/current/clients/java/troubleshoot
 - /docs/lts/clients/java/troubleshoot
 - /docs/preview/clients/java/troubleshoot
+- /docs/stable/clients/java/troubleshoot
 title: Troubleshoot
 ---
 

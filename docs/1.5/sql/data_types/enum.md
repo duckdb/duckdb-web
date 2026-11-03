@@ -18,7 +18,7 @@ You can create an enum using hardcoded values:
 
 ```sql
 CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
--- This statement will fail since enums cannot hold NULL values:
+-- This statement will fail since enum dictionary values cannot be NULL:
 -- CREATE TYPE mood AS ENUM ('sad', NULL);
 -- This statement will fail since enum values must be unique:
 -- CREATE TYPE mood AS ENUM ('sad', 'sad');
@@ -88,6 +88,9 @@ INSERT INTO person VALUES
     ('Pagliacci', 'sad'),
     ('Mr. Mackey', 'ok');
 ```
+
+Enum-typed columns can still contain SQL `NULL`, which is distinct from the
+values in the enum dictionary.
 
 The following query will fail since the mood type does not have a `quackity-quack` value.
 
@@ -208,7 +211,7 @@ INSERT INTO tasks VALUES ('a', 'low'), ('b', 'medium'), ('c', 'high');
 -- WARNING!
 -- Equivalent to `WHERE priority_level::VARCHAR >= 'medium'`
 SELECT * FROM tasks
-WHERE priority_level >= 'medium';  
+WHERE priority_level >= 'medium';
 -- Misses the 'high' priority task!
 ```
 
@@ -217,7 +220,7 @@ WHERE priority_level >= 'medium';
 | b    | medium          |
 
 
-So, if you want to e.g. "get all priorities at or above `medium`" then explicitly cast to the enum type:
+So, if you want to e.g. “get all priorities at or above `medium`” then explicitly cast to the enum type:
 
 ```sql
 SELECT * FROM tasks

@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: sidequery/duckflight-extension
-  ref: a36f686e136f2a4ee22253f25ebdff6e28f36343
+  ref: 94b984d096d90094d6902bfa8c0eca3aa5067df2
   variegata: d6646edb7877ab65f39ffa1cfe53b5d090f3694b
 
 docs:
@@ -64,10 +64,10 @@ docs:
     The v1 table-function C API does not expose function-description setters,
     so the five native server functions are documented above.
 
-extension_star_count: 29
-extension_star_count_pretty: 29
-extension_download_count: 3144
-extension_download_count_pretty: 3.1k
+extension_star_count: 30
+extension_star_count_pretty: 30
+extension_download_count: 906
+extension_download_count_pretty: 906
 image: '/images/community_extensions/social_preview/preview_community_extension_duckflight.png'
 layout: community_extension_doc
 ---
@@ -79,10 +79,10 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -170,6 +170,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

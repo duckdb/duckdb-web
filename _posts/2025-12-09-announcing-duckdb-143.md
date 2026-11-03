@@ -9,10 +9,10 @@ excerpt: "Today we are releasing DuckDB 1.4.3. Along with bugfixes, we are shipp
 tag: release
 ---
 
-In this blog post, we highlight a few important fixes in DuckDB v1.4.3, the third patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}).
+In this blog post, we highlight a few important fixes in DuckDB 1.4.3, the third patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}).
 You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.3).
 
-To install the new version, please visit the [installation page]({% link install/index.html %}#version=lts).
+To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}#version=lts).
 
 ## Fixes
 
@@ -37,7 +37,7 @@ This version ships a number of performance improvements and bugfixes.
 
 * [`#18997` Macro binding had slow performance for unbalanced trees](https://github.com/duckdb/duckdb/issues/18997)
 * [`#19901` Memory management has been improved during WAL replay in the presence of indexes](https://github.com/duckdb/duckdb/pull/19901)
-* The [`vortex` extension]({% link docs/1.5/core_extensions/vortex.md %}) ships significant performance improvements for writing Vortex files
+* The [`vortex` extension]({% link docs/2.0/core_extensions/vortex.md %}) ships significant performance improvements for writing Vortex files
 
 ### Miscellaneous
 
@@ -47,7 +47,7 @@ This version ships a number of performance improvements and bugfixes.
 
 ## Azure Blob Storage Writes
 
-The [`azure` extension]({% link docs/1.5/core_extensions/azure.md %}) can now [write to the Azure Blob Storage](https://github.com/duckdb/duckdb-azure/pull/131).
+The [`azure` extension]({% link docs/2.0/core_extensions/azure.md %}) can now [write to the Azure Blob Storage](https://github.com/duckdb/duckdb-azure/pull/131).
 This unlocks several other Azure and Fabric features, including using [OneLake](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview) instances.
 
 ## Windows Arm64
@@ -56,7 +56,7 @@ With this release, we are introducing beta support for Windows Arm64 by distribu
 
 ### Extension Distribution
 
-On Windows Arm64, you can now natively install core extensions, including complex ones like [`spatial`]({% link docs/1.5/core_extensions/spatial/overview.md %}):
+On Windows Arm64, you can now natively install core extensions, including complex ones like [`spatial`]({% link docs/2.0/core_extensions/spatial/overview.md %}):
 
 ```batch
 duckdb
@@ -94,7 +94,7 @@ SELECT ST_Area(ST_GeomFromText(
 
 ### Python Wheel Distribution
 
-We now distribute Python wheels for Windows Arm64 for Python 3.11+. This means that you take e.g. a Copilot+ PC, install the native Python interpreter and run:
+We now distribute Python wheels for Windows Arm64 for Python 3.11+. This means that you take e.g. a Copilot+ PC, install the native Python interpreter, and run:
 
 ```batch
 pip install duckdb
@@ -128,4 +128,4 @@ Head to the [ODBC Windows installation page](https://duckdb.org/install/?platfor
 
 This post was a short summary of the changes in v1.4.3. As usual, you can find the [full release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.3).
 We would like to thank our contributors for providing detailed issue reports and patches.
-Stay tuned for DuckDB v1.4.4 and v1.5.0, both released [early next year]({% link release_calendar.md %})!
+Stay tuned for DuckDB 1.4.4 and 1.5.0, both released [early next year]({% link release_calendar.md %})!
