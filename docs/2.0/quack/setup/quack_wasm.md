@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/quack/setup/quack_wasm
 - /docs/lts/quack/setup/quack_wasm
 - /docs/preview/quack/setup/quack_wasm
+- /docs/stable/quack/setup/quack_wasm
 title: Quack on WebAssembly
 ---
 

@@ -13,7 +13,7 @@ This build has been stripped of all the assertions and debug symbols and code, o
 
 ### `debug`
 
-This build runs with all the debug information, including symbols, assertions and `#ifdef DEBUG` blocks.
+This build runs with all the debug information, including symbols, assertions, and `#ifdef DEBUG` blocks.
 Due to these, binaries of this build are expected to be slow.
 Note: the special debug defines are not automatically set for this build.
 

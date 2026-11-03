@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/operations_manual/migration
 - /docs/lts/operations_manual/migration
 - /docs/preview/operations_manual/migration
+- /docs/stable/operations_manual/migration
 title: Migrating to DuckDB 2.0
 ---
 
@@ -116,6 +117,40 @@ INSTALL AND LOAD legacy_parser;
 SET enable_legacy_parser = true;
 ```
 
+### Errors in Transactions
+
+In DuckDB 2.0.0, any error inside an explicit transaction aborts the transaction.
+Previously, parser and binder errors, such as a reference to a table or column that does not exist, left the transaction usable, so later statements in the same transaction could still run and commit.
+Now the transaction has to be rolled back:
+
+```sql
+CREATE TABLE t (x INTEGER);
+BEGIN;
+SELECT * FROM missing_table;
+```
+
+```console
+Catalog Error: Table with name missing_table does not exist!
+```
+
+```sql
+INSERT INTO t VALUES (1);
+```
+
+```console
+TransactionContext Error: Current transaction is aborted (please ROLLBACK)
+```
+
+Code that runs a statement which may fail inside a transaction and carries on after the error, for example to skip a table that may not exist, needs to check first or run the statement outside the transaction.
+
+To restore the previous behavior, set the `default_transaction_invalidation_policy` option:
+
+```sql
+SET default_transaction_invalidation_policy = 'SYNTACTIC_ERRORS_DO_NOT_INVALIDATE';
+```
+
+For the list of configuration options, see the [Configuration page]({% link docs/2.0/configuration/overview.md %}).
+
 ### C API v2
 
 DuckDB 2.0.0 ships a revamped [C API]({% link docs/2.0/clients/c/overview.md %}#c-api-v2), which is considerably more powerful than its predecessor and exposes components such as file systems and table functions to extensions.
@@ -125,7 +160,7 @@ For background on extension stability levels, see [Versioning of Extensions]({% 
 ### ICU Removed from the Core Build
 
 DuckDB 2.0.0 removed the dependency on the [ICU library](https://github.com/unicode-org/icu).
-Time zones, calendars and collations are now implemented natively by the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}), and will continue to behave as before.
+Time zones, calendars, and collations are now implemented natively by the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}), and will continue to behave as before.
 No query changes are required, but if you ship a custom build, note that ICU is no longer bundled.
 If you find that ICU's behavior changed, please [file an issue](https://github.com/duckdb/duckdb/issues).
 
@@ -153,7 +188,7 @@ Cast the `NULL` to the intended type, e.g., `NULL::VARCHAR AS x`, or restore the
 
 ### Identifier Case Setting
 
-The [`preserve_identifier_case` setting]({% link docs/2.0/configuration/overview.md %}) changed from a `BOOLEAN` to a `VARCHAR` with the values `'preserve_case'` (default), `'lowercase'` and `'uppercase'`.
+The [`preserve_identifier_case` setting]({% link docs/2.0/configuration/overview.md %}) changed from a `BOOLEAN` to a `VARCHAR` with the values `'preserve_case'` (default), `'lowercase'`, and `'uppercase'`.
 The old values `true` and `false` are still accepted and map to `'preserve_case'` and `'lowercase'`, respectively.
 
 ### S3 URL Parameters
@@ -192,7 +227,7 @@ The [What's New in the Docs for 2.0 page]({% link docs/2.0/whats_new_in_the_docs
 * Optimizer and engine improvements that speed up existing queries, including on Windows
 * Self-hostable [extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}) for signing and distributing your own extensions
 
-Several of the headline v2.0.0 changes are covered in [Breaking Changes](#breaking-changes) above: the new default [storage format](#storage-format), the [PEG-based SQL parser](#sql-parser), the revamped [C API v2](#c-api-v2) and the native timezone, calendar and collation support left after [ICU was removed from the core build](#icu-removed-from-the-core-build).
+Several of the headline v2.0.0 changes are covered in [Breaking Changes](#breaking-changes) above: the new default [storage format](#storage-format), the [PEG-based SQL parser](#sql-parser), the revamped [C API v2](#c-api-v2), and the native timezone, calendar, and collation support left after [ICU was removed from the core build](#icu-removed-from-the-core-build).
 
 ## See Also
 

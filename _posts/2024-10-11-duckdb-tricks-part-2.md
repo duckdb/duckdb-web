@@ -6,7 +6,7 @@ authors:
   - Gábor Szárnyas
 thumb: "/images/blog/thumbs/duckdb-tricks.svg"
 image: "/images/blog/thumbs/duckdb-tricks.png"
-excerpt: "We continue our “DuckDB tricks” series, focusing on queries that clean, transform and summarize data."
+excerpt: "We continue our “DuckDB tricks” series, focusing on queries that clean, transform, and summarize data."
 tag: using-duckdb
 ---
 
@@ -25,7 +25,7 @@ Here’s a summary of what we’re going to cover:
 
 ## Dataset
 
-For our example dataset, we’ll use `schedule.csv`, a hand-written CSV file that encodes a conference schedule. The schedule contains the timeslots, the locations and the events scheduled.
+For our example dataset, we’ll use `schedule.csv`, a hand-written CSV file that encodes a conference schedule. The schedule contains the timeslots, the locations, and the events scheduled.
 
 ```csv
 timeslot,location,event
@@ -89,7 +89,7 @@ Note that we use the [dot operator for function chaining]({% link docs/2.0/sql/f
 └─────────────────────┴──────────────┴──────────────────┘
 ```
 
-## Filling in Missing Values
+## Filling In Missing Values
 
 Next, we would like to derive a schedule that includes the full picture: *every timeslot* for *every location* should have its line in the table. For the timeslot-location combinations, where there is no event specified, we would like to explicitly add a string that says `<empty>`.
 

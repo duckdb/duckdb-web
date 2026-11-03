@@ -299,7 +299,7 @@ SELECT  {'k1': 1, 'k2': 0} > {'k2': 0, 'k3': 0};
 
 ## Updating the Schema
 
-Starting with DuckDB v1.3.0, it's possible to update the sub-schema of structs
+Starting with DuckDB 1.3.0, it's possible to update the sub-schema of structs
 using the [`ALTER TABLE` clause]({% link docs/1.3/sql/statements/alter_table.md %}).
 
 To follow the examples, initialize the `test` table as follows:

@@ -28,7 +28,7 @@ For example, Rabobank, one of the biggest banks in the Netherlands, exports the 
 />
 
 If a big financial institute cannot write proper CSV files, imagine the errors occurring in CSV files exported by decades-old legacy software, in hand-written CSV files, files exported from spreadsheet software, and so on!
-These sorts of errors are so prevalent that spreadsheet software, [dataframe libraries](https://news.ycombinator.com/item?id=39665312) and specialized CSV tools go above and beyond to salvage these files and hammer them into tables that users can work with.
+These sorts of errors are so prevalent that spreadsheet software, [dataframe libraries](https://news.ycombinator.com/item?id=39665312), and specialized CSV tools go above and beyond to salvage these files and hammer them into tables that users can work with.
 
 ## DuckDB's CSV Parser
 

@@ -3,6 +3,8 @@ layout: post
 title: "DuckLake: The Lakehouse That Finally Embraces the Database"
 authors:
   - Graziano Montanaro
+thumb: "/images/library/thumbs/2026-05-29-pycon-italia.png"
+image: "/images/library/thumbs/2026-05-29-pycon-italia.png"
 tag: talk
 category: community
 excerpt: ""

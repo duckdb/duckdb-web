@@ -39,7 +39,7 @@ We’ll track ducks and preserve history whenever their name, breed, or location
 > The UI ships with the DuckDB CLI, so if you have the CLI installed you can use the front end.
 > To start the notebook front end just run: `duckdb -ui` and you can navigate to [http://localhost:4213/](http://localhost:4213/) to start writing your SQL code inside of your notebooks. Just copy and paste the following code blocks to follow this guide.
 
-### Step 1: Create the Incoming (source) Table
+### Step 1: Create the Incoming (Source) Table
 
 This table represents today’s transactional data.
 
@@ -61,7 +61,7 @@ INSERT INTO incoming_ducks VALUES
     (105, 'Puddles',    'Indian Runner', 'Relocated',   CURRENT_DATE - INTERVAL '1 day', NULL, true);
 ```
 
-### Step 2: Create the Master (target) Table
+### Step 2: Create the Master (Target) Table
 
 This table represents the type 2 SCD data (i.e., transaction data with history).
 
@@ -146,7 +146,7 @@ WHERE target.is_current = false
   AND target.end_date = CURRENT_DATE - INTERVAL '1 day';
 ```
 
-### Step 5: Query The Results
+### Step 5: Query the Results
 
 The following queries can be used to examine the data resulting from the `MERGE` statement.
 
@@ -166,7 +166,7 @@ SELECT * FROM master_ducks WHERE is_current = false ORDER BY duck_id, begin_date
 To better illustrate the concept, let's examine a single duck, to drive home the value add for type 2 SCDs.
 If we select from the master table after running the merge statement and the post update insert statement, we can see the individual rows for `Quackers`.
 
-To view the original row of data that is historical: 
+To view the original row of data that is historical:
 
 ```sql
 SELECT * FROM master_ducks where duck_name = 'Quackers' and is_current = false;
@@ -178,7 +178,7 @@ Returns:
 |----------:|--------:|----------:|---------|----------|-------------|--------------|------------|
 | 1         | 101     | Quackers  | Mallard | Pond A   | 2025-11-24  | 2025-11-25   | false      |
 
-**Note**: 
+**Note**:
 
 - The `end date` is NOT NULL, it has the date when this duck's data was updated.
 - The `is_current` is `false` indicating this is a historical record.
@@ -196,7 +196,7 @@ SELECT * FROM master_ducks where duck_name = 'Quackers' and is_current = true;
 |----------:|--------:|----------:|---------|----------|-------------|----------|------------|
 | 10        | 101     | Quackers  | Mallard | Pond B   | 2025-11-26  | NULL     | true       |
 
-**Note**: 
+**Note**:
 
 - The `end date` is NULL, the NULL in this context indicates this is the latest record for this `duck_id`.
 - The `is_current` is `true` also indicating this is a current record.

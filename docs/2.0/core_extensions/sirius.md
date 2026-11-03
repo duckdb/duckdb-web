@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/core_extensions/sirius
 - /docs/lts/core_extensions/sirius
 - /docs/preview/core_extensions/sirius
+- /docs/stable/core_extensions/sirius
 title: Sirius Extension
 ---
 

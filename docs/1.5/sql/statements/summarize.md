@@ -3,7 +3,7 @@ layout: docu
 title: SUMMARIZE Statement
 ---
 
-The `SUMMARIZE` statement returns summary statistics for a table, view or a query.
+The `SUMMARIZE` statement returns summary statistics for a table, view, or a query.
 
 ## Usage
 

@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/performance/environment
 - /docs/preview/guides/performance/environment
 title: Environment
+how_to_topic: performance
 ---
 
 The environment where DuckDB is run has an obvious impact on performance. This page focuses on the effects of the hardware configuration and the operating system used.
@@ -43,7 +44,7 @@ As an approximation, aggregation-heavy workloads require 1-2 GB memory per threa
 #### Larger-than-Memory Workloads
 
 DuckDB can process larger-than-memory workloads by spilling to disk.
-This is possible thanks to _out-of-core_ support for grouping, joining, sorting and windowing operators.
+This is possible thanks to _out-of-core_ support for grouping, joining, sorting, and windowing operators.
 Note that larger-than-memory workloads can be processed both in persistent mode and in in-memory mode as DuckDB still spills to disk in both modes.
 
 ### Local Disk

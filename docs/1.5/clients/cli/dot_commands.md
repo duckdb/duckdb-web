@@ -58,7 +58,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.singleline`{:.language-sql .highlight}                              | Set single-line mode                                                                                                                                                       |
 | `.startup_text ⟨none/version/all⟩`{:.language-sql .highlight}         | Controls the start-up text displayed when launching the CLI. Set this as the first line in `~/.duckdbrc`                                                                   |
 | `.system ⟨CMD⟩ ⟨ARGS...⟩`{:.language-sql .highlight}                  | Run `CMD` with `ARGS...` in a system shell                                                                                                                                 |
-| `.tables ⟨TABLE⟩`{:.language-sql .highlight}                          | List tables [matching `LIKE` pattern]({% link docs/1.5/sql/functions/pattern_matching.md %}) `TABLE` with column names, types and row counts, grouped by database and schema |
+| `.tables ⟨TABLE⟩`{:.language-sql .highlight}                          | List tables [matching `LIKE` pattern]({% link docs/1.5/sql/functions/pattern_matching.md %}) `TABLE` with column names, types, and row counts, grouped by database and schema |
 | `.timer ⟨on/off⟩`{:.language-sql .highlight}                          | Turn SQL timer `on` or `off`. SQL statements separated by `;` but _not_ separated via newline are measured together                                                        |
 | `.width ⟨NUM1⟩ ⟨NUM2⟩ ...`{:.language-sql .highlight}                 | Set minimum column widths for columnar output                                                                                                                              |
 
@@ -201,19 +201,19 @@ The `--newlines` option allows unescaped newline characters in the output:
 
 The DuckDB CLI client's progress bar supports customization through components.
 
-The `.progress_bar` command supports `--add` and `--clear` parameters for adding and removing components. 
+The `.progress_bar` command supports `--add` and `--clear` parameters for adding and removing components.
 
 For details on specific usage, see the examples below.
 
 ### Configuring the Progress Bar Display
 
-To check if the progress bar is enabled: 
+To check if the progress bar is enabled:
 
 ```sql
 SELECT * FROM duckdb_settings() WHERE name = 'enable_progress_bar';
 ```
 
-To check the current minimum amount of time (in milliseconds) a query needs to take before displaying a progress bar: 
+To check the current minimum amount of time (in milliseconds) a query needs to take before displaying a progress bar:
 
 ```sql
 SELECT * FROM duckdb_settings() WHERE name = 'progress_bar_time';

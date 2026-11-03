@@ -5,6 +5,7 @@ redirect_from:
 - /docs/current/sql/statements/create_trigger
 - /docs/lts/sql/statements/create_trigger
 - /docs/preview/sql/statements/create_trigger
+- /docs/stable/sql/statements/create_trigger
 title: CREATE TRIGGER Statement
 ---
 
@@ -164,6 +165,6 @@ DuckDB 2.0 has the following limitations:
 * `RETURNING` is not yet supported on tables with `FOR EACH ROW` triggers.
 * `INSTEAD OF` triggers and triggers on views are not supported; a trigger requires a base table.
 * Temporary triggers are not supported.
-* `MERGE INTO` is not supported on tables with triggers. `INSERT ... ON CONFLICT`, `INSERT OR REPLACE` and `INSERT OR IGNORE` are executed as a merge and therefore fail on tables with `UPDATE` or `DELETE` triggers.
+* `MERGE INTO` is not supported on tables with triggers. `INSERT ... ON CONFLICT`, `INSERT OR REPLACE`, and `INSERT OR IGNORE` are executed as a merge and therefore fail on tables with `UPDATE` or `DELETE` triggers.
 * `ON CONFLICT` is not yet supported on tables with `FOR EACH ROW` triggers.
 * `FOR EACH ROW` and `FOR EACH STATEMENT` triggers cannot be mixed for the same event on the same table.

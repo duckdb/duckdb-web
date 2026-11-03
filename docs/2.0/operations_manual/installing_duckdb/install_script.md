@@ -72,7 +72,7 @@ curl https://install.duckdb.org | DUCKDB_VERSION=1.2.2 bash
 
 ### Installing the C/C++ Libraries
 
-Starting with DuckDB 2.0, the install script can also install the DuckDB C/C++ headers and libraries using the `DUCKDB_INSTALL` variable. It takes a comma-separated list of components: `cli` (default), `static` and `shared`. For example, to install the static library and the CLI, run:
+Starting with DuckDB 2.0, the install script can also install the DuckDB C/C++ headers and libraries using the `DUCKDB_INSTALL` variable. It takes a comma-separated list of components: `cli` (default), `static`, and `shared`. For example, to install the static library and the CLI, run:
 
 ```bash
 curl https://install.duckdb.org | DUCKDB_INSTALL=static,cli bash

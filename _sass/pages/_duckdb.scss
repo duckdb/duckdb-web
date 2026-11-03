@@ -23,7 +23,7 @@ body.design{
 	}
 	
 	.logo_packages .example-description{
-		font-size: var(--type-body-small, 14px);
+		font-size: var(--type-body-small, 13px);
 	}
 
 	.usage-example{
@@ -177,7 +177,7 @@ body.design{
 		}
 
 		&__name{
-			font-size: var(--type-label-1, 14px);
+			font-size: var(--type-label, 14px);
 			font-weight: 600;
 			line-height: 1;
 			letter-spacing: 0.014px;
@@ -248,7 +248,7 @@ body.history{
 	}
 
 	.timeline-year{
-		@include label-1();
+		@include label();
 		position: sticky;
 		top: 100px;
 		z-index: 1;

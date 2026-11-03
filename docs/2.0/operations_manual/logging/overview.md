@@ -47,7 +47,7 @@ DuckDB supports different logging levels that control the verbosity of the logs:
 * `FATAL`: Only logs fatal errors
 * `ERROR`: Logs error messages
 * `WARNING`: Logs warnings and errors
-* `INFO`: Logs general information, warnings and errors (default)
+* `INFO`: Logs general information, warnings, and errors (default)
 * `DEBUG`: Logs detailed debugging information
 * `TRACE`: Logs very detailed tracing information
 
@@ -149,7 +149,7 @@ the following log storage types are implemented in core DuckDB.
 | `file`              | Log to (a) csv file(s)                                                    |
 | `shell_log_storage` | Print log messages to the console (default in the CLI)                    |
 
-The `shell_log_storage` cannot be queried: `duckdb_logs`, `duckdb_logs_parsed()` and `truncate_duckdb_logs()` all return an error. It also does not accept configuration options such as `storage_config` or `storage_buffer_size`. To query logs in the CLI, switch to a queryable storage such as `memory` or `file`:
+The `shell_log_storage` cannot be queried: `duckdb_logs`, `duckdb_logs_parsed()`, and `truncate_duckdb_logs()` all return an error. It also does not accept configuration options such as `storage_config` or `storage_buffer_size`. To query logs in the CLI, switch to a queryable storage such as `memory` or `file`:
 
 ```sql
 CALL enable_logging(storage = 'memory');
@@ -165,7 +165,7 @@ the log storage may influence what is returned by the `duckdb_logs` function.
 CALL enable_logging(storage = 'stdout');
 ```
 
-### Logging to File 
+### Logging to File
 
 ```sql
 CALL enable_logging(storage = 'file', storage_config = {'path': 'path/to/store/logs'});
@@ -193,7 +193,7 @@ the log entries are stored separately with `context_id`s referencing the context
 | `stdout`    | no           |
 
 For file storage, you can switch between normalized and denormalized by providing a path to a directory (for normalized)
-or a path ending in `.csv` (for denormalized). For file logging, denormalized is generally recommended since this increases performance 
+or a path ending in `.csv` (for denormalized). For file logging, denormalized is generally recommended since this increases performance
 and reduces the total size of the logs. To configure normalization of `file` log storage:
 
 ```sql
@@ -232,7 +232,7 @@ Note that the default buffer size is different for different log storages:
 | `file`      | `STANDARD_VECTOR_SIZE` (2048) |
 | `stdout`    | Disabled (0)                  |
 
-So for example, if you want to increase your `stdout` logging performance, simply enable buffering to greatly (>10x) speed up 
+So for example, if you want to increase your `stdout` logging performance, simply enable buffering to greatly (>10x) speed up
 your logging:
 
 ```sql
@@ -251,9 +251,9 @@ CALL enable_logging(storage_path = '/tmp/mylogs', storage_buffer_size = 0);
 DuckDB contains some syntactic sugar to make common paths easier. For example, the following statements are all equal:
 
 ```sql
--- regular invocation 
+-- regular invocation
 CALL enable_logging(storage = 'file', storage_config = {'path': 'path/to/store/logs'});
--- using shorthand for common path storage config param 
+-- using shorthand for common path storage config param
 CALL enable_logging(storage = 'file', storage_path = 'path/to/store/logs');
 -- omitting `storage = 'file'` -> is implied from presence of `storage_config`
 CALL enable_logging(storage_config = {'path': 'path/to/store/logs'});

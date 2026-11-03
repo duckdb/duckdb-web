@@ -6,6 +6,7 @@ redirect_from:
 - /docs/lts/guides/database_integration/rds_iam
 - /docs/preview/guides/database_integration/rds_iam
 title: Amazon RDS with IAM Authentication
+how_to_topic: database-integration
 ---
 
 Managed PostgreSQL databases on [Amazon RDS and Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) can authenticate with short-lived IAM tokens instead of a static password. DuckDB supports this through the [`postgres`]({% link docs/2.0/core_extensions/postgres/overview.md %}) and [`aws`]({% link docs/2.0/core_extensions/aws.md %}) extensions: the `aws` extension generates the token from an AWS credential chain, and the `postgres` extension uses it as the connection password, refreshing it automatically.

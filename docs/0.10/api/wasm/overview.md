@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/archive/0.10/api/wasm
-- /docs/archive/0.10/api/wasm/
 title: DuckDB Wasm
 ---
 

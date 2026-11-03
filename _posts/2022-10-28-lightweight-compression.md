@@ -20,11 +20,11 @@ DuckDB added support for compression [at the end of last year](https://github.co
 
 | Version                |    Taxi | On&nbsp;Time | `lineitem` | Notes          | Date           |
 | :--------------------- | ------: | -----------: | ---------: | :------------- | :------------- |
-| DuckDB v0.2.8          | 15.3 GB |      1.73 GB |    0.85 GB | Uncompressed   | July 2021      |
-| DuckDB v0.2.9          | 11.2 GB |      1.25 GB |    0.79 GB | RLE + Constant | September 2021 |
-| DuckDB v0.3.2          | 10.8 GB |      0.98 GB |    0.56 GB | Bitpacking     | February 2022  |
-| DuckDB v0.3.3          |  6.9 GB |      0.23 GB |    0.32 GB | Dictionary     | April 2022     |
-| DuckDB v0.5.0          |  6.6 GB |      0.21 GB |    0.29 GB | FOR            | September 2022 |
+| DuckDB 0.2.8           | 15.3 GB |      1.73 GB |    0.85 GB | Uncompressed   | July 2021      |
+| DuckDB 0.2.9           | 11.2 GB |      1.25 GB |    0.79 GB | RLE + Constant | September 2021 |
+| DuckDB 0.3.2           | 10.8 GB |      0.98 GB |    0.56 GB | Bitpacking     | February 2022  |
+| DuckDB 0.3.3           |  6.9 GB |      0.23 GB |    0.32 GB | Dictionary     | April 2022     |
+| DuckDB 0.5.0           |  6.6 GB |      0.21 GB |    0.29 GB | FOR            | September 2022 |
 | DuckDB dev             |  4.8 GB |      0.21 GB |    0.17 GB | FSST + Chimp   | `now()`        |
 | CSV                    | 17.0 GB |      1.11 GB |    0.72 GB |                |                |
 | Parquet (Uncompressed) |  4.5 GB |      0.12 GB |    0.31 GB |                |                |
@@ -46,9 +46,9 @@ The constant data set can be compressed by simply storing the value of the patte
 
 ## General-Purpose Compression Algorithms
 
-The compression algorithms that most people are familiar with are _general-purpose compression algorithms_, such as Zip, Gzip or Zstd. General-purpose compression algorithms work by finding patterns in bits. They are therefore agnostic to data types, and can be used on any stream of bits. They can be used to compress files, but they can also be applied to arbitrary data sent over a socket connection.
+The compression algorithms that most people are familiar with are _general-purpose compression algorithms_, such as Zip, Gzip, or Zstd. General-purpose compression algorithms work by finding patterns in bits. They are therefore agnostic to data types, and can be used on any stream of bits. They can be used to compress files, but they can also be applied to arbitrary data sent over a socket connection.
 
-General-purpose compression is flexible and very easy to set up. There are a number of high quality libraries available (such as Zstd, Snappy or LZ4) that provide compression, and they can be applied to any data set stored in any manner.
+General-purpose compression is flexible and very easy to set up. There are a number of high quality libraries available (such as Zstd, Snappy, or LZ4) that provide compression, and they can be applied to any data set stored in any manner.
 
 The downside of general-purpose compression is that (de)compression is generally expensive. While this does not matter if we are reading and writing from a hard disk or over a slow internet connection, the speed of (de)compression can become a bottleneck when data is stored in RAM.
 

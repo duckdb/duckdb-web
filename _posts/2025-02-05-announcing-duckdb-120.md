@@ -9,7 +9,7 @@ excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB
 tag: release
 ---
 
-To install the new version, please visit the [installation guide]({% link install/index.html %}).
+To install the new version, please visit the [installation guide]({% link docs/2.0/installation.html %}).
 For the release notes, see the [release page](https://github.com/duckdb/duckdb/releases/tag/v1.2.0).
 
 > Some packages (Go, R, Java) take a few extra days to release due to the reviews required in the release pipelines.
@@ -36,10 +36,10 @@ If you would like to return a list, use the [`map_extract` function]({% link doc
 
 ### Explicit Storage Versions
 
-DuckDB v1.2.0 ships new compression methods but *they are not yet enabled by default* to ensure that older DuckDB versions can read files produced by DuckDB v1.2.0.
+DuckDB 1.2.0 ships new compression methods but *they are not yet enabled by default* to ensure that older DuckDB versions can read files produced by DuckDB 1.2.0.
 
-In practice, this means that DuckDB v1.2.0 can read database files written by past stable DuckDB versions such as v1.0.0.
-When using DuckDB v1.2.0 with default settings, older versions can read files written by DuckDB v1.2.0.
+In practice, this means that DuckDB 1.2.0 can read database files written by past stable DuckDB versions such as v1.0.0.
+When using DuckDB 1.2.0 with default settings, older versions can read files written by DuckDB 1.2.0.
 
 You can *opt-in to newer forwards-incompatible features* using the following syntax:
 
@@ -70,7 +70,7 @@ This shows the storage versions:
 
 This means that `file2` can be opened by past DuckDB versions while `file1` is compatible only with `v1.2.0` (or future versions).
 
-To convert from the new format to the old format for compatibility, use the following sequence in DuckDB v1.2.0:
+To convert from the new format to the old format for compatibility, use the following sequence in DuckDB 1.2.0:
 
 ```sql
 ATTACH 'file1.db';
@@ -253,7 +253,7 @@ It is hard to quantify optimizer improvements, but as a result of these optimiza
 
 ### C API for Extensions
 
-Currently, DuckDB extensions use DuckDB’s internal C++ structures. This – along with some fun linking issues – requires a lock-step development of extensions with mainline DuckDB and constant updates. Starting with this release, we expose a new C-style API for extensions in [`duckdb_extension.h`](https://github.com/duckdb/duckdb/blob/v1.2.0/src/include/duckdb_extension.h). This API can be used to create for example scalar, aggregate or table functions in DuckDB. There are two main advantages of using this API: first, many programming languages (e.g., Go, Rust and even Java) have direct bindings to C APIs, making it rather easy to integrate. Secondly, the C Extension API is stable and backwards-compatible, meaning that extensions that target this API will keep working for new DuckDB versions. We will follow up with a new extension template.
+Currently, DuckDB extensions use DuckDB’s internal C++ structures. This – along with some fun linking issues – requires a lock-step development of extensions with mainline DuckDB and constant updates. Starting with this release, we expose a new C-style API for extensions in [`duckdb_extension.h`](https://github.com/duckdb/duckdb/blob/v1.2.0/src/include/duckdb_extension.h). This API can be used to create for example scalar, aggregate, or table functions in DuckDB. There are two main advantages of using this API: first, many programming languages (e.g., Go, Rust, and even Java) have direct bindings to C APIs, making it rather easy to integrate. Secondly, the C Extension API is stable and backwards-compatible, meaning that extensions that target this API will keep working for new DuckDB versions. We will follow up with a new extension template.
 
 ### musl Extensions
 
@@ -276,4 +276,4 @@ CREATE TABLE t (
 
 These were a few highlights – but there are many more features and improvements in this release.  There have been **over 5 000 commits** by over 70 contributors since we released 1.1.3. The full – very long – release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.2.0).
 
-We would like to thank again our amazing community for using DuckDB, building cool projects on DuckDB and improving DuckDB by providing us feedback. Your contributions truly mean a lot!
+We would like to thank again our amazing community for using DuckDB, building cool projects on DuckDB, and improving DuckDB by providing us feedback. Your contributions truly mean a lot!

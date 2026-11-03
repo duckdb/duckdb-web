@@ -150,7 +150,7 @@ for a matrix of the following values:
 
 * Prices – 100K to 1B rows in steps of 10×;
 * Time – 1 to 2048 rows in steps of 2× (until it got too slow);
-* Threads – 36, 18 and 9;
+* Threads – 36, 18, and 9;
 
 Here are the results:
 
@@ -265,7 +265,7 @@ The new AsOf Loop Join plan feature only covers a common but very specific situa
 and the standard operator could be made a lot more efficient if it knew that the data was already sorted.
 This is often the case, but we do not yet have the ability to track partitioning and ordering between operators.
 Tracking that kind of metadata would be very useful for speeding up a large number of operations,
-including sorting (!), partitioned aggregation, windowing, AsOf joins and merge joins.
+including sorting (!), partitioned aggregation, windowing, AsOf joins, and merge joins.
 This is work we are very interested in, so stay tuned!
 
 ## Conclusion

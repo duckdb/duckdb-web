@@ -25,7 +25,7 @@ The datasets are organized into:
 - a provinces GeoJSON file, containing the geographic information about the Dutch provinces, hosted on GitHub;
 - a municipalities GeoJSON file, containing the geographic information about Dutch municipalities, stored together with the code.
 
-After doing an initial exploration of the above data, we can observe that a province can have one or many municipalities, a municipality can have none or many train stations and a train service record is connected to one and only one train station. Therefore we decide on the following data model:
+After doing an initial exploration of the above data, we can observe that a province can have one or many municipalities, a municipality can have none or many train stations, and a train service record is connected to one and only one train station. Therefore we decide on the following data model:
 
 - a dimension table, `dim_nl_provinces`, to hold information about the Dutch provinces;
 - a dimension table, `dim_nl_municipalities`, to hold information about the Dutch municipalities, linked to `dim_nl_provinces`;
@@ -158,7 +158,7 @@ WHERE tr_st.country = 'NL';
 
 ## Exporting Data from DuckDB
 
-One major benefit of using DuckDB for data processing is the ability to export data to files (such as CSV, JSON and Parquet) and to refresh data directly in PostgreSQL or MySQL databases.
+One major benefit of using DuckDB for data processing is the ability to export data to files (such as CSV, JSON, and Parquet) and to refresh data directly in PostgreSQL or MySQL databases.
 
 ### External Files
 
@@ -320,7 +320,7 @@ FROM main_public.rep_fact_train_services_daily_agg;
 ```
 
 ```text
- count  |   sum    
+ count  |   sum
 --------+----------
  240826 | 17438151
 ```
@@ -335,7 +335,7 @@ The above implementation consists of 10 models and 20 data tests, processing 400
 05:48:07  Running with dbt=1.9.3
 05:48:08  Registered adapter: duckdb=1.9.2
 05:48:08  Found 10 models, 20 data tests, 4 sources, 565 macros
-05:48:08  
+05:48:08
 05:48:08  Concurrency: 1 threads (target='dev')
 ...
 05:48:45  19 of 30 OK created sql table model main_main.fact_services .................... [OK in 32.60s]
@@ -343,12 +343,12 @@ The above implementation consists of 10 models and 20 data tests, processing 400
 05:48:50  26 of 30 OK created sql incremental model postgres_db.main_public.rep_fact_train_services_daily_agg  [OK in 3.74s]
 ...
 05:48:51  Finished running 2 external models, 1 incremental model, 7 table models, 20 data tests in 0 hours 0 minutes and 42.63 seconds (42.63s).
-05:48:51  
+05:48:51
 05:48:51  Completed successfully
-05:48:51  
+05:48:51
 05:48:51  Done. PASS=30 WARN=0 ERROR=0 SKIP=0 TOTAL=30
 ```
 
 ## Conclusion
 
-In this post we have demonstrated how DuckDB integrates with `dbt` and how it is part of the data processing ecosystem by showcasing data mart creation, file exports and reverse ETL to a PostgreSQL database.
+In this post we have demonstrated how DuckDB integrates with `dbt` and how it is part of the data processing ecosystem by showcasing data mart creation, file exports, and reverse ETL to a PostgreSQL database.

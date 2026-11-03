@@ -18,7 +18,7 @@
 	</script>
 	{% endif %}
 	
-	<link rel="stylesheet" href="/css/main.css?{{ site.time | date: '%s' }}">
+	<link rel="stylesheet" href="{{ '/css/main.css' | fingerprint }}">
 	{% if page.content contains "quote-slider" %}
 	<link rel="stylesheet" href="/css/swiper-bundle.min.css">
 	{% endif %}
@@ -201,7 +201,7 @@
 	{% if page.content contains "quote-slider" %}
 	<script src="/js/swiper-bundle.min.js" defer></script>
 	{% endif %}
-	<script src="/js/script.js?{{ site.time | date: '%s' }}" defer></script>
+	<script src="{{ '/js/script.js' | fingerprint }}" defer></script>
 	<script src="/js/copy_button.js" defer></script>
 	
 </body>

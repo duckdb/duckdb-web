@@ -6,6 +6,7 @@ redirect_from:
 - /docs/lts/guides/file_formats/read_duckdb
 - /docs/preview/guides/file_formats/read_duckdb
 title: Directly Read DuckDB Databases
+how_to_topic: file-formats
 ---
 
 DuckDB allows directly reading DuckDB files through the `read_duckdb` function:

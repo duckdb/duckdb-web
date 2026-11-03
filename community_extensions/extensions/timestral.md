@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: timestral
   description: Zero-shot probabilistic time-series forecasting in SQL with Mistral's Timestral models, on CPU via ONNX Runtime
-  version: '0.1.0'
+  version: '0.1.1'
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: altertable-ai/duckdb-timestral
-  ref: 3bab0a28ff9b8854dc624b6666e1fc0639076466
+  ref: 8f0bc7fe5e83d127abd4ea1b4115fa1ab121006b
   variegata: 7d6486900113e4271f8e32324adf27776b63a02b
 
 docs:
@@ -27,7 +27,7 @@ docs:
     INSTALL timestral FROM community;
     LOAD timestral;
 
-    -- Hourly series, one per store. The 5M model (~23 MB) is downloaded and cached on first use.
+    -- Hourly series, one per store. The 5M model (~21 MB) is downloaded and cached on first use.
     CREATE TABLE sales AS
     SELECT g AS store, TIMESTAMP '2026-01-01' + INTERVAL (i) HOUR AS ts, 10 * g + sin(i / 6) AS amount
     FROM range(3) a(g), range(500) b(i);
@@ -61,8 +61,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 921
-extension_download_count_pretty: 921
+extension_download_count: 519
+extension_download_count_pretty: 519
 image: '/images/community_extensions/social_preview/preview_community_extension_timestral.png'
 layout: community_extension_doc
 ---
@@ -128,9 +128,9 @@ This extension does not add any types.
 |---------------------------|------------------------------------------------------------------------------------|------------|--------|---------|-------------------------------------------|
 | active_grammar_extensions | The grammar extensions used by the parser.                                         | VARCHAR[]  | LOCAL  | []      | [shell, timestral]                        |
 | temp_directory            | Set the directory to which temporary files are written.                            | VARCHAR    | GLOBAL | []      | post.db.tmp                               |
-| timestral_cache_dir       | Directory downloaded Timestral models are cached in                                | VARCHAR    | GLOBAL | []      | ~/.duckdb/timestral/v1                    |
+| timestral_cache_dir       | Directory downloaded Timestral models are cached in                                | VARCHAR    | GLOBAL | []      | ~/.duckdb/timestral/v2                    |
 | timestral_model           | Default Timestral model size: 5m, 28m, 123m or 209m                                | VARCHAR    | GLOBAL | []      | 5m                                        |
 | timestral_model_path      | Explicit local .onnx file to use instead of the download cache (no checksum check) | VARCHAR    | GLOBAL | []      |                                           |
-| timestral_model_url       | Base URL the Timestral .onnx files are downloaded from                             | VARCHAR    | GLOBAL | []      | https://assets.altertable.ai/timestral/v1 |
+| timestral_model_url       | Base URL the Timestral .onnx files are downloaded from                             | VARCHAR    | GLOBAL | []      | https://assets.altertable.ai/timestral/v2 |
 
 

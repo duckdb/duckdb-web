@@ -10,7 +10,7 @@ excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB
 tag: release
 ---
 
-To install the new version, please visit the [installation guide]({% link install/index.html %}).
+To install the new version, please visit the [installation guide]({% link docs/2.0/installation.html %}).
 For the release notes, see the [release page](https://github.com/duckdb/duckdb/releases/tag/v1.1.0).
 
 > Some packages (R, Java) take a few extra days to release due to the reviews required in the release pipelines.
@@ -102,7 +102,7 @@ SELECT (SELECT unnest(range(10))) AS result;
 
 Recently we introduced [Community Extensions]({% post_url 2024-07-05-community-extensions %}). Community extensions allow anyone to build extensions for DuckDB, that are then built and distributed by us. The [list of community extensions]({% link community_extensions/list_of_extensions.md %}) has been growing since then.
 
-In this release, we have been working towards making community extensions easier to build and produce. This release includes a new method of registering extensions [using the C API](https://github.com/duckdb/duckdb/pull/12682) in addition to a lot of extensions to the C API allowing [scalar functions](https://github.com/duckdb/duckdb/pull/11786), [aggregate functions](https://github.com/duckdb/duckdb/pull/13229) and [custom types](https://github.com/duckdb/duckdb/pull/13499) to be defined. These changes will enable building extensions against a stable API, that are smaller in size, that will work across different DuckDB versions. In addition, these changes will enable building extensions in other programming languages in the future.
+In this release, we have been working towards making community extensions easier to build and produce. This release includes a new method of registering extensions [using the C API](https://github.com/duckdb/duckdb/pull/12682) in addition to a lot of extensions to the C API allowing [scalar functions](https://github.com/duckdb/duckdb/pull/11786), [aggregate functions](https://github.com/duckdb/duckdb/pull/13229), and [custom types](https://github.com/duckdb/duckdb/pull/13499) to be defined. These changes will enable building extensions against a stable API, that are smaller in size, that will work across different DuckDB versions. In addition, these changes will enable building extensions in other programming languages in the future.
 
 ## Friendly SQL
 
@@ -427,10 +427,10 @@ WHERE ST_Within(geom, ST_MakeEnvelope(450, 450, 650, 650));
 3986
 ```
 
-R-Tree indexes mostly share the same feature-set as DuckDB's built-in ART index. They are buffer-managed, persistent, lazily-loaded from disk and support inserts, updates and deletes to the base table. Although they can not be used to enforce constraints.
+R-Tree indexes mostly share the same feature-set as DuckDB's built-in ART index. They are buffer-managed, persistent, lazily-loaded from disk and support inserts, updates, and deletes to the base table. Although they can not be used to enforce constraints.
 
 ## Final Thoughts
 
 These were a few highlights – but there are many more features and improvements in this release. The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.1.0).
 
-We would like to thank again our amazing community for using DuckDB, building cool projects on DuckDB and improving DuckDB by providing us feedback. Your contributions truly mean a lot!
+We would like to thank again our amazing community for using DuckDB, building cool projects on DuckDB, and improving DuckDB by providing us feedback. Your contributions truly mean a lot!

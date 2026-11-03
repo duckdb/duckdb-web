@@ -5,6 +5,7 @@ redirect_from:
 - /docs/current/data/io
 - /docs/lts/data/io
 - /docs/preview/data/io
+- /docs/stable/data/io
 title: I/O
 ---
 
@@ -32,7 +33,7 @@ Other formats, such as JSON files, use synchronous I/O. Asynchronous I/O is used
 
 DuckDB uses two thread pools:
 
-* The regular pool contains the worker threads, which perform the actual query processing (e.g., decoding, joins and aggregations). Its size is controlled by the `threads` setting and defaults to the number of CPU cores. Regular threads prioritize query processing but can also perform I/O tasks when idle.
+* The regular pool contains the worker threads, which perform the actual query processing (e.g., decoding, joins, and aggregations). Its size is controlled by the `threads` setting and defaults to the number of CPU cores. Regular threads prioritize query processing but can also perform I/O tasks when idle.
 * The asynchronous pool contains threads dedicated to blocking I/O. As these threads spend most of their time waiting for responses (e.g., HTTP requests), there are more of them than CPU cores: by default, four times the number of system threads, capped at 256. Its size is controlled by the `async_threads` setting.
 
 For example, to set the number of asynchronous I/O threads to 48, run:
@@ -59,7 +60,7 @@ To configure it, use the `SET` clause, e.g.:
 SET read_ahead_depth = 5;
 ```
 
-In the default mode, the read-ahead budget is negotiated with the same memory manager that distributes memory between operators such as joins, sorts and window functions. Under high memory pressure, the read-ahead queue shrinks to a single job and the scan behaves similarly to a synchronous scan. Once memory frees up, the queue fills up again. To limit the total memory used by DuckDB, use the [`memory_limit` setting]({% link docs/2.0/configuration/overview.md %}).
+In the default mode, the read-ahead budget is negotiated with the same memory manager that distributes memory between operators such as joins, sorts, and window functions. Under high memory pressure, the read-ahead queue shrinks to a single job and the scan behaves similarly to a synchronous scan. Once memory frees up, the queue fills up again. To limit the total memory used by DuckDB, use the [`memory_limit` setting]({% link docs/2.0/configuration/overview.md %}).
 
 ### Tuning
 

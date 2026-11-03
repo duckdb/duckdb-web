@@ -26,10 +26,16 @@ if response.status_code == 200:
     for event in cal.walk():
         dtstart = event.get("DTSTART")
         title = event.get("SUMMARY")
-        if title is None or "freeze" in title.lower():
+        if title is None:
             continue
-        else:
-            title = title.replace("DuckDB ", "").replace("Release ", "")
+        title = title.replace("DuckDB ", "")
+        # Normalize freeze entries, e.g., "Merge Freeze v1.5" -> "Merge freeze 1.5"
+        title = re.sub(
+            "(feature|merge) freeze v?",
+            lambda m: f"{m.group(1).capitalize()} freeze ",
+            title,
+            flags=re.IGNORECASE,
+        )
 
         version_search = re.search("([0-9]+\\.[0-9]+\\.[0-9])", title)
         if version_search:

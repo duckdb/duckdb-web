@@ -9,12 +9,12 @@ redirect_from:
 title: Securing DuckDB
 ---
 
-DuckDB is a powerful analytical database engine. It can read and write files, access the network, load extensions, 
-and use system resources. Like any powerful tool, these capabilities require appropriate configuration when 
+DuckDB is a powerful analytical database engine. It can read and write files, access the network, load extensions,
+and use system resources. Like any powerful tool, these capabilities require appropriate configuration when
 working with sensitive data or in shared environments.
 
 This page documents DuckDB's security model and security-related settings. The right configuration depends on your use case, environment, and threat model.
-If you plan to embed DuckDB in your application, also consult the ["Embedding DuckDB"]({% link docs/2.0/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
+If you plan to embed DuckDB in your application, also consult the [“Embedding DuckDB”]({% link docs/2.0/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
 
 ## Untrusted Input
 
@@ -35,7 +35,7 @@ If your application must execute SQL from untrusted sources, use additional safe
 * Implement strict query timeouts at the application level
 
 The settings described on this page provide **defense-in-depth** and can limit certain capabilities, but they are not a substitute for proper sandboxing. Also keep in mind that
-sandboxing should not just be considered for security purposes, but also for preventing denial of service (DoS) attacks: malicious inputs can easily cause DuckDB to consume excessive resources such 
+sandboxing should not just be considered for security purposes, but also for preventing denial of service (DoS) attacks: malicious inputs can easily cause DuckDB to consume excessive resources such
 as memory, disk, CPU, or network.
 
 ### Untrusted Non-SQL Input
@@ -99,7 +99,7 @@ relied upon as comprehensive security mechanisms in all configurations. These se
 measures to limit the impact of potential security issues, but they cannot provide complete protection against all
 attack vectors, especially when executing untrusted SQL. For robust security when dealing with untrusted input, combine
 these settings with proper sandboxing at the operating system or container level, as described in
-the ["Untrusted SQL Input"](#untrusted-sql-input) section.
+the [“Untrusted SQL Input”](#untrusted-sql-input) section.
 
 ### Safe Mode (CLI)
 
@@ -133,6 +133,8 @@ File access can be disabled in two ways. First, you can disable individual file 
 SET disabled_filesystems = 'LocalFileSystem';
 ```
 
+The `disabled_filesystems` option can only be set with `SET` on a running database; it is not accepted as a startup configuration option. Like the other security-related settings, it cannot be undone: a disabled file system stays disabled until the database is restarted, and trying to re-enable it fails with `has been disabled previously, it cannot be re-enabled`. Disabling `LocalFileSystem` also refuses `INSTALL` and `LOAD` for all extensions, since extensions are loaded from local files, so load the extensions you need (e.g., `httpfs`) before disabling it.
+
 Second, you can also completely disable external access by setting the [`enable_external_access` option]({% link docs/2.0/configuration/overview.md %}#configuration-reference) option to `false`.
 
 ```sql
@@ -163,6 +165,31 @@ With the setting applied, DuckDB will refuse to read files in the current workin
 Permission Error:
 Cannot access file "test.csv" - file system operations are disabled by configuration
 ```
+
+Note that allow-listed paths and directories can be written to as well as read from; these options do not make the allowed locations read-only.
+
+#### Allowing Remote Files
+
+The entries of `allowed_paths` and `allowed_directories` can also be remote URLs, such as `s3://⟨bucket⟩/⟨prefix⟩/` or `https://⟨host⟩/⟨file⟩`. An entry is resolved by the file system that handles its scheme at the time it is set, so that file system must already be registered: load the extension that provides it (e.g., `LOAD httpfs`) before setting the option. Before DuckDB 2.0.0, an `s3://` entry set without `httpfs` loaded was silently stored as a local path under the current working directory and never matched the intended object.
+
+The order of the statements matters, and it cannot be changed afterwards: once `enable_external_access` is `false`, `allowed_paths` and `allowed_directories` can no longer be changed, and once `LocalFileSystem` is disabled, no further extension can be loaded. A working sequence for an instance that may only read and write a single S3 prefix is:
+
+```sql
+LOAD httpfs;
+SET allowed_directories = ['s3://⟨bucket⟩/⟨prefix⟩/'];
+SET enable_external_access = false;
+SET disabled_filesystems = 'LocalFileSystem';
+SET lock_configuration = true;
+```
+
+Setting the allow-list after external access has been disabled fails:
+
+```console
+Invalid Input Error:
+Cannot change allowed_directories when enable_external_access is disabled
+```
+
+For HTTPS URLs, `httpfs` verifies the server certificate against a CA certificate bundle that it reads from the local file system. Once `LocalFileSystem` is disabled or `enable_external_access` is `false`, this read fails with `Cannot read a CA certificate bundle: file system access is restricted by configuration` unless the bundle was already loaded by an earlier HTTPS request, its path is included in `allowed_paths`, or the [`ca_cert_file` option]({% link docs/2.0/core_extensions/httpfs/https.md %}) points to a certificate file.
 
 ### Locking Configurations
 
@@ -202,11 +229,13 @@ Queries can access the secrets defined in the Secrets Manager. For example, if t
 
 [Persistent secrets]({% link docs/2.0/configuration/secrets_manager.md %}#persistent-secrets) are stored in unencrypted binary format on the disk. These have the same permissions as SSH keys, `600`, i.e., only the user who is running the DuckDB (parent) process can read and write them.
 
+The Secrets Manager opens its persistent storage directory (`secret_directory`, by default `~/.duckdb/stored_secrets`) the first time secrets are used in a database, not when the database is opened. If that first use happens after `enable_external_access` has been set to `false`, the access to the local file system fails and the Secrets Manager remains unusable for the rest of the session. When locking down an instance that needs secrets, either use the Secrets Manager once before the lock-down, e.g., with `SELECT count(*) FROM duckdb_secrets();`, or set `allow_persistent_secrets = false` before it so that persistent storage is never touched.
+
 ## Prepared Statements to Prevent SQL Injection
 
 Similarly to other SQL databases, it's recommended to use [prepared statements]({% link docs/2.0/sql/query_syntax/prepared_statements.md %}) in DuckDB to prevent [SQL injection](https://en.wikipedia.org/wiki/SQL_injection).
 
-> Important Prepared statements protect against SQL injection when **you control the query structure** but accept **untrusted data values** (e.g., user-provided search terms or IDs). If users can supply the SQL query itself, this is equivalent to allowing them to run arbitrary code – see ["Untrusted SQL Input"](#untrusted-sql-input).
+> Important Prepared statements protect against SQL injection when **you control the query structure** but accept **untrusted data values** (e.g., user-provided search terms or IDs). If users can supply the SQL query itself, this is equivalent to allowing them to run arbitrary code – see [“Untrusted SQL Input”](#untrusted-sql-input).
 
 **Therefore, avoid concatenating strings for queries:**
 

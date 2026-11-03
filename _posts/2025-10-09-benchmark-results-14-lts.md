@@ -24,7 +24,7 @@ On October 9, 2025, DuckDB's in-memory variant hit #1 on the popular [ClickBench
      class="darkmode-img"
      />
 
-This result was made possible due several [performance optimizations]({% post_url 2025-09-16-announcing-duckdb-140 %}#performance-and-optimizations) in DuckDB v1.4.
+This result was made possible due several [performance optimizations]({% post_url 2025-09-16-announcing-duckdb-140 %}#performance-and-optimizations) in DuckDB 1.4.
 
 > Update As of October 26, the rules of ClickBench changed. The new rules prevent [in-memory databases from showing “cold” (and “combined”) results](https://github.com/ClickHouse/ClickBench/pull/660). After this change, DuckDB is the #1 open-source system in hot runs, closely trailing the leader in that category, Umbra, a closed-source research prototype.
 
@@ -39,7 +39,7 @@ We estimated the number of Fortune-100 companies who use DuckDB by cross-checkin
 
 ## 25M+ Downloads / Month
 
-DuckDB's Python packages has almost 25 million monthly downloads on [PyPI alone](https://pypistats.org/packages/duckdb). This is complemented with the downloads of other popular clients such as the CLI, Go, Node.js, Java, R, Rust and so on.
+DuckDB's Python packages has almost 25 million monthly downloads on [PyPI alone](https://pypistats.org/packages/duckdb). This is complemented with the downloads of other popular clients such as the CLI, Go, Node.js, Java, R, Rust, and so on.
 
 ## TPC-H SF 100,000
 

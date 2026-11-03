@@ -6,6 +6,7 @@ redirect_from:
 - /docs/lts/guides/sql_features/graph_queries
 - /docs/preview/guides/sql_features/graph_queries
 title: Graph Queries
+how_to_topic: sql-features
 ---
 
 DuckDB supports graph queries via the [DuckPGQ community extension](https://duckpgq.org), which implements the SQL/PGQ syntax from the SQL:2023 standard.
@@ -99,7 +100,7 @@ FROM pagerank('social_network', 'Person', 'Knows');
 
 ## Use Case: Financial Fraud Detection
 
-Graph queries excel at finding suspicious patterns in financial data. See the ["Uncovering Financial Crime with DuckDB and Graph Queries" blog post]({% post_url 2025-10-22-duckdb-graph-queries-duckpgq %}) for a detailed example of detecting money laundering patterns.
+Graph queries excel at finding suspicious patterns in financial data. See the [“Uncovering Financial Crime with DuckDB and Graph Queries” blog post]({% post_url 2025-10-22-duckdb-graph-queries-duckpgq %}) for a detailed example of detecting money laundering patterns.
 
 ## Cleanup
 
@@ -113,4 +114,4 @@ DROP PROPERTY GRAPH social_network;
 
 * [DuckPGQ Documentation](https://duckpgq.org)
 * [DuckPGQ Community Extension]({% link community_extensions/extensions/duckpgq.md %})
-* ["Uncovering Financial Crime with DuckDB and Graph Queries" blog post]({% post_url 2025-10-22-duckdb-graph-queries-duckpgq %})
+* [“Uncovering Financial Crime with DuckDB and Graph Queries” blog post]({% post_url 2025-10-22-duckdb-graph-queries-duckpgq %})
