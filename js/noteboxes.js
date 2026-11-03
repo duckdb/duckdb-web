@@ -8,14 +8,12 @@ $(document).ready(function(){
 		deprecated: "alert-circle",
 		update: "refresh-cw-02",
 		installation: "settings-02",
-		quote: "quotation_mark",
 		new: "stars-01"
 	};
 
 	$('#main_content_wrap blockquote, .singleentry blockquote').each(function() {
 		var $blockquote = $(this);
-		var blockquoteText = $blockquote.text().trim();
-		var firstWord = blockquoteText.split(' ')[0];
+		var firstWord = $blockquote.children('p').first().text().trim().split(/\s+/)[0];
 
 		var className = "";
 
@@ -68,6 +66,9 @@ $(document).ready(function(){
 		$blockquote.wrapInner('<div class="content"></div>');
 
 		if (className === "quote") {
+			var $content = $blockquote.children('.content');
+			var $first = $content.children('p').first();
+			if (!$first.text().trim() && !$first.find('img').length) {
 				$first.remove();
 			}
 			var $last = $blockquote.find('.content > p:last-child');
