@@ -129,8 +129,8 @@ docs:
 
     Full test suite with 2058 passing assertions across 60 test files.
 
-extension_star_count: {"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
-extension_star_count_pretty: n/a
+extension_star_count: 32
+extension_star_count_pretty: 32
 extension_download_count: 2302
 extension_download_count_pretty: 2.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
