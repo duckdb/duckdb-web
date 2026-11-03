@@ -2,7 +2,9 @@
 layout: post
 title: "The Five-Minute Test: Ted Dunning on Why DuckDB Makes Analytics Easier"
 authors:
-  - Ted Dunning in conversation with Geertjan Wielenga and Tim Cox
+  - Ted Dunning
+  - Geertjan Wielenga
+  - Tim Cox
 thumb: "/images/blog/thumbs/ted-dunning.svg"
 image: "/images/blog/thumbs/ted-dunning.png"
 excerpt: "Ted Dunning has spent decades building distributed data systems, including Apache Drill. He queries a year of home sensor data, around 100 million rows, on a Raspberry Pi in a fraction of a second with DuckDB. This is his case for why a single machine, and a tool that proves itself in five minutes, now goes a very long way."
