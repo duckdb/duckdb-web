@@ -185,6 +185,7 @@ infera,CogitatorTech/infera,d70d4f1f8df2a5aa76f2c68d0b4c4b719eb5a2ce,"A DuckDB e
 inflector,query-farm/inflector,69e604e8d73bb5b40b03d024d04572ba3a9fac49,"Powerful string case transformation and inflection capabilities directly to your SQL queries."
 interlis,edigonzales/duckdb-interlis,30923246a778f7db6319ed09052aaa1176c9cc7f,"Native INTERLIS model introspection and streaming XTF support for DuckDB"
 ion,kestra-io/duckdb-ion,a144356501ec0432b5025c6b8d19f643761d6f65,"Read AWS Ion data and write Ion text or binary with typed mappings"
+ivf,alitrack/duckdb-ivf,74b06baaa68c46d7579bcb1ad6b13df3f171ec9b,"OSA Levenshtein + Meilisearch-style typo tolerance for FTS (ivf_levenshtein, transposition = 1), with an exact-recall IVF-Flat vector baseline"
 jev,judoaseeta/duckdb-jev,58e548463b0bfb25d86bc68b11515a1daaf87ab3,"Ask your tables questions in plain language — filter, rank and classify rows with a condition you write as a sentence"
 json_schema,query-farm/json_schema,c0b5fc48d1d2654e804a7b0ea6aad877044dc4ba,"Adds support for validating JSON data with JSON schemas."
 jsonata,query-farm/jsonata,3c64d4ca993743128d117bd15a8be146a2344c2c,"The JSONata extension for DuckDB enables expressive, JSON-focused querying and transformation directly within SQL using the powerful JSONata expression language."
