@@ -51,10 +51,11 @@ module SearchIndex
     @threads.each(&:join)
     @threads = nil
     # on a fresh checkout, the files did not exist yet when Jekyll read the site
-    known = site.static_files.map(&:relative_path).to_set
+    # compare absolute paths: Jekyll's relative_path has a leading slash ("/data/..."), which is easy to get wrong
+    known = site.static_files.map(&:path).to_set
     OUTPUT_FILES.each do |name|
-      relative_path = "#{OUTPUT_DIR}/#{name}"
-      next if known.include?(relative_path) || !File.exist?(site.in_source_dir(OUTPUT_DIR, name))
+      path = site.in_source_dir(OUTPUT_DIR, name)
+      next if known.include?(path) || !File.exist?(path)
 
       site.static_files << Jekyll::StaticFile.new(site, site.source, OUTPUT_DIR, name)
     end
