@@ -47,6 +47,10 @@ body.documentation.guides-index {
             height: 44px;
             justify-content: space-between;
 
+            &:hover {
+                border-color: var(--border-color-hover);
+            }
+
             .selectedversion {
                 overflow: hidden;
                 text-overflow: ellipsis;

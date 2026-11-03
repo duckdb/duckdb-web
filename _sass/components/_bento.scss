@@ -9,6 +9,17 @@
 
 .bento-box {
 	@include glass-card;
+	transition: border-color .2s;
+	text-decoration: none;
+
+	&:focus-visible {
+		outline: 2px solid var(--main-text-primary-color);
+		outline-offset: -3px;
+	}
+
+	&:hover {
+		border-color: var(--border-color-hover);
+	}
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -50,31 +61,8 @@
 		max-width: 296px;
 	}
 
-	.bento-link {
-		@include label;
-		font-size: var(--type-body-small, 13px);
-		display: inline-flex;
-		align-items: center;
-		gap: 7px;
-		margin-top: auto;
-		padding-top: 8px;
-		color: var(--main-text-secondary-color, #666);
-		text-decoration: none;
-
-		.icon {
-			width: 14px;
-			height: 14px;
-			stroke-width: 2;
-		}
-
-		&:hover {
-			color: var(--main-text-primary-color, #0d0d0d);
-		}
-	}
-
 	.bento-title,
-	p,
-	.bento-link {
+	p {
 		position: relative;
 		z-index: 1;
 	}

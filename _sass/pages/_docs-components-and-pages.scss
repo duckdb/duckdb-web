@@ -460,6 +460,7 @@ body.documentation.docs-overview .box-link {
 }
 
 .box-link {
+    border: 1px solid var(--border-color);
     border-radius: var(--page-radius-box-inner);
     padding: 5px;
     display: flex;
@@ -467,10 +468,14 @@ body.documentation.docs-overview .box-link {
     position: relative;
     gap: 6px;
     @include body-small();
-    transition: background-color .2s;
+    transition: border-color .2s;
 
     &:hover {
-        background: var(--doc-sidebar-selected-background-color, #F2F2F2);
+        border-color: var(--border-color-hover);
+
+        .symbol {
+            border-color: transparent;
+        }
     }
 
     >a {

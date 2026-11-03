@@ -460,15 +460,15 @@
 
 @media only screen and (max-width: 720px) {
 	header .headerline{
-		height: 55px;
+		height: $site-header-height;
 	}
 
 	main.inactive::before {
-		top: calc(54px + var(--docbanner-height, 0px));
+		top: calc($site-header-height - 1px + var(--docbanner-height, 0px));
 	}
 
 	header .headerline .headercontent .landingmenu nav:not(.mobile) {
-		top: 70px;
+		top: $site-header-height;
 	}
 
 	header .headerline .headercontent .landingmenu .hamburger{
@@ -484,7 +484,7 @@
 	#duckcon7_logo,
 	#duckcon8_logo,
 	#foundation_logo{
-		height: 55px;
+		height: $site-header-height;
 	}
 
 	#duckdb_logo{

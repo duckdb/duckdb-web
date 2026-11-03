@@ -552,7 +552,7 @@ h5 a {
 
 .newswrap{
 	min-height: calc(100vh - 111px);
-	margin-top: 70px;
+	margin-top: $site-header-height;
 	width: 100%;
 	.wrap{
 		max-width: $maxContentWidth;

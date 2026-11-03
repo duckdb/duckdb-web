@@ -27,7 +27,7 @@ body.landing{
 	}
 	
 	main{
-		margin-top: 70px;
+		margin-top: $site-header-height;
 	}
 	h1{
 		margin: 0;
@@ -638,7 +638,6 @@ body.landing{
 		}
 		.duckstack-card{
 			width: 565px;
-			min-height: 340px;
 			flex-shrink: 0;
 			display: flex;
 			flex-direction: column;
@@ -666,22 +665,22 @@ body.landing{
 					margin: 0 0 10px;
 				}
 			}
+			position: relative;
+			transition: border-color .2s;
+
+			&:hover{
+				border-color: var(--border-color-hover);
+			}
+
 			.stack-link{
-				display: inline-flex;
-				align-items: center;
-				gap: 7px;
-				font-size: var(--type-body-small, 13px);
-				font-weight: var(--type-weight-standard, 450);
-				line-height: 1;
-				color: var(--main-text-secondary-color, #666);
-				text-decoration: none;
-				.icon{
-					width: 14px;
-					height: 14px;
-					stroke-width: 2;
-				}
-				&:hover{
-					color: var(--main-text-primary-color, #0d0d0d);
+				position: absolute;
+				inset: 0;
+				z-index: 1;
+				border-radius: var(--page-radius-box, 15px);
+
+				&:focus-visible{
+					outline: 2px solid var(--main-text-primary-color);
+					outline-offset: -3px;
 				}
 			}
 		}
@@ -702,7 +701,7 @@ body.landing{
 			display: block;
 			width: 100%;
 			height: auto;
-			margin-top: 36px;
+			margin-top: 24px;
 			border-radius: var(--page-radius-m, 10px);
 
 			text{
@@ -1229,7 +1228,6 @@ body.landing{
 			}
 			.duckstack-card{
 				width: 100%;
-				min-height: 0;
 			}
 		}
 		section.proof .wrap.flexwrap{
