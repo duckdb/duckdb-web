@@ -104,7 +104,7 @@ He is also adding real-time collaboration based on the [Loro CRDT](https://loro.
 
 At [DuckCon #7]({% link _events/2026-06-24-duckcon7.html %}) in Amsterdam, Ilya showed a SQLRooms command-line tool that works with a DuckDB database and presents the analysis in a notebook-like style. The direction is a single DuckDB file that holds an entire analytical workspace, which someone can open elsewhere and continue. The design is still changing.
 
-## Watch the DuckCon Talk
+## Learn More
 
 Ilya's five-minute talk from DuckCon #7 gives a short tour of this direction.
 
