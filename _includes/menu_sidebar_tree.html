@@ -6,7 +6,7 @@
 {%- assign nav_found = false -%}
 {%- assign nav_trail = "" -%}
 {%- for item in nav_menu -%}
-	{%- if item.group_start -%}<li class="nav-label">Reference</li>{%- endif -%}
+	{%- if item.group_start -%}<li class="nav-label">Topics</li>{%- endif -%}
 	{%- if item.mainfolderitems[0] -%}
 		{%- assign first = item.mainfolderitems[0] -%}
 		{%- assign crumb_href = "" -%}

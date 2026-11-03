@@ -286,8 +286,8 @@
         }
 
         .table-title {
-            // Both rules are duplicates of the title-1 mixin, but we need to override the font-size and font-weight
-            font-size:var(--type-title-1, 18px);
+            // Both rules are duplicates of the headline-3 mixin, but we need to override the font-size and font-weight
+            font-size:var(--type-headline-3, 18px);
             font-weight: 600;
         }
 

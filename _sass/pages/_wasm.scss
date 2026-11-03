@@ -26,13 +26,13 @@ body.wasm{
 
 		.selection-head{
 			h3{
-				@include title-1;
+				@include headline-3;
 				cursor: pointer;
 				position: relative;
 				margin: 0;
 				padding-right: 55px;
 				.selected{
-					@include label-1;
+					@include label;
 					margin-left: 20px;
 				}
 				&::after{
@@ -72,7 +72,7 @@ body.wasm{
 		}
 
 		h4{
-			@include label-1;
+			@include label;
 		}
 
 		&.disabled{
@@ -106,7 +106,7 @@ body.wasm{
 
 			label{
 				display: block;
-				@include label-1;
+				@include label;
 				margin-bottom: 8px;
 				font-weight: 600;
 			}
@@ -177,7 +177,7 @@ body.wasm{
 			background: var(--main-background-color, #FFFFFF);
 			color: var(--main-text-primary-color, #0D0D0D);
 			text-decoration: none;
-			@include label-1;
+			@include label;
 			transition: all .3s;
 
 			&:hover{
@@ -251,7 +251,7 @@ body.wasm{
 		margin: 8px 0;
 
 		&#last_query_status{
-			@include label-1;
+			@include label;
 			font-weight: 600;
 			color: var(--main-text-secondary-color, #666);
 			margin-top: 16px;
