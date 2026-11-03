@@ -101,7 +101,7 @@ When the memory-heavy operator finishes, the memory manager has more budget to g
 
 ## Benchmarks
 
-Asynchronous I/O should have the largest effect when the latency of synchronous requests prevents us from using the available remote bandwidth. To measure this effect, we ran [TPC-H Query 6 at SF100](https://duckdb.org/docs/current/core_extensions/tpch), with the data sitting on S3, and compared the results against [DuckDB 1.5.5]({% post_url 2026-07-22-announcing-duckdb-155 %}), our latest stable release. The SF100 dataset was written as a single file per table for both the Parquet and CSV benchmarks, with the `lineitem` table containing 600,037,902 rows.
+Asynchronous I/O should have the largest effect when the latency of synchronous requests prevents us from using the available remote bandwidth. To measure this effect, we ran [TPC-H Query 6 at SF100]({% link docs/2.0/core_extensions/tpch.md %}), with the data sitting on S3, and compared the results against [DuckDB 1.5.5]({% post_url 2026-07-22-announcing-duckdb-155 %}), our latest stable release. The SF100 dataset was written as a single file per table for both the Parquet and CSV benchmarks, with the `lineitem` table containing 600,037,902 rows.
 
 For compute, we used an EC2 [r7i.16xlarge](http://instances.vantage.sh/aws/ec2/r7i.16xlarge) machine (64 vCPUs and 512 GB of RAM), with both the machine and the S3 bucket with the data located in the same region. We executed the query five times and report the mean execution time. The files were never cached (i.e., `SET enable_external_file_cache = false;`{:.language-sql .highlight}), meaning that every execution read the data straight from S3.
 
