@@ -5,22 +5,34 @@ excerpt: |
   DuckDB Community Extensions
   High-performance lossless log parsing, analytical database compaction, and information-theoretic semantic accounting.
 
+# =============================================================================
+# DuckDB community extension metadata specification for razobill
+#
+# defines extension identity, build system, excluded platforms, and repository
+# coordinates for the DuckDB community extension distribution repository
+# ~ DuckDB community extension metadata specification and usage documentation
+# =============================================================================
+
 extension:
   name: razobill
   description: High-performance lossless log parsing, analytical database compaction, and information-theoretic semantic accounting.
-  version: 1.1.1
+  version: 1.1.8
   language: C++
   build: cmake
   license: Apache-2.0
   maintainers:
     - 4t1a
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;windows_amd64_rtools"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools"
+  opt_in_platforms: "osx_amd64"
 
+# upstream git repository coordinates and tagged release reference
 repo:
   github: razobill/razobill
-  ref: 258b2da2481c4a79c01b2f1d89f282810d8b85cc
-  ref_next: 258b2da2481c4a79c01b2f1d89f282810d8b85cc
+  ref: 00a4995fb090fbb5bc8b506d77665f8c4e31af67
+  variegata: 00a4995fb090fbb5bc8b506d77665f8c4e31af67
+  andium: 00a4995fb090fbb5bc8b506d77665f8c4e31af67
 
+# documentation and sql usage examples published on DuckDB community portal
 docs:
   hello_world: |
     -- Install and load the Razobill extension
@@ -30,10 +42,9 @@ docs:
     -- Vectorized single-pass composite struct decomposition: STRUCT(template VARCHAR, ints BIGINT[], strs VARCHAR[])
     SELECT RzSplit('2026-10-10 12:00:00 [INFO] Worker 42 finished job in 150ms') AS parsed;
 
-    -- Extract structural template and typed variable columns
+    -- Extract structural template and 64-bit partition hash
     SELECT RzTemplate('User 1042 authenticated') AS template,
-           RzInts('User 1042 authenticated') AS ints,
-           RzStrs('User 1042 authenticated') AS strs;
+           RzHash('User 1042 authenticated') AS template_hash;
 
     -- Exact bit-for-bit lossless log reconstruction
     SELECT RzJoin(d.template, d.ints, d.strs) AS reconstructed
@@ -45,11 +56,26 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 325
-extension_download_count_pretty: 325
+extension_download_count: 769
+extension_download_count_pretty: 769
 image: '/images/community_extensions/social_preview/preview_community_extension_razobill.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -67,7 +93,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -95,6 +120,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

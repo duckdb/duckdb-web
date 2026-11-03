@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckgql
   description: Adds ISO GQL graph querying and graph algorithms to DuckDB
-  version: 0.2.0
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,9 @@ extension:
 
 repo:
   github: rahul-iyer/duckdb-gql
-  ref: 44e77c6835f9e6758bb3e3bccb1a642981dbf1e7
+  ref: 549eb4f70e74b3cd18e7f6597f3c492e5edcc1c5
+  variegata: 44e77c6835f9e6758bb3e3bccb1a642981dbf1e7
+  andium: 44e77c6835f9e6758bb3e3bccb1a642981dbf1e7
 
 docs:
   hello_world: |
@@ -52,7 +54,9 @@ docs:
     mutations with DuckDB's native relational storage and execution engine,
     plus an explicit CSR layer for graph algorithms.
 
-    **What works in v0.2.0**
+    **What works in v0.3.0**
+
+    This version targets DuckDB 2.0.0.
 
     * Managed property graphs backed by typed DuckDB vertex and edge tables.
     * Read-only, zero-copy graph projections over existing DuckDB and DuckLake
@@ -69,12 +73,17 @@ docs:
       ordering, paging, fixed multi-hop patterns, and a bounded
       variable-length path subset.
     * Standalone node and directed-path `INSERT`, fixed directed
-      `MATCH`-and-`INSERT`, single-node `INSERT RETURN`, property and label
-      mutation, and edge/node deletion.
+      `MATCH`-and-`INSERT`, multiple directed insertion paths, node and edge
+      `INSERT RETURN` values, property and label mutation, and edge/node deletion.
     * Native DuckDB ART indexes for selective vertex-property equality lookups.
-    * Explicit CSR-backed BFS, DFS, unweighted SSSP, PageRank, weak and strong
-      components, Louvain community detection, degree, closeness, local
+    * Explicit CSR-backed BFS, DFS, unweighted and weighted SSSP, PageRank, weak
+      and strong components, Louvain community detection, degree, closeness, local
       clustering coefficient, and triangle counting.
+    * Experimental cost-based graph planning with plan diagnostics, directional
+      fanout and endpoint statistics, and costing across connected patterns.
+      Enable it with `SET gql_optimizer = 'cost'`; legacy planning is the default.
+    * Snapshot-scoped DuckLake identity caching and selective projected property
+      access, with source-version pinning and prepared-query rebinding.
 
     **Storage and execution model**
 
@@ -91,17 +100,17 @@ docs:
 
     **Project status**
 
-    DuckGQL v0.2.0 is not yet a complete or conforming ISO GQL implementation.
+    DuckGQL v0.3.0 is not yet a complete or conforming ISO GQL implementation.
     Grammar recognition does not imply semantic or transactional conformance.
-    The machine-readable conformance manifest currently classifies 24 feature
-    families as partial and 12 as planned. Important restrictions include
+    The machine-readable conformance manifest records partial and planned
+    feature families. Important restrictions include
     autocommit-only graph lifecycle and CSR operations, a single vertex and
     edge input per bulk load, and incomplete
     general path searches, query composition, procedures, and the complete GQL
     value/type system.
 
     See the [documentation](https://duckgql.com/docs/), inspect the
-    [conformance manifest](https://github.com/rahul-iyer/duckdb-gql/blob/v0.2.0/test/conformance/iso-gql-2024.tsv),
+    [conformance manifest](https://github.com/rahul-iyer/duckdb-gql/blob/549eb4f70e74b3cd18e7f6597f3c492e5edcc1c5/test/conformance/iso-gql-2024.tsv),
     or try the [browser playground](https://duckgql.com/).
 
   known_limitations: |
@@ -116,13 +125,10 @@ docs:
       database-instance scoped and version checked. Graph mutations or direct
       SQL writes invalidate managed snapshots; the next algorithm call rebuilds
       the required projection automatically.
-    * Weighted SSSP is not implemented. The current SSSP implementation is
-      unweighted.
-    * Multiple-path and undirected insertion, general runtime property maps,
+    * Undirected insertion, general runtime property maps,
       and open-graph schema evolution remain incomplete.
-    * `INSERT RETURN` currently supports one directly inserted node variable;
-      edge values, expressions, multiple return items, ordering, and pagination
-      are not yet supported.
+    * Standalone `INSERT RETURN` supports directly inserted node and edge
+      variables; expressions, ordering, and pagination are not yet supported.
     * General path modes and searches, shortest-path groups, complete
       variable-length path composition, procedure semantics, query composition,
       named graph types, typed storage enforcement, and the complete GQL
@@ -134,13 +140,28 @@ docs:
       string identities, multi-table joins for one element, mapping predicates,
       and write-through mutations are not yet supported.
 
-extension_star_count: 52
-extension_star_count_pretty: 52
-extension_download_count: 745
-extension_download_count_pretty: 745
+extension_star_count: 53
+extension_star_count_pretty: 53
+extension_download_count: 765
+extension_download_count_pretty: 765
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgql.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -158,7 +179,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -176,6 +196,7 @@ LOAD {{ page.extension.name }};
 | gql_clear_properties_source | table         | NULL        | NULL    |          |
 | gql_create_property_index   | table         | NULL        | NULL    |          |
 | gql_csr_edge_stats          | table         | NULL        | NULL    |          |
+| gql_csr_endpoint_stats      | table         | NULL        | NULL    |          |
 | gql_csr_expand              | table         | NULL        | NULL    |          |
 | gql_csr_path_expand         | table         | NULL        | NULL    |          |
 | gql_csr_stats               | table         | NULL        | NULL    |          |
@@ -195,8 +216,13 @@ LOAD {{ page.extension.name }};
 | gql_mutation_graph          | table         | NULL        | NULL    |          |
 | gql_mutation_target         | table         | NULL        | NULL    |          |
 | gql_neighbors               | table         | NULL        | NULL    |          |
+| gql_optimizer_plan          | table         | NULL        | NULL    |          |
 | gql_property_indexes        | table         | NULL        | NULL    |          |
+| gql_referenced_cache_stats  | table         | NULL        | NULL    |          |
+| gql_referenced_keys         | table         | NULL        | NULL    |          |
+| gql_trail_unique            | scalar        | NULL        | NULL    |          |
 | gql_vertex_fetch            | table         | NULL        | NULL    |          |
+| gql_vertex_fetch_projected  | table         | NULL        | NULL    |          |
 | lcc                         | table         | NULL        | NULL    |          |
 | louvain                     | table         | NULL        | NULL    |          |
 | pagerank                    | table         | NULL        | NULL    |          |
@@ -204,6 +230,7 @@ LOAD {{ page.extension.name }};
 | sssp                        | table         | NULL        | NULL    |          |
 | triangle_count              | table         | NULL        | NULL    |          |
 | wcc                         | table         | NULL        | NULL    |          |
+| weighted_sssp               | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -221,6 +248,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|              name               |                               description                                | input_type | scope  | aliases | typed_value |
+|---------------------------------|--------------------------------------------------------------------------|------------|--------|---------|-------------|
+| allow_parser_override_extension | Allow extensions to override the current parser.                         | VARCHAR    | GLOBAL | []      | fallback    |
+| gql_optimizer                   | Graph access planner: legacy (default) or experimental cost-based search | VARCHAR    | GLOBAL | []      | legacy      |
+| temp_directory                  | Set the directory to which temporary files are written.                  | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

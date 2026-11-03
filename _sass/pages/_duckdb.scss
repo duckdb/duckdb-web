@@ -29,7 +29,7 @@ body.design{
 	.usage-example{
 		padding: 50px 30px;
 		background: white;
-		border: 1px solid var(--doc-codebox-border-color, #e6e6e6);
+		border: 1px solid var(--border-color);
 		border-radius: var(--page-radius-box);
 		display: flex;
 		align-items: center;
@@ -42,7 +42,7 @@ body.design{
 
 		&--dark{
 			background: #0d0d0d;
-			border: 1px solid var(--doc-codebox-border-color, #333);
+			border: 1px solid var(--border-color);
 		}
 
 		&--clearspace{
@@ -134,7 +134,7 @@ body.design{
 			font-weight: 700;
 			font-size: 14px;
 			text-align: left;
-			border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+			border-bottom: 1px solid var(--border-color);
 			white-space: nowrap;
 		}
 
@@ -142,7 +142,7 @@ body.design{
 			padding: 10px;
 			font-size: 14px;
 			line-height: 1.55;
-			border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+			border-bottom: 1px solid var(--border-color);
 			vertical-align: middle;
 		}
 
@@ -167,7 +167,7 @@ body.design{
 		padding: 20px;
 		min-height: 165px;
 		border-radius: var(--page-radius-box);
-		border: 1px solid rgba(0, 0, 0, 0.15);
+		border: 1px solid var(--border-color);
 
 		&__category{
 			font-size: var(--type-micro, 10px);

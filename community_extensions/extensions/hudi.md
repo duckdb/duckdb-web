@@ -8,18 +8,19 @@ excerpt: |
 extension:
   name: hudi
   description: Query Apache Hudi COW and MOR tables directly in DuckDB — full scans, time-travel (as_of), incremental windows, and table metadata — powered by the Rust hudi-rs kernel.
-  version: 0.2.1
+  version: 0.3.1
   language: Rust
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl;windows_amd64_mingw;windows_amd64_rtools"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl;windows_amd64;windows_amd64_mingw;windows_amd64_rtools"
   requires_toolchains: "rust"
   maintainers:
     - alitrack
 
 repo:
   github: alitrack/duckdb-hudi
-  ref: ea166bd3b7fc07bcaf3356880da73e864c5f05e9
+  ref: 942dfb3fbc173d3157ae6a9e240a81e4f800d8e1
+  variegata: c15d5e6c4960ba429d804653da60834cff2fbfb8
 
 docs:
   hello_world: |
@@ -70,11 +71,26 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 452
-extension_download_count_pretty: 452
+extension_download_count: 820
+extension_download_count_pretty: 820
 image: '/images/community_extensions/social_preview/preview_community_extension_hudi.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -92,15 +108,17 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
+| hudi_commits  | table         | NULL        | NULL    |          |
 | hudi_files    | scalar        | NULL        | NULL    |          |
 | hudi_info     | scalar        | NULL        | NULL    |          |
+| hudi_mdt      | table         | NULL        | NULL    |          |
+| hudi_stats    | table         | NULL        | NULL    |          |
 | read_hudi     | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
@@ -119,6 +137,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|       name        |                                                                               description                                                                                | input_type | scope  | aliases | typed_value |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| hudi_row_estimate | Report the kernel's row count of the planned file slices as the estimated cardinality of a read_hudi scan (the count is size-based unless the metadata table records it) | BOOLEAN    | GLOBAL | []      | false       |
+| temp_directory    | Set the directory to which temporary files are written.                                                                                                                  | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -1,0 +1,7 @@
+{%- comment -%}
+Outputs the URL of a client's documentation page for a release, e.g., /docs/2.0/clients/java/overview.
+Parameters: release (short version), client (directory under docs/⟨release⟩/clients/).
+{%- endcomment -%}
+{%- capture docs_dir -%}docs/{{ include.release }}/clients/{{ include.client }}{%- endcapture -%}
+{%- capture docs_overview_exists -%}{% file_exists {{ docs_dir }}/overview.md %}{%- endcapture -%}
+/{{ docs_dir }}{%- if docs_overview_exists == "true" -%}/overview{%- endif -%}

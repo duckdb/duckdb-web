@@ -141,8 +141,8 @@ def index_dir(dirname):
 
 
 # only index the current docs; other versions (lts, preview, archives) would
-# produce duplicate results pointing outside of /docs/current/
-index_dir('docs/current')
+# produce duplicate results pointing outside of /docs/2.0/
+index_dir('docs/2.0')
 index_dir('_posts')
 
 
@@ -198,7 +198,7 @@ def extract_functions(text, full_path):
         }
 
 
-function_dir = os.path.sep.join('docs/current/sql/functions'.split('/'))
+function_dir = os.path.sep.join('docs/2.0/sql/functions'.split('/'))
 files = os.listdir(function_dir)
 files.sort()
 for file in files:

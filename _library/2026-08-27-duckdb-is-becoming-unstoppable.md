@@ -3,6 +3,8 @@ layout: post
 title: "DuckDB Is Becoming Unstoppable..."
 authors:
   - Better Stack
+thumb: "/images/library/thumbs/2026-08-27-betterstack.png"
+image: "/images/library/thumbs/2026-08-27-betterstack.png"
 tag: talk
 category: community
 excerpt: ""

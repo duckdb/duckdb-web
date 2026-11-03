@@ -18,7 +18,7 @@
 
 	.card{
 		border-radius: var(--page-radius-box);
-		border: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
+		border: 1px solid var(--border-color);
 		overflow: hidden;
 
 		.card-image{

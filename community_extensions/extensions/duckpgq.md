@@ -12,17 +12,20 @@ extension:
   language: C++
   build: cmake
   license: MIT
+  opt_in_platforms: "windows_arm64"
   maintainers:
     - Dtenwolde
 
 repo:
   github: cwida/duckpgq-extension
   andium: 42eea114b22fad93f04cb7edf50d2b0077e464fa
-  ref: 61f5d08270bef2c81fc4e5d9af32739e67adc2be
-  ref_next: 91433a8397642684fcfed0be52aca9c8b5078faa
+  variegata: 61f5d08270bef2c81fc4e5d9af32739e67adc2be
+  ref: 9c11bc192a071c9e44cef16cced90a22d7d7db2c
 
 docs:
   hello_world: |
+    SET active_grammar_extensions = ['duckpgq'];
+
     CREATE TABLE Person AS SELECT * FROM 'https://gist.githubusercontent.com/Dtenwolde/2b02aebbed3c9638a06fda8ee0088a36/raw/8c4dc551f7344b12eaff2d1438c9da08649d00ec/person-sf0.003.csv';
     CREATE TABLE Person_knows_person AS SELECT * FROM 'https://gist.githubusercontent.com/Dtenwolde/81c32c9002d4059c2c3073dbca155275/raw/8b440e810a48dcaa08c07086e493ec0e2ec6b3cb/person_knows_person-sf0.003.csv';
 
@@ -50,25 +53,41 @@ docs:
 
     FROM local_clustering_coefficient(snb, person, knows);
 
-    DROP PROPERTY GRAPH snb; 
+    DROP PROPERTY GRAPH snb;
 
   extended_description: >
     The DuckPGQ extension supports the SQL/PGQ syntax as part of the official SQL:2023 standard developed by ISO.
-    
-    
+
+
     It introduces visual graph pattern matching and a more concise syntax for path-finding.
     For more information, please see the [DuckPGQ documentation](https://duckpgq.org).
-    
+
+    *Note:* Starting with DuckDB v2.0, you have to opt in to the DuckPGQ grammar after loading the extension by running `SET active_grammar_extensions = ['duckpgq'];`.
 
     *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 504
-extension_star_count_pretty: 504
-extension_download_count: 17022
-extension_download_count_pretty: 17.0k
+extension_star_count: 513
+extension_star_count_pretty: 513
+extension_download_count: 11772
+extension_download_count_pretty: 11.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
+| WebAssembly | ✅ | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -86,7 +105,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -141,6 +159,12 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|               name                |                                                                      description                                                                      | input_type | scope  | aliases | typed_value |
+|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| duckpgq_factorized_join_directory | Let FACTORIZED_GROUP_JOIN count into a dense array indexed by the key when the key bounds are known, instead of a hash table                          | BOOLEAN    | GLOBAL | []      | true        |
+| duckpgq_factorized_join_operator  | Use the FACTORIZED_GROUP_JOIN operator when both sides of a join are only counted or summed, instead of separate GROUP BY aggregates and a hash join  | BOOLEAN    | GLOBAL | []      | true        |
+| duckpgq_factorized_joins          | Pre-aggregate join sides that are only counted or summed above the join, so that path counts become degree products instead of enumerating every path | BOOLEAN    | GLOBAL | []      | true        |
+| duckpgq_vertex_join_elimination   | Leave vertex tables out of the MATCH translation when the query only uses their key, joining the incident edge tables to each other instead           | BOOLEAN    | GLOBAL | []      | true        |
+| temp_directory                    | Set the directory to which temporary files are written.                                                                                               | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

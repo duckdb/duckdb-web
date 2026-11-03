@@ -1,0 +1,90 @@
+---
+layout: docu
+redirect_from:
+- /docs/clients/go/profiling
+- /docs/stable/clients/go/profiling
+- /docs/current/clients/go/profiling
+- /docs/lts/clients/go/profiling
+- /docs/preview/clients/go/profiling
+title: Profile and Monitor
+---
+
+## Overview
+
+The Go client can observe query execution: it can retrieve per-operator [profiling metrics](#profiling) after a query runs, and register a [log storage](#log-storage) that receives DuckDB's log messages. Both are described below.
+
+## Profiling
+
+Profiling information is connection-local, so it is read from a `*sql.Conn` checked out with `db.Conn()`. Enable profiling on that connection with the [`enable_profiling` setting]({% link docs/2.0/dev/profiling.md %}), run the query to profile, then read the result with `duckdb.GetProfilingInfo()`:
+
+```go
+db, err := sql.Open("duckdb", "")
+check(err)
+defer db.Close()
+
+conn, err := db.Conn(context.Background())
+check(err)
+defer conn.Close()
+
+// Do not print profiling output to stdout after each query.
+_, err = conn.ExecContext(context.Background(), `SET enable_profiling = 'no_output'`)
+check(err)
+
+// Run the query to profile.
+res, err := conn.QueryContext(context.Background(), `SELECT 42`)
+check(err)
+res.Close()
+
+// Retrieve the metrics collected for that query.
+info, err := duckdb.GetProfilingInfo(conn)
+check(err)
+
+// Optionally, turn profiling off again.
+_, err = conn.ExecContext(context.Background(), `PRAGMA disable_profiling`)
+check(err)
+```
+
+`GetProfilingInfo()` returns a `duckdb.ProfilingInfo`, a tree that mirrors DuckDB's query plan. Each node has a `Metrics` map of metric name to value and a `Children` slice of child nodes. Metrics are grouped and named in lowercase: the root's children are the root plan operator, whose metrics include `type` and `timing`, followed by one node per metric group, e.g., the `query` group with `total_time`. Walk the tree to read them:
+
+```go
+for _, child := range info.Children {
+    if opType, ok := child.Metrics["type"]; ok {
+        log.Printf("operator: %s, timing: %s", opType, child.Metrics["timing"])
+    }
+}
+```
+
+All metrics are collected by default; to restrict them, set the `tracked_metrics` option. See the [Profiling page]({% link docs/2.0/dev/profiling.md %}) and the [metrics list]({% link docs/2.0/dev/metrics.md %}) for the available metric names.
+
+## Log Storage
+
+DuckDB can forward its [log messages]({% link docs/2.0/operations_manual/logging/overview.md %}) to a custom storage registered from Go. Register one on a `Connector` with `duckdb.RegisterLogStorage()`, giving it a name and a `duckdb.LoggerCallbacks` whose `DefaultLoggerCallback` receives each entry's level, type, and message:
+
+```go
+connector, err := duckdb.NewConnector("", nil)
+check(err)
+defer connector.Close()
+
+err = duckdb.RegisterLogStorage(connector, "my_log_storage", duckdb.LoggerCallbacks{
+    DefaultLoggerCallback: func(level, logType, logMsg string) {
+        log.Printf("[%s] %s: %s", level, logType, logMsg)
+    },
+})
+check(err)
+
+// Enable logging, then point it at the registered storage.
+db := sql.OpenDB(connector)
+_, err = db.Exec(`CALL enable_logging(level = 'info')`)
+check(err)
+_, err = db.Exec(`SET logging_storage = 'my_log_storage'`)
+check(err)
+```
+
+Logging is off by default, so enable it with `CALL enable_logging()` in addition to selecting the storage with `SET logging_storage`. Once both are set, DuckDB forwards all log calls to the callback.
+
+## Further Reading
+
+* [Profiling]({% link docs/2.0/dev/profiling.md %}) — DuckDB's query profiling output and the `enable_profiling` and `tracked_metrics` settings.
+* [Logging]({% link docs/2.0/operations_manual/logging/overview.md %}) — enabling logging with `enable_logging` and querying log entries through `duckdb_logs`.
+* [Run Queries]({% link docs/2.0/clients/go/querying.md %}) — running the queries whose metrics this page reads.
+* [Connect]({% link docs/2.0/clients/go/connecting.md %}) — checking out the connection that profiling operates on, and the connector that log storage is registered on.

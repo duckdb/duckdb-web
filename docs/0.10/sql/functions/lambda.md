@@ -169,7 +169,7 @@ SELECT list_transform([5, NULL, 6], x -> coalesce(x, 0) + 1);
 Constructs a list from those elements of the input list for which the lambda function returns `true`.
 DuckDB must be able to cast the lambda function's return type to `BOOL`.
 
-**Aliases:**  
+**Aliases:**
 * `array_filter`
 * `filter`
 
@@ -223,7 +223,7 @@ Starting with the first element
 and then repeatedly applying the lambda function to the result of the previous application and the next element of the list.
 The list must have at least one element.
 
-**Aliases:**  
+**Aliases:**
 * `array_reduce`
 * `reduce`
 

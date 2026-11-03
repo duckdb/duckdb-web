@@ -6,7 +6,6 @@
     if (!$('body').hasClass('installation')) return;
 
     var $container = $('.installationselection');
-    $container.find('.selection-head h3').append('<span class="foldout-icon"><svg class="icon"><use href="#chevron-down"></use></svg></span>');
     var $result = $('#result');
     var $templates = $('.instruction-collection');
     var $inst = $('.installation-instructions');
@@ -23,34 +22,25 @@
     var $versionBtns = $versionSwitch.find('.version-switch-option');
     var $versionSlider = $versionSwitch.find('.version-switch-slider');
 
-    var VERSIONS = ['current', 'lts', 'preview'];
-    var VERSION_LABELS = { current: 'current', lts: 'LTS', preview: 'preview' };
+    // Releases (e.g., '2.0', '1.5', '1.4'), newest first, as rendered from _data/releases.yml
+    var VERSIONS = $versionBtns.map(function () { return $(this).attr('data-version'); }).get();
+    var ALIASES = {};
+    $versionBtns.each(function () {
+      var v = $(this).attr('data-version');
+      $(this).data('default-label', $(this).text());
+      String($(this).attr('data-aliases') || '').split(' ').forEach(function (a) {
+        if (a) ALIASES[a] = v;
+      });
+    });
+
+    var defaultVersion = $container.attr('data-default-version');
+    if (VERSIONS.indexOf(defaultVersion) < 0) defaultVersion = VERSIONS[0];
 
     var state = {
       platform: null,
       environment: null,
-      version: 'current'
+      version: defaultVersion // the release selected by the user, see shownVersion()
     };
-
-    function detectPlatform() {
-      if (window.UAParser) {
-        try {
-          var result = new UAParser().getResult();
-          var osName = (result && result.os && result.os.name) ? String(result.os.name).toLowerCase() : '';
-          if (osName) {
-            if (/mac\s?os|macos|os\s?x/.test(osName)) return 'macos';
-            if (/windows/.test(osName)) return 'windows';
-            if (/linux|ubuntu|debian|fedora|arch|gentoo|suse|centos/.test(osName)) return 'linux';
-          }
-        } catch (e) {}
-      }
-
-      var fallback = (navigator.platform || '') + ' ' + (navigator.userAgent || '');
-      if (/Mac/i.test(fallback)) return 'macos';
-      if (/Win/i.test(fallback)) return 'windows';
-      if (/Linux|X11/i.test(fallback)) return 'linux';
-      return 'macos';
-    }
 
     function readURL() {
       try {
@@ -58,6 +48,7 @@
         state.platform = sanitizeParam(params.get('platform'));
         state.environment = sanitizeParam(params.get('environment'));
         var v = sanitizeParam(params.get('version'));
+        v = ALIASES[v] || v;
         if (VERSIONS.indexOf(v) >= 0) state.version = v;
       } catch (e) {}
     }
@@ -67,7 +58,7 @@
         var params = new URLSearchParams(window.location.search);
         setOrDelete(params, 'platform', state.platform);
         setOrDelete(params, 'environment', state.environment);
-        setOrDelete(params, 'version', state.version !== 'current' ? state.version : null);
+        setOrDelete(params, 'version', state.version !== defaultVersion ? state.version : null);
         var newQuery = params.toString();
         var newUrl = window.location.pathname + (newQuery ? '?' + newQuery : '') + window.location.hash;
         var prevQuery = window.location.search.replace(/^\?/, '');
@@ -90,7 +81,7 @@
     }
 
     function defaultState() {
-      var pf = detectPlatform();
+      var pf = window.detectPlatform();
       return {
         platform: pf,
         environment: 'cli'
@@ -128,8 +119,7 @@
       $opt
         .addClass('active')
         .attr('aria-checked', 'true')
-        .attr('tabindex', '0')
-        .focus();
+        .attr('tabindex', '0');
 
       state[role] = value;
     }
@@ -151,6 +141,7 @@
 
     function setFoldoutOpen($foldout, open, animate) {
       var $content = $foldout.children('.selection-content');
+      $foldout.find('.selection-head button').attr('aria-expanded', String(open));
       if (open) {
         $foldout.addClass('open');
         if (animate) $content.stop(true, true).slideDown(150); else $content.show();
@@ -170,7 +161,7 @@
         platLabel = '';
       }
       var text = platLabel ? ' ' + platLabel : '';
-      $foldPlat.find('.selection-head .selected').text(text);
+      $foldPlat.find('.selection-head .selected').text(needsPlatform ? text : 'Not required');
 
       var $live = $container.find('.live-region');
       if (!$live.length) {
@@ -182,51 +173,36 @@
       $live.text(liveText.join(', '));
     }
 
-    function getVersionForEnv(prefix) {
-      if (!$inst || !$inst.length) return '';
-      var env = state.environment || '';
-      var attr = function (name) {
-        return String($inst.attr(prefix + name) || '').trim();
-      };
-      var ver = attr('core-version');
-      if (env === 'java') ver = attr('java-version') || ver;
-      else if (env === 'odbc') ver = attr('odbc-version') || ver;
-      else if (env === 'go') ver = attr('go-version') || ver;
-      else if (env === 'nodejs') ver = attr('nodejs-version') || ver;
-      else if (env === 'r') ver = attr('r-version') || ver;
-      else if (env === 'rust') ver = attr('rust-version') || ver;
-      else if (env === 'wasm') ver = attr('wasm-version') || ver;
-      return ver;
+    function templatesFor(v) {
+      var envSel = '[data-environment="' + cssEscape(state.environment) + '"]';
+      return $templates.find(envSel + '[data-release="' + cssEscape(v) + '"]');
     }
 
-    function versionAttrPrefix(v) {
-      return v === 'current' ? 'data-' : 'data-' + v + '-';
+    function hasVersion(v) {
+      return templatesFor(v).length > 0;
     }
 
+    // The selected release, or the newest one offering the selected client
+    function shownVersion() {
+      return hasVersion(state.version) ? state.version : (VERSIONS.filter(hasVersion)[0] || state.version);
+    }
+
+    // Label the buttons with the client's version, e.g., the JDBC driver's version for Java
     function updateVersionButtons() {
       $versionBtns.each(function () {
-        var v = $(this).data('version');
-        var ver = getVersionForEnv(versionAttrPrefix(v));
-        if (ver) $(this).text(ver + ' (' + VERSION_LABELS[v] + ')');
+        var $btn = $(this);
+        var label = templatesFor($btn.attr('data-version')).first().attr('data-label');
+        var suffix = $btn.attr('data-suffix');
+        $btn.text(label ? label + (suffix ? ' (' + suffix + ')' : '') : $btn.data('default-label'));
       });
       positionSlider();
     }
 
-    function hasVersion(v) {
-      var envSel = '[data-environment="' + cssEscape(state.environment) + '"]';
-      return $templates.find(envSel + '.' + v).length > 0;
-    }
-
     function updateVersionToggle() {
-      // Auto-select available version if current selection is unavailable
-      if (!hasVersion(state.version)) {
-        var fallback = VERSIONS.filter(hasVersion)[0];
-        if (fallback) state.version = fallback;
-      }
-
+      var shown = shownVersion();
       $versionBtns.each(function () {
-        var v = $(this).data('version');
-        var isActive = v === state.version;
+        var v = $(this).attr('data-version');
+        var isActive = v === shown;
         var isAvailable = hasVersion(v);
 
         $(this).toggleClass('active', isActive)
@@ -252,6 +228,7 @@
 
     function updateFoldouts(animate) {
       var needsPlatform = environmentRequiresPlatform(state.environment);
+      $foldPlat.find('.selection-head button').prop('disabled', !needsPlatform);
 
       if (!needsPlatform) {
         setFoldoutOpen($foldPlat, false, !!animate);
@@ -280,10 +257,9 @@
       setFoldoutOpen($foldPlat, !shouldClosePlat, !!animate);
     }
 
-    function findTemplate(environment, platform, versionClass) {
+    function findTemplate(environment, platform, version) {
       var envSel = '[data-environment="' + cssEscape(environment) + '"]';
-      var cls = '.' + versionClass;
-      var $candidates = $templates.find(envSel + cls);
+      var $candidates = $templates.find(envSel + '[data-release="' + cssEscape(version) + '"]');
 
       if (platform) {
         var $match = $candidates.filter('[data-platform="' + cssEscape(platform) + '"]').first();
@@ -298,23 +274,8 @@
     }
 
     function bestTemplate() {
-      var p = state.platform;
-      var e = state.environment;
-      var v = state.version || 'current';
-
-      if (!e) return $();
-
-      // Try requested version first
-      var $match = findTemplate(e, p, v);
-      if ($match.length) return $match;
-
-      // Fallback: try the other versions (for clients with only some versions)
-      for (var i = 0; i < VERSIONS.length; i++) {
-        if (VERSIONS[i] === v) continue;
-        $match = findTemplate(e, p, VERSIONS[i]);
-        if ($match.length) return $match;
-      }
-      return $();
+      if (!state.environment) return $();
+      return findTemplate(state.environment, state.platform, shownVersion());
     }
 
     function environmentRequiresPlatform(environment) {
@@ -355,7 +316,6 @@
       }
 
       updateMore($tpl);
-      $inst.find('.preview-note').toggle($tpl.hasClass('preview'));
       $inst.show();
     }
 
@@ -406,6 +366,7 @@
       if (!role || !value) return;
 
       selectOption(role, value);
+      $opt.focus();
 
       writeURL();
       render();
@@ -432,9 +393,7 @@
         var $fold = $(this);
         if ($fold.hasClass('disabled')) return;
         if (!$fold.hasClass('open')) {
-          var $content = $fold.children('.selection-content');
-          $content.stop(true, true).slideDown(150);
-          $fold.addClass('open');
+          setFoldoutOpen($fold, true, true);
         }
       });
 
@@ -442,21 +401,12 @@
         e.stopPropagation();
         var $fold = $(this).closest('.selection-foldout');
         if ($fold.hasClass('disabled')) return;
-        var $content = $fold.children('.selection-content');
-        if ($fold.hasClass('open')) {
-          $content.stop(true, true).slideUp(150);
-          $fold.removeClass('open');
-        } else {
-          $content.stop(true, true).slideDown(150);
-          $fold.addClass('open');
-        }
+        setFoldoutOpen($fold, !$fold.hasClass('open'), true);
       });
 
       $container.find('.selection-foldout').each(function () {
         var $fold = $(this);
-        var isOpen = $fold.hasClass('open');
-        var $content = $fold.children('.selection-content');
-        if (isOpen) $content.css('display', 'block'); else $content.hide();
+        setFoldoutOpen($fold, $fold.hasClass('open'), false);
       });
 
       $container.find('.selection-options[data-role]').each(function () {
@@ -475,7 +425,7 @@
       // Version switch toggle
       $versionSwitch.on('click', '.version-switch-option', function (e) {
         e.preventDefault();
-        var newVersion = $(this).data('version');
+        var newVersion = $(this).attr('data-version');
         if (newVersion === state.version) return;
         state.version = newVersion;
         writeURL();
