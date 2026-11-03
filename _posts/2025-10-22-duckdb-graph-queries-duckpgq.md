@@ -24,7 +24,7 @@ ATTACH 'https://blobs.duckdb.org/data/finbench.duckdb' AS finbench;
 USE finbench;
 ```
 
-> To follow along with the examples in this post, it is recommended to use DuckDB v1.4.1.
+> To follow along with the examples in this post, it is recommended to use DuckDB 1.4.1.
 
 In this blog post we will use a subset of the dataset with tables for `Person`, `Account`, and the `AccountTransferAccount` table that links them.
 
@@ -87,7 +87,7 @@ EDGE TABLES (
 );
 ```
 
-During the creation of the property graph, we make a clear distinction between `VERTEX` tables and `EDGE` tables. For `VERTEX` tables, we only have to specify the name of the table. For `EDGE` tables, a little more work is required since for both the `SOURCE` and the `DESTINATION`, we need to specify the column in the edge table that forms the key for the `SOURCE` or `DESTINATION`. This is the same principle as defining a [`FOREIGN KEY` constraint]({% link docs/current/sql/constraints.md %}#foreign-keys), linking our edge table back to the node tables it connects.
+During the creation of the property graph, we make a clear distinction between `VERTEX` tables and `EDGE` tables. For `VERTEX` tables, we only have to specify the name of the table. For `EDGE` tables, a little more work is required since for both the `SOURCE` and the `DESTINATION`, we need to specify the column in the edge table that forms the key for the `SOURCE` or `DESTINATION`. This is the same principle as defining a [`FOREIGN KEY` constraint]({% link docs/2.0/sql/constraints.md %}#foreign-keys), linking our edge table back to the node tables it connects.
 The `LABEL` clause gives a clean name to the relationship type. While our table is named `AccountTransferAccount`, the edges within it represent a `Transfer` relationship. This is the name we'll use in our graph queries.
 
 Now that we have created our property graph, we are ready to investigate the financial data and uncover its secrets!
@@ -206,7 +206,7 @@ The results confirm our suspicions. Our query found multiple non-obvious paths b
 
 Each row represents a hidden chain of transactions connecting two of the person's accounts. More interestingly, we can see clear cyclical patterns. For instance, the query found a 9-step path from account `4753267931712848113` to `4769874955338776819`, and another 9-step path flowing in the opposite direction. This suggests a sophisticated and intentional effort to move money between accounts, a strong indicator that warrants further investigation.
 
-## Doing it the Old-Fashioned Way
+## Doing It the Old-Fashioned Way
 
 Earlier, we challenged you to think about how you would find these ownership cycles using traditional SQL. As promised, here is the answer.
 
@@ -262,7 +262,7 @@ As you can see, the logic requires a `WITH RECURSIVE` clause, manual path tracki
 
 We began this post with a simple goal: to see if we could use DuckDB to hunt for the complex patterns and hidden paths typical of graph analysis. After diving into the Financial Benchmark dataset, the conclusion is clear: you can.
 
-The key takeaway is the drastic improvement in usability. We saw how the visual syntax of SQL/PGQ, enabled by the DuckPGQ extension, transformed a sophisticated "ownership cycle" query from a monstrous recursive CTE into a few readable lines of code. This is exactly the kind of expressive power needed for real-world analytical tasks. For more information and complete documentation on DuckPGQ, be sure to visit its official website: [duckpgq.org](https://duckpgq.org).
+The key takeaway is the drastic improvement in usability. We saw how the visual syntax of SQL/PGQ, enabled by the DuckPGQ extension, transformed a sophisticated “ownership cycle” query from a monstrous recursive CTE into a few readable lines of code. This is exactly the kind of expressive power needed for real-world analytical tasks. For more information and complete documentation on DuckPGQ, be sure to visit its official website: [duckpgq.org](https://duckpgq.org).
 
 Just as importantly, this entire investigation was performed directly within DuckDB. By leveraging the extension ecosystem, we tapped into the power of graph queries without ever needing to export our data or manage a separate, specialized system. Everything runs on top of DuckDB's high-performance vectorized engine, right where the data lives.
 

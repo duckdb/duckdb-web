@@ -4,11 +4,11 @@ layout: docu
 title: Java JDBC Client
 ---
 
-> The latest version of the DuckDB Java (JDBC) client is {{ site.current_duckdb_java_short_version }}.
+> The latest version of the DuckDB Java (JDBC) client is {{ site.maintained_duckdb_java_short_version }}.
 
 ## Installation
 
-The DuckDB Java JDBC API can be installed from [Maven Central](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc). Please see the [installation page]({% link install/index.html %}?environment=java) for details.
+The DuckDB Java JDBC API can be installed from [Maven Central](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc). Please see the [installation page]({% link docs/2.0/installation.html %}?environment=java) for details.
 
 ## Basic API Usage
 

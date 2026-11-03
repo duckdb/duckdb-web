@@ -6,8 +6,7 @@ excerpt: |
   DuckDB HTTP Cronjob Extension
 
 docs:
-  extended_description: This extension is experimental and potentially unstable. Do
-    not use it in production.
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/cronjob/).
   hello_world: "-- Every 15 seconds during hours 1-4\nSELECT cron('SELECT now()',\
     \ '*/15 * 1-4 * * *');\n\n-- Every 2 hours (at minute 0, second 0) during hours\
     \ 1-4\nSELECT cron('SELECT version()', '0 0 */2 1-4 * *');\n\n-- Every 5 minute\
@@ -67,20 +66,37 @@ extension:
   license: MIT
   maintainers:
   - lmangani
+  - rustyconover
   name: cronjob
   version: '2025120401'
 repo:
   andium: 040dbecd552e6b373fb1bb4582935d243693978e
   github: quackscience/duckdb-extension-cronjob
-  ref: a8982fb5d1520f307f92e197436abb84b41ac86d
+  ref: 1a8304ef9c98c73e8293525db67eb681b9ceee56
+  variegata: 40e96fd97cb8ce393578f4b64622c9cd5b8a3280
 
-extension_star_count: 55
-extension_star_count_pretty: 55
-extension_download_count: 1300
-extension_download_count_pretty: 1.3k
+extension_star_count: 57
+extension_star_count_pretty: 57
+extension_download_count: 1038
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -98,16 +114,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| cron          | scalar        | NULL        | NULL    |          |
-| cron_delete   | scalar        | NULL        | NULL    |          |
-| cron_jobs     | table         | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

@@ -6,8 +6,7 @@ excerpt: |
   Load DuckDB Macros from the web
 
 docs:
-  extended_description: The HTTP Client Extension is experimental, use at your own
-    risk!
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/webmacro/).
   hello_world: "-- Create a DuckDB Scalar or Table macro statement and save it to\
     \ a gist;\n\n-- Load your remote macro onto your system using the gist url\n\n\
     D SELECT load_macro_from_url('https://gist.githubusercontent.com/lmangani/518215a68e674ac662537d518799b893/raw/5f305480fdd7468f4ecda3686011bab8e8e711bf/bsky.sql')\
@@ -81,20 +80,37 @@ extension:
   license: MIT
   maintainers:
   - lmangani
+  - rustyconover
   name: webmacro
   version: '2025120401'
 repo:
   andium: 43a4ba8fcc13219be487d0ac12d68d66ac1d8268
   github: quackscience/duckdb-extension-webmacro
-  ref: 48d0902095106792a85451ca2d0bb1a85e746108
+  ref: a9694a967c289aa62f2fadf4e3c82d9d2391dca9
+  variegata: 2d725bd8f730f1556dc230e3cf984fec4c17a95d
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 1206
-extension_download_count_pretty: 1.2k
+extension_download_count: 977
+extension_download_count_pretty: 977
 image: '/images/community_extensions/social_preview/preview_community_extension_webmacro.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -112,14 +128,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| load_macro_from_url | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

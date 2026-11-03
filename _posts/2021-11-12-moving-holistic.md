@@ -96,7 +96,7 @@ Fortunately, there are much faster approaches for all of them.
 
 In the [previous post on windowing]({% post_url 2021-10-13-windowing %}),
 we explained the component operations used to implement a generic aggregate function
-(initialize, update, finalize, combine and window).
+(initialize, update, finalize, combine, and window).
 In the rest of this post, we will dig into how they can be implemented for these complex aggregates.
 
 ### Quantile
@@ -112,7 +112,7 @@ but they can all be implemented in similar ways.
 
 A common way to implement `quantile` that we saw in the Python example is to collect all the values into the state,
 sort them, and then read out the values at the requested positions.
-(This is probably why the SQL standard refers to it as an "ordered-set aggregate".)
+(This is probably why the SQL standard refers to it as an “ordered-set aggregate”.)
 States can be combined by concatenation,
 which lets us group in parallel and build segment trees for windowing.
 
@@ -149,7 +149,7 @@ With this algorithm, we can create a faster implementation of single-fraction `q
 
 We can extend this implementation to _lists_ of fractions by leveraging the fact that each call to `nth_element`
 partially orders the values, which further improves performance.
-The "reuse" trick can be generalised to distinguish between fractions that are undisturbed
+The “reuse” trick can be generalised to distinguish between fractions that are undisturbed
 and ones that need to be recomputed.
 
 A common application of multiple fractions is computing
@@ -165,7 +165,7 @@ Maintaining the partial ordering can also be used to boost the performance of th
 [median absolute deviation](https://en.wikipedia.org/wiki/Median_absolute_deviation)
 (or `mad`) aggregate.
 Unfortunately, the second partial ordering can't use the single value trick
-because the "function" being used to partially order the values will have changed if the data median changes.
+because the “function” being used to partially order the values will have changed if the data median changes.
 Still, the values are still probably not far off,
 which again improves the performance of `nth_element`.
 
@@ -239,7 +239,7 @@ FROM rank100;
 ```
 
 The two examples here are the interquartile range queries;
-the other queries use the single argument aggregates `median`, `mad` and `mode`.
+the other queries use the single argument aggregates `median`, `mad`, and `mode`.
 
 As a final step, we ran the same query with `count(*)`,
 which has the same overhead as the other benchmarks, but is trivial to compute
@@ -262,7 +262,7 @@ and then considering providing a window operation instead of deferring to the se
 DuckDB's aggregate API enables aggregate functions to define a windowing operation
 that can significantly improve the performance of moving window computations for complex aggregates.
 This functionality has been used to significantly speed up windowing for several statistical aggregates,
-such as mode, interquartile ranges and median absolute deviation.
+such as mode, interquartile ranges, and median absolute deviation.
 
 DuckDB is a free and open-source database management system (MIT licensed).
 It aims to be the SQLite for Analytics,

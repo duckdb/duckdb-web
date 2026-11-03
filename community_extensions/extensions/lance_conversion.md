@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lance_conversion
   description: Stream any DuckDB query into Lance datasets with Blob v2 storage and scalar, vector, text, and Bloom filter indexes
-  version: 0.1.4
+  version: 0.2.1
   language: C++ & Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb_lance_conversion
-  ref: 2d0dd959003fb5d7b105fed4cecff2b4f58645f2
+  ref: 46a105d76e886df3bac24d47322345664225b733
 
 docs:
   hello_world: |
@@ -108,6 +108,19 @@ docs:
     COPY events TO 'events_sample.lance' (FORMAT LANCE, SAMPLE_ROWS 1000);
     ```
 
+    `GENERATED_COLUMNS` adds columns computed by DuckDB SQL expressions from
+    each source row. Lance stores each expression in the column's metadata,
+    and `APPEND` must use the same definitions:
+
+    ```sql
+    COPY (
+      SELECT * FROM read_warc('archive.warc.gz') WHERE type = 'response'
+    ) TO 'responses.lance' (FORMAT LANCE, GENERATED_COLUMNS {
+      'doc_id': $$ sha256(id || ':' || target_uri) $$,
+      'body_size': 'octet_length(body)'
+    });
+    ```
+
     Blob v2 layout, data file sizing, and indexes are configurable directly
     from the `COPY` statement:
 
@@ -134,11 +147,26 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 790
-extension_download_count_pretty: 790
+extension_download_count: 2826
+extension_download_count_pretty: 2.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_lance_conversion.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -156,15 +184,15 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type |                  description                  | comment |                      examples                      |
-|------------------|---------------|-----------------------------------------------|---------|----------------------------------------------------|
-| read_huggingface | table         | Reads a Hugging Face dataset's Parquet files. | NULL    | [SELECT * FROM read_huggingface('lhoestq/demo1');] |
-| read_warc        | table         | Reads records from a local or S3 WARC file.   | NULL    | [SELECT * FROM read_warc('archive.warc.gz');]      |
+|  function_name   | function_type |                                                          description                                                           | comment |                      examples                      |
+|------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------|
+| read_atif        | table         | Reads ATIF agent trajectories from a local, S3, or HTTP(S) JSON or JSONL file, optionally gzipped, embedding referenced media. | NULL    | [SELECT * FROM read_atif('trajectories.jsonl');]   |
+| read_huggingface | table         | Reads a Hugging Face dataset's Parquet files.                                                                                  | NULL    | [SELECT * FROM read_huggingface('lhoestq/demo1');] |
+| read_warc        | table         | Reads records from a local, S3, or HTTP(S) WARC file or Common Crawl crawl or segment.                                         | NULL    | [SELECT * FROM read_warc('archive.warc.gz');]      |
 
 ### Overloaded Functions
 
@@ -182,6 +210,14 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|                    name                     |                            description                            | input_type | scope  | aliases | typed_value |
+|---------------------------------------------|-------------------------------------------------------------------|------------|--------|---------|-------------|
+| lance_conversion_storage_io_timeout_ms      | IO operation and body method timeout per attempt (ms)             | BIGINT     | GLOBAL | []      | 10000       |
+| lance_conversion_storage_retry_factor       | Storage exponential retry backoff multiplier for reads and writes | DOUBLE     | GLOBAL | []      | 2.0         |
+| lance_conversion_storage_retry_max_delay_ms | Maximum exponential retry backoff (ms)                            | BIGINT     | GLOBAL | []      | 60000       |
+| lance_conversion_storage_retry_max_times    | Maximum retries after the initial attempt (0 disables retries)    | BIGINT     | GLOBAL | []      | 3           |
+| lance_conversion_storage_retry_min_delay_ms | Initial exponential retry backoff (ms)                            | BIGINT     | GLOBAL | []      | 1000        |
+| lance_conversion_storage_timeout_ms         | Control operation timeout per attempt (ms)                        | BIGINT     | GLOBAL | []      | 60000       |
+| temp_directory                              | Set the directory to which temporary files are written.           | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

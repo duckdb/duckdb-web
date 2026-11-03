@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: aixchess
   description: Efficiently query large chess game collections
-  version: 0.2.0
+  version: 0.3.0
   language: C++
   build: cmake
   license: GPL-3.0
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: thomas-daniels/aix
-  ref: 728e58fb70d343b6b69a9d0bc395db5309b4dc65
+  ref: 907b5107601ebe95bb4e567e0a3f4ad03afeff27
 
 docs:
   hello_world: |
@@ -47,13 +47,28 @@ docs:
     [provides scalar functions](https://github.com/thomas-daniels/aix/blob/main/docs/functions.md) to decode and query these games directly within DuckDB.
 
     See the [GitHub repository](https://github.com/thomas-daniels/aix) or [blog post](https://thomasd.be/2026/02/01/aix-storing-querying-chess-games.html) for more details.
-extension_star_count: 28
-extension_star_count_pretty: 28
-extension_download_count: 931
-extension_download_count_pretty: 931
+extension_star_count: 31
+extension_star_count_pretty: 31
+extension_download_count: 958
+extension_download_count_pretty: 958
 image: '/images/community_extensions/social_preview/preview_community_extension_aixchess.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -71,7 +86,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -122,6 +136,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

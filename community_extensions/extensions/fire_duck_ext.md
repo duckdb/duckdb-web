@@ -8,17 +8,18 @@ excerpt: |
 extension:
   name: fire_duck_ext
   description: Query Google Cloud Firestore directly from DuckDB using SQL
-  version: 0.3.1
+  version: 0.4.2
   language: C++
   build: cmake
   license: MIT
   excluded_platforms: "windows_amd64_mingw"
+  opt_in_platforms: "windows_arm64"
   maintainers:
     - BorisBesky
 
 repo:
   github: BorisBesky/fire_duck_ext
-  ref: 898cb0d8dc9a3a6270a076e38ba8a1d00d683a62
+  ref: c59ff962087da37c4630221f996fb6fd96f0e86a
 
 docs:
   hello_world: |
@@ -54,7 +55,8 @@ docs:
     firestore_update(), firestore_delete(), their batch counterparts
     (firestore_update_batch(), firestore_delete_batch()), and the array-transform
     functions firestore_array_union(), firestore_array_remove(), and
-    firestore_array_append().
+    firestore_array_append(). Every function documents itself in
+    duckdb_functions() with a description, parameter names, and an example.
 
     WHERE filters, SQL ORDER BY / LIMIT, the column projection, and a bare
     COUNT(*) are pushed down to Firestore where possible. A query then
@@ -66,7 +68,13 @@ docs:
     Scans stream a page at a time, so a collection of any size can be read
     without holding it in memory, and the page size adapts when documents turn
     out to be unusually large. Settings cover paging, schema sampling, ORDER BY
-    pushdown, and optional parallel scanning.
+    pushdown, optional parallel scanning, and retries.
+
+    Transient failures -- 429 and 503 responses, aborted writes, dropped
+    connections -- are retried with jittered exponential backoff (5 retries by
+    default, honouring Retry-After). A failure that may have applied a request
+    is only retried when repeating it is harmless, so creating a document is
+    never sent twice after one.
 
     Firestore's schemaless documents are mapped to typed DuckDB columns
     automatically, with configurable handling for nested maps and for fields
@@ -83,17 +91,36 @@ docs:
 
     The extension also builds and runs under DuckDB-WASM using API-key or
     Firebase-user auth (service-account auth needs OpenSSL and is native-only).
+    Prefer DuckDB 2.0 there: the DuckDB 1.5 WASM runtime misreports requests
+    Firestore refuses, so a rejected update or delete can look successful.
+
+    Builds for DuckDB 2.0 (including Windows ARM64) and DuckDB 1.5.
 
     See the project README for the parameter and settings reference, type
     mapping, pushdown semantics, and platform notes.
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 1023
+extension_download_count: 1014
 extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_fire_duck_ext.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -111,25 +138,25 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|     function_name      | function_type |                             description                             | comment |                                       examples                                       |
-|------------------------|---------------|---------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------|
-| firestore_scan         | table         | Read all documents from a Firestore collection or collection group. | NULL    | [SELECT * FROM firestore_scan('users');]                                             |
-| firestore_insert       | table         | Insert documents into a Firestore collection from a subquery.       | NULL    | [CALL firestore_insert('users', (SELECT name, age FROM read_csv('new_users.csv')));] |
-| firestore_update       | table         | Update fields on a single Firestore document.                       | NULL    | [CALL firestore_update('users', 'user123', 'status', 'verified');]                   |
-| firestore_delete       | table         | Delete a single Firestore document.                                 | NULL    | [CALL firestore_delete('users', 'user123');]                                         |
-| firestore_update_batch | table         | Batch update multiple Firestore documents by ID list.               | NULL    | [CALL firestore_update_batch('users', ['id1', 'id2'], 'status', 'reviewed');]        |
-| firestore_delete_batch | table         | Batch delete multiple Firestore documents by ID list.               | NULL    | [CALL firestore_delete_batch('users', ['id1', 'id2']);]                              |
-| firestore_array_union  | table         | Add elements to an array field without duplicates.                  | NULL    | [CALL firestore_array_union('users', 'user123', 'tags', ['vip', 'active']);]         |
-| firestore_array_remove | table         | Remove elements from an array field.                                | NULL    | [CALL firestore_array_remove('users', 'user123', 'tags', ['inactive']);]             |
-| firestore_array_append | table         | Append elements to an array field (allows duplicates).              | NULL    | [CALL firestore_array_append('users', 'user123', 'log', ['event1']);]                |
-| firestore_clear_cache  | table         | Clear the cached schema for all or a specific collection.           | NULL    | [CALL firestore_clear_cache();]                                                      |
-| firestore_connect      | table         | Set the session-scoped Firestore database for subsequent queries.   | NULL    | [CALL firestore_connect('analytics-db');]                                            |
-| firestore_disconnect   | table         | Clear the session-scoped Firestore database override.               | NULL    | [CALL firestore_disconnect();]                                                       |
+|     function_name      | function_type |                                                                                                                                                                                                                                                          description                                                                                                                                                                                                                                                           | comment |                                                  examples                                                  |
+|------------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------|
+| firestore_array_append | table         | Append values to an array field of one Firestore document, keeping duplicates. The array is read and written back whole, so a concurrent write to the same field can be lost. Returns a one-row count.                                                                                                                                                                                                                                                                                                                         | NULL    | [CALL firestore_array_append('users', 'user123', 'events', ['login']);]                                    |
+| firestore_array_remove | table         | Remove every occurrence of the given values from an array field of one Firestore document (Firestore's arrayRemove transform). Returns a one-row count.                                                                                                                                                                                                                                                                                                                                                                        | NULL    | [CALL firestore_array_remove('users', 'user123', 'tags', ['inactive']);]                                   |
+| firestore_array_union  | table         | Add values to an array field of one Firestore document, skipping any the array already holds (Firestore's arrayUnion transform). Returns a one-row count.                                                                                                                                                                                                                                                                                                                                                                      | NULL    | [CALL firestore_array_union('users', 'user123', 'tags', ['vip', 'active']);]                               |
+| firestore_clear_cache  | table         | Forget every cached Firestore schema, so the next scan of each collection samples its documents again.                                                                                                                                                                                                                                                                                                                                                                                                                         | NULL    | [CALL firestore_clear_cache();]                                                                            |
+| firestore_clear_cache  | table         | Forget the cached schema of one collection path (e.g. 'users', '~orders' or 'users/u1/orders'), so its next scan samples its documents again.                                                                                                                                                                                                                                                                                                                                                                                  | NULL    | [CALL firestore_clear_cache('users');]                                                                     |
+| firestore_connect      | table         | Make a Firestore database ID the default for later calls in this session that pass no database := parameter. Fails if no firestore secret covers that database.                                                                                                                                                                                                                                                                                                                                                                | NULL    | [CALL firestore_connect('analytics-db');]                                                                  |
+| firestore_delete       | table         | Delete one Firestore document by ID. Returns a one-row count.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | NULL    | [CALL firestore_delete('users', 'user123');]                                                               |
+| firestore_delete_batch | table         | Delete every Firestore document in a list of IDs, sent through batchWrite in groups of up to 500. Batches are not atomic: each delete succeeds or fails on its own. Returns a one-row count.                                                                                                                                                                                                                                                                                                                                   | NULL    | [CALL firestore_delete_batch('users', ['user1', 'user2']);]                                                |
+| firestore_disconnect   | table         | Clear the session's default database set by firestore_connect(), so later calls pick their database as they would without it.                                                                                                                                                                                                                                                                                                                                                                                                  | NULL    | [CALL firestore_disconnect();]                                                                             |
+| firestore_insert       | table         | Insert one Firestore document per row of a subquery, with one field per column. document_id := names the column that supplies document IDs, which is then left out of the fields; without it Firestore generates the IDs. Returns the number of documents inserted.                                                                                                                                                                                                                                                            | NULL    | [CALL firestore_insert('users', (SELECT 'alice' AS id, 'Alice' AS name, 30 AS age), document_id := 'id');] |
+| firestore_scan         | table         | Read a Firestore collection as a table: one row per document, with __document_id plus columns inferred from sampled documents. The path may name a nested collection ('users/u1/orders'), every collection with one name ('~orders', a collection-group query), or a document ('users/u1'), which lists that document's subcollection IDs instead. WHERE filters, ORDER BY ... LIMIT, the projection and COUNT(*) are pushed down to Firestore where possible. With API-key or Firebase-user auth, pass show_missing := false. | NULL    | [SELECT __document_id, name FROM firestore_scan('users', show_missing := false) WHERE status = 'active';]  |
+| firestore_update       | table         | Set fields on one Firestore document from the trailing field-name/value pairs, leaving its other fields as they are. Returns a one-row count.                                                                                                                                                                                                                                                                                                                                                                                  | NULL    | [CALL firestore_update('users', 'user123', 'status', 'verified', 'age', 31);]                              |
+| firestore_update_batch | table         | Set the same field-name/value pairs on every Firestore document in a list of IDs, sent through batchWrite in groups of up to 500. Batches are not atomic: each write succeeds or fails on its own. Returns a one-row count.                                                                                                                                                                                                                                                                                                    | NULL    | [CALL firestore_update_batch('users', ['user1', 'user2'], 'status', 'reviewed');]                          |
 
 ### Overloaded Functions
 
@@ -147,13 +174,17 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                                                                                                                                            description                                                                                                                                                             | input_type | scope  | aliases |
-|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| firestore_max_threads        | Maximum threads one scan may split across, reading separate document-key ranges. 1 (the default) disables parallel scanning; raise it for collections whose document ids spread over the key space, such as Firestore auto-ids                                                                                                     | BIGINT     | GLOBAL | []      |
-| firestore_orderby_pushdown   | Whether a SQL ORDER BY may be sent to Firestore. Off by default, because Firestore's ordering is not SQL's: it omits documents that lack the ordering field, sorts nulls first, and orders across types by its own precedence, so pushing the sort down changes which rows a query returns. The order_by:= parameter is unaffected | BOOLEAN    | GLOBAL | []      |
-| firestore_page_byte_budget   | Uncompressed bytes one page may weigh before the scan requests fewer documents per round trip (0 disables the guard)                                                                                                                                                                                                               | BIGINT     | GLOBAL | []      |
-| firestore_page_size          | Documents requested per Firestore round trip (1-1000; lower it for collections of large documents)                                                                                                                                                                                                                                 | BIGINT     | GLOBAL | []      |
-| firestore_schema_cache_ttl   | Schema cache TTL in seconds (0 to disable caching)                                                                                                                                                                                                                                                                                 | BIGINT     | GLOBAL | []      |
-| firestore_schema_sample_size | Documents sampled to infer a collection's schema (-1 samples every document)                                                                                                                                                                                                                                                       | BIGINT     | GLOBAL | []      |
+|                name                |                                                                                                                                                                                      description                                                                                                                                                                                       | input_type | scope  | aliases | typed_value |
+|------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| firestore_max_retries              | Times a Firestore request is retried after a transient failure (429, 503, 409 ABORTED, a dropped connection, and for reads and idempotent writes 500 and 504); 0 disables retrying                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      | 5           |
+| firestore_max_threads              | Maximum threads one scan may split across, reading separate document-key ranges. 1 (the default) disables parallel scanning; raise it for collections whose document ids spread over the key space, such as Firestore auto-ids                                                                                                                                                         | BIGINT     | GLOBAL | []      | 1           |
+| firestore_orderby_pushdown         | Whether a SQL ORDER BY ... LIMIT may be sent to Firestore. Each ordering field is first checked against the sampled documents, because Firestore omits documents that lack the ordering field, sorts nulls first, and orders across types by its own precedence; a field that would change which rows a query returns keeps its sort in DuckDB. The order_by:= parameter is unaffected | BOOLEAN    | GLOBAL | []      | true        |
+| firestore_page_byte_budget         | Uncompressed bytes one page may weigh before the scan requests fewer documents per round trip (0 disables the guard)                                                                                                                                                                                                                                                                   | BIGINT     | GLOBAL | []      | 67108864    |
+| firestore_page_size                | Documents requested per Firestore round trip (1-1000; lower it for collections of large documents)                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      | 1000        |
+| firestore_retry_initial_backoff_ms | Longest wait, in milliseconds, before the first retry; each further retry doubles it. Waits are jittered between half and all of that                                                                                                                                                                                                                                                  | BIGINT     | GLOBAL | []      | 1000        |
+| firestore_retry_max_backoff_ms     | Ceiling, in milliseconds, on any one wait between retries, including one Firestore asks for with Retry-After                                                                                                                                                                                                                                                                           | BIGINT     | GLOBAL | []      | 32000       |
+| firestore_schema_cache_ttl         | Schema cache TTL in seconds (0 to disable caching)                                                                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      | 3600        |
+| firestore_schema_sample_size       | Documents sampled to infer a collection's schema (-1 samples every document)                                                                                                                                                                                                                                                                                                           | BIGINT     | GLOBAL | []      | 1000        |
+| temp_directory                     | Set the directory to which temporary files are written.                                                                                                                                                                                                                                                                                                                                | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

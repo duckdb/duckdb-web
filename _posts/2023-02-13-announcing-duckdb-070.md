@@ -14,9 +14,9 @@ tag: release
      width="200"
      />
 
-The DuckDB team is happy to announce the latest DuckDB version (0.7.0) has been released. This release of DuckDB is named "Labradorius" after the [Labrador Duck (Camptorhynchus labradorius)](https://en.wikipedia.org/wiki/Labrador_duck) that was native to North America.
+The DuckDB team is happy to announce the latest DuckDB version (0.7.0) has been released. This release of DuckDB is named “Labradorius” after the [Labrador Duck (Camptorhynchus labradorius)](https://en.wikipedia.org/wiki/Labrador_duck) that was native to North America.
 
-To install the new version, please visit the [installation guide]({% link install/index.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.7.0).
+To install the new version, please visit the [installation guide]({% link docs/2.0/installation.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.7.0).
 
 ## What's in 0.7.0
 
@@ -38,7 +38,7 @@ FROM 'data/json/with_list.json';
 | 4   | [Broadcast, News]                |
 | 5   | [Raising, Arizona]               |
 
-**Partitioned Parquet/CSV Export.** DuckDB has been able to ingest [Hive-partitioned Parquet and CSV files]({% link docs/current/core_extensions/httpfs/overview.md %}#hive-partitioning) for a while. After this release [DuckDB will also be able to _write_ Hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
+**Partitioned Parquet/CSV Export.** DuckDB has been able to ingest [Hive-partitioned Parquet and CSV files]({% link docs/2.0/core_extensions/httpfs/overview.md %}#hive-partitioning) for a while. After this release [DuckDB will also be able to _write_ Hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
 
 ```sql
 COPY orders TO 'orders' (FORMAT parquet, PARTITION_BY (year, month));
@@ -82,7 +82,7 @@ INSERT INTO new_db.tbl SELECT * FROM range(1000);
 DETACH new_db;
 ```
 
-See the [documentation for more information]({% link docs/current/sql/statements/attach.md %}).
+See the [documentation for more information]({% link docs/2.0/sql/statements/attach.md %}).
 
 **SQLite Storage Back-End.** In addition to adding support for attaching DuckDB databases – this release also adds support for [_pluggable database engines_](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/duckdb-sqlite) makes use of this to add native read/write support for SQLite database files to DuckDB.
 
@@ -93,7 +93,7 @@ INSERT INTO sqlite.tbl VALUES (1), (2), (3);
 SELECT * FROM sqlite.tbl;
 ```
 
-Using this, SQLite database files can be attached, queried and modified as if they are native DuckDB database files. This allows data to be quickly transferred between SQLite and DuckDB – and allows you to use DuckDB's rich SQL dialect to query data stored in SQLite tables.
+Using this, SQLite database files can be attached, queried, and modified as if they are native DuckDB database files. This allows data to be quickly transferred between SQLite and DuckDB – and allows you to use DuckDB's rich SQL dialect to query data stored in SQLite tables.
 
 ## New SQL Features
 
@@ -118,7 +118,7 @@ FROM movies;
 | --- | ------------------ |
 | 1   | The Phantom Menace |
 
-See the [documentation for more information]({% link docs/current/sql/statements/insert.md %}#on-conflict-clause).
+See the [documentation for more information]({% link docs/2.0/sql/statements/insert.md %}#on-conflict-clause).
 
 **Lateral Joins.** Support for [lateral joins](https://github.com/duckdb/duckdb/pull/5393) is added in this release. Lateral joins are a more flexible variant of correlated subqueries that make working with nested data easier, as they allow [easier unnesting](https://github.com/duckdb/duckdb/pull/5485) of nested data.
 
@@ -276,7 +276,7 @@ duckdb.register_filesystem(filesystem('gcs'))
 data = duckdb.query("SELECT * FROM read_csv_auto('gcs:///bucket/file.csv')").fetchall()
 ```
 
-Have a look at the [guide]({% link docs/current/guides/python/filesystems.md %}) for more information
+Have a look at the [guide]({% link docs/2.0/guides/python/filesystems.md %}) for more information
 
 ## Storage Improvements
 

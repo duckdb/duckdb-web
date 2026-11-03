@@ -6,7 +6,7 @@ excerpt: |
   Fuzzy matching based autocompletion
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_fuzzycomplete.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/fuzzycomplete/).
 extension:
   build: cmake
   description: Fuzzy matching based autocompletion
@@ -21,15 +21,31 @@ extension:
 repo:
   andium: 74630cc8548a8ee6b32129abdc8bd70e1cf2bf87
   github: query-farm/fuzzycomplete
-  ref: 8b89b19bbed0c7338a2a5e1dfc08eea88290e0ee
+  ref: b632926cf27221b3afbbdd7b7f2dcc3e55f21601
+  variegata: 040136c2f5148f1dcd4f4ac60921ed2c40c615bb
 
-extension_star_count: 31
-extension_star_count_pretty: 31
-extension_download_count: 2601
-extension_download_count_pretty: 2.6k
+extension_star_count: 33
+extension_star_count_pretty: 33
+extension_download_count: 1327
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_fuzzycomplete.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -47,7 +63,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

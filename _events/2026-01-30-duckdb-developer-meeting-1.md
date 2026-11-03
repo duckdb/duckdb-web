@@ -11,11 +11,6 @@ category: core
 location: "Pakhuis de Zwijger, Amsterdam"
 ---
 
-<img src="{% link images/events/duckdb-developer-meeting-1-splashscreen.svg %}"
-     alt="DuckDB Developer Meeting #1 splashscreen"
-     width="680"
-     />
-
 We are excited to announce the first DuckDB Developer Meeting, organized by [DuckLabs](https://ducklabs.com/).
 The event will feature talks from DuckDB developers, and is aimed at developers who build DuckDB extensions or complex applications on top of DuckDB.
 
@@ -74,5 +69,5 @@ If you experience any incidents, please let us know at <quack@duckdb.org>.
 The [FOSDEM 2026 conference in Brussels](https://fosdem.org/2026/) is happening on the weekend after the DuckDB Developer Meeting, so you can conveniently travel there.
 Two railway companies operate direct services between Amsterdam and Brussels, and both train services run about once per hour on Friday evenings:
 
-* The [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid, operates without seat reservation and is generally cheaper.
-* The [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) departs from Amsterdam Centraal, has seat reservation and and a slightly more premium pricing.
+* The [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid, operates without seat reservation, and is generally cheaper.
+* The [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) departs from Amsterdam Centraal, has seat reservation, and a slightly more premium pricing.

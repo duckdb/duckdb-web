@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: markdown
   description: Read, analyze, and write Markdown files with block-level document representation and inline element support
-  version: 1.9.7
+  version: 1.9.8
   language: C++
   build: cmake
   license: MIT
@@ -21,17 +21,22 @@ repo:
   # change since ships on the v1.5.x track via ref, which is a v1.5.6 tree as of
   # v1.9.7 (was v1.5.4 when this note was written, then v1.5.5).
   andium: c9e1a4d3b98a814c86295ecb2ed760be286242ba
-  ref: 4721b312e6ed93ed94b48ea151877ce804672f07
+  ref: 6fc7013de640191ea5248897df3b60a7bc07db67
+  # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
+  # present and to `ref` otherwise, and unlike ref_next it has no skip branch -- so
+  # once `ref` is 2.0-only a v1.5.6 build would fail rather than be skipped. Equal to
+  # `ref` while both lines build; advance only to a commit v1.5.6 can still build.
+  variegata: 6fc7013de640191ea5248897df3b60a7bc07db67
   # ref_next is what makes the PRERELEASE leg actually build against DuckDB
   # v2.0. Without it build_next.yml prints "Skipping prerelease validation" and
   # the PR passes green having verified nothing on that line. A STALE ref_next is
   # worse than an absent one: it validates the PREVIOUS release against the next
   # line while reporting green, so it moves with ref on every release.
   #
-  # Same commit as ref, and this time measured rather than assumed: v1.9.7's
-  # next-line legs are green on linux_amd64, wasm_eh and windows_amd64 against
-  # v2.0-cyanoptera.
-  ref_next: 4721b312e6ed93ed94b48ea151877ce804672f07
+  # Same commit as ref, and measured rather than assumed: v1.9.8's next-line legs
+  # are green on all eight arches against v2.0-cyanoptera (linux_amd64/arm64,
+  # osx_amd64/arm64, windows_amd64 + mingw, wasm_mvp/eh/threads).
+  ref_next: 6fc7013de640191ea5248897df3b60a7bc07db67
 docs:
   hello_world: |
     -- Load the extension
@@ -122,15 +127,30 @@ docs:
 
     Real-world benchmark: Processing 287 Markdown files (2,699 sections, 1,137 code blocks, 1,174 links) in 603ms.
 
-    Full test suite with 2013 passing assertions across 58 test files.
+    Full test suite with 2058 passing assertions across 60 test files.
 
 extension_star_count: 32
 extension_star_count_pretty: 32
-extension_download_count: 2549
-extension_download_count_pretty: 2.5k
+extension_download_count: 2302
+extension_download_count_pretty: 2.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -148,7 +168,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -158,27 +177,15 @@ LOAD {{ page.extension.name }};
 | duck_block_to_md              | scalar        | Convert a single duck_block struct to Markdown text.                               | NULL    | [duck_block_to_md({'kind': 'container', 'element_type': 'paragraph', 'content': 'hello', 'level': 0, 'encoding': 'text', 'attributes': map(), 'element_order': 0})] |
 | duck_blocks_to_md             | scalar        | Convert a list of duck_blocks to Markdown text.                                    | NULL    | [duck_blocks_to_md([])]                                                                                                                                             |
 | duck_blocks_to_sections       | scalar        | Convert a list of duck_blocks into structured sections.                            | NULL    | [duck_blocks_to_sections([])]                                                                                                                                       |
-| md_extract_code_blocks        | scalar        | Extract fenced and indented code blocks from Markdown content.                     | NULL    | [md_extract_code_blocks('```sql
-SELECT 1;
-```')]                                                                                                                                                              |
-| md_extract_frontmatter        | scalar        | Extract the raw YAML frontmatter text block from Markdown.                         | NULL    | [md_extract_frontmatter('---
-title: Test
----
-# Body')]                                                                                                                                                           |
+| md_extract_code_blocks        | scalar        | Extract fenced and indented code blocks from Markdown content.                     | NULL    | [md_extract_code_blocks('```sql<br>SELECT 1;<br>```')]                                                                                                              |
+| md_extract_frontmatter        | scalar        | Extract the raw YAML frontmatter text block from Markdown.                         | NULL    | [md_extract_frontmatter('---<br>title: Test<br>---<br># Body')]                                                                                                     |
 | md_extract_images             | scalar        | Extract images from Markdown content.                                              | NULL    | [md_extract_images('![Logo](logo.png)')]                                                                                                                            |
 | md_extract_links              | scalar        | Extract hyperlinks from Markdown content.                                          | NULL    | [md_extract_links('[DuckDB](https://duckdb.org)')]                                                                                                                  |
-| md_extract_metadata           | scalar        | Extract YAML frontmatter from Markdown text as a MAP.                              | NULL    | [md_extract_metadata('---
-title: Test
----
-# Body')]                                                                                                                                                           |
+| md_extract_metadata           | scalar        | Extract YAML frontmatter from Markdown text as a MAP.                              | NULL    | [md_extract_metadata('---<br>title: Test<br>---<br># Body')]                                                                                                        |
 | md_extract_section            | scalar        | NULL                                                                               | NULL    |                                                                                                                                                                     |
 | md_extract_sections           | scalar        | NULL                                                                               | NULL    |                                                                                                                                                                     |
-| md_extract_table_rows         | scalar        | Extract table cell rows from Markdown content.                                     | NULL    | [md_extract_table_rows('\| a \| b \|
-\|---\|---\|
-\| 1 \| 2 \|')]                                                                                                                                                     |
-| md_extract_tables_json        | scalar        | Extract tables from Markdown content as structured objects.                        | NULL    | [md_extract_tables_json('\| a \| b \|
-\|---\|---\|
-\| 1 \| 2 \|')]                                                                                                                                                     |
+| md_extract_table_rows         | scalar        | Extract table cell rows from Markdown content.                                     | NULL    | [md_extract_table_rows('\| a \| b \|<br>\|---\|---\|<br>\| 1 \| 2 \|')]                                                                                             |
+| md_extract_tables_json        | scalar        | Extract tables from Markdown content as structured objects.                        | NULL    | [md_extract_tables_json('\| a \| b \|<br>\|---\|---\|<br>\| 1 \| 2 \|')]                                                                                            |
 | md_extract_tags               | scalar        | Extract hashtag tags from Markdown content.                                        | NULL    | [md_extract_tags('Tag #important text')]                                                                                                                            |
 | md_extract_wikilinks          | scalar        | Extract wiki-style links and embeds from Markdown content.                         | NULL    | [md_extract_wikilinks('[[Page Name]]')]                                                                                                                             |
 | md_section_breadcrumb         | scalar        | Generate a breadcrumb string combining file path and section identifier.           | NULL    | [md_section_breadcrumb('doc.md', 'intro')]                                                                                                                          |
@@ -211,6 +218,8 @@ This extension does not add any function overloads.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

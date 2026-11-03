@@ -12,7 +12,7 @@ while getopts "f" opt; do
     esac
 done
 
-npx markdownlint-cli docs/lts/ _posts/ --config .markdownlint.jsonc ${fix} || echo 'markdownlint failed'
+npx markdownlint-cli docs/2.0/ _posts/ --config .markdownlint.jsonc ${fix} || echo 'markdownlint failed'
 
 black scripts --skip-string-normalization $check || echo 'black failed'
 
@@ -22,7 +22,7 @@ if ! $(which vale); then
 fi
 
 vale sync
-vale docs/lts/ _library/
+vale docs/2.0/ _library/
 
 if ag --md -l "https://www.youtube.com/embed/"; then
     echo 'Found "https://www.youtube.com/embed/ strings, please use "https://www.youtube-nocookie.com/embed/" instead'

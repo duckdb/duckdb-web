@@ -1,6 +1,6 @@
 ---
 layout: community_extension_doc
-title: Community Extension Development
+title: Development
 ---
 
 ## Building
@@ -27,7 +27,7 @@ With DuckDB's Community Extensions being a [relatively new]({% post_url 2024-07-
 * [extension template](https://github.com/duckdb/extension-template)
 * [Community Extensions Repository](https://github.com/duckdb/community-extensions)
 
-However, because of the batteries-included nature of the extension template and the [large]({% link community_extensions/index.md %}) [number]({% link docs/current/core_extensions/overview.md %}) of example extensions, extension development should be relatively straightforward.
+However, because of the batteries-included nature of the extension template and the [large]({% link community_extensions/index.md %}) [number]({% link docs/2.0/core_extensions/overview.md %}) of example extensions, extension development should be relatively straightforward.
 
 ## How to Maintain an Extension Through DuckDB Releases
 
@@ -45,7 +45,7 @@ If an extension is *not* compatible with both branches at the same time, the rec
 3. This allows the extension to be tested both versus latest stable *and* against current `main`.
 4. Once a release hash is set, community extensions will be built for that DuckDB hash and `ref_next` (if present) swapped for `ref`.
 
-See for example the descriptor for [`hannes/duckdb_avro`](https://github.com/hannes/duckdb_avro) that was published a few weeks before DuckDB v1.2.0.
+See for example the descriptor for [`hannes/duckdb_avro`](https://github.com/hannes/duckdb_avro) that was published a few weeks before DuckDB 1.2.0.
 It changed in <https://github.com/duckdb/community-extensions/pull/252/files> from:
 
 ```yaml
@@ -63,7 +63,7 @@ repo:
   ref_next: c8941c92ec103f7825eb88207c04512f8a714b23
 ```
 
-Here, the `ref` commit is compatible with DuckDB version v1.1.3, and `ref_next` is compatible with current main.
+Here, the `ref` commit is compatible with DuckDB version 1.1.3, and `ref_next` is compatible with current main.
 
 Note that being compatible with current main can't guarantee compatibility with v1.2.0, since changes affecting the extension might still land, but it should allow iterating early before a new stable DuckDB release.
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Importing Data using Java Table Functions"
+title: "Importing Data Using Java Table Functions"
 authors:
   - Guest Author
   - Geertjan Wielenga
@@ -19,13 +19,13 @@ At the company where I work, we store vulnerability data for our clients as a co
 
 The plan was to import one year of records into an alternative database and run analytical queries on it. The requirements were to run all the queries in one second or less and export 50,000 records in Excel format under ten seconds. Anything more than that would be handled in background.
 
-Due to internal requirements, the analytical database had to run on the same server as MongoDB. It needed to be actively developed, free, open-source and capable of working well with limited resources - and DuckDB checked all the boxes.
+Due to internal requirements, the analytical database had to run on the same server as MongoDB. It needed to be actively developed, free, open-source, and capable of working well with limited resources - and DuckDB checked all the boxes.
 
 ## Sample Data Set and Code Snippets
 
 To share my performance measurement results, I have prepared an anonymized dataset that roughly corresponds to the data used in our production environment. The size of this dataset has been scaled down significantly from the original to allow for faster experimentation.
 
-The dataset is available within this link: [vulnerability_sample.csv.zst](https://github.com/duckdb/duckdb/issues/24935), it contains 485168 records with 24 fields. Two notable fields are the `VARCHAR` "description" and "references", which contain long strings with median lengths of 5,000 and 2,500 characters, respectively. Some records contain strings as large as 32,000 characters, making many operations on this dataset computationally expensive.
+The dataset is available within this link: [vulnerability_sample.csv.zst](https://github.com/duckdb/duckdb/issues/24935), it contains 485168 records with 24 fields. Two notable fields are the `VARCHAR` “description” and “references”, which contain long strings with median lengths of 5,000 and 2,500 characters, respectively. Some records contain strings as large as 32,000 characters, making many operations on this dataset computationally expensive.
 
 Additionally, along with the DuckLabs team, I have prepared several code snippets to illustrate data import in Java. While these snippets are significantly simplified compared to the code we run, their performance characteristics more or less matched the real ones. The code snippets are available in this GitHub repository [staticlibs/duckdb_java_data_import](https://github.com/staticlibs/duckdb_java_data_import).
 
@@ -43,11 +43,11 @@ Using the sample dataset, this query took 55 seconds.
 
 I was quickly able to get it up and running and import the data into DuckDB. I ran many of our analytical queries and it was very fast, under 100ms for `GROUP BY` and `COUNT` queries and I was able to export 50,000 records in less than 5 seconds. The only exception was when projecting large text columns, which caused a performance degradation; I have raised an [issue](https://github.com/duckdb/duckdb/issues/24935) about that.
 
-Sorting the data provided further query performance improvements, and using `SET storage_compatibility_version = 'latest'` resulted in a significant reduction in the database file size.
+Sorting the data provided further query performance improvements, and using `SET storage_compatibility_version = 'latest'`{:.language-sql .highlight} resulted in a significant reduction in the database file size.
 
 Ultimately, the `mongo` community extension appears to be the easiest, most painless, and most performant way to set up a MongoDB-to-DuckDB pipeline.
 
-However, we decided against using it due to the lack of "future-proof" guarantees associated with community extensions. DuckDB is a fast- moving project which is constantly improving, and we did not want to be held back from updating to new DuckDB version simply because an extension was not updated and can no longer be built.
+However, we decided against using it due to the lack of “future-proof” guarantees associated with community extensions. DuckDB is a fast- moving project which is constantly improving, and we did not want to be held back from updating to new DuckDB version simply because an extension was not updated and can no longer be built.
 
 The only real option for using the community extension would have been to build it locally - effectively maintaining an internal fork of it. While possible, we decided against this for two reasons. First, the burden of maintaining a C++ codebase was a major concern. Second, we prefer our data ingestion pipelines to be written in Java, that is much easier for us to maintain, and to be able to reuse parts of this pipeline across other internal data sources that we use from Java and that do not have ready-to-use DuckDB extensions.
 
@@ -77,12 +77,12 @@ public class InsertWorker implements Runnable {
                 break;
             }
             insertDayRecords(day, collection, ps);
-        } 
+        }
         // error handling omitted
     }
 
     static void insertDayRecords(LocalDate day, MongoCollection<Document> collection, PreparedStatement ps) {
-        MongoCursor<Document> docs = collection.find(Filters.and( // other filters omittted 
+        MongoCursor<Document> docs = collection.find(Filters.and( // other filters omittted
                 Filters.gte("updated_date", day.atStartOfDay().toInstant(ZoneOffset.UTC)),
                 Filters.lt("updated_date", day.plusDays(1).atStartOfDay().toInstant(ZoneOffset.UTC))
         )).iterator();
@@ -110,11 +110,11 @@ By running eight of these workers in parallel, we import data into a staging Duc
 
 With this approach, the total execution time on the sample data was 3 minutes and 37 seconds, with the final `CREATE TABLE... AS... ORDER BY` operation taking approximately 30 seconds.
 
-The performance being 3.5x slower compared to the `mongo` extension is largely due to the lack of native "batch" insert support in DuckDB. The `executeBatch` is implemented on Java level. And while the statement is prepared only once per batch, the each entry in the batch is run in a separate database-level `INSERT`, thereby incurring a per-row overhead.
+The performance being 3.5x slower compared to the `mongo` extension is largely due to the lack of native “batch” insert support in DuckDB. The `executeBatch` is implemented on Java level. And while the statement is prepared only once per batch, the each entry in the batch is run in a separate database-level `INSERT`, thereby incurring a per-row overhead.
 
 ## Java Appender Interface
 
-The next attempt was to use the [Appender](https://duckdb.org/docs/current/clients/java/data_import#appender) interface, that is exposed in Java with the `Connection#createAppender` method. The worker for Appender can be structured very similar to the batch insert worker above:
+The next attempt was to use the [Appender]({% link docs/2.0/clients/java/data_import.md %}#appender) interface, that is exposed in Java with the `Connection#createAppender` method. The worker for Appender can be structured very similar to the batch insert worker above:
 
 ```java
 public class AppendWorker implements Runnable {
@@ -234,7 +234,7 @@ In this implementation, we use our table function as the data source for the `CR
 To make the query over this function to run in parallel we need two bits:
 
  - `info.setMaxThreads(8)` in `globalInit`: tells DuckDB that function supports multiple concurrent `apply` calls
- - `SET preserve_insertion_order = FALSE`: tells DuckDB that it is not necessary to maintain the original order of records as they are read from the table function during insertion. If this flag is not set to FALSE, DuckDB will restrict apply calls to a single thread to preserve order. Since we perform sorting as a post-processing step after the import, preserving the insertion order is unnecessary.
+ - `SET preserve_insertion_order = FALSE`{:.language-sql .highlight}: tells DuckDB that it is not necessary to maintain the original order of records as they are read from the table function during insertion. If this flag is not set to FALSE, DuckDB will restrict apply calls to a single thread to preserve order. Since we perform sorting as a post-processing step after the import, preserving the insertion order is unnecessary.
 
 With this approach, the total execution time on the sample data was 1 minute and 27 seconds. While it does not achieve the `mongo` extension time (it is not an apples-to-apples comparison due to day-sized queries and post-processing sorting) - it incurs the least overhead among all Java approaches I tried.
 

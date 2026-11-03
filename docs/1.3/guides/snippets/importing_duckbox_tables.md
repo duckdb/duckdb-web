@@ -8,7 +8,7 @@ title: Importing Duckbox Tables
 By default, the DuckDB [CLI client]({% link docs/1.3/clients/cli/overview.md %}) renders query results in the [duckbox format]({% link docs/1.3/clients/cli/output_formats.md %}),
 which uses rich, ASCII-art inspired tables to show data.
 These tables are often shared verbatim in other documents.
-For example, take the table used to demonstrate [new CSV features in the DuckDB v1.2.0 release blog post]({% post_url 2025-02-05-announcing-duckdb-120 %}#csv-features.md):
+For example, take the table used to demonstrate [new CSV features in the DuckDB 1.2.0 release blog post]({% post_url 2025-02-05-announcing-duckdb-120 %}#csv-features.md):
 
 ```text
 ┌─────────┬───────┐

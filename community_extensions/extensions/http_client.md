@@ -6,8 +6,7 @@ excerpt: |
   DuckDB HTTP Client Extension
 
 docs:
-  extended_description: The HTTP Client Extension is experimental, use at your own
-    risk!
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/http_client/).
   hello_world: "-- GET Request Example w/ JSON Parsing\nWITH __input AS (\n  SELECT\n\
     \    http_get(\n        'https://httpbin.org/delay/0',\n        headers => MAP\
     \ {\n          'accept': 'application/json',\n        },\n        params => MAP\
@@ -59,15 +58,31 @@ extension:
 repo:
   andium: e9730fc28af6757f663246f06956a8cab7ad9a55
   github: query-farm/httpclient
-  ref: 9e5713359dfefd6efff40a7f44c6e88b75bb9df4
+  ref: f8885ec49e233d0d246f3aad5406ca11fd148868
+  variegata: 9db208efbb157cd481d64b23b95b0fca1a86887f
 
 extension_star_count: 81
 extension_star_count_pretty: 81
-extension_download_count: 4159
-extension_download_count_pretty: 4.2k
+extension_download_count: 2452
+extension_download_count_pretty: 2.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -85,17 +100,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type | description | comment | examples |
-|----------------|---------------|-------------|---------|----------|
-| http_get       | scalar        | NULL        | NULL    |          |
-| http_head      | scalar        | NULL        | NULL    |          |
-| http_post      | scalar        | NULL        | NULL    |          |
-| http_post_form | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

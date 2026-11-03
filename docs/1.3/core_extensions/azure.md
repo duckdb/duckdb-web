@@ -186,7 +186,7 @@ If no explicit `CHAIN` is provided, the default one will be [`default`](https://
 #### MANAGED_IDENTITY Provider
 
 If you need to specifically name the User-assigned Managed Identity to be used, the
-`MANAGED_IDENTITY` provider must be used (instead of a `CHAIN`). This provider allows identity 
+`MANAGED_IDENTITY` provider must be used (instead of a `CHAIN`). This provider allows identity
 specification via one of `CLIENT_ID`, `OBJECT_ID` or `RESOURCE_ID`, e.g.:
 
 ```sql

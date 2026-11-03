@@ -8,7 +8,7 @@ excerpt: DuckDB, a free and open source analytical data management system, can r
 tag: using-duckdb
 ---
 
-Apache Parquet is the most common "Big Data" storage format for analytics. In Parquet files, data is stored in a columnar-compressed binary format. Each Parquet file stores a single table. The table is partitioned into row groups, which each contain a subset of the rows of the table. Within a row group, the table data is stored in a columnar fashion.
+Apache Parquet is the most common “Big Data” storage format for analytics. In Parquet files, data is stored in a columnar-compressed binary format. Each Parquet file stores a single table. The table is partitioned into row groups, which each contain a subset of the rows of the table. Within a row group, the table data is stored in a columnar fashion.
 
 <img src="{% link images/blog/parquet.svg %}" alt="Example Parquet file shown visually. The Parquet file (taxi.parquet) is divided into row groups that each have two columns (pickup_at and dropoff_at)" title="Taxi Parquet File" style="max-width:30%"/>
 
@@ -76,13 +76,13 @@ We can use the statistics inside the Parquet file to great advantage here. Any r
 
 To illustrate how effective these automatic optimizations are, we will run a number of queries on top of Parquet files using both Pandas and DuckDB.
 
-In these queries, we use a part of the infamous New York Taxi dataset stored as Parquet files, specifically data from April, May and June 2019. These files are ca. 360 MB in size together and contain around 21 million rows of 18 columns each. The three files are placed into the `taxi/` folder.
+In these queries, we use a part of the infamous New York Taxi dataset stored as Parquet files, specifically data from April, May, and June 2019. These files are ca. 360 MB in size together and contain around 21 million rows of 18 columns each. The three files are placed into the `taxi/` folder.
 
 The examples are available as [an interactive notebook over at Google Colab](https://colab.research.google.com/drive/1e1beWqYOcFidKl2IxHtxT5s9i_6KYuNY). The timings reported here are from this environment for reproducibility.
 
 ## Reading Multiple Parquet Files
 
-First we look at some rows in the dataset. There are three Parquet files in the `taxi/` folder. [DuckDB supports the globbing syntax]({% link docs/current/data/parquet/overview.md %}), which allows it to query all three files simultaneously.
+First we look at some rows in the dataset. There are three Parquet files in the `taxi/` folder. [DuckDB supports the globbing syntax]({% link docs/2.0/data/parquet/overview.md %}), which allows it to query all three files simultaneously.
 
 ```python
 con.execute("""
@@ -133,7 +133,7 @@ import pyarrow.parquet as pq
 pq.write_table(pq.ParquetDataset('taxi/').read(), 'alltaxi.parquet', row_group_size=100000)
 ```
 
-Note that [DuckDB also has support for writing Parquet files]({% link docs/current/data/parquet/overview.md %}#writing-to-parquet-files) using the COPY statement.
+Note that [DuckDB also has support for writing Parquet files]({% link docs/2.0/data/parquet/overview.md %}#writing-to-parquet-files) using the COPY statement.
 
 ## Querying the Large File
 
@@ -289,7 +289,7 @@ The query completes in `220ms` and yields the following result:
 |               8 |       72 |
 |               9 |       64 |
 
-For the SQL-averse and as a teaser for a future blog post, DuckDB also has a "Relational API" that allows for a more Python-esque declaration of queries. Here's the equivalent to the above SQL query, that provides the exact same result and performance:
+For the SQL-averse and as a teaser for a future blog post, DuckDB also has a “Relational API” that allows for a more Python-esque declaration of queries. Here's the equivalent to the above SQL query, that provides the exact same result and performance:
 
 ```python
 con.from_parquet('alltaxi.parquet')

@@ -17,7 +17,7 @@ to compute useful moving aggregates such as moving inter-quartile ranges (IQRs).
 
 The original relational model as developed by Codd in the 1970s treated relations as *unordered sets* of tuples.
 While this was nice for theoretical computer science work,
-it ignored the way humans think using physical analogies (the "embodied brain" model from neuroscience).
+it ignored the way humans think using physical analogies (the “embodied brain” model from neuroscience).
 In particular, humans naturally order data to help them understand it and engage with it.
 To help with this, SQL uses the `SELECT` clause for horizontal layout and the `ORDER BY` clause for vertical layout.
 
@@ -31,7 +31,7 @@ To help answer such questions, SQL introduced *analytic* (or *window*) functions
 ### Window Functions
 
 Windowing works by breaking a relation up into independent *partitions*, *ordering* those partitions,
-and then defining [various functions]({% link docs/current/sql/functions/window_functions.md %}) that can be computed for each row
+and then defining [various functions]({% link docs/2.0/sql/functions/window_functions.md %}) that can be computed for each row
 using the nearby values.
 These functions include all the aggregate functions (such as `sum` and `avg`)
 as well as some window-specific functions (such as `rank()` and `nth_value(<expression>, <N>)`).
@@ -170,7 +170,7 @@ so lets have a look at how they all get implemented in DuckDB.
 
 ### Pipeline Breaking
 
-The first thing to notice is that windowing is a "pipeline breaker".
+The first thing to notice is that windowing is a “pipeline breaker”.
 That is, the `Window` operator has to read all of its inputs before it can start computing a function.
 This means that if there is some other way to compute something,
 it may well be faster to use a different technique.
@@ -243,7 +243,7 @@ and share the data layout between those functions.
 
 ### Aggregation
 
-Most of the [general-purpose window functions]({% link docs/current/sql/functions/window_functions.md %}) are straightforward to compute,
+Most of the [general-purpose window functions]({% link docs/2.0/sql/functions/window_functions.md %}) are straightforward to compute,
 but windowed aggregate functions can be expensive because they need to look at multiple values for each row.
 They often need to look at the same value multiple times, or repeatedly look at a large number of values,
 so over the years several approaches have been taken to improve performance.
@@ -252,7 +252,7 @@ so over the years several approaches have been taken to improve performance.
 
 Before explaining how DuckDB implements windowed aggregation,
 we need to take a short detour through how ordinary aggregates are implemented.
-Aggregate "functions" are implemented using three required operations and one optional operation:
+Aggregate “functions” are implemented using three required operations and one optional operation:
 * *Initialize* – Creates a state that will be updated.
 For `sum`, this is the running total, starting at `NULL` (because a `sum` of zero items is `NULL`, not zero.)
 * *Update* – Updates the state with a new value. For `sum`, this adds the value to the state.
@@ -270,7 +270,7 @@ For example, a running total will re-add all the values from the start of the pa
 for each running total, and this has a run time of `O(N^2)`.
 
 To improve on this, some databases add additional
-["moving state" operations](https://www.postgresql.org/docs/14/sql-createaggregate.html)
+[“moving state” operations](https://www.postgresql.org/docs/14/sql-createaggregate.html)
 that can add or remove individual values incrementally.
 This reduces computation in some common cases,
 but it can only be used for certain aggregates.
@@ -351,7 +351,7 @@ which means you don't have to learn new syntax or pull the data out into another
 #### Ordered Set Aggregates
 
 Window functions are often closely associated with some special
-"[ordered set aggregates](https://www.postgresql.org/docs/current/functions-aggregate.html#FUNCTIONS-ORDEREDSET-TABLE)"
+[“ordered set aggregates”](https://www.postgresql.org/docs/current/functions-aggregate.html#FUNCTIONS-ORDEREDSET-TABLE)
 defined by the SQL standard.
 Some databases implement these functions using the `Window` operator,
 but this is rather inefficient because sorting the data (an `O(N log N)` operation) is not required –

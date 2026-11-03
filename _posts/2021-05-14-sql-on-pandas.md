@@ -51,7 +51,7 @@ print(duckdb.query("SELECT sum(a) FROM mydf").to_df())
 
 The SQL table name `mydf` is interpreted as the local Python variable `mydf` that happens to be a Pandas DataFrame, which DuckDB can read and query directly. The column names and types are also extracted automatically from the DataFrame.
 
-Not only is this process painless, it is highly efficient. For many queries, you can use DuckDB to process data faster than Pandas, and with a much lower total memory usage, *without ever leaving the Pandas DataFrame binary format* ("Pandas-in, Pandas-out"). Unlike when using an external database system such as Postgres, the data transfer time of the input or the output is negligible (see Appendix A for details).
+Not only is this process painless, it is highly efficient. For many queries, you can use DuckDB to process data faster than Pandas, and with a much lower total memory usage, *without ever leaving the Pandas DataFrame binary format* (“Pandas-in, Pandas-out”). Unlike when using an external database system such as Postgres, the data transfer time of the input or the output is negligible (see Appendix A for details).
 
 ## SQL on Pandas Performance
 
@@ -59,7 +59,7 @@ To demonstrate the performance of DuckDB when executing SQL on Pandas DataFrames
 
 ### Benchmark Setup and Data Set
 
-We run the benchmark entirely from within the Google Colab environment. For our benchmark dataset, we use the [infamous TPC-H data set](http://www.tpc.org/tpch/). Specifically, we focus on the `lineitem` and `orders` tables as these are the largest tables in the benchmark. The total dataset size is around 1 GB in uncompressed CSV format ("scale factor" 1).
+We run the benchmark entirely from within the Google Colab environment. For our benchmark dataset, we use the [infamous TPC-H data set](http://www.tpc.org/tpch/). Specifically, we focus on the `lineitem` and `orders` tables as these are the largest tables in the benchmark. The total dataset size is around 1 GB in uncompressed CSV format (“scale factor” 1).
 
 As DuckDB is capable of using multiple processors (multi-threading), we include both a single-threaded variant and a variant with two threads. Note that while DuckDB can scale far beyond two threads, Google Colab only supports two.
 
@@ -192,7 +192,7 @@ result = filtered_df.groupby(
 
 In DuckDB, the query optimizer will combine the filter and aggregation into a single pass over the data, only reading relevant columns. In Pandas, however, we have no such luck. The filter as it is executed will actually subset the entire lineitem table, *including any columns we are not using!* As a result of this, the filter operation is much more time-consuming than it needs to be.
 
-We can manually perform this optimization ("projection pushdown" in database literature). To do this, we first need to select only the columns that are relevant to our query and then subset the lineitem dataframe. We will end up with the following code snippet:
+We can manually perform this optimization (“projection pushdown” in database literature). To do this, we first need to select only the columns that are relevant to our query and then subset the lineitem dataframe. We will end up with the following code snippet:
 
 ```python
 # projection pushdown
@@ -326,15 +326,15 @@ We see that the basic approach is extremely time consuming compared to the optim
 
 ### Takeaway
 
-Using DuckDB, you can take advantage of the powerful and expressive SQL language without having to worry about moving your data in – and out – of Pandas. DuckDB is extremely simple to install, and offers many advantages such as a query optimizer, automatic multi-threading and larger-than-memory computation. DuckDB uses the Postgres SQL parser, and offers many of the same SQL features as Postgres, including advanced features such as window functions, correlated subqueries, (recursive) common table expressions, nested types and sampling. If you are missing a feature, please [open an issue](https://github.com/duckdb/duckdb/issues).
+Using DuckDB, you can take advantage of the powerful and expressive SQL language without having to worry about moving your data in – and out – of Pandas. DuckDB is extremely simple to install, and offers many advantages such as a query optimizer, automatic multi-threading, and larger-than-memory computation. DuckDB uses the Postgres SQL parser, and offers many of the same SQL features as Postgres, including advanced features such as window functions, correlated subqueries, (recursive) common table expressions, nested types, and sampling. If you are missing a feature, please [open an issue](https://github.com/duckdb/duckdb/issues).
 
 ## Appendix A: There and Back Again: Transferring Data from Pandas to a SQL Engine and Back
 
 Traditional SQL engines use the Client-Server paradigm, which means that a client program connects through a socket to a server. Queries are run on the server, and results are sent back down to the client afterwards. This is the same when using for example Postgres from Python. Unfortunately, this transfer [is a serious bottleneck](http://www.vldb.org/pvldb/vol10/p1022-muehleisen.pdf). In-process engines such as SQLite or DuckDB do not run into this problem.
 
-To showcase how costly this data transfer over a socket is, we have run a benchmark involving Postgres, SQLite and DuckDB. The source code for the benchmark can be found on [GitHub](https://gist.github.com/hannes/a95a39a1eda63aeb0ca13fd82d1ba49c).
+To showcase how costly this data transfer over a socket is, we have run a benchmark involving Postgres, SQLite, and DuckDB. The source code for the benchmark can be found on [GitHub](https://gist.github.com/hannes/a95a39a1eda63aeb0ca13fd82d1ba49c).
 
-In this benchmark we copy a (fairly small) Pandas data frame consisting of 10M 4-byte integers (40 MB) from Python to the PostgreSQL, SQLite and DuckDB databases. Since the default Pandas `to_sql` was rather slow, we added a separate optimization in which we tell Pandas to write the data frame to a temporary CSV file, and then tell PostgreSQL to directly copy data from that file into a newly created table. This of course will only work if the database server is running on the same machine as Python.
+In this benchmark we copy a (fairly small) Pandas data frame consisting of 10M 4-byte integers (40 MB) from Python to the PostgreSQL, SQLite, and DuckDB databases. Since the default Pandas `to_sql` was rather slow, we added a separate optimization in which we tell Pandas to write the data frame to a temporary CSV file, and then tell PostgreSQL to directly copy data from that file into a newly created table. This of course will only work if the database server is running on the same machine as Python.
 
 | Name                                                    | Time (s) |
 | :------------------------------------------------------ | -------: |

@@ -6,81 +6,7 @@ excerpt: |
   Redis compatible Client for DuckDB
 
 docs:
-  extended_description: '<img src="https://github.com/user-attachments/assets/46a5c546-7e9b-42c7-87f4-bc8defe674e0"
-    width=250 />
-
-
-    # DuckDB Redis Client Extension
-
-    This extension provides Redis-compatible client functionality for DuckDB
-
-
-    > Experimental: USE AT YOUR OWN RISK!
-
-
-    ## Features
-
-    Currently supported Redis operations:
-
-    - String operations: `GET`, `SET`, `MGET`
-
-    - Hash operations: `HGET`, `HSET`, `HGETALL`, `HSCAN`, `HSCAN_OVER_SCAN`
-
-    - List operations: `LPUSH`, `LRANGE`, `LRANGE_TABLE`
-
-    - Key operations: `DEL`, `EXISTS`, `TYPE`, `SCAN`, `KEYS`
-
-    - Batch and discovery operations: `SCAN`, `HSCAN_OVER_SCAN`, `KEYS`
-
-
-    ## Quick Reference: Available Functions
-
-
-    | Function | Type | Description |
-
-    |----------|------|-------------|
-
-    | `redis_get(key, secret)` | Scalar | Get value of a string key |
-
-    | `redis_set(key, value, secret)` | Scalar | Set value of a string key |
-
-    | `redis_mget(keys_csv, secret)` | Scalar | Get values for multiple keys (comma-separated)
-    |
-
-    | `redis_hget(key, field, secret)` | Scalar | Get value of a hash field |
-
-    | `redis_hset(key, field, value, secret)` | Scalar | Set value of a hash field
-    |
-
-    | `redis_lpush(key, value, secret)` | Scalar | Push value to a list |
-
-    | `redis_lrange(key, start, stop, secret)` | Scalar | Get range from a list (comma-separated)
-    |
-
-    | `redis_del(key, secret)` | Scalar | Delete a key (returns TRUE if deleted) |
-
-    | `redis_exists(key, secret)` | Scalar | Check if a key exists (returns TRUE if
-    exists) |
-
-    | `redis_type(key, secret)` | Scalar | Get the type of a key |
-
-    | `redis_scan(cursor, pattern, count, secret)` | Scalar | Scan keys (returns cursor:keys_csv)
-    |
-
-    | `redis_hscan(key, cursor, pattern, count, secret)` | Scalar | Scan fields in
-    a hash |
-
-    | `redis_keys(pattern, secret)` | Table | List all keys matching a pattern |
-
-    | `redis_hgetall(key, secret)` | Table | List all fields and values in a hash
-    |
-
-    | `redis_lrange_table(key, start, stop, secret)` | Table | List elements in a
-    list as rows |
-
-    | `redis_hscan_over_scan(scan_pattern, hscan_pattern, count, secret)` | Table
-    | For all keys matching scan_pattern, HSCAN with hscan_pattern, return (key, field,
-    value) rows |'
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/redis/).
   hello_world: "-- Create a local Redis connection secret\nCREATE SECRET IF NOT EXISTS\
     \ redis (\n        TYPE redis,\n        PROVIDER config,\n        host 'localhost',\n\
     \        port '6379',\n        password 'optional_password'\n    );\n\n-- Create\
@@ -107,20 +33,37 @@ extension:
   maintainers:
   - lmangani
   - gigapi
+  - rustyconover
   name: redis
   version: '2025120401'
 repo:
   andium: 52d4e50c2fce74de9e9c90b15316a63350614495
   github: quackscience/duckdb-extension-redis
-  ref: ba3af666aa45e68928428b8be24cd2eabf5bab66
+  ref: 0dc6a8a84206fb4cb59c33fd5ba65c1c3e18c790
+  variegata: 54559a51e0d4337ac6b5d553cc37a909c9a52393
 
 extension_star_count: 17
 extension_star_count_pretty: 17
-extension_download_count: 989
-extension_download_count_pretty: 989
+extension_download_count: 1021
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_redis.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -138,29 +81,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|     function_name     | function_type |                                                                                      description                                                                                       | comment |                                                       examples                                                       |
-|-----------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------------------------------------------|
-| redis_del             | scalar        | Delete a key from Redis. Returns true if the key was deleted, false if it did not exist.                                                                                               | NULL    | [SELECT redis_del('mykey', 'my_redis_secret');]                                                                      |
-| redis_exists          | scalar        | Check if a key exists in Redis. Returns true if the key exists, false otherwise.                                                                                                       | NULL    | [SELECT redis_exists('mykey', 'my_redis_secret');]                                                                   |
-| redis_get             | scalar        | Get the value of a key from Redis. Returns the value associated with the specified key, or an empty string if the key does not exist.                                                  | NULL    | [SELECT redis_get('mykey', 'my_redis_secret');, SELECT redis_get(key_column, 'my_redis_secret') FROM my_table;]      |
-| redis_hget            | scalar        | Get the value of a field in a Redis hash. Returns the value associated with the field, or an empty string if the field does not exist.                                                 | NULL    | [SELECT redis_hget('myhash', 'field1', 'my_redis_secret');]                                                          |
-| redis_hgetall         | table         | Get all fields and values from a Redis hash. Returns a table with 'field' and 'value' columns.                                                                                         | NULL    | [SELECT * FROM redis_hgetall('myhash', 'my_redis_secret');]                                                          |
-| redis_hscan           | scalar        | Incrementally iterate over fields in a Redis hash matching a pattern. Returns 'cursor:field1=value1,field2=value2,...'.                                                                | NULL    | [SELECT redis_hscan('myhash', '0', '*', 100, 'my_redis_secret');]                                                    |
-| redis_hscan_over_scan | table         | Scan all hash keys matching a pattern, then scan fields within each hash. Returns a table with 'key', 'field', and 'value' columns. Useful for iterating over multiple hashes at once. | NULL    | [SELECT * FROM redis_hscan_over_scan('user:*', '*', 100, 'my_redis_secret');]                                        |
-| redis_hset            | scalar        | Set the value of a field in a Redis hash. Returns the number of fields that were added (0 if the field existed and was updated, 1 if it was created).                                  | NULL    | [SELECT redis_hset('myhash', 'field1', 'value1', 'my_redis_secret');]                                                |
-| redis_keys            | table         | Scan all keys in Redis matching a pattern. Returns a table with a single 'key' column containing all matching keys.                                                                    | NULL    | [SELECT * FROM redis_keys('*', 'my_redis_secret');, SELECT * FROM redis_keys('user:*', 'my_redis_secret');]          |
-| redis_lpush           | scalar        | Prepend a value to a Redis list. Returns the length of the list after the push operation.                                                                                              | NULL    | [SELECT redis_lpush('mylist', 'value1', 'my_redis_secret');]                                                         |
-| redis_lrange          | scalar        | Get a range of elements from a Redis list. Returns elements as a comma-separated string. Use 0 for start and -1 for stop to get all elements.                                          | NULL    | [SELECT redis_lrange('mylist', 0, -1, 'my_redis_secret');, SELECT redis_lrange('mylist', 0, 10, 'my_redis_secret');] |
-| redis_lrange_table    | table         | Get a range of elements from a Redis list as a table. Returns a table with 'index' and 'value' columns.                                                                                | NULL    | [SELECT * FROM redis_lrange_table('mylist', 0, -1, 'my_redis_secret');]                                              |
-| redis_mget            | scalar        | Get the values of multiple keys from Redis. Keys should be comma-separated. Returns values as a comma-separated string.                                                                | NULL    | [SELECT redis_mget('key1,key2,key3', 'my_redis_secret');]                                                            |
-| redis_scan            | scalar        | Incrementally iterate over keys in Redis matching a pattern. Returns 'cursor:key1,key2,...'. Use cursor '0' to start, and continue until cursor returns '0'.                           | NULL    | [SELECT redis_scan('0', '*', 100, 'my_redis_secret');, SELECT redis_scan('0', 'user:*', 10, 'my_redis_secret');]     |
-| redis_set             | scalar        | Set the value of a key in Redis. Returns 'OK' on success.                                                                                                                              | NULL    | [SELECT redis_set('mykey', 'myvalue', 'my_redis_secret');]                                                           |
-| redis_type            | scalar        | Get the type of a key in Redis. Returns the type as a string (string, list, set, zset, hash, stream) or 'none' if the key does not exist.                                              | NULL    | [SELECT redis_type('mykey', 'my_redis_secret');]                                                                     |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

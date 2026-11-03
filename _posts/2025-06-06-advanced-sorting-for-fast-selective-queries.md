@@ -43,7 +43,7 @@ In this post, we describe several advanced sorting strategies, compare them with
 ## The Strategy
 
 Instead of sorting precisely by one or a small number of columns, we want to sort approximately by a larger number of columns.
-That will allow queries with different `WHERE` clauses to all benefit from DuckDB's [min-max indexes (zone maps)]({% link docs/current/sql/indexes.md %}#min-max-index-zonemap).
+That will allow queries with different `WHERE` clauses to all benefit from DuckDB's [min-max indexes (zone maps)]({% link docs/2.0/sql/indexes.md %}#min-max-index-zonemap).
 This post introduces two high-level approaches with several examples of each: sorting by space filling curves, and sorting by truncated timestamps.
 
 ### Space Filling Curves
@@ -56,7 +56,7 @@ Cafés that are somewhat close in both latitude and longitude will receive a sim
 This will allow us to quickly execute queries like “Find all cafés within this rectangular region on a map”.
 (A rectangular region like that is called a bounding box in geospatial-land!)
 The [GIF at the top of this post](#hilbert-curve) shows various levels of granularity of a Hilbert encoding – imagine if the x axis were longitude and the y axis were latitude.
-The "zig-zag" line of the Hilbert algorithm is the list of cafés, sorted approximately.
+The “zig-zag” line of the Hilbert algorithm is the list of cafés, sorted approximately.
 
 Both Morton and Hilbert operate on integers or floats, but this post outlines a way to use them to sort `VARCHAR` columns as well.
 A SQL macro is used to convert the first few characters of a `VARCHAR` column into an integer as a pre-processing step.
@@ -112,7 +112,7 @@ Our alternative sorting approaches are:
 
 > The Morton and Hilbert encoding functions come from the [`lindel` DuckDB community extension]({% link community_extensions/extensions/lindel.md %}), contributed by [Rusty Conover](https://github.com/rustyconover).
 > Thank you to Rusty and the folks who have built the [`lindel` Rust crate](https://crates.io/crates/lindel) upon which the DuckDB extension is based!
-> The [`spatial` extension]({% link docs/current/core_extensions/spatial/overview.md %}) also contains an [`ST_Hilbert` function]({% link docs/current/core_extensions/spatial/functions.md %}#st_hilbert) that works similarly.
+> The [`spatial` extension]({% link docs/2.0/core_extensions/spatial/overview.md %}) also contains an [`ST_Hilbert` function]({% link docs/2.0/core_extensions/spatial/functions.md %}#st_hilbert) that works similarly.
 > Thanks to [Max Gabrielsson](https://github.com/Maxxen) and the GDAL community!
 
 These plots display query runtime when pulling from a DuckDB file hosted on S3.
@@ -121,7 +121,7 @@ DuckLake is the modern evolution of the cloud data lakehouse – take a minute t
 DuckLake has an [additional concept of a partition](https://ducklake.select/docs/stable/duckdb/advanced_features/partitioning), which enables entire files to be skipped.
 To take full advantage of DuckLake, first partition your data (by time or otherwise) and then apply the techniques in this post when loading your data.
 
-All experiments were run on an M1 MacBook Pro with DuckDB v1.2.2.
+All experiments were run on an M1 MacBook Pro with DuckDB 1.2.2.
 The tests were conducted with the DuckDB Python client with results returned as Apache Arrow tables.
 In between each query, the DuckDB connection is closed and recreated (this time is not measured as a part of the results).
 This is to better simulate a single user's experience accessing the dashboard in our hypothetical use case.
@@ -251,7 +251,7 @@ CREATE TABLE IF NOT EXISTS flights_hilbert AS
         ]::UBIGINT[2]);
 ```
 
-Alternatively, the [`spatial` extension]({% link docs/current/core_extensions/spatial/overview.md %}) can be used to execute a Hilbert encoding.
+Alternatively, the [`spatial` extension]({% link docs/2.0/core_extensions/spatial/overview.md %}) can be used to execute a Hilbert encoding.
 It requires a bounding box to be supplied, as this helps determine the granularity of the encoding for geospatial use cases.
 It performed similarly to the Hilbert approach included in the experimental results.
 
@@ -521,7 +521,7 @@ The way to interpret this is that for selective queries to work effectively, eac
 Smaller is better!
 However, there are likely diminishing returns when this metric is below the number of threads DuckDB is using.
 
-> Other database systems measure a similar metric called "Clustering Depth".
+> Other database systems measure a similar metric called “Clustering Depth”.
 
 <div id="number_of_rowgroups_per_value" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
@@ -645,7 +645,7 @@ FROM rowgroup_counts('flights_hilbert', ['origin', 'dest']);
 
 The `rowgroup_id_count` column is a measurement of how many distinct row groups that a specific column value is present in, so it is an indicator of how much work DuckDB would need to do to pull all data associated with that value.
 
-> This calculation uses the [pseudo-column `rowid`]({% link docs/current/sql/statements/select.md %}#row-ids), and it requires data to have been inserted in a single batch to be perfectly accurate.
+> This calculation uses the [pseudo-column `rowid`]({% link docs/2.0/sql/statements/select.md %}#row-ids), and it requires data to have been inserted in a single batch to be perfectly accurate.
 > It is only an approximate metric when data is inserted in batches.
 
 ## Conclusion
@@ -653,7 +653,7 @@ The `rowgroup_id_count` column is a measurement of how many distinct row groups 
 When storing data in a columnar file format like a DuckDB database or a Parquet file, approximately sorting by multiple columns can lead to fast read queries across a variety of query patterns.
 Sorting using the Hilbert encoding provided high performance across multiple workloads, and sorting by year and then by Hilbert performed well when also filtering by time.
 
-Thanks to the "Number of Row Groups per Value" calculation, we can measure the sortedness of any table by any column, and it was predictive of the experimental performance we observed.
+Thanks to the “Number of Row Groups per Value” calculation, we can measure the sortedness of any table by any column, and it was predictive of the experimental performance we observed.
 This way we can experiment with different sorting approaches and quickly forecast their effectiveness, without having to benchmark read workloads each time.
 
 Using these approaches can greatly speed up dashboard interactivity when users are unpredictable (which we always are!).

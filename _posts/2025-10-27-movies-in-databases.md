@@ -9,8 +9,9 @@ image: "/images/blog/thumbs/movies-in-databases.png"
 excerpt: "You can store and even process videos in DuckDB. In this post, we show you how."
 ---
 
-<p style="text-align: right"><i>“Your scientists were so preoccupied with whether they could,<br/> they didn't stop to think if they should.”</i><br/>
-   Dr. Ian Malcolm, Jurassic Park (1993)</p>
+> Quote Your scientists were so preoccupied with whether they could, they didn't stop to think if they should.
+>
+> -- Dr. Ian Malcolm, Jurassic Park (1993)
 
 Here at team DuckDB, we *love* tables. Tables are a timeless elegant abstraction that precedes literature by [about a thousand years](https://www.youtube.com/watch?v=-wCzn9gKoUk). Relational tables specifically can represent *any* kind of information imaginable. But just because something *can* be done it is not always a great idea to do so. Can we build a rocket propelled by a nuclear chain reaction that irradiates the land it flies over? [Yes](https://en.wikipedia.org/wiki/Project_Pluto). Should we? Probably not.
 
@@ -18,14 +19,14 @@ Here at team DuckDB, we *love* tables. Tables are a timeless elegant abstraction
 
 Array-like data like images and videos are a *textbook example* of something that [might not benefit](https://stackoverflow.com/questions/3748/storing-images-in-db-yea-or-nay) from storing them in a database. While of course any binary data can be added to tables as `BLOB`s, there is not that much added value from it. Sure, it's harder to lose the image compared to the industry standard solution, storing a file name that points to the image. But there are not that many meaningful operations that can be done on BLOBs other than store and load. Without adding some [overhyped](https://pluralistic.net/2025/09/27/econopocalypse/) AI tech, you can't even ask the database [what the picture shows](https://xkcd.com/1425/).
 
-Array data also has its own world of highly specialized file formats and compression algorithms. Just think of the ubiquitous [MPEG-4 standard](https://en.wikipedia.org/wiki/MPEG-4) to store movies. They are approximate (not exact, lossy) formats that are designed around human perception models, which is why they can avoid storing things people do not notice. They achieve impressive compression rates, with a two hour "Full" HD movie compressing to about 2 GB using MPEG-4.
+Array data also has its own world of highly specialized file formats and compression algorithms. Just think of the ubiquitous [MPEG-4 standard](https://en.wikipedia.org/wiki/MPEG-4) to store movies. They are approximate (not exact, lossy) formats that are designed around human perception models, which is why they can avoid storing things people do not notice. They achieve impressive compression rates, with a two hour “Full” HD movie compressing to about 2 GB using MPEG-4.
 
 
 ## Ignoring the Disclaimer
 
-But what would it feel like to turn a movie into a table? (Very) deep down, a movie is just a series of fast-moving pictures ("frames"), typically at something around 25 frames per second. At that speed, our monkey-brain cannot distinguish the separate images any more and is fooled into thinking that we are watching smooth movement. Side note for the younger generations, a strip of pictures was the way we [shipped around movies](https://en.wikipedia.org/wiki/Film_stock#/media/File:ButterflyDancebis.jpg) for more than 100 years. 
+But what would it feel like to turn a movie into a table? (Very) deep down, a movie is just a series of fast-moving pictures (“frames”), typically at something around 25 frames per second. At that speed, our monkey-brain cannot distinguish the separate images any more and is fooled into thinking that we are watching smooth movement. Side note for the younger generations, a strip of pictures was the way we [shipped around movies](https://en.wikipedia.org/wiki/Film_stock#/media/File:ButterflyDancebis.jpg) for more than 100 years.
 
-So a series of pictures it is. Each picture can be further deconstructed into a two-dimensional array (a "matrix") of points, so-called "pixels". Every pixel in turn consists of three numbers, one each for the intensity of red, green and blue, or [RGB](https://en.wikipedia.org/wiki/RGB_color_model) for short. Note that we're ignoring the audio tracks in this post, but in principle it would work the exact same way, just with a different kind of intensity.
+So a series of pictures it is. Each picture can be further deconstructed into a two-dimensional array (a “matrix”) of points, so-called “pixels”. Every pixel in turn consists of three numbers, one each for the intensity of red, green, and blue, or [RGB](https://en.wikipedia.org/wiki/RGB_color_model) for short. Note that we're ignoring the audio tracks in this post, but in principle it would work the exact same way, just with a different kind of intensity.
 
 As an added complexity, the relational model (famously) [does not require](https://www.reddit.com/r/Database/comments/1l7tbrc/why_is_inherent_order_in_rdbms_so_neglected/) an absolute order of records. So all the various offsets have to be made explicit to not lose information. This of course greatly increases the size of our data set. We end up with a table that looks like this:
 
@@ -42,18 +43,18 @@ As an added complexity, the relational model (famously) [does not require](https
 |    0 |    0 |    8 |    9 |   10 |    5 |
 |    0 |    0 |    9 |    9 |   10 |    5 |
 
-We have the time offset or frame number `i`, we have `x` and `y` for the pixel position in the frame, and `r`, `g` and `b` for the color components red, green and blue. Quite involved.
+We have the time offset or frame number `i`, we have `x` and `y` for the pixel position in the frame, and `r`, `g`, and `b` for the color components red, green, and blue. Quite involved.
 
-But now the movie is just a single table. If only just we had a conventional and guaranteed total order of rows, we could in theory skip all columns except for `r`, `g` and `b`, because with a known resolution all other columns can be inferred. This is coincidentally also how actual movie data files are stored, ignoring compression. This is another reason why maybe relational tables are not the best place for a movie to live in, but if [all you have is a hammer](https://en.wikipedia.org/wiki/Law_of_the_instrument). We could also have used some more modern features of SQL and use nested fields (a `LIST` in DuckDB), but let's keep it to a table even [System R](https://en.wikipedia.org/wiki/IBM_System_R) could have dealt with.  In addition, having explicit offsets  does not require nebulous conventions or additional metadata to know along with axis order the array data was serialized. 
+But now the movie is just a single table. If only just we had a conventional and guaranteed total order of rows, we could in theory skip all columns except for `r`, `g`, and `b`, because with a known resolution all other columns can be inferred. This is coincidentally also how actual movie data files are stored, ignoring compression. This is another reason why maybe relational tables are not the best place for a movie to live in, but if [all you have is a hammer](https://en.wikipedia.org/wiki/Law_of_the_instrument). We could also have used some more modern features of SQL and use nested fields (a `LIST` in DuckDB), but let's keep it to a table even [System R](https://en.wikipedia.org/wiki/IBM_System_R) could have dealt with.  In addition, having explicit offsets  does not require nebulous conventions or additional metadata to know along with axis order the array data was serialized.
 
 
 ## Experiments
 
-To investigate this daft idea further (for [Science](https://www.ru.nl/personen/muhleisen-h)!), we convert the 1963 classic "[Charade](https://en.wikipedia.org/wiki/Charade_(1963_film))", a "romantic screwball comedy mystery film" starring Audrey Hepburn and Cary Grant to a DuckDB table. This movie was picked because it is *accidentally in the Public Domain* because a screw-up in the wording of the copyright notice (no, really). Because of this, you can actually [freely download this movie](https://archive.org/details/Charade19631280x696) from the Internet Archive.
+To investigate this daft idea further (for [Science](https://www.ru.nl/personen/muhleisen-h)!), we convert the 1963 classic [“Charade”](https://en.wikipedia.org/wiki/Charade_(1963_film)), a “romantic screwball comedy mystery film” starring Audrey Hepburn and Cary Grant to a DuckDB table. This movie was picked because it is *accidentally in the Public Domain* because a screw-up in the wording of the copyright notice (no, really). Because of this, you can actually [freely download this movie](https://archive.org/details/Charade19631280x696) from the Internet Archive.
 
 <img src="{% link images/blog/movies/charade-poster.jpg %}" width="400" />
- 
-Since we're just creating a table, we will use DuckDB's native storage format. Here is the *complete* code snippet we used to convert the movie. In fact, this code should actually be generic enough to convert anything that `ffmpeg` can read to a table. Just in case you would want to try this at home on your own movies. 
+
+Since we're just creating a table, we will use DuckDB's native storage format. Here is the *complete* code snippet we used to convert the movie. In fact, this code should actually be generic enough to convert anything that `ffmpeg` can read to a table. Just in case you would want to try this at home on your own movies.
 
 
 ```python
@@ -82,8 +83,8 @@ for i_idx, im in enumerate(vid):
     g = v[1:len(v):3]
     b = v[2:len(v):3]
 
-    con.execute('''INSERT INTO movie 
-        FROM repeat(?, ?) i -- frame offset 
+    con.execute('''INSERT INTO movie
+        FROM repeat(?, ?) i -- frame offset
         POSITIONAL JOIN   y -- temp table
         POSITIONAL JOIN   x -- temp table
         POSITIONAL JOIN   r -- numpy scan
@@ -92,9 +93,9 @@ for i_idx, im in enumerate(vid):
         ''', [i_idx, rows_per_frame])
 ```
 
-This script makes use of not just one, but (at least) *two* cool DuckDB features. First, we use so-called [replacement scans]({% link docs/current/clients/c/replacement_scans.md %}) to directly query the NumPy arrays `r`, `g`, and `b`. Note that those have not been created as tables in DuckDB nor registered in any way, but they are referenced by name in the `INSERT`. What happens here is that DuckDB inspects the Python context for the missing "tables" and finds objects with those names that it can read. The other cool feature is the [`POSITIONAL JOIN`]({% link docs/current/sql/query_syntax/from.md %}#positional-joins), which lets us stack multiple tables horizontally by position without running an actual (expensive) `JOIN`. This way, we assemble all the columns we need for a single frame in a bulk `INSERT`, which executes quite efficiently.
+This script makes use of not just one, but (at least) *two* cool DuckDB features. First, we use so-called [replacement scans]({% link docs/2.0/clients/c/replacement_scans.md %}) to directly query the NumPy arrays `r`, `g`, and `b`. Note that those have not been created as tables in DuckDB nor registered in any way, but they are referenced by name in the `INSERT`. What happens here is that DuckDB inspects the Python context for the missing “tables” and finds objects with those names that it can read. The other cool feature is the [`POSITIONAL JOIN`]({% link docs/2.0/sql/query_syntax/from.md %}#positional-joins), which lets us stack multiple tables horizontally by position without running an actual (expensive) `JOIN`. This way, we assemble all the columns we need for a single frame in a bulk `INSERT`, which executes quite efficiently.
 
-The movie file we have has a frame rate of 25 frames per second at a (DVD-ish) resolution of 720x392 pixels. The total runtime is 01:53:02.56 seconds, which comes down to 169 563 individual frames. Because we have a row for each pixel we end up with 169 563 * 720 x 392  rows, or 47 857 461 120. 47 billion rows! Finally [Big Data](https://motherduck.com/blog/big-data-is-dead/)! When stored as a DuckDB database however, the file size is "only" around 200 GB. Totally doable on a laptop!
+The movie file we have has a frame rate of 25 frames per second at a (DVD-ish) resolution of 720x392 pixels. The total runtime is 01:53:02.56 seconds, which comes down to 169 563 individual frames. Because we have a row for each pixel we end up with 169 563 * 720 x 392  rows, or 47 857 461 120. 47 billion rows! Finally [Big Data](https://motherduck.com/blog/big-data-is-dead/)! When stored as a DuckDB database however, the file size is “only” around 200 GB. Totally doable on a laptop!
 
 DuckDB's [lightweight compression]({% post_url 2022-10-28-lightweight-compression %}) performs quite well here, given that in a naive binary format we would have to store at least 15 bytes per row. If we multiply that with the row count (47 billion, remember) we would end up at around 700 GB in storage for this hypothetical naive format.
 
@@ -124,7 +125,7 @@ img.save(f'frame.png')
 
 <img src="{% link images/blog/movies/frame.png %}" width="800" />
 
-And voila, we can see a wonderful frame with Audrey and Cary appear. This trick can also be used to create a sequence of pictures and write them to a MPEG-4 file again using – for example – the `moviepy` library. 
+And voila, we can see a wonderful frame with Audrey and Cary appear. This trick can also be used to create a sequence of pictures and write them to a MPEG-4 file again using – for example – the `moviepy` library.
 
 But now that we have a table, we can have some fun with it. Let's do some basic exploration first: we start with `DESCRIBE`, which basically tells us the schema. We knew this of course.
 
@@ -172,14 +173,14 @@ This one is admittedly a bit of a flex. DuckDB can compute elaborate summary sta
 |           b | UTINYINT    |    0 |    255 |           252 | 43.249715985643995 |  38.39218963268899 |    16 |    28 |     61 | 47857461120 |            0.00 |
 
 
-Since we're basically storing a lot of colors, just how many different combinations of red, green and blue are there, DuckDB?
+Since we're basically storing a lot of colors, just how many different combinations of red, green, and blue are there, DuckDB?
 
 ```sql
 FROM (FROM movie SELECT DISTINCT r, g, b)
 SELECT count(*);
 ```
 
-Any seasoned data engineer would rightfully caution you to run a `DISTINCT` on this many rows. There have just been too many production outages caused by overflowing aggregations. But thanks to DuckDB's [larger-than-memory aggregate hash table]({% post_url 2024-03-29-external-aggregation %}), we can confidently issue this query. We even get a nice progress bar and (since 1.4.0) a surprisingly accurate estimate of how long the query will take. 
+Any seasoned data engineer would rightfully caution you to run a `DISTINCT` on this many rows. There have just been too many production outages caused by overflowing aggregations. But thanks to DuckDB's [larger-than-memory aggregate hash table]({% post_url 2024-03-29-external-aggregation %}), we can confidently issue this query. We even get a nice progress bar and (since 1.4.0) a surprisingly accurate estimate of how long the query will take.
 
 | count_star() |
 | -----------: |

@@ -17,7 +17,7 @@ tag: release
 
 The DuckDB team is happy to announce the latest DuckDB release (0.8.0). This release is named “Fulvigula” after the [Mottled Duck](https://en.wikipedia.org/wiki/Mottled_duck) (Anas Fulvigula) native to the Gulf of Mexico.
 
-To install the new version, please visit the [installation guide]({% link install/index.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.8.0).
+To install the new version, please visit the [installation guide]({% link docs/2.0/installation.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.8.0).
 
 ## What's New in 0.8.0
 
@@ -43,7 +43,7 @@ SET integer_division = true;
 SET default_null_order = 'NULLS_FIRST';
 ```
 
-[**Division Operator**](https://github.com/duckdb/duckdb/pull/7082). The division operator `/` will now always perform a floating point division even with integer parameters. The new operator `//` retains the old semantics and can be used to perform integer division. This makes DuckDB's division operator less error prone for beginners, and consistent with the division operator in Python 3 and other systems in the OLAP space like Spark, Snowflake and BigQuery.
+[**Division Operator**](https://github.com/duckdb/duckdb/pull/7082). The division operator `/` will now always perform a floating point division even with integer parameters. The new operator `//` retains the old semantics and can be used to perform integer division. This makes DuckDB's division operator less error prone for beginners, and consistent with the division operator in Python 3 and other systems in the OLAP space like Spark, Snowflake, and BigQuery.
 
 ```sql
 SELECT 42 / 5, 42 // 5;
@@ -81,7 +81,7 @@ PIVOT sales ON year USING sum(amount);
 | ---: | ---: |
 |   84 |  100 |
 
-The [documentation contains more examples]({% link docs/current/sql/statements/pivot.md %}).
+The [documentation contains more examples]({% link docs/2.0/sql/statements/pivot.md %}).
 
 [**ASOF Joins for Time Series**](https://github.com/duckdb/duckdb/pull/6719). When joining time series data with background fact tables, the timestamps often do not exactly match. In this case it is often desirable to join rows so that the timestamp is joined with the *nearest timestamp*. The ASOF join can be used for this purpose – it performs a fuzzy join to find the closest join partner for each row instead of requiring an exact match.
 
@@ -99,7 +99,7 @@ FROM a ASOF JOIN b ON a.ts >= b.ts;
 | 2023-05-15 10:31:00 | 2023-05-15 10:30:00 |
 | 2023-05-15 11:31:00 | 2023-05-15 11:30:00 |
 
-Please [refer to the documentation]({% link docs/current/guides/sql_features/asof_join.md %}) for a more in-depth explanation.
+Please [refer to the documentation]({% link docs/2.0/guides/sql_features/asof_join.md %}) for a more in-depth explanation.
 
 ## Data Integration Improvements
 
@@ -115,7 +115,7 @@ CREATE TABLE lineitem AS FROM lineitem.csv;
 | -----: | -----: |
 |  4.1 s |  1.2 s |
 
-**Parallel [Parquet](https://github.com/duckdb/duckdb/pull/7375), [CSV and JSON Writing](https://github.com/duckdb/duckdb/pull/7368)**. This release includes support for parallel *order-preserving* writing of Parquet, CSV and JSON files. As a result, writing to these file formats is parallel by default, also without disabling insertion order preservation, and writing to these formats is greatly sped up.
+**Parallel [Parquet](https://github.com/duckdb/duckdb/pull/7375), [CSV, and JSON Writing](https://github.com/duckdb/duckdb/pull/7368)**. This release includes support for parallel *order-preserving* writing of Parquet, CSV, and JSON files. As a result, writing to these file formats is parallel by default, also without disabling insertion order preservation, and writing to these formats is greatly sped up.
 
 ```sql
 COPY lineitem TO 'lineitem.csv';
@@ -135,7 +135,7 @@ COPY lineitem TO 'lineitem.json';
 FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 ```
 
-[The documentation has been updated]({% link docs/current/data/multiple_files/overview.md %}) with various examples of this syntax.
+[The documentation has been updated]({% link docs/2.0/data/multiple_files/overview.md %}) with various examples of this syntax.
 
 ## Storage Improvements
 
@@ -166,7 +166,7 @@ print(res)
 # [(datetime.date(2019, 5, 15),)]
 ```
 
-See the [documentation]({% link docs/current/clients/python/function.md %}) for more information.
+See the [documentation]({% link docs/2.0/clients/python/function.md %}) for more information.
 
 [**Arrow Database Connectivity Support (ADBC)**](https://github.com/duckdb/duckdb/pull/7086). ADBC is a database API standard for database access libraries that uses Apache Arrow to transfer query result sets and to ingest data. Using Arrow for this is particularly beneficial for columnar data management systems which traditionally suffered a performance hit by emulating row-based APIs such as JDBC/ODBC. From this release, DuckDB natively supports ADBC. We’re happy to be one of the first systems to offer native support, and DuckDB’s in-process design fits nicely with ADBC.
 

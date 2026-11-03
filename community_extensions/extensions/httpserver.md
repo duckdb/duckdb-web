@@ -6,18 +6,7 @@ excerpt: |
   DuckDB HTTP API Server Extension
 
 docs:
-  extended_description: "<img src=\"https://github.com/user-attachments/assets/46a5c546-7e9b-42c7-87f4-bc8defe674e0\"\
-    \ width=250 />\n\n# DuckDB HTTP Server Extension\nThis extension transforms **DuckDB**\
-    \ instances into tiny multi-player **HTTP OLAP API** services.<br>\nSupports Authentication\
-    \ _(Basic Auth or X-Token)_ and includes the _play_ SQL user interface.\n\n###\
-    \ Features\n\n- Turn any [DuckDB](https://duckdb.org) instance into an **HTTP\
-    \ OLAP API** Server\n- Use the embedded **Web User Interface** to query and visualize\
-    \ data\n- Work with local and remote datasets including [MotherDuck](https://motherduck.com)\
-    \ \U0001F424\n- _100% Opensource, ready to use and extend by the Community!_\n\
-    \n> This extension is experimental and potentially unstable. Use at your own risk.\n\
-    \n> This DuckDB extension was created by Query.Farm, where we develop and maintain\
-    \ many extensions that expand DuckDB\u2019s capabilities by connecting it to new\
-    \ data sources, formats, and features."
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/httpserver/).
   hello_world: "-- Start a DuckDB HTTP API Server with parameters\nD SELECT httpserve_start('0.0.0.0',\
     \ 9999, 'user:pass');\n\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
     \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
@@ -62,15 +51,31 @@ extension:
   version: '20260707'
 repo:
   github: Query-farm/httpserver
-  ref: ff40b661c5415359df80a3f67fb0cf78962e0c34
+  ref: 647d099778dac1fced7d442b7f46c75413c7d8a3
+  variegata: bb04a75a66c80b29c7ef8fccaff9dbb40b7b9f86
 
 extension_star_count: 285
 extension_star_count_pretty: 285
-extension_download_count: 4319
-extension_download_count_pretty: 4.3k
+extension_download_count: 25179
+extension_download_count_pretty: 25.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -88,15 +93,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|  function_name  | function_type | description | comment | examples |
-|-----------------|---------------|-------------|---------|----------|
-| httpserve_start | scalar        | NULL        | NULL    |          |
-| httpserve_stop  | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

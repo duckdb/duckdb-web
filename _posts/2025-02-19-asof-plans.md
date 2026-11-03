@@ -9,8 +9,9 @@ thumb: "/images/blog/thumbs/asof-join.svg"
 image: "/images/blog/thumbs/asof-join.png"
 ---
 
-<p>“I love it when a plan comes together.”<br/>
-  — Hannibal Smith, <cite>The A-Team</cite></p>
+> Quote I love it when a plan comes together.
+>
+> -- Hannibal Smith, *The A-Team*
 
 ## Introduction
 
@@ -31,7 +32,7 @@ The superpower of SQL is that it is _declarative:_
 you tell us _what_ you want and we figure out an efficient _how._
 By allowing you to say you want an AsOf join, we can think about how to get you results faster!
 
-Still, the [AsOf operator]({% link docs/current/sql/query_syntax/from.md %}#as-of-joins) has to do a lot of work.
+Still, the [AsOf operator]({% link docs/2.0/sql/query_syntax/from.md %}#as-of-joins) has to do a lot of work.
 Namely:
 
 * Read all the data in the right side (lookup) table
@@ -86,8 +87,8 @@ you know that the phrase “eliminate the duplicates” means `GROUP BY`!
 So to eliminate the duplicates, we want to add an aggregation operator onto the output.
 The tricky part is that we want to keep only the matched values that have the “largest” times.
 Fortunately, DuckDB has a pair of aggregate functions that do just that:
-[`arg_max`]({% link docs/current/sql/functions/aggregates.md %}#arg_maxarg-val) and
-[`arg_min`]({% link docs/current/sql/functions/aggregates.md %}#arg_minarg-val)
+[`arg_max`]({% link docs/2.0/sql/functions/aggregates.md %}#arg_maxarg-val) and
+[`arg_min`]({% link docs/2.0/sql/functions/aggregates.md %}#arg_minarg-val)
 (also called `max_by` and `min_by`).
 
 That takes care of the fields from the lookup table, but what about the fields from the small table?
@@ -102,7 +103,7 @@ but that could be problematic if there are duplicate lookup times
 Instead, we need to have a unique identifier for each row being looked up.
 The simplest way to do this is to use the
 [_streaming window operator_]({% post_url 2025-02-14-window-flying %})
-with the [`row_number()` window function]({% link docs/current/sql/functions/window_functions.md %}#row_numberorder-by-ordering).
+with the [`row_number()` window function]({% link docs/2.0/sql/functions/window_functions.md %}#row_numberorder-by-ordering).
 We then group on this row number.
 
 ## Coming Together
@@ -149,7 +150,7 @@ for a matrix of the following values:
 
 * Prices – 100K to 1B rows in steps of 10×;
 * Time – 1 to 2048 rows in steps of 2× (until it got too slow);
-* Threads – 36, 18 and 9;
+* Threads – 36, 18, and 9;
 
 Here are the results:
 
@@ -264,7 +265,7 @@ The new AsOf Loop Join plan feature only covers a common but very specific situa
 and the standard operator could be made a lot more efficient if it knew that the data was already sorted.
 This is often the case, but we do not yet have the ability to track partitioning and ordering between operators.
 Tracking that kind of metadata would be very useful for speeding up a large number of operations,
-including sorting (!), partitioned aggregation, windowing, AsOf joins and merge joins.
+including sorting (!), partitioned aggregation, windowing, AsOf joins, and merge joins.
 This is work we are very interested in, so stay tuned!
 
 ## Conclusion

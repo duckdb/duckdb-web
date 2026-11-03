@@ -5,15 +5,15 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-4-0-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-0-lts.png"
-excerpt: "We're releasing DuckDB version 1.4.0, codenamed “Andium”. This is an LTS release with one year of community support, and it packs several new features including database encryption, the MERGE statement and Iceberg writes."
+excerpt: "We're releasing DuckDB version 1.4.0, codenamed “Andium”. This is an LTS release with one year of community support, and it packs several new features including database encryption, the MERGE statement, and Iceberg writes."
 tag: release
 ---
 
-We are proud to release DuckDB v1.4.0, named “Andium” after the _Andean teal_ (Anas andium), which lives in the Andean highlands of Colombia, Venezuela and Ecuador.
+We are proud to release DuckDB 1.4.0, named “Andium” after the _Andean teal_ (Anas andium), which lives in the Andean highlands of Colombia, Venezuela, and Ecuador.
 
-In this blog post, we cover the most important updates for this release around support, features and extensions. DuckDB is moving rather quickly, and we could cover only a small fraction of the changes in this release. For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.0).
+In this blog post, we cover the most important updates for this release around support, features, and extensions. DuckDB is moving rather quickly, and we could cover only a small fraction of the changes in this release. For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.0).
 
-> To install the new version, please visit the [installation page]({% link install/index.html %}#version=lts). Note that it can take a few days to release some client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
+> To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}#version=lts). Note that it can take a few days to release some client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
 ## Long-Term Support (LTS) Edition
 
@@ -22,7 +22,6 @@ In the past, we would automatically deprecate old DuckDB versions whenever the n
 
 Starting with this release, every _other_ DuckDB version is going to be a Long-Term Support (LTS) edition.
 For LTS DuckDB versions, [community support](https://ducklabs.com/community_support_policy/) will last a year after the release (for now).
-[DuckLabs](https://ducklabs.com/) is also starting to offer support for older LTS versions after their community support has expired.
 
 ![DuckDB LTS support](/images/blog/lts-support-light.svg){: .lightmode-img }
 ![DuckDB LTS support](/images/blog/lts-support-dark.svg){: .darkmode-img }
@@ -78,8 +77,8 @@ Click to see the end-of-life (EOL) dates for DuckDB releases.
 
 ### Database Encryption
 
-Being able to encrypt DuckDB database files has been a [long-standing feature request](https://github.com/duckdb/duckdb/discussions/4512). Starting with this release, DuckDB supports encryption of its files. Encryption keys are given using the `ENCRYPTION_KEY` parameter 
-to [`ATTACH`]({% link docs/current/sql/statements/attach.md %}), like so:
+Being able to encrypt DuckDB database files has been a [long-standing feature request](https://github.com/duckdb/duckdb/discussions/4512). Starting with this release, DuckDB supports encryption of its files. Encryption keys are given using the `ENCRYPTION_KEY` parameter
+to [`ATTACH`]({% link docs/2.0/sql/statements/attach.md %}), like so:
 
 ```sql
 ATTACH 'encrypted.db' AS enc_db (ENCRYPTION_KEY 'quack_quack');
@@ -93,7 +92,7 @@ Encryption support in DuckDB was implemented by [Lotte Felius (@ccfelius)](https
 
 ### `MERGE` Statement
 
-DuckDB now supports [`MERGE INTO`]({% link docs/current/sql/statements/merge_into.md %}) as an alternative to [`INSERT INTO ... ON CONFLICT`]({% link docs/current/sql/statements/insert.md %}#on-conflict-clause).
+DuckDB now supports [`MERGE INTO`]({% link docs/2.0/sql/statements/merge_into.md %}) as an alternative to [`INSERT INTO ... ON CONFLICT`]({% link docs/2.0/sql/statements/insert.md %}#on-conflict-clause).
 `MERGE INTO` does not require a primary key since it works on any custom merge condition. This is a very common statement in OLAP systems that do not support primary keys but still want to support upserting (i.e., `UPDATE` plus `INSERT`) functionality.
 
 In this example we use a simple condition matching on a key and we call the `RETURNING` statement to get a summary of the updated and inserted rows.
@@ -146,7 +145,7 @@ WITH deletes(item_id, delete_threshold) AS (VALUES (10, 3000))
 
 ### Iceberg Writes
 
-The [duckdb-iceberg]({% link docs/current/core_extensions/iceberg/overview.md %}) extension now **supports writing to Iceberg**.
+The [duckdb-iceberg]({% link docs/2.0/core_extensions/iceberg/overview.md %}) extension now **supports writing to Iceberg**.
 
 <details markdown='1'>
 <summary markdown='span'>
@@ -241,7 +240,7 @@ A separate blog post will be coming.
 
 ## Performance and Optimizations
 
-DuckDB v1.4.0 received a number of performance optimizations.
+DuckDB 1.4.0 received a number of performance optimizations.
 
 ### Checkpointing In-Memory Tables
 
@@ -269,20 +268,20 @@ This feature was [implemented](https://github.com/duckdb/duckdb/pull/17459) by [
 
 ### Additional Optimizations
 
-DuckBB v1.4.0 fixes some [scaling issues](https://github.com/duckdb/duckdb/pull/17985), supports [caching for hashes of string dictionaries](https://github.com/duckdb/duckdb/pull/18580) and has several [aggregation optimizations](https://github.com/duckdb/duckdb/pull/17718).
+DuckBB v1.4.0 fixes some [scaling issues](https://github.com/duckdb/duckdb/pull/17985), supports [caching for hashes of string dictionaries](https://github.com/duckdb/duckdb/pull/18580), and has several [aggregation optimizations](https://github.com/duckdb/duckdb/pull/17718).
 
-## Distribution 
+## Distribution
 
 ### macOS Notarization
 
-macOS has a fairly advanced model to ensure system integrity built around cryptographic signatures along with so-called “[notarization](https://developer.apple.com/documentation/Security/notarizing-macos-software-before-distribution)” by Apple. We had been signing our binaries [for about two years already](https://github.com/duckdb/duckdb/pull/7484).
+macOS has a fairly advanced model to ensure system integrity built around cryptographic signatures along with so-called [“notarization”](https://developer.apple.com/documentation/Security/notarizing-macos-software-before-distribution) by Apple. We had been signing our binaries [for about two years already](https://github.com/duckdb/duckdb/pull/7484).
 Starting from this release, the DuckDB command line utility (`duckdb`) and the dynamic library `libduckdb...sdylib` are _released with this notarization_. This will reduce the amount of complaints when using web browsers to download our binaries. Unfortunately, macOS does not yet fully support notarization of command line utility, so the “open with double click” use case will still have to wait. The recommended path to install the CLI on macOS is still our install script:
 
 ```batch
 curl https://install.duckdb.org | bash
 ```
 
-### Moved Python Integration to its Own Repository
+### Moved Python Integration to Its Own Repository
 
 We have been slowly moving language integrations (“clients”) into their own repositories from `duckdb/duckdb`. For this release, we moved the Python client to its [own repository](https://github.com/duckdb/duckdb-python), `duckdb/duckdb-python`. Please make sure to [file issues](https://github.com/duckdb/duckdb-python/issues/new) related to the Python client there.
 

@@ -4,7 +4,7 @@ title: "DuckDB-Wasm: Efficient Analytical SQL in the Browser"
 authors:
   - André Kohn
   - Dominik Moritz
-excerpt: "[DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) is an in-process analytical SQL database for the browser. It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js. You can try it at [shell.duckdb.org](https://shell.duckdb.org) or on [Observable](https://observablehq.com/@cmudig/duckdb)."
+excerpt: "[DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) is an in-process analytical SQL database for the browser. It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV, and JSON files backed by Filesystem APIs or HTTP requests, and has been tested with Chrome, Firefox, Safari, and Node.js. You can try it at [shell.duckdb.org](https://shell.duckdb.org) or on [Observable](https://observablehq.com/@cmudig/duckdb)."
 tag: using-duckdb
 ---
 
@@ -33,12 +33,12 @@ The processing capabilities of browsers were boosted tremendously 4 years ago wi
 > WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.
 >
 > The Wasm stack machine is designed to be encoded in a size- and load-time efficient binary format. WebAssembly aims to execute at native speed by taking advantage of common hardware capabilities available on a wide range of platforms.
-> 
+>
 > (ref: [https://webassembly.org/](https://webassembly.org/))
 
-Four years later, the WebAssembly revolution is in full progress with first implementations being shipped in four major browsers. It has already brought us game engines, [entire IDEs](https://blog.stackblitz.com/posts/introducing-webcontainers/) and even a browser version of [Photoshop](https://web.dev/ps-on-the-web/). Today, we join the ranks with a first release of the npm library [@duckdb/duckdb-wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm).
+Four years later, the WebAssembly revolution is in full progress with first implementations being shipped in four major browsers. It has already brought us game engines, [entire IDEs](https://blog.stackblitz.com/posts/introducing-webcontainers/), and even a browser version of [Photoshop](https://web.dev/ps-on-the-web/). Today, we join the ranks with a first release of the npm library [@duckdb/duckdb-wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm).
 
-As an in-process analytical database, DuckDB has the rare opportunity to significantly speed up OLAP workloads in the browser. We believe that there is a need for a comprehensive and self-contained data analysis library. DuckDB-wasm automatically offloads your queries to dedicated worker threads and reads Parquet, CSV and JSON files from either your local filesystem or HTTP servers driven by plain SQL input.
+As an in-process analytical database, DuckDB has the rare opportunity to significantly speed up OLAP workloads in the browser. We believe that there is a need for a comprehensive and self-contained data analysis library. DuckDB-wasm automatically offloads your queries to dedicated worker threads and reads Parquet, CSV, and JSON files from either your local filesystem or HTTP servers driven by plain SQL input.
 In this blog post, we want to introduce the library and present challenges on our journey towards a browser-native OLAP database.
 
 *DuckDB-Wasm is not yet stable. You will find rough edges and bugs in this release. Please share your thoughts with us [on GitHub](https://github.com/duckdb/duckdb-wasm/discussions).*
@@ -46,7 +46,7 @@ In this blog post, we want to introduce the library and present challenges on ou
 ## How to Get Data In?
 
 Let's dive into examples.
-DuckDB-Wasm provides a variety of ways to load your data. First, raw SQL value clauses like `INSERT INTO sometable VALUES (1, 'foo'), (2, 'bar')` are easy to formulate and only depend on plain SQL text. Alternatively, SQL statements like `CREATE TABLE foo AS SELECT * FROM 'somefile.parquet'` consult our integrated web filesystem to resolve `somefile.parquet` locally, remotely or from a buffer. The methods `insertCSVFromPath` and `insertJSONFromPath` further provide convenient ways to import CSV and JSON files using additional typed settings like column types. And finally, the method `insertArrowFromIPCStream` (optionally through `insertArrowTable`, `insertArrowBatches` or `insertArrowVectors`) copies raw IPC stream bytes directly into a WebAssembly stream decoder.
+DuckDB-Wasm provides a variety of ways to load your data. First, raw SQL value clauses like `INSERT INTO sometable VALUES (1, 'foo'), (2, 'bar')` are easy to formulate and only depend on plain SQL text. Alternatively, SQL statements like `CREATE TABLE foo AS SELECT * FROM 'somefile.parquet'` consult our integrated web filesystem to resolve `somefile.parquet` locally, remotely, or from a buffer. The methods `insertCSVFromPath` and `insertJSONFromPath` further provide convenient ways to import CSV and JSON files using additional typed settings like column types. And finally, the method `insertArrowFromIPCStream` (optionally through `insertArrowTable`, `insertArrowBatches`, or `insertArrowVectors`) copies raw IPC stream bytes directly into a WebAssembly stream decoder.
 
 The following example presents different options how data can be imported into DuckDB-Wasm:
 
@@ -131,7 +131,7 @@ for await (const batch of await conn.send<{ v: arrow.Int32 }>(`
     SELECT * FROM generate_series(1, 100) t(v)
 `)) {
     // ...
-} 
+}
 ```
 
 Alternatively, you can prepare statements for parameterized queries using:
@@ -155,7 +155,7 @@ DuckDB-Wasm uses [Arrow](https://arrow.apache.org) as data protocol for the data
 
 _Why not use plain Javascript objects?_
 
-WebAssembly is isolated and memory-safe. This isolation is part of it's DNA and drives fundamental design decisions in DuckDB-Wasm. For example, WebAssembly introduces a barrier towards the traditional JavaScript heap. Crossing this barrier is difficult as JavaScript has to deal with native function calls, memory ownership and serialization performance. Languages like C++ make this worse as they rely on smart pointers that are not available through the FFI. They leave us with the choice to either pass memory ownership to static singletons within the WebAssembly instance or maintain the memory through C-style APIs in JavaScript, a language that is too dynamic for sound implementations of the [RAII idiom](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization). The memory-isolation forces us to serialize data before we can pass it to the WebAssembly instance. Browsers can serialize JavaScript objects natively to and from JSON using the functions `JSON.stringify` and `JSON.parse` but this is slower compared to, for example, copying raw native arrays.
+WebAssembly is isolated and memory-safe. This isolation is part of it's DNA and drives fundamental design decisions in DuckDB-Wasm. For example, WebAssembly introduces a barrier towards the traditional JavaScript heap. Crossing this barrier is difficult as JavaScript has to deal with native function calls, memory ownership, and serialization performance. Languages like C++ make this worse as they rely on smart pointers that are not available through the FFI. They leave us with the choice to either pass memory ownership to static singletons within the WebAssembly instance or maintain the memory through C-style APIs in JavaScript, a language that is too dynamic for sound implementations of the [RAII idiom](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization). The memory-isolation forces us to serialize data before we can pass it to the WebAssembly instance. Browsers can serialize JavaScript objects natively to and from JSON using the functions `JSON.stringify` and `JSON.parse` but this is slower compared to, for example, copying raw native arrays.
 
 ## Web Filesystem
 
@@ -178,7 +178,7 @@ The following figure shows our current web filesystem in action. The sequence di
         />
 </p>
 
-Depending on the context, the Parquet file may either reside on the local device, on a remote server or in a buffer that was registered by the user upfront. We deliberately treat all three cases equally to unify the retrieval and processing of external data. This does not only simplify the analysis, it also enables more advanced features like partially consuming structured file formats. Parquet files, for example, consist of multiple row groups that store data in a column-major fashion. As a result, we may not need to download the entire file for a query but only required bytes.
+Depending on the context, the Parquet file may either reside on the local device, on a remote server, or in a buffer that was registered by the user upfront. We deliberately treat all three cases equally to unify the retrieval and processing of external data. This does not only simplify the analysis, it also enables more advanced features like partially consuming structured file formats. Parquet files, for example, consist of multiple row groups that store data in a column-major fashion. As a result, we may not need to download the entire file for a query but only required bytes.
 
 A query like `SELECT count(*) FROM parquet_scan(...)`, for example, can be evaluated on the file metadata alone and will finish in milliseconds even on remote files that are several terabytes large. Another more general example are paging scans with `LIMIT` and `OFFSET` qualifiers such as `SELECT * FROM parquet_scan(...) LIMIT 20 OFFSET 40`, or queries with selective filter predicates where entire row groups can be skipped based on metadata statistics. These partial file reads are no groundbreaking novelty and could be implemented in JavaScript today, but with DuckDB-Wasm, these optimizations are now driven by the semantics of SQL queries instead of fine-tuned application logic.
 
@@ -190,7 +190,7 @@ WebAssembly 1.0 has landed in all major browsers. The WebAssembly Community Grou
 
 The rapid pace of this development presents challenges and opportunities for library authors. On the one hand, the different features find their way into the browsers at different speeds which leads to a fractured space of post-MVP functionality. On the other hand, features can bring flat performance improvements and are therefore indispensable when aiming for a maximum performance.
 
-The most promising feature for DuckDB-Wasm is [exception handling](https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/Exceptions.md) which is already enabled by default in Chrome 95. DuckDB and DuckDB-Wasm are written in C++ and use exceptions for faulty situations. DuckDB does not use exceptions for general control flow but to automatically propagate errors upwards to the top-level plan driver. In native environments, these exceptions are implemented as "zero-cost exceptions" as they induce no overhead until they are thrown. With the WebAssembly MVP, however, that is no longer possible as the compiler toolchain Emscripten has to emulate exceptions through JavaScript. Without WebAssembly exceptions, DuckDB-Wasm calls throwing functions through a JavaScript hook that can catch exceptions emulated through JavaScript `aborts`. An example for these hook calls is shown in the following figure. Both stack traces originate from a single paged read of a Parquet file in DuckDB-Wasm. The left side shows a stack trace with the WebAssembly MVP and requires multiple calls through the functions `wasm-to-js-i*` . The right stack trace uses WebAssembly exceptions without any hook calls.
+The most promising feature for DuckDB-Wasm is [exception handling](https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/Exceptions.md) which is already enabled by default in Chrome 95. DuckDB and DuckDB-Wasm are written in C++ and use exceptions for faulty situations. DuckDB does not use exceptions for general control flow but to automatically propagate errors upwards to the top-level plan driver. In native environments, these exceptions are implemented as “zero-cost exceptions” as they induce no overhead until they are thrown. With the WebAssembly MVP, however, that is no longer possible as the compiler toolchain Emscripten has to emulate exceptions through JavaScript. Without WebAssembly exceptions, DuckDB-Wasm calls throwing functions through a JavaScript hook that can catch exceptions emulated through JavaScript `aborts`. An example for these hook calls is shown in the following figure. Both stack traces originate from a single paged read of a Parquet file in DuckDB-Wasm. The left side shows a stack trace with the WebAssembly MVP and requires multiple calls through the functions `wasm-to-js-i*` . The right stack trace uses WebAssembly exceptions without any hook calls.
 
 <p align="center">
     <img src="{% link images/blog/wasm-eh.png %}"
@@ -200,7 +200,7 @@ The most promising feature for DuckDB-Wasm is [exception handling](https://githu
         />
 </p>
 
-This fractured feature space is a temporary challenge that will be resolved once high-impact features like exception handling, SIMD and bulk-memory operations are available everywhere. In the meantime, we will ship multiple WebAssembly modules that are compiled for different feature sets and adaptively pick the best bundle for you using dynamic browser checks.
+This fractured feature space is a temporary challenge that will be resolved once high-impact features like exception handling, SIMD, and bulk-memory operations are available everywhere. In the meantime, we will ship multiple WebAssembly modules that are compiled for different feature sets and adaptively pick the best bundle for you using dynamic browser checks.
 
 The following example shows how the asynchronous version of DuckDB-Wasm can be instantiated using either manual or JsDelivr bundles:
 
@@ -301,7 +301,7 @@ WHERE r_regionkey = n_regionkey;
 
 ## Evaluation
 
-The following table teases the execution times of some TPC-H queries at scale factor 0.5 using the libraries [DuckDB-Wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm), [sql.js](https://github.com/sql-js/sql.js/), [Arquero](https://github.com/uwdata/arquero) and [Lovefield](https://github.com/google/lovefield). You can find a more in-depth discussion with all TPC-H queries, additional scale factors and microbenchmarks on the [“DuckDB-Wasm versus X” page](https://shell.duckdb.org/versus).
+The following table teases the execution times of some TPC-H queries at scale factor 0.5 using the libraries [DuckDB-Wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm), [sql.js](https://github.com/sql-js/sql.js/), [Arquero](https://github.com/uwdata/arquero), and [Lovefield](https://github.com/google/lovefield). You can find a more in-depth discussion with all TPC-H queries, additional scale factors, and microbenchmarks on the [“DuckDB-Wasm versus X” page](https://shell.duckdb.org/versus).
 
 | Query | DuckDB-Wasm |  sql.js |  Arquero | Lovefield |
 | ----: | ----------: | ------: | -------: | --------: |
@@ -321,4 +321,4 @@ The following table teases the execution times of some TPC-H queries at scale fa
 
 ## Future Research
 
-We believe that WebAssembly unveils hitherto dormant potential for shared query processing between clients and servers. Pushing computation closer to the client can eliminate costly round-trips to the server and thus increase interactivity and scalability of in-browser analytics. We further believe that the release of DuckDB-Wasm could be the first step towards a more universal data plane spanning across multiple layers including traditional database servers, clients, CDN workers and computational storage. As an in-process analytical database, DuckDB might be the ideal driver for distributed query plans that increase the scalability and interactivity of SQL databases at low costs.
+We believe that WebAssembly unveils hitherto dormant potential for shared query processing between clients and servers. Pushing computation closer to the client can eliminate costly round-trips to the server and thus increase interactivity and scalability of in-browser analytics. We further believe that the release of DuckDB-Wasm could be the first step towards a more universal data plane spanning across multiple layers including traditional database servers, clients, CDN workers, and computational storage. As an in-process analytical database, DuckDB might be the ideal driver for distributed query plans that increase the scalability and interactivity of SQL databases at low costs.

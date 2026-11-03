@@ -360,6 +360,9 @@ $highlighting-macros$
 $endif$
 $if(tables)$
 \usepackage{longtable,booktabs,array}
+\makeatletter
+\@ifundefined{c@none}{\newcounter{none}}{} % for unnumbered tables
+\makeatother
 $if(multirow)$
 \usepackage{multirow}
 $endif$

@@ -163,7 +163,7 @@
 		height: auto;
 		backdrop-filter: blur(5px);
 		background: var(--menu-dropdown-background-color, #F2F2F2);
-		border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
+		border: 1px solid var(--border-color);
 		backdrop-filter: blur(5px);
 		border-radius: var(--page-radius-m);
 		pointer-events: none;
@@ -258,7 +258,7 @@
 		transition: all .3s;
 		padding-top: 14px;
 		background: var(--menu-dropdown-background-color, #F2F2F2);
-		border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
+		border: 1px solid var(--border-color);
 		border-radius: var(--page-radius-m);
 		opacity: 0;
 		pointer-events: none;
@@ -291,6 +291,15 @@
 		.opensearch {
 			display: none;
 		}
+
+		&.sidenav-drill .nav-row {
+			min-height: 44px;
+
+			&[aria-current="page"]::before {
+				top: 50%;
+				transform: translateY(-50%);
+			}
+		}
 	}
 	
 	body.documentation header .headerline .headercontent .landingmenu nav.mobile {
@@ -302,7 +311,7 @@
 	}
 	
 	body.documentation main .wrap {
-		padding: 15px;
+		padding: 20px 15px 15px;
 		width: 100%;
 		margin-left: 0;
 		transition: opacity 0.5s;
@@ -322,6 +331,7 @@
 			border: 0;
 		}
 		main .wrap #main_content_wrap{
+			padding-top: 0;
 			padding-right: 0;
 		}
 	}
@@ -372,7 +382,7 @@
 		margin-left: 0;
 		margin-top: 50px;
 		width: 90%;
-		border-top: 1px solid #ebebeb;
+		border-top: 1px solid var(--border-color);
 
 		div.sup {
 			position: relative;
@@ -425,7 +435,6 @@
 
 		.titlebar {
 			order: 3;
-			margin-top: 5px;
 		}
 
 		.title {
@@ -462,7 +471,6 @@
 		top: 70px;
 	}
 
-	header .headerline .headercontent .options button.mode,
 	header .headerline .headercontent .landingmenu .hamburger{
 		width: 33px;
 		height: 33px;
@@ -480,7 +488,7 @@
 	}
 
 	#duckdb_logo{
-		width: 104px;
+		--duckdb-wordmark-width: 80px;
 	}
 
 	#ducklake_logo{
@@ -543,13 +551,6 @@
 		h1, h2, h3, h4, h5{
 			overflow-wrap: break-word;
 		}
-	}
-	body.documentation main .wrap {
-		h1 code { font-size: 21px; }
-		h2 code { font-size: 19px; }
-		h3 code { font-size: 17px; }
-		h4 code { font-size: 16px; }
-		h5 code { font-size: 14px; }
 	}
 }
 
@@ -709,23 +710,8 @@
 	}
 	
 	body.installation {
-		.selection-options {
-			gap: 10px;
-	
-			.option {
-				height: 54px;
-				padding: 8px;
-	
-				.symbol {
-					width: 36px;
-					height: 36px;
-	
-					img {
-						max-width: 16px;
-						max-height: 16px;
-					}
-				}
-			}
+		.selection-foldout {
+			padding: 16px;
 		}
 	
 		.installation-instructions {
@@ -737,10 +723,6 @@
 			#result .more {
 				gap: 15px;
 			}
-		}
-	
-		.selection-head h3 .selected {
-			margin-left: 15px;
 		}
 	
 		.shainfo {
@@ -841,7 +823,7 @@
 
 	body.documentation{
 		#duckdb_logo{
-			width: 38px;
+			width: var(--duckdb-wordmark-height);
 			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' fill='none' viewBox='0 0 38 38'%3E%3Cpath fill='%230D0D0D' d='M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19Z'/%3E%3Cpath fill='%23FFF100' d='M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795ZM7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.535 7.875-7.875 0-4.341-3.534-7.876-7.875-7.876S7.172 14.66 7.172 19Z'/%3E%3C/svg%3E");
 		}
 	}
@@ -851,11 +833,11 @@
 /** TOUCH DEVICES **/
 @media (hover: none) {
 	header .headerline .headercontent .options button.mode:hover{
-		border-color: var(--menu-topmenu-searchbar-border-color) !important;
+		border-color: var(--border-color) !important;
 		color: var(--duckdb-nav-icon, #CCBD00) !important;
 	}
 	.hamburger:hover{
-		border-color: var(--menu-topmenu-searchbar-border-color) !important;
+		border-color: var(--border-color) !important;
 	}
 	.hamburger:hover .hamburger-inner,
 	.hamburger:hover .hamburger-inner:after,
@@ -864,7 +846,7 @@
 	}
 	.opensearch:hover,
 	body.documentation div.version .versiontrigger:hover{
-		border-color: var(--menu-dropdown-border-color, #333) !important;
+		border-color: var(--border-color) !important;
 		color: var(--main-text-secondary-color, #666) !important;
 	}
 	svg.anchor-icon{
