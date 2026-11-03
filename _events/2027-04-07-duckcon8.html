@@ -12,8 +12,6 @@ body_class: duckcon
 force_dark: true
 duckcon_register_url: https://luma.com/3bjl8lw4
 duckcon_menu:
-- title: Venue
-  anchor: venue
 location: "De Wester, Amsterdam"
 description: "We're hosting DuckCon #8 in our home town of Amsterdam on Wednesday, April 7."
 toc: false
@@ -75,7 +73,7 @@ redirect_from:
         <thead>
           <tr>
             <th></th>
-            <th class="title-1 table-title">{{ session.title }}</th>
+            <th class="headline-3 table-title">{{ session.title }}</th>
             <th></th>
             <th></th>
             <th></th>
@@ -192,7 +190,7 @@ redirect_from:
         {% for venue_access in site.data.duckcon7.venue_access %}
           <li class="featurebox">
             <img class="icon" src="{{ venue_access.icon }}" alt="{{ venue_access.title }}" />
-            <h3 class="title-1">{{ venue_access.title }}</h3>
+            <h3 class="headline-3">{{ venue_access.title }}</h3>
             <p class="body-small text-secondary-color">{{ venue_access.description }}</p>
             <a href="{{ venue_access.url }}" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
           </li>

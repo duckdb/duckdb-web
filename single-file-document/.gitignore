@@ -2,6 +2,11 @@
 duckdb-docs.md
 duckdb-docs.tex
 duckdb-docs.pdf
+duckdb-docs-cleaned.md
+duckdb-blog.md
+duckdb-blog.tex
+duckdb-blog.pdf
+duckdb-blog-cleaned.md
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

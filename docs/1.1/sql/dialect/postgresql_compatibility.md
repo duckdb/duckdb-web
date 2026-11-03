@@ -185,7 +185,7 @@ For instruction on reclaiming space, refer to the [“Reclaiming space” page](
 
 ### `regexp_extract` Function
 
-Unlike PostgreSQL's `regexp_substr` function, DuckDB's `regexp_extract` returns empty strings instead of `NULL`s when there is no match. 
+Unlike PostgreSQL's `regexp_substr` function, DuckDB's `regexp_extract` returns empty strings instead of `NULL`s when there is no match.
 
 ### `to_date` Function
 

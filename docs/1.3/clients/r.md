@@ -4,7 +4,7 @@ layout: docu
 title: R Client
 ---
 
-> The latest version of the DuckDB R client is {{ site.current_duckdb_r_version }}.
+> The latest version of the DuckDB R client is {{ site.maintained_duckdb_r_version }}.
 
 ## Installation
 
@@ -16,7 +16,7 @@ The DuckDB R client can be installed using the following command:
 install.packages("duckdb")
 ```
 
-Please see the [installation page]({% link install/index.html %}?environment=r) for details.
+Please see the [installation page]({% link docs/2.0/installation.html %}?environment=r) for details.
 
 ### `duckplyr`: dplyr Client
 

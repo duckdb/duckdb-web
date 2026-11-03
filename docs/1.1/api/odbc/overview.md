@@ -3,7 +3,6 @@ github_repository: https://github.com/duckdb/duckdb-odbc
 layout: docu
 redirect_from:
 - /docs/archive/1.1/api/odbc
-- /docs/archive/1.1/api/odbc/
 title: ODBC API Overview
 ---
 
@@ -21,4 +20,4 @@ The DM maps user application calls of ODBC functions to the correct ODBC driver 
 
 DuckDB supports the ODBC version 3.0 according to the [Core Interface Conformance](https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/core-interface-conformance?view=sql-server-ver15).
 
-The ODBC driver is available for all operating systems. Visit the [installation page]({% link install/index.html %}) for direct links.
+The ODBC driver is available for all operating systems. Visit the [installation page]({% link docs/2.0/installation.html %}) for direct links.

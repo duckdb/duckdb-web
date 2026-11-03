@@ -6,4 +6,6 @@ set -xeuo pipefail
 cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 python3 concatenate_to_single_file.py
-pandoc --defaults pandoc-configuration.yaml --to=latex --output duckdb-docs.tex
+for document in duckdb-docs duckdb-blog; do
+    pandoc --defaults pandoc-configuration.yaml --metadata-file metadata/${document}.yaml --to=latex --output ${document}.tex ${document}.md
+done

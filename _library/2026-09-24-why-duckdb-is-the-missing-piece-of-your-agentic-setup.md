@@ -3,6 +3,8 @@ layout: post
 title: "Why DuckDB Is the Missing Piece of Your Agentic Setup"
 authors:
   - Christophe Blefari
+thumb: "/images/library/thumbs/2026-09-24-paris-meetup-christophe-blefari.png"
+image: "/images/library/thumbs/2026-09-24-paris-meetup-christophe-blefari.png"
 tag: talk
 length: "20 min"
 category: community
@@ -21,4 +23,4 @@ venue: "DuckDB Paris Meetup"
 
 ## Abstract
 
-Christophe Blefari, co-founder of Nao Labs, explores why DuckDB is becoming an important building block for AI agents and agentic data architectures. The talk explains how DuckDB can help agents access, prepare and analyze data efficiently, and how it fits into the emerging stack for reliable agentic analytics.
+Christophe Blefari, co-founder of Nao Labs, explores why DuckDB is becoming an important building block for AI agents and agentic data architectures. The talk explains how DuckDB can help agents access, prepare, and analyze data efficiently, and how it fits into the emerging stack for reliable agentic analytics.

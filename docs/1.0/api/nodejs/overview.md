@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/archive/1.0/api/nodejs
-- /docs/archive/1.0/api/nodejs/
 title: Node.js API
 ---
 

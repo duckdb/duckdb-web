@@ -24,7 +24,7 @@ ATTACH 'https://blobs.duckdb.org/data/finbench.duckdb' AS finbench;
 USE finbench;
 ```
 
-> To follow along with the examples in this post, it is recommended to use DuckDB v1.4.1.
+> To follow along with the examples in this post, it is recommended to use DuckDB 1.4.1.
 
 In this blog post we will use a subset of the dataset with tables for `Person`, `Account`, and the `AccountTransferAccount` table that links them.
 
@@ -87,7 +87,7 @@ EDGE TABLES (
 );
 ```
 
-During the creation of the property graph, we make a clear distinction between `VERTEX` tables and `EDGE` tables. For `VERTEX` tables, we only have to specify the name of the table. For `EDGE` tables, a little more work is required since for both the `SOURCE` and the `DESTINATION`, we need to specify the column in the edge table that forms the key for the `SOURCE` or `DESTINATION`. This is the same principle as defining a [`FOREIGN KEY` constraint]({% link docs/current/sql/constraints.md %}#foreign-keys), linking our edge table back to the node tables it connects.
+During the creation of the property graph, we make a clear distinction between `VERTEX` tables and `EDGE` tables. For `VERTEX` tables, we only have to specify the name of the table. For `EDGE` tables, a little more work is required since for both the `SOURCE` and the `DESTINATION`, we need to specify the column in the edge table that forms the key for the `SOURCE` or `DESTINATION`. This is the same principle as defining a [`FOREIGN KEY` constraint]({% link docs/2.0/sql/constraints.md %}#foreign-keys), linking our edge table back to the node tables it connects.
 The `LABEL` clause gives a clean name to the relationship type. While our table is named `AccountTransferAccount`, the edges within it represent a `Transfer` relationship. This is the name we'll use in our graph queries.
 
 Now that we have created our property graph, we are ready to investigate the financial data and uncover its secrets!
@@ -206,7 +206,7 @@ The results confirm our suspicions. Our query found multiple non-obvious paths b
 
 Each row represents a hidden chain of transactions connecting two of the person's accounts. More interestingly, we can see clear cyclical patterns. For instance, the query found a 9-step path from account `4753267931712848113` to `4769874955338776819`, and another 9-step path flowing in the opposite direction. This suggests a sophisticated and intentional effort to move money between accounts, a strong indicator that warrants further investigation.
 
-## Doing it the Old-Fashioned Way
+## Doing It the Old-Fashioned Way
 
 Earlier, we challenged you to think about how you would find these ownership cycles using traditional SQL. As promised, here is the answer.
 

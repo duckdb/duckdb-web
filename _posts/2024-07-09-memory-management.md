@@ -21,7 +21,7 @@ In this blog post we will cover these aspects of memory management within DuckDB
 
 ## Streaming Execution
 
-DuckDB uses a streaming execution engine to process queries. Data sources, such as tables, CSV files or Parquet files, are never fully materialized in memory. Instead, data is read and processed one chunk at a time. For example, consider the execution of the following query:
+DuckDB uses a streaming execution engine to process queries. Data sources, such as tables, CSV files, or Parquet files, are never fully materialized in memory. Instead, data is read and processed one chunk at a time. For example, consider the execution of the following query:
 
 ```sql
 SELECT
@@ -31,7 +31,7 @@ FROM 'hits.csv'
 GROUP BY UserAgent;
 ```
 
-Instead of reading the entire CSV file at once, DuckDB reads data from the CSV file in pieces, and computes the aggregation incrementally using the data read from those pieces. This happens continuously until the entire CSV file is read, at which point the entire aggregation result is computed. 
+Instead of reading the entire CSV file at once, DuckDB reads data from the CSV file in pieces, and computes the aggregation incrementally using the data read from those pieces. This happens continuously until the entire CSV file is read, at which point the entire aggregation result is computed.
 
 <img src="{% link images/blog/streamingexecution.png %}"
     alt="DuckDB Streaming Execution"
@@ -46,7 +46,7 @@ While streaming execution is conceptually simple, it is powerful, and is suffici
 * Reading data from one file and writing to another (e.g., reading from CSV and writing to Parquet)
 * Computing a Top-N over the data (where N is small)
 
-Note that nothing needs to be done to enable streaming execution – DuckDB always processes queries in this manner. 
+Note that nothing needs to be done to enable streaming execution – DuckDB always processes queries in this manner.
 
 ## Intermediate Spilling
 

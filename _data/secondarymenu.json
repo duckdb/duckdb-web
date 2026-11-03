@@ -13,7 +13,7 @@
             },
             {
               "page": "Installation",
-              "url": "/install"
+              "url": "/docs/2.0/installation"
             },
             {
               "page": "Quack Remote Protocol",
@@ -56,10 +56,6 @@
             {
               "page": "Events",
               "url": "/events"
-            },
-            {
-              "page": "Webshop",
-              "url": "https://shop.duckdb.org"
             },
             {
               "page": "Design",

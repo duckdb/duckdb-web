@@ -3,7 +3,6 @@ github_repository: https://github.com/duckdb/duckdb-wasm
 layout: docu
 redirect_from:
 - /docs/archive/1.0/api/wasm
-- /docs/archive/1.0/api/wasm/
 title: DuckDB Wasm
 ---
 

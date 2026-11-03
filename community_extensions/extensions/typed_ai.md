@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: typed_ai
   description: Use TypeSafe Jev (or another AI, even a free one on your laptop) to sort, filter and check the text in your tables. Get yes or no, pick one, or a rating, see how sure it is, and never spend more than your limit.
-  version: 0.1.0
+  version: 0.1.1
   language: C++
   build: cmake
   license: MIT
@@ -18,8 +18,8 @@ extension:
 
 repo:
   github: hfmsio/duckdb-typed-ai
-  ref: d99fa461d5722e48136277ac788068e7fad6a1b9
-  ref_next: d99fa461d5722e48136277ac788068e7fad6a1b9
+  ref: 00d03a08936f2edf86f72cd77a8986b500796506
+  ref_next: 00d03a08936f2edf86f72cd77a8986b500796506
 
 docs:
   hello_world: |
@@ -50,13 +50,13 @@ docs:
     -- Odds from 0 to 1
     SELECT item, typed_prob(item, 'the owner needs this back today') AS urgent
     FROM found ORDER BY urgent DESC;
-    -- insulin pen in a blue case                  0.59
-    -- laptop with a school sticker                0.54
-    -- wedding ring wrapped in a napkin            0.54
-    -- half-eaten sandwich                         0.37
-    -- broken umbrella                             0.34
-    -- cello in a hard case                        0.31
-    -- box of live crickets labelled lizard food   0.30
+    -- insulin pen in a blue case                  0.64
+    -- wedding ring wrapped in a napkin            0.59
+    -- laptop with a school sticker                0.53
+    -- box of live crickets labelled lizard food   0.36
+    -- broken umbrella                             0.36
+    -- half-eaten sandwich                         0.27
+    -- cello in a hard case                        0.26
 
     -- Pick a shelf; the options come from a table
     SELECT item, typed_pick(item, 'which shelf?', (SELECT list(name) FROM shelves)) AS shelf
@@ -89,12 +89,13 @@ docs:
     | --- | --- |
     | `typed_is(value, statement [, cutoff])` | true or false, for filtering with `WHERE` |
     | `typed_prob(value, statement)` | how likely the statement is true, from 0 to 1 |
-    | `typed_pick(value, question, options)` | the best option; the options can come from a table |
+    | `typed_pick(value, question, options)` | the best option; the options can come from a table, or be pictures |
     | `typed_score(value, question, levels)` | a rating on your scale, e.g. 0 for the lowest level up to 3 |
+    | `typed_box(photo, target)` | where something is in a photo, and how sure (Jev only) |
     | `typed_ask(value, question_json)` | the full answer, with the odds for every option |
     | `typed_usage()` | what you have spent, your limit, and how many answers were reused for free |
 
-    `value` can be text, any other value, or a whole row.
+    `value` can be text, any other value, a whole row, or (new in 0.1.1, Jev only, in preview) a photo.
 
     Safe by default:
 
@@ -145,13 +146,62 @@ docs:
     -- 1 none   2 contact details   3 health   4 money   5 none
     ```
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 245
-extension_download_count_pretty: 245
+    #### Photos (new in 0.1.1, Jev only)
+
+    With Jev, a PNG or JPEG file is sent as a picture, so `read_blob` turns a folder of photos into rows. Each
+    side must be 280 to 1568 pixels; shrink big phone photos first with `magick mogrify -resize '1568x1568>' *.jpg`.
+    A 1024 x 768 photo costs about $0.0001. Photo support is a Jev preview, so its limits may change. Other
+    providers stop with a clear message instead of sending a photo.
+
+    ```sql
+    CREATE TABLE found AS SELECT parse_filename(filename, true) AS item, content FROM read_blob('found/*.jpg');
+
+    -- Ask about the photo
+    SELECT item, typed_pick(content, 'which shelf?', ['medical', 'electronics', 'valuables', 'animals',
+                                                      'food and rubbish', 'general']) AS shelf FROM found;
+    -- hearing_aid      medical
+    -- leather_wallet   valuables
+
+    -- Photo and text together: does the desk note match the photo?
+    SELECT item, typed_prob({photo: content, note: note}, 'the note correctly describes the photo') AS matches
+    FROM found JOIN desk USING (item);
+    -- teddy_bear   (note: teddy bear in a red jumper)   0.96
+    -- wristwatch   (note: silver digital watch)         0.01   it is a gold watch
+
+    -- Options as pictures: which lost-item report, each one the owner's photo?
+    SELECT item, typed_pick(content, 'which lost-item report is the item in this photo?',
+             (SELECT map_concat(map(list(report), list(photo)), MAP {'no report matches': NULL::BLOB})
+              FROM reports)) AS report FROM found;
+    -- found_bottle_blue   bottle_blue
+    -- sandwich            no report matches
+
+    -- Where is it? Edges are fractions of the photo's width and height
+    SELECT typed_box(content, 'the winding crown') FROM found WHERE item = 'wristwatch';
+    -- {'left': 0.1, 'top': 0.73, 'right': 0.22, 'bottom': 0.88, 'confidence': 0.89}
+    ```
+
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 809
+extension_download_count_pretty: 809
 image: '/images/community_extensions/social_preview/preview_community_extension_typed_ai.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -169,19 +219,19 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| typed_ask     | scalar        | NULL        | NULL    |          |
-| typed_is      | scalar        | NULL        | NULL    |          |
-| typed_pick    | scalar        | NULL        | NULL    |          |
-| typed_prob    | scalar        | NULL        | NULL    |          |
-| typed_score   | scalar        | NULL        | NULL    |          |
-| typed_usage   | table         | NULL        | NULL    |          |
+| function_name | function_type |                                     description                                      | comment |                                               examples                                                |
+|---------------|---------------|--------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------|
+| typed_ask     | scalar        | The full answer as JSON, with the odds for every option                              | NULL    | [typed_ask(note, '{"v": 1, "type": "pick", "question": "how urgent?", "options": ["now", "later"]}')] |
+| typed_box     | scalar        | Where something is in a photo: box edges from 0 to 1, and confidence (Jev only)      | NULL    | [typed_box(content, 'the coffee mug')]                                                                |
+| typed_is      | scalar        | True when the AI thinks the statement is true (cutoff 0.5 unless given)              | NULL    | [typed_is(review, 'the customer is angry')]                                                           |
+| typed_pick    | scalar        | The option that fits best; options are names, or a MAP of name to picture (Jev only) | NULL    | [typed_pick(item, 'which shelf?', ['food', 'tools', 'other'])]                                        |
+| typed_prob    | scalar        | How likely the statement is true, from 0 to 1                                        | NULL    | [typed_prob(item, 'the owner needs this back today')]                                                 |
+| typed_score   | scalar        | A rating: 0 for the first level, 1 for the next, and so on                           | NULL    | [typed_score(answer, 'how helpful is it?', ['not', 'a bit', 'very'])]                                 |
+| typed_usage   | table         | What has been spent, the limit, and how many answers were reused                     | NULL    | [FROM typed_usage()]                                                                                  |
 
 ### Overloaded Functions
 
@@ -199,19 +249,20 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|         name          |                                        description                                         | input_type | scope  | aliases |
-|-----------------------|--------------------------------------------------------------------------------------------|------------|--------|---------|
-| typed_batch_size      | Rows per request, up to the provider's limit                                               | BIGINT     | GLOBAL | []      |
-| typed_budget_usd      | Most dollars this database may spend, counted since the extension loaded                   | DOUBLE     | GLOBAL | []      |
-| typed_cache_mb        | Memory for saved answers                                                                   | BIGINT     | GLOBAL | []      |
-| typed_concurrency     | Requests in flight across the whole process                                                | BIGINT     | GLOBAL | []      |
-| typed_dry_run         | Price queries and call nothing; results are NULL                                           | BOOLEAN    | GLOBAL | []      |
-| typed_fail_after      | Failed requests in a row that stop calls for the rest of the query; 0 is off               | BIGINT     | GLOBAL | []      |
-| typed_max_input_chars | Longest input value, in characters; longer values are refused, never cut                   | BIGINT     | GLOBAL | []      |
-| typed_max_retries     | Extra attempts after a 408, 429, 5xx or dropped connection                                 | BIGINT     | GLOBAL | []      |
-| typed_max_rows        | Most rows one query may send to the model; cached rows are free                            | BIGINT     | GLOBAL | []      |
-| typed_on_stop         | What a stopped job shows: 'error', 'null' or 'row' ({value, error} pairs)                  | VARCHAR    | GLOBAL | []      |
-| typed_profile         | Name of the typed_ai secret to use; empty picks the only one, or Jev from TYPESAFE_API_KEY | VARCHAR    | GLOBAL | []      |
-| typed_timeout_s       | Seconds per HTTP attempt                                                                   | BIGINT     | GLOBAL | []      |
+|         name          |                                                    description                                                    | input_type | scope  | aliases | typed_value |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory        | Set the directory to which temporary files are written.                                                           | VARCHAR    | GLOBAL | []      | post.db.tmp |
+| typed_batch_size      | Rows per request, up to the provider's limit                                                                      | BIGINT     | GLOBAL | []      | 10          |
+| typed_budget_usd      | Most dollars this database may spend, counted since the extension loaded                                          | DOUBLE     | GLOBAL | []      | 1.0         |
+| typed_cache_mb        | Memory, in MB, for saved answers                                                                                  | BIGINT     | GLOBAL | []      | 256         |
+| typed_concurrency     | Most requests sent at the same time                                                                               | BIGINT     | GLOBAL | []      | 4           |
+| typed_dry_run         | Price queries and call nothing; results are NULL                                                                  | BOOLEAN    | GLOBAL | []      | false       |
+| typed_fail_after      | Stop asking for the rest of the query after this many failed requests in a row; 0 never stops                     | BIGINT     | GLOBAL | []      | 3           |
+| typed_max_input_chars | Longest input value, in characters; longer values are refused, never cut                                          | BIGINT     | GLOBAL | []      | 20000       |
+| typed_max_retries     | Extra tries when the AI service is busy, down or drops the connection                                             | BIGINT     | GLOBAL | []      | 3           |
+| typed_max_rows        | Most rows one query may send to the model; cached rows are free                                                   | BIGINT     | GLOBAL | []      | 1000        |
+| typed_on_stop         | What a stopped job shows: 'error' fails the query, 'null' leaves answers empty, 'row' adds the reason to each row | VARCHAR    | GLOBAL | []      | error       |
+| typed_profile         | Name of the typed_ai secret to use; empty picks the only one, or Jev from TYPESAFE_API_KEY                        | VARCHAR    | GLOBAL | []      |             |
+| typed_timeout_s       | Seconds to wait for each try                                                                                      | BIGINT     | GLOBAL | []      | 30          |
 
 

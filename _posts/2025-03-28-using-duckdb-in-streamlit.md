@@ -15,8 +15,8 @@ In the article [Analyzing Railway Traffic in the Netherlands]({% post_url 2024-0
 
 Using the above open data, in this post we will build an application, in which a user can:
 
-- Understand the railway traffic data;  
-- Visualize the railway network traffic in 2024, by using Plotly;  
+- Understand the railway traffic data;
+- Visualize the railway network traffic in 2024, by using Plotly;
 - Visualize the five closest train stations on any point selected on the map, by using the Streamlit Folium component.
 
 The application will be developed with [Streamlit](https://streamlit.io/), an open source framework in which one can implement data applications easily with Python. The application code is available on [GitHub](https://github.com/duckdb/duckdb-blog-examples/tree/main/duckdb_streamlit).
@@ -26,7 +26,7 @@ The application will be developed with [Streamlit](https://streamlit.io/), an op
 To load the railway traffic data, we write a function, which creates the two tables we will be working with, `services` and `stations`:
 
 ```python
-def prepare_duckdb(duckdb_conn):  
+def prepare_duckdb(duckdb_conn):
 
     duckdb_conn.sql("""
         create table if not exists services as
@@ -41,15 +41,15 @@ def prepare_duckdb(duckdb_conn):
 
 From a Streamlit application there are three ways to connect to DuckDB:
 
-- In-memory connection;  
-- Persisted local file connection;  
+- In-memory connection;
+- Persisted local file connection;
 - Attaching an external database.
 
 ### In-Memory Connection
 
 Connecting to an in-memory database involves loading the data into memory, whenever a DuckDB connection is established. Depending on the resources of the application server and the amount of data, creating a new in-memory DuckDB connection and loading the required data on every request will slow down the application. In Streamlit this behavior is addressed by [caching the resource](https://docs.streamlit.io/develop/concepts/architecture/caching#stcache_resource), which can be done as:
 
-- caching the DuckDB connection as a global shared connection in the application;  
+- caching the DuckDB connection as a global shared connection in the application;
 - caching the DuckDB connection for the user session.
 
 ```python
@@ -65,19 +65,19 @@ def get_duckdb_memory(session_id):
     duckdb_conn = duckdb.connect()
     prepare_duckdb(duckdb_conn=duckdb_conn)
 
-    return duckdb_conn  
+    return duckdb_conn
 ```
 
 ### Persisted Local File Connection
 
 A DuckDB connection can be established against a persisted database file on the server of the application. The database file can be created:
 
-- during the deployment, before the application starts;  
+- during the deployment, before the application starts;
 - a standalone process, which creates the database and copies it to the application server. Depending on the freshness requirement of the application, one might schedule a process to refresh the data.
 
 ```python
 duckdb_conn = duckdb.connect(
-    "train_stations_and_services.duckdb", 
+    "train_stations_and_services.duckdb",
     read_only=True
 )
 ```
@@ -93,24 +93,24 @@ duckdb_conn.execute(f"attach '{DUCKDB_EXTERNAL_LOCATION}' as ext_db")
 duckdb_conn.execute("use ext_db")
 ```
 
-More details about attaching an external database can be found in the [DuckDB documentation]({% link docs/current/guides/network_cloud_storage/duckdb_over_https_or_s3.md %}).
+More details about attaching an external database can be found in the [DuckDB documentation]({% link docs/2.0/guides/network_cloud_storage/duckdb_over_https_or_s3.md %}).
 
 ### Considerations
 
-1. DuckDB works best if you have allocated 1-4GB of memory per thread, therefore configure the appropriate resources when deploying the Streamlit application.  
-2. The recommendation is to use a new connection for each database interaction or at least one at user session level, and not a global connection at application level. Using a global connection might result in unexpected behaviour, depending on the number of users using the application at the same time.  
-3. When using a persisted local database, take into account that when there is a database connection established no other process can write to it. One workaround is to have a process which creates and replaces the database file on the server.  
+1. DuckDB works best if you have allocated 1-4GB of memory per thread, therefore configure the appropriate resources when deploying the Streamlit application.
+2. The recommendation is to use a new connection for each database interaction or at least one at user session level, and not a global connection at application level. Using a global connection might result in unexpected behaviour, depending on the number of users using the application at the same time.
+3. When using a persisted local database, take into account that when there is a database connection established no other process can write to it. One workaround is to have a process which creates and replaces the database file on the server.
 4. When using an attached database, take into account that the application can have a performance impact depending on the storage solution chosen.
 
 Starting from this point, we will work with the external database.
 
 ## Analyzing Dutch Railway Data
 
-To analyze the data within Streamlit, we will make use of the Python [relational API]({% link docs/current/clients/python/relational_api.md %}), by chaining queries. We start by defining a relation, which will select the needed data from `stations`:
+To analyze the data within Streamlit, we will make use of the Python [relational API]({% link docs/2.0/clients/python/relational_api.md %}), by chaining queries. We start by defining a relation, which will select the needed data from `stations`:
 
 ```python
 stations_selection = duckdb_conn.sql("""
-    select name_long as station_name, geo_lat, geo_lng, code 
+    select name_long as station_name, geo_lat, geo_lng, code
     from stations
 """).set_alias("stations_selection")
 ```
@@ -135,7 +135,7 @@ bringing the above code together in a function.
 
 ```python
 def get_stations_services_query(duckdb_conn):
-    
+
     # create a relation for the station selection
     stations_selection = ...
 
@@ -146,7 +146,7 @@ def get_stations_services_query(duckdb_conn):
     return (
         stations_selection
         .join(
-            services_selection, 
+            services_selection,
             "services.station_code = stations_selection.code"
         )
         .select("""
@@ -164,10 +164,10 @@ When we run `get_stations_services_query(get_duckdb_conn())`, there is yet no da
 
 The query will be executed when one of the following methods is encountered:
 
-- `stations_query.df()` to extract to a Pandas dataframe;  
-- `stations_query.fetchall()` to extract in a list;  
-- `stations_query.write_to()` to export the data in a file;  
-- any other calculation method, such as `.sum`, `.row_number` etc. The relational methods can be found in the [DuckDB documentation]({% link docs/current/clients/python/reference/index.md %}).
+- `stations_query.df()` to extract to a Pandas dataframe;
+- `stations_query.fetchall()` to extract in a list;
+- `stations_query.write_to()` to export the data in a file;
+- any other calculation method, such as `.sum`, `.row_number` etc. The relational methods can be found in the [DuckDB documentation]({% link docs/2.0/clients/python/reference/index.md %}).
 
 <div align="center" style="margin:10px">
     <a href="/images/blog/duckdb-streamlit/top_5_busiest_stations.png">
@@ -188,19 +188,19 @@ stations_query, _ = get_stations_services_query(get_duckdb_conn())
 
 top_5_query = (
     stations_query.aggregate("""
-            station_name, 
-            service_month: monthname(service_date), 
-            service_month_id: month(service_date), 
+            station_name,
+            service_month: monthname(service_date),
+            service_month_id: month(service_date),
             num_services: sum(num_services)
         """)
     .select("""
-            station_name, 
-            service_month, 
-            service_month_id, 
-            num_services, 
-            rn: row_number() 
+            station_name,
+            service_month,
+            service_month_id,
+            num_services,
+            rn: row_number()
                 over (
-                    partition by service_month 
+                    partition by service_month
                     order by num_services desc
                 )
         """)
@@ -227,7 +227,7 @@ The data about the train rides through the train stations of The Netherlands, at
     </a>
 </div>
 
-To analyze the network utilization across the country, we use `density_map` chart from Plotly, which will generate a heat map on a map chart. Because heat maps work best with pre-aggregated data, we first aggregate the number of train services and the geolocation of the station: 
+To analyze the network utilization across the country, we use `density_map` chart from Plotly, which will generate a heat map on a map chart. Because heat maps work best with pre-aggregated data, we first aggregate the number of train services and the geolocation of the station:
 
 ```python
 stations_df = stations_query.aggregate(
@@ -331,12 +331,12 @@ We then define a function to retrieve the query, which returns the closest five 
 def get_closest_stations_query(duckdb_conn, lat, lng):
 
     stations_selection = duckdb_conn.sql("""
-        select name_long as station_name, geo_lat, geo_lng, code 
-        from stations st 
+        select name_long as station_name, geo_lat, geo_lng, code
+        from stations st
         where exists (
-                select count(*) 
-                from services sv 
-                where st.code = sv."Stop:Station code" 
+                select count(*)
+                from services sv
+                where st.code = sv."Stop:Station code"
                 having count(*) > 100
             )
     """)
@@ -345,12 +345,12 @@ def get_closest_stations_query(duckdb_conn, lat, lng):
         stations_selection.project(f"""
             code as station_code,
             station_name,
-            geo_lat, 
-            geo_lng, 
+            geo_lat,
+            geo_lng,
             station_geo_point: st_point(geo_lng, geo_lat),
             clicked_geo_point: st_point({lng}, {lat}),
             distance_in_m: st_distance_sphere(
-                            st_point(geo_lng, geo_lat), 
+                            st_point(geo_lng, geo_lat),
                             clicked_geo_point
                         ),
             distance_in_km: round(distance_in_m/1000,2)
@@ -370,4 +370,4 @@ The code of implementing interactive maps with Folium in Streamlit is available 
 
 ## Conclusion
 
-In this post, we illustrated how DuckDB can be used in Streamlit, how the Python relational API can make our code cleaner by chaining queries and how to implement interactive maps with Plotly and Folium, while leveraging the Streamlit caching mechanism.  
+In this post, we illustrated how DuckDB can be used in Streamlit, how the Python relational API can make our code cleaner by chaining queries, and how to implement interactive maps with Plotly and Folium, while leveraging the Streamlit caching mechanism.

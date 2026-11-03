@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: maxmind
   description: Read MaxMind databases (GeoLite, GeoIP, and more)
-  version: 0.10.0
+  version: 0.12.0
   language: Zig
   build: cmake
   license: ISC
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: marselester/duckdb-maxmind
-  ref: dc2e6e60f619403c4714e95f014f6444a2653f9c
+  ref: 08a80d772143c083c160ebd846642ecac1ef035c
 
 docs:
   hello_world: |
@@ -26,7 +26,7 @@ docs:
   extended_description: |
     Read any MaxMind database using table and scalar functions.
     GeoLite and GeoIP databases get typed columns;
-    other MMDB files return JSON in a `record` VARCHAR column.
+    other MMDB files return a `record` JSON column.
 
     Scan all IP network blocks with `read_mmdb()`.
     Use the optional `network` parameter to limit the scan to a subnet,
@@ -60,7 +60,7 @@ docs:
     Use `mmdb_record()` to look up a record from any MMDB file as JSON:
 
     ```sql
-    SELECT mmdb_record('./GeoLite2-City.mmdb', '1.0.64.0', 'city')::json -> 'city' -> 'names' ->> 'en' AS en;
+    SELECT mmdb_record('./GeoLite2-City.mmdb', '1.0.64.0', 'city') -> 'city' -> 'names' ->> 'en' AS en;
     ┌───────────┐
     │    en     │
     ├───────────┤
@@ -70,11 +70,26 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 1078
-extension_download_count_pretty: 1.1k
+extension_download_count: 1024
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_maxmind.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -92,31 +107,32 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|     function_name     | function_type | description | comment | examples |
-|-----------------------|---------------|-------------|---------|----------|
-| extension_version     | scalar        | NULL        | NULL    |          |
-| geoip_anonymous_ip    | scalar        | NULL        | NULL    |          |
-| geoip_anonymous_plus  | scalar        | NULL        | NULL    |          |
-| geoip_city            | scalar        | NULL        | NULL    |          |
-| geoip_connection_type | scalar        | NULL        | NULL    |          |
-| geoip_country         | scalar        | NULL        | NULL    |          |
-| geoip_densityincome   | scalar        | NULL        | NULL    |          |
-| geoip_domain          | scalar        | NULL        | NULL    |          |
-| geoip_enterprise      | scalar        | NULL        | NULL    |          |
-| geoip_ip_risk         | scalar        | NULL        | NULL    |          |
-| geoip_isp             | scalar        | NULL        | NULL    |          |
-| geoip_static_ip_score | scalar        | NULL        | NULL    |          |
-| geoip_user_count      | scalar        | NULL        | NULL    |          |
-| geolite_asn           | scalar        | NULL        | NULL    |          |
-| geolite_city          | scalar        | NULL        | NULL    |          |
-| geolite_country       | scalar        | NULL        | NULL    |          |
-| mmdb_record           | scalar        | NULL        | NULL    |          |
-| read_mmdb             | table         | NULL        | NULL    |          |
+|      function_name      | function_type | description | comment | examples |
+|-------------------------|---------------|-------------|---------|----------|
+| extension_version       | scalar        | NULL        | NULL    |          |
+| geoip_anonymous_ip      | scalar        | NULL        | NULL    |          |
+| geoip_anonymous_plus    | scalar        | NULL        | NULL    |          |
+| geoip_city              | scalar        | NULL        | NULL    |          |
+| geoip_connection_type   | scalar        | NULL        | NULL    |          |
+| geoip_country           | scalar        | NULL        | NULL    |          |
+| geoip_densityincome     | scalar        | NULL        | NULL    |          |
+| geoip_domain            | scalar        | NULL        | NULL    |          |
+| geoip_enterprise        | scalar        | NULL        | NULL    |          |
+| geoip_ip_risk           | scalar        | NULL        | NULL    |          |
+| geoip_isp               | scalar        | NULL        | NULL    |          |
+| geoip_regions           | scalar        | NULL        | NULL    |          |
+| geoip_residential_proxy | scalar        | NULL        | NULL    |          |
+| geoip_static_ip_score   | scalar        | NULL        | NULL    |          |
+| geoip_user_count        | scalar        | NULL        | NULL    |          |
+| geolite_asn             | scalar        | NULL        | NULL    |          |
+| geolite_city            | scalar        | NULL        | NULL    |          |
+| geolite_country         | scalar        | NULL        | NULL    |          |
+| mmdb_record             | scalar        | NULL        | NULL    |          |
+| read_mmdb               | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -134,6 +150,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 
