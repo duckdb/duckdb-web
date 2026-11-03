@@ -21,13 +21,13 @@ His users are typically teams of 10 to 15 quants. They are deep specialists in f
 
 ## Problems That Didn't Need a Heavyweight Answer
 
-Alongside that work, startups, smaller tech firms and smaller funds kept asking Ryan the same question: what should we run this on?
+Alongside that work, startups, smaller tech firms, and smaller funds kept asking Ryan the same question: what should we run this on?
 
 For years he had no good answer. He tried other systems but found that their license was prohibitively expensive, their setup didn't offer an embedded mode of operation, or they were much more operationally involved than he wanted at the time. For some clients, the honest answer was that he would write something in C for their narrow use case.
 
 ## A Different Starting Point
 
-DuckDB was different. It was small, embedded, reliable and analytically capable, and a team could start with it inside an application without standing up a server.
+DuckDB was different. It was small, embedded, reliable, and analytically capable, and a team could start with it inside an application without standing up a server.
 
 **“I like the simplicity of just a small thing running and working,”** Ryan says. **“And then you can get more complex.”**
 
@@ -51,7 +51,7 @@ GROUP BY ALL
 ORDER BY total_volume DESC;
 ```
 
-The result is a personal sandbox where quants can build on their own earlier work. It proved popular, and Ryan found its performance close to kdb+.
+The result is a personal sandbox where quants can build on their own earlier work. It proved popular, and Ryan found its performance close to kdb+'s.
 
 Because QStudio is a Java Swing desktop application deployed inside banks, the integration depends on DuckDB's [Java client]({% link docs/2.0/clients/java/overview.md %}). Ryan's early version relied on inefficient workarounds to get appending working. Once a dedicated Java developer joined and rebuilt the [Appender]({% link docs/2.0/clients/java/data_import.md %}) properly, every kink was ironed out.
 
@@ -81,4 +81,4 @@ Ryan's DuckCon talk gives a short tour of this work.
 
 You can explore QStudio, now open source, and try PeachQ at [peachq.org](https://peachq.org/).
 
-We would like to thank Ryan for the conversation. You can follow his work on DuckDB, Q and TimeStored at [timestored.com](https://www.timestored.com/). And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com).
+We would like to thank Ryan for the conversation. You can follow his work on DuckDB, Q, and TimeStored at [timestored.com](https://www.timestored.com/). And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com).
