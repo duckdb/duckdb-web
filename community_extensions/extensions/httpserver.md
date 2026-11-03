@@ -54,8 +54,8 @@ repo:
   ref: 647d099778dac1fced7d442b7f46c75413c7d8a3
   variegata: bb04a75a66c80b29c7ef8fccaff9dbb40b7b9f86
 
-extension_star_count: 284
-extension_star_count_pretty: 284
+extension_star_count: 285
+extension_star_count_pretty: 285
 extension_download_count: 25179
 extension_download_count_pretty: 25.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
