@@ -19,7 +19,7 @@ The SQL standard answers questions like these with [`MATCH_RECOGNIZE`](https://e
 
 > New The `MATCH_RECOGNIZE` clause is introduced in DuckDB 2.1. It is not part of the 2.0 release. To run the examples in this post today, install a [nightly build]({% link install/preview.md %}).
 
-In this blog post, we use `MATCH_RECOGNIZE` to answer all three questions, and we show the [window function]({% link docs/current/sql/functions/window_functions.md %}) equivalents that work in DuckDB 2.0 and earlier.
+In this blog post, we use `MATCH_RECOGNIZE` to answer all three questions, and we show the [window function]({% link docs/2.0/sql/functions/window_functions.md %}) equivalents that work in DuckDB 2.0 and earlier.
 
 ## The Data
 
@@ -74,7 +74,7 @@ ORDER BY user_id;
 
 Each clause plays a distinct role:
 
-* `PARTITION BY` and `ORDER BY` work as they do in [window functions]({% link docs/current/sql/functions/window_functions.md %}): matching happens inside each user independently, with rows examined in timestamp order.
+* `PARTITION BY` and `ORDER BY` work as they do in [window functions]({% link docs/2.0/sql/functions/window_functions.md %}): matching happens inside each user independently, with rows examined in timestamp order.
 * `PATTERN` is a regular expression over rows. The names `cart`, `nonbuy`, and `buy` are *pattern variables*, and the quantifier `*` means zero or more, just as in a text regular expression.
 * `DEFINE` gives the condition each variable must satisfy. A row is labeled `cart` only when `event = 'cart'`, and so on. A pattern variable with no `DEFINE` matches any row.
 * `MEASURES` computes output columns from the matched rows. Here `first(cart.ts)` is the timestamp of the first `cart` row in the match, and `last(buy.ts)` is the timestamp of its `buy` row.
@@ -227,7 +227,7 @@ INSERT INTO logins VALUES
     (2, '2026-10-06'), (2, '2026-10-07');
 ```
 
-A streak is a starting day followed by days that are each exactly one day after the previous one. Deduplicating the days with [`SELECT DISTINCT`]({% link docs/current/sql/statements/select.md %}) first means two logins on the same day do not break the run:
+A streak is a starting day followed by days that are each exactly one day after the previous one. Deduplicating the days with [`SELECT DISTINCT`]({% link docs/2.0/sql/statements/select.md %}) first means two logins on the same day do not break the run:
 
 ```sql
 FROM (SELECT DISTINCT user_id, day FROM logins) MATCH_RECOGNIZE (
@@ -285,9 +285,9 @@ ORDER BY user_id;
 
 ## The Portable Version: Window Functions
 
-Before DuckDB 2.1, these questions were answered with [window functions]({% link docs/current/sql/functions/window_functions.md %}) and a few well-known idioms. These queries still work and remain the way to express the same logic in DuckDB 2.0 and earlier.
+Before DuckDB 2.1, these questions were answered with [window functions]({% link docs/2.0/sql/functions/window_functions.md %}) and a few well-known idioms. These queries still work and remain the way to express the same logic in DuckDB 2.0 and earlier.
 
-Sessions use the "flag a boundary, then run a count" idiom. [`lag`]({% link docs/current/sql/functions/window_functions.md %}) gives the gap to the previous event, a boundary is flagged whenever the gap is too large, and a running [`count_if`]({% link docs/current/sql/functions/utility.md %}) turns the flags into session numbers:
+Sessions use the "flag a boundary, then run a count" idiom. [`lag`]({% link docs/2.0/sql/functions/window_functions.md %}) gives the gap to the previous event, a boundary is flagged whenever the gap is too large, and a running [`count_if`]({% link docs/2.0/sql/functions/utility.md %}) turns the flags into session numbers:
 
 ```sql
 SELECT
@@ -326,7 +326,7 @@ ORDER BY ALL;
 └─────────┴────────────┴─────────────────────┴──────────┴────────┴──────────────────────────┘
 ```
 
-Streaks use the *gaps and islands* trick: subtracting a [`row_number`]({% link docs/current/sql/functions/window_functions.md %}) from the date gives a value that is constant within a run of consecutive days and changes at every gap, so it can be used as a group key.
+Streaks use the *gaps and islands* trick: subtracting a [`row_number`]({% link docs/2.0/sql/functions/window_functions.md %}) from the date gives a value that is constant within a run of consecutive days and changes at every gap, so it can be used as a group key.
 
 ```sql
 SELECT user_id, max(days) AS longest_streak
@@ -372,8 +372,8 @@ Both produce the same results as the `MATCH_RECOGNIZE` queries. They work everyw
 
 * [Add `MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/pull/25255) (DuckDB pull request)
 * [Row pattern recognition request](https://github.com/duckdb/duckdb/discussions/3994) (DuckDB discussion)
-* [Window Functions]({% link docs/current/sql/functions/window_functions.md %}) (DuckDB documentation)
-* [Aggregate Functions]({% link docs/current/sql/functions/aggregates.md %}) including `string_agg` (DuckDB documentation)
+* [Window Functions]({% link docs/2.0/sql/functions/window_functions.md %}) (DuckDB documentation)
+* [Aggregate Functions]({% link docs/2.0/sql/functions/aggregates.md %}) including `string_agg` (DuckDB documentation)
 * [Windowing in DuckDB]({% post_url 2021-10-13-windowing %}) (DuckDB blog)
 * [Catching up with Windowing]({% post_url 2025-02-10-window-catchup %}) (DuckDB blog)
 * [Flying Through Windows]({% post_url 2025-02-14-window-flying %}) (DuckDB blog)
