@@ -3,8 +3,8 @@ layout: post
 title: "From kdb+ to DuckDB: Bringing Local Analytics to the Quant's Desktop"
 authors:
   - Ryan Hamilton in conversation with Geertjan Wielenga and Tim Cox
-thumb: "/images/blog/thumbs/java.svg"
-image: "/images/blog/thumbs/java.png"
+thumb: "/images/blog/thumbs/quants-desktop.svg"
+image: "/images/blog/thumbs/quants-desktop.png"
 excerpt: "TL;DR: After years building kdb+-based data platforms for banks and hedge funds, Ryan Hamilton wanted an analytical engine he could recommend to smaller teams without specialized infrastructure or expensive licensing. DuckDB gave him a small, embedded way to bring fast local analytics into QStudio and Pulse, and it is now shaping his next open-source project, PeachQ."
 tag: using-duckdb
 ---
