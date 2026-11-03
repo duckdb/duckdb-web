@@ -15,7 +15,7 @@ tag: using-duckdb
 
 At Teralytics, Ilya's team used ClickHouse. Like DuckDB, it is columnar and built for analytics, but it usually runs on provisioned servers in a cluster. **“ClickHouse can be used locally, but it's not really meant for that, unlike DuckDB.”**
 
-He first used DuckDB in [Flowmap.city](https://www.flowmap.city/), a side project for [visualizing mobility flows](https://ilya.boyandin.me/p/flowmap-city) that he still maintains. He had little budget for infrastructure, and DuckDB already had a [WebAssembly build]({% link docs/current/clients/wasm/overview.md %}) that runs in the browser. In Flowmap.city, users upload files to object storage, which is cheap or often free. When someone opens a project, DuckDB-Wasm starts in the browser and loads the files from the bucket over the [`s3://`]({% link docs/current/core_extensions/httpfs/s3api.md %}) protocol:
+He first used DuckDB in [Flowmap.city](https://www.flowmap.city/), a side project for [visualizing mobility flows](https://ilya.boyandin.me/p/flowmap-city) that he still maintains. He had little budget for infrastructure, and DuckDB already had a [WebAssembly build]({% link docs/2.0/clients/wasm/overview.md %}) that runs in the browser. In Flowmap.city, users upload files to object storage, which is cheap or often free. When someone opens a project, DuckDB-Wasm starts in the browser and loads the files from the bucket over the [`s3://`]({% link docs/2.0/core_extensions/httpfs/s3api.md %}) protocol:
 
 ```sql
 SELECT *
@@ -28,7 +28,7 @@ Flowmap.city showed him that an analytical application could work with no databa
 
 ## From a Side Project to SQLRooms
 
-For Flowmap.city, Ilya had built a table view, a SQL editor, a schema tree and query execution in the browser. None of it was specific to mobility data. He extracted these pieces into a standalone framework called [SQLRooms](https://ilya.boyandin.me/p/sqlrooms), which he continues to develop as open source.
+For Flowmap.city, Ilya had built a table view, a SQL editor, a schema tree, and query execution in the browser. None of it was specific to mobility data. He extracted these pieces into a standalone framework called [SQLRooms](https://ilya.boyandin.me/p/sqlrooms), which he continues to develop as open source.
 
 SQLRooms is a set of building blocks for creating DuckDB-backed analytics applications in React. Developers combine only the packages and state slices their app needs. At its center is the Room, a self-contained workspace that holds the data along with the analysis done on it. Each Room is connected to its own DuckDB instance, running natively on a device or as WebAssembly in a browser. The framework's DuckDB wrapper handles file loading, so data can be queried as soon as it is added. All computation happens on the user's own machine, whether that is a browser tab or a desktop app. The framework also has built-in support for AI agents that write and run SQL.
 
@@ -62,7 +62,7 @@ Spatial Desktop followed kepler.gl, the free client-only tool, and Foursquare St
 
 DuckDB ships with the application, so users install nothing extra. Ilya acknowledges that a desktop application makes it harder to share projects and edit them together. In exchange, queries don't wait on the network and the data stays on the user's machine. Foursquare also has no database servers to run. Modern laptops are powerful, he adds, and their GPUs are good at visualization. **“There is a bit of a resurrection of desktop applications right now.”**
 
-Foursquare also has a browser version of its geospatial agent that reads data through [MotherDuck]({% link docs/current/core_extensions/motherduck.md %}). Since MotherDuck is DuckDB in the cloud, the team reuses most of the agent's instructions for generating SQL.
+Foursquare also has a browser version of its geospatial agent that reads data through [MotherDuck]({% link docs/2.0/core_extensions/motherduck.md %}). Since MotherDuck is DuckDB in the cloud, the team reuses most of the agent's instructions for generating SQL.
 
 ## When the Agent Writes the SQL
 
@@ -72,9 +72,9 @@ The interface changed as a result. **“In the very first version the SQL editor
 
 ## Geospatial Processing on the Fly
 
-Spatial Desktop has been tested with datasets from tens of thousands of points up to several gigabytes. It renders maps with deck.gl, which slows down once a map holds hundreds of thousands of objects. The team got around this with dynamic tiling built on DuckDB's [spatial extension]({% link docs/current/core_extensions/spatial/overview.md %}).
+Spatial Desktop has been tested with datasets from tens of thousands of points up to several gigabytes. It renders maps with deck.gl, which slows down once a map holds hundreds of thousands of objects. The team got around this with dynamic tiling built on DuckDB's [spatial extension]({% link docs/2.0/core_extensions/spatial/overview.md %}).
 
-Web maps usually load pre-generated tiles for the area in view at the current zoom level. Spatial Desktop generates those tiles at query time instead. A query filters the features to the viewport. As the user zooms out, it simplifies polygons, and it samples the data where needed. The spatial extension's [`ST_AsMVT`]({% link docs/current/core_extensions/spatial/functions.md %}#st_asmvt) function then encodes the result as a binary tile in MVT, a widely supported format:
+Web maps usually load pre-generated tiles for the area in view at the current zoom level. Spatial Desktop generates those tiles at query time instead. A query filters the features to the viewport. As the user zooms out, it simplifies polygons, and it samples the data where needed. The spatial extension's [`ST_AsMVT`]({% link docs/2.0/core_extensions/spatial/functions.md %}#st_asmvt) function then encodes the result as a binary tile in MVT, a widely supported format:
 
 ```sql
 INSTALL spatial;
