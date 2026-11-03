@@ -18,7 +18,8 @@ body.documentation {
             margin-block: 2.5rem 0;
         }
 
-        #main_content_wrap .installationselection :is(.selection-head > h3, .installation-heading > h2) {
+        #main_content_wrap .installationselection :is(.selection-head > h3, .installation-heading > h2),
+        #main_content_wrap .qa-wrap > h3 {
             margin-block: 0;
         }
 

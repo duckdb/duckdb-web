@@ -34,6 +34,11 @@ div.singleentry {
 			margin: 0.8em 0 0 0;
 		}
 
+		p code,
+		li code {
+			font-size: var(--type-code-small, 12px);
+		}
+
 		.sr-only + p,
 		.sr-only + ul,
 		.content > p:first-child,
