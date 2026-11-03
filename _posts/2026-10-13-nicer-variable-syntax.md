@@ -9,9 +9,9 @@ excerpt: "DuckDB 2.0 lets you read a session variable with a `$name` reference i
 tag: using-duckdb
 ---
 
-DuckDB has long supported session variables through the [`SET VARIABLE` statement]({% link docs/preview/sql/statements/set_variable.md %}). You set a value once and read it back wherever you need it, which keeps a magic constant in a single place instead of scattering it across a script. Until now, reading a variable meant calling `getvariable`, and the call was more verbose than the idea behind it.
+DuckDB has long supported session variables through the [`SET VARIABLE` statement]({% link docs/2.0/sql/statements/set_variable.md %}). You set a value once and read it back wherever you need it, which keeps a magic constant in a single place instead of scattering it across a script. Until now, reading a variable meant calling `getvariable`, and the call was more verbose than the idea behind it.
 
-DuckDB 2.0 adds a shorthand. You can read a session variable with a `$name` reference, and [prepared statements]({% link docs/preview/sql/query_syntax/prepared_statements.md %}) can fall back to a session variable when a named parameter is left out. This post walks through both halves of the feature and shows how they work together.
+DuckDB 2.0 adds a shorthand. You can read a session variable with a `$name` reference, and [prepared statements]({% link docs/2.0/sql/query_syntax/prepared_statements.md %}) can fall back to a session variable when a named parameter is left out. This post walks through both halves of the feature and shows how they work together.
 
 ## Reading a Variable with `$name`
 
@@ -142,4 +142,4 @@ DuckDB 2.0 makes session variables easier to read and easier to combine with pre
 * A named prepared statement parameter falls back to the session variable of the same name when you do not supply it, and an explicit argument always wins.
 * Positional parameters are matched by position only and do not fall back to variables.
 
-For the full reference, see the [`SET VARIABLE` statement]({% link docs/preview/sql/statements/set_variable.md %}) and [prepared statements]({% link docs/preview/sql/query_syntax/prepared_statements.md %}) pages, both listed among DuckDB's [friendly SQL features]({% link docs/preview/sql/dialect/friendly_sql.md %}).
+For the full reference, see the [`SET VARIABLE` statement]({% link docs/2.0/sql/statements/set_variable.md %}) and [prepared statements]({% link docs/2.0/sql/query_syntax/prepared_statements.md %}) pages, both listed among DuckDB's [friendly SQL features]({% link docs/2.0/sql/dialect/friendly_sql.md %}).
