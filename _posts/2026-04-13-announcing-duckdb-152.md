@@ -57,7 +57,7 @@ Your old links to `shell.duckdb.org` should still work but if you experience any
 
 We benchmarked DuckDB using the Linux v7 kernel on an [r8gd.8xlarge](https://instances.vantage.sh/aws/ec2/r8gd.8xlarge?currency=USD) instance with 32 vCPUs, 256 GiB RAM, and an NVMe SSD.
 We first ran the scale factor 300 test on Ubuntu 24.04 LTS, then upgraded to Ubuntu 26.04 beta.
-We noticed that the composite TPC-H score shows a **~10% improvement**, jumping from 778,041 to 854,676 when measured with TPC-H's QphH@Score metric.
+We noticed that the composite TPC-H score shows a **~10% improvement**, jumping from 778,041 to 854,676.
 
 ## Coming Up
 
