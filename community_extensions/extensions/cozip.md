@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cozip
   description: Cloud-Optimized ZIP reader for DuckDB
-  version: 2.0.1
+  version: 3.0.0
   language: C++
   build: cmake
   license: MIT
@@ -18,38 +18,36 @@ extension:
     - ryali93
 repo:
   github: asterisk-labs/cozip_reader
-  ref: 7af22df789f3ece8301492b7e229b968664fcd56
+  ref: 911e26c23330238302f0d937cfcae6e7ba529140
 docs:
   hello_world: |
     INSTALL cozip FROM community;
     LOAD cozip;
 
-    -- One row per sample, one column per file, ready for a dataloader.
-    SELECT * FROM read_taco('https://example.org/cloudsen12.zip') LIMIT 10;
-
-    -- A Flat-profile archive is a plain manifest instead.
-    SELECT * FROM read_flat('https://example.org/dataset.zip') LIMIT 10;
+    SELECT name, "cozip:location"
+    FROM read_flat('https://data.source.coop/asterisk-labs/cozip-api-fixtures/data/cities.zip')
+    LIMIT 10;
 
   extended_description: |
-    cozip puts an index at byte 0 of a ZIP archive, so a reader reaches any
-    file inside it in one range request instead of scanning the Central
-    Directory. This extension reads both cozip profiles without downloading
-    the archive, over HTTPS, S3, GCS, Azure or HuggingFace.
+    cozip puts an index at byte 0 of a ZIP archive, so a reader can locate a
+    file without scanning the Central Directory. This extension reads the
+    Flat profile (profile 1) from local files or remote storage, including
+    HTTPS, S3, GCS, Azure, and Hugging Face.
 
     read_flat(path) returns the Flat-profile manifest: one row per entry with
     name, offset, size and whatever columns the writer added.
 
-    read_taco(path) returns one row per sample with one column per file in the
-    contract. Pass pivoted := false for one row per file. It reads .zip,
-    FOLDER, and TACOCAT datasets.
+    The cozip:location column contains a GDAL /vsisubfile/ path for each stored
+    file. DuckDB readers can open those paths directly, fetching only the
+    needed byte ranges. The extension also accepts cozip-subfile:// paths.
 
-    Every data column holds a GDAL /vsisubfile/ path that opens the referenced
-    file in GDAL, rasterio or terra without extracting the archive.
+    Version 3.0 removes the TACO-specific read_taco and taco_* functions.
+    TACO ZIP ::location paths remain readable through the subfile filesystem.
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 9293
-extension_download_count_pretty: 9.3k
+extension_download_count: 956
+extension_download_count_pretty: 956
 image: '/images/community_extensions/social_preview/preview_community_extension_cozip.png'
 layout: community_extension_doc
 ---
@@ -61,11 +59,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ✅ | ❌ | ❌ |
 
@@ -96,13 +94,6 @@ LOAD {{ page.extension.name }};
 | cozip_vsi_base    | scalar        | NULL        | NULL    |          |
 | read_cozip        | table_macro   | NULL        | NULL    |          |
 | read_flat         | table_macro   | NULL        | NULL    |          |
-| read_taco         | table_macro   | NULL        | NULL    |          |
-| taco_collection   | scalar        | NULL        | NULL    |          |
-| taco_contract     | table_macro   | NULL        | NULL    |          |
-| taco_derived      | scalar        | NULL        | NULL    |          |
-| taco_levels       | scalar        | NULL        | NULL    |          |
-| taco_sql          | scalar        | NULL        | NULL    |          |
-| taco_structure    | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -120,6 +111,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

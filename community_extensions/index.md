@@ -1,21 +1,13 @@
 ---
 layout: community_extension_doc
-title: Community Extensions
+title: Overview
 excerpt: |
   List of community-contributed open-source DuckDB extensions
 redirect_from:
 - /ce
 ---
 
-Welcome to the documentation for the DuckDB Community Extensions.
-
-This website contains all documentation specific to community-contributed extensions for DuckDB.
-
-DuckDB is an analytical in-process SQL database management system, documented at the [DuckDB documentation website]({% link docs/2.0/index.md %}).
-
-Community means that the extensions are created by external contributors and not maintained by [DuckLabs](https://ducklabs.com/).
-
-Extensions for DuckDB are the preferred way to package additional functionality for DuckDB. Generic extensions are documented in the [core DuckDB documentation]({% link docs/2.0/core_extensions/overview.md %}).
+Community extensions add functionality to DuckDB and are developed by external contributors, not maintained by [DuckLabs](https://ducklabs.com/). This documentation covers installing, using, and developing community extensions. For general information about extensions, see the [core DuckDB documentation]({% link docs/2.0/core_extensions/overview.md %}).
 
 ## How to Use a Community Extension
 

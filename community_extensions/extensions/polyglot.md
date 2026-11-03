@@ -8,18 +8,19 @@ excerpt: |
 extension:
   name: polyglot
   description: Transpile SQL from 34 different dialects into DuckDB SQL
-  version: 0.3.3
+  version: 0.5.0
   language: Rust
   build: cargo
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl;windows_arm64;windows_amd64_mingw;osx_amd64"
+  excluded_platforms: "wasm_threads;linux_amd64_musl;windows_arm64;windows_amd64_mingw;osx_amd64"
   requires_toolchains: "rust;python3"
   maintainers:
     - tobilg
 
 repo:
   github: tobilg/duckdb-polyglot
-  ref: 8f1666dd9c1761c368f45acc5dfc48c7e54539d9
+  ref: c28271ebf05cc1d7939b12039d14bf6421f42c0a
+  variegata: 8f1666dd9c1761c368f45acc5dfc48c7e54539d9
 
 docs:
   hello_world: |
@@ -242,8 +243,8 @@ docs:
 
 extension_star_count: 27
 extension_star_count_pretty: 27
-extension_download_count: 11691
-extension_download_count_pretty: 11.7k
+extension_download_count: 8483
+extension_download_count_pretty: 8.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_polyglot.png'
 layout: community_extension_doc
 ---
@@ -255,13 +256,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ❌ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -290,7 +291,7 @@ LOAD {{ page.extension.name }};
 | polyglot_parse     | scalar        | Parses SQL into an AST (Abstract Syntax Tree) and returns it as a JSON array.                                                                            | NULL    | [SELECT polyglot_parse('SELECT 1', 'generic');]                                 |
 | polyglot_optimize  | scalar        | Applies simplification and canonicalization optimization passes to a SQL statement.                                                                      | NULL    | [SELECT polyglot_optimize('SELECT a FROM t WHERE b = 1', 'generic');]           |
 | polyglot_dialects  | table         | Returns a table listing all 34 supported SQL dialect names.                                                                                              | NULL    | [SELECT * FROM polyglot_dialects();]                                            |
-| polyglot_query     | table         | Transpiles a SQL query from a specified dialect and executes it, returning results with a dynamic schema.                                                | NULL    | [SELECT * FROM polyglot_query('SELECT 1 AS a, 2 AS b', 'postgresql');]          |
+| polyglot_query     | table_macro   | Transpiles a SQL query from a specified dialect and executes it, returning results with a dynamic schema.                                                | NULL    | [SELECT * FROM polyglot_query('SELECT 1 AS a, 2 AS b', 'postgresql');]          |
 | polyglot_lineage   | table         | Traces a named column's dependency graph through a SQL statement, returning each node and its source table.                                              | NULL    | [SELECT * FROM polyglot_lineage('SELECT a FROM t', 'generic', 'a');]            |
 | polyglot_diff      | table         | Compares two SQL statements at the AST level and emits each change as a row with an edit type and the affected expression.                               | NULL    | [SELECT * FROM polyglot_diff('SELECT a FROM t', 'SELECT b FROM t', 'generic');] |
 
@@ -304,12 +305,16 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-This extension does not add any types.
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+| STRUCT    | 0         | STRUCT       | COMPOSITE     | true     |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

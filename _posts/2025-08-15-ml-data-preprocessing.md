@@ -64,7 +64,7 @@ SELECT
 
 ## Feature Encoding
 
-From the above data stats, we see that there are a few category columns, such as `transaction_type`, `merchant_category` and `payment_channel`. Because most machine learning models expect numerical inputs, this type of data is converted to a numerical representation. This process is called _encoding,_ and it can be done in multiple ways. In the following, we showcase a few common encoding techniques in SQL.
+From the above data stats, we see that there are a few category columns, such as `transaction_type`, `merchant_category`, and `payment_channel`. Because most machine learning models expect numerical inputs, this type of data is converted to a numerical representation. This process is called _encoding,_ and it can be done in multiple ways. In the following, we showcase a few common encoding techniques in SQL.
 
 > In this post, we use several of DuckDB's [“friendly SQL” features]({% link docs/2.0/sql/dialect/friendly_sql.md %}), including the [`FROM`-first syntax]({% link docs/2.0/sql/query_syntax/from.md %}) and [prefix aliases]({% post_url 2025-02-25-prefix-aliases-in-sql %}).
 
@@ -243,7 +243,7 @@ ORDER BY trx_type_le;
 
 One other common data preprocessing step in machine learning is to scale numerical features, such that the values of different features are brought to a similar range or distribution. _Scaling,_ also known as _feature normalization_ or _standardization,_ involves transforming features so they have comparable magnitudes; typically by rescaling them to a fixed range (like 0 to 1) or adjusting them to have zero mean and unit variance. This process is required because many algorithms rely on distance calculations or gradient updates, which can be skewed if features vary widely in scale.
 
-If encoding is performed on the initial raw data (due to the need of knowing the entire categorical values list), scaling requires to split the data into training and testing data sets, in order to avoid [data leakage](https://scikit-learn.org/stable/common_pitfalls.html#data-leakage). In DuckDB, we can split the data by [sampling]({% link docs/2.0/sql/samples.md %}) it:
+If encoding is performed on the initial raw data (due to the need of knowing the entire categorical values list), scaling requires to split the data into training and testing data sets, in order to avoid [data leakage](https://scikit-learn.org/stable/common_pitfalls.html#data-leakage). In DuckDB, we can split the data by [sampling]({% link docs/2.0/sql/query_syntax/samples.md %}) it:
 
 ```sql
 SET threads = 1;
@@ -422,7 +422,7 @@ FROM financial_trx_testing,
 
 ## Handling Missing Values
 
-It often happens that our input data is incomplete, i.e., it has missing data. Depending on the use case, such data is excluded, used as it is or filled with a constant value. In DuckDB we can use the [`coalesce` function]({% link docs/2.0/sql/functions/utility.md %}#coalesceexpr-) in order to retrieve the value of the column or a default value, if the column is `NULL`.
+It often happens that our input data is incomplete, i.e., it has missing data. Depending on the use case, such data is excluded, used as it is, or filled with a constant value. In DuckDB we can use the [`coalesce` function]({% link docs/2.0/sql/functions/utility.md %}#coalesceexpr-) in order to retrieve the value of the column or a default value, if the column is `NULL`.
 
 Some common techniques are to:
 

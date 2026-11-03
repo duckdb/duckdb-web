@@ -20,7 +20,7 @@ Meanwhile, there have been significant leaps in x86 land too. AMD's [Ryzen AI 30
 
 ## Setup
 
-To run this experiment, we purchased the 13" modular laptop by [Framework](https://frame.work/gb/en) and kitted it out with 128 GB of RAM and 8 TB of disk – all for [just under 3,000 euros](#cost-breakdown).
+To run this experiment, we purchased the 13″ modular laptop by [Framework](https://frame.work/gb/en) and kitted it out with 128 GB of RAM and 8 TB of disk – all for [just under 3,000 euros](#cost-breakdown).
 
 We installed [Omarchy 2.0](https://omarchy.org/), an Arch Linux-based distribution with a vibrant community and first-class support for Framework laptops. Assembling the laptop and installing Omarchy took less than an hour in total. Installing the DuckDB command line client only took seconds using the installer script:
 

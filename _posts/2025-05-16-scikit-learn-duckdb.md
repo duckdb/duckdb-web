@@ -102,7 +102,7 @@ selection_query = (
 
 ## Model Training
 
-Our scope is to predict a penguin's specie based on its characteristics (features), such as bill length and depth, flipper length, body mass and island. Such a model is called a classification model because it predicts the category to which the input data belongs.`scikit-learn` offers [multiple classification models](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html). For our dataset, we have chosen to implement a [random forest classifier](https://en.wikipedia.org/wiki/Random_forest), based on decision trees:
+Our scope is to predict a penguin's specie based on its characteristics (features), such as bill length and depth, flipper length, body mass, and island. Such a model is called a classification model because it predicts the category to which the input data belongs.`scikit-learn` offers [multiple classification models](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html). For our dataset, we have chosen to implement a [random forest classifier](https://en.wikipedia.org/wiki/Random_forest), based on decision trees:
 
 <div align="center" style="margin:10px">
     <a href="/images/blog/scikit-learn-duckdb/decision_tree.png">
@@ -387,7 +387,7 @@ for i in range(4):
 
 ### Performance Considerations
 
-To obtain performance data on a larger scale dataset, we have generated a dummy dataset with approximately 59 million records. On a [sample]({% link docs/2.0/sql/samples.md %}) of 10%, on a 16 GB MacBook Pro, the batch processing ranges between 3 and 4 seconds, while the Pandas implementation is executed under 1 second. This is because the Python UDF includes multiple conversion steps which affect performance:
+To obtain performance data on a larger scale dataset, we have generated a dummy dataset with approximately 59 million records. On a [sample]({% link docs/2.0/sql/query_syntax/samples.md %}) of 10%, on a 16 GB MacBook Pro, the batch processing ranges between 3 and 4 seconds, while the Pandas implementation is executed under 1 second. This is because the Python UDF includes multiple conversion steps which affect performance:
 
 - parsing the input data as JSON;
 - converting the JSON to numpy array;

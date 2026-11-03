@@ -87,9 +87,9 @@ For more information, see the [Rust Appender API]({% link docs/1.5/clients/rust/
 
 For more information, see the [C Appender API]({% link docs/1.5/clients/c/appender.md %}).
 
-## Date, Time and Timestamps
+## Date, Time, and Timestamps
 
-While numbers and strings are rather self-explanatory, dates, times, and timestamps require some explanation. In the C++ API, they can be directly appended using the methods provided by `duckdb::Date`, `duckdb::Time` or `duckdb::Timestamp`. They can also be appended using the internal `duckdb::Value` type, however, this adds some additional overheads and should be avoided if possible.
+While numbers and strings are rather self-explanatory, dates, times, and timestamps require some explanation. In the C++ API, they can be directly appended using the methods provided by `duckdb::Date`, `duckdb::Time`, or `duckdb::Timestamp`. They can also be appended using the internal `duckdb::Value` type, however, this adds some additional overheads and should be avoided if possible.
 
 Below is a short example:
 

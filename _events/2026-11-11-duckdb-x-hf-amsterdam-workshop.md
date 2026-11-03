@@ -30,4 +30,4 @@ The workshop runs from 12:00 to 17:00 CET on November 11, 2026.
 
 ### Speaker
 
-**Pratik Patel** is an AI Data Engineer and Developer Advocate at Hugging Face. He has written 3 books on programming, Cloud and OSS. An all-around software and hardware nerd with experience in the healthcare, telecom, financial services, and startup sectors. He's co-organizer of Enterprise AI Atlanta and the Atlanta Java User Group, and conference chairperson for Devnexus. He also writes about his knowledge (and adventures) in tech, is a frequent speaker at tech events, and master builder of nachos.
+**Pratik Patel** is an AI Data Engineer and Developer Advocate at Hugging Face. He has written 3 books on programming, Cloud, and OSS. An all-around software and hardware nerd with experience in the healthcare, telecom, financial services, and startup sectors. He's co-organizer of Enterprise AI Atlanta and the Atlanta Java User Group, and conference chairperson for Devnexus. He also writes about his knowledge (and adventures) in tech, is a frequent speaker at tech events, and master builder of nachos.

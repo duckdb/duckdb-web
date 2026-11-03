@@ -1,6 +1,13 @@
 ---
 layout: docu
 railroad: statements/samples.js
+redirect_from:
+- /docs/sql/samples
+- /docs/stable/sql/samples
+- /docs/current/sql/samples
+- /docs/lts/sql/samples
+- /docs/preview/sql/samples
+- /docs/stable/sql/query_syntax/samples
 title: Samples
 ---
 
@@ -24,7 +31,7 @@ FROM tbl
 USING SAMPLE 10%;
 ```
 
-> Warning By default, when you specify a percentage, each [*vector*]({% link docs/1.5/internals/vector.md %}) is included in the sample with that probability. If your table contains fewer than ~10k rows, it makes sense to specify the `bernoulli` sampling option instead, which applies the probability to each row independently. Even then, you'll sometimes get more and sometimes less than the specified percentage of the number of rows, but it is much less likely that you get no rows at all. To get exactly 10% of rows (up to rounding), you must use the `reservoir` sampling option.
+> Warning By default, when you specify a percentage, each [*vector*]({% link docs/2.0/internals/vector.md %}) is included in the sample with that probability. If your table contains fewer than ~10k rows, it makes sense to specify the `bernoulli` sampling option instead, which applies the probability to each row independently. Even then, you'll sometimes get more and sometimes less than the specified percentage of the number of rows, but it is much less likely that you get no rows at all. To get exactly 10% of rows (up to rounding), you must use the `reservoir` sampling option.
 
 Select a sample of *approximately* 10% of the table using `bernoulli` sampling:
 
@@ -82,11 +89,20 @@ USING SAMPLE reservoir(20%);
 
 Samples allow you to randomly extract a subset of a dataset. Samples are useful for exploring a dataset faster, as often you might not be interested in the exact answers to queries, but only in rough indications of what the data looks like and what is in the data. Samples allow you to get approximate answers to queries faster, as they reduce the amount of data that needs to pass through the query engine.
 
-DuckDB supports three different types of sampling methods: `reservoir`, `bernoulli` and `system`. By default, DuckDB uses `reservoir` sampling when an exact number of rows is sampled, and `system` sampling when a percentage is specified. The sampling methods are described in detail below.
+DuckDB supports three different types of sampling methods: `reservoir`, `bernoulli`, and `system`. By default, DuckDB uses `reservoir` sampling when an exact number of rows is sampled, and `system` sampling when a percentage is specified. The sampling methods are described in detail below.
 
 Samples require a *sample size*, which is an indication of how many elements will be sampled from the total population. Samples can either be given as a percentage (`10%` or `10 PERCENT`) or as a fixed number of rows (`10` or `10 ROWS`). All three sampling methods support sampling over a percentage, but **only** reservoir sampling supports sampling a fixed number of rows.
 
-Samples are probabilistic, that is to say, samples can be different between runs *unless* the seed is specifically specified. Specifying the seed *only* guarantees that the sample is the same if multi-threading is not enabled (i.e., `SET threads = 1`). In the case of multiple threads running over a sample, samples are not necessarily consistent even with a fixed seed.
+Samples are probabilistic, that is to say, samples can be different between runs *unless* the seed is specifically specified. Specifying the seed *only* guarantees that the sample is the same if multi-threading is not enabled (i.e., `SET threads = 1`{:.language-sql .highlight}). In the case of multiple threads running over a sample, samples are not necessarily consistent even with a fixed seed.
+
+## Reproducible Samples
+
+Sampling is probabilistic, so a query returns a different sample on each run unless the seed is fixed. The seed is a non-negative integer and can be specified in two equivalent ways:
+
+* With the `REPEATABLE` keyword after the method form, e.g., `USING SAMPLE reservoir(50 ROWS) REPEATABLE (100)`.
+* As the second value in the parenthesized method form, e.g., `USING SAMPLE 20% (system, 377)`.
+
+As noted above, fixing the seed only guarantees a reproducible sample when DuckDB runs single-threaded (`SET threads = 1`{:.language-sql .highlight}). With multiple threads, samples are not necessarily consistent even with a fixed seed.
 
 ## Sampling Methods
 
@@ -115,7 +131,7 @@ The *expected* number of rows is still equal to the specified percentage of the 
 
 ## Table Samples
 
-The `TABLESAMPLE` and `USING SAMPLE` clauses are identical in terms of syntax and effect, with one important difference: tablesamples sample directly from the table for which they are specified, whereas the sample clause samples after the entire from clause has been resolved. This is relevant when there are joins present in the query plan.
+The `TABLESAMPLE` and `USING SAMPLE` clauses use the same internal syntax (sample size, method, and optional seed), but they differ in where they are written and what they sample. The `TABLESAMPLE` clause is written directly after a table expression, following its alias if one is present, and samples only that table. The `USING SAMPLE` clause is written at the end of the `SELECT` statement body and samples the result of the entire `FROM` clause, after all joins have been resolved. This distinction is relevant when there are joins present in the query plan. `TABLESAMPLE` can be applied to any table expression in the `FROM` clause, including tables that participate in a join.
 
 The `TABLESAMPLE` clause is essentially equivalent to creating a subquery with the `USING SAMPLE` clause, i.e., the following two queries are identical:
 

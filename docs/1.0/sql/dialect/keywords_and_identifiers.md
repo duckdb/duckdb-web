@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/archive/1.0/sql/case_sensitivity
-- /docs/archive/1.0/sql/case_sensitivity/
 - /docs/archive/1.0/sql/keywords-and-identifiers
 - /docs/archive/1.0/sql/dialect/keywords-and-identifiers
 title: Keywords and Identifiers

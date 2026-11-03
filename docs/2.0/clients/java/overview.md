@@ -15,17 +15,17 @@ redirect_from:
 title: Java (JDBC) Client
 ---
 
-> Installation To use the DuckDB Java (JDBC) client, visit the [Java installation page]({% link install/index.html %}?environment=java).
+> Installation To use the DuckDB Java (JDBC) client, visit the [Java installation page]({% link docs/2.0/installation.html %}?environment=java).
 >
 > The latest stable version of the DuckDB Java (JDBC) client is {% include install/latest_client.html client="java" %}{{ latest_version }}.
 
-The DuckDB Java (JDBC) client lets Java applications query DuckDB through the standard JDBC API, extended with DuckDB-specific features for bulk loading, [Apache Arrow](https://arrow.apache.org/) interchange, user-defined functions, and profiling, and can open a [DuckLake]({% link docs/2.0/core_extensions/ducklake.md %}) catalog directly from the JDBC URL. The driver also supports ahead-of-time compilation with [GraalVM Native Image]({% link docs/2.0/clients/java/deploy_native_image.md %}). 
+The DuckDB Java (JDBC) client lets Java applications query DuckDB through the standard JDBC API, extended with DuckDB-specific features for bulk loading, [Apache Arrow](https://arrow.apache.org/) interchange, user-defined functions, and profiling, and can open a [DuckLake]({% link docs/2.0/core_extensions/ducklake.md %}) catalog directly from the JDBC URL. The driver also supports ahead-of-time compilation with [GraalVM Native Image]({% link docs/2.0/clients/java/deploy_native_image.md %}).
 
 This page covers installation; the other pages in this section cover connecting and each feature in detail.
 
 ## Installation
 
-The DuckDB Java JDBC API can be installed from [Maven Central](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc). Please see the [installation page]({% link install/index.html %}?environment=java) for details.
+The DuckDB Java JDBC API can be installed from [Maven Central](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc). Please see the [installation page]({% link docs/2.0/installation.html %}?environment=java) for details.
 
 > Tip To try features before they reach a stable release, preview (nightly) builds of the JDBC driver are published as `SNAPSHOT` versions to DuckDB's snapshot repository at `https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven`. This is an object storage repository with no browseable web page; it is consumed directly by Maven. Add the repository to your build and depend on a `duckdb_jdbc` `SNAPSHOT` version. See the [preview builds page]({% link install/preview.md %}) for a full Maven example.
 

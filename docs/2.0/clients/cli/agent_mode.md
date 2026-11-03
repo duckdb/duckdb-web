@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/clients/cli/agent_mode
 - /docs/lts/clients/cli/agent_mode
 - /docs/preview/clients/cli/agent_mode
+- /docs/stable/clients/cli/agent_mode
 title: Agent Mode
 ---
 

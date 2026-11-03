@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/database_integration/postgres
 - /docs/preview/guides/database_integration/postgres
 title: PostgreSQL Import
+how_to_topic: database-integration
 ---
 
 To run a query directly on a running PostgreSQL database, the [`postgres` extension]({% link docs/2.0/core_extensions/postgres/overview.md %}) is required.

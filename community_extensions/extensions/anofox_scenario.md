@@ -74,10 +74,10 @@ docs:
     `SET anofox_scenario_telemetry_enabled = false` or
     `DATAZOO_DISABLE_TELEMETRY=1`; see TELEMETRY.md in the repository.
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 11422
-extension_download_count_pretty: 11.4k
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 918
+extension_download_count_pretty: 918
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_scenario.png'
 layout: community_extension_doc
 ---

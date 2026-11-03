@@ -7,11 +7,11 @@ The `.mode` [dot command]({% link docs/1.5/clients/cli/dot_commands.md %}) may b
 The `markdown` mode is particularly useful for building documentation and the `latex` mode is useful for writing academic papers.
 
 > Warning Unicode handling in Windows Terminal
-> 
+>
 > When long results are displayed in Windows Terminal the [more system utility](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/more)
 > is used by default to provide the scrolling through the results. This utility has incomplete support of Unicode,
 > depending on the output data, in some cases it can display Unicode characters in garbled form.
-> 
+>
 > We suggest using the [third-party less utility](https://en.wikipedia.org/wiki/Less_(Unix)) instead,
 > that is installed by default along with the [Git for Windows](https://git-scm.com/install/windows) installation.
 > It can be enabled the following way:

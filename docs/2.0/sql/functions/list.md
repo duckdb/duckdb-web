@@ -501,7 +501,7 @@ title: List Functions
 
 | **Description** | Returns a list of all the elements that exist in both `list1` and `list2`, without duplicates. |
 | **Example** | `list_intersect([1, 2, 3], [2, 3, 4])` |
-| **Result** | `[3, 2]` |
+| **Result** | `[2, 3]` |
 | **Alias** | `array_intersect` |
 
 #### `list_kurtosis(list)`
@@ -1041,7 +1041,7 @@ The arguments are as follows:
     * **Bracket Notation:** When `end` is omitted, it defaults to the end of the list. When `end` is omitted and a `step` is provided, `end` must be replaced with a `-`
 * `step` *(optional)*
     * Is the step size between elements in the slice
-    * When `step < 0` the slice is reversed, and `begin` and `end` are swapped
+    * When `step < 0` the slice is reversed, and `begin` and `end` are swapped before the `begin` and `end` rules above are applied
     * Must be non-zero
 
 Examples:
@@ -1071,6 +1071,18 @@ SELECT([1, 2, 3, 4, 5])[4:2:-2];
 ```
 
 ```sql
+SELECT ([1, 2, 3, 4, 5])[1:99:-1];
+```
+
+```text
+[]
+```
+
+The negative step swaps the bounds before the `begin` and `end` rules above are
+applied. The example above therefore becomes `begin=99, end=1`, and `begin`
+exceeds the list length.
+
+```sql
 SELECT ([1, 2, 3, 4, 5])[:];
 ```
 
@@ -1096,12 +1108,12 @@ SELECT ([1, 2, 3, 4, 5])[:-:-2];
 
 ## List Aggregates
 
-The function [`list_aggregate`](#list_aggregatelist-function_name-) allows the execution of arbitrary existing aggregate functions on the elements of a list. Its first argument is the list (column), its second argument is the aggregate function name, e.g., `min`, `histogram` or `sum`.
+The function [`list_aggregate`](#list_aggregatelist-function_name-) allows the execution of arbitrary existing aggregate functions on the elements of a list. Its first argument is the list (column), its second argument is the aggregate function name, e.g., `min`, `histogram`, or `sum`.
 
 `list_aggregate` accepts additional arguments after the aggregate function name. These extra arguments are passed directly to the aggregate function, which serves as the second argument of `list_aggregate`.
 
-Order-sensitive aggregate functions are applied in the order of the list. The `ORDER BY`, `DISTINCT` and `FILTER` clauses are not supported by `list_aggregate`.
-They may instead be emulated using `list_sort`, `list_grade_up`, `list_select`, `list_distinct` and `list_filter`.
+Order-sensitive aggregate functions are applied in the order of the list. The `ORDER BY`, `DISTINCT`, and `FILTER` clauses are not supported by `list_aggregate`.
+They may instead be emulated using `list_sort`, `list_grade_up`, `list_select`, `list_distinct`, and `list_filter`.
 
 ```sql
 SELECT list_aggregate([1, 2, -4, NULL], 'min');
@@ -1137,7 +1149,7 @@ SELECT list_aggregate([2, 4, 8, 42], 'string_agg', '|');
 
 ### `list_*` Rewrite Functions
 
-The following is a list of existing rewrites. Rewrites simplify the use of the list aggregate function by only taking the list (column) as their argument. `list_avg`, `list_var_samp`, `list_var_pop`, `list_stddev_pop`, `list_stddev_samp`, `list_sem`, `list_approx_count_distinct`, `list_bit_xor`, `list_bit_or`, `list_bit_and`, `list_bool_and`, `list_bool_or`, `list_count`, `list_entropy`, `list_last`, `list_first`, `list_kurtosis`, `list_kurtosis_pop`, `list_min`, `list_max`, `list_product`, `list_skewness`, `list_sum`, `list_string_agg`, `list_mode`, `list_median`, `list_mad` and `list_histogram`.
+The following is a list of existing rewrites. Rewrites simplify the use of the list aggregate function by only taking the list (column) as their argument. `list_avg`, `list_var_samp`, `list_var_pop`, `list_stddev_pop`, `list_stddev_samp`, `list_sem`, `list_approx_count_distinct`, `list_bit_xor`, `list_bit_or`, `list_bit_and`, `list_bool_and`, `list_bool_or`, `list_count`, `list_entropy`, `list_last`, `list_first`, `list_kurtosis`, `list_kurtosis_pop`, `list_min`, `list_max`, `list_product`, `list_skewness`, `list_sum`, `list_string_agg`, `list_mode`, `list_median`, `list_mad`, and `list_histogram`.
 
 ```sql
 SELECT list_min([1, 2, -4, NULL]);

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: panduck
   description: Read documents natively into the duck_block vocabulary -- DOCX, ODT, EPUB, RTF, LaTeX, Org, RST, ipynb, MediaWiki and Textile -- and write them back as Pandoc JSON, without linking Pandoc
-  version: 0.6.2
+  version: 0.7.0
   language: C++
   build: cmake
   license: MIT
@@ -20,30 +20,32 @@ extension:
   vcpkg_commit: 84bab45d415d22042bd0b9081aea57f362da3f35
 repo:
   github: teaguesterling/duckdb_panduck
-  ref: fbc56ed5c5d550a9dd601c617649a56625c89d19
+  ref: dc094ee3261251a69f3f394b775709a682fb0640
   # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
   # present and to `ref` otherwise, and unlike ref_next it has no skip branch -- so
   # once `ref` is 2.0-only a v1.5.6 build would fail rather than be skipped. Equal to
   # `ref` while both lines build; advance only to a commit v1.5.6 can still build.
-  variegata: fbc56ed5c5d550a9dd601c617649a56625c89d19
-  # THE SAME COMMIT AS `ref`, measured rather than defaulted: panduck's own pipeline on this
-  # commit built v2.0-cyanoptera green on every platform target, and DuckDB `main` as an
-  # advisory canary. 0.5.0 needed a separate ref_next for a missing catalog.hpp include; that
-  # fix has been in every tag since. RE-MEASURED for 0.6.2 on this exact commit (run
-  # 38436336002): 45 jobs green, 1 skipped, with all THREE lines at 10/10 -- the default
-  # stable line, the v2.0 "next" line, and the `main` canary -- across the nine platform
-  # targets, which are linux amd64/arm64, osx amd64/arm64, windows amd64 + mingw and wasm
-  # mvp/eh/threads. The single skip is `Code Quality Check / Tidy Check`, which skipped for
-  # 0.6.0 and 0.6.1 too. Note that the v2.0 and canary jobs do NOT run on pull requests --
-  # they skip there and only fire on main -- so this measurement is from the post-merge run,
-  # not the PR's, and it was re-run for THIS commit rather than carried over from 0.6.1.
+  variegata: dc094ee3261251a69f3f394b775709a682fb0640
+  # THE SAME COMMIT AS `ref`, measured rather than defaulted. MEASURED for 0.7.0 on this
+  # exact commit, in panduck's post-merge run 41124226755. It is red, for known reasons:
+  #   v1.5.6 and v2.0.0 linux_amd64: 3160 of 3163 assertions. The 3 failures
+  #     (doc_namespace.test:26, multidoc.test:435, register_reader.test:56) INSTALL
+  #     duck_block_utils FROM community. The served duck_block_utils still registers the
+  #     converter names that 0.7.0 now owns, and the second extension to load fails its
+  #     init. They pass once the duck_block_utils release that drops those names is served.
+  #   macOS, Windows and wasm were skipped, because they wait on the linux job. So this
+  #     registry build is their first build of 0.7.0.
+  #   An advisory job that compares against duck_block_utils' converter copy got a 404,
+  #     because that copy is gone. The canary's linux_arm64 failed on an empty yum mirror.
+  # Before the merge, on longbottom: the v2.0.0 (d54cbbe) suite gave the same 3160/3163, and
+  # 0.7.0 loads with the new duck_block_utils in both orders.
   #
   # ref_next STAYS SET even when it equals ref: without it scripts/build.py prints "Skipping
   # prerelease validation" and test_against_latest never runs -- a green that means "did not
   # look". panduck v0.2.0 merged that way, and the job has since caught two real defects.
   # A STALE ref_next is worse than an absent one: it validates the PREVIOUS release
   # against the next line while reporting green, so it moves with ref every release.
-  ref_next: fbc56ed5c5d550a9dd601c617649a56625c89d19
+  ref_next: dc094ee3261251a69f3f394b775709a682fb0640
 docs:
   hello_world: |
     LOAD panduck;
@@ -156,6 +158,13 @@ docs:
     | `panduck_write_pandoc_ast(path, blocks)` | Write Pandoc JSON to a file |
     | `panduck_pandoc_ast_map()` | The constructor mapping, as a queryable table |
 
+    Since 0.7.0, panduck also registers the converter names that `duck_block_utils` used
+    to register: `pandoc_ast_to_blocks`, `read_pandoc_ast`, `write_pandoc_ast`,
+    `duck_blocks_to_pandoc_ast`, `duck_blocks_to_pandoc_blocks`, `pandoc_ast`,
+    `pandoc_inlines_to_db_inlines`, `pandoc_inlines_to_text` and
+    `duck_blocks_inlines_to_pandoc`. Load it with a `duck_block_utils` release that no
+    longer registers them.
+
     The governing rule is that panduck may be **more** faithful than pandoc -- richer
     attributes, better block types, metadata pandoc does not extract -- so long as the
     mapping back to valid Pandoc JSON stays total. Every fixture and a set of
@@ -165,8 +174,9 @@ docs:
 
     This is an early release. Ten native readers are implemented and tested against
     reference implementations -- RTF, DOCX, ODT, EPUB, LaTeX, Org, RST, ipynb, MediaWiki,
-    Textile -- plus a Pandoc AST reader, with 3108 test assertions, differential validation
-    against a real pandoc on every fixture, and eleven jobs in CI. PDF, Markdown and HTML
+    Textile -- plus a Pandoc AST reader, with 3163 test assertions, differential validation
+    against a real pandoc on every fixture, and CI that builds and tests against DuckDB
+    v1.5.6, v2.0.0 and main. PDF, Markdown and HTML
     are read by delegating to the pdf, markdown and webbed extensions rather than by a
     reader here.
 
@@ -183,8 +193,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 11866
-extension_download_count_pretty: 11.9k
+extension_download_count: 1032
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_panduck.png'
 layout: community_extension_doc
 ---
@@ -231,6 +241,13 @@ LOAD {{ page.extension.name }};
 | doc_search_sections              | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
 | doc_section                      | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
 | doc_toc                          | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
+| duck_blocks_inlines_to_pandoc    | scalar        | NULL                                                                                                   | NULL    |                                                                                                               |
+| duck_blocks_to_pandoc_ast        | scalar        | Convert a list of duck_blocks into a Pandoc AST document struct.                                       | NULL    | [duck_blocks_to_pandoc_ast(blocks)]                                                                           |
+| duck_blocks_to_pandoc_blocks     | scalar        | Convert a list of duck_blocks into a JSON array of Pandoc blocks.                                      | NULL    | [duck_blocks_to_pandoc_blocks(blocks)]                                                                        |
+| pandoc_ast                       | table         | Return a list of duck_blocks as one Pandoc AST row.                                                    | NULL    | [SELECT * FROM pandoc_ast(blocks)]                                                                            |
+| pandoc_ast_to_blocks             | scalar        | Convert a Pandoc AST JSON string into a list of duck_blocks.                                           | NULL    | [pandoc_ast_to_blocks('{"pandoc-api-version": [1,23,1], "meta": {}, "blocks": []}')]                          |
+| pandoc_inlines_to_db_inlines     | scalar        | Parse a Pandoc inlines JSON array into inline duck_blocks.                                             | NULL    | [pandoc_inlines_to_db_inlines('[{"t":"Str","c":"hi"}]')]                                                      |
+| pandoc_inlines_to_text           | scalar        | NULL                                                                                                   | NULL    |                                                                                                               |
 | panduck_block_cols               | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
 | panduck_blocks_to_pandoc_ast     | scalar        | Convert a list of duck_blocks into a Pandoc AST document struct.                                       | NULL    | [panduck_blocks_to_pandoc_ast(blocks)]                                                                        |
 | panduck_blocks_to_pandoc_blocks  | scalar        | Convert a list of duck_blocks into a JSON array string of Pandoc block elements.                       | NULL    | [panduck_blocks_to_pandoc_blocks(blocks)]                                                                     |
@@ -288,6 +305,7 @@ LOAD {{ page.extension.name }};
 | read_odt_blocks                  | table         | Read an ODT document and return structured document blocks.                                            | NULL    | [SELECT * FROM read_odt_blocks('document.odt')]                                                               |
 | read_org_blocks                  | table         | Read an Emacs Org-mode document and return structured document blocks.                                 | NULL    | [SELECT * FROM read_org_blocks('document.org')]                                                               |
 | read_org_blocks_string           | table         | Parse an Emacs Org-mode string and return structured document blocks.                                  | NULL    | [SELECT * FROM read_org_blocks_string('* Heading\nParagraph')]                                                |
+| read_pandoc_ast                  | scalar        | Read a Pandoc AST JSON file into a list of duck_blocks.                                                | NULL    | [read_pandoc_ast('document.json')]                                                                            |
 | read_pandoc_blocks               | table         | Read a Pandoc AST JSON file and return structured document blocks.                                     | NULL    | [SELECT * FROM read_pandoc_blocks('document.json')]                                                           |
 | read_pandoc_blocks_string        | table         | Parse a Pandoc AST JSON string and return structured document blocks.                                  | NULL    | [SELECT * FROM read_pandoc_blocks_string('{"pandoc-api-version": [1,23,1], "meta": {}, "blocks": []}')]       |
 | read_panduck_doc                 | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
@@ -298,6 +316,7 @@ LOAD {{ page.extension.name }};
 | read_rtf_blocks                  | table         | Read an RTF file and return structured document blocks.                                                | NULL    | [SELECT * FROM read_rtf_blocks('document.rtf')]                                                               |
 | read_textile_blocks              | table         | Read a Textile document and return structured document blocks.                                         | NULL    | [SELECT * FROM read_textile_blocks('document.textile')]                                                       |
 | read_textile_blocks_string       | table         | Parse a Textile string and return structured document blocks.                                          | NULL    | [SELECT * FROM read_textile_blocks_string('h1. Header\n\n*bold*')]                                            |
+| write_pandoc_ast                 | scalar        | Write a list of duck_blocks out as a Pandoc AST JSON file.                                             | NULL    | [write_pandoc_ast('output.json', blocks)]                                                                     |
 
 ### Overloaded Functions
 

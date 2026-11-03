@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/quack/reference
 - /docs/lts/quack/reference
 - /docs/preview/quack/reference
+- /docs/stable/quack/reference
 title: Reference
 ---
 
@@ -41,7 +42,7 @@ For a tour of the protocol, start with the [Overview]({% link docs/2.0/quack/ove
 
 | Function | Description |
 | -------- | ----------- |
-| `quack_query(uri, query, ...)` | Run `query` on remote `uri`, stream result back. Accepts the named parameters `token`, `disable_ssl`, `ssl_fingerprint`, `client_id` and `heartbeat_timeout`, which behave like the [`ATTACH` options](#attach-options) of the same name. Pass `token` to override any matching quack secret on the client side. |
+| `quack_query(uri, query, ...)` | Run `query` on remote `uri`, stream result back. Accepts the named parameters `token`, `disable_ssl`, `ssl_fingerprint`, `client_id`, and `heartbeat_timeout`, which behave like the [`ATTACH` options](#attach-options) of the same name. Pass `token` to override any matching quack secret on the client side. |
 | `quack_query_by_name(catalog, query)` | Run `query` against an already-attached Quack catalog (used by `⟨catalog⟩.query()`{:.language-sql .highlight}). Also accepts the named parameters `use_transaction` and `refresh_catalog` (both `BOOLEAN`). |
 | `quack_connection_id(catalog)` | Return the server-issued `quack_connection_id` of an attached Quack catalog. |
 | `quack_cancel(catalog, connection_id)` | Cancel the running query of the connection `connection_id` on the server of the attached Quack catalog `catalog`. Returns the connection id and whether the cancellation succeeded. |

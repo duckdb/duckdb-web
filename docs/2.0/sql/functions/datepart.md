@@ -11,7 +11,7 @@ title: Date Part Functions
 
 <!-- markdownlint-disable MD001 -->
 
-The `date_part`, `date_trunc` and `date_diff` functions can be used to extract or manipulate parts of temporal types such as [`TIMESTAMP`]({% link docs/2.0/sql/data_types/timestamp.md %}), [`TIMESTAMPTZ`]({% link docs/2.0/sql/data_types/timestamp.md %}), [`DATE`]({% link docs/2.0/sql/data_types/date.md %}) and [`INTERVAL`]({% link docs/2.0/sql/data_types/interval.md %}).
+The `date_part`, `date_trunc`, and `date_diff` functions can be used to extract or manipulate parts of temporal types such as [`TIMESTAMP`]({% link docs/2.0/sql/data_types/timestamp.md %}), [`TIMESTAMPTZ`]({% link docs/2.0/sql/data_types/timestamp.md %}), [`DATE`]({% link docs/2.0/sql/data_types/date.md %}), and [`INTERVAL`]({% link docs/2.0/sql/data_types/interval.md %}).
 
 The parts to be extracted or manipulated are specified by one of the strings in the tables below.
 The example column provides the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
@@ -244,7 +244,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `second(timestamp '2021-08-03 11:59:44.123456')` |
 | **Result** | `44` |
 
-#### `timezone_hour(date)`
+#### `timezone_hour(timestamptz)`
 
 <div class="nostroke_table"></div>
 
@@ -252,7 +252,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `timezone_hour(TIMESTAMPTZ '1992-02-15 01:00:00+00')` |
 | **Result** | `-5` (with `TimeZone` set to `America/New_York`) |
 
-#### `timezone_minute(date)`
+#### `timezone_minute(timestamptz)`
 
 <div class="nostroke_table"></div>
 
@@ -260,7 +260,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `timezone_minute(TIMESTAMPTZ '1992-02-15 01:00:00+00')` |
 | **Result** | `30` (with `TimeZone` set to `Asia/Kolkata`) |
 
-#### `timezone(date)`
+#### `timezone(timestamptz)`
 
 <div class="nostroke_table"></div>
 

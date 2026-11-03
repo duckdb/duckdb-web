@@ -121,7 +121,7 @@ DuckLake is the modern evolution of the cloud data lakehouse – take a minute t
 DuckLake has an [additional concept of a partition](https://ducklake.select/docs/stable/duckdb/advanced_features/partitioning), which enables entire files to be skipped.
 To take full advantage of DuckLake, first partition your data (by time or otherwise) and then apply the techniques in this post when loading your data.
 
-All experiments were run on an M1 MacBook Pro with DuckDB v1.2.2.
+All experiments were run on an M1 MacBook Pro with DuckDB 1.2.2.
 The tests were conducted with the DuckDB Python client with results returned as Apache Arrow tables.
 In between each query, the DuckDB connection is closed and recreated (this time is not measured as a part of the results).
 This is to better simulate a single user's experience accessing the dashboard in our hypothetical use case.

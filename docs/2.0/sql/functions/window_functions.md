@@ -127,7 +127,7 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `expr` evaluated at the row that is the last row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. If omitted, `offset` defaults to `1` and default to `NULL`. If an `ORDER BY` clause is specified, the last row is determined within the frame using the provided ordering instead of the frame ordering. |
+| **Description** | Returns `expr` evaluated at the row that is the last row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. If an `ORDER BY` clause is specified, the last row is determined within the frame using the provided ordering instead of the frame ordering. |
 | **Return type** | Same type as `expr` |
 | **Example** | `last_value(column)` |
 
@@ -159,9 +159,18 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. If an `ORDER BY` clause is specified, the relative rank is computed within the frame using the provided ordering instead of the frame ordering. |
+| **Description** | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. If an `ORDER BY` clause is specified, the relative rank is computed within the frame using the provided ordering instead of the frame ordering. For a partition with a single row, `percent_rank` returns `0`. |
 | **Return type** | `DOUBLE` |
 | **Example** | `percent_rank()` |
+
+```sql
+SELECT percent_rank() OVER (ORDER BY x) AS percent_rank
+FROM (VALUES (42)) AS t(x);
+```
+
+```text
+0.0
+```
 
 #### `rank([ORDER BY ordering])`
 
@@ -204,7 +213,7 @@ SELECT list(DISTINCT name) OVER (ORDER BY time) FROM sales;
 All aggregate window functions support using an `ORDER BY` argument clause that is *different* from the window ordering.
 When the `ORDER BY` argument clause is provided, the values being aggregated are sorted before applying the function.
 Usually this is not important, but there are some order-sensitive aggregates that can have indeterminate results (e.g.,
-`mode`, `list` and `string_agg`). These can be made deterministic by ordering the arguments. For order-insensitive
+`mode`, `list`, and `string_agg`). These can be made deterministic by ordering the arguments. For order-insensitive
 aggregates, this clause is parsed and ignored.
 
 ```sql
@@ -466,7 +475,7 @@ There are four options for `EXCLUDE` that specify how to treat the current row:
 * `TIES` – exclude all peer rows, but _not_ the current row (this makes a hole on either side)
 * `NO OTHERS` – don't exclude anything (the default)
 
-Exclusion is implemented for both windowed aggregates as well as for the `first`, `last` and `nth_value` functions.
+Exclusion is implemented for both windowed aggregates as well as for the `first`, `last`, and `nth_value` functions.
 
 ### `WINDOW` Clauses
 

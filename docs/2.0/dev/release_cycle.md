@@ -14,7 +14,7 @@ DuckDB extensions to better understand the underlying processes.
 ## Overview
 
 - DuckDB follows [Semantic Versioning](https://semver.org/) (`v<MAJOR>.<MINOR>.<PATCH>`)
-- Feature releases (new minor or major versions) are released approximately every 6 months, e.g., v1.4.0 in September 2025, v1.5.0 in March 2026 and v2.0.0 in October 2026
+- Feature releases (new minor or major versions) are released approximately every 6 months, e.g., v1.4.0 in September 2025, v1.5.0 in March 2026, and v2.0.0 in October 2026
 - Patch releases are issued as needed for all supported versions:
     - The latest stable version
     - Long Term Support (LTS) versions within their support period
@@ -57,7 +57,7 @@ listing the format these core branches come in.
 
 > LTS (Long-Term Support) releases follow a separate maintenance cycle to provide extended support and stability.
 
-The main DuckDB release cycle consists of 3 main phases: *Mid-cycle*, *Pre-release* and *Feature freeze*. These phases are clearly defined and communicated to ensure the
+The main DuckDB release cycle consists of 3 main phases: *Mid-cycle*, *Pre-release*, and *Feature freeze*. These phases are clearly defined and communicated to ensure the
 whole team is synchronized and working together towards the next release.
 
 ### Phase 1: Mid-Cycle
@@ -261,7 +261,7 @@ type (single/multi branch):
     - Extension type: **Three branch**
         - Latest version: Extension **`vx.<y+1>-codename`** branch
 
-#### Switching between Single Branch, Two Branch and Three Branch
+#### Switching between Single Branch, Two Branch, and Three Branch
 
 Switching between the different branch types for extensions is a fairly straightforward process and should be done as follows:
 

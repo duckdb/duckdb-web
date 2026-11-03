@@ -16,8 +16,8 @@ extension:
     - nkwork9999
 
 repo:
-  github: nkwork9999/duckgl # あなたのリポジトリ名に合わせて
-  ref: 2cfa0a924beaa0985af6729c4986c129e8c52ce5
+  github: nkwork9999/duckgl
+  ref: 45ef59e814d2fa1dac3b383d40513ffd45f1beb9
 
 docs:
   hello_world: |
@@ -42,10 +42,18 @@ docs:
     and a north-up SVG geometry overview without base-map tiles. Export PDF opens that report in the
     browser print dialog; choose Save as PDF. Saved HTML contains no scripts and does not execute SQL.
 
-extension_star_count: 10
-extension_star_count_pretty: 10
-extension_download_count: 10795
-extension_download_count_pretty: 10.8k
+    **Map analysis and additional exports**:
+    Inspect table columns, choose a geometry column, specify the source CRS for WGS84 conversion,
+    map a spatial SELECT query, and click features to inspect their attributes.
+    Download query results as CSV or JSON, and map data as GeoJSON, SVG, PNG, or interactive HTML.
+    Interactive HTML embeds the data and runs without the DuckGL server, but needs internet access
+    for map libraries and base-map tiles. SVG and PNG are north-up geometry overviews without tiles.
+    Attached database selection and large integer identifiers retain their exact identity.
+
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 939
+extension_download_count_pretty: 939
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgl.png'
 layout: community_extension_doc
 ---

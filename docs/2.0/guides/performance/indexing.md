@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/performance/indexing
 - /docs/preview/guides/performance/indexing
 title: Indexing
+how_to_topic: performance
 ---
 
 DuckDB has two types of indexes: zonemaps and ART indexes.

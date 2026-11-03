@@ -235,9 +235,9 @@ duckdb.df(df).filter(
     SQLExpression("'hello'").alias("constant_text_column")
 ).aggregate(
     aggr_expr=[
-        SQLExpression("SUM(selecting_column_a)").alias("sum_a"), 
-        "selecting_case_expression" , 
-        "constant_numeric_column", 
+        SQLExpression("SUM(selecting_column_a)").alias("sum_a"),
+        "selecting_case_expression" ,
+        "constant_numeric_column",
         "constant_text_column"
     ],
 ).show()

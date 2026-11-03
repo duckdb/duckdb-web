@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: st_read_multi
   description: Read multiple geospatial files
-  version: 0.0.4
+  version: 0.0.6
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: yutannihilation/duckdb-ext-st-read-multi
-  ref: 27060866a7f71433d70d7598033ccefab9fc510c
+  ref: b57e6f26d86e7a979e3de8c2970bee3a758b5d38
 
 docs:
   hello_world: |
@@ -31,8 +31,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 7854
-extension_download_count_pretty: 7.9k
+extension_download_count: 826
+extension_download_count_pretty: 826
 image: '/images/community_extensions/social_preview/preview_community_extension_st_read_multi.png'
 layout: community_extension_doc
 ---
@@ -44,11 +44,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ❌ | ✅ |
 | macOS AMD64 | ✅ | ✅ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -92,6 +92,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

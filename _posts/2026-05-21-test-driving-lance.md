@@ -16,7 +16,7 @@ With the [`lance` extension]({% link docs/2.0/core_extensions/lance.md %}), Duck
 
 > In this blog, there will be some mentions of “retrieval workloads” and “AI data patterns” or “AI datasets”. By “retrieval workloads,” we mean queries that find rows by similarity or keyword relevance, such as vector search and full-text search, rather than by exact filters or aggregations. By “AI data patterns,” we mean datasets that mix embeddings, images, or audio alongside scalar metadata.
 
-## What is Lance?
+## What Is Lance?
 
 [Lance](https://lance.org/) is an open lakehouse format designed for modern ML and AI workloads. Unlike Parquet, Lance is a file format, a table format, and a lightweight catalog spec all at once. At the table format level, Lance supports versioning, schema evolution, indexes, and transactional updates through MVCC and ACID-style semantics. In practice, this means Lance is built for datasets that change over time and need more than read-only scans.
 

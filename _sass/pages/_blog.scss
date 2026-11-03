@@ -179,7 +179,7 @@ section.speakers,
 			}
 		}
 		.postdetails h3{
-			@include title-3();
+			@include headline-4();
 			color: var(--main-text-primary-color, #0D0D0D);
 			margin: 0;
 			a{
@@ -279,10 +279,10 @@ section.speakers,
 	}
 
 	#search-input {
-		@include label-1();
+		@include label();
 		height: 44px;
 		padding: 0 15px 0 40px;
-		border: 1px solid var(--main-codebox-border-color, #E6E6E6);
+		border: 1px solid var(--border-color);
 		border-radius: var(--page-radius-pill);
 		order: 2;
 		flex: 0 1 300px;
@@ -296,12 +296,12 @@ section.speakers,
 		background-position: 18px center;
 		color: var(--main-text-primary-color, #F2F2F2);
 		&:focus{
-			outline: var(--interactive-filter-selected-background-color, #D9D9D9);
+			outline: var(--element-background-color);
 		}
 	}
 
 	.core-toggle {
-		@include label-1;
+		@include label;
 		order: 3;
 		display: flex;
 		align-items: center;
@@ -368,7 +368,7 @@ section.speakers,
 		height: 44px;
 		min-width: 44px;
 		border-radius: 50%;
-		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+		border: 1px solid var(--border-color);
 		background: var(--doc-codebox-background-color, #F2F2F2);
 		cursor: pointer;
 		position: relative;
@@ -413,14 +413,14 @@ section.speakers,
 			top: 0;
 			left: 0;
 			height: $filter-btn-height;
-			background: var(--interactive-filter-selected-background-color, #D9D9D9);
+			background: var(--element-background-color);
 			border-radius: var(--page-radius-pill);
 			transition: all 0.3s ease;
 			z-index: 1;
 		}
 
 		.filter-btn {
-			@include label-1;
+			@include label;
 			white-space: nowrap;
 			position: relative;
 			z-index: 2;
@@ -471,7 +471,7 @@ img{
 div.graphics-box,
 div.graphic-box{
 	border-radius: var(--page-radius-box);
-	border: 1px solid var(--main-infographics-element-border, #D9D9D9);
+	border: 1px solid var(--border-color);
 	background: var(--main-infographis-primary-background, #E6E6E6);
 	display: flex;
 	justify-content: center;
@@ -569,16 +569,16 @@ h5 a {
 			margin: 0 auto;
 			@include blog-typography;
 			details summary{
-				font-size: var(--type-body-normal, 16px);
+				font-size: var(--type-body-normal, 15px);
 			}
 			// Match the compatibility matrix on community extension pages
 			.extension_compatibility_table + table{
 				thead th{
-					font-size: var(--type-body-small, 14px);
+					font-size: var(--type-body-small, 13px);
 					font-weight: 700;
 				}
 				tbody td{
-					font-size: var(--type-body-small, 14px);
+					font-size: var(--type-body-small, 13px);
 					font-weight: var(--type-weight-standard, 450);
 					line-height: 1.55;
 				}
@@ -635,50 +635,8 @@ h5 a {
 						margin-left: 12px;
 						margin-top: 0;
 					}
-					ul li{
-						@include tiny();
-						font-weight: 400;
-					}
 					ul#toc{
-						list-style: none;
-						padding: 0;
-						margin: 0;
-						margin-top: 15px;
-						position: relative;
-						ul{
-							padding-left: 0px;
-							margin-left: 15px;
-							border-left: 1px solid #D9D9D9;
-							margin-top: 2px;
-							margin-bottom: 2px;
-							li{
-								list-style: none;
-							}
-							ul{
-								display: none;
-							}
-						}
-						li{
-							line-height: 1;
-						&.current > a{
-								color: var(--main-text-primary-color, #0D0D0D);
-							}
-						}
-						a{
-							color: $black400;
-							text-decoration: none;
-							padding: 6px 0px 6px 12px;
-							border-radius: var(--page-radius-pill);
-							display: inline-block;
-							text-overflow: ellipsis; 
-							overflow: hidden; 
-							white-space: nowrap;
-							max-width: 100%;
-							line-height: 1;
-						&:hover{
-								color: var(--main-text-primary-color, #0D0D0D);
-							}
-						}
+						@include toc-nav(15px);
 					}
 				}
 				
@@ -688,7 +646,7 @@ h5 a {
 				margin-top: 25px;
 				background-color: var(--doc-codebox-background-color, #F2F2F2);
 				border-radius: var(--page-radius-box);
-				border-top: 15px solid #979797;
+				border-top: 15px solid var(--border-color);
 				&:not(:first-of-type){
 					
 				}
@@ -1235,7 +1193,7 @@ footer{
 			right: 0;
 			z-index: 503;
 			background: var(--menu-dropdown-background-color, #F2F2F2);
-			border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
+			border: 1px solid var(--border-color);
 			border-radius: var(--page-radius-box);
 			padding: $filter-modal-padding;
 			opacity: 0;
