@@ -24,7 +24,7 @@ require "etc"
 # Note that with `--profile`, the render stats only cover the main process.
 
 module ParallelRender
-  DEFAULT_MAX_WORKERS = 8
+  DEFAULT_MAX_WORKERS = 12
   # below this many pages (e.g., in incremental regeneration), forking is not worth it
   MIN_PAGES = 100
   JOB_FORMAT = "L" # 32-bit unsigned job index
