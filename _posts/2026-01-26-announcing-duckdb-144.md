@@ -9,7 +9,7 @@ excerpt: "Today we are releasing DuckDB 1.4.4 with bugfixes and performance impr
 tag: release
 ---
 
-In this blog post, we highlight a few important fixes in DuckDB v1.4.4, the fourth patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}).
+In this blog post, we highlight a few important fixes in DuckDB 1.4.4, the fourth patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}).
 The release ships bugfixes, performance improvements, and security patches. You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.4).
 
 To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}#version=lts).
@@ -46,7 +46,7 @@ This version ships a number of performance improvements and bugfixes.
 
 This post was a short summary of the changes in v1.4.4. As usual, you can find the [full release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.4).
 We would like to thank our contributors for providing detailed issue reports and patches.
-In the coming month, we'll release DuckDB v1.5.0.
+In the coming month, we'll release DuckDB 1.5.0.
 We'll also keep v1.4 LTS updated until mid-September. We'll announce the release date of v1.4.5 in the [release calendar]({% link release_calendar.md %}) in the coming months.
 
 > Earlier today, we pushed an incorrect tag that was visible for a few minutes.

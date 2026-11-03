@@ -84,8 +84,8 @@ The data generator function `dsdgen` has the following parameters:
 
 ## Pre-Generated Datasets
 
-Pre-generated DuckDB databases for TPC-DS are available for download. Note that these were generated with DuckDB v1.x.
-DuckDB v2.x generates slightly different TPC-DS files, compatible with TPC-DS v4.
+Pre-generated DuckDB databases for TPC-DS are available for download. Note that these were generated with DuckDB 1.x.
+DuckDB 2.x generates slightly different TPC-DS files, compatible with TPC-DS v4.
 
 * [`tpcds-sf10.db`](https://blobs.duckdb.org/data/tpcds-sf10.db) (2.9 GB)
 * [`tpcds-sf30.db`](https://blobs.duckdb.org/data/tpcds-sf30.db) (7.7 GB)

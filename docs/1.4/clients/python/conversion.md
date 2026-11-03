@@ -109,7 +109,7 @@ The example above becomes a `MAP(INTEGER, VARCHAR)`:
 └─────────────────────────┘
 ```
 
-If the dict is returned by a [function]({% link docs/1.4/clients/python/function.md %}), 
+If the dict is returned by a [function]({% link docs/1.4/clients/python/function.md %}),
 the function will return a `MAP`, therefore the function `return_type` has to be specified. Providing
 a return type which cannot convert to `MAP` will raise an error:
 ```python
@@ -172,7 +172,7 @@ Becomes:
 └────────────────────────────────────────────────────────────────────┘
 ```
 
-If the dict is returned by a [function]({% link docs/1.4/clients/python/function.md %}), 
+If the dict is returned by a [function]({% link docs/1.4/clients/python/function.md %}),
 the function will return a `MAP`, due to [automatic conversion]({% link docs/1.4/clients/python/types.md %}#dictkey_type-value_type).
 To return a `STRUCT`, the `return_type` has to be provided:
 ```python

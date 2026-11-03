@@ -18,7 +18,7 @@
   max-width: 1150px;
 
   h2 {
-    font-size: var(--type-display-2, 45px);
+    font-size: var(--type-display-1, 44px);
     font-weight: 600;
     line-height: 1.2;
     color: var(--main-text-primary-color, #0d0d0d);
@@ -26,7 +26,7 @@
   }
 
   p {
-    font-size: var(--type-body-normal, 16px);
+    font-size: var(--type-body-normal, 15px);
     line-height: 1.5;
     color: var(--main-text-secondary-color, #666);
     margin: 18px 0 0;
@@ -108,7 +108,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: var(--type-title-3, 16px);
+  font-size: var(--type-headline-4, 15px);
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0.014px;
@@ -333,11 +333,11 @@
 
   .ecosystem-header {
     h2 {
-      font-size: var(--type-display-2, 34px);
+      font-size: var(--type-display-1, 44px);
     }
 
     p {
-      font-size: var(--type-body-normal, 14px);
+      font-size: var(--type-body-normal, 15px);
     }
   }
 

@@ -165,7 +165,7 @@ the log storage may influence what is returned by the `duckdb_logs` function.
 CALL enable_logging(storage = 'stdout');
 ```
 
-### Logging to File 
+### Logging to File
 
 ```sql
 CALL enable_logging(storage = 'file', storage_config = {'path': 'path/to/store/logs'});
@@ -193,7 +193,7 @@ the log entries are stored separately with `context_id`s referencing the context
 | `stdout`    | no           |
 
 For file storage, you can switch between normalized and denormalized by providing a path to a directory (for normalized)
-or a path ending in `.csv` (for denormalized). For file logging, denormalized is generally recommended since this increases performance 
+or a path ending in `.csv` (for denormalized). For file logging, denormalized is generally recommended since this increases performance
 and reduces the total size of the logs. To configure normalization of `file` log storage:
 
 ```sql
@@ -232,7 +232,7 @@ Note that the default buffer size is different for different log storages:
 | `file`      | `STANDARD_VECTOR_SIZE` (2048) |
 | `stdout`    | Disabled (0)                  |
 
-So for example, if you want to increase your `stdout` logging performance, simply enable buffering to greatly (>10x) speed up 
+So for example, if you want to increase your `stdout` logging performance, simply enable buffering to greatly (>10x) speed up
 your logging:
 
 ```sql
@@ -251,9 +251,9 @@ CALL enable_logging(storage_path = '/tmp/mylogs', storage_buffer_size = 0);
 DuckDB contains some syntactic sugar to make common paths easier. For example, the following statements are all equal:
 
 ```sql
--- regular invocation 
+-- regular invocation
 CALL enable_logging(storage = 'file', storage_config = {'path': 'path/to/store/logs'});
--- using shorthand for common path storage config param 
+-- using shorthand for common path storage config param
 CALL enable_logging(storage = 'file', storage_path = 'path/to/store/logs');
 -- omitting `storage = 'file'` -> is implied from presence of `storage_config`
 CALL enable_logging(storage_config = {'path': 'path/to/store/logs'});

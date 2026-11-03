@@ -258,8 +258,8 @@ SELECT min(COLUMNS(*)) AS "min_\0" FROM numbers;
 
 ### `COLUMNS` Lambda Function
 
-`COLUMNS` also supports passing in a [lambda function]({% link docs/2.0/sql/functions/lambda.md %}). 
-The lambda function is evaluated for all columns present in the `FROM` clause. 
+`COLUMNS` also supports passing in a [lambda function]({% link docs/2.0/sql/functions/lambda.md %}).
+The lambda function is evaluated for all columns present in the `FROM` clause.
 Only columns for which the lambda function evaluates to `TRUE` are retained, and discarded otherwise.
 
 `COLUMNS`-clause lambdas have a mandatory parameter that receives the column name.
@@ -329,12 +329,12 @@ FROM (SELECT NULL a, 42 AS b, true AS c);
 | 42     |
 
 > Warning In the following example, replacing `UNPACK` by `*` results in a syntax error:
-> 
+>
 > ```sql
 > SELECT greatest(UNPACK(COLUMNS(*) + 1)) AS result
 > FROM (SELECT 1 AS a, 2 AS b, 3 AS c);
 > ```
-> 
+>
 > | result |
 > |-------:|
 > | 4      |

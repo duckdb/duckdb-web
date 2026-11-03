@@ -44,7 +44,7 @@ results = DBInterface.execute(con, "SELECT 42 a")
 print(results)
 ```
 
-Some SQL statements, such as PIVOT and IMPORT DATABASE are executed as multiple prepared statements and will error when using `DuckDB.execute()`. Instead they can be run with `DuckDB.query()` instead of `DuckDB.execute()` and will always return a materialized result. 
+Some SQL statements, such as PIVOT and IMPORT DATABASE are executed as multiple prepared statements and will error when using `DuckDB.execute()`. Instead they can be run with `DuckDB.query()` instead of `DuckDB.execute()` and will always return a materialized result.
 
 ## Scanning DataFrames
 
@@ -96,7 +96,7 @@ for i in eachrow(df)
     end
     DuckDB.end_row(appender)
 end
-# close the appender after all rows 
+# close the appender after all rows
 DuckDB.close(appender)
 ```
 
@@ -147,7 +147,7 @@ function run_appender(db, id)
         for j in row
             DuckDB.append(appender, j);
         end
-        DuckDB.end_row(appender); 
+        DuckDB.end_row(appender);
     end
     DuckDB.close(appender);
 end

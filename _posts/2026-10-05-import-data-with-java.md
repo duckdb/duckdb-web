@@ -114,7 +114,7 @@ The performance being 3.5x slower compared to the `mongo` extension is largely d
 
 ## Java Appender Interface
 
-The next attempt was to use the [Appender](https://duckdb.org/docs/current/clients/java/data_import#appender) interface, that is exposed in Java with the `Connection#createAppender` method. The worker for Appender can be structured very similar to the batch insert worker above:
+The next attempt was to use the [Appender]({% link docs/2.0/clients/java/data_import.md %}#appender) interface, that is exposed in Java with the `Connection#createAppender` method. The worker for Appender can be structured very similar to the batch insert worker above:
 
 ```java
 public class AppendWorker implements Runnable {

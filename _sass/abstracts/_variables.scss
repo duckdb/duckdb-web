@@ -718,25 +718,24 @@ html.darkmode {
   --type-label-2: 12px;
   --type-pre-title: 12px;
   --type-tiny: 12px;
+  --type-meta: 12px;
   --type-side-menu: 13px;
-  --type-body-small: 14px;
+  --type-body-small: 13px;
   --type-code: 14px;
-  --type-label-1: 14px;
+  --type-label: 14px;
   --type-menu-items-m: 14px;
   --type-menu-items-l: 14.5px;
   --type-body-docs: 15px;
-  --type-body-normal: 16px;
+  --type-body-normal: 15px;
   --type-code-large: 16px;
-  --type-title-3: 16px;
-  --type-title-2: 17px;
-  --type-body-large: 18px;
-  --type-title-1: 20px;
-  --type-headline-3: 24px;
-  --type-headline-2: 28px;
-  --type-display-3: 34px;
-  --type-headline-1: 34px;
-  --type-display-2: 44px;
-  --type-display-1: 56px;
+  --type-body-large: 22.5px;
+  --type-headline-5: 13px;
+  --type-headline-4: 15px;
+  --type-headline-3: 18px;
+  --type-headline-2: 22.5px;
+  --type-headline-1: 26px;
+  --type-display-2: 34px;
+  --type-display-1: 44px;
 }
 
 // MOBILE SIZES
@@ -776,7 +775,8 @@ html.darkmode {
     --type-label-3: 10px;
     --type-label-2: 11px;
     --type-tiny: 11px;
-    --type-label-1: 13px;
+    --type-meta: 11px;
+    --type-label: 13px;
     --type-pre-title: 12px;
     --type-body-small: 13px;
     --type-code: 13px;
@@ -785,16 +785,12 @@ html.darkmode {
     --type-menu-items-l: 14px;
     --type-menu-items-m: 14px;
     --type-code-large: 15px;
-    --type-title-3: 15px;
-    --type-body-normal: 16px;
-    --type-title-2: 16px;
-    --type-body-large: 17px;
-    --type-title-1: 18px;
-    --type-headline-3: 20px;
-    --type-headline-2: 22px;
-    --type-display-3: 26px;
+    --type-body-normal: 15px;
+    --type-body-large: 18px;
+    --type-headline-3: 18px;
+    --type-headline-2: 20px;
     --type-headline-1: 26px;
-    --type-display-2: 30px;
-    --type-display-1: 36px;
+    --type-display-2: 26px;
+    --type-display-1: 30px;
   }
 }

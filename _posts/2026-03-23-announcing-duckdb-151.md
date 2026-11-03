@@ -9,7 +9,7 @@ excerpt: "We are releasing DuckDB version 1.5.1, a patch release with bugfixes, 
 tag: release
 ---
 
-In this blog post, we highlight a few important fixes in DuckDB v1.5.1, the first patch release in [DuckDB's v1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
+In this blog post, we highlight a few important fixes in DuckDB 1.5.1, the first patch release in [DuckDB's 1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
 You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.1).
 
 To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}).
@@ -50,7 +50,7 @@ SELECT count(*) FROM 'example.lance';
 └──────────────┘
 ```
 
-> Lance support is also available for DuckDB v1.4.4 LTS and v1.5.0.
+> Lance support is also available for DuckDB 1.4.4 LTS and 1.5.0.
 
 ### Iceberg Support
 

@@ -121,8 +121,8 @@ WHERE i % 2 = 0;
 
 ### Table Functions
 
-Some functions in DuckDB return entire tables rather than individual values. These functions are accordingly called _table functions_ and can be used with a `FROM` clause like regular table references. 
-Examples include [`read_csv`]({% link docs/1.5/data/csv/overview.md %}#csv-functions), [`read_parquet`]({% link docs/1.5/data/parquet/overview.md %}#read_parquet-function), [`range`]({% link docs/1.5/sql/functions/list.md %}#rangestart-stop-step), [`generate_series`]({% link docs/1.5/sql/functions/list.md %}#generate_seriesstart-stop-step), [`repeat`]({% link docs/1.5/sql/functions/utility.md %}#repeat_rowvarargs-num_rows), [`unnest`]({% link docs/1.5/sql/query_syntax/unnest.md %}), and [`glob`]({% link docs/1.5/sql/functions/utility.md %}#globsearch_path) (note that some of the examples here can be used as both scalar and table functions). 
+Some functions in DuckDB return entire tables rather than individual values. These functions are accordingly called _table functions_ and can be used with a `FROM` clause like regular table references.
+Examples include [`read_csv`]({% link docs/1.5/data/csv/overview.md %}#csv-functions), [`read_parquet`]({% link docs/1.5/data/parquet/overview.md %}#read_parquet-function), [`range`]({% link docs/1.5/sql/functions/list.md %}#rangestart-stop-step), [`generate_series`]({% link docs/1.5/sql/functions/list.md %}#generate_seriesstart-stop-step), [`repeat`]({% link docs/1.5/sql/functions/utility.md %}#repeat_rowvarargs-num_rows), [`unnest`]({% link docs/1.5/sql/query_syntax/unnest.md %}), and [`glob`]({% link docs/1.5/sql/functions/utility.md %}#globsearch_path) (note that some of the examples here can be used as both scalar and table functions).
 
 For example,
 
@@ -142,7 +142,7 @@ FROM read_csv('test.csv');
 All table functions support a `WITH ORDINALITY` suffix, which extends the returned table by an integer column `ordinality` that enumerates the generated rows starting at `1`.
 
 ```sql
-SELECT * 
+SELECT *
 FROM read_csv('test.csv') WITH ORDINALITY;
 ```
 

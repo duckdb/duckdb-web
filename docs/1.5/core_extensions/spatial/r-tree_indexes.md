@@ -87,7 +87,7 @@ EXPLAIN SELECT count(*) FROM t1 WHERE ST_Within(geom, ST_MakeEnvelope(45, 45, 65
 ┌─────────────┴─────────────┐
 │           FILTER          │
 │    ────────────────────   │
-│ ST_Within(geom, '...')    │ 
+│ ST_Within(geom, '...')    │
 │                           │
 │         ~2000 Rows        │
 └─────────────┬─────────────┘
@@ -150,15 +150,15 @@ FROM st_generatepoints({min_x: 0, min_y: 0, max_x: 100, max_y: 100}::BOX_2D, 64,
 -- Create an R-tree index on the geometry column (with a low max_node_capacity for demonstration purposes)
 CREATE INDEX my_idx ON t1 USING RTREE (geom) WITH (max_node_capacity = 4);
 
--- Inspect the R-tree index. Notice how the area of the bounding boxes of the branch nodes 
+-- Inspect the R-tree index. Notice how the area of the bounding boxes of the branch nodes
 -- decreases as we go deeper into the tree.
-SELECT 
-  level, 
-  bounds::GEOMETRY AS geom, 
-  CASE WHEN row_id IS NULL THEN st_area(geom) ELSE NULL END AS area, 
-  row_id, 
-  CASE WHEN row_id IS NULL THEN 'branch' ELSE 'leaf' END AS kind 
-FROM rtree_index_dump('my_idx') 
+SELECT
+  level,
+  bounds::GEOMETRY AS geom,
+  CASE WHEN row_id IS NULL THEN st_area(geom) ELSE NULL END AS area,
+  row_id,
+  CASE WHEN row_id IS NULL THEN 'branch' ELSE 'leaf' END AS kind
+FROM rtree_index_dump('my_idx')
 ORDER BY area DESC;
 ```
 

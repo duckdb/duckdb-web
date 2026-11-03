@@ -6,14 +6,14 @@ authors:
 tag: deep-dive
 thumb: "/images/blog/thumbs/spatial-joins.svg"
 image: "/images/blog/thumbs/spatial-joins.png"
-excerpt: "DuckDB v1.3.0 significantly improved the scalability of geospatial joins with a dedicated `SPATIAL_JOIN` operator."
+excerpt: "DuckDB 1.3.0 significantly improved the scalability of geospatial joins with a dedicated `SPATIAL_JOIN` operator."
 ---
 
 ## Introduction
 
 Spatial joins are join operations that match rows based on the (geo-)spatial relationship between column(s). In practice they are often used to answer questions like “which of these points are within which of these polygons?”. Being able to connect datasets based on the **physical location(s)** they model is fundamental to the whole field of geospatial data science, but at a high level, also an extremely powerful way to correlate and enrich otherwise disparate data sources, anchor insights to the real world, and more often than not tell a great story with your analysis.
 
-Ever since its inception, DuckDB's `spatial` extension has provided a `GEOMETRY` column type to represent locations, regions, and shapes, along with plenty of _spatial predicate_ functions to use when `JOIN`ing. However, it wasn't until recently in [DuckDB v1.3.0]({% post_url 2025-05-21-announcing-duckdb-130 %}) that spatial joins really became _scalable_ thanks to the introduction of the dedicated `SPATIAL_JOIN` query **operator**.
+Ever since its inception, DuckDB's `spatial` extension has provided a `GEOMETRY` column type to represent locations, regions, and shapes, along with plenty of _spatial predicate_ functions to use when `JOIN`ing. However, it wasn't until recently in [DuckDB 1.3.0]({% post_url 2025-05-21-announcing-duckdb-130 %}) that spatial joins really became _scalable_ thanks to the introduction of the dedicated `SPATIAL_JOIN` query **operator**.
 
 We managed to hastily sneak in some information about this new operator towards [the end of the v1.3.0 release notes]({% post_url 2025-05-21-announcing-duckdb-130 %}#spatial-join-operator), but we figured we got enough to talk about to justify a separate blog post. So in this post, we will take a closer look at some of the challenges involved in optimizing spatial joins, and how the new `SPATIAL_JOIN` operator addresses them to achieve new levels of efficiency.
 
@@ -191,12 +191,12 @@ To leverage this, we made the following changes to `spatial`:
     * `PIECEWISE_MERGE_JOIN`, a “IE” (inequality) range-join operator joining on the intersection of the bounding boxes, written as a series of `BETWEEN` clauses on the min/max values of the bounding boxes
     * `FILTER` operator that filters the resulting rows on the actual spatial predicate function.
 
-To show how this affects the query plan, we're going to go [back in time]({% link release_calendar.md %}#past-releases) and use DuckDB **v1.2.0** (which does contain the `PIECEWISE_MERGE_JOIN` optimization, but **not** the `SPATIAL_JOIN` operator) to re-run the query from above.
+To show how this affects the query plan, we're going to go [back in time]({% link release_calendar.md %}#past-releases) and use DuckDB **1.2.0** (which does contain the `PIECEWISE_MERGE_JOIN` optimization, but **not** the `SPATIAL_JOIN` operator) to re-run the query from above.
 
 ```sql
 LOAD spatial; -- Load the spatial extension
 
--- Check that we are using DuckDB v1.2.0
+-- Check that we are using DuckDB 1.2.0
 PRAGMA version;
 ```
 
@@ -318,7 +318,7 @@ While being a lot more complex to implement compared to the `PIECEWISE_MERGE_JOI
 
 ### Experiment
 
-Just to show what this plan looks like, this is what you get when you run the same query but on DuckDB v1.3.0 or later with the `SPATIAL_JOIN` operator enabled:
+Just to show what this plan looks like, this is what you get when you run the same query but on DuckDB 1.3.0 or later with the `SPATIAL_JOIN` operator enabled:
 
 ```sql
 LOAD spatial; -- Load the spatial extension
@@ -375,7 +375,7 @@ Result of EXPLAIN
 
 </details>
 
-Nice, we're back to a single join condition again. So how does this perform? We already saw in the first example that DuckDB v1.3.2 was able to execute the original query in about 30 seconds using the `SPATIAL_JOIN` operator, but here are the precise results for all the different sizes and join strategies for comparison. All queries were run on the same Apple MacBook M3 Pro with 36 GB of memory and timings averaged over 3 runs:
+Nice, we're back to a single join condition again. So how does this perform? We already saw in the first example that DuckDB 1.3.2 was able to execute the original query in about 30 seconds using the `SPATIAL_JOIN` operator, but here are the precise results for all the different sizes and join strategies for comparison. All queries were run on the same Apple MacBook M3 Pro with 36 GB of memory and timings averaged over 3 runs:
 
 | Number of rows in `rides` | Nested loop join | Piecewise merge join | Spatial join |
 | ------------------------: | ---------------: | -------------------: | -----------: |
@@ -428,5 +428,5 @@ The `SPATIAL_JOIN` operator currently only supports `INNER`, `LEFT`, `RIGHT`, an
 
 ## Conclusion
 
-Spatial joins are a powerful way to connect and enrich datasets based on their geospatial relationship. DuckDB's `spatial` extension provides a wide assortment of spatial predicate functions that can be used to perform spatial joins in SQL. While the performance of spatial joins has been challenging to deal with in the past due to the complexity of the spatial predicates and the limitations of the join strategies, the new `SPATIAL_JOIN` operator introduced in DuckDB v1.3.0 significantly raises the efficiency and scalability of these workloads, making spatial joins a first-class citizen in DuckDB's execution engine.
+Spatial joins are a powerful way to connect and enrich datasets based on their geospatial relationship. DuckDB's `spatial` extension provides a wide assortment of spatial predicate functions that can be used to perform spatial joins in SQL. While the performance of spatial joins has been challenging to deal with in the past due to the complexity of the spatial predicates and the limitations of the join strategies, the new `SPATIAL_JOIN` operator introduced in DuckDB 1.3.0 significantly raises the efficiency and scalability of these workloads, making spatial joins a first-class citizen in DuckDB's execution engine.
 

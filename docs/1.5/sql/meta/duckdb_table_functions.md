@@ -106,7 +106,7 @@ The `duckdb_coordinate_systems()` function lists the available [coordinate refer
 | `projjson` | The projjson encoding of the CRS. | `VARCHAR` |
 | `wkt2_2019` | The Well-Known Text (WKT) representation of the CRS. | `VARCHAR` |
 
-This function lists both built-in CRSs as well as the ones that are installed by extensions (such as the [`SPATIAL`]({% link docs/1.5/core_extensions/spatial/overview.md %}) extension. 
+This function lists both built-in CRSs as well as the ones that are installed by extensions (such as the [`SPATIAL`]({% link docs/1.5/core_extensions/spatial/overview.md %}) extension.
 
 ## `duckdb_databases`
 

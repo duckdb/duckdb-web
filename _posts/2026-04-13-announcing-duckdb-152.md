@@ -5,11 +5,11 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-5-2.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-2.png"
-excerpt: "We are releasing DuckDB version v1.5.2, a patch release with bugfixes, performance improvements, and support for the DuckLake v1.0 lakehouse format."
+excerpt: "We are releasing DuckDB version 1.5.2, a patch release with bugfixes, performance improvements, and support for the DuckLake 1.0 lakehouse format."
 tag: release
 ---
 
-In this blog post, we highlight a few important fixes in DuckDB v1.5.2, the second patch release in [DuckDB's v1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
+In this blog post, we highlight a few important fixes in DuckDB 1.5.2, the second patch release in [DuckDB's 1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
 You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.2).
 
 To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}).
@@ -20,7 +20,7 @@ To install the new version, please visit the [installation page]({% link docs/2.
 
 We are proud to release a stable, production-ready lakehouse specification and its reference implementation in DuckDB.
 
-We published a [detailed blog post on the DuckLake site](https://ducklake.select/2026/04/13/ducklake-10/) but here's a quick summary: DuckLake v1.0 ships dozens of bugfixes and guarantees backward-compatibility. Additionally, it has a number of cool features: [data inlining](https://ducklake.select/2026/04/02/data-inlining-in-ducklake/), sorted tables, bucket partitioning, and deletion buffers as Iceberg-compatible Puffin files. More on this in the [announcement blog post](https://ducklake.select/2026/04/13/ducklake-10/).
+We published a [detailed blog post on the DuckLake site](https://ducklake.select/2026/04/13/ducklake-10/) but here's a quick summary: DuckLake 1.0 ships dozens of bugfixes and guarantees backward-compatibility. Additionally, it has a number of cool features: [data inlining](https://ducklake.select/2026/04/02/data-inlining-in-ducklake/), sorted tables, bucket partitioning, and deletion buffers as Iceberg-compatible Puffin files. More on this in the [announcement blog post](https://ducklake.select/2026/04/13/ducklake-10/).
 
 ### Iceberg
 

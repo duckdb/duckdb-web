@@ -10,7 +10,7 @@ extension:
   name: biosignals
   description: |
     Reader utilities to import medical time series data into DuckDB as EDF(+)/BDF(+) files.
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   build: cmake
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: nmontesg/biosignals
-  ref: ed19763f5ecfdca9e645fe15a4c717a0b8db1f82
+  ref: 13e1e4c141a0e861f47009d3926956b41845a57a
 
 docs:
   hello_world: |
@@ -39,7 +39,7 @@ docs:
 
     For full documentation and examples, see the project
     [`README`](https://github.com/nmontesg/biosignals/blob/main/README.md).
-    
+
     **Reader functions:**
 
     * `read_edf_global_header()`: Import the global header information into a table, one row per file.
@@ -47,13 +47,13 @@ docs:
     every file signal.
     * `read_edf_signal()`: Import the time series data of EDF(+)/BDF(+) files into a table. Only non-annotation signals
     are included.
-    * `read_edf_annotations()`: Import the annotation data of EDF(+)/BDF(+) files into a table, one row per TAL 
+    * `read_edf_annotations()`: Import the annotation data of EDF(+)/BDF(+) files into a table, one row per TAL
     (time-stamped annotation list). Only annotation signals are included.
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 844
-extension_download_count_pretty: 844
+extension_download_count: 521
+extension_download_count_pretty: 521
 image: '/images/community_extensions/social_preview/preview_community_extension_biosignals.png'
 layout: community_extension_doc
 ---

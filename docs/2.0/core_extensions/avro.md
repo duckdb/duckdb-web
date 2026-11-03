@@ -49,7 +49,7 @@ If the filenames somehow contain valuable information (as is unfortunately all-t
 FROM read_avro('some_file_*.avro', filename=true);
 ```
 
-This will result in an additional column in the result set that contains the actual filename of the Avro file. 
+This will result in an additional column in the result set that contains the actual filename of the Avro file.
 
 ## Schema Conversion
 
@@ -67,7 +67,7 @@ Internally, this extension uses the “official” [Apache Avro C API](https://a
 
 ## Limitations and Future Plans
 
-* This extension currently does not make use of **parallelism** when reading either a single (large) Avro file or when reading a list of files. Adding support for parallelism in the latter case is on the roadmap. 
+* This extension currently does not make use of **parallelism** when reading either a single (large) Avro file or when reading a list of files. Adding support for parallelism in the latter case is on the roadmap.
 * There is currently no support for either projection or filter **pushdown**, but this is also planned at a later stage.
 * There is currently no support for the Wasm or the Windows-MinGW builds of DuckDB due to issues with the Avro library dependency (sigh again). We plan to fix this eventually.
 * As mentioned above, DuckDB cannot express recursive type definitions that Avro has, this is unlikely to ever change.

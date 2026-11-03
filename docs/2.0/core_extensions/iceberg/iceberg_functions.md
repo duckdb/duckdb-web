@@ -162,7 +162,7 @@ FROM iceberg_table_properties(iceberg_catalog.default.my_table);
 
 -- Set table properties
 ALTER TABLE iceberg_catalog.default.my_table SET (
-    'write.update.mode'='merge-on-read', 
+    'write.update.mode'='merge-on-read',
     'write.delete.mode'='merge-on-read',
     'format-version'=3
 );

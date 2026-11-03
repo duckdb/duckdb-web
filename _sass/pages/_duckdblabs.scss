@@ -50,7 +50,7 @@ header .headerline .headercontent .header-actions {
 /** DUCKDB-LABS LANDING PAGE STYLES **/
 body.landing{
 	h1{
-		@include display-2();
+		@include display-1();
 	}
 	
 	section.welcome{
@@ -231,11 +231,11 @@ section#jobs{
 		backdrop-filter: blur(13px);
 		h2{
 			margin: 0;
-			font-size: var(--type-headline-3, 24px);
+			font-size: var(--type-headline-3, 18px);
 			padding: 20px;
 			border-bottom: 1px solid var(--border-color);
 			span.count{
-				font-size: var(--type-body-small, 14px);
+				font-size: var(--type-body-small, 13px);
 				font-weight: 450;
 				color: var(--main-text-tertiary-color, #B2B2B2);
 				vertical-align: 2px;
@@ -292,7 +292,7 @@ section.support{
 				background: linear-gradient(180deg, var(--main-infobox-background-color, rgba(246, 245, 255, 0.36)) -2.91%, rgba(202, 162, 255, 0.09) 105.67%), var(--main-infobox-background-color, rgba(246, 245, 255, 0.60));
 			}
 			.tag{
-				font-size: var(--type-body-small, 14px);
+				font-size: var(--type-body-small, 13px);
 			}
 			h2{
 				font-size: var(--type-headline-2, 28px);
@@ -706,7 +706,7 @@ body.press-release{
 	}
 
 	input{
-		@include label-1();
+		@include label();
 		height: 44px;
 		width: 100%;
 		padding: 0 15px 0 38px;
@@ -790,7 +790,7 @@ body.press-release{
 	}
 
 	.press-card-title{
-		@include title-2();
+		@include headline-4();
 		margin: 0;
 	}
 
@@ -878,7 +878,7 @@ body.press-release{
 	.coverage-title{
 		position: relative;
 		z-index: 1;
-		@include title-1();
+		@include headline-3();
 		margin: 0 0 8px 0;
 	}
 
@@ -912,7 +912,7 @@ body.press-release{
 	align-items: flex-start;
 
 	.resource-title{
-		@include title-2();
+		@include headline-4();
 		display: flex;
 		align-items: center;
 		gap: 8px;

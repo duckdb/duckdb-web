@@ -41,9 +41,9 @@ Starting this fall, the [DuckDB Foundation](https://duckdb.foundation/) will als
   - macOS latest
   - Windows 11+ on x86_64
 - **Versions:** We support the following versions:
-  - DuckDB v2.0 (LTS, supported until October 2027)
-  - DuckDB v1.5 (extended support until March 2027)
-  - DuckDB v1.4 (LTS, supported until November 2026)
+  - DuckDB 2.0 (LTS, supported until October 2027)
+  - DuckDB 1.5 (extended support until March 2027)
+  - DuckDB 1.4 (LTS, supported until November 2026)
   - The bleeding edge version ([`main` branch](https://github.com/duckdb/duckdb/tree/main)) of DuckDB
 
 Out of scope:

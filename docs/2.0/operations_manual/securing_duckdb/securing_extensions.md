@@ -16,10 +16,11 @@ This introduces security considerations. Therefore, we recommend reviewing the c
 ## DuckDB Signature Checks
 
 DuckDB extensions are checked on every load using the signature of the binaries.
-There are currently three categories of extensions:
+There are currently four categories of extensions:
 
 * Signed with a `core` key. Only extensions vetted by the core DuckDB team are signed with these keys.
 * Signed with a `community` key. These are open-source extensions distributed via the [DuckDB Community Extensions repository]({% link community_extensions/index.md %}).
+* Signed with a key pinned by a [custom extension repository]({% link docs/2.0/extensions/extension_repositories.md %}). These keys are only trusted for extensions installed from that repository.
 * Unsigned.
 
 ## Overview of Security Levels for Extensions
@@ -50,7 +51,7 @@ Cannot change allow_community_extensions setting while database is running
 
 DuckDB 2.0 introduced trusted [custom extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}), which can serve extensions signed with user-provided keys. Two settings control them:
 
-* `allow_extension_repositories`: whether custom trusted extension repositories are `'allowed'`, `'forbidden'` (which also distrusts existing repositories), or `'undecided'` (the default: blocks adding new repositories, but keeps trusting existing ones). While the database is running, the setting can only move from `'undecided'` to `'allowed'` or `'forbidden'`, or from `'allowed'` to `'forbidden'`.
+* `allow_extension_repositories`: whether custom trusted extension repositories are `'allowed'`, `'forbidden'` (which also distrusts existing repositories), or `'undecided'` (the default: blocks adding new repositories, but keeps trusting existing ones). While the database is running, the setting can only move from `'undecided'` to `'allowed'` or `'forbidden'`, or from `'allowed'` to `'forbidden'`. Installing extensions from an existing repository also requires `'allowed'`.
 * `extension_repository_directory`: the directory in which trusted extension repositories are stored. This is the trust anchor for user-provided repositories, so while signature checking is enabled (`allow_unsigned_extensions = false`), it can only be set at startup, not while the database is running.
 
 If you run DuckDB in an environment where only extensions signed by the DuckDB team should be loaded, disable custom repositories:

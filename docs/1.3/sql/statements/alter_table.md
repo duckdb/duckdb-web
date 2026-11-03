@@ -119,7 +119,7 @@ The `RENAME TO` clause renames an entire table, changing its name in the schema.
 To rename a column of a table, use the `RENAME` or `RENAME COLUMN` clauses:
 
 ```sql
-ALTER TABLE integers 
+ALTER TABLE integers
 RENAME COLUMN i TO j;
 ```
 
@@ -194,7 +194,7 @@ ALTER i TYPE VARCHAR;
 
 > Instead of
 > `ALTER ⟨column_name⟩ TYPE ⟨type⟩`{:.language-sql .highlight}, you can also use the equivalent
-> `ALTER ⟨column_name⟩ SET TYPE ⟨type⟩`{:.language-sql .highlight} and the 
+> `ALTER ⟨column_name⟩ SET TYPE ⟨type⟩`{:.language-sql .highlight} and the
 > `ALTER ⟨column_name⟩ SET DATA TYPE ⟨type⟩`{:.language-sql .highlight} clauses.
 
 Change the type of the column `i` to the type `VARCHAR`, using the specified expression to convert the data for each row:
@@ -223,7 +223,7 @@ ALTER col TYPE USING struct_insert(col, a := 42, b := NULL::VARCHAR);
 
 #### `ALTER TABLE` with `ADD COLUMN` / `DROP COLUMN` / `RENAME COLUMN`
 
-Starting with DuckDB v1.3.0, `ALTER TABLE` supports the
+Starting with DuckDB 1.3.0, `ALTER TABLE` supports the
 [`ADD COLUMN`, `DROP COLUMN` and `RENAME COLUMN` clauses]({% link docs/1.3/sql/data_types/struct.md %}#updating-the-schema)
 to update the sub-schema of a `STRUCT`.
 

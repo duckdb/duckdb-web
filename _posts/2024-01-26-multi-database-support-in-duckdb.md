@@ -141,18 +141,18 @@ WHERE title = 'ACE GOLDFINGER';
 Running `EXPLAIN` on the query shows how the data from the different engines is combined into the final query result.
 
 ```text
-┌───────────────────────────┐                                                          
-│         PROJECTION        │                                                          
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │                                                          
-│         first_name        │                                                          
-│         last_name         │                                                          
-└─────────────┬─────────────┘                                                          
-┌─────────────┴─────────────┐                                                          
-│         HASH_JOIN         │                                                          
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │                                                          
-│           INNER           │                                                          
-│     film_id = film_id     ├───────────────────────────────────────────┐              
-└─────────────┬─────────────┘                                           │              
+┌───────────────────────────┐
+│         PROJECTION        │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│         first_name        │
+│         last_name         │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│           INNER           │
+│     film_id = film_id     ├───────────────────────────────────────────┐
+└─────────────┬─────────────┘                                           │
 ┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐
 │         HASH_JOIN         │                             │           FILTER          │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │

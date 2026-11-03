@@ -170,7 +170,7 @@ sqlite> SELECT * FROM tbl;
 ```
 
 ```text
-id  name  
+id  name
 --  ------
 42  DuckDB
 ```

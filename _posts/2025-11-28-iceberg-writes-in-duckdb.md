@@ -12,7 +12,7 @@ tag: deep-dive
 Over the past several months, the DuckLabs team has been hard at work on the [DuckDB-Iceberg extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}), with _full read support_ and _initial write support_ released in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}).
 Today, we are happy to announce delete and update support for Iceberg v2 tables is available in [v1.4.2]({% post_url 2025-11-12-announcing-duckdb-142 %})!
 
-The Iceberg open table format has become extremely popular in the past two years, with many databases announcing support for the open table format [originally developed at Netflix](https://softwareengineeringdaily.com/2024/03/07/iceberg-at-netflix-and-beyond-with-ryan-blue/). This past year the DuckDB team has made Iceberg integration a [priority]({% link roadmap.md %}) and today we are happy to announce another step in that direction. In this blog post we will describe the current feature set of DuckDB-Iceberg in DuckDB v1.4.2.
+The Iceberg open table format has become extremely popular in the past two years, with many databases announcing support for the open table format [originally developed at Netflix](https://softwareengineeringdaily.com/2024/03/07/iceberg-at-netflix-and-beyond-with-ryan-blue/). This past year the DuckDB team has made Iceberg integration a [priority]({% link roadmap.md %}) and today we are happy to announce another step in that direction. In this blog post we will describe the current feature set of DuckDB-Iceberg in DuckDB 1.4.2.
 
 ## Getting Started
 
@@ -27,7 +27,7 @@ ATTACH '⟨warehouse_name⟩' AS iceberg_catalog (
 
 ## Inserts, Deletes, and Updates
 
-Support for creating tables and inserting to tables was already added in DuckDB v1.4.0: you can use standard DuckDB SQL syntax to insert data into your Iceberg table.
+Support for creating tables and inserting to tables was already added in DuckDB 1.4.0: you can use standard DuckDB SQL syntax to insert data into your Iceberg table.
 
 ```sql
 CREATE TABLE iceberg_catalog.default.simple_table (

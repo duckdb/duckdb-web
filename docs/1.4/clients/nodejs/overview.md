@@ -4,7 +4,7 @@ title: Node.js API
 ---
 
 > The latest stable version of the DuckDB Node.js (deprecated) client is {{ site.old_lts_duckdb_nodejs_version }}.
-> The Node.js client will not be released for DuckDB v1.5.
+> The Node.js client will not be released for DuckDB 1.5.
 
 > Deprecated The old DuckDB Node.js package is deprecated.
 > Please use the [DuckDB Node Neo package]({% link docs/1.4/clients/node_neo/overview.md %}) instead.

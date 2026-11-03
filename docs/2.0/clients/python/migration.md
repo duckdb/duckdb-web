@@ -5,7 +5,7 @@ redirect_from:
 title: Migrating Python Code to DuckDB 2.0
 ---
 
-This page lists what Python code written for DuckDB 1.x must change to run on DuckDB 2.0. Each item gives the 1.x form, the 2.0 form, and the page that explains it. For changes outside the Python client, see [Migrating to DuckDB v2.0]({% link docs/2.0/operations_manual/migration.md %}).
+This page lists what Python code written for DuckDB 1.x must change to run on DuckDB 2.0. Each item gives the 1.x form, the 2.0 form, and the page that explains it. For changes outside the Python client, see [Migrating to DuckDB 2.0]({% link docs/2.0/operations_manual/migration.md %}).
 
 * **Python version.** DuckDB 2.0 requires Python 3.11 or newer; free-threaded builds of CPython are not supported. On Python 3.10, `pip install duckdb` installs a 1.x release. See [Installation]({% link docs/2.0/clients/python/overview.md %}#installation).
 
