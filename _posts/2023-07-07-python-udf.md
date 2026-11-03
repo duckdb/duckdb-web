@@ -5,7 +5,7 @@ authors:
   - Pedro Holanda
   - Thijs Bruineman
   - Phillip Cloud
-excerpt: DuckDB now supports vectorized Scalar Python User Defined Functions (UDFs). By implementing Python UDFs, users can easily expand the functionality of DuckDB while taking advantage of DuckDB's fast execution model, SQL and data safety.
+excerpt: DuckDB now supports vectorized Scalar Python User Defined Functions (UDFs). By implementing Python UDFs, users can easily expand the functionality of DuckDB while taking advantage of DuckDB's fast execution model, SQL, and data safety.
 tag: using-duckdb
 ---
 
@@ -26,7 +26,7 @@ There are two main reasons users often refrain from implementing UDFs. 1) There 
 
 DuckDB followed a similar approach. As a DBMS tailored for analytical tasks, performance is a key consideration, leading to the implementation of its core in C++. Consequently, the initial focus of extensibility efforts [was centered around C++](https://www.youtube.com/watch?v=UKo_LQyLTko&ab_channel=DuckDBLabs). However, this  duck is not limited to just waddling; it can also fly. So we are delighted to announce the [recent addition](https://github.com/duckdb/duckdb/pull/7171) of Scalar Python UDFs to DuckDB.
 
-DuckDB provides support for two distinct types of Python UDFs, differing in the Python object used for communication between [DuckDB's native data types]({% link docs/1.5/sql/data_types/overview.md %}) and the Python process. These communication layers include support for [Python built-in types]({% link docs/1.5/sql/data_types/overview.md %}) and [PyArrow Tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html).
+DuckDB provides support for two distinct types of Python UDFs, differing in the Python object used for communication between [DuckDB's native data types]({% link docs/2.0/sql/data_types/overview.md %}) and the Python process. These communication layers include support for [Python built-in types]({% link docs/2.0/sql/data_types/overview.md %}) and [PyArrow Tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html).
 
 The two approaches exhibit two key differences:
 
@@ -34,7 +34,7 @@ The two approaches exhibit two key differences:
 
 2) **Vectorization.** PyArrow Table functions operate on a chunk level, processing chunks of data containing up to 2048 rows. This approach maximizes cache locality and leverages vectorization. On the other hand, the built-in types UDF implementation operates on a per-row basis.
 
-This blog post aims to demonstrate how you can extend DuckDB using Python UDFs, with a particular emphasis on PyArrow-powered UDFs. In our quick-tour section, we will provide examples using the PyArrow UDF types. For those interested in benchmarks, you can jump ahead to the [benchmark section below](#benchmarks). If you want to see a detailed description of the Python UDF API, please refer to our [documentation]({% link docs/1.5/clients/python/function.md %}).
+This blog post aims to demonstrate how you can extend DuckDB using Python UDFs, with a particular emphasis on PyArrow-powered UDFs. In our quick-tour section, we will provide examples using the PyArrow UDF types. For those interested in benchmarks, you can jump ahead to the [benchmark section below](#benchmarks). If you want to see a detailed description of the Python UDF API, please refer to our [documentation]({% link docs/2.0/clients/python/function.md %}).
 
 ## Python UDFs
 
@@ -122,7 +122,7 @@ res = duckdb.sql('SELECT random_date() FROM range (3)').fetchall()
 
 ### Swap String Case (PyArrow Type UDF)
 
-One issue with using built-in types is that you don't benefit from zero-copy, vectorization and cache locality. Using PyArrow as a UDF type should be favored to leverage these optimizations.
+One issue with using built-in types is that you don't benefit from zero-copy, vectorization, and cache locality. Using PyArrow as a UDF type should be favored to leverage these optimizations.
 
 To demonstrate a PyArrow function, let's consider a simple example where we want to transform lowercase characters to uppercase and uppercase characters to lowercase. Fortunately, PyArrow already has a function for this in the compute engine, and it's as simple as calling `pc.utf8_swapcase(x)`.
 

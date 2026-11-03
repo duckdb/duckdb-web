@@ -195,14 +195,14 @@ For CLion users, the project can be configured for C++ debugging of the Python e
 In **Settings** → **Build, Execution, Deployment** → **CMake**, create a Debug profile:
 
 - **Name:** Debug
-- **Build type:** Debug  
+- **Build type:** Debug
 - **Generator:** Ninja
 - **CMake Options:**
   ```text
   -DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
   ```
 
-### Python Debug Configuration  
+### Python Debug Configuration
 
 Create a **CMake Application** run configuration:
 

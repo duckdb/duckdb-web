@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: nats_js
   description: Query NATS JetStream message streams directly with SQL
-  version: 0.3.0
+  version: 0.4.0
   language: C++
   build: cmake
   license: MIT
@@ -18,8 +18,8 @@ extension:
 
 repo:
   github: brannn/duckdb-nats-jetstream
-  ref: b2582ad248818f8fb0758399f7259b08d8f0e02c
-  variegata: 01ee2f89b6ea7daec6e57f72c7eb0367d0c08874
+  ref: e3a8038757a187f2df1afcec4b687ff0587c26f5
+  variegata: 6979bb32de0c215f5f6d5c5dc71ff6ea8b4fdbb6
 
 docs:
   hello_world: |
@@ -47,17 +47,20 @@ docs:
 
     Features:
     - Subject filters with NATS wildcards, applied by the server
-    - Sequence ranges (start_seq, end_seq) and time ranges (start_time, end_time)
+    - Sequence ranges (start_seq, end_seq) and time ranges (start_time, end_time), also from WHERE clauses
+    - Batched reads on nats-server 2.11 and later
+    - Message headers as a MAP(VARCHAR, VARCHAR[]) column
     - JSON field extraction with dot paths for nested fields
     - Protocol Buffers decoding from a .proto file at query time, with native DuckDB types
+    - Authentication and TLS through DuckDB secrets of type nats
     - Streams with or without allow_direct
 
     Documentation: https://github.com/brannn/duckdb-nats-jetstream
 
 extension_star_count: 22
 extension_star_count_pretty: 22
-extension_download_count: 586
-extension_download_count_pretty: 586
+extension_download_count: 650
+extension_download_count_pretty: 650
 image: '/images/community_extensions/social_preview/preview_community_extension_nats_js.png'
 layout: community_extension_doc
 ---
@@ -71,7 +74,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ❌ | ❌ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ❌ | ❌ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ❌ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ❌ | ❌ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ❌ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -117,6 +120,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

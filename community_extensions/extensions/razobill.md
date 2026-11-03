@@ -16,19 +16,21 @@ excerpt: |
 extension:
   name: razobill
   description: High-performance lossless log parsing, analytical database compaction, and information-theoretic semantic accounting.
-  version: 1.1.4
+  version: 1.1.8
   language: C++
   build: cmake
   license: Apache-2.0
   maintainers:
     - 4t1a
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;windows_amd64_rtools"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools"
+  opt_in_platforms: "osx_amd64"
 
 # upstream git repository coordinates and tagged release reference
 repo:
   github: razobill/razobill
-  ref: 55e2bd1d8aab484c6b997102c00d337dbc4d8807
-  variegata: 55e2bd1d8aab484c6b997102c00d337dbc4d8807
+  ref: 00a4995fb090fbb5bc8b506d77665f8c4e31af67
+  variegata: 00a4995fb090fbb5bc8b506d77665f8c4e31af67
+  andium: 00a4995fb090fbb5bc8b506d77665f8c4e31af67
 
 # documentation and sql usage examples published on DuckDB community portal
 docs:
@@ -54,8 +56,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 2430
-extension_download_count_pretty: 2.4k
+extension_download_count: 769
+extension_download_count_pretty: 769
 image: '/images/community_extensions/social_preview/preview_community_extension_razobill.png'
 layout: community_extension_doc
 ---
@@ -95,7 +97,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-This extension does not add any functions.
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| RzHash        | scalar        | NULL        | NULL    |          |
+| RzJoin        | scalar        | NULL        | NULL    |          |
+| RzSplit       | scalar        | NULL        | NULL    |          |
+| RzTemplate    | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -113,6 +120,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

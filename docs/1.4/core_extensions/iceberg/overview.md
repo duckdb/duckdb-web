@@ -4,7 +4,7 @@ layout: docu
 title: Iceberg Extension
 ---
 
-The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/). 
+The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/).
 In this page we will go over the basic usage of the extension without the need to attach to an Iceberg catalog. For full support – including write support – see [how to attach Iceberg REST catalogs]({% link docs/1.4/core_extensions/iceberg/iceberg_rest_catalogs.md %}).
 
 ## Installing and Loading
@@ -52,7 +52,7 @@ FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 |-------------:|
 | 51793        |
 
-> The `allow_moved_paths` option ensures that some path resolution is performed, 
+> The `allow_moved_paths` option ensures that some path resolution is performed,
 > which allows scanning Iceberg tables that are moved.
 
 You can also directly specify the current manifest in the query, this may be resolved from the catalog prior to the query, in this example the manifest version is a UUID.

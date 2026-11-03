@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/snippets/importing_duckbox_tables
 - /docs/preview/guides/snippets/importing_duckbox_tables
 title: Importing Duckbox Tables
+how_to_topic: tools-meta
 ---
 
 > The scripts provided in this page work on Linux, macOS, and WSL.

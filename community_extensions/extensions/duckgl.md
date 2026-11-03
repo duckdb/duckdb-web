@@ -16,8 +16,8 @@ extension:
     - nkwork9999
 
 repo:
-  github: nkwork9999/duckgl # あなたのリポジトリ名に合わせて
-  ref: e8bbc917f3676ff738eb41c4617201bcfd7624c9
+  github: nkwork9999/duckgl
+  ref: 45ef59e814d2fa1dac3b383d40513ffd45f1beb9
 
 docs:
   hello_world: |
@@ -37,10 +37,23 @@ docs:
     - GeoJSON layer rendering from spatial tables
     - SQL query execution from browser UI
 
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: 5095
-extension_download_count_pretty: 5.1k
+    **HTML and PDF reports**:
+    Export HTML downloads an offline snapshot containing the last successful SQL query, all returned rows,
+    and a north-up SVG geometry overview without base-map tiles. Export PDF opens that report in the
+    browser print dialog; choose Save as PDF. Saved HTML contains no scripts and does not execute SQL.
+
+    **Map analysis and additional exports**:
+    Inspect table columns, choose a geometry column, specify the source CRS for WGS84 conversion,
+    map a spatial SELECT query, and click features to inspect their attributes.
+    Download query results as CSV or JSON, and map data as GeoJSON, SVG, PNG, or interactive HTML.
+    Interactive HTML embeds the data and runs without the DuckGL server, but needs internet access
+    for map libraries and base-map tiles. SVG and PNG are north-up geometry overviews without tiles.
+    Attached database selection and large integer identifiers retain their exact identity.
+
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 939
+extension_download_count_pretty: 939
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgl.png'
 layout: community_extension_doc
 ---
@@ -52,13 +65,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -101,6 +114,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

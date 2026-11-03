@@ -3,7 +3,7 @@ layout: docu
 title: Editing
 ---
 
-> The linenoise-based CLI editor is available for macOS, Linux and Windows.
+> The linenoise-based CLI editor is available for macOS, Linux, and Windows.
 
 DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com/antirez/linenoise), which has shortcuts that are based on [Emacs mode of readline](https://readline.kablamo.org/emacs.html). Below is a list of available commands. You can also view these shortcuts from within the CLI using `.help shortcuts`.
 
@@ -89,7 +89,7 @@ Use `.edit` or `\e` to open a query in an external text editor.
 * When entered alone, it opens the previous command for editing.
 * When used inside a multi-line command, it opens the current command in the editor.
 
-The editor is taken from the first set environment variable among `DUCKDB_EDITOR`, `EDITOR` or `VISUAL` (in that order). If none are set, `vi` is used.
+The editor is taken from the first set environment variable among `DUCKDB_EDITOR`, `EDITOR`, or `VISUAL` (in that order). If none are set, `vi` is used.
 
 ## Using Read-Line
 

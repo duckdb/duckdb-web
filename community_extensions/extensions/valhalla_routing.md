@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: valhalla_routing
   description: DuckDB extension for routing and travel time calculations using Valhalla routing engine
-  version: '2026020501'
+  version: '2026102301'
   language: C++
   build: cmake
   license: MIT
@@ -21,7 +21,8 @@ extension:
 repo:
   github: midwork-finds-jobs/duckdb-valhalla-routing
   andium: d379f55ff8d80080b5b8e927c53d3062e6a57fab
-  ref: e73ec94493444fa0ae452474e4329dda13b4d138
+  variegata: e73ec94493444fa0ae452474e4329dda13b4d138
+  ref: 7d4bf9ad8f3fb7ba5031519cf982d535c16c0eab
 
 docs:
   hello_world: |
@@ -111,8 +112,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 6960
-extension_download_count_pretty: 7.0k
+extension_download_count: 981
+extension_download_count_pretty: 981
 image: '/images/community_extensions/social_preview/preview_community_extension_valhalla_routing.png'
 layout: community_extension_doc
 ---
@@ -124,13 +125,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -179,8 +180,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|      name      |                   description                   | input_type | scope  | aliases |
-|----------------|-------------------------------------------------|------------|--------|---------|
-| valhalla_tiles | Path to Valhalla tiles directory or config file | VARCHAR    | GLOBAL | []      |
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
+| valhalla_tiles | Path to Valhalla tiles directory or config file         | VARCHAR    | GLOBAL | []      |             |
 
 

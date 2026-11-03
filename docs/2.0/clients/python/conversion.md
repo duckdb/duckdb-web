@@ -15,7 +15,7 @@ This page documents the rules for converting [DuckDB results to Python](#result-
 
 ## Result Conversion: DuckDB Results to Python
 
-A result is read from a [relation]({% link docs/2.0/clients/python/relational_api.md %}) or, when using the [DB-API]({% link docs/2.0/clients/python/dbapi.md %}) / `con.execute()`, from the connection. `con.sql()`, `con.table()`, the readers and the other relational methods return relations. Each has its own methods:
+A result is read from a [relation]({% link docs/2.0/clients/python/relational_api.md %}) or, when using the [DB-API]({% link docs/2.0/clients/python/dbapi.md %}) / `con.execute()`, from the connection. `con.sql()`, `con.table()`, the readers, and the other relational methods return relations. Each has its own methods:
 
 <div class="monospace_table"></div>
 
@@ -30,7 +30,7 @@ A result is read from a [relation]({% link docs/2.0/clients/python/relational_ap
 | PyTorch              | `torch()`                                            | `torch()`                                                     |
 | TensorFlow           | `tf()`                                               | `tf()`                                                        |
 
-Relations are recommended for most conversion, except when you want to do row-based work. A relation has no `fetchone()`, `fetchmany()` or `fetch_df_chunk()` because it is stateless, i.e. it does not hold a result itself. To get specific rows of a result with the relational API you would use `limit(n).fetchall()`, `iter_rows()` or `to_arrow_reader()` instead. Note that with the DB-API, after a partial read with `fetchone()` or `fetchmany()`, the `df()`, `fetchnumpy()` and Arrow methods of the connection return only the remaining rows.
+Relations are recommended for most conversion, except when you want to do row-based work. A relation has no `fetchone()`, `fetchmany()`, or `fetch_df_chunk()` because it is stateless, i.e. it does not hold a result itself. To get specific rows of a result with the relational API you would use `limit(n).fetchall()`, `iter_rows()`, or `to_arrow_reader()` instead. Note that with the DB-API, after a partial read with `fetchone()` or `fetchmany()`, the `df()`, `fetchnumpy()`, and Arrow methods of the connection return only the remaining rows.
 
 ### Examples
 
@@ -113,9 +113,9 @@ print(tbl.to_pandas())
 
 After `con.execute()`, `to_arrow_table()` and `to_arrow_reader()` first fetch the rows and then convert them, so they make an extra copy of the result, and the reader returns its first batch only after the whole query ran. They warn: `UserWarning: Arrow output on a DB-API result makes an extra copy of the rows, use con.sql(query).to_arrow_table() instead.` The module functions `duckdb.to_arrow_table()` and `duckdb.to_arrow_reader()` read the result of `duckdb.execute()` and warn the same way. For Arrow output, run the query with `con.sql(query)`.
 
-> Deprecated on relations, `fetch_arrow_table()`, `fetch_record_batch()` and `fetch_arrow_reader()` are deprecated aliases of `to_arrow_table()` and `to_arrow_reader()`. After `con.execute()`, `fetch_arrow_table()`, `fetch_record_batch()`, `arrow()` and `pl()` no longer exist, and neither do the module functions `duckdb.fetch_arrow_table()`, `duckdb.fetch_record_batch()` and `duckdb.pl()`.
+> Deprecated on relations, `fetch_arrow_table()`, `fetch_record_batch()`, and `fetch_arrow_reader()` are deprecated aliases of `to_arrow_table()` and `to_arrow_reader()`. After `con.execute()`, `fetch_arrow_table()`, `fetch_record_batch()`, `arrow()`, and `pl()` no longer exist, and neither do the module functions `duckdb.fetch_arrow_table()`, `duckdb.fetch_record_batch()`, and `duckdb.pl()`.
 
-DuckDB has a single `INTERVAL` type that stores months, days and microseconds, so it maps onto Arrow's `month_day_nano_interval` type. On import, every Arrow interval and duration type, including `duration[s]`, `duration[ms]`, `duration[us]` and `duration[ns]`, is read into that one `INTERVAL` type. As a result, a `duration` column that is passed through DuckDB and read back as Arrow is returned as a `month_day_nano_interval` rather than as its original `duration` type. This is expected. The resolution and unit of the original Arrow type are not preserved.
+DuckDB has a single `INTERVAL` type that stores months, days, and microseconds, so it maps onto Arrow's `month_day_nano_interval` type. On import, every Arrow interval and duration type, including `duration[s]`, `duration[ms]`, `duration[us]`, and `duration[ns]`, is read into that one `INTERVAL` type. As a result, a `duration` column that is passed through DuckDB and read back as Arrow is returned as a `month_day_nano_interval` rather than as its original `duration` type. This is expected. The resolution and unit of the original Arrow type are not preserved.
 
 ### Polars
 
@@ -123,7 +123,7 @@ DuckDB has a single `INTERVAL` type that stores months, days and microseconds, s
 
 ## Object Conversion: Python Object to DuckDB
 
-Python objects are converted when they are passed as query parameters (`execute()`, `executemany()` and `sql(..., params=...)`), as rows of `values()`, as constants in [expressions]({% link docs/2.0/clients/python/expression.md %}) and as the value of a `duckdb.Value`. The rules are the same on all of these paths, except where a section below says otherwise.
+Python objects are converted when they are passed as query parameters (`execute()`, `executemany()`, and `sql(..., params=...)`), as rows of `values()`, as constants in [expressions]({% link docs/2.0/clients/python/expression.md %}) and as the value of a `duckdb.Value`. The rules are the same on all of these paths, except where a section below says otherwise.
 
 This is a mapping of Python object types to DuckDB [Logical Types]({% link docs/2.0/sql/data_types/overview.md %}):
 
@@ -148,7 +148,7 @@ A `memoryview` converts to a `BLOB` of the bytes it shows. As a query parameter,
 
 ### `decimal.Decimal`
 
-A `Decimal` becomes a `DECIMAL` whose width and scale follow from its digits and its exponent: `Decimal("12.5")` is a `DECIMAL(3,1)`, `Decimal("1E+2")` is a `DECIMAL(3,0)` that holds 100 and `Decimal("1E-7")` is a `DECIMAL(8,7)`. A value that needs more than 38 digits becomes a `DOUBLE`, such as `Decimal("1E+38")` or `Decimal(0.1)`, which holds the 55 decimal digits of the binary float 0.1. `NaN` and the infinities become `FLOAT`.
+A `Decimal` becomes a `DECIMAL` whose width and scale follow from its digits and its exponent: `Decimal("12.5")` is a `DECIMAL(3,1)`, `Decimal("1E+2")` is a `DECIMAL(3,0)` that holds 100, and `Decimal("1E-7")` is a `DECIMAL(8,7)`. A value that needs more than 38 digits becomes a `DOUBLE`, such as `Decimal("1E+38")` or `Decimal(0.1)`, which holds the 55 decimal digits of the binary float 0.1. `NaN` and the infinities become `FLOAT`.
 
 ### `int`
 
@@ -160,7 +160,7 @@ Since integers can be of arbitrary size in Python, there is not a one-to-one con
 * `HUGEINT`
 * `UHUGEINT`
 
-So `2**31` is a `BIGINT`, `2**63` a `UBIGINT`, `2**64` and `-(2**63) - 1` are `HUGEINT` and `2**127` is a `UHUGEINT`. An integer that does not fit in 128 bits raises `InvalidInputException: Python integer too large for 128-bit integer type`. A subclass of `int` converts by the value it stores.
+So `2**31` is a `BIGINT`, `2**63` a `UBIGINT`, `2**64` and `-(2**63) - 1` are `HUGEINT`, and `2**127` is a `UHUGEINT`. An integer that does not fit in 128 bits raises `InvalidInputException: Python integer too large for 128-bit integer type`. A subclass of `int` converts by the value it stores.
 
 When using the DuckDB Value class, it's possible to set a target type, which will influence the conversion:
 
@@ -212,7 +212,7 @@ print(con.execute("SELECT ?", [[12345, "test"]]).fetchall())
 [(['12345', 'test'],)]
 ```
 
-A `NaN` stays `NaN` inside a list, a struct, a map or a `duckdb.Value` of a nested type. A list that mixes `datetime` values with and without tzinfo becomes a `TIMESTAMPTZ` list as a query parameter and in `values()`, which read the values without tzinfo as UTC.
+A `NaN` stays `NaN` inside a list, a struct, a map, or a `duckdb.Value` of a nested type. A list that mixes `datetime` values with and without tzinfo becomes a `TIMESTAMPTZ` list as a query parameter and in `values()`, which read the values without tzinfo as UTC.
 
 ### `dict`
 

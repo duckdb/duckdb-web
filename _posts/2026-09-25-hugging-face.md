@@ -11,7 +11,7 @@ tag: extensions
 
 [Hugging Face](https://huggingface.co/) is where much of the machine learning community publishes and finds its datasets, while DuckDB is the in-process analytical database that queries files like CSV and Parquet directly, with no server or warehouse to install or run.
 
-Did you know that, since DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3) (released on May 22, 2024), you can point a `SELECT` at a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub), using the DuckDB `hf://` protocol, and query it, without downloading it first? This post covers how that integration works and the use cases it fits.
+Did you know that, since DuckDB [0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3) (released on May 22, 2024), you can point a `SELECT` at a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub), using the DuckDB `hf://` protocol, and query it, without downloading it first? This post covers how that integration works and the use cases it fits.
 
 ## Background
 
@@ -19,9 +19,9 @@ On the [Hugging Face Hub](https://huggingface.co/docs/hub), each dataset is a gi
 
 Before the Hugging Face integration, getting at that data from DuckDB meant downloading the files first, or loading them with the Hugging Face [`datasets`](https://huggingface.co/docs/datasets) library, before they could be read and analyzed. Either way, the data had to be copied out of the [Hugging Face Hub](https://huggingface.co/docs/hub) before you could query it.
 
-DuckDB was already able to read remote files over HTTP through its [`httpfs` extension](/docs/current/core_extensions/httpfs/overview.md %}), so reading a URL directly was not new. Hugging Face datasets are also increasingly published as Parquet, the columnar format DuckDB reads natively and can scan without materializing everything in memory.
+DuckDB was already able to read remote files over HTTP through its [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/overview.md %}), so reading a URL directly was not new. Hugging Face datasets are also increasingly published as Parquet, the columnar format DuckDB reads natively and can scan without materializing everything in memory.
 
-DuckDB and Hugging Face [worked together]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) to add the [`hf://` path scheme](/docs/1.4/core_extensions/httpfs/hugging_face) on top of `httpfs`, [announced in May 2024]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) with DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3). As a result, DuckDB can resolve a dataset repository to the files inside it, so that a query can read and analyze them exactly where they are located, instead of via a downloaded copy.
+DuckDB and Hugging Face [worked together]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) to add the [`hf://` path scheme](/docs/1.4/core_extensions/httpfs/hugging_face) on top of `httpfs`, [announced in May 2024]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) with DuckDB [0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3). As a result, DuckDB can resolve a dataset repository to the files inside it, so that a query can read and analyze them exactly where they are located, instead of via a downloaded copy.
 
 ## Reading Hugging Face Datasets Directly
 
@@ -61,7 +61,7 @@ DuckDB infers the format from the file and reads only the columns that the query
 
 ### Querying Many Files at Once
 
-Datasets are often split across many files. A [glob pattern](/docs/current/data/multiple_files/overview.md %}#multi-file-reads-and-globs) lets you treat a whole directory as one table. The [`cais/mmlu`](https://huggingface.co/datasets/cais/mmlu) benchmark stores its `astronomy` task across three Parquet files (`dev`, `test`, and `validation`), and this counts the rows across all of them:
+Datasets are often split across many files. A [glob pattern]({% link docs/2.0/data/multiple_files/overview.md %}#multi-file-reads-and-globs) lets you treat a whole directory as one table. The [`cais/mmlu`](https://huggingface.co/datasets/cais/mmlu) benchmark stores its `astronomy` task across three Parquet files (`dev`, `test`, and `validation`), and this counts the rows across all of them:
 
 ```sql
 SELECT count(*) AS count
@@ -128,7 +128,7 @@ FROM data;
 
 ### Private and Gated Datasets
 
-Public datasets need no setup. For private or gated ones, store a Hugging Face token in DuckDB's [Secrets Manager](/docs/current/configuration/secrets_manager.md %}). You can pass the token directly:
+Public datasets need no setup. For private or gated ones, store a Hugging Face token in DuckDB's [Secrets Manager]({% link docs/2.0/configuration/secrets_manager.md %}). You can pass the token directly:
 
 ```sql
 CREATE SECRET hf_token (

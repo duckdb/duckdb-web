@@ -38,7 +38,9 @@ This will iterate over the extensions and return their repositories and the upda
 └────────────────┴──────────────┴─────────────────────┴──────────────────┴─────────────────┘
 ```
 
-Extensions that are statically linked into the DuckDB binary, such as `json`, `parquet` and `icu` in the official DuckDB builds, are not updated by this statement.
+Extensions that are statically linked into the DuckDB binary, such as `json`, `parquet`, and `icu` in the official DuckDB builds, are not updated by this statement.
+
+Extensions installed from a [custom extension repository]({% link docs/2.0/extensions/extension_repositories.md %}) are not updated either: `UPDATE EXTENSIONS` skips them, and naming one in the list of extensions fails with an error. To upgrade such an extension, run `FORCE INSTALL ⟨extension_name⟩ FROM ⟨repository_name⟩;`{:.language-sql .highlight}.
 
 ## Updating Selected Extensions
 

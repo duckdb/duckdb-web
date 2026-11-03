@@ -68,8 +68,8 @@ At DuckDB, this realization of the importance of extensions and its relation to 
 design since its early days. Today, many parts of DuckDB can be extended. For example, you can add functions (table,
 scalar, copy, aggregation), filesystems, parsers, optimizer rules, and much more. Many new features that are added to
 DuckDB are added in extensions and are grouped by either functionality or by set of dependencies. Some examples of
-extensions are the [SQLite]({% link docs/1.5/core_extensions/sqlite.md %}) extension for reading/writing to/from SQLite files or the
-[Spatial]({% link docs/1.5/core_extensions/spatial/overview.md %}) extension which offers support for a wide range of geospatial processing
+extensions are the [SQLite]({% link docs/2.0/core_extensions/sqlite.md %}) extension for reading/writing to/from SQLite files or the
+[Spatial]({% link docs/2.0/core_extensions/spatial/overview.md %}) extension which offers support for a wide range of geospatial processing
 features. DuckDB's extensions are distributed as loadable binaries for most major platforms (including
 [DuckDB-Wasm]({% post_url 2023-12-18-duckdb-extensions-in-wasm %})), allowing loading and installing extensions with two simple SQL
 statements:
@@ -81,7 +81,7 @@ LOAD spatial;
 
 For most core extensions maintained by the DuckDB team, there is even an auto-install and auto-load feature which will detect the required extensions for
 a SQL statement and automatically install and load them. For a detailed description of which extensions are available
-and how to use them, check out the [docs]({% link docs/1.5/core_extensions/overview.md %}).
+and how to use them, check out the [docs]({% link docs/2.0/core_extensions/overview.md %}).
 
 ## Dependency Management
 
@@ -111,14 +111,14 @@ focus on its seamless CMake integration.
 ## Using vcpkg with DuckDB
 
 Now that we covered DuckDB extensions and vcpkg, we have shown how DuckDB can manage dependencies without sacrificing
-portability, maintainability and stability more than necessary. Next, we'll make things a bit more tangible by looking at
+portability, maintainability, and stability more than necessary. Next, we'll make things a bit more tangible by looking at
 one of DuckDB's extensions and how it uses vcpkg to manage its dependencies.
 
-### Example: Azure extension
+### Example: Azure Extension
 
-The [Azure]({% link docs/1.5/core_extensions/azure.md %}) extension provides functionality related to [Microsoft Azure](https://azure.microsoft.com/),
+The [Azure]({% link docs/2.0/core_extensions/azure.md %}) extension provides functionality related to [Microsoft Azure](https://azure.microsoft.com/),
 one of the major cloud providers. DuckDB's Azure extension depends on the Azure C++ SDK to support reading directly from
-Azure Storage. To do so it adds a custom filesystem and [secret type]({% link docs/1.5/configuration/secrets_manager.md %}), which can be
+Azure Storage. To do so it adds a custom filesystem and [secret type]({% link docs/2.0/configuration/secrets_manager.md %}), which can be
 used to easily query from authenticated Azure containers:
 
 ```sql
@@ -155,17 +155,17 @@ target_include_directories(${EXTENSION_NAME} PRIVATE Azure::azure-identity Azure
 ```
 
 And that's basically it! Every time the Azure extension is built, vcpkg will be called first to
-ensure `azure-identity-cpp`, `azure-storage-blobs-cpp` and `azure-storage-files-datalake-cpp` are built using the correct platform-specific flags and
+ensure `azure-identity-cpp`, `azure-storage-blobs-cpp`, and `azure-storage-files-datalake-cpp` are built using the correct platform-specific flags and
 available in CMake through `find_package`.
 
 ## Building Your Own DuckDB Extension
 
 Up until this part, we've focused on managing dependencies from a point-of-view of the developers of core DuckDB
 contributors. However, all of this applies to anyone who wants to build an extension. DuckDB maintains a [C++ Extension Template](https://github.com/duckdb/extension-template),
-which contains all the necessary build scripts, CI/CD pipeline and vcpkg configuration to build, test and deploy a DuckDB extension in
+which contains all the necessary build scripts, CI/CD pipeline, and vcpkg configuration to build, test, and deploy a DuckDB extension in
 minutes. It can automatically build the loadable extension binaries for all available platforms, including Wasm.
 
-### Setting up the Extension Template
+### Setting Up the Extension Template
 
 To demonstrate how simple this process is, let's go through all the steps of building a DuckDB extension from scratch,
 including adding a vcpkg-managed external dependency.
@@ -292,7 +292,7 @@ DuckDB-maintained extension and third-party extensions.
 
 If this blog post sparked your interest in creating your own DuckDB extension, check out
 the [C++ Extension Template](https://github.com/duckdb/extension-template),
-the [DuckDB docs on extensions]({% link docs/1.5/core_extensions/overview.md %}),
+the [DuckDB docs on extensions]({% link docs/2.0/core_extensions/overview.md %}),
 and the very handy [duckdb-extension-radar repository](https://github.com/mehd-io/duckdb-extension-radar) that tracks public DuckDB extensions.
 Additionally, DuckDB has a [Discord server](https://discord.duckdb.org) where you can ask for help on
 extensions or anything DuckDB-related in general.

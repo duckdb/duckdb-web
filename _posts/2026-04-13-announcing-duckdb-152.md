@@ -5,14 +5,14 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-5-2.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-2.png"
-excerpt: "We are releasing DuckDB version v1.5.2, a patch release with bugfixes and performance improvements, and support for the DuckLake v1.0 lakehouse format."
+excerpt: "We are releasing DuckDB version 1.5.2, a patch release with bugfixes, performance improvements, and support for the DuckLake 1.0 lakehouse format."
 tag: release
 ---
 
-In this blog post, we highlight a few important fixes in DuckDB v1.5.2, the second patch release in [DuckDB's v1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
+In this blog post, we highlight a few important fixes in DuckDB 1.5.2, the second patch release in [DuckDB's 1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
 You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.2).
 
-To install the new version, please visit the [installation page]({% link install/index.html %}).
+To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}).
 
 ## Data Lake and Lakehouse Formats
 
@@ -20,11 +20,11 @@ To install the new version, please visit the [installation page]({% link install
 
 We are proud to release a stable, production-ready lakehouse specification and its reference implementation in DuckDB.
 
-We published a [detailed blog post on the DuckLake site](https://ducklake.select/2026/04/13/ducklake-10/) but here's a quick summary: DuckLake v1.0 ships dozens of bugfixes and guarantees backward-compatibility. Additionally, it has a number of cool features: [data inlining](https://ducklake.select/2026/04/02/data-inlining-in-ducklake/), sorted tables, bucket partitioning, and deletion buffers as Iceberg-compatible Puffin files. More on this in the [announcement blog post](https://ducklake.select/2026/04/13/ducklake-10/).
+We published a [detailed blog post on the DuckLake site](https://ducklake.select/2026/04/13/ducklake-10/) but here's a quick summary: DuckLake 1.0 ships dozens of bugfixes and guarantees backward-compatibility. Additionally, it has a number of cool features: [data inlining](https://ducklake.select/2026/04/02/data-inlining-in-ducklake/), sorted tables, bucket partitioning, and deletion buffers as Iceberg-compatible Puffin files. More on this in the [announcement blog post](https://ducklake.select/2026/04/13/ducklake-10/).
 
 ### Iceberg
 
-The [Iceberg extension]({% link docs/1.5/core_extensions/iceberg/overview.md %}) ships a number of new features. It now supports the following:
+The [Iceberg extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}) ships a number of new features. It now supports the following:
 
 * `GEOMETRY` type
 * `ALTER TABLE` statement
@@ -41,10 +41,10 @@ The test suite has uncovered a bug that was triggered by `INSERT INTO` statement
 
 ## New Online Shell
 
-The online [WebAssembly]({% link docs/1.5/clients/wasm/overview.md %}) shell at [`shell.duckdb.org`](https://shell.duckdb.org/) received a complete overhaul.
+The online [WebAssembly]({% link docs/2.0/clients/wasm/overview.md %}) shell at [`shell.duckdb.org`](https://shell.duckdb.org/) received a complete overhaul.
 A highlight of the new shell is the ability to store and list files using the `.files` dot command and its variants.
 
-Using the file storage feature, you can turn your browser session into workbench: you can drag-and-drop files from your local file system to upload them, create new ones using DuckDB's [`COPY ... TO` statement]({% link docs/1.5/sql/statements/copy.md %}#copy--to) and download the results. For more information on this feature, use the `.help` command.
+Using the file storage feature, you can turn your browser session into workbench: you can drag-and-drop files from your local file system to upload them, create new ones using DuckDB's [`COPY ... TO` statement]({% link docs/2.0/sql/statements/copy.md %}#copy--to), and download the results. For more information on this feature, use the `.help` command.
 
 <!--
 <img src="{% link images/blog/online-shell-example.png %}" alt="Example use of the new online shell at shell.duckdb.org" width="800" />

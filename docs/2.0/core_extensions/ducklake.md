@@ -14,7 +14,7 @@ title: DuckLake
 > DuckLake 1.1 was released together with DuckDB 2.0.
 > Read the [announcement blog post](https://ducklake.select/2026/10/21/ducklake-11/).
 
-The `ducklake` extension adds support for attaching to databases stored in the [DuckLake format](http://ducklake.select/). 
+The `ducklake` extension adds support for attaching to databases stored in the [DuckLake format](http://ducklake.select/).
 The complete documentation of this extension is available at the [DuckLake website](https://ducklake.select/docs/stable/duckdb/introduction).
 
 ## Installing and Loading
@@ -183,7 +183,7 @@ It returns the expired snapshots, using the same columns as [`ducklake_snapshots
 ### `ducklake_merge_adjacent_files`
 
 The `ducklake_merge_adjacent_files` function merges adjacent files in the storage.
-It returns one row per table with the columns `schema_name`, `table_name`, `files_processed` and `files_created`.
+It returns one row per table with the columns `schema_name`, `table_name`, `files_processed`, and `files_created`.
 
 | Parameter name | Parameter type | Named parameter | Description |
 | -------------- | -------------- | --------------- | ----------- |

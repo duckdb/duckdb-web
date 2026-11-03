@@ -14,18 +14,17 @@ extension:
   maintainers:
     - onnimonni
   name: cloudfront
-  vcpkg_url: https://github.com/microsoft/vcpkg.git
-  vcpkg_commit: ce613c41372b23b1f51333815feb3edd87ef8a8b
-  version: '2026020501'
+  version: '2026102301'
 repo:
   github: midwork-finds-jobs/duckdb-cloudfront
   andium: 176b7ee77e2c12c8a7068fde233f04f93a729c39
-  ref: 5d5309e77ff5a59dad1dd09f94772729fb83cc5a
+  variegata: 5d5309e77ff5a59dad1dd09f94772729fb83cc5a
+  ref: 48a48a0da1d4cf69ab6c2e09053b4ac648d89372
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 2599
-extension_download_count_pretty: 2.6k
+extension_download_count: 783
+extension_download_count_pretty: 783
 image: '/images/community_extensions/social_preview/preview_community_extension_cloudfront.png'
 layout: community_extension_doc
 ---
@@ -37,13 +36,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ❌ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ❌ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ✅ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -85,6 +84,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

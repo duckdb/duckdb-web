@@ -208,12 +208,12 @@ If no explicit `CHAIN` is provided, the default one will be [`default`](https://
 
 #### Managed Identity
 
-Managed Identity (MI) can be used gracefully and automatically via the `credential_chain`. In typical 
-cases where the executor has a single MI available, no configuration is needed. 
+Managed Identity (MI) can be used gracefully and automatically via the `credential_chain`. In typical
+cases where the executor has a single MI available, no configuration is needed.
 
 If your execution environment has multiple Identities, use the `MANAGED_IDENTITY` provider and specify
-which identity to use. This provider allows identity specification via one of 
-`CLIENT_ID`, `OBJECT_ID` or `RESOURCE_ID`, e.g.:
+which identity to use. This provider allows identity specification via one of
+`CLIENT_ID`, `OBJECT_ID`, or `RESOURCE_ID`, e.g.:
 
 ```sql
 CREATE SECRET secret1 (
@@ -224,8 +224,8 @@ CREATE SECRET secret1 (
 );
 ```
 
-The provider may be used without specifying an ID; if only a single ID is available this provider 
-will function identically to the `credential_chain` provider, and use the single available ID. If 
+The provider may be used without specifying an ID; if only a single ID is available this provider
+will function identically to the `credential_chain` provider, and use the single available ID. If
 multiple IDs are available, behavior is undefined (or more specifically, defined by the Azure SDK)
 – therefore we recommend explicit Identity setting in this situation.
 
@@ -262,7 +262,7 @@ CREATE SECRET azure_spn_cert (
 
 #### Configuring a Proxy
 
-To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME` and `PROXY_PASSWORD` in the secret definition. For example:
+To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME`, and `PROXY_PASSWORD` in the secret definition. For example:
 
 ```sql
 CREATE SECRET secret5 (

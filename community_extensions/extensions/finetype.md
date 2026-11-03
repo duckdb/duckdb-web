@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: finetype
   description: Semantic type classification — detects 251 data types (emails, URLs, dates, UUIDs, currencies, etc.) from raw strings
-  version: 0.6.63
+  version: 0.6.66
   language: Rust
   build: cargo
   license: MIT
@@ -22,8 +22,8 @@ extension:
 
 repo:
   github: meridian-online/finetype
-  ref: 80a8bc157d98897a1df0140cf2e35a314816fd52
-  ref_next: 80a8bc157d98897a1df0140cf2e35a314816fd52
+  ref: 6b85e500659f44520ca7e6e70073e335cc3e3acb
+  ref_next: 6b85e500659f44520ca7e6e70073e335cc3e3acb
   variegata: a8ec8663862d28b1b9e0794f5026efbdb2ea3836
 
 docs:
@@ -182,21 +182,40 @@ docs:
 
     ### `ft_cast(value VARCHAR) → VARCHAR`
     Normalize a value for safe `TRY_CAST()` to its detected DuckDB type. Handles date format
-    conversion (US/EU → ISO), boolean normalization, UUID lowercasing, numeric cleanup.
+    conversion (US/EU → ISO), boolean normalization, UUID lowercasing, numeric cleanup. A
+    percentage casts to a fraction, the value a spreadsheet holds.
 
     ```sql
     SELECT ft_cast('01/15/2024');  -- 2024-01-15 (US date → ISO)
+    SELECT ft_cast('95.5%');       -- 0.955 (percentage → fraction)
     ```
 
-    ### `ft_validate_text(value VARCHAR, schema_json VARCHAR) → STRUCT(valid BOOLEAN, "constraint" VARCHAR, message VARCHAR)`
+    ### `ft_validate_text(value VARCHAR, schema_json VARCHAR) → STRUCT(valid BOOLEAN, "constraint" VARCHAR, message VARCHAR, grade VARCHAR, note VARCHAR)`
     Validate a single value against a JSON Schema fragment. Returns a struct: `valid` is `true` when
     the value conforms (with `constraint` and `message` `NULL`); on failure `valid` is `false` and
     `constraint` / `message` name the failing keyword and the reason. This is the per-cell engine the
     `ft_validate` table verb runs over every column.
 
+    `grade` is `conforms`, `noted` or `fails`. A `noted` value is valid but carries a `note`, such as
+    a non-canonical form (an uppercase UUID) or a withdrawn code, when the fragment declares the
+    `x-finetype-canonical` or `x-finetype-historic` extension. `valid` still means "not a failure".
+    The scalar applies the same per-value check as `finetype validate`: enum membership ignores
+    letter-case, and when the fragment's `x-finetype-label` names a type with a check digit (ISBN,
+    IBAN, NPI and others), a right-shape value with a bad check digit fails with constraint
+    `checksum`.
+
     ```sql
     SELECT ft_validate_text('not-an-email', '{"type":"string","pattern":"^[^@]+@[^@]+\\.[^@]+$"}');
-    -- {'valid': false, 'constraint': pattern, 'message': '"not-an-email" does not match "^[^@]+@[^@]+\.[^@]+$"'}
+    -- {'valid': false, 'constraint': pattern, 'message': '"not-an-email" does not match "^[^@]+@[^@]+\.[^@]+$"', 'grade': fails, 'note': NULL}
+
+    SELECT ft_validate_text('550E8400-E29B-41D4-A716-446655440000',
+      '{"type":"string","pattern":"^[0-9a-fA-F-]{36}$",
+        "x-finetype-canonical":{"kind":"non_canonical","name":"lowercase","pattern":"^[^A-F]*$"}}');
+    -- {'valid': true, 'constraint': NULL, 'message': NULL, 'grade': noted, 'note': 'non_canonical: lowercase'}
+
+    SELECT ft_validate_text('0306406153',
+      '{"type":"string","pattern":"^[0-9]{9}[0-9X]$","x-finetype-label":"identity.commerce.isbn"}');
+    -- {'valid': false, 'constraint': checksum, 'message': '"0306406153" fails its isbn check digit', 'grade': fails, 'note': NULL}
     ```
 
     ### `ft_unpack(json VARCHAR) → VARCHAR`
@@ -223,10 +242,10 @@ docs:
 
     For more information, see the [FineType documentation](https://github.com/meridian-online/finetype).
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 6895
-extension_download_count_pretty: 6.9k
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 1051
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_finetype.png'
 layout: community_extension_doc
 ---
@@ -240,7 +259,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -269,7 +288,7 @@ LOAD {{ page.extension.name }};
 |  function_name   | function_type | description | comment | examples |
 |------------------|---------------|-------------|---------|----------|
 | ft_cast          | scalar        | NULL        | NULL    |          |
-| ft_detail        | scalar        | NULL        | NULL    |          |
+| ft_detail        | aggregate     | NULL        | NULL    |          |
 | ft_infer         | scalar        | NULL        | NULL    |          |
 | ft_profile       | aggregate     | NULL        | NULL    |          |
 | ft_profile       | table_macro   | NULL        | NULL    |          |
@@ -294,6 +313,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

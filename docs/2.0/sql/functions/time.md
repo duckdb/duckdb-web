@@ -36,7 +36,7 @@ The table below shows the available scalar functions for `TIME` types.
 | [`get_current_time()`](#get_current_time) | Current time (start of current transaction). |
 | [`make_time(bigint, bigint, double)`](#make_timebigint-bigint-double) | The time for the given parts. |
 
-The only [date parts]({% link docs/2.0/sql/functions/datepart.md %}) that are defined for times are `epoch`, `hours`, `minutes`, `seconds`, `milliseconds` and `microseconds`.
+The only [date parts]({% link docs/2.0/sql/functions/datepart.md %}) that are defined for times are `epoch`, `hours`, `minutes`, `seconds`, `milliseconds`, and `microseconds`.
 
 #### `current_localtime()`
 

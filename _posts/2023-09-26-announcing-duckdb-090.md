@@ -17,7 +17,7 @@ tag: release
 
 The DuckDB team is happy to announce the latest DuckDB release (0.9.0). This release is named Undulata after the [Yellow-billed duck](https://en.wikipedia.org/wiki/Yellow-billed_duck) native to Africa.
 
-To install the new version, please visit the [installation guide]({% link install/index.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.9.0).
+To install the new version, please visit the [installation guide]({% link docs/2.0/installation.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.9.0).
 
 ## What's New in 0.9.0
 
@@ -122,7 +122,7 @@ trent005 -> 500tnert
 
 By reducing the size of query intermediates, we can prevent/reduce spilling data to disk, reducing the need for costly I/O operations, thereby improving query performance.
 
-**Window Function Performance Improvements ([#7831](https://github.com/duckdb/duckdb/pull/7831), [#7996](https://github.com/duckdb/duckdb/pull/7996), [#8050](https://github.com/duckdb/duckdb/pull/8050), [#8491](https://github.com/duckdb/duckdb/pull/8491)).** This release features many improvements to the performance of Window functions due to improved vectorization of the code, more re-use of partial aggregates and improved parallelism through work stealing of tasks. As a result, performance of [Window functions has improved significantly, particularly in scenarios where there are no or few partitions](https://github.com/duckdb/duckdb/issues/7809#issuecomment-1679387022).
+**Window Function Performance Improvements ([#7831](https://github.com/duckdb/duckdb/pull/7831), [#7996](https://github.com/duckdb/duckdb/pull/7996), [#8050](https://github.com/duckdb/duckdb/pull/8050), [#8491](https://github.com/duckdb/duckdb/pull/8491)).** This release features many improvements to the performance of Window functions due to improved vectorization of the code, more re-use of partial aggregates, and improved parallelism through work stealing of tasks. As a result, performance of [Window functions has improved significantly, particularly in scenarios where there are no or few partitions](https://github.com/duckdb/duckdb/issues/7809#issuecomment-1679387022).
 
 ```sql
 SELECT
@@ -145,7 +145,7 @@ FROM tripdata;
 
 [**Vacuuming of Deleted Row Groups**](https://github.com/duckdb/duckdb/pull/7794). Starting with this release, when deleting data using `DELETE` statements, entire row groups that are deleted will be automatically cleaned up. Support is also added to [truncate the database file on checkpoint](https://github.com/duckdb/duckdb/pull/7824) which allows the database file to be reduced in size after data is deleted. Note that this only occurs if the deleted row groups are located at the end of the file. The system does not yet move around data in order to reduce the size of the file on disk. Instead, free blocks earlier on in the file are re-used to store later data.
 
-**Index Storage Improvements ([#7930](https://github.com/duckdb/duckdb/pull/7930), [#8112](https://github.com/duckdb/duckdb/pull/8112), [#8437](https://github.com/duckdb/duckdb/pull/8437), [#8703](https://github.com/duckdb/duckdb/pull/8703))**. Many improvements have been made to both the in-memory footprint, and the on-disk footprint of ART indexes. In particular for indexes created to maintain `PRIMARY KEY`, `UNIQUE` or `FOREIGN KEY` constraints the storage and in-memory footprint is drastically reduced.
+**Index Storage Improvements ([#7930](https://github.com/duckdb/duckdb/pull/7930), [#8112](https://github.com/duckdb/duckdb/pull/8112), [#8437](https://github.com/duckdb/duckdb/pull/8437), [#8703](https://github.com/duckdb/duckdb/pull/8703))**. Many improvements have been made to both the in-memory footprint, and the on-disk footprint of ART indexes. In particular for indexes created to maintain `PRIMARY KEY`, `UNIQUE`, or `FOREIGN KEY` constraints the storage and in-memory footprint is drastically reduced.
 
 ```sql
 CREATE TABLE integers (i INTEGER PRIMARY KEY);
@@ -172,7 +172,7 @@ import duckdb
 duckdb.sql("FROM 'https://raw.githubusercontent.com/duckdb/duckdb/main/data/json/example_n.ndjson'")
 ```
 
-The set of autoloadable extensions is limited to official extensions distributed by DuckLabs, and can be [found here](https://github.com/duckdb/duckdb/blob/8feb03d274892db0e7757cd62c145b18dfa930ec/scripts/generate_extensions_function.py#L298). The behavior can also be disabled using the `autoinstall_known_extensions` and `autoload_known_extensions` settings, or through the more general `enable_external_access` setting. See the [configuration options]({% link docs/1.5/configuration/overview.md %}).
+The set of autoloadable extensions is limited to official extensions distributed by DuckLabs, and can be [found here](https://github.com/duckdb/duckdb/blob/8feb03d274892db0e7757cd62c145b18dfa930ec/scripts/generate_extensions_function.py#L298). The behavior can also be disabled using the `autoinstall_known_extensions` and `autoload_known_extensions` settings, or through the more general `enable_external_access` setting. See the [configuration options]({% link docs/2.0/configuration/overview.md %}).
 
 [**DuckDB-Wasm Extensions**](https://github.com/duckdb/duckdb-wasm/pull/1403). This release adds support for loadable extensions to DuckDB-Wasm. Previously, any extensions that you wanted to use with the Wasm client had to be baked in. With this release, extensions can be loaded dynamically instead. When an extension is loaded, the Wasm bundle is downloaded and the functionality of the extension is enabled. Give it a try in our [Wasm shell](https://shell.duckdb.org).
 
@@ -188,7 +188,7 @@ CALL load_aws_credentials();
 SELECT * FROM 's3://some-bucket/that/requires/authentication.parquet';
 ```
 
-[See the documentation for more information]({% link docs/1.5/core_extensions/aws.md %}).
+[See the documentation for more information]({% link docs/2.0/core_extensions/aws.md %}).
 
 [**Experimental Iceberg Extension**](https://github.com/duckdb/duckdb-iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
 
@@ -197,7 +197,7 @@ SELECT count(*)
 FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 ```
 
-[See the documentation for more information]({% link docs/1.5/core_extensions/iceberg/overview.md %}).
+[See the documentation for more information]({% link docs/2.0/core_extensions/iceberg/overview.md %}).
 
 [**Experimental Azure Extension**](https://github.com/duckdb/duckdb-azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
 
@@ -206,11 +206,11 @@ SET azure_storage_connection_string = '<your_connection_string>';
 SELECT * FROM 'azure://<my_container>/*.csv';
 ```
 
-[See the documentation for more information]({% link docs/1.5/core_extensions/azure.md %}).
+[See the documentation for more information]({% link docs/2.0/core_extensions/azure.md %}).
 
 ## Clients
 
-[**Experimental PySpark API**](https://github.com/duckdb/duckdb/pull/8083). This release features the addition of an experimental Spark API to the Python client. The API aims to be fully compatible with the PySpark API, allowing you to use the Spark API as you are familiar with but while utilizing the power of DuckDB. All statements are translated to DuckDB's internal plans using our [relational API]({% link docs/1.5/clients/python/relational_api.md %}) and executed using DuckDB's query engine.
+[**Experimental PySpark API**](https://github.com/duckdb/duckdb/pull/8083). This release features the addition of an experimental Spark API to the Python client. The API aims to be fully compatible with the PySpark API, allowing you to use the Spark API as you are familiar with but while utilizing the power of DuckDB. All statements are translated to DuckDB's internal plans using our [relational API]({% link docs/2.0/clients/python/relational_api.md %}) and executed using DuckDB's query engine.
 
 ```python
 from duckdb.experimental.spark.sql import SparkSession as session

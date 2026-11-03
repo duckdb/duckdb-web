@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: http_request
   description: HTTP client extension for DuckDB with GET/POST/PUT/PATCH/DELETE and byte-range requests
-  version: '2026020501'
+  version: '2026102301'
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,8 @@ extension:
 repo:
   github: midwork-finds-jobs/duckdb_http_request
   andium: d4ad6fb9728b637996de4e23e0afcaf89b5140b4
-  ref: 1c0324d3749d7b2d82fbf35b289cd2ca4da62934
+  variegata: 1c0324d3749d7b2d82fbf35b289cd2ca4da62934
+  ref: 319d8af27df8868593068f8698e168f8ac9ac44b
 
 docs:
   hello_world: |
@@ -69,8 +70,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 487
-extension_download_count_pretty: 487
+extension_download_count: 889
+extension_download_count_pretty: 889
 image: '/images/community_extensions/social_preview/preview_community_extension_http_request.png'
 layout: community_extension_doc
 ---
@@ -82,13 +83,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ❌ | ❌ | ❌ |
-| macOS AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ❌ | ❌ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ❌ | ❌ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ❌ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ❌ | ❌ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ❌ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ❌ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -144,18 +145,19 @@ LOAD {{ page.extension.name }};
 <div class="extension_types_table"></div>
 
 |  type_name   | type_size | logical_type | type_category | internal |
-|--------------|----------:|--------------|---------------|---------:|
+|--------------|----------:|--------------|---------------|----------|
 | HTTP_HEADERS | 16        | MAP          | COMPOSITE     | true     |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|         name          |                                    description                                    | input_type | scope  | aliases |
-|-----------------------|-----------------------------------------------------------------------------------|------------|--------|---------|
-| http_follow_redirects | Automatically follow HTTP redirects (default: true)                               | BOOLEAN    | GLOBAL | []      |
-| http_max_concurrency  | Maximum number of concurrent HTTP requests per scalar function call (default: 32) | UBIGINT    | GLOBAL | []      |
-| http_request_cache    | Cache HTTP responses within query to prevent duplicate requests (default: true)   | BOOLEAN    | GLOBAL | []      |
-| http_user_agent       | Custom User-Agent header for all HTTP requests (default: DuckDB)                  | VARCHAR    | GLOBAL | []      |
+|         name          |                                    description                                    | input_type | scope  | aliases | typed_value |
+|-----------------------|-----------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| http_follow_redirects | Automatically follow HTTP redirects (default: true)                               | BOOLEAN    | GLOBAL | []      | true        |
+| http_max_concurrency  | Maximum number of concurrent HTTP requests per scalar function call (default: 32) | UBIGINT    | GLOBAL | []      | 32          |
+| http_request_cache    | Cache HTTP responses within query to prevent duplicate requests (default: true)   | BOOLEAN    | GLOBAL | []      | true        |
+| http_user_agent       | Custom User-Agent header for all HTTP requests (default: DuckDB)                  | VARCHAR    | GLOBAL | []      |             |
+| temp_directory        | Set the directory to which temporary files are written.                           | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

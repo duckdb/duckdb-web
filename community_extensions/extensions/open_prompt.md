@@ -70,8 +70,8 @@ repo:
 
 extension_star_count: 62
 extension_star_count_pretty: 62
-extension_download_count: 9133
-extension_download_count_pretty: 9.1k
+extension_download_count: 1005
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---
@@ -85,7 +85,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -111,16 +111,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name  | function_type |                              description                               | comment |                          examples                           |
-|-----------------|---------------|------------------------------------------------------------------------|---------|-------------------------------------------------------------|
-| open_prompt     | scalar        | Send a prompt to an LLM API using a specific model                     | NULL    | [open_prompt('Explain SQL', 'gpt-4')]                       |
-| open_prompt     | scalar        | Send a prompt to an LLM API with a system prompt and structured output | NULL    | [open_prompt('Hello', 'gpt-4', '{}', 'You are helpful')]    |
-| open_prompt     | scalar        | Send a prompt to an LLM API with structured JSON output                | NULL    | [open_prompt('Extract name', 'gpt-4', '{"type":"object"}')] |
-| open_prompt     | scalar        | Send a prompt to an OpenAI-compatible LLM API and return the response  | NULL    | [open_prompt('What is DuckDB?')]                            |
-| set_api_timeout | scalar        | Set the API timeout in seconds for LLM requests                        | NULL    | [set_api_timeout('30')]                                     |
-| set_api_token   | scalar        | Set the API token for LLM authentication                               | NULL    | [set_api_token('sk-...')]                                   |
-| set_api_url     | scalar        | Set the API URL for LLM endpoint                                       | NULL    | [set_api_url('https://api.openai.com/v1/chat/completions')] |
-| set_model_name  | scalar        | Set the default model name for LLM requests                            | NULL    | [set_model_name('gpt-4')]                                   |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

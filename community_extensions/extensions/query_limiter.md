@@ -31,8 +31,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 4036
-extension_download_count_pretty: 4.0k
+extension_download_count: 935
+extension_download_count_pretty: 935
 image: '/images/community_extensions/social_preview/preview_community_extension_query_limiter.png'
 layout: community_extension_doc
 ---
@@ -46,7 +46,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -92,9 +92,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|           name           |                                                      description                                                       | input_type | scope  | aliases |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| max_rows_to_scan         | Reject queries before execution when estimated table-scan rows exceed this value. Defaults to the maximum idx_t value. | UBIGINT    | GLOBAL | []      |
-| max_rows_to_scan_unknown | Policy for scans without row estimates when max_rows_to_scan is enabled: allow or reject.                              | VARCHAR    | GLOBAL | []      |
+|           name           |                                                      description                                                       | input_type | scope  | aliases |     typed_value      |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|----------------------|
+| max_rows_to_scan         | Reject queries before execution when estimated table-scan rows exceed this value. Defaults to the maximum idx_t value. | UBIGINT    | GLOBAL | []      | 18446744073709551615 |
+| max_rows_to_scan_unknown | Policy for scans without row estimates when max_rows_to_scan is enabled: allow or reject.                              | VARCHAR    | GLOBAL | []      | allow                |
+| temp_directory           | Set the directory to which temporary files are written.                                                                | VARCHAR    | GLOBAL | []      | post.db.tmp          |
 
 

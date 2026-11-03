@@ -35,7 +35,7 @@
 		}
 
 		span {
-			@include title-2;
+			@include headline-4;
 			color: var(--main-text-primary-color, #0d0d0d);
 		}
 	}
@@ -51,14 +51,13 @@
 	}
 
 	.bento-link {
+		@include label;
+		font-size: var(--type-body-small, 13px);
 		display: inline-flex;
 		align-items: center;
 		gap: 7px;
 		margin-top: auto;
 		padding-top: 8px;
-		font-size: var(--type-label-1, 14px);
-		font-weight: var(--type-weight-standard, 450);
-		line-height: 1;
 		color: var(--main-text-secondary-color, #666);
 		text-decoration: none;
 

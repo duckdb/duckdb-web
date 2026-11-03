@@ -30,7 +30,7 @@ CREATE SCHEMA my_schema;
 CREATE TYPE my_schema.mood AS ENUM ('sad', 'ok', 'happy');
 ```
 
-Anonymous enums can be created on the fly during [casting]({% link docs/1.5/sql/expressions/cast.md %}):
+Anonymous enums can be created on the fly during [casting]({% link docs/1.4/sql/expressions/cast.md %}):
 
 ```sql
 SELECT 'clubs'::ENUM ('spades', 'hearts', 'diamonds', 'clubs');
@@ -194,7 +194,7 @@ INSERT INTO tasks VALUES ('a', 'low'), ('b', 'medium'), ('c', 'high');
 -- WARNING!
 -- Equivalent to `WHERE priority_level::VARCHAR >= 'medium'`
 SELECT * FROM tasks
-WHERE priority_level >= 'medium';  
+WHERE priority_level >= 'medium';
 -- Misses the 'high' priority task!
 ```
 
@@ -217,7 +217,7 @@ WHERE priority_level >= 'medium'::priority;
 
 ## Functions
 
-See [Enum Functions]({% link docs/1.5/sql/functions/enum.md %}).
+See [Enum Functions]({% link docs/1.4/sql/functions/enum.md %}).
 
 For example, show the available values in the `moods` enum using the `enum_range` function:
 

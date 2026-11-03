@@ -26,7 +26,7 @@ Array data also has its own world of highly specialized file formats and compres
 
 But what would it feel like to turn a movie into a table? (Very) deep down, a movie is just a series of fast-moving pictures (“frames”), typically at something around 25 frames per second. At that speed, our monkey-brain cannot distinguish the separate images any more and is fooled into thinking that we are watching smooth movement. Side note for the younger generations, a strip of pictures was the way we [shipped around movies](https://en.wikipedia.org/wiki/Film_stock#/media/File:ButterflyDancebis.jpg) for more than 100 years.
 
-So a series of pictures it is. Each picture can be further deconstructed into a two-dimensional array (a “matrix”) of points, so-called “pixels”. Every pixel in turn consists of three numbers, one each for the intensity of red, green and blue, or [RGB](https://en.wikipedia.org/wiki/RGB_color_model) for short. Note that we're ignoring the audio tracks in this post, but in principle it would work the exact same way, just with a different kind of intensity.
+So a series of pictures it is. Each picture can be further deconstructed into a two-dimensional array (a “matrix”) of points, so-called “pixels”. Every pixel in turn consists of three numbers, one each for the intensity of red, green, and blue, or [RGB](https://en.wikipedia.org/wiki/RGB_color_model) for short. Note that we're ignoring the audio tracks in this post, but in principle it would work the exact same way, just with a different kind of intensity.
 
 As an added complexity, the relational model (famously) [does not require](https://www.reddit.com/r/Database/comments/1l7tbrc/why_is_inherent_order_in_rdbms_so_neglected/) an absolute order of records. So all the various offsets have to be made explicit to not lose information. This of course greatly increases the size of our data set. We end up with a table that looks like this:
 
@@ -43,9 +43,9 @@ As an added complexity, the relational model (famously) [does not require](https
 |    0 |    0 |    8 |    9 |   10 |    5 |
 |    0 |    0 |    9 |    9 |   10 |    5 |
 
-We have the time offset or frame number `i`, we have `x` and `y` for the pixel position in the frame, and `r`, `g` and `b` for the color components red, green and blue. Quite involved.
+We have the time offset or frame number `i`, we have `x` and `y` for the pixel position in the frame, and `r`, `g`, and `b` for the color components red, green, and blue. Quite involved.
 
-But now the movie is just a single table. If only just we had a conventional and guaranteed total order of rows, we could in theory skip all columns except for `r`, `g` and `b`, because with a known resolution all other columns can be inferred. This is coincidentally also how actual movie data files are stored, ignoring compression. This is another reason why maybe relational tables are not the best place for a movie to live in, but if [all you have is a hammer](https://en.wikipedia.org/wiki/Law_of_the_instrument). We could also have used some more modern features of SQL and use nested fields (a `LIST` in DuckDB), but let's keep it to a table even [System R](https://en.wikipedia.org/wiki/IBM_System_R) could have dealt with.  In addition, having explicit offsets  does not require nebulous conventions or additional metadata to know along with axis order the array data was serialized.
+But now the movie is just a single table. If only just we had a conventional and guaranteed total order of rows, we could in theory skip all columns except for `r`, `g`, and `b`, because with a known resolution all other columns can be inferred. This is coincidentally also how actual movie data files are stored, ignoring compression. This is another reason why maybe relational tables are not the best place for a movie to live in, but if [all you have is a hammer](https://en.wikipedia.org/wiki/Law_of_the_instrument). We could also have used some more modern features of SQL and use nested fields (a `LIST` in DuckDB), but let's keep it to a table even [System R](https://en.wikipedia.org/wiki/IBM_System_R) could have dealt with.  In addition, having explicit offsets  does not require nebulous conventions or additional metadata to know along with axis order the array data was serialized.
 
 
 ## Experiments
@@ -53,7 +53,7 @@ But now the movie is just a single table. If only just we had a conventional and
 To investigate this daft idea further (for [Science](https://www.ru.nl/personen/muhleisen-h)!), we convert the 1963 classic [“Charade”](https://en.wikipedia.org/wiki/Charade_(1963_film)), a “romantic screwball comedy mystery film” starring Audrey Hepburn and Cary Grant to a DuckDB table. This movie was picked because it is *accidentally in the Public Domain* because a screw-up in the wording of the copyright notice (no, really). Because of this, you can actually [freely download this movie](https://archive.org/details/Charade19631280x696) from the Internet Archive.
 
 <img src="{% link images/blog/movies/charade-poster.jpg %}" width="400" />
- 
+
 Since we're just creating a table, we will use DuckDB's native storage format. Here is the *complete* code snippet we used to convert the movie. In fact, this code should actually be generic enough to convert anything that `ffmpeg` can read to a table. Just in case you would want to try this at home on your own movies.
 
 
@@ -93,7 +93,7 @@ for i_idx, im in enumerate(vid):
         ''', [i_idx, rows_per_frame])
 ```
 
-This script makes use of not just one, but (at least) *two* cool DuckDB features. First, we use so-called [replacement scans]({% link docs/1.5/clients/c/replacement_scans.md %}) to directly query the NumPy arrays `r`, `g`, and `b`. Note that those have not been created as tables in DuckDB nor registered in any way, but they are referenced by name in the `INSERT`. What happens here is that DuckDB inspects the Python context for the missing “tables” and finds objects with those names that it can read. The other cool feature is the [`POSITIONAL JOIN`]({% link docs/1.5/sql/query_syntax/from.md %}#positional-joins), which lets us stack multiple tables horizontally by position without running an actual (expensive) `JOIN`. This way, we assemble all the columns we need for a single frame in a bulk `INSERT`, which executes quite efficiently.
+This script makes use of not just one, but (at least) *two* cool DuckDB features. First, we use so-called [replacement scans]({% link docs/2.0/clients/c/replacement_scans.md %}) to directly query the NumPy arrays `r`, `g`, and `b`. Note that those have not been created as tables in DuckDB nor registered in any way, but they are referenced by name in the `INSERT`. What happens here is that DuckDB inspects the Python context for the missing “tables” and finds objects with those names that it can read. The other cool feature is the [`POSITIONAL JOIN`]({% link docs/2.0/sql/query_syntax/from.md %}#positional-joins), which lets us stack multiple tables horizontally by position without running an actual (expensive) `JOIN`. This way, we assemble all the columns we need for a single frame in a bulk `INSERT`, which executes quite efficiently.
 
 The movie file we have has a frame rate of 25 frames per second at a (DVD-ish) resolution of 720x392 pixels. The total runtime is 01:53:02.56 seconds, which comes down to 169 563 individual frames. Because we have a row for each pixel we end up with 169 563 * 720 x 392  rows, or 47 857 461 120. 47 billion rows! Finally [Big Data](https://motherduck.com/blog/big-data-is-dead/)! When stored as a DuckDB database however, the file size is “only” around 200 GB. Totally doable on a laptop!
 
@@ -173,7 +173,7 @@ This one is admittedly a bit of a flex. DuckDB can compute elaborate summary sta
 |           b | UTINYINT    |    0 |    255 |           252 | 43.249715985643995 |  38.39218963268899 |    16 |    28 |     61 | 47857461120 |            0.00 |
 
 
-Since we're basically storing a lot of colors, just how many different combinations of red, green and blue are there, DuckDB?
+Since we're basically storing a lot of colors, just how many different combinations of red, green, and blue are there, DuckDB?
 
 ```sql
 FROM (FROM movie SELECT DISTINCT r, g, b)

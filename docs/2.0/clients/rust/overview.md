@@ -14,11 +14,9 @@ redirect_from:
 title: Rust Client
 ---
 
-> Installation To use the DuckDB Rust client, visit the [Rust installation page]({% link install/index.html %}?environment=rust).
+> Installation To use the DuckDB Rust client, visit the [Rust installation page]({% link docs/2.0/installation.html %}?environment=rust).
 >
-> The latest stable version of the DuckDB Rust client is {% include install/latest_client.html client="rust" %}{{ latest_version }}.{% if latest_release != "2.0" %}
->
-> A release of the Rust client based on DuckDB 2.0 is not yet available. Releases based on DuckDB 1.5 cannot open database files created by DuckDB 2.0, see the [migration guide]({% link docs/2.0/operations_manual/migration.md %}#storage-format).{% endif %}
+> The latest stable version of the DuckDB Rust client is {% include install/latest_client.html client="rust" %}{{ latest_version }}.
 
 The DuckDB Rust client, [`duckdb-rs`](https://github.com/duckdb/duckdb-rs), is an ergonomic wrapper over the [DuckDB C API](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb.h) that exposes an interface modeled on [rusqlite](https://github.com/rusqlite/rusqlite). It supports type-safe queries, bulk loading with the Appender, [Apache Arrow](https://arrow.apache.org/) interchange, user-defined functions, and building DuckDB extensions in Rust. This page focuses on installation. The other pages in this section cover connecting and each feature in detail.
 
@@ -180,8 +178,8 @@ Each statically links the matching bundled extension. All imply `bundled-cmake`,
 | Feature | Enables |
 |--|--|
 | `vtab-full` | `vtab-arrow` and `appender-arrow`, plus the deprecated `vtab-excel`. |
-| `extensions-full` | `json`, `parquet` and `vtab-full`. |
-| `modern-full` | `chrono`, `serde_json`, `url`, `r2d2`, `uuid`, `polars` and `rust_decimal`. |
+| `extensions-full` | `json`, `parquet`, and `vtab-full`. |
+| `modern-full` | `chrono`, `serde_json`, `url`, `r2d2`, `uuid`, `polars`, and `rust_decimal`. |
 
 ### Deprecated Features
 

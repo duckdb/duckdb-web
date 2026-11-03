@@ -97,7 +97,7 @@ The table below shows the available mathematical functions.
 | [`roundbankers(v NUMERIC, s INTEGER)`](#round_evenv-numeric-s-integer) | Alias of `round_even(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
 | [`round(v NUMERIC, s INTEGER)`](#roundv-numeric-s-integer) | Round to `s` decimal places. Values `s < 0` are allowed. |
 | [`setseed(x)`](#setseedx) | Sets the seed to be used for the random function. |
-| [`sign(x)`](#signx) | Returns the sign of `x` as -1, 0 or 1. |
+| [`sign(x)`](#signx) | Returns the sign of `x` as -1, 0, or 1. |
 | [`signbit(x)`](#signbitx) | Returns whether the signbit is set or not. |
 | [`sin(x)`](#sinx) | Computes the sin of `x`. |
 | [`sqrt(x)`](#sqrtx) | Returns the square root of the number. |
@@ -276,7 +276,7 @@ The table below shows the available mathematical functions.
 | **Example** | `factorial(4)` |
 | **Result** | `24` |
 
-> Note In DuckDB v2.0, the `!` operator binds more tightly than in earlier versions. For example, `SELECT 2 * 3!;` now returns `12` (`2 * (3!)`), while in v1.5 it returned `720` (`(2 * 3)!`). Use parentheses to get the old behavior, e.g., `SELECT (2 * 3)!;`.
+> Note In DuckDB 2.0, the `!` operator binds more tightly than in earlier versions. For example, `SELECT 2 * 3!;` now returns `12` (`2 * (3!)`), while in v1.5 it returned `720` (`(2 * 3)!`). Use parentheses to get the old behavior, e.g., `SELECT (2 * 3)!;`.
 
 #### `fdiv(x, y)`
 
@@ -513,7 +513,7 @@ The table below shows the available mathematical functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the sign of `x` as -1, 0 or 1. |
+| **Description** | Returns the sign of `x` as -1, 0, or 1. |
 | **Example** | `sign(-349)` |
 | **Result** | `-1` |
 

@@ -31,10 +31,10 @@ docs:
     `ngrams(list,n)`, `double_metaphone(str)`
     and faster versions of `levenshtein` and `damerau_levenshtein`.
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 10486
-extension_download_count_pretty: 10.5k
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 2797
+extension_download_count_pretty: 2.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_splink_udfs.png'
 layout: community_extension_doc
 ---
@@ -48,7 +48,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -74,15 +74,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| build_suffix_trie | aggregate     | NULL        | NULL    |          |
-| double_metaphone  | scalar        | NULL        | NULL    |          |
-| find_address      | scalar        | NULL        | NULL    |          |
-| ngrams            | scalar        | NULL        | NULL    |          |
-| soundex           | scalar        | NULL        | NULL    |          |
-| strip_diacritics  | scalar        | NULL        | NULL    |          |
-| unaccent          | scalar        | NULL        | NULL    |          |
+|      function_name       | function_type | description | comment | examples |
+|--------------------------|---------------|-------------|---------|----------|
+| _get_nicknames           | scalar        | NULL        | NULL    |          |
+| double_metaphone         | scalar        | NULL        | NULL    |          |
+| ngrams                   | scalar        | NULL        | NULL    |          |
+| nickname_lookup_versions | table         | NULL        | NULL    |          |
+| soundex                  | scalar        | NULL        | NULL    |          |
+| strip_diacritics         | scalar        | NULL        | NULL    |          |
+| unaccent                 | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -103,6 +103,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

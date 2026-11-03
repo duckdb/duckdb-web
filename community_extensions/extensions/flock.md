@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: flock
   description: LLM & RAG extension to combine analytics and semantic analysis
-  version: 0.9.0
+  version: 0.10.0
   language: SQL & C++
   build: cmake
   license: MIT
@@ -20,14 +20,15 @@ extension:
     - iZarrios
 
 repo:
-  github: dais-polymtl/flock
-  ref: b719767de598fc784f037f2342d0a5167deed2d8
+  github: dais-labo/flock
+  ref: f83d73cee9ac4aa95c8d43c375725f07370e6544
+  variegata: b719767de598fc784f037f2342d0a5167deed2d8
 
 docs:
   hello_world: |
     -- After loading, any function call will throw an error if the provider's secret doesn't exist
 
-    -- Create your provider secret by following the [documentation](https://dais-polymtl.github.io/flock/docs/what-is-flock/). For example, you can create a default OpenAI API key as follows:
+    -- Create your provider secret by following the [documentation](https://dais-labo.github.io/flock). For example, you can create a default OpenAI API key as follows:
     D CREATE SECRET (TYPE OPENAI, API_KEY 'your-api-key');
 
     -- Call an OpenAI model with a predefined prompt ('Tell me hello world') and default model ('gpt-4o-mini')
@@ -57,14 +58,14 @@ docs:
 
     It introduces `MODEL` and `PROMPT` objects as first-class SQL entities, making it easy to define, manage, and reuse LLM interactions. Core functions like `llm_complete`, `llm_filter`, and `llm_rerank` allow you to perform generation, semantic filtering, and ranking—all from SQL.
 
-    📄 For more details and examples, see the [Flock documentation](https://dais-polymtl.github.io/flock/docs/what-is-flock).
+    📄 For more details and examples, see the [Flock documentation](https://dais-labo.github.io/flock).
 
-    > *Note:* Flock is part of ongoing research by the [Data & AI Systems (DAIS) Laboratory @ Polytechnique Montréal](https://github.com/dais-polymtl). It is under active development, and some features may evolve. Feedback and contributions are welcome!
+    > *Note:* Flock is part of ongoing research by the [Data & AI Systems (DAIS) Laboratory @ Polytechnique Montréal](https://github.com/dais-labo). It is under active development, and some features may evolve. Feedback and contributions are welcome!
 
-extension_star_count: 359
-extension_star_count_pretty: 359
-extension_download_count: 7005
-extension_download_count_pretty: 7.0k
+extension_star_count: 362
+extension_star_count_pretty: 362
+extension_download_count: 1161
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_flock.png'
 layout: community_extension_doc
 ---
@@ -76,13 +77,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -139,6 +140,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

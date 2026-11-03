@@ -25,7 +25,7 @@ The datasets are organized into:
 - a provinces GeoJSON file, containing the geographic information about the Dutch provinces, hosted on GitHub;
 - a municipalities GeoJSON file, containing the geographic information about Dutch municipalities, stored together with the code.
 
-After doing an initial exploration of the above data, we can observe that a province can have one or many municipalities, a municipality can have none or many train stations and a train service record is connected to one and only one train station. Therefore we decide on the following data model:
+After doing an initial exploration of the above data, we can observe that a province can have one or many municipalities, a municipality can have none or many train stations, and a train service record is connected to one and only one train station. Therefore we decide on the following data model:
 
 - a dimension table, `dim_nl_provinces`, to hold information about the Dutch provinces;
 - a dimension table, `dim_nl_municipalities`, to hold information about the Dutch municipalities, linked to `dim_nl_provinces`;
@@ -50,7 +50,7 @@ The purpose of processing the train services and the Netherlands cartography dat
 
 After we have [initialized](https://docs.getdbt.com/reference/commands/init) our project, we configure the connection details for DuckDB in the `profiles.yml` file. Along with specifying if the database should be in memory or persisted to disk, we also specify:
 
-- which extensions are required for the data processing, e.g., [spatial]({% link docs/1.5/core_extensions/spatial/overview.md %});
+- which extensions are required for the data processing, e.g., [spatial]({% link docs/2.0/core_extensions/spatial/overview.md %});
 - external databases, attached from the local disk or other storage solutions.
 
 ```yaml
@@ -108,7 +108,7 @@ In `dbt` the way of storing the data in the target system is called `materializa
 - `snapshot`, implementing a [Slowly Changing Dimension Type 2](https://en.wikipedia.org/wiki/Slowly_changing_dimension) table with time validity intervals;
 - `view`, replacing the target view at each run.
 
-Another feature of using the above adapter is that the SQL dialect used in the data processing scripts has all the [friendly SQL extensions]({% link docs/1.5/sql/dialect/friendly_sql.md %}) DuckDB has to offer.
+Another feature of using the above adapter is that the SQL dialect used in the data processing scripts has all the [friendly SQL extensions]({% link docs/2.0/sql/dialect/friendly_sql.md %}) DuckDB has to offer.
 
 To refresh the data in the `dim_nl_provinces` table, we use  the `st_read` spatial function, which reads and parses automatically the `nl_provinces` GeoJSON file, defined in `sources.yml`.
 
@@ -158,7 +158,7 @@ WHERE tr_st.country = 'NL';
 
 ## Exporting Data from DuckDB
 
-One major benefit of using DuckDB for data processing is the ability to export data to files (such as CSV, JSON and Parquet) and to refresh data directly in PostgreSQL or MySQL databases.
+One major benefit of using DuckDB for data processing is the ability to export data to files (such as CSV, JSON, and Parquet) and to refresh data directly in PostgreSQL or MySQL databases.
 
 ### External Files
 
@@ -203,7 +203,7 @@ GROUP BY ALL
 ```
 {% endraw %}
 
-The exported files are placed in [Hive partitioned directory structure]({% link docs/1.5/data/partitioning/hive_partitioning.md %}).
+The exported files are placed in [Hive partitioned directory structure]({% link docs/2.0/data/partitioning/hive_partitioning.md %}).
 
 ```text
 ./service_year=2024/service_month=1:
@@ -266,7 +266,7 @@ Thanks to DuckDB's ability to connect and write to a PostgreSQL database, we can
 
 To connect to a PostgreSQL database, we need to specify in `profiles.yml`:
 
-- the [`postgres` extension]({% link docs/1.5/core_extensions/postgres/overview.md %});
+- the [`postgres` extension]({% link docs/2.0/core_extensions/postgres/overview.md %});
 - the PostgreSQL connection string in the `attach` section.
 
 {% raw %}
@@ -320,7 +320,7 @@ FROM main_public.rep_fact_train_services_daily_agg;
 ```
 
 ```text
- count  |   sum    
+ count  |   sum
 --------+----------
  240826 | 17438151
 ```
@@ -335,7 +335,7 @@ The above implementation consists of 10 models and 20 data tests, processing 400
 05:48:07  Running with dbt=1.9.3
 05:48:08  Registered adapter: duckdb=1.9.2
 05:48:08  Found 10 models, 20 data tests, 4 sources, 565 macros
-05:48:08  
+05:48:08
 05:48:08  Concurrency: 1 threads (target='dev')
 ...
 05:48:45  19 of 30 OK created sql table model main_main.fact_services .................... [OK in 32.60s]
@@ -343,12 +343,12 @@ The above implementation consists of 10 models and 20 data tests, processing 400
 05:48:50  26 of 30 OK created sql incremental model postgres_db.main_public.rep_fact_train_services_daily_agg  [OK in 3.74s]
 ...
 05:48:51  Finished running 2 external models, 1 incremental model, 7 table models, 20 data tests in 0 hours 0 minutes and 42.63 seconds (42.63s).
-05:48:51  
+05:48:51
 05:48:51  Completed successfully
-05:48:51  
+05:48:51
 05:48:51  Done. PASS=30 WARN=0 ERROR=0 SKIP=0 TOTAL=30
 ```
 
 ## Conclusion
 
-In this post we have demonstrated how DuckDB integrates with `dbt` and how it is part of the data processing ecosystem by showcasing data mart creation, file exports and reverse ETL to a PostgreSQL database.
+In this post we have demonstrated how DuckDB integrates with `dbt` and how it is part of the data processing ecosystem by showcasing data mart creation, file exports, and reverse ETL to a PostgreSQL database.

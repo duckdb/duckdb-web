@@ -110,11 +110,11 @@ SELECT
 ;
 ```
 
-## "Top-N in Group" Queries
+## “Top-N in Group” Queries
 
-Computing the "top-N rows in a group" ordered by some criteria is a common task in SQL that unfortunately often requires a complex query involving window functions and/or subqueries.
+Computing the “top-N rows in a group” ordered by some criteria is a common task in SQL that unfortunately often requires a complex query involving window functions and/or subqueries.
 
-To aid in this, DuckDB provides the aggregate functions [`max(arg, n)`]({% link docs/1.5/sql/functions/aggregates.md %}#maxarg-n), [`min(arg, n)`]({% link docs/1.5/sql/functions/aggregates.md %}#minarg-n), [`arg_max(arg, val, n)`]({% link docs/1.5/sql/functions/aggregates.md %}#arg_maxarg-val-n), [`arg_min(arg, val, n)`]({% link docs/1.5/sql/functions/aggregates.md %}#arg_minarg-val-n), [`max_by(arg, val, n)`]({% link docs/1.5/sql/functions/aggregates.md %}#arg_maxarg-val-n) and [`min_by(arg, val, n)`]({% link docs/1.5/sql/functions/aggregates.md %}#arg_minarg-val-n) to efficiently return the "top" `n` rows in a group based on a specific column in either ascending or descending order.
+To aid in this, DuckDB provides the aggregate functions [`max(arg, n)`]({% link docs/1.5/sql/functions/aggregates.md %}#maxarg-n), [`min(arg, n)`]({% link docs/1.5/sql/functions/aggregates.md %}#minarg-n), [`arg_max(arg, val, n)`]({% link docs/1.5/sql/functions/aggregates.md %}#arg_maxarg-val-n), [`arg_min(arg, val, n)`]({% link docs/1.5/sql/functions/aggregates.md %}#arg_minarg-val-n), [`max_by(arg, val, n)`]({% link docs/1.5/sql/functions/aggregates.md %}#arg_maxarg-val-n), and [`min_by(arg, val, n)`]({% link docs/1.5/sql/functions/aggregates.md %}#arg_minarg-val-n) to efficiently return the “top” `n` rows in a group based on a specific column in either ascending or descending order.
 
 For example, let's use the following table:
 

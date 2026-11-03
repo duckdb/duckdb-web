@@ -9,15 +9,15 @@ excerpt: "We highlight a few exciting features that were introduced in DuckDB 1.
 tag: release
 ---
 
-We published the DuckDB 1.2.1 bugfix release yesterday. As usual, please consult the [release notes](https://github.com/duckdb/duckdb/releases/tag/v1.2.1) for the full list of changes and the [installation page]({% link install/index.html %}) for instructions on installing or upgrading. In this post, we'll highlight a few features that were recently added to DuckDB and improvements that have been made in its ecosystem.
+We published the DuckDB 1.2.1 bugfix release yesterday. As usual, please consult the [release notes](https://github.com/duckdb/duckdb/releases/tag/v1.2.1) for the full list of changes and the [installation page]({% link docs/2.0/installation.html %}) for instructions on installing or upgrading. In this post, we'll highlight a few features that were recently added to DuckDB and improvements that have been made in its ecosystem.
 
 ## New Clients Page
 
-DuckDB's client APIs (or “drivers”) are distributed through several centralized repositories, such as [CRAN](https://cran.r-project.org/web/packages/duckdb/index.html) for R and [Maven](https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc) for Java. To help users keep track of the rollout of a new DuckDB release, we reworked our [“Clients” page]({% link docs/1.5/clients/overview.md %}) to show the latest version for each client. The page also clarifies the support tiers that apply to clients.
+DuckDB's client APIs (or “drivers”) are distributed through several centralized repositories, such as [CRAN](https://cran.r-project.org/web/packages/duckdb/index.html) for R and [Maven](https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc) for Java. To help users keep track of the rollout of a new DuckDB release, we reworked our [“Clients” page]({% link docs/2.0/clients/overview.md %}) to show the latest version for each client. The page also clarifies the support tiers that apply to clients.
 
 ## Simpler Installation
 
-In line with DuckDB's “low friction” principle, we made sure that you can install the [DuckDB command line client]({% link docs/1.5/clients/cli/overview.md %}) more easily.
+In line with DuckDB's “low friction” principle, we made sure that you can install the [DuckDB command line client]({% link docs/2.0/clients/cli/overview.md %}) more easily.
 
 ### Installation Script on Linux and macOS
 
@@ -62,21 +62,21 @@ This feature is documented in the [DuckDB tldr page](https://tldr.inbrowser.app/
 
 ### `allowed_directories` / `allowed_paths` Options
 
-We continue to improve support for [operating DuckDB in secure environments]({% link docs/1.5/operations_manual/securing_duckdb/overview.md %}). The [`allowed_directories` and `allowed_paths` options](https://github.com/duckdb/duckdb/pull/14568) allow restricting DuckDB's access to certain directories or files (resp.).
+We continue to improve support for [operating DuckDB in secure environments]({% link docs/2.0/operations_manual/securing_duckdb/overview.md %}). The [`allowed_directories` and `allowed_paths` options](https://github.com/duckdb/duckdb/pull/14568) allow restricting DuckDB's access to certain directories or files (resp.).
 These options allows fine-grained access control for the file system.
 For example, you can set DuckDB to only use the `/tmp` directory.
 
 ```sql
-SET allowed_directories = ['/tmp'];  
-SET enable_external_access = false;  
-FROM read_csv('test.csv');  
+SET allowed_directories = ['/tmp'];
+SET enable_external_access = false;
+FROM read_csv('test.csv');
 ```
 
 With the setting applied, DuckDB will refuse to read files in the current working directory:
 
 ```console
 Permission Error:
-Cannot access file "test.csv" - file system operations are disabled by configuration  
+Cannot access file "test.csv" - file system operations are disabled by configuration
 ```
 
 ### `sum(BOOLEAN)`
@@ -84,22 +84,22 @@ Cannot access file "test.csv" - file system operations are disabled by configura
 You can now directly [compute the sum of `BOOLEAN` expressions](https://github.com/duckdb/duckdb/pull/15042) without wrapping them into a `CASE` expression:
 
 ```sql
-SELECT sum(l_extendedprice > 500) FROM lineitem;  
+SELECT sum(l_extendedprice > 500) FROM lineitem;
 ```
 
 This is equivalent to:
 
 ```sql
-SELECT sum(CASE WHEN l_extendedprice > 500 THEN 1 END) FROM lineitem;  
+SELECT sum(CASE WHEN l_extendedprice > 500 THEN 1 END) FROM lineitem;
 ```
 
 ### Excel Extension
 
-Prior to DuckDB 1.2, Excel files were only supported by the [`spatial` extension]({% link docs/1.5/core_extensions/spatial/overview.md %}), which is a heavyweight extension with several dependencies.
-Starting with 1.2, the [`excel` extension]({% link docs/1.5/core_extensions/excel.md %}) – which was previously limited to computing a few formulas – can read and write Excel sheets. For example:
+Prior to DuckDB 1.2, Excel files were only supported by the [`spatial` extension]({% link docs/2.0/core_extensions/spatial/overview.md %}), which is a heavyweight extension with several dependencies.
+Starting with 1.2, the [`excel` extension]({% link docs/2.0/core_extensions/excel.md %}) – which was previously limited to computing a few formulas – can read and write Excel sheets. For example:
 
 ```sql
-FROM read_xlsx('test.xlsx', header = true);  
+FROM read_xlsx('test.xlsx', header = true);
 ```
 
 > If you would like to work with _Google Sheets_ sheets, take a look at the [`gsheets` community extension]({% post_url 2025-02-26-google-sheets-community-extension %}).
@@ -115,7 +115,7 @@ The ecosystem around DuckDB keeps growing: many projects are built both with Duc
 
 ### DuckDB File Signature
 
-DuckDB's [file signature]({% link docs/1.5/internals/storage.md %}#storage-header), `DUCK` (hex: `44 55 43 4B`), is now listed on [Wikipedia](https://en.wikipedia.org/wiki/List_of_file_signatures).
+DuckDB's [file signature]({% link docs/2.0/internals/storage.md %}#storage-header), `DUCK` (hex: `44 55 43 4B`), is now listed on [Wikipedia](https://en.wikipedia.org/wiki/List_of_file_signatures).
 
 ### Parquet Information Sheet
 

@@ -5,20 +5,20 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-5-1.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-1.png"
-excerpt: "We are releasing DuckDB version 1.5.1, a patch release with bugfixes, performance improvements and support for the Lance lakehouse format."
+excerpt: "We are releasing DuckDB version 1.5.1, a patch release with bugfixes, performance improvements, and support for the Lance lakehouse format."
 tag: release
 ---
 
-In this blog post, we highlight a few important fixes in DuckDB v1.5.1, the first patch release in [DuckDB's v1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
+In this blog post, we highlight a few important fixes in DuckDB 1.5.1, the first patch release in [DuckDB's 1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
 You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.1).
 
-To install the new version, please visit the [installation page]({% link install/index.html %}).
+To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}).
 
 ## Data Lake and Lakehouse Formats
 
 ### Lance Support
 
-Thanks to the collaboration with LanceDB, DuckDB now supports reading and writing the [Lance lakehouse format](https://github.com/lance-format/lance/) through the [`lance` core extension]({% link docs/1.5/core_extensions/lance.md %}).
+Thanks to the collaboration with LanceDB, DuckDB now supports reading and writing the [Lance lakehouse format](https://github.com/lance-format/lance/) through the [`lance` core extension]({% link docs/2.0/core_extensions/lance.md %}).
 
 ```sql
 INSTALL lance;
@@ -50,7 +50,7 @@ SELECT count(*) FROM 'example.lance';
 └──────────────┘
 ```
 
-> Lance support is also available for DuckDB v1.4.4 LTS and v1.5.0.
+> Lance support is also available for DuckDB 1.4.4 LTS and 1.5.0.
 
 ### Iceberg Support
 
@@ -65,7 +65,7 @@ We extended support for [Iceberg v3](https://iceberg.apache.org/spec/#version-3)
 
 ## Configuration Options
 
-The [`httpfs` extension]({% link docs/1.5/core_extensions/httpfs/overview.md %}) has a [new setting](https://github.com/duckdb/duckdb-httpfs/pull/285):
+The [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/overview.md %}) has a [new setting](https://github.com/duckdb/duckdb-httpfs/pull/285):
 
 ```sql
 SET force_download_threshold = 2_000_000;
@@ -84,12 +84,12 @@ There have been reports by users (thanks!) that S3 globbing performance degraded
 
 On Linux and macOS, DuckDB's new CLI had an issue executing the input received through a [non-interactive shell](https://github.com/duckdb/duckdb/issues/21243).
 In practice, this meant that scripts piped into DuckDB were not executed.
-For v1.5.0, there was a [simple workaround available]({% link docs/1.5/guides/troubleshooting/command_line.md %}).
+For v1.5.0, there was a [simple workaround available]({% link docs/2.0/guides/troubleshooting/command_line.md %}).
 We fixed the issue in v1.5.1, so there is no need for a workaround.
 
 ### Indexes
 
-This release ships [two](https://github.com/duckdb/duckdb/pull/21270) [fixes](https://github.com/duckdb/duckdb/pull/21427) for [ART indexes]({% link docs/1.5/sql/indexes.md %}).
+This release ships [two](https://github.com/duckdb/duckdb/pull/21270) [fixes](https://github.com/duckdb/duckdb/pull/21427) for [ART indexes]({% link docs/2.0/sql/indexes.md %}).
 If you are using indexes in your workload (directly or through key / unique constraints), we recommend updating to v1.5.1 as soon as possible.
 
 ## Landing Page Improvements

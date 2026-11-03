@@ -4,7 +4,7 @@ layout: docu
 title: R Client
 ---
 
-> Installation To use the DuckDB R client, visit the [R installation page]({% link install/index.html %}?environment=r).
+> Installation To use the DuckDB R client, visit the [R installation page]({% link docs/2.0/installation.html %}?environment=r).
 >
 > The latest stable version of the DuckDB R client is {% if site.maintained_duckdb_r_version != "" %}{{ site.maintained_duckdb_r_version }}{% else %}{{ site.old_lts_duckdb_r_version }}{% endif %}
 
@@ -18,7 +18,7 @@ The DuckDB R client can be installed using the following command:
 install.packages("duckdb")
 ```
 
-Please see the [installation page]({% link install/index.html %}?environment=r) and [CRAN](https://cran.r-project.org/web/packages/duckdb/index.html) for details.
+Please see the [installation page]({% link docs/2.0/installation.html %}?environment=r) and [CRAN](https://cran.r-project.org/web/packages/duckdb/index.html) for details.
 
 ### `duckplyr`: dplyr Client
 

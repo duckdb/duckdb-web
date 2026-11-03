@@ -80,10 +80,10 @@ docs:
     for complete setup instructions.** For comprehensive usage examples, authentication methods, and 
     advanced features, visit the [extension repository](https://github.com/iqea-ai/duckdb-snowflake).
 
-extension_star_count: 65
-extension_star_count_pretty: 65
-extension_download_count: 13384
-extension_download_count_pretty: 13.4k
+extension_star_count: 68
+extension_star_count_pretty: 68
+extension_download_count: 8160
+extension_download_count_pretty: 8.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
 layout: community_extension_doc
 ---
@@ -97,7 +97,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -145,9 +145,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|              name              |                                                                                                                                                     description                                                                                                                                                      | input_type | scope  | aliases |
-|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| snowflake_prefetch_concurrency | How many Snowflake result chunks the ADBC driver downloads in parallel. 0 (the default) leaves the driver's own default in place; max 10000. Lowering this reduces read-ahead further, but costs download throughput.                                                                                                | BIGINT     | GLOBAL | []      |
-| snowflake_result_queue_size    | Maximum Arrow batches the ADBC driver buffers per Snowflake result stream. 0 (the default) leaves the driver's own default in place; max 10000. Set to 1 to throttle the driver's read-ahead when the consumer is slow (CREATE TABLE AS, COPY TO, inserts), which otherwise buffers the result outside memory_limit. | BIGINT     | GLOBAL | []      |
+|              name              |                                                                                                                                                     description                                                                                                                                                      | input_type | scope  | aliases | typed_value |
+|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| snowflake_prefetch_concurrency | How many Snowflake result chunks the ADBC driver downloads in parallel. 0 (the default) leaves the driver's own default in place; max 10000. Lowering this reduces read-ahead further, but costs download throughput.                                                                                                | BIGINT     | GLOBAL | []      | 0           |
+| snowflake_result_queue_size    | Maximum Arrow batches the ADBC driver buffers per Snowflake result stream. 0 (the default) leaves the driver's own default in place; max 10000. Set to 1 to throttle the driver's read-ahead when the consumer is slow (CREATE TABLE AS, COPY TO, inserts), which otherwise buffers the result outside memory_limit. | BIGINT     | GLOBAL | []      | 0           |
+| temp_directory                 | Set the directory to which temporary files are written.                                                                                                                                                                                                                                                              | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -209,11 +209,11 @@ SELECT ST_AsGeoJSON('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::GEOMETRY);
 
 -- Convert a geometry into a full GeoJSON feature (requires the JSON extension to be loaded)
 SELECT CAST({
-	type: 'Feature', 
-	geometry: ST_AsGeoJSON(ST_Point(1,2)), 
-	properties: { 
-		name: 'my_point' 
-	} 
+	type: 'Feature',
+	geometry: ST_AsGeoJSON(ST_Point(1,2)),
+	properties: {
+		name: 'my_point'
+	}
 } AS JSON);
 ----
 {"type":"Feature","geometry":{"type":"Point","coordinates":[1.0,2.0]},"properties":{"name":"my_point"}}

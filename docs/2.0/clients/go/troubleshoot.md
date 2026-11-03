@@ -6,6 +6,7 @@ redirect_from:
 - /docs/current/clients/go/troubleshoot
 - /docs/lts/clients/go/troubleshoot
 - /docs/preview/clients/go/troubleshoot
+- /docs/stable/clients/go/troubleshoot
 title: Troubleshoot
 ---
 
@@ -72,7 +73,7 @@ By default the client statically links a pre-built DuckDB library into the binar
 
 ### Linking a Custom Static Library
 
-Build DuckDB from source. Starting with DuckDB 2.0, the `bundle-library` Makefile target and the merged `libduckdb_bundle.a` archive no longer exist: the build produces `libduckdb_static.a` plus one static archive per extension (e.g., `libparquet_extension.a`), and statically linked extensions have to be registered at startup. See [Statically Linking Extensions]({% link docs/2.0/dev/building/linking_extensions.md %}) for the archives, the required link order and the extension registration.
+Build DuckDB from source. Starting with DuckDB 2.0, the `bundle-library` Makefile target and the merged `libduckdb_bundle.a` archive no longer exist: the build produces `libduckdb_static.a` plus one static archive per extension (e.g., `libparquet_extension.a`), and statically linked extensions have to be registered at startup. See [Statically Linking Extensions]({% link docs/2.0/dev/building/linking_extensions.md %}) for the archives, the required link order, and the extension registration.
 
 Then build the Go module against these archives with the `duckdb_use_static_lib` [build tag]({% link docs/2.0/clients/go/overview.md %}#build-tags), passing the archives in `CGO_LDFLAGS`, with the extension archives listed before `libduckdb_static.a`.
 

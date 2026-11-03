@@ -5,18 +5,18 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-5-3.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-3.png"
-excerpt: "We are releasing DuckDB version v1.5.3. While updates in DuckDB itself are limited bugfixes, the upgraded extensions shipped with v1.5.3 bring a ton of new features. These include the Quack client-server protocol, which is now available as a core extension, support for Quack in DuckLake, and several new features for Iceberg, AWS and HTTPS."
+excerpt: "We are releasing DuckDB version 1.5.3. While updates in DuckDB itself are limited bugfixes, the upgraded extensions shipped with v1.5.3 bring a ton of new features. These include the Quack client-server protocol, which is now available as a core extension, support for Quack in DuckLake, and several new features for Iceberg, AWS, and HTTPS."
 tag: release
 ---
 
-In this blog post, we highlight a few important features shipped in DuckDB v1.5.3, the third patch release in [DuckDB's v1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
+In this blog post, we highlight a few important features shipped in DuckDB 1.5.3, the third patch release in [DuckDB's 1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
 You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.3).
 
-To install the new version, please visit the [installation page]({% link install/index.html %}).
+To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}).
 
 ## What's New
 
-While DuckDB v1.5.3 is a patch release, its extensions brings various new features.
+While DuckDB 1.5.3 is a patch release, its extensions brings various new features.
 We list these below.
 
 ### Quack as a Core Extension
@@ -26,10 +26,10 @@ If you are new to Quack and don't know where to start, check out the following r
 
 * For a high-level overview, see the [Quack explainer page]({% link quack/index.html %}).
 * For the rationale and history behind Quack, along with an introduction of the protocol and its features, see the [announcement blog post]({% post_url 2026-05-12-quack-remote-protocol %}).
-* For the reference manual and setup guide, check out the [Quack documentation]({% link docs/1.5/quack/overview.md %}).
+* For the reference manual and setup guide, check out the [Quack documentation]({% link docs/2.0/quack/overview.md %}).
 
-Starting from DuckDB v1.5.3, we ship Quack as a [core extension]({% link docs/1.5/core_extensions/quack.md %}). This means that you can now start using Quack right away from any client running DuckDB:
-it will be transparently autoinstalled and [autoloaded]({% link docs/1.5/extensions/overview.md %}#autoloading-extension) on first use.
+Starting from DuckDB 1.5.3, we ship Quack as a [core extension]({% link docs/2.0/core_extensions/quack.md %}). This means that you can now start using Quack right away from any client running DuckDB:
+it will be transparently autoinstalled and [autoloaded]({% link docs/2.0/extensions/overview.md %}#autoloading-extension) on first use.
 
 <!-- markdownlint-disable MD001 -->
 
@@ -74,7 +74,7 @@ FROM remote.hello;
 <!-- markdownlint-enable MD001 -->
 
 Please note that Quack is still in beta state and breaking changes may happen in the protocol, in function names, etc.
-We plan to release the production-ready version of Quack together with [DuckDB v2.0]({% link release_calendar.md %}) in fall 2026.
+We plan to release the production-ready version of Quack together with [DuckDB 2.0]({% link release_calendar.md %}) in fall 2026.
 
 ### DuckLake with Quack
 
@@ -135,10 +135,10 @@ SELECT * FROM pond ORDER BY id;
 
 ### AWS Extension Features
 
-The [AWS extension]({% link docs/1.5/core_extensions/aws.md %}) now supports the [`web_identity` chain type for IAM Roles for Service Accounts (IRSA) support](https://github.com/duckdb/duckdb-aws/pull/136).
+The [AWS extension]({% link docs/2.0/core_extensions/aws.md %}) now supports the [`web_identity` chain type for IAM Roles for Service Accounts (IRSA) support](https://github.com/duckdb/duckdb-aws/pull/136).
 This was made possible through a contribution by community member [Marcel Steinbach (@mst)](https://github.com/mst).
 
-The AWS extension now also supports [IAM authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) for managed PostgreSQL databases running on RDS/Aurora. For more details, see the [AWS RDS IAM Authentication section]({% link docs/1.5/core_extensions/postgres/secrets.md %}#aws-rds-iam-authentication) in the documentation.
+The AWS extension now also supports [IAM authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) for managed PostgreSQL databases running on RDS/Aurora. For more details, see the [AWS RDS IAM Authentication section]({% link docs/2.0/core_extensions/postgres/secrets.md %}#aws-rds-iam-authentication) in the documentation.
 
 ### `HTTP_PROXY` Variable for the HTTPS Extension
 
@@ -149,11 +149,11 @@ Note that since the [introduction of `curl` into DuckDB's network stack]({% post
 
 ### Iceberg
 
-The DuckDB-Iceberg extension has shipped a number of features between DuckDB v1.5.2 and v1.5.3. Most notably:
+The DuckDB-Iceberg extension has shipped a number of features between DuckDB 1.5.2 and 1.5.3. Most notably:
 
 * `MERGE INTO` is now supported for Iceberg tables ([iceberg#788](https://github.com/duckdb/duckdb-iceberg/pull/788))
 * The `INSERT` and `UPDATE` statements are now supported on partitioned Iceberg tables with a `truncate` or `bucket` transform ([iceberg#879](https://github.com/duckdb/duckdb-iceberg/pull/879))
-* [CTAS]({% link docs/1.5/sql/statements/create_table.md %}#create-table--as-select-ctas) statements in DuckDB-Iceberg using [ADBC]({% link docs/1.5/clients/adbc.md %}) are now possible ([iceberg#974](https://github.com/duckdb/duckdb-iceberg/pull/974))
+* [CTAS]({% link docs/2.0/sql/statements/create_table.md %}#create-table--as-select-ctas) statements in DuckDB-Iceberg using [ADBC]({% link docs/2.0/clients/adbc.md %}) are now possible ([iceberg#974](https://github.com/duckdb/duckdb-iceberg/pull/974))
 * We added the `iceberg_schema_properties`, `set_iceberg_schema_properties`, and `remove_iceberg_schema_properties` functions to allow getting, setting, and removing Iceberg schema properties ([iceberg#960](https://github.com/duckdb/duckdb-iceberg/pull/960))
 * `ALTER TABLE` support has been added for Iceberg tables ([iceberg#932](https://github.com/duckdb/duckdb-iceberg/pull/932), [iceberg#928](https://github.com/duckdb/duckdb-iceberg/pull/928), [iceberg#924](https://github.com/duckdb/duckdb-iceberg/pull/924), [iceberg#912](https://github.com/duckdb/duckdb-iceberg/pull/912), [iceberg#904](https://github.com/duckdb/duckdb-iceberg/pull/904), [iceberg#853](https://github.com/duckdb/duckdb-iceberg/pull/853), [iceberg#985](https://github.com/duckdb/duckdb-iceberg/pull/985), [iceberg#981](https://github.com/duckdb/duckdb-iceberg/pull/981))
 * Support for the `GEOMETRY` type has been added for Iceberg tables ([iceberg#968](https://github.com/duckdb/duckdb-iceberg/pull/968), [iceberg#902](https://github.com/duckdb/duckdb-iceberg/pull/902))
@@ -162,7 +162,7 @@ The DuckDB-Iceberg extension has shipped a number of features between DuckDB v1.
 
 ### Shipping jemalloc as a Statically Linked Library
 
-The [jemalloc allocator]({% link docs/1.5/internals/jemalloc.md %}) is now part of core DuckDB ([duckdb#22603](https://github.com/duckdb/duckdb/pull/22603)) as a static third-party library which is included and linked by default on Linux.
+The [jemalloc allocator]({% link docs/2.0/internals/jemalloc.md %}) is now part of core DuckDB ([duckdb#22603](https://github.com/duckdb/duckdb/pull/22603)) as a static third-party library which is included and linked by default on Linux.
 Previously jemalloc was a statically-linked extension – the new packaging is cleaner since other DuckDB extensions can be loaded dynamically.
 
 ### `DISABLE_EXTENSION_LOAD` Flag

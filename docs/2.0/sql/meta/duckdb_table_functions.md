@@ -54,7 +54,7 @@ The `duckdb_available_metrics()` function lists the metrics that can be collecte
 | Column | Description | Type |
 |:-|:---|:-|
 | `metric_name` | The name of the metric, e.g., `query.cpu_time`. | `VARCHAR` |
-| `metric_type` | The type of the metric's value, e.g., `double`, `uint64`, `string` or `map`. | `VARCHAR` |
+| `metric_type` | The type of the metric's value, e.g., `double`, `uint64`, `string`, or `map`. | `VARCHAR` |
 | `description` | Human readable text that describes the metric. | `VARCHAR` |
 | `unit` | The unit of the metric, e.g., `seconds` or `rows`. Empty for unitless metrics. | `VARCHAR` |
 
@@ -136,7 +136,7 @@ The `duckdb_coordinate_systems()` function lists the available [coordinate refer
 | `projjson` | The projjson encoding of the CRS. | `VARCHAR` |
 | `wkt2_2019` | The Well-Known Text (WKT) representation of the CRS. | `VARCHAR` |
 
-This function lists both built-in CRSs as well as the ones that are installed by extensions (such as the [`SPATIAL`]({% link docs/2.0/core_extensions/spatial/overview.md %}) extension. 
+This function lists both built-in CRSs as well as the ones that are installed by extensions (such as the [`SPATIAL`]({% link docs/2.0/core_extensions/spatial/overview.md %}) extension.
 
 ## `duckdb_databases`
 
@@ -173,13 +173,13 @@ The `duckdb_dependencies()` function provides metadata about the dependencies av
 
 > New The `duckdb_extension_repositories()` function was introduced in DuckDB 2.0.
 
-The `duckdb_extension_repositories()` function provides metadata about the [extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}) known to the DuckDB instance, including the built-in ones (e.g., `core`, `core_nightly` and `community`) and those created with `CREATE EXTENSION REPOSITORY`.
+The `duckdb_extension_repositories()` function provides metadata about the [extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}) known to the DuckDB instance, including the built-in ones (e.g., `core`, `core_nightly`, and `community`) and those created with `CREATE EXTENSION REPOSITORY`.
 
 | Column | Description | Type |
 |:-|:---|:-|
 | `repository_name` | The name of the repository. | `VARCHAR` |
 | `prefix` | The URL prefix (or path) from which extensions are installed. | `VARCHAR` |
-| `type` | The type of the repository, e.g., `CORE` or `COMMUNITY`. | `VARCHAR` |
+| `type` | The type of the repository: `CORE`, `COMMUNITY`, or `USER_PROVIDED`. | `VARCHAR` |
 | `key_fingerprints` | The SHA-256 fingerprints of the public keys pinned for the repository. `NULL` for built-in repositories. | `VARCHAR[]` |
 | `public_keys` | The public keys pinned for the repository. `NULL` for built-in repositories. | `VARCHAR[]` |
 
@@ -198,6 +198,7 @@ The `duckdb_extensions()` function provides metadata about the extensions availa
 | `extension_version` | The version of the extension (`vX.Y.Z` for stable versions and 6-character hash for unstable versions). | `VARCHAR` |
 | `install_mode` | The installation mode that was used to install the extension: `UNKNOWN`, `REPOSITORY`, `CUSTOM_PATH`, `STATICALLY_LINKED`, `NOT_INSTALLED`, `NULL`. | `VARCHAR` |
 | `installed_from` | Name of the repository the extension was installed from, e.g., `community` or `core_nightly`. The empty string denotes the `core` repository. | `VARCHAR` |
+| `signature_key_fingerprint` | The SHA-256 fingerprint of the public key that verified the extension when it was installed. `NULL` if no fingerprint is available, e.g., for built-in extensions and for extensions from [custom extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}#using-a-repository). Available as of DuckDB 2.0. | `VARCHAR` |
 
 ## `duckdb_functions`
 
@@ -210,7 +211,7 @@ The `duckdb_functions()` function provides metadata about the functions (includi
 | `schema_name` | The SQL name of the schema where the function resides. | `VARCHAR` |
 | `function_name` | The SQL name of the function. | `VARCHAR` |
 | `alias_of` | The name of the function this is an alias of, or `NULL` if this is not an alias. | `VARCHAR` |
-| `function_type` | The function kind. Value is one of: `table`, `scalar`, `aggregate`, `pragma`, `macro`, `table_macro` | `VARCHAR` |
+| `function_type` | The function kind. Value is one of: `table`, `scalar`, `aggregate`, `window`, `pragma`, `macro`, `table_macro` | `VARCHAR` |
 | `description` | Description of this function, or `NULL` if none is registered. | `VARCHAR` |
 | `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/2.0/sql/statements/comment_on.md %}). | `VARCHAR` |
 | `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
@@ -224,7 +225,7 @@ The `duckdb_functions()` function provides metadata about the functions (includi
 | `extension_name` | The name of the extension that provides this function, or `NULL` if none. | `VARCHAR` |
 | `function_oid` | The internal identifier for this function. | `BIGINT` |
 | `examples` | Examples of using the function. Used to generate the documentation. | `VARCHAR[]` |
-| `stability` | The stability of the function (`CONSISTENT`, `VOLATILE`, `CONSISTENT_WITHIN_QUERY` or `NULL`) | `VARCHAR` |
+| `stability` | The stability of the function (`CONSISTENT`, `VOLATILE`, `CONSISTENT_WITHIN_QUERY`, or `NULL`) | `VARCHAR` |
 | `categories` | Categories of the function. Used to generate the documentation. | `VARCHAR[]` |
 
 > New The `extension_name` column was introduced in DuckDB 2.0.
@@ -279,7 +280,7 @@ The `duckdb_log_contexts()` function provides information on the contexts of Duc
 | Column | Description | Type |
 |:-|:---|:-|
 | `context_id` | The identifier of the context. The `context_id` column in the [`duckdb_logs`](#duckdb_logs) table is a foreign key that points to this column. | `UBIGINT` |
-| `scope` | The scope of the context (`connection`, `database` or `file_opener`). | `VARCHAR` |
+| `scope` | The scope of the context (`connection`, `database`, or `file_opener`). | `VARCHAR` |
 | `connection_id` | The identifier of the connection. | `UBIGINT` |
 | `transaction_id` | The identifier of the transaction. | `UBIGINT` |
 | `query_id` | The identifier of the query. | `UBIGINT` |
@@ -294,7 +295,7 @@ The `duckdb_logs()` function returns a table of DuckDB log entries.
 | `context_id` | The identifier of the context of the log entry. Foreign key to the [`duckdb_log_contexts`](#duckdb_log_contexts) table. | `UBIGINT` |
 | `timestamp` | The timestamp of the log entry. | `TIMESTAMP` |
 | `type` | The type of the log entry. | `VARCHAR` |
-| `log_level` | The level of the log entry (`TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`). | `VARCHAR` |
+| `log_level` | The level of the log entry (`TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR`, or `FATAL`). | `VARCHAR` |
 | `message` | The message of the log entry. | `VARCHAR` |
 
 ## `duckdb_memory`
@@ -493,7 +494,7 @@ The `duckdb_triggers()` function provides metadata about the [triggers]({% link 
 | `trigger_oid` | The object identifier of the trigger. | `BIGINT` |
 | `table_name` | The name of the table the trigger is attached to. | `VARCHAR` |
 | `action_timing` | When the trigger fires relative to the triggering statement, e.g., `AFTER`. | `VARCHAR` |
-| `event_manipulation` | The event that fires the trigger: `INSERT`, `UPDATE` or `DELETE`. | `VARCHAR` |
+| `event_manipulation` | The event that fires the trigger: `INSERT`, `UPDATE`, or `DELETE`. | `VARCHAR` |
 | `columns` | For `UPDATE OF ⟨column⟩, ...` triggers, the list of columns. Empty otherwise. | `VARCHAR[]` |
 | `for_each` | The granularity of the trigger: `ROW` or `STATEMENT`. | `VARCHAR` |
 | `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/2.0/sql/statements/comment_on.md %}). | `VARCHAR` |
@@ -515,7 +516,7 @@ The `duckdb_types()` function provides metadata about the data types available i
 | `type_oid` | The internal identifier of the data type object. If `NULL`, then this is an alias of the type (as identified by the value in the `logical_type` column). | `BIGINT` |
 | `type_size` | The number of bytes required to represent a value of this type in memory. | `BIGINT` |
 | `logical_type` | The 'canonical' name of this data type. The same `logical_type` may be referenced by several types having different `type_name`s. | `VARCHAR` |
-| `type_category` | The category to which this type belongs. Data types within the same category generally expose similar behavior when values of this type are used in expressions. For example, the `NUMERIC` type_category includes integers, decimals and floating point numbers. | `VARCHAR` |
+| `type_category` | The category to which this type belongs. Data types within the same category generally expose similar behavior when values of this type are used in expressions. For example, the `NUMERIC` type_category includes integers, decimals, and floating point numbers. | `VARCHAR` |
 | `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/2.0/sql/statements/comment_on.md %}). | `VARCHAR` |
 | `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
 | `internal` | Whether this is an internal (built-in) or a user object. | `BOOLEAN` |

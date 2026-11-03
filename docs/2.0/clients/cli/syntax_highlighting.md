@@ -10,7 +10,7 @@ redirect_from:
 title: Syntax Highlighting
 ---
 
-> Syntax highlighting in the CLI is available for macOS, Linux and Windows.
+> Syntax highlighting in the CLI is available for macOS, Linux, and Windows.
 
 SQL queries that are written in the shell are automatically highlighted using syntax highlighting.
 
@@ -37,7 +37,7 @@ Colors are specified by name. The following basic colors are supported by all te
 
 In addition, 8-bit colors can be used. Run `.display_colors` to list all available color names, see [8-Bit Colors]({% link docs/2.0/clients/cli/friendly_cli.md %}#8-bit-colors).
 
-The optional intensity can be `standard`, `bold`, `underline` or `bold_underline`.
+The optional intensity can be `standard`, `bold`, `underline`, or `bold_underline`.
 
 For example, here is an alternative set of syntax highlighting colors:
 

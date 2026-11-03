@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/snippets/analyze_git_repository
 - /docs/preview/guides/snippets/analyze_git_repository
 title: Analyzing a Git Repository
+how_to_topic: tools-meta
 ---
 
 You can use DuckDB to analyze Git logs using the output of the [`git log` command](https://git-scm.com/docs/git-log).
@@ -39,7 +40,7 @@ The resulting file looks like this:
 Start DuckDB and read the log as a <s>CSV</s> 🍥SV:
 
 ```sql
-CREATE TABLE commits AS 
+CREATE TABLE commits AS
     FROM read_csv(
             'git-log.csv',
             delim = '🍥',
@@ -110,7 +111,7 @@ CREATE TABLE words AS
             .regexp_replace('\W', ' ')
             .trim(' ')
             .string_split_regex('\W')
-        ) AS word    
+        ) AS word
 FROM commits;
 ```
 

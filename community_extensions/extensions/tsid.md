@@ -95,8 +95,8 @@ repo:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 9313
-extension_download_count_pretty: 9.3k
+extension_download_count: 965
+extension_download_count_pretty: 965
 image: '/images/community_extensions/social_preview/preview_community_extension_tsid.png'
 layout: community_extension_doc
 ---
@@ -110,7 +110,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -136,10 +136,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type |                                                                                                 description                                                                                                 | comment |                        examples                         |
-|-------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------|
-| tsid              | scalar        | Generates a new Time-Sorted Unique Identifier (TSID). TSIDs are chronologically sortable 128-bit unique identifiers that embed a timestamp, making them ideal for distributed systems and time-series data. | NULL    | [tsid()]                                                |
-| tsid_to_timestamp | scalar        | Extracts the embedded timestamp from a TSID. Returns the timestamp that was recorded when the TSID was generated.                                                                                           | NULL    | [tsid_to_timestamp('0193b9c8d23d7192bc1cc82b43e6e8f3')] |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

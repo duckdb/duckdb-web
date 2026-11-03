@@ -26,8 +26,8 @@ repo:
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 4964
-extension_download_count_pretty: 5.0k
+extension_download_count: 933
+extension_download_count_pretty: 933
 image: '/images/community_extensions/social_preview/preview_community_extension_radio.png'
 layout: community_extension_doc
 ---
@@ -41,7 +41,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -67,22 +67,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|                    function_name                     | function_type | description | comment | examples |
-|------------------------------------------------------|---------------|-------------|---------|----------|
-| radio_flush                                          | table         | NULL        | NULL    |          |
-| radio_listen                                         | table         | NULL        | NULL    |          |
-| radio_received_messages                              | table         | NULL        | NULL    |          |
-| radio_sleep                                          | table         | NULL        | NULL    |          |
-| radio_subscribe                                      | table         | NULL        | NULL    |          |
-| radio_subscription_received_message_add              | table         | NULL        | NULL    |          |
-| radio_subscription_received_messages                 | table         | NULL        | NULL    |          |
-| radio_subscription_transmit_message_delete           | table         | NULL        | NULL    |          |
-| radio_subscription_transmit_messages                 | table         | NULL        | NULL    |          |
-| radio_subscription_transmit_messages_delete_finished | table         | NULL        | NULL    |          |
-| radio_subscriptions                                  | table         | NULL        | NULL    |          |
-| radio_transmit_message                               | table         | NULL        | NULL    |          |
-| radio_unsubscribe                                    | table         | NULL        | NULL    |          |
-| radio_version                                        | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

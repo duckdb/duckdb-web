@@ -19,7 +19,8 @@ extension:
 
 repo:
   github: alitrack/duckdb-python
-  ref: refs/tags/v0.2.1
+  ref: 901a7bdbc3a1b7f760882eeb91b6716e4b136cc2
+  ref_next: 901a7bdbc3a1b7f760882eeb91b6716e4b136cc2
 
 docs:
   hello_world: |
@@ -70,8 +71,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 1036
-extension_download_count_pretty: 1.0k
+extension_download_count: 776
+extension_download_count_pretty: 776
 image: '/images/community_extensions/social_preview/preview_community_extension_python_udf.png'
 layout: community_extension_doc
 ---
@@ -83,11 +84,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 

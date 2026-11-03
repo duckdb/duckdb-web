@@ -20,7 +20,7 @@ Meanwhile, there have been significant leaps in x86 land too. AMD's [Ryzen AI 30
 
 ## Setup
 
-To run this experiment, we purchased the 13" modular laptop by [Framework](https://frame.work/gb/en) and kitted it out with 128 GB of RAM and 8 TB of disk – all for [just under 3,000 euros](#cost-breakdown).
+To run this experiment, we purchased the 13″ modular laptop by [Framework](https://frame.work/gb/en) and kitted it out with 128 GB of RAM and 8 TB of disk – all for [just under 3,000 euros](#cost-breakdown).
 
 We installed [Omarchy 2.0](https://omarchy.org/), an Arch Linux-based distribution with a vibrant community and first-class support for Framework laptops. Assembling the laptop and installing Omarchy took less than an hour in total. Installing the DuckDB command line client only took seconds using the installer script:
 
@@ -41,7 +41,7 @@ To see how this laptop performs, we ran a few benchmarks focusing on loading and
 
 ### CSV Loading
 
-To measure CSV loading performance, we used one of our favorite datasets: the [Dutch railway services]({% link docs/1.5/guides/snippets/dutch_railway_datasets.md %}). We picked the [full dataset spanning the last 80 months](https://blobs.duckdb.org/nl-railway/railway-services-80-months.zip) (between Jan 2019 and Aug 2025).
+To measure CSV loading performance, we used one of our favorite datasets: the [Dutch railway services]({% link docs/2.0/guides/snippets/dutch_railway_datasets.md %}). We picked the [full dataset spanning the last 80 months](https://blobs.duckdb.org/nl-railway/railway-services-80-months.zip) (between Jan 2019 and Aug 2025).
 We can fetch and decompress the file as follows:
 
 ```bash

@@ -53,8 +53,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 1101
-extension_download_count_pretty: 1.1k
+extension_download_count: 766
+extension_download_count_pretty: 766
 image: '/images/community_extensions/social_preview/preview_community_extension_qvd.png'
 layout: community_extension_doc
 ---
@@ -68,7 +68,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -114,6 +114,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

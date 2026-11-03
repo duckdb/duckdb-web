@@ -40,7 +40,7 @@ In 2026, [DuckLabs joined Amazon Web Services]({% post_url 2026-08-26-ducklabs-t
 
 <div class="answer" markdown="1">
 
-Ducks are amazing animals. They can fly, walk and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck's song will bring people back from the dead and [inspires database research](/images/wilbur.jpg). They are thus the perfect mascot for a versatile and resilient data management system.
+Ducks are amazing animals. They can fly, walk, and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck's song will bring people back from the dead and [inspires database research](/images/wilbur.jpg). They are thus the perfect mascot for a versatile and resilient data management system.
 
 </div>
 
@@ -130,18 +130,18 @@ Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidel
 
 <div class="answer" markdown="1">
 
-The following projects, domains and events are officially affiliated with DuckDB:
+The following projects, domains, and events are officially affiliated with DuckDB:
 
 * [DuckDB (`duckdb.org`)](https://duckdb.org/)
 * [DuckLake (`ducklake.select`)](https://ducklake.select), an open lakehouse format
 * [Quack (`quack.duckdb.org`)](https://quack.duckdb.org/)
-* all [primary client libraries]({% link install/index.html %})
+* all [primary client libraries]({% link docs/2.0/installation.html %})
 * all [core DuckDB extensions]({% link docs/2.0/core_extensions/overview.md %}), including the [DuckDB UI](https://github.com/duckdb/duckdb-ui)
 * [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb), a dbt connector for DuckDB
 * [DuckCon (`duckcon.org`)](https://duckcon.org/), our technical conference series
 * [DuckDB Backup (`duckdb-backup.org`)](https://www.duckdb-backup.org/)
 
-Other projects and events are likely _not affiliated_ with DuckDB. Please check their websites, descriptions and licenses for more details.
+Other projects and events are likely _not affiliated_ with DuckDB. Please check their websites, descriptions, and licenses for more details.
 
 </div>
 
@@ -254,7 +254,7 @@ and the section on [“Multiple Processes”]({% link docs/2.0/connect/concurren
 To work on the same data set with multiple DuckDB clients (“multi-player experience”), there are now two options:
 
 1. The [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/2.0/core_extensions/ducklake.md %}) with PostgreSQL as the catalog database. This is a [production-ready solution](https://ducklake.select/2026/04/13/ducklake-10/).
-2. The [Quack remote protocol]({% link docs/2.0/quack/overview.md %}), which turns DuckDB into a client-server database. Quack was introduced in DuckDB v1.5.3, and [DuckDB v2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}#duckdb-as-a-server) ships a polished version of the protocol.
+2. The [Quack remote protocol]({% link docs/2.0/quack/overview.md %}), which turns DuckDB into a client-server database. Quack was introduced in DuckDB 1.5.3, and [DuckDB 2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}#duckdb-as-a-server) ships a polished version of the protocol.
 </div>
 
 </div>
@@ -299,7 +299,7 @@ If you are unsure about the DuckDB version used in a process, run the `PRAGMA ve
 
 <div class="answer" markdown="1">
 
-DuckDB has the official [documentation]({% link docs/2.0/index.md %}), [blog]({% link news/index.html %}) and [library]({% link library/index.html %}).
+DuckDB has the official [documentation]({% link docs/2.0/index.md %}), [blog]({% link news/index.html %}), and [library]({% link library/index.html %}).
 There are also few third-party resources which can help you learn more about DuckDB:
 
 * To discover projects using DuckDB, we recommend visiting the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb).
@@ -464,9 +464,9 @@ Currently, the official community support applies to the following components:
 
 This support covers the following minor versions:
 
-* DuckDB v2.0 (LTS, supported until October 2027)
-* DuckDB v1.5 (extended support until March 2027)
-* DuckDB v1.4 (LTS, supported until November 2026)
+* DuckDB 2.0 (LTS, supported until October 2027)
+* DuckDB 1.5 (extended support until March 2027)
+* DuckDB 1.4 (LTS, supported until November 2026)
 
 For end-of-life dates, see the [release calendar]({% link release_calendar.md %}#past-releases).
 

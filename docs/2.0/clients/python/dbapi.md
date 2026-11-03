@@ -15,7 +15,7 @@ The standard DuckDB Python API provides a SQL interface compliant with the [DB-A
 ## Connection
 
 To use the module, you must first create a `DuckDBPyConnection` object that represents a connection to a database.
-This is done through the [`duckdb.connect`]({% link docs/2.0/clients/python/reference/index.md %}#duckdb.connect) method, which takes three arguments: `database`, `read_only` and `config`.
+This is done through the [`duckdb.connect`]({% link docs/2.0/clients/python/reference/index.md %}#duckdb.connect) method, which takes three arguments: `database`, `read_only`, and `config`.
 
 The `config` keyword argument can be used to provide a `dict` that contains key-value pairs referencing [settings]({% link docs/2.0/configuration/overview.md %}#configuration-reference) understood by DuckDB.
 
@@ -23,7 +23,7 @@ The `config` keyword argument can be used to provide a `dict` that contains key-
 
 The special value `:memory:` can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Python process).
 
-#### Named In-memory Connections
+#### Named In-Memory Connections
 
 The special value `:memory:` can also be postfixed with a name, for example: `:memory:conn3`.
 When a name is provided, subsequent `duckdb.connect` calls will create a new connection to the same database, sharing the catalogs (views, tables, macros etc.).
@@ -74,7 +74,7 @@ duckdb.sql("SELECT * FROM answer").fetchall()
 ### File-Based Connection
 
 If the `database` is a file path, a connection to a persistent database is established.
-If the file does not exist the file will be created (the extension of the file is irrelevant and can be `.db`, `.duckdb` or anything else).
+If the file does not exist the file will be created (the extension of the file is irrelevant and can be `.db`, `.duckdb`, or anything else).
 
 #### `read_only` Connections
 
@@ -104,7 +104,7 @@ Connections are closed implicitly when they go out of scope or if they are expli
 
 ## Querying
 
-SQL queries can be sent to DuckDB using the `execute()` method of connections. Once a query has been executed, results can be retrieved using the `fetchone`, `fetchmany` and `fetchall` methods on the connection. `fetchone()` returns the next row, or `None` when no rows are left. `fetchmany(size)` returns a list of at most `size` rows, one by default. `fetchall()` returns all remaining rows. `df()` and `fetchnumpy()` return the remaining rows as a pandas DataFrame or as NumPy arrays. Below are some short examples:
+SQL queries can be sent to DuckDB using the `execute()` method of connections. Once a query has been executed, results can be retrieved using the `fetchone`, `fetchmany`, and `fetchall` methods on the connection. `fetchone()` returns the next row, or `None` when no rows are left. `fetchmany(size)` returns a list of at most `size` rows, one by default. `fetchall()` returns all remaining rows. `df()` and `fetchnumpy()` return the remaining rows as a pandas DataFrame or as NumPy arrays. Below are some short examples:
 
 ```python
 import duckdb
@@ -135,11 +135,11 @@ print(con.fetchone())
 None
 ```
 
-The `description` property of the connection object contains the column names as per the standard. The `rowcount` property holds the number of rows that the last `INSERT`, `UPDATE` or `DELETE` changed, counted over all parameter sets of an `executemany()` call. It is `-1` after a query and after a statement with a `RETURNING` clause.
+The `description` property of the connection object contains the column names as per the standard. The `rowcount` property holds the number of rows that the last `INSERT`, `UPDATE`, or `DELETE` changed, counted over all parameter sets of an `executemany()` call. It is `-1` after a query and after a statement with a `RETURNING` clause.
 
 ### Query Parameters
 
-Pass parameter values as the second argument to `execute()`. Use `?` with a list in placeholder order, `$1` to reuse a list value or `$name` with a dictionary. Pass values separately from the SQL text. The query then runs as a [prepared statement]({% link docs/2.0/sql/query_syntax/prepared_statements.md %}), and the values are converted according to the [conversion rules]({% link docs/2.0/clients/python/conversion.md %}#object-conversion-python-object-to-duckdb).
+Pass parameter values as the second argument to `execute()`. Use `?` with a list in placeholder order, `$1` to reuse a list value, or `$name` with a dictionary. Pass values separately from the SQL text. The query then runs as a [prepared statement]({% link docs/2.0/sql/query_syntax/prepared_statements.md %}), and the values are converted according to the [conversion rules]({% link docs/2.0/clients/python/conversion.md %}#object-conversion-python-object-to-duckdb).
 
 ```python
 rows = con.execute(
@@ -188,9 +188,9 @@ print(con.fetchall())
 
 `execute()` starts the statement and returns the connection. A query runs until its first rows are ready, so an error up to that point raises from `execute()`, and an error further into the query raises from the fetch that reaches it. Any other statement, `INSERT ... RETURNING` included, runs to its end inside `execute()`.
 
-The result of a query stays open until a fetch returns no rows, or until `fetchall()`, `df()` or `fetchnumpy()` reads the rest of it. After a partial read with `fetchone()` or `fetchmany()`, these methods return the rows not fetched yet. `con.complete()` runs an open result to its end without reading its rows, and `con.abort()` cancels it, which fails an open transaction when the statement may write. Both are also functions of the `duckdb` module. The next `execute()` replaces an open result. If the replaced result may have side effects then it runs to its end first.
+The result of a query stays open until a fetch returns no rows, or until `fetchall()`, `df()`, or `fetchnumpy()` reads the rest of it. After a partial read with `fetchone()` or `fetchmany()`, these methods return the rows not fetched yet. `con.complete()` runs an open result to its end without reading its rows, and `con.abort()` cancels it, which fails an open transaction when the statement may write. Both are also functions of the `duckdb` module. The next `execute()` replaces an open result. If the replaced result may have side effects then it runs to its end first.
 
-While a result is open, everything that runs a query on the connection raises an error, including reading a relation, `register()` and `create_function()`. Building a relation, the `description` property and `cursor()` still work, so a cursor can run other queries in the meantime.
+While a result is open, everything that runs a query on the connection raises an error, including reading a relation, `register()`, and `create_function()`. Building a relation, the `description` property, and `cursor()` still work, so a cursor can run other queries in the meantime.
 
 ```python
 con.execute("SELECT * FROM items")
@@ -212,11 +212,11 @@ con.sql("SELECT 42").fetchall()
 
 ### Arrow and Polars Output
 
-A result of `execute()` has no `fetch_arrow_table()`, `fetch_record_batch()`, `arrow()` or `pl()` method. Its `to_arrow_table()` and `to_arrow_reader()` methods copy the rows and emit a `UserWarning`, and that reader does not stream: its first batch arrives after the whole query ran. For Arrow and Polars output, use a [relation]({% link docs/2.0/clients/python/relational_api.md %}) instead: `con.sql(query).to_arrow_table()`, `con.sql(query).pl()` or `con.sql(query).to_arrow_reader()`, which streams.
+A result of `execute()` has no `fetch_arrow_table()`, `fetch_record_batch()`, `arrow()`, or `pl()` method. Its `to_arrow_table()` and `to_arrow_reader()` methods copy the rows and emit a `UserWarning`, and that reader does not stream: its first batch arrives after the whole query ran. For Arrow and Polars output, use a [relation]({% link docs/2.0/clients/python/relational_api.md %}) instead: `con.sql(query).to_arrow_table()`, `con.sql(query).pl()`, or `con.sql(query).to_arrow_reader()`, which streams.
 
 ### Transactions
 
-`con.begin()`, `con.commit()` and `con.rollback()` start, commit and roll back a transaction, as the [`BEGIN`, `COMMIT` and `ROLLBACK` statements]({% link docs/2.0/sql/statements/transactions.md %}) do. Inside a transaction, any statement run with `execute()` that fails aborts the transaction, including one with a syntax error or one that names a missing table. After that, `commit()` rolls the transaction back without raising an error, and any other statement raises a `TransactionException` until you roll back:
+`con.begin()`, `con.commit()`, and `con.rollback()` start, commit, and roll back a transaction, as the [`BEGIN`, `COMMIT`, and `ROLLBACK` statements]({% link docs/2.0/sql/statements/transactions.md %}) do. Inside a transaction, any statement run with `execute()` that fails aborts the transaction, including one with a syntax error or one that names a missing table. After that, `commit()` rolls the transaction back without raising an error, and any other statement raises a `TransactionException` until you roll back:
 
 ```python
 con.begin()

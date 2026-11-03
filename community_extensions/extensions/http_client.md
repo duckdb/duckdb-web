@@ -63,8 +63,8 @@ repo:
 
 extension_star_count: 81
 extension_star_count_pretty: 81
-extension_download_count: 10702
-extension_download_count_pretty: 10.7k
+extension_download_count: 2452
+extension_download_count_pretty: 2.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---
@@ -78,7 +78,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -104,12 +104,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type | description | comment | examples |
-|----------------|---------------|-------------|---------|----------|
-| http_get       | scalar        | NULL        | NULL    |          |
-| http_head      | scalar        | NULL        | NULL    |          |
-| http_post      | scalar        | NULL        | NULL    |          |
-| http_post_form | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

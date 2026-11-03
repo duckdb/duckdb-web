@@ -27,8 +27,8 @@ repo:
 
 extension_star_count: 17
 extension_star_count_pretty: 17
-extension_download_count: 9497
-extension_download_count_pretty: 9.5k
+extension_download_count: 1031
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_marisa.png'
 layout: community_extension_doc
 ---
@@ -42,7 +42,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -68,12 +68,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type |                    description                     | comment |                examples                 |
-|----------------------|---------------|----------------------------------------------------|---------|-----------------------------------------|
-| marisa_common_prefix | scalar        | NULL                                               | NULL    |                                         |
-| marisa_lookup        | scalar        | NULL                                               | NULL    |                                         |
-| marisa_predictive    | scalar        | NULL                                               | NULL    |                                         |
-| marisa_trie          | aggregate     | Creates a new Marisa Trie from the value supplied. | NULL    | [SELECT marisa_trie(column) FROM table] |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

@@ -73,8 +73,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 4680
-extension_download_count_pretty: 4.7k
+extension_download_count: 908
+extension_download_count_pretty: 908
 image: '/images/community_extensions/social_preview/preview_community_extension_fusion_scanner.png'
 layout: community_extension_doc
 ---
@@ -88,7 +88,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -143,10 +143,11 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|               name                |                                                                                                                                                description                                                                                                                                                 | input_type | scope  | aliases |
-|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| fusion_scanner_filter_pushdown    | Send WHERE predicates on an attached Oracle Fusion table to Fusion. Off by default: DuckDB removes a pushed filter from the plan, so a predicate that cannot be translated exactly must fail the query rather than be approximated.                                                                        | BOOLEAN    | GLOBAL | []      |
-| fusion_scanner_metadata_page_size | Rows per page when listing Oracle Fusion's dictionary. Lower it if a listing keeps stopping short of the instance's own table count.                                                                                                                                                                       | UBIGINT    | GLOBAL | []      |
-| fusion_scanner_stable_paging      | Give a paged statement an order, so that its pages partition the result instead of sampling it: an attached table by its primary key (or ROWID), a query by every column it returns. On by default; turn it off only if Oracle refuses the ordering, and expect pages to repeat and skip rows when you do. | BOOLEAN    | GLOBAL | []      |
+|               name                |                                                                                                                                                description                                                                                                                                                 | input_type | scope  | aliases | typed_value |
+|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| fusion_scanner_filter_pushdown    | Send WHERE predicates on an attached Oracle Fusion table to Fusion. Off by default: DuckDB removes a pushed filter from the plan, so a predicate that cannot be translated exactly must fail the query rather than be approximated.                                                                        | BOOLEAN    | GLOBAL | []      | false       |
+| fusion_scanner_metadata_page_size | Rows per page when listing Oracle Fusion's dictionary. Lower it if a listing keeps stopping short of the instance's own table count.                                                                                                                                                                       | UBIGINT    | GLOBAL | []      | 2000        |
+| fusion_scanner_stable_paging      | Give a paged statement an order, so that its pages partition the result instead of sampling it: an attached table by its primary key (or ROWID), a query by every column it returns. On by default; turn it off only if Oracle refuses the ordering, and expect pages to repeat and skip rows when you do. | BOOLEAN    | GLOBAL | []      | true        |
+| temp_directory                    | Set the directory to which temporary files are written.                                                                                                                                                                                                                                                    | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

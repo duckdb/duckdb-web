@@ -18,7 +18,7 @@
 
 	.card{
 		border-radius: var(--page-radius-box);
-		border: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
+		border: 1px solid var(--border-color);
 		overflow: hidden;
 
 		.card-image{
@@ -35,7 +35,7 @@
 			padding: var(--card-content-padding, 32px 36px 36px 36px);
 			h3{
 				margin: 0 0 12px 0;
-				font-size: var(--type-headline-3, 24px);
+				font-size: var(--type-headline-3, 18px);
 			}
 			p{
 				margin: 0;

@@ -5,6 +5,7 @@ redirect_from:
 - /docs/current/sql/statements/prepare
 - /docs/lts/sql/statements/prepare
 - /docs/preview/sql/statements/prepare
+- /docs/stable/sql/statements/prepare
 title: PREPARE, EXECUTE, and DEALLOCATE Statements
 ---
 

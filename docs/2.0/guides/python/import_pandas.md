@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/python/import_pandas
 - /docs/preview/guides/python/import_pandas
 title: Import from Pandas
+how_to_topic: python
 ---
 
 [`CREATE TABLE ... AS`]({% link docs/2.0/sql/statements/create_table.md %}#create-table--as-select-ctas) and [`INSERT INTO`]({% link docs/2.0/sql/statements/insert.md %}) can be used to create a table from any query.
