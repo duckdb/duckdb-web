@@ -38,7 +38,7 @@ As an x86 baseline, we also ran the benchmark on an Intel Xeon 6 machine.
 We used two bare-metal machines running Ubuntu 26.04:
 
 * an NVIDIA Vera server with 1536 GB of memory, and
-* an x86 baseline, an [`m8id.metal-48xl` EC2 instance](https://aws.amazon.com/ec2/instance-types/m8i/) with an Intel Xeon 6 CPU and 768 GiB of memory.
+* an x86 baseline, an [`m8id.metal-48xl` EC2 instance](https://aws.amazon.com/ec2/instance-types/m8i/) with an Intel Xeon 6975P-C CPU and 768 GiB of memory.
 
 On both machines, we stored the database on a single NVMe SSD with 3+ TB of storage, formatted as ext4.
 At the time of writing, DuckDB 2.0 was [not released yet]({% post_url 2026-09-02-try-duckdb-20-alpha %}), so we used a [preview build]({% link docs/2.0/installation.html %}?version=preview), `1.6.0.dev379` (a codename for 2.0-dev).
@@ -124,15 +124,15 @@ SET threads = 96;
 
 The table below summarizes the specifications of the two CPUs:
 
-| Specification              | NVIDIA Vera (per socket)  | Intel Xeon 6975P-C       |
-|----------------------------|---------------------------|--------------------------|
-| Cores / threads            | 88 / 176                  | 96 / 192                 |
-| Threads used by DuckDB     | 88                        | 96                       |
-| L3 cache                   | 164 MB                    | 480 MB                   |
-| Memory bandwidth           | up to 1.2 TB/s            | not published            |
+| Specification          | NVIDIA Vera (per socket) | Intel Xeon 6975P-C |
+| ---------------------- | ------------------------ | ------------------ |
+| Cores / threads        | 88 / 176                 | 96 / 192           |
+| Threads used by DuckDB | 88                       | 96                 |
+| L3 cache               | 164 MB                   | 480 MB             |
+| Memory bandwidth       | up to 1.2 TB/s           | not published      |
 
 For Vera, the cache and memory bandwidth figures are from NVIDIA's [Vera CPU architecture whitepaper](https://dam-cdn.nvd.orangelogic.com/AssetLink/lptf1ea6nbw67y10wro347r4a3biqt0w.pdf).
-The Xeon 6975P-C is a custom part that is not listed on [Intel ARK](https://www.intel.com/content/www/us/en/ark/products/series/240357/intel-xeon-6-processors.html).
+The Xeon 6975P-C is a custom variant that is not listed on [Intel ARK](https://www.intel.com/content/www/us/en/ark/products/series/240357/intel-xeon-6-processors.html).
 At the time of writing, reliable information on the power (TDP) and frequency of these chips is not available.
 
 > Update DuckDB 2.1 will ship improvements for [NUMA-awarerness and many-core setups](https://github.com/duckdb/duckdb/pull/27782).
@@ -156,13 +156,13 @@ Our implementation deviates from the specification in the following ways:
 We performed an initial warmup run and discarded its result.
 Then, we conducted three complete runs in sequence and took the median value of the _QphH@Size_ composite scores:
 
-| CPU              | NVIDIA Vera      | NVIDIA Vera        | Intel Xeon 6     | Intel Xeon 6       |
-|------------------|-----------------:|-------------------:|-----------------:|-------------------:|
-| DuckDB           | 1.5.5            | 2.0.0-alpha        | 1.5.5            | 2.0.0-alpha        |
-| Run 1            | 2,488,209.48     | 3,073,292.99       | 1,643,610.87     | 2,120,588.82       |
-| Run 2            | 2,389,726.36     | 3,131,306.27       | 1,700,471.78     | 2,022,795.01       |
-| Run 3            | 2,482,589.73     | 3,052,102.87       | 1,673,422.48     | 2,109,782.19       |
-| **Median score** | **2,482,589.73** | **3,073,292.99**   | **1,673,422.48** | **2,109,782.19**   |
+| CPU              |      NVIDIA Vera |      NVIDIA Vera |     Intel Xeon 6 |     Intel Xeon 6 |
+| ---------------- | ---------------: | ---------------: | ---------------: | ---------------: |
+| DuckDB           |            1.5.5 |      2.0.0-alpha |            1.5.5 |      2.0.0-alpha |
+| Run 1            |     2,488,209.48 |     3,073,292.99 |     1,643,610.87 |     2,120,588.82 |
+| Run 2            |     2,389,726.36 |     3,131,306.27 |     1,700,471.78 |     2,022,795.01 |
+| Run 3            |     2,482,589.73 |     3,052,102.87 |     1,673,422.48 |     2,109,782.19 |
+| **Median score** | **2,482,589.73** | **3,073,292.99** | **1,673,422.48** | **2,109,782.19** |
 
 The results show two key findings.
 First, the Vera platform has a 46–48% performance advantage over the x86 baseline (Intel Xeon 6) with both DuckDB versions.
