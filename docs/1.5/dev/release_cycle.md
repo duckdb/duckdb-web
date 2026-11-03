@@ -51,7 +51,7 @@ listing the format these core branches come in.
 
 > LTS (Long-Term Support) releases follow a separate maintenance cycle to provide extended support and stability.
 
-The main DuckDB release cycle consists of 3 main phases: *Mid-cycle*, *Pre-release* and *Feature freeze*. These phases are clearly defined and communicated to ensure the
+The main DuckDB release cycle consists of 3 main phases: *Mid-cycle*, *Pre-release*, and *Feature freeze*. These phases are clearly defined and communicated to ensure the
 whole team is synchronized and working together towards the next release.
 
 ### Phase 1: Mid-Cycle
@@ -255,7 +255,7 @@ type (single/multi branch):
     - Extension type: **Three branch**
         - Latest version: Extension **`vx.<y+1>-codename`** branch
 
-#### Switching between Single Branch, Two Branch and Three Branch
+#### Switching between Single Branch, Two Branch, and Three Branch
 
 Switching between the different branch types for extensions is a fairly straightforward process and should be done as follows:
 

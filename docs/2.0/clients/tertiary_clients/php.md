@@ -12,7 +12,7 @@ title: PHP Client
 > The DuckDB PHP client is a [tertiary client]({% link docs/2.0/clients/overview.md %}) and is maintained by a third-party.
 
 Client API for PHP, focused on performance. The DuckDB PHP client uses the official C API internally through [FFI](https://www.php.net/manual/en/book.ffi.php), achieving good benchmark results.
-This library is more than just a wrapper for the C API; it introduces custom, PHP-friendly methods to simplify working with DuckDB. It is compatible with Linux, Windows and macOS, requiring PHP version 8.3 or higher.
+This library is more than just a wrapper for the C API; it introduces custom, PHP-friendly methods to simplify working with DuckDB. It is compatible with Linux, Windows, and macOS, requiring PHP version 8.3 or higher.
 
 Full documentation is available at [https://duckdb-php.readthedocs.io/](https://duckdb-php.readthedocs.io/).
 
@@ -28,7 +28,7 @@ check [installation](https://duckdb-php.readthedocs.io/en/latest/installation) f
 ## Quick Start
 
 ```php
-DuckDB::sql("SELECT 'quack' as my_column")->print();    
+DuckDB::sql("SELECT 'quack' as my_column")->print();
 ```
 
 ```text
@@ -107,7 +107,7 @@ $appender->flush();
 
 ### DuckDB-Powerful
 
-DuckDB provides some amazing features. For example, 
+DuckDB provides some amazing features. For example,
 you can query remote files directly.
 
 Let's use an aggregate function to calculate the average of a column
@@ -115,8 +115,8 @@ for a Parquet remote file:
 
 ```php
 DuckDB::sql(
-    'SELECT "Reporting Year", avg("Gas Produced, MCF") as "AVG Gas Produced" 
-    FROM "https://github.com/plotly/datasets/raw/refs/heads/master/oil-and-gas.parquet" 
+    'SELECT "Reporting Year", avg("Gas Produced, MCF") as "AVG Gas Produced"
+    FROM "https://github.com/plotly/datasets/raw/refs/heads/master/oil-and-gas.parquet"
     WHERE "Reporting Year" BETWEEN 1985 AND 1990
     GROUP BY "Reporting Year";'
 )->print();
@@ -154,7 +154,7 @@ DuckDB::sql('SUMMARIZE TABLE "https://blobs.duckdb.org/data/Star_Trek-Season_1.c
 
 ## Requirements
 
-* Linux, macOS or Windows.
+* Linux, macOS, or Windows.
 * x64 platform.
 * PHP >= 8.3.
 * ext-ffi.

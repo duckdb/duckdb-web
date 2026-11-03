@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/python/install
 - /docs/preview/guides/python/install
 title: Installing the Python Client
+how_to_topic: python
 ---
 
 ## Installing via Pip

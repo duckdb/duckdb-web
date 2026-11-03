@@ -14,7 +14,7 @@ body.quack {
 	}
 
 	.section-title {
-		@include display-3;
+		@include display-2;
 		text-align: left;
 		margin: 0 0 32px;
 	}
@@ -24,7 +24,7 @@ body.quack {
 		padding: 85px 0;
 		text-align: center;
 
-		h1.display-2 {
+		h1.display-1 {
 			margin: 0 auto;
 			max-width: 760px;
 		}
@@ -76,7 +76,7 @@ body.quack {
 			text-align: left;
 
 			h2 {
-				@include display-3;
+				@include display-2;
 				margin: 0 0 16px;
 			}
 
@@ -181,7 +181,7 @@ body.quack {
 		}
 
 		h4 {
-			@include title-2;
+			@include headline-4;
 			margin: 0;
 			font-size: 14px;
 			font-weight: 600;
@@ -442,7 +442,7 @@ body.quack {
 
 		h3 {
 			margin: 0;
-			font-size: var(--type-title-1, 22px);
+			font-size: var(--type-headline-3, 18px);
 			font-weight: 600;
 			line-height: 1.2;
 			color: var(--main-text-primary-color-strong, #050505);
@@ -450,7 +450,7 @@ body.quack {
 
 		p {
 			margin: 0;
-			font-size: var(--type-body-small, 14px);
+			font-size: var(--type-body-small, 13px);
 			line-height: 1.4;
 			color: var(--quack-text-secondary);
 		}
@@ -470,7 +470,7 @@ body.quack {
 			gap: 7px;
 			margin-top: auto;
 			padding-top: 16px;
-			font-size: var(--type-label-1, 14px);
+			font-size: var(--type-label, 14px);
 			font-weight: var(--type-weight-standard, 450);
 			line-height: 1;
 			color: var(--main-text-secondary-color, #666);

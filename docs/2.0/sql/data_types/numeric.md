@@ -13,8 +13,8 @@ title: Numeric Types
 
 ## Fixed-Width Integer Types
 
-The types `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT` and `HUGEINT` store whole numbers, that is, numbers without fractional components, of various ranges. Attempts to store values outside of the allowed range will result in an error.
-The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT` and `UHUGEINT` store whole unsigned numbers. Attempts to store negative numbers or values outside of the allowed range will result in an error.
+The types `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT`, and `HUGEINT` store whole numbers, that is, numbers without fractional components, of various ranges. Attempts to store values outside of the allowed range will result in an error.
+The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT`, and `UHUGEINT` store whole unsigned numbers. Attempts to store negative numbers or values outside of the allowed range will result in an error.
 
 <div class="center_aligned_header_table"></div>
 
@@ -31,7 +31,7 @@ The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT` and `UHUGEINT` store wh
 | `UBIGINT`   | `UINT64`                         |       0 |  2^64 - 1 |             8 |
 | `UHUGEINT`  | `UINT128`                        |       0 | 2^128 - 1 |            16 |
 
-> `INT8` is a 64-bit integer, and is not the signed equivalent of `UINT8`, an unsigned, 8-bit integer. The type aliases `INT1`, `INT2`, `INT4` and `INT8` for signed integers were inherited from PostgreSQL, where digits in these names indicate their size in *bytes*, whereas the type aliases for their unsigned equivalents, `UINT8`, `UINT16`, `UINT32` and `UINT64`, indicate their size in *bits* following the C/C++ convention.
+> `INT8` is a 64-bit integer, and is not the signed equivalent of `UINT8`, an unsigned, 8-bit integer. The type aliases `INT1`, `INT2`, `INT4`, and `INT8` for signed integers were inherited from PostgreSQL, where digits in these names indicate their size in *bytes*, whereas the type aliases for their unsigned equivalents, `UINT8`, `UINT16`, `UINT32`, and `UINT64`, indicate their size in *bits* following the C/C++ convention.
 
 The type integer is the common choice, as it offers the best balance between range, storage size, and performance. The `SMALLINT` type is generally only used if disk space is at a premium. The `BIGINT` and `HUGEINT` types are designed to be used when the range of the integer type is insufficient.
 
@@ -101,7 +101,7 @@ Type "DECIMAL" does not accept type parameters (INTEGER, INTEGER)
 
 ### Arithmetic and Internal Representation
 
-Addition, subtraction and multiplication of two fixed-point decimals returns another fixed-point decimal with the required `WIDTH` and `SCALE` to contain the exact result, or throws an error if the required `WIDTH` would exceed the maximal supported `WIDTH`, which is currently 38.
+Addition, subtraction, and multiplication of two fixed-point decimals returns another fixed-point decimal with the required `WIDTH` and `SCALE` to contain the exact result, or throws an error if the required `WIDTH` would exceed the maximal supported `WIDTH`, which is currently 38.
 
 Division of fixed-point decimals does not typically produce numbers with finite decimal expansion. Therefore, DuckDB uses approximate [floating-point arithmetic](#floating-point-types) for all divisions that involve fixed-point decimals and accordingly returns floating-point data types.
 
@@ -127,13 +127,13 @@ The data types `FLOAT` and `DOUBLE` precision are variable-precision numeric typ
 
 Like for fixed-point data types, conversion from literals or casts from other datatypes to floating-point types stores inputs that cannot be represented exactly as approximations. However, it can be harder to predict what inputs are affected by this. For example, it is not surprising that `1.3::DECIMAL(1, 0) - 0.7::DECIMAL(1, 0) != 0.6::DECIMAL(1, 0)` but it may be surprising that `1.3::FLOAT - 0.7::FLOAT != 0.6::FLOAT`.
 
-Additionally, whereas multiplication, addition and subtraction of fixed-point decimal data types is exact, these operations are only approximate on floating-point binary data types.
+Additionally, whereas multiplication, addition, and subtraction of fixed-point decimal data types is exact, these operations are only approximate on floating-point binary data types.
 
 For more complex mathematical operations, however, floating-point arithmetic is used internally and more precise results can be obtained if intermediate steps are _not_ cast to fixed point formats of the same width as in- and outputs. For example, `(10::FLOAT / 3::FLOAT)::FLOAT * 3 = 10` whereas `(10::DECIMAL(18, 3) / 3::DECIMAL(18, 3))::DECIMAL(18, 3) * 3 = 9.999`.
 
 In general:
 
-* If you require exact storage of numbers with a known number of decimal digits and require exact additions, subtractions and multiplications (such as for monetary amounts), use the [`DECIMAL` data type](#fixed-point-decimals) or its `NUMERIC` alias instead.
+* If you require exact storage of numbers with a known number of decimal digits and require exact additions, subtractions, and multiplications (such as for monetary amounts), use the [`DECIMAL` data type](#fixed-point-decimals) or its `NUMERIC` alias instead.
 * If you want to do fast or complicated calculations, the floating-point data types may be more appropriate. However, if you use the results for anything important, you should evaluate your implementation carefully for corner cases (ranges, infinities, underflows, invalid operations) that may be handled differently from what you expect and you should familiarize yourself with common floating-point pitfalls. The article [“What Every Computer Scientist Should Know About Floating-Point Arithmetic” by David Goldberg](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) and the [floating point series on Bruce Dawson's blog](https://randomascii.wordpress.com/2017/06/19/sometimes-floating-point-math-is-perfect/) provide excellent starting points.
 
 On most platforms, the `FLOAT` type has a range of at least 1E-37 to 1E+37 with a precision of at least 6 decimal digits. The `DOUBLE` type typically has a range of around 1E-307 to 1E+308 with a precision of at least 15 digits. Positive numbers outside of these ranges (and negative numbers outside the mirrored ranges) may cause errors on some platforms but will usually be converted to zero or infinity, respectively.
@@ -230,7 +230,7 @@ The following default rounding logic applies:
   └────────┘
   ```
 
-If non-default rounding logic is required, functions like `ceil`, `floor`, `round` and `round_even` should be used.
+If non-default rounding logic is required, functions like `ceil`, `floor`, `round`, and `round_even` should be used.
 
 ## Functions
 

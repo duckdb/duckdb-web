@@ -96,7 +96,7 @@ Fortunately, there are much faster approaches for all of them.
 
 In the [previous post on windowing]({% post_url 2021-10-13-windowing %}),
 we explained the component operations used to implement a generic aggregate function
-(initialize, update, finalize, combine and window).
+(initialize, update, finalize, combine, and window).
 In the rest of this post, we will dig into how they can be implemented for these complex aggregates.
 
 ### Quantile
@@ -239,7 +239,7 @@ FROM rank100;
 ```
 
 The two examples here are the interquartile range queries;
-the other queries use the single argument aggregates `median`, `mad` and `mode`.
+the other queries use the single argument aggregates `median`, `mad`, and `mode`.
 
 As a final step, we ran the same query with `count(*)`,
 which has the same overhead as the other benchmarks, but is trivial to compute
@@ -262,7 +262,7 @@ and then considering providing a window operation instead of deferring to the se
 DuckDB's aggregate API enables aggregate functions to define a windowing operation
 that can significantly improve the performance of moving window computations for complex aggregates.
 This functionality has been used to significantly speed up windowing for several statistical aggregates,
-such as mode, interquartile ranges and median absolute deviation.
+such as mode, interquartile ranges, and median absolute deviation.
 
 DuckDB is a free and open-source database management system (MIT licensed).
 It aims to be the SQLite for Analytics,

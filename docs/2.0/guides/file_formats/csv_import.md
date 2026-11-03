@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/file_formats/csv_import
 - /docs/preview/guides/file_formats/csv_import
 title: CSV Import
+how_to_topic: file-formats
 ---
 
 To read data from a CSV file, use the `read_csv` function in the `FROM` clause of a query:

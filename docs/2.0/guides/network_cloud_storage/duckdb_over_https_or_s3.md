@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/network_cloud_storage/duckdb_over_https_or_s3
 - /docs/preview/guides/network_cloud_storage/duckdb_over_https_or_s3
 title: Attach to a DuckDB Database over HTTPS or S3
+how_to_topic: network-cloud-storage
 ---
 
 You can establish a read-only connection to a DuckDB instance via HTTPS or the S3 API.

@@ -27,7 +27,7 @@ We summarize the key findings of the survey below:
 * The most popular clients are the Python API and the standalone CLI client.
 * Most users don't have huge data sets but they appreciate high performance very much.
 * Users would like to see performance optimizations related to time series and partitioned data.
-* DuckDB is popular among data engineers, analysts and scientists, and also among software engineers.
+* DuckDB is popular among data engineers, analysts, and scientists, and also among software engineers.
 
 Let's dive into the details!
 
@@ -44,7 +44,7 @@ This is in line with the vision that originally drove the creation of DuckDB: cr
 ### Clients
 
 [Unsurprisingly](https://www.tiobe.com/tiobe-index/python/), DuckDB is most often used from Python (73%), followed by the [standalone command-line application]({% link docs/2.0/clients/cli/overview.md %}) (47%).
-The third spot is hotly contested with R, WebAssembly (!) and Java all achieving around 14%, followed by Node.js (Javascript) at 9%.
+The third spot is hotly contested with R, WebAssembly (!), and Java all achieving around 14%, followed by Node.js (Javascript) at 9%.
 
 ![DuckDB clients]({% link images/blog/survey/clients.svg %})
 
@@ -119,7 +119,7 @@ The most liked feature is **high performance**.
 Users also enjoy **file format support** (CSV, Parquet, JSON, etc.),
 **ease of use**,
 **extensive SQL support** (including [friendly SQL]({% link docs/2.0/sql/dialect/friendly_sql.md %}))
-and **in-memory integrations** such as support for Pandas, Arrow and NumPy.
+and **in-memory integrations** such as support for Pandas, Arrow, and NumPy.
 Finally, users mentioned low memory usage, protocol support (e.g., HTTPS, S3), database integrations, and portability.
 
 ### Feature Requests

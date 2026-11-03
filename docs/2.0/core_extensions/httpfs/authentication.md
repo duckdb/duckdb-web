@@ -26,7 +26,7 @@ There are two S3 secret providers. Use the `config` provider when you have stati
 
 The `config` provider is part of the [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/overview.md %}) and works with any S3-compatible storage. The `credential_chain` provider is AWS-specific and is provided by the [`aws` extension]({% link docs/2.0/core_extensions/aws.md %}), which is autoloaded on first use.
 
-## Static Credentials: the `config` Provider
+## Static Credentials: The `config` Provider
 
 Supply the key and secret directly:
 
@@ -42,7 +42,7 @@ CREATE OR REPLACE SECRET secret (
 
 See the [`config` provider documentation]({% link docs/2.0/core_extensions/httpfs/s3api.md %}#config-provider) for the full details, including how to set an explicit `ENDPOINT` for non-AWS storage.
 
-## Automatic Credentials: the `credential_chain` Provider
+## Automatic Credentials: The `credential_chain` Provider
 
 The `credential_chain` provider fetches credentials automatically using the AWS SDK, covering profiles, SSO, assumed roles, web identities (IRSA), and instance metadata. To use the AWS SDK default provider:
 

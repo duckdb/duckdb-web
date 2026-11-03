@@ -126,7 +126,7 @@ Since v1.5.4, the extension buffers written data locally and uploads it in block
 By default, the uploaded blocks are committed when the file is closed, so other readers see the new content only after the write completes.
 To commit earlier, set `azure_write_staged_blocks_per_commit` to the number of blocks after which an intermediate commit happens.
 
-> Warning An intermediate commit makes an incomplete file visible to readers. A Parquet file cannot be read until its footer is written at the end, so keep the default `0` for Parquet files and for Delta, Iceberg or DuckLake tables.
+> Warning An intermediate commit makes an incomplete file visible to readers. A Parquet file cannot be read until its footer is written at the end, so keep the default `0` for Parquet files and for Delta, Iceberg, or DuckLake tables.
 
 ### Writing Large Files
 
@@ -242,7 +242,7 @@ The possible values are:
 
 #### `MANAGED_IDENTITY` Provider
 
-If the machine has one managed identity, the `credential_chain` provider uses it with no extra options. If it has several, use the `MANAGED_IDENTITY` provider and pick one with `CLIENT_ID`, `OBJECT_ID` or `RESOURCE_ID`:
+If the machine has one managed identity, the `credential_chain` provider uses it with no extra options. If it has several, use the `MANAGED_IDENTITY` provider and pick one with `CLIENT_ID`, `OBJECT_ID`, or `RESOURCE_ID`:
 
 ```sql
 CREATE SECRET azure_mi (
@@ -302,7 +302,7 @@ CREATE SECRET azure_token (
 
 #### Configuring a Proxy
 
-To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME` and `PROXY_PASSWORD` in the secret definition. For example:
+To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME`, and `PROXY_PASSWORD` in the secret definition. For example:
 
 ```sql
 CREATE SECRET secret5 (

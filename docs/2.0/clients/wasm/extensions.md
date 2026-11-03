@@ -26,7 +26,7 @@ An extension in DuckDB-Wasm is a regular Wasm file to be dynamically loaded via 
 
 ## `INSTALL` and `LOAD`
 
-The `INSTALL` semantic in native embeddings of DuckDB is to fetch, decompress from `gzip` and store data in local disk.
+The `INSTALL` semantic in native embeddings of DuckDB is to fetch, decompress from `gzip`, and store data in local disk.
 The `LOAD` semantic in native embeddings of DuckDB is to (optionally) perform signature checks *and* dynamic load the binary with the main DuckDB binary.
 
 In DuckDB-Wasm, `INSTALL` performs no durable installation, because there is no cross-session storage; it only records where an extension will be fetched from (for example, with `INSTALL ⟨name⟩ FROM community`), deferring the actual fetch to `LOAD`. The `LOAD` operation will fetch (and decompress on the fly), perform signature checks *and* dynamically load via the Emscripten implementation of `dlopen`.
@@ -63,7 +63,7 @@ The core extensions commonly used with DuckDB-Wasm include:
 | [autocomplete]({% link docs/2.0/core_extensions/autocomplete.md %}) | Adds support for autocomplete in the shell                       |                 |
 | [excel]({% link docs/2.0/core_extensions/excel.md %})               | Adds support for Excel-like format strings                       |                 |
 | [fts]({% link docs/2.0/core_extensions/full_text_search.md %})      | Adds support for Full-Text Search indexes                        |                 |
-| [icu]({% link docs/2.0/core_extensions/icu.md %})                   | Adds support for time zones, calendars and collations             |                 |
+| [icu]({% link docs/2.0/core_extensions/icu.md %})                   | Adds support for time zones, calendars, and collations             |                 |
 | [inet]({% link docs/2.0/core_extensions/inet.md %})                 | Adds support for IP-related data types and functions             |                 |
 | [json]({% link docs/2.0/data/json/overview.md %})                   | Adds support for JSON operations                                 |                 |
 | [parquet]({% link docs/2.0/data/parquet/overview.md %})             | Adds support for reading and writing Parquet files               |                 |

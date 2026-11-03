@@ -59,7 +59,7 @@ SUMMARIZE FROM 'services-2024-08.csv';
 
 With `SUMMARIZE`, we get 10 statistics about our data (`min`, `max`, `approx_unique`, etc.).
 If we want to remove a few of them the result, we can use the [`EXCLUDE` modifier]({% link docs/2.0/sql/expressions/star.md %}#exclude-modifier).
-For example, to exclude `min`, `max` and the quantiles `q25`, `q50`, `q75`, we can use issue the following command:
+For example, to exclude `min`, `max`, and the quantiles `q25`, `q50`, `q75`, we can use issue the following command:
 
 ```sql
 SELECT * EXCLUDE(min, max, q25, q50, q75)

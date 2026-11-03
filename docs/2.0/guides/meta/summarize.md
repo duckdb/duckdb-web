@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/meta/summarize
 - /docs/preview/guides/meta/summarize
 title: Summarize
+how_to_topic: tools-meta
 ---
 
 The `SUMMARIZE` command can be used to easily compute a number of aggregates over a table or a query.

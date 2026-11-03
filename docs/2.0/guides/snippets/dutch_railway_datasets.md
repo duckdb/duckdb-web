@@ -6,6 +6,7 @@ redirect_from:
 - /docs/lts/guides/snippets/dutch_railway_datasets
 - /docs/preview/guides/snippets/dutch_railway_datasets
 title: Dutch Railway Datasets
+how_to_topic: tools-meta
 ---
 
 Examples in this documentation often use datasets based on the [Dutch Railway datasets](https://www.rijdendetreinen.nl/en/open-data/).

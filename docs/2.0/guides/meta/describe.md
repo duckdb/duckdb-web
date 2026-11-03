@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/meta/describe
 - /docs/preview/guides/meta/describe
 title: Describe
+how_to_topic: tools-meta
 ---
 
 ## Describing a Table

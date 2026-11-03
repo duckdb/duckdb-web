@@ -8,8 +8,8 @@
 	{% include darkmode_init.html %}
 
 	<script src="/js/jquery-3.5.1.min.js"></script>
-	<link rel="stylesheet" href="/css/main.css?{{ site.time | date: '%s' }}">
-	<link rel="stylesheet" href="/css/communityextensions.css?{{ site.time | date: '%s' }}">
+	<link rel="stylesheet" href="{{ '/css/main.css' | fingerprint }}">
+	<link rel="stylesheet" href="{{ '/css/communityextensions.css' | fingerprint }}">
 
 	<link rel="icon" type="image/png" href="{% link images/favicon_ce/favicon-48x48.png %}" sizes="48x48" />
 	<link rel="icon" type="image/svg+xml" href="{% link images/favicon_ce/favicon.svg %}" />
@@ -118,7 +118,6 @@
 				{% endif %}
 
 				{% assign extension_content = content | community_extension_headings: page.extension.name %}
-				{% assign ct = extension_content | toc %}
 				{% include anchor_headings.html html=extension_content %}
 				
 				{% if page.url contains 'overview' %}
@@ -136,16 +135,7 @@ Page URL: <{{ site.url }}{{ page.url }}>
 				{% if page.repo.github %}
 					{% assign extension_repository = 'https://github.com/' | append: page.repo.github %}
 				{% endif %}
-				<div class="pagemeta">
-					<div>
-						<ul>
-							<li><a href="https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/{{ page.path }}" title="See Markdown"><svg class="icon"><use href="#file-code-01"></use></svg>See this page as Markdown</a></li>
-							<li><a href="https://github.com/duckdb/duckdb-web/edit/main/{{ page.path }}" title="Go to GitHub"><svg class="icon"><use href="#edit-02"></use></svg>Edit this page on GitHub</a></li>
-							<li><a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&amp;labels=issue%20found%20on%20page&amp;body={{ issue_body | uri_escape }}" title="Create GitHub issue"><svg class="icon"><use href="#flag-01"></use></svg>Report content issue</a></li>
-							<li><a href="{{ extension_repository }}"><svg class="icon"><use href="#folder-code"></use></svg>See this repository on GitHub</a></li>
-						</ul>
-					</div>
-				</div>
+				{% include page_actions.html repository=extension_repository %}
 
 				<div class="bottomline">
 					<div>© {{ "now" | date: "%Y" }} DuckDB Foundation, Amsterdam NL</div>
@@ -182,7 +172,7 @@ Page URL: <{{ site.url }}{{ page.url }}>
 	<script src="/js/search.js" defer></script>
 
 	<script src="/js/noteboxes.js" defer></script>
-	<script src="/js/script.js?{{ site.time | date: '%s' }}" defer></script>
+	<script src="{{ '/js/script.js' | fingerprint }}" defer></script>
 	<script src="/js/copy_button.js" defer></script>
 
 </body>

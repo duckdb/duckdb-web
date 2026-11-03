@@ -39,6 +39,31 @@ def reduce_clutter_in_doc(doc_body):
     return doc_body
 
 
+# emulate the install/latest_client.html include: find the newest release in _data/releases.yml that offers the client
+def latest_client_variables(config, client):
+    config_keys = {
+        "java": ("java_short_version", "java_version"),
+        "odbc": ("odbc_short_version", "odbc_version"),
+        "nodejs": ("node_neo_version", "node_neo_version"),
+        "go": ("go_version", "go_tag"),
+        "r": ("r_version", "r_version"),
+        "rust": ("rust_version", "rust_crate_version"),
+        "wasm": ("wasm_version", "wasm_tag"),
+        "csharp": ("csharp_version", "csharp_version"),
+    }
+    version_key, package_key = config_keys.get(client, ("version", "version"))
+    for release in config["data"]["releases"]:
+        config_prefix = f"{release['config_prefix']}_duckdb_"
+        variables = {
+            "latest_version": config.get(config_prefix + version_key, ""),
+            "latest_package": config.get(config_prefix + package_key, ""),
+            "latest_release": release["version"],
+        }
+        if variables["latest_version"]:
+            break
+    return variables
+
+
 def replace_jekyll_tags_for_variables(doc_body, config):
     # stash the content of {% raw %} blocks so that it is not processed
     raw_blocks = []
@@ -69,6 +94,17 @@ def replace_jekyll_tags_for_variables(doc_body, config):
             lambda m: ("0" + parts[int(m.group(1))])[-2:],
             doc_body
         )
+
+    # evaluate the variables assigned by the install/latest_client.html include, which are available until the next include, e.g.,
+    # {% include install/latest_client.html client="java" %}{% assign jdbc_version = latest_package %}...{{ jdbc_version }}
+    segments = re.split(r'{% include install/latest_client\.html client="(\w+)" %}', doc_body)
+    doc_body = segments[0]
+    for client, segment in zip(segments[1::2], segments[2::2]):
+        variables = latest_client_variables(config, client)
+        for variable, latest_variable in re.findall(r"{% assign (\w+) = (latest_\w+) %}", segment):
+            variables[variable] = variables[latest_variable]
+        doc_body += re.sub(r"{{ (\w+) }}", lambda m: variables.get(m.group(1), m.group(0)), segment)
+
     doc_body = re.sub(r'{% assign .*? %}', "", doc_body)
 
     # replace variables, e.g., {{ site.maintained_duckdb_version }}, undefined variables are rendered as empty strings (as in Jekyll)
@@ -100,10 +136,21 @@ def fix_language_tags_for_syntax_highlighting(doc_body):
     return doc_body
 
 
-def move_headers_down(doc_body):
-    # move headers h2-h4 down by 1 level
-    extra_header_levels = "##"
-    return re.sub(r"^##", f"##{extra_header_levels}", doc_body, flags=re.MULTILINE)
+def move_headers_down(doc_body, header_level):
+    # move headers h2-h5 below the page's header (by at least 2 levels),
+    # capped at h6, the deepest header level supported by Markdown
+    extra_header_levels = max(2, header_level - 1)
+    return re.sub(
+        r"^(##+) ",
+        lambda m: "#" * min(len(m.group(1)) + extra_header_levels, 6) + " ",
+        doc_body,
+        flags=re.MULTILINE
+    )
+
+
+def section_title_to_label(title):
+    # e.g., "CSV Files" -> "csv-files"
+    return re.sub("[^0-9a-z]+", "-", title.lower()).strip("-")
 
 
 def replace_html_code_blocks(doc_body):
@@ -153,13 +200,6 @@ def adjust_links_in_doc_body(doc_body):
     doc_body = re.sub(
             r"\(/(20[0-9][0-9]/[0-9][0-9]/[0-9][0-9])/",
             r"(https://duckdb.org/\1/",
-            doc_body
-        )
-
-    # replace relative installation page links
-    doc_body = re.sub(
-            r"\[installation page\]\((.*)?\)",
-            r"[installation page](https://duckdb.org/install)",
             doc_body
         )
 
@@ -347,6 +387,10 @@ def resolve_doc_file_path(docs_root, doc_file_path):
     if doc_file_path.endswith("release_calendar"):
         return None
 
+    # skip HTML pages (e.g., the installation page), links to these point to the website
+    if os.path.exists(f"{docs_root}/{doc_file_path}.html"):
+        return None
+
     # determine the full path
     doc_file_full_path = f"{docs_root}/{doc_file_path}.md"
     if not os.path.exists(doc_file_full_path):
@@ -371,7 +415,7 @@ def concatenate_page_to_output(config, internal_labels, of, header_level, doc_fi
         doc_body = reduce_clutter_in_doc(doc_body)
         doc_body = replace_jekyll_tags_for_variables(doc_body, config)
         doc_body = replace_box_names(doc_body)
-        doc_body = move_headers_down(doc_body)
+        doc_body = move_headers_down(doc_body, header_level)
         doc_body = replace_html_code_blocks(doc_body)
         doc_body = adjust_links_in_doc_body(doc_body)
         doc_body = adjust_headers(doc_body, doc_header_label)
@@ -394,16 +438,43 @@ def collect_main_documentation(docs_root, docs_url_prefix, menu):
         if doc_file_full_path:
             items.append(("page", header_level, doc_file_full_path))
 
+    # add the pages and subsections of a menu section, e.g., "Import & Export" > "CSV Files" > "Overview"
+    def add_menu_items(menu_items, header_level, parent_label):
+        for menu_item in menu_items:
+            path = menu_item.get("path")
+            if path and path.startswith(docs_url_prefix):
+                logging.info(f"{'  ' * (header_level - 2)}- {path}")
+                add_page(header_level, path[len(docs_url_prefix):])
+
+            subitems = menu_item.get("subfolderitems") or menu_item.get("subsubfolderitems")
+            if subitems:
+                # e.g., "## CSV Files {#data:csv-files}"
+                label = f"{parent_label}:{section_title_to_label(menu_item['page'])}"
+                items.append(("section", header_level, menu_item["page"], label))
+                add_menu_items(subitems, header_level + 1, label)
+
+    how_to_guides_position = None
     for chapter_json in menu["docsmenu"]:
-        # standalone pages in the documentation, e.g., "What's New in the Docs for 2.0"
         chapter_url = chapter_json.get("url")
-        if chapter_url and chapter_url.startswith(docs_url_prefix):
+
+        # the How-to Guides page lists the guides based on their front matter, so they are collected separately
+        if chapter_url == f"{docs_url_prefix}guides/":
+            how_to_guides_position = len(items)
+
+        # standalone pages in the documentation, e.g., "Quickstart"
+        elif chapter_url and chapter_url.startswith(docs_url_prefix):
             logging.info(f"- {chapter_url}")
             add_page(1, chapter_url[len(docs_url_prefix):])
 
+        # sections of the documentation, e.g., "Import & Export"
         if chapter_json["page"] != "Documentation":
+            if "mainfolderitems" in chapter_json:
+                logging.info(f"- {chapter_json['slug']}")
+                items.append(("section", 1, chapter_json["page"], chapter_json["slug"]))
+                add_menu_items(chapter_json["mainfolderitems"], 2, chapter_json["slug"])
             continue
 
+        # the "Documentation" section of the menu used in v1.5 and earlier versions
         chapter_slug = chapter_json["slug"]
         for main_level_page in chapter_json["mainfolderitems"]:
             main_title = main_level_page["page"]
@@ -442,6 +513,31 @@ def collect_main_documentation(docs_root, docs_url_prefix, menu):
                     logging.info(f"    - {main_slug}/{subfolder_slug}/{subsubfolder_url}")
                     add_page(3, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
 
+    if how_to_guides_position is not None:
+        menu_pages = set(item[2] for item in items if item[0] == "page")
+        items[how_to_guides_position:how_to_guides_position] = collect_how_to_guides(docs_root, menu_pages)
+
+    return items
+
+
+# collect the how-to guides (pages with a "how_to_topic" front matter field) grouped by topic,
+# skipping the guides that are already included via the menu
+def collect_how_to_guides(docs_root, menu_pages):
+    with open("../_data/post_types.yml") as post_types_file:
+        topic_labels = yaml.safe_load(post_types_file)["tag_labels"]
+
+    guides_by_topic = {}
+    for doc_file_full_path in glob.glob(f"{docs_root}/**/*.md", recursive=True):
+        doc = frontmatter.load(doc_file_full_path)
+        topic = doc.get("how_to_topic")
+        if topic and doc_file_full_path not in menu_pages:
+            guides_by_topic.setdefault(topic, []).append((doc["title"], doc_file_full_path))
+
+    items = [("section", 1, "How-to Guides", "guides")]
+    for topic in sorted(guides_by_topic, key=lambda topic: topic_labels.get(topic, topic)):
+        logging.info(f"- guides: {topic}")
+        items.append(("section", 2, topic_labels.get(topic, topic), f"guides:{topic}"))
+        items.extend(("page", 3, guide) for _, guide in sorted(guides_by_topic[topic]))
     return items
 
 
@@ -474,7 +570,7 @@ def add_blog_posts(blog_post_files, config, internal_labels, of):
         doc_body = replace_jekyll_tags_for_variables(doc_body, config)
         doc_body = fix_language_tags_for_syntax_highlighting(doc_body)
         doc_body = replace_box_names(doc_body)
-        doc_body = move_headers_down(doc_body)
+        doc_body = move_headers_down(doc_body, 2)
         doc_body = adjust_links_in_doc_body(doc_body)
         doc_body = adjust_headers(doc_body, doc_header_label)
         doc_body = change_links(doc_body, doc_header_label, internal_labels)
@@ -525,6 +621,10 @@ if verbose:
 
 with open("../_config.yml") as config_file:
     config = yaml.safe_load(config_file.read())
+
+# data files used in the pages, available as site.data.* in Jekyll
+with open("../_data/releases.yml") as releases_file:
+    config["data"] = {"releases": yaml.safe_load(releases_file.read())}
 
 # write the metadata (title page) of the documents
 generated_on = f"Generated on {datetime.now(timezone.utc).strftime('%Y-%m-%d at %H:%M UTC')}"

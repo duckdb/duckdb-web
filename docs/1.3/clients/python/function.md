@@ -57,7 +57,7 @@ con.remove_function(name)
 
 DuckDB UDFs can also be created with [Python partial functions](https://docs.python.org/3/library/functools.html#functools.partial).
 
-In the below example, we show how a custom logger will return the concatenation of the execution datetime in ISO format, always followed by 
+In the below example, we show how a custom logger will return the concatenation of the execution datetime in ISO format, always followed by
 argument passed at UDF creation and the input parameter provided to the function call:
 
 ```python
@@ -72,11 +72,11 @@ def get_datetime_iso_format() -> str:
 
 def logger_udf(func, arg1: str, arg2: int) -> str:
     return ' '.join([func(), arg1, str(arg2)])
-    
-    
+
+
 with duckdb.connect() as con:
     con.sql("select * from range(10) tbl(id)").to_table("example_table")
-    
+
     con.create_function(
         'custom_logger',
         functools.partial(logger_udf, get_datetime_iso_format, 'logging data')
@@ -207,7 +207,7 @@ from duckdb.typing import VARCHAR
 def return_str_or_none(x: str) -> str | None:
     if not x:
         return None
-    
+
     return x
 
 duckdb.create_function(

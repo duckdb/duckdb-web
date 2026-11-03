@@ -341,7 +341,7 @@ As a result, while Arrow is clearly preferable for exports, DuckDB will happily 
 However, in this case, the in-memory nature of both Arrow and Pandas allow them to perform 2–3× faster than Parquet.
 In absolute terms, the time required to complete this operation is a very small fraction of the benchmark, so other operations should be the deciding factor.
 
-## Scale tests
+## Scale Tests
 
 Analyzing larger-than-memory data is a superpower for DuckDB, allowing it to be used for substantially larger data analysis tasks than were previously possible.
 

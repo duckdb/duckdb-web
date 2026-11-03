@@ -4,13 +4,13 @@ title: Lambda Functions
 tested: true
 ---
 
-DuckDB lambda functions (a.k.a. 'lambdas' or 'lambda expressions') are expressions that define an inline anonymous function. 
-Lambdas are passed as argument to certain [list functions]({% link docs/1.5/sql/functions/list.md %}), which evaluate the passed lambda expression against its elements. 
+DuckDB lambda functions (a.k.a. 'lambdas' or 'lambda expressions') are expressions that define an inline anonymous function.
+Lambdas are passed as argument to certain [list functions]({% link docs/1.5/sql/functions/list.md %}), which evaluate the passed lambda expression against its elements.
 The value resulting from the lambda's evaluation is then processed further by the list function to create its return value.
 
 Lambdas may also be used in the [`COLUMNS` clause]({% link docs/1.5/sql/expressions/star.md %}#columns-lambda-function).
 In that context, the lambda function acts as a filter: if it evaluates to `true`, the column is retained, and discarded otherwise.
-`COLUMNS`-clause lambdas have a mandatory parameter that receives the column name. Optionally, a second parameter may be declared that receives the (1-based) column index. 
+`COLUMNS`-clause lambdas have a mandatory parameter that receives the column name. Optionally, a second parameter may be declared that receives the (1-based) column index.
 
 The syntax for a lambda expression is:
 
@@ -295,7 +295,7 @@ INITIAL - 1 - a - 2 - b - 3 - c - 4 - d
   ```sql
   SELECT list_apply([1, 2, 3], lambda x: (SELECT 42) + x);
   ```
-  
+
   ```console
   Binder Error:
   subqueries in lambda expressions are not supported
@@ -305,10 +305,10 @@ INITIAL - 1 - a - 2 - b - 3 - c - 4 - d
 
 ## Deprecated Syntax
 
-> Deprecated DuckDB v1.3 deprecated the old lambda single arrow syntax (`x -> x + 1`)
+> Deprecated DuckDB 1.3 deprecated the old lambda single arrow syntax (`x -> x + 1`)
 > in favor of the Python-style syntax (`lambda x : x + 1`).
 >
-> DuckDB v1.3 also introduces a new setting to configure the lambda syntax.
+> DuckDB 1.3 also introduces a new setting to configure the lambda syntax.
 >
 > ```sql
 > SET lambda_syntax = 'default';
@@ -319,9 +319,9 @@ INITIAL - 1 - a - 2 - b - 3 - c - 4 - d
 > Currently, `default` enables both syntax styles, i.e.,
 > the old single arrow syntax and the Python-style syntax.
 >
-> DuckDB v1.5 is the last release supporting the single arrow syntax without explicitly enabling it.
+> DuckDB 1.5 is the last release supporting the single arrow syntax without explicitly enabling it.
 >
-> DuckDB v2.0 will disable the single arrow syntax by default.
+> DuckDB 2.0 will disable the single arrow syntax by default.
 >
-> DuckDB v2.1 will remove the `lambda_syntax` flag and fully deprecates the single arrow syntax,
+> DuckDB 2.1 will remove the `lambda_syntax` flag and fully deprecates the single arrow syntax,
 > so the old behavior will no longer be possible.

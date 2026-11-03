@@ -12,7 +12,7 @@ DuckDB is designed to be [portable]({% link why_duckdb.md %}#portable) and has v
 
 ## Supported Platforms
 
-DuckDB officially supports Linux, macOS and Windows on both x86_64 (AMD64) and AArch64 (ARM64) CPU architectures. Official binaries are distributed for these platforms for both the latest stable version and the preview version (nightly build).
+DuckDB officially supports Linux, macOS, and Windows on both x86_64 (AMD64) and AArch64 (ARM64) CPU architectures. Official binaries are distributed for these platforms for both the latest stable version and the preview version (nightly build).
 
 | Platform name   | Operating system | Architecture    | CPU types                      | Support level |
 | --------------- | ---------------- | --------------- | ------------------------------ | ------------- |
@@ -25,7 +25,7 @@ DuckDB officially supports Linux, macOS and Windows on both x86_64 (AMD64) and A
 
 > Warning macOS on Intel CPUs (`osx_amd64`) is only partially supported. DuckDB binaries and [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are still distributed for this platform but, starting with DuckDB 2.0.0, [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are only built for it on a best-effort basis. DuckDB 2.1 will stop supporting `osx_amd64`.
 
-DuckDB can also run on other platforms, such as Linux distributions using musl libc (e.g., Alpine Linux), Android and WebAssembly, with varying levels of support. For details, see the [list of platforms on the “Building DuckDB” page]({% link docs/2.0/dev/building/overview.md %}#platforms). For the platforms extensions are distributed for, see the [“Extension Distribution” page]({% link docs/2.0/extensions/extension_distribution.md %}#platforms).
+DuckDB can also run on other platforms, such as Linux distributions using musl libc (e.g., Alpine Linux), Android, and WebAssembly, with varying levels of support. For details, see the [list of platforms on the “Building DuckDB” page]({% link docs/2.0/dev/building/overview.md %}#platforms). For the platforms extensions are distributed for, see the [“Extension Distribution” page]({% link docs/2.0/extensions/extension_distribution.md %}#platforms).
 
 ## Linux
 

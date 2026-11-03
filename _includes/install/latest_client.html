@@ -1,6 +1,6 @@
 {%- comment -%}
 Finds the newest release in _data/releases.yml that offers a client, e.g., to point to the 1.5 Rust client from the 2.0 docs
-until a Rust client based on DuckDB 2.0 is released. Assigns latest_version, latest_package (e.g., JDBC version, Go tag or Rust crate version)
+until a Rust client based on DuckDB 2.0 is released. Assigns latest_version, latest_package (e.g., JDBC version, Go tag, or Rust crate version)
 and latest_release (short version) in the caller.
 Usage: {% include install/latest_client.html client="rust" %}{{ latest_version }}
 Clients: core (CLI, Python, C), java, odbc, nodejs, go, r, rust, wasm, csharp

@@ -11,11 +11,11 @@ tag: using-duckdb
 
 ## Introduction
 
-One of the persistent challenges of maintaining an open-source library is the lack of visibility into how, where, and by whom it's being used. At DuckDB we look at the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb), which contains a curated list of DuckDB libraries, tools and resources. To supplement this, we wanted to automate insights from GitHub in order to uncover new and emerging projects using DuckDB. In this post we write about how we use DuckDB to query the GitHub API, export the data into a Markdown file and visualize the historical data, generated from Git commits.
+One of the persistent challenges of maintaining an open-source library is the lack of visibility into how, where, and by whom it's being used. At DuckDB we look at the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb), which contains a curated list of DuckDB libraries, tools, and resources. To supplement this, we wanted to automate insights from GitHub in order to uncover new and emerging projects using DuckDB. In this post we write about how we use DuckDB to query the GitHub API, export the data into a Markdown file, and visualize the historical data, generated from Git commits.
 
 ## Data Retrieval from GitHub
 
-GitHub provides a [series of REST API](https://docs.github.com/en/rest?apiVersion=2022-11-28) which can be used to retrieve data from GitHub. Among them, the [search repositories API](https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories) returns a list of public repositories whose name, description or readme matches the search text.
+GitHub provides a [series of REST API](https://docs.github.com/en/rest?apiVersion=2022-11-28) which can be used to retrieve data from GitHub. Among them, the [search repositories API](https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories) returns a list of public repositories whose name, description, or readme matches the search text.
 
 > GitHub also has a search code API in order to match on code dependency, but it does not return all the information the search repository provides. One could use the search code API and for each result to retrieve the repository information from the repository API.
 
@@ -157,7 +157,7 @@ By using [`recursive` unnesting]({% link docs/2.0/sql/query_syntax/unnest.md %}#
 ```
 
 Our scope is to create a Markdown file containing a table, with the following format:
-- **name**, containing the name, link, description, license and owner of the repository;
+- **name**, containing the name, link, description, license, and owner of the repository;
 - **topics**, the list of topics of the repository;
 - **stars**, the number of stars;
 - **open issues**, the number of open issues;
@@ -190,7 +190,7 @@ repo_details = [duckdb](https://github.com/duckdb/duckdb)<br>DuckDB is an analyt
 ...
 ```
 
-We also calculate metrics such as stars, open issues count and forks, which we sum into a field `activity_count`. A repository will end up in the list only if it has an `activity_count` greater than 3 and if it is not a fork. From above we also see that repositories owned by DuckDB are returned, therefore we filter them out too:
+We also calculate metrics such as stars, open issues count, and forks, which we sum into a field `activity_count`. A repository will end up in the list only if it has an `activity_count` greater than 3 and if it is not a fork. From above we also see that repositories owned by DuckDB are returned, therefore we filter them out too:
 
 ```python
 selection_query.filter("""
@@ -305,7 +305,7 @@ with open('README.md', 'w') as readme_file:
     readme_file.write(f"{selected_data}|")
 ```
 
-In the above code snippet we concatenate the columns with the pipe character and then we aggregate the records into a string, separated by `|\n` in order to add a pipe and newline at the end of each line. We then use Python to write to README the title of the page, the Markdown table header, the delimiter row (by using the [`repeat` function]({% link docs/2.0/sql/functions/text.md %}#repeatstring-count)) and the data itself.
+In the above code snippet we concatenate the columns with the pipe character and then we aggregate the records into a string, separated by `|\n` in order to add a pipe and newline at the end of each line. We then use Python to write to README the title of the page, the Markdown table header, the delimiter row (by using the [`repeat` function]({% link docs/2.0/sql/functions/text.md %}#repeatstring-count)), and the data itself.
 
 > The data size is very small, each commit having a README of approx. 35 KB.
 

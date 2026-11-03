@@ -13,9 +13,9 @@ On Windows, DuckDB requires the [Microsoft Visual C++ Redistributable package](h
 
 ## Clang-cl
 
-To build DuckDB on Windows, we recommend using the [`clang-cl` compiler](https://clang.llvm.org/docs/MSVCCompatibility.html) with the Visual Studio build tools (MSVC toolchain, Windows SDK and linker). This is the setup used by DuckDB's [CI workflow](https://github.com/duckdb/duckdb/blob/d54cbbe3df17e8e5ce68312f483b4155836112aa/.github/workflows/Windows.yml#L30).
+To build DuckDB on Windows, we recommend using the [`clang-cl` compiler](https://clang.llvm.org/docs/MSVCCompatibility.html) with the Visual Studio build tools (MSVC toolchain, Windows SDK, and linker). This is the setup used by DuckDB's [CI workflow](https://github.com/duckdb/duckdb/blob/d54cbbe3df17e8e5ce68312f483b4155836112aa/.github/workflows/Windows.yml#L30).
 
-1. Install [Visual Studio](https://visualstudio.microsoft.com/downloads/) (or the Build Tools for Visual Studio) with the “Desktop development with C++” workload and the “C++ Clang Compiler for Windows” component. You also need Python, CMake, Ninja and a Bash shell with GNU Make (e.g., Git Bash with `make` installed).
+1. Install [Visual Studio](https://visualstudio.microsoft.com/downloads/) (or the Build Tools for Visual Studio) with the “Desktop development with C++” workload and the “C++ Clang Compiler for Windows” component. You also need Python, CMake, Ninja, and a Bash shell with GNU Make (e.g., Git Bash with `make` installed).
 2. Open a shell where the Visual Studio environment variables are set (e.g., the “x64 Native Tools Command Prompt” or a shell started from it).
 3. Run the following commands in a Bash shell from the root of the DuckDB repository:
 

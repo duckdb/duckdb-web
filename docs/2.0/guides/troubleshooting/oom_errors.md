@@ -6,6 +6,7 @@ redirect_from:
 - /docs/lts/guides/troubleshooting/oom_errors
 - /docs/preview/guides/troubleshooting/oom_errors
 title: Out of Memory Errors
+how_to_topic: troubleshooting
 ---
 
 DuckDB has a state of the art out-of-core query engine that can spill to disk for larger-than-memory processing.

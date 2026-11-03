@@ -9,7 +9,7 @@ redirect_from:
 title: DESCRIBE Statement
 ---
 
-The `DESCRIBE` statement shows the schema of a table, view or query.
+The `DESCRIBE` statement shows the schema of a table, view, or query.
 
 ## Usage
 

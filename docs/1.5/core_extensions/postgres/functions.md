@@ -42,7 +42,7 @@ CALL pg_clear_cache()
 
 ### postgres_attach
 
-> Warning 
+> Warning
 > This function is deprecated and is planned to be removed in future versions.
 > The `ATTACH` statement is intended to be used instead.
 
@@ -212,7 +212,7 @@ FROM postgres_query('db11', 'SELECT $1::INTEGER, $2::TEXT', params=row(42::INTEG
 
 ### postgres_scan
 
-> Warning 
+> Warning
 > This function is deprecated and is planned to be removed in future versions.
 > Direct SQL queries over the attached PostgreSQL database are intended to be used instead.
 
@@ -222,7 +222,7 @@ postgres_scan(connection_string VARCHAR, schema_name VARCHAR, table_name VARCHAR
 
 ### postgres_scan_pushdown
 
-> Warning 
+> Warning
 > This function is deprecated and is planned to be removed in future versions.
 > Direct SQL queries over the attached PostgreSQL database are intended to be used instead.
 

@@ -211,7 +211,7 @@ INSERT INTO tasks VALUES ('a', 'low'), ('b', 'medium'), ('c', 'high');
 -- WARNING!
 -- Equivalent to `WHERE priority_level::VARCHAR >= 'medium'`
 SELECT * FROM tasks
-WHERE priority_level >= 'medium';  
+WHERE priority_level >= 'medium';
 -- Misses the 'high' priority task!
 ```
 
@@ -220,7 +220,7 @@ WHERE priority_level >= 'medium';
 | b    | medium          |
 
 
-So, if you want to e.g. "get all priorities at or above `medium`" then explicitly cast to the enum type:
+So, if you want to e.g. “get all priorities at or above `medium`” then explicitly cast to the enum type:
 
 ```sql
 SELECT * FROM tasks
