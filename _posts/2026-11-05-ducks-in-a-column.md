@@ -5,7 +5,7 @@ authors:
   - DuckDB Team
 thumb: "/images/blog/thumbs/ducks-column.svg"
 image: "/images/blog/thumbs/ducks-column.png"
-excerpt: "DuckDB is fast because it keeps its ducks in a column. In this post, we walk through DuckDB features that lean on columnar execution: reading files in place, column-level SQL, aggregation shortcuts, window functions, ASOF joins and writing well-organized Parquet. Each one rewards you for touching only the columns you need."
+excerpt: "DuckDB is fast because it keeps its ducks in a column. In this post, we walk through DuckDB features that lean on columnar execution: reading files in place, column-level SQL, aggregation shortcuts, window functions, ASOF joins, and writing well-organized Parquet. Each one rewards you for touching only the columns you need."
 tag: using-duckdb
 ---
 
@@ -70,7 +70,7 @@ WHERE year = 2026 AND month = 10;
 
 ## Picking Your Ducks: Column-Level SQL
 
-DuckDB's [friendly SQL]({% link docs/current/sql/dialect/friendly_sql.md %}) treats columns as things you can select, drop and transform in bulk. On wide tables, this saves both typing and I/O.
+DuckDB's [friendly SQL]({% link docs/2.0/sql/dialect/friendly_sql.md %}) treats columns as things you can select, drop, and transform in bulk. On wide tables, this saves both typing and I/O.
 
 **Drop or swap a few ducks with `EXCLUDE` and `REPLACE`.**
 
@@ -82,7 +82,7 @@ SELECT * EXCLUDE (raw_json, internal_id) FROM sightings;
 SELECT * REPLACE (round(weight_g / 1000, 2) AS weight_g) FROM sightings;
 ```
 
-**Herd ducks by name with `COLUMNS()`.** It takes a regex, a list or a lambda, and applies an expression to every match.
+**Herd ducks by name with `COLUMNS()`.** It takes a regex, a list, or a lambda, and applies an expression to every match.
 
 ```sql
 -- Max of every column whose name starts with temp_
@@ -109,7 +109,7 @@ SELECT {'species': species, 'pond': pond} AS duck FROM sightings;
 SELECT duck.* FROM (SELECT {'species': species, 'pond': pond} AS duck FROM sightings);
 ```
 
-> Tip **Let DuckDB tell you about the columns.** `SUMMARIZE` profiles every column in one pass: type, min, max, approximate distinct count, null percentage and quartiles.
+> Tip **Let DuckDB tell you about the columns.** `SUMMARIZE` profiles every column in one pass: type, min, max, approximate distinct count, null percentage, and quartiles.
 
 ```sql
 SUMMARIZE sightings;
