@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) with SAX streaming for large files, intelligent schema inference, XPath-based data extraction, and HTML table parsing.
-  version: 2.10.0
+  version: 2.14.0
   language: C++
   build: cmake
   license: MIT
@@ -18,28 +18,22 @@ extension:
   # windows_amd64 MSVC runner in CI.
   maintainers:
     - teaguesterling
-  vcpkg_commit: 68a1c387f660632f2f65cdb7e8cd093a08840e5d
 repo:
   github: teaguesterling/duckdb_webbed
-  andium: ddda30f11352138b2451657419640370d1612137
-  # andium (DuckDB v1.4.5 track) left at its prior commit; v2.9.3 ships on the
-  # v1.5.x track via ref and is verified against DuckDB v2.0-cyanoptera as well.
-  ref: acc5a33329e9b289ba6a68cccc858b78fb0b4caf
-  # ref_next is what makes the PRERELEASE leg actually build against DuckDB
-  # v2.0. Without it build_next.yml prints "Skipping prerelease validation" and
-  # the PR passes green having verified nothing on that line. Same commit as
-  # ref: v2.10.0 (tag v2.10.0) adds xml_extract_text_each for positionally
-  # aligned extraction, documents record_element as the better answer for most of
-  # those cases, and documents a SAX limitation where the column set comes
-  # strictly from the first sample_size records. Builds green on both the v1.5.6
-  # and v2.0-cyanoptera lines -- nine next-line legs success on this exact commit,
-  # measured rather than assumed.
-  #
-  # A STALE ref_next is worse than an absent one: it validates the PREVIOUS
-  # release against the next line while reporting green, so it moves with ref on
-  # every release. v2.9.5 was tagged and built green but never registered, so it
-  # was never installable; v2.10.0 supersedes it.
-  ref_next: acc5a33329e9b289ba6a68cccc858b78fb0b4caf
+  ref: 18c22232ebdb387014f4e024c5e41a2326358c88
+  # variegata: the v1.5.6 track. scripts/build.py:46-48 routes duckdb_version
+  # v1.5.6 here. Same commit as ref deliberately -- this release builds and
+  # passes on both lines, so v1.5.6 users get the correctness fixes rather than
+  # staying frozen at v2.10.0. The registry no longer builds v1.5 automatically;
+  # per the DuckDB team, a v1.5.6 build needs this field plus contacting them.
+  variegata: 18c22232ebdb387014f4e024c5e41a2326358c88
+  # ref_next is now DORMANT: build_next.yml is `if: false`, and build.py's
+  # ref_next branch is unreachable while the registry's duckdb_version equals its
+  # DUCKDB_LATEST_STABLE. Kept and moved with ref anyway -- it costs nothing and
+  # restores prerelease validation if that job is re-enabled. A STALE ref_next is
+  # worse than an absent one: it validates the PREVIOUS release while reporting
+  # green, so it must never lag ref.
+  ref_next: 18c22232ebdb387014f4e024c5e41a2326358c88
 docs:
   docs_url: https://duckdb-webbed.readthedocs.io
   hello_world: |
@@ -87,7 +81,7 @@ docs:
 
     **Document Block Processing**: Convert HTML documents to and from structured block representations with `read_html_blocks()`, `parse_html_blocks()`, `html_to_duck_blocks()`, and `duck_blocks_to_html()`. Supports paragraphs, headings, code blocks, tables, lists, inline formatting (bold, italic, links, etc.), and frontmatter preservation. Integrates with the `duck_block_utils` extension for full Markdown support.
 
-    **Smart Schema Inference & File Reading**: Automatically flatten XML/HTML documents into relational tables with intelligent type detection for dates, numbers, booleans, and nested structures. Functions like `read_xml()` and `read_html()` provide direct file-to-table conversion with configurable options including `datetime_format` presets, `nullstr` for custom NULL values, and schema customization. **SAX streaming** (v2.0) automatically handles files over 16MB using a push parser that processes XML in 64KB chunks — peak memory stays proportional to a single record, not the file size.
+    **Smart Schema Inference & File Reading**: Automatically flatten XML/HTML documents into relational tables with intelligent type detection for dates, numbers, booleans, and nested structures. Functions like `read_xml()` and `read_html()` provide direct file-to-table conversion with configurable options including `datetime_format` presets, `nullstr` for custom NULL values, and schema customization. **SAX streaming** (v2.0) automatically handles files over 16MB using a push parser that processes XML in 64KB chunks — peak memory stays proportional to a single record, not the file size. Files compressed with gzip, or with zstd once `parquet` is loaded, are read directly.
 
     **Key XML Functions**:
     - `read_xml(pattern)` - Read XML files with automatic schema inference
@@ -118,15 +112,30 @@ docs:
 
     See https://duckdb-webbed.readthedocs.io for comprehensive documentation and examples.
 
-    Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling and memory-safe RAII implementation. 109 test suites with 4104 assertions, including DOM/SAX equivalence, adversarial/security, and multi-file parallelism testing. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
+    Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling and memory-safe RAII implementation. 140 test files with 5017 assertions, including DOM/SAX equivalence, adversarial/security, and multi-file parallelism testing. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
 
-extension_star_count: 77
-extension_star_count_pretty: 77
-extension_download_count: 24710
-extension_download_count_pretty: 24.7k
+extension_star_count: 78
+extension_star_count_pretty: 78
+extension_download_count: 24261
+extension_download_count_pretty: 24.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -144,7 +153,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -221,6 +229,9 @@ This extension does not add any function overloads.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|         name          |                                                                                   description                                                                                    | input_type | scope  | aliases | typed_value |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory        | Set the directory to which temporary files are written.                                                                                                                          | VARCHAR    | GLOBAL | []      | post.db.tmp |
+| xml_inference_threads | Maximum number of files read_xml and read_html parse at once while inferring a schema at bind. Unset uses the threads setting, lowered to fit memory_limit at maximum_file_size. | UBIGINT    | GLOBAL | []      | NULL        |
 
 

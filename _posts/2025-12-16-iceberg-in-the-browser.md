@@ -41,13 +41,13 @@ DuckDB supports both Iceberg interaction models.
 In the *client–server model,* DuckDB runs on the server to read the Iceberg datasets.
 From the user's point of view, the choice of engine is transparent, and DuckDB is just one of many engines that the server could use in the background.
 The *client-is-the-server* model is more interesting:
-here, users [install a DuckDB client locally]({% link install/index.html %})
+here, users [install a DuckDB client locally]({% link docs/2.0/installation.html %})
 and use it through its SQL interface to query Iceberg catalogs.
 For example:
 
 ```sql
 CREATE SECRET test_secret (
-    TYPE S3, 
+    TYPE S3,
     KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
     SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩'
 );
@@ -76,7 +76,7 @@ This could provide a zero-setup, no-infrastructure, properly serverless option f
 ![Iceberg with DuckDB-Wasm](/images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-light.svg){: .lightmode-img }
 
 Luckily, DuckDB has a client that can run in any browser!
-[DuckDB-Wasm]({% link docs/current/clients/wasm/overview.md %}) is a WebAssembly port of DuckDB, which [supports loading of extensions]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).
+[DuckDB-Wasm]({% link docs/2.0/clients/wasm/overview.md %}) is a WebAssembly port of DuckDB, which [supports loading of extensions]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).
 
 Interacting with an Iceberg REST Catalog requires a number of functionalities; the ability to talk to a REST API over HTTP(S), the ability to read and write `avro` and `parquet` files on object storage, and finally, the ability to negotiate authentication to access those resources on behalf of the user. All of these must be done from within a browser without calling any native components.
 
@@ -100,7 +100,7 @@ Check out our demo of serverless Iceberg analytics using the [DuckDB Table Visua
 
 ## Access Your Own Data
 
-Substituting your own S3 Tables bucket ARN and credentials with policy [`AmazonS3TablesReadOnlyAccess`](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-2#/policies/details/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonS3TablesReadOnlyAccess), you can also access your catalog, metadata and data.
+Substituting your own S3 Tables bucket ARN and credentials with policy [`AmazonS3TablesReadOnlyAccess`](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-2#/policies/details/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonS3TablesReadOnlyAccess), you can also access your catalog, metadata, and data.
 Computations are fully local, and the credentials and warehouse ID are only sent to the catalog endpoint specified in your `ATTACH` command.
 Inputs are translated to SQL, and added to the hash segment of the URL.
 
@@ -111,8 +111,8 @@ This means that:
 * you can use the familiar SQL interface with the same code snippets that can run everywhere DuckDB runs
 * if you edit the credentials and share the resulting link, you will be sharing the new credentials
 
-As of today, this works with [Amazon S3 Tables]({% link docs/current/core_extensions/iceberg/catalogs.md %}#amazon-s3-tables). This has been implemented through a collaboration with the Amazon S3 Tables team.
-To learn more about S3 Tables, how to get started and their feature set, you can take a look at their [product page](https://aws.amazon.com/s3/features/tables/) or [documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
+As of today, this works with [Amazon S3 Tables]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}#amazon-s3-tables). This has been implemented through a collaboration with the Amazon S3 Tables team.
+To learn more about S3 Tables, how to get started, and their feature set, you can take a look at their [product page](https://aws.amazon.com/s3/features/tables/) or [documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
 A demo of DuckDB querying S3 Tables from a browser was presented at AWS re:Invent 2025 – [see the presentation](https://www.youtube.com/watch?v=Pi82g0YGklU&t=2603s).
 
 ## Conclusion

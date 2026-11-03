@@ -9,24 +9,24 @@ excerpt: "We are releasing DuckDB version 1.5.0, codenamed “Variegata”. This
 tag: release
 ---
 
-We are proud to release DuckDB v1.5.0, codenamed “Variegata” after the _Paradise shelduck_ (Tadorna variegata) endemic to New Zealand.
+We are proud to release DuckDB 1.5.0, codenamed “Variegata” after the _Paradise shelduck_ (Tadorna variegata) endemic to New Zealand.
 
-In this blog post, we cover the most important updates for this release around support, features and extensions. As always, there is more: for the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
+In this blog post, we cover the most important updates for this release around support, features, and extensions. As always, there is more: for the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
 
-> To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some extensions (e.g., the [UI]({% link docs/current/core_extensions/ui.md %})) client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
+> To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}). Note that it can take a few days to release some extensions (e.g., the [UI]({% link docs/2.0/core_extensions/ui.md %})) client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
 With this release, we will have two DuckDB releases available: v1.4 (LTS) and v1.5 (current).
-The next release – planned for September – will ship a major version, DuckDB v2.0.
+The next release – planned for September – will ship a major version, DuckDB 2.0.
 
 ## New Features
 
 ### Command Line Client
 
-For users who use DuckDB through the terminal, the highlight of the new release is a rework of the CLI client with a new color scheme, dynamic prompts, a pager and many other convenience features.
+For users who use DuckDB through the terminal, the highlight of the new release is a rework of the CLI client with a new color scheme, dynamic prompts, a pager, and many other convenience features.
 
 #### Color Scheme
 
-We shipped a [new color palette]({% link docs/current/clients/cli/friendly_cli.md %}) and harmonized it with the documentation. The color palette is available in both dark mode and light mode. Both use two shades of gray, and five colors for keywords, strings, errors, functions and numbers. You can find the color palette in the [Design Manual]({% link design/manual/index.html %}#color-palette).
+We shipped a [new color palette]({% link docs/2.0/clients/cli/friendly_cli.md %}) and harmonized it with the documentation. The color palette is available in both dark mode and light mode. Both use two shades of gray, and five colors for keywords, strings, errors, functions, and numbers. You can find the color palette in the [Design Manual]({% link design/manual/index.html %}#color-palette).
 
 You can customize the color scheme using the `.highlight_colors` dot command:
 
@@ -42,7 +42,7 @@ FROM ducks;
 
 #### Dynamic Prompts in the CLI
 
-DuckDB v1.5.0 introduces dynamic prompts for the CLI ([PR #19579](https://github.com/duckdb/duckdb/pull/19579)). By default, these show the database and schema that you are currently connected to:
+DuckDB 1.5.0 introduces dynamic prompts for the CLI ([PR #19579](https://github.com/duckdb/duckdb/pull/19579)). By default, these show the database and schema that you are currently connected to:
 
 ```batch
 duckdb
@@ -60,7 +60,7 @@ These prompts can be configured using bracket codes to have a maximum length, ru
 
 #### `.tables` and `DESCRIBE`
 
-To show the columns of an individual table, use the [`DESCRIBE` statement]({% link docs/current/sql/statements/describe.md %}):
+To show the columns of an individual table, use the [`DESCRIBE` statement]({% link docs/2.0/sql/statements/describe.md %}):
 
 ```sql
 «memory» D ATTACH 'https://blobs.duckdb.org/data/animals.db' AS animals_db;
@@ -78,7 +78,7 @@ To show the columns of an individual table, use the [`DESCRIBE` statement]({% li
 └──────────────────────┘
 ```
 
-The [`.tables` dot command]({% link docs/current/clients/cli/dot_commands.md %}) lists the attached catalogs, the schemas and tables in them, and the columns in each table.
+The [`.tables` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}) lists the attached catalogs, the schemas and tables in them, and the columns in each table.
 
 ```sql
 «memory» D ATTACH 'https://blobs.duckdb.org/data/animals.db' AS animals_db;
@@ -153,7 +153,7 @@ The initial implementation of the pager was provided by [`tobwen`](https://githu
 
 ### PEG Parser
 
-DuckDB v1.5 ships an experimental parser based on PEG (Parser Expression Grammars). The new parser enables better suggestions, improved error messages, and allows extensions to extend the grammar. The PEG parser is currently disabled by default but you can opt-in using:
+DuckDB 1.5 ships an experimental parser based on PEG (Parser Expression Grammars). The new parser enables better suggestions, improved error messages, and allows extensions to extend the grammar. The PEG parser is currently disabled by default but you can opt-in using:
 
 ```sql
 CALL enable_peg_parser();
@@ -162,7 +162,7 @@ CALL enable_peg_parser();
 The PEG parser is already used for generating suggestions. You can cycle through the options using `TAB`.
 
 ```sql
-«animals_db» D FROM ducks WHERE habitat IS 
+«animals_db» D FROM ducks WHERE habitat IS
 IS           ISNULL       ILIKE        ⌊IN⌋           INTERSECT    LIKE
 ```
 
@@ -172,7 +172,7 @@ We are planning to make the switch to the new parser in the upcoming DuckDB rele
 
 ### `VARIANT` Type
 
-DuckDB now natively supports the [`VARIANT` type](https://github.com/duckdb/duckdb/pull/18609), inspired by [Snowflake's semi-structured `VARIANT` data type](https://docs.snowflake.com/en/sql-reference/data-types-semistructured) and available [in Parquet since 2025](https://github.com/apache/parquet-format/blob/master/VariantEncoding.md). Unlike the [JSON type]({% link docs/current/data/json/json_type.md %}), which is physically stored as text, VARIANT stores typed, binary data. Each row in a VARIANT column is self-contained with its own type information. This leads to better compression and query performance. Here are a few examples of using `VARIANT`.
+DuckDB now natively supports the [`VARIANT` type](https://github.com/duckdb/duckdb/pull/18609), inspired by [Snowflake's semi-structured `VARIANT` data type](https://docs.snowflake.com/en/sql-reference/data-types-semistructured) and available [in Parquet since 2025](https://github.com/apache/parquet-format/blob/master/VariantEncoding.md). Unlike the [JSON type]({% link docs/2.0/data/json/json_type.md %}), which is physically stored as text, VARIANT stores typed, binary data. Each row in a VARIANT column is self-contained with its own type information. This leads to better compression and query performance. Here are a few examples of using `VARIANT`.
 
 Store different types in the same column:
 
@@ -218,7 +218,7 @@ You can extract fields from nested variants using the dot notation or the `varia
 
 ```sql
 SELECT data.name FROM events WHERE id = 4;
--- or 
+-- or
 SELECT variant_extract(data, 'name') AS name FROM events WHERE id = 4;
 ```
 ```text
@@ -252,7 +252,7 @@ FROM read_duckdb('numbers*.db');
 
 ### Azure Writes
 
-You can now [write to the Azure Blob or ADLSv2 storage]({% link docs/current/core_extensions/azure.md %}#writing-to-azure-blob-storage) using the `COPY` statement:
+You can now [write to the Azure Blob or ADLSv2 storage]({% link docs/2.0/core_extensions/azure.md %}#writing-to-azure-blob-storage) using the `COPY` statement:
 
 ```sql
 -- Write query results to a Parquet file on Blob Storage
@@ -281,7 +281,7 @@ In the meantime, please refer to the [project's README](https://github.com/duckd
 
 ### Breaking Change for Datetime Function
 
-The [`date_trunc`]({% link docs/current/sql/functions/timestamptz.md %}#date_truncpart-timestamptz) function, when applied to a `DATE`, now returns a `TIMESTAMP` instead of a date.
+The [`date_trunc`]({% link docs/2.0/sql/functions/timestamptz.md %}#date_truncpart-timestamptz) function, when applied to a `DATE`, now returns a `TIMESTAMP` instead of a date.
 
 ```sql
 -- v1.4.4:
@@ -295,28 +295,28 @@ SELECT typeof(date_trunc('month', DATE('2026-03-27')));
 
 ### Lakehouse Updates
 
-All of DuckDB’s supported Lakehouse formats have received some updates in DuckDB v1.5.
+All of DuckDB’s supported Lakehouse formats have received some updates in DuckDB 1.5.
 
 #### DuckLake
 
-The main [DuckLake](https://ducklake.select/) change for DuckDB v1.5 is updating the DuckLake specification to v0.4.
-We are aiming for this to be the same specification that ships with DuckLake v1.0, which will be released in April.
+The main [DuckLake](https://ducklake.select/) change for DuckDB 1.5 is updating the DuckLake specification to v0.4.
+We are aiming for this to be the same specification that ships with DuckLake 1.0, which will be released in April.
 Its main highlights include:
 
-* Macro support.  
-* Sorted tables.  
-* Deletion inlining and addition of partial delete files.  
+* Macro support.
+* Sorted tables.
+* Deletion inlining and addition of partial delete files.
 * Internal rework of DuckLake options.
 
-We'll announce more details about these features in the blog post for DuckLake v1.0.
+We'll announce more details about these features in the blog post for DuckLake 1.0.
 
 #### Delta Lake
 
-For the [Delta Lake extension]({% link docs/current/core_extensions/delta.md %}), the team has focused on improving support for writes via [Unity Catalog]({% link docs/current/core_extensions/unity_catalog.md %}), Delta idempotent writes and table `CHECKPOINT`s.
+For the [Delta Lake extension]({% link docs/2.0/core_extensions/delta.md %}), the team has focused on improving support for writes via [Unity Catalog]({% link docs/2.0/core_extensions/unity_catalog.md %}), Delta idempotent writes, and table `CHECKPOINT`s.
 
 #### Iceberg
 
-For the [Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}), the team is working on a larger release for v1.5.1. For v1.5.0, the main feature is the addition of table properties in the `CREATE TABLE` statement:
+For the [Iceberg extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}), the team is working on a larger release for v1.5.1. For v1.5.0, the main feature is the addition of table properties in the `CREATE TABLE` statement:
 
 ```sql
 CREATE TABLE test_create_table (a INTEGER)
@@ -334,7 +334,7 @@ Other minor additions have been made to enable passing `EXTRA_HTTP_HEADERS` when
 
 ### Network Stack
 
-The default backend for the [httpfs extension]({% link docs/current/core_extensions/httpfs/overview.md %}) has changed from [`httplib`](https://github.com/yhirose/cpp-httplib) to [`curl`](https://curl.se/). As one of the most popular and well-tested open-source projects, we expect `curl` to provide long-standing stability and security for DuckDB. Regardless of the `http` library used, `openssl` is still the backing SSL library and options such as `http_timeout`, `http_retries`, etc. are still the same.
+The default backend for the [httpfs extension]({% link docs/2.0/core_extensions/httpfs/overview.md %}) has changed from [`httplib`](https://github.com/yhirose/cpp-httplib) to [`curl`](https://curl.se/). As one of the most popular and well-tested open-source projects, we expect `curl` to provide long-standing stability and security for DuckDB. Regardless of the `http` library used, `openssl` is still the backing SSL library and options such as `http_timeout`, `http_retries`, etc. are still the same.
 
 Our community has been [testing the new network stack](https://github.com/duckdb/duckdb/issues/20977) for the last few weeks. Still, if you encounter any issues, please submit them to the [`duckdb-httpfs` repository](https://github.com/duckdb/duckdb-httpfs).
 
@@ -344,14 +344,14 @@ If you are interested in more details, click here.
 </summary>
 Due to technical reasons, `httplib` is still the library we use for downloading the `httpfs` extension. When `httpfs` is loaded with the (now default) `curl` backend, subsequent extension installations go through `https://`, with the default endpoint for core extensions pointing to [`https://extensions.duckdb.org`](https://extensions.duckdb.org).
 
-All core and community extensions are cryptographically signed, so installing them through `http://` does not pose a security risk. However, some users reported issues about `http://` extension installs in environments with firewalls.  
+All core and community extensions are cryptographically signed, so installing them through `http://` does not pose a security risk. However, some users reported issues about `http://` extension installs in environments with firewalls.
 </details>
 
 ### Lambda Syntax
 
-Up to DuckDB v1.2, the syntax for defining lambda expressions used the arrow notation `x -> x + 1`. While this was a nice syntax, it clashed with the JSON extract operator (`->`) due to operator precedence and led to error messages that some users found difficult to troubleshoot. To work around this, we introduced a new, Python-style [lambda syntax in v1.3]({% post_url 2025-05-21-announcing-duckdb-130 %}#lambda-function-syntax), `lambda x: x + 1`.
+Up to DuckDB 1.2, the syntax for defining lambda expressions used the arrow notation `x -> x + 1`. While this was a nice syntax, it clashed with the JSON extract operator (`->`) due to operator precedence and led to error messages that some users found difficult to troubleshoot. To work around this, we introduced a new, Python-style [lambda syntax in v1.3]({% post_url 2025-05-21-announcing-duckdb-130 %}#lambda-function-syntax), `lambda x: x + 1`.
 
-While DuckDB v1.5 supports both styles of writing lambda expressions, using the deprecated arrow syntax will now throw a warning:
+While DuckDB 1.5 supports both styles of writing lambda expressions, using the deprecated arrow syntax will now throw a warning:
 
 ```sql
 SELECT list_transform([1, 2, 3], x -> x + 1);
@@ -366,16 +366,16 @@ You can use the `lambda_syntax` configuration option to change this behavior to 
 
 ```sql
 -- Suppress the warning
-SET lambda_syntax = 'ENABLE_SINGLE_ARROW';
+SET lambda_syntax = 'enable_single_arrow';
 -- Turn the deprecation warning into an error
-SET lambda_syntax = 'DISABLE_SINGLE_ARROW';
+SET lambda_syntax = 'disable_single_arrow';
 ```
 
 DuckDB 2.0 will disable the single arrow syntax by default and it will only be available if you opt-in explicitly.
 
 ### Spatial Extension
 
-The [spatial extension]({% link docs/current/core_extensions/spatial/overview.md %}) ships several important changes.
+The [spatial extension]({% link docs/2.0/core_extensions/spatial/overview.md %}) ships several important changes.
 
 #### Breaking Change: Flipping of Axis Order
 
@@ -389,13 +389,13 @@ Most functions in `spatial` operate in Cartesian space and are unaffected by axi
 
 Additionally, `ST_Transform` also expects that the input geometries are in the same axis order as defined by the source coordinate reference system, which in the case of e.g., `EPSG:4326` is also (x = latitude, y = longitude).
 
-This has been a long-standing source of confusion and numerous issues, as other databases, formats and GIS systems tend to always treat `X` as “easting”, “left-right” or “longitude”, and `Y` as “northing”, “up-down” or “latitude”.
+This has been a long-standing source of confusion and numerous issues, as other databases, formats, and GIS systems tend to always treat `X` as “easting”, “left-right”, or “longitude”, and `Y` as “northing”, “up-down”, or “latitude”.
 
 We are changing how this currently works in DuckDB to be consistent with how other systems operate, and hopefully cause less confusion for new users in the future. However, to avoid silently breaking existing workflows that have adapted to this quirk (e.g., by using `ST_FlipCoordinates`), we are rolling out this change gradually via a new `geometry_always_xy` setting:
 
-* In DuckDB v1.5, setting `geometry_always_xy = true` enables the new behavior (x = longitude, y = latitude). Without it, affected functions emit a warning.  
-* In DuckDB v2.0, the warning will become an error. Set `geometry_always_xy = false` to preserve the old behavior.  
-* In DuckDB v2.1, `geometry_always_xy = true` will become the default.
+* In DuckDB 1.5, setting `geometry_always_xy = true` enables the new behavior (x = longitude, y = latitude). Without it, affected functions emit a warning.
+* In DuckDB 2.0, the warning will become an error. Set `geometry_always_xy = false` to preserve the old behavior.
+* In DuckDB 2.1, `geometry_always_xy = true` will become the default.
 
 So to summarize, nothing is changing by default in this release, but to avoid being affected by this change in the future, set `geometry_always_xy` explicitly now. Set it to `true` to opt into the new behavior, or `false` to keep the existing one.
 
@@ -403,15 +403,15 @@ So to summarize, nothing is changing by default in this release, but to avoid be
 
 #### `GEOMETRY` Becomes a Built-In Type
 
-The `GEOMETRY` type has been moved from the `spatial` extension into core DuckDB\! 
+The `GEOMETRY` type has been moved from the `spatial` extension into core DuckDB\!
 
 Geospatial data is no longer niche. The Parquet standard now treats `GEOMETRY` as a first-class column type, and open table formats like Apache Iceberg and DuckLake are moving in the same direction. Many widely used data formats and systems also have geospatial counterparts—GeoJSON, PostGIS, GeoPandas, GeoPackage/Spatialite, and more.
 
 DuckDB already offers extensions that integrate with many of these formats and systems. But there’s a structural problem: as long as `GEOMETRY` lives inside the `spatial` extension, other extensions that want to read or write geospatial data must either depend on `spatial`, implement their own incompatible geometry representation, or force users to handle the conversions themselves.
 
-By moving `GEOMETRY` into DuckDB’s core, extensions can now produce and consume geometry values natively, without depending on `spatial`. While the `spatial` extension still provides most of the functions for working with geometries, the type itself becomes a shared foundation that the entire ecosystem can build on. We’ve already added `GEOMETRY` support to the Postgres scanner and GeoArrow conversion for Arrow import and export. Geometry support in additional extensions is coming soon. 
+By moving `GEOMETRY` into DuckDB’s core, extensions can now produce and consume geometry values natively, without depending on `spatial`. While the `spatial` extension still provides most of the functions for working with geometries, the type itself becomes a shared foundation that the entire ecosystem can build on. We’ve already added `GEOMETRY` support to the Postgres scanner and GeoArrow conversion for Arrow import and export. Geometry support in additional extensions is coming soon.
 
-This change also enables deeper integration with DuckDB’s storage engine and query optimizer, unlocking new compression techniques, query optimizations, and CRS awareness capabilities that were not possible when `GEOMETRY` only existed as an extension type. This is all documented in the new [geometry page]({% link docs/current/sql/data_types/geometry.md %}) in the documentation, but we will highlight some below.
+This change also enables deeper integration with DuckDB’s storage engine and query optimizer, unlocking new compression techniques, query optimizations, and CRS awareness capabilities that were not possible when `GEOMETRY` only existed as an extension type. This is all documented in the new [geometry page]({% link docs/2.0/sql/data_types/geometry.md %}) in the documentation, but we will highlight some below.
 
 #### Improved Storage: WKB and Shredding
 
@@ -431,7 +431,7 @@ The `GEOMETRY` type now accepts an optional CRS parameter (e.g., `GEOMETRY('OGC:
 
 #### Non-Blocking Checkpointing
 
-During checkpointing, it's now possible to run concurrent reads ([#19867](https://github.com/duckdb/duckdb/pull/19867)), writes ([#20052](https://github.com/duckdb/duckdb/pull/20052)), insertions with indexes ([#20160](https://github.com/duckdb/duckdb/pull/20160)) and deletes ([#20286](https://github.com/duckdb/duckdb/pull/20286)). The rework of checkpointing benefits concurrent RW workloads and increases the TPC-H throughput score on SF100 from 246,115.60 to 287,122.97, a **17% improvement**.
+During checkpointing, it's now possible to run concurrent reads ([#19867](https://github.com/duckdb/duckdb/pull/19867)), writes ([#20052](https://github.com/duckdb/duckdb/pull/20052)), insertions with indexes ([#20160](https://github.com/duckdb/duckdb/pull/20160)), and deletes ([#20286](https://github.com/duckdb/duckdb/pull/20286)). The rework of checkpointing benefits concurrent RW workloads and increases the TPC-H throughput score on SF100 from 246,115.60 to 287,122.97, a **17% improvement**.
 
 #### Aggregates
 
@@ -455,7 +455,7 @@ You can then launch DuckDB in your virtual environment using:
 duckdb
 ```
 
-Both DuckDB v1.4 and v1.5 are supported. We are working on shipping extensions as extras using the `duckdb[extension_name]` syntax – stay tuned!
+Both DuckDB 1.4 and 1.5 are supported. We are working on shipping extensions as extras using the `duckdb[extension_name]` syntax – stay tuned!
 
 #### Windows Install Script (Beta)
 
@@ -469,7 +469,7 @@ Please note that this is currently in the beta stage. If you have any feedback, 
 
 #### CLI for Linux with musl libc
 
-We are distributing CLI clients that work with [musl libc]({% link docs/current/dev/building/linux.md %}) (e.g., for Alpine Linux, commonly used in Docker images). The archives are available [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
+We are distributing CLI clients that work with [musl libc]({% link docs/2.0/dev/building/linux.md %}) (e.g., for Alpine Linux, commonly used in Docker images). The archives are available [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
 
 Note that the musl libc CLI client requires the `libstdc++`. To install this package, run:
 

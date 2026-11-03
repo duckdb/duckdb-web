@@ -19,7 +19,7 @@
 
 	{% include darkmode_init.html %}
 
-    <link rel="stylesheet" href="/css/main.css?{{ site.time | date: '%s' }}">
+    <link rel="stylesheet" href="{{ '/css/main.css' | fingerprint }}">
 	<link rel="preload" href="/css/webfont/SuisseIntl-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
 	{% if page.add_css %}
 	<link rel="stylesheet" href="/css/{{ page.add_css }}">
@@ -186,9 +186,9 @@
 	<script src="/js/swiper-bundle.min.js" defer></script>
 	{% endif %}
 	<script src="/js/noteboxes.js" defer></script>
-	<script src="/js/script.js?{{ site.time | date: '%s' }}" defer></script>
+	<script src="{{ '/js/script.js' | fingerprint }}" defer></script>
 	{% if page.body_class contains "installation" %}
-	<script src="/js/install.js" defer></script>
+	<script src="{{ '/js/install.js' | fingerprint }}" defer></script>
 	{% endif %}
 	{% if page.body_class contains "wasm" %}
 	<script src="/js/wasm.js" defer></script>

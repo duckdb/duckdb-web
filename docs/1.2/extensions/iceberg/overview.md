@@ -54,7 +54,7 @@ FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 |-------------:|
 | 51793        |
 
-> The `allow_moved_paths` option ensures that some path resolution is performed, 
+> The `allow_moved_paths` option ensures that some path resolution is performed,
 > which allows scanning Iceberg tables that are moved.
 
 You can also address specify the current manifest directly in the query, this may be resolved from the catalog prior to the query, in this example the manifest version is a UUID.

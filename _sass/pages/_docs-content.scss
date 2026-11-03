@@ -9,6 +9,23 @@ body.documentation {
     // Main content typography
     main .wrap {
 
+        #main_content_wrap p,
+        #main_content_wrap > :is(ul, ol) {
+            color: var(--main-text-secondary-color, #666);
+        }
+
+        #main_content_wrap :is(h1, h2, h3, h4, h5, h6):where(:not(.title)) {
+            margin-block: 2.5rem 0;
+        }
+
+        #main_content_wrap :is(blockquote, table, .monospace_table, .highlighter-rouge, .highlight) + :is(h1, h2, h3, h4, h5, h6) {
+            margin-top: 2rem;
+        }
+
+        #main_content_wrap :is(h1, h2, h3, h4, h5, h6, .headlinebar) + :is(h1, h2, h3, h4, h5, h6) {
+            margin-top: 1rem;
+        }
+
         // Headings
         h1,
         h2,
@@ -29,70 +46,65 @@ body.documentation {
             }
             code {
                 font-family: $fontMonoXBold;
+                font-size: inherit;
             }
         }
 
         h1 {
             @include headline-1;
-            margin-bottom: 0.6em;
-            margin-top: 1.6em;
-
-            code {
-                font-size: 30px;
-            }
         }
 
         h2 {
-            @include headline-2;
-            margin-bottom: 0.6em;
-            margin-top: 1.6em;
-
-            code {
-                font-size: 27px;
-            }
+            @include headline-3;
         }
 
         h3 {
-            @include headline-3;
-            margin-bottom: 0.5em;
-            margin-top: 1.6em;
+            @include headline-4;
 
             code {
                 font-family: $fontMonoXBold;
-                font-size: 23px;
                 padding: 2px 5px;
                 font-weight: normal;
             }
         }
 
         h4 {
-            @include title-1;
-            margin-top: 1.6em;
-            margin-bottom: 0.4em;
-
-            code {
-                font-size: 19px;
-            }
+            @include headline-5;
         }
 
         h5 {
-            @include title-2;
-            margin-top: 1.5em;
-            margin-bottom: 0.4em;
-
-            code {
-                font-size: 19px;
-            }
+            @include headline-5;
         }
 
         p {
-            margin-top: 1em;
+            margin-top: 1rem;
             margin-bottom: 0;
         }
 
-        .highlighter-rouge,
-        div.highlight {
-            margin-bottom: 1.7em;
+        // The following content owns the gap below the page title.
+        #main_content_wrap .headlinebar:has(
+            + :is(p, h1, h2, h3, h4, h5, h6, table),
+            + :is(.monospace_table, .center_aligned_header_table) + table
+        ) {
+            margin-bottom: 0;
+        }
+
+        #main_content_wrap :is(h1, h2, h3, h4, h5, h6, .headlinebar) + p {
+            margin-top: 0.75rem;
+        }
+
+        #main_content_wrap {
+            :is(blockquote, div.highlighter-rouge, div.highlight) {
+                margin-bottom: 0;
+            }
+
+            :is(blockquote, div.highlighter-rouge, div.highlight) + :is(blockquote, div.highlighter-rouge, div.highlight) {
+                margin-top: 1rem;
+            }
+
+            :is(blockquote, div.highlighter-rouge, div.highlight) + p {
+                margin-top: 1.5rem;
+            }
         }
 
         h4+.highlighter-rouge,
@@ -100,14 +112,15 @@ body.documentation {
             margin-top: 0.35em;
         }
 
-        p+.highlighter-rouge,
-        p+table {
+        p+.highlighter-rouge {
             margin-top: 0.6em;
         }
 
-        p + .monospace_table,
-        div + .monospace_table {
-            margin-top: 0.6em;
+        #main_content_wrap {
+            :is(p, blockquote, div.highlighter-rouge, div.highlight, .headlinebar, h1, h2, h3, h4, h5, h6) + table,
+            :is(p, blockquote, div.highlighter-rouge, div.highlight, .headlinebar, h1, h2, h3, h4, h5, h6) + :is(.monospace_table, .center_aligned_header_table) + table {
+                margin-top: 1rem;
+            }
         }
 
         .limit-width {
@@ -255,7 +268,7 @@ body.documentation {
         
         hr {
             margin: 20px 0 10px 0;
-            border: 0.5px solid rgb(229, 229, 229);
+            border: 0.5px solid var(--border-color);
         }
         
         ul {
@@ -331,7 +344,7 @@ body.layout_default.blog_typography {
         }
 
         tr {
-            border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+            border-bottom: 1px solid var(--border-color);
         }
 
         tbody tr:last-child {
@@ -339,7 +352,7 @@ body.layout_default.blog_typography {
         }
 
         >tbody>tr:hover {
-            background: var(--interactive-table-row-hover, #F2F2F2);
+            background: var(--element-background-color);
         }
 
         a {
@@ -361,13 +374,13 @@ body.layout_default.blog_typography {
         th {
             padding: 10px;
             font-weight: 700;
-            font-size: var(--type-body-small, 14px);
+            font-size: var(--type-body-small, 13px);
         }
 
         td {
             padding: 10px;
-            border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
-            font-size: var(--type-body-small, 14px);
+            border-bottom: 1px solid var(--border-color);
+            font-size: var(--type-body-small, 13px);
             line-height: 1.55;
             vertical-align: top;
 
@@ -482,7 +495,7 @@ body.layout_default.blog_typography {
                 top: calc(69px + var(--docbanner-height, 0px));
                 z-index: 10;
                 background: var(--main-body-background-color, #FAFAFA);
-                box-shadow: inset 0 -1px 0 var(--doc-codebox-border-color, #E6E6E6);           }
+                box-shadow: inset 0 -1px 0 var(--border-color);           }
         }
     }
 
@@ -528,7 +541,7 @@ body.layout_default.blog_typography {
         overflow: hidden;
         transition: border-color .3s;
         background: var(--doc-codebox-background-color, #F2F2F2);
-        border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
+        border: 1px solid var(--border-color);
     }
 
     /* example:
@@ -541,7 +554,7 @@ body.layout_default.blog_typography {
     main .wrap .codebox-catalog {
         position: relative;
         overflow: hidden;
-        border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
+        border: 1px solid var(--border-color);
         border-radius: var(--page-radius-m);
         background: var(--doc-codebox-background-color, #F2F2F2);
 
@@ -552,7 +565,7 @@ body.layout_default.blog_typography {
             text-transform: uppercase;
             color: var(--main-text-secondary-color, #666);
             background: var(--doc-codebox-background-color-secondary, #EDEDED);
-            border-bottom: 1px solid var(--doc-codebox-border-color, #D9D9D9);
+            border-bottom: 1px solid var(--border-color);
         }
 
         > div.highlight {
@@ -587,7 +600,7 @@ body.layout_default.blog_typography {
 
     code.highlighter-rouge,
     code.language-plaintext {
-        border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+        border: 1px solid var(--border-color);
         background: var(--doc-codebox-background-color, #F2F2F2);
         font-family: $fontMonoMedium;
         border-radius: var(--page-radius-xs);

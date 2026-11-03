@@ -7,7 +7,6 @@ redirect_from:
 - /dev/release-calendar
 - /docs/dev/release_calendar
 - /docs/current/dev/release_calendar
-- /docs/current/dev/release_calendar
 title: Release Calendar
 body_class: release-calendar blog_typography post
 max_page_width: medium
@@ -24,14 +23,14 @@ while patch versions mostly contain bugfixes.
 
 ## Upcoming Releases
 
-The planned dates of upcoming DuckDB releases are shown below.
+The planned dates of upcoming DuckDB releases and related logistics (e.g., feature freezes) are shown below.
 **Please note that these dates are tentative** and DuckDB maintainers may decide to push back release dates to ensure the stability and quality of releases.
 
 <!-- markdownlint-disable MD055 MD056 MD058 -->
 
 {% if site.data.upcoming_releases.size > 0 %}
-| Date | Version |
-|:-----|--------:|
+| Date | Event |
+|:-----|:------|
 {%- for release in site.data.upcoming_releases %}
 | {{ release.start_date }} | {{ release.title }} |
 {%- endfor %}
@@ -41,12 +40,15 @@ _There are no upcoming releases announced at the moment. Please check back later
 
 <!-- markdownlint-enable MD055 MD056 MD058 -->
 
+DuckDB 2.1 will be released sometime in 2027 H1 with the codename “Islandica”.
+
 For planned new features, see the [DuckDB Development Roadmap]({% link roadmap.md %}).
 
 ### LTS Releases
 
 Starting with v1.4.0, every _other_ DuckDB version is going to be a Long-Term Support (LTS) edition.
 For LTS DuckDB versions, the support period for [community support](https://ducklabs.com/community_support_policy/) is currently a year after the release.
+As exceptions, the support for DuckDB 1.4 was extended until November 17, 2026 and the support for DuckDB 1.5 (a non-LTS version) was extended until March 2027.
 
 <img src="{% link images/blog/lts-support-light.svg %}" alt="DuckDB LTS support" width="900" class="lightmode-img">
 <img src="{% link images/blog/lts-support-dark.svg %}" alt="DuckDB LTS support" width="900" class="darkmode-img">
@@ -73,8 +75,8 @@ Since version 0.4.0, only major and minor versions get a codename.
 
 ## Release Calendar as a CSV File
 
-You can get a [CSV file containing past DuckDB releases](/data/duckdb-releases.csv) and analyze it using DuckDB's [docs/currenter]({% link docs/current/data/csv/overview.md %}).
-For example, you can compute the average number of days between releases using the [`lag` window function]({% link docs/current/sql/functions/window_functions.md %}#lagexpr-offset-default-order-by-ordering-ignore-nulls):
+You can get a [CSV file containing past DuckDB releases](/data/duckdb-releases.csv) and analyze it using DuckDB's [CSV reader]({% link docs/2.0/data/csv/overview.md %}).
+For example, you can compute the average number of days between releases using the [`lag` window function]({% link docs/2.0/sql/functions/window_functions.md %}#lagexpr-offset-default-order-by-ordering-ignore-nulls):
 
 ```sql
 SELECT avg(diff)::DECIMAL(8, 2) AS average_days_between_releases

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: luajit
   description: "In-process LuaJIT UDFs for DuckDB — JIT-compiled, parallel (per-thread states), trusted sandbox, GROUP BY aggregates, LIST/STRUCT/MAP bridges, embedded Fennel compiler"
-  version: 0.32.5
+  version: 0.32.6
   language: C
   build: cmake
   license: MIT
@@ -18,7 +18,8 @@ extension:
 
 repo:
   github: alitrack/duckdb-luajit
-  ref: 2419c908a7bb014fe3b4bcb17b1deaf55dd51721
+  ref: c95b9a1985b98b9ace4f299a97f77429f8cbb5c7
+  ref_next: c95b9a1985b98b9ace4f299a97f77429f8cbb5c7
 
 docs:
   hello_world: |
@@ -74,11 +75,26 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 725
-extension_download_count_pretty: 725
+extension_download_count: 911
+extension_download_count_pretty: 911
 image: '/images/community_extensions/social_preview/preview_community_extension_luajit.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -96,28 +112,28 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| luajit        | scalar        | NULL        | NULL    |          |
-| luajit_agg    | aggregate     | NULL        | NULL    |          |
-| luajit_b      | scalar        | NULL        | NULL    |          |
-| luajit_blob   | scalar        | NULL        | NULL    |          |
-| luajit_f      | scalar        | NULL        | NULL    |          |
-| luajit_i      | scalar        | NULL        | NULL    |          |
-| luajit_l      | scalar        | NULL        | NULL    |          |
-| luajit_m      | scalar        | NULL        | NULL    |          |
-| luajit_map    | scalar        | NULL        | NULL    |          |
-| luajit_module | table         | NULL        | NULL    |          |
-| luajit_s      | scalar        | NULL        | NULL    |          |
-| luajit_table  | table         | NULL        | NULL    |          |
-| luajit_v      | scalar        | NULL        | NULL    |          |
-| luajit_vi     | scalar        | NULL        | NULL    |          |
-| luajit_vs     | scalar        | NULL        | NULL    |          |
+|  function_name  | function_type | description | comment | examples |
+|-----------------|---------------|-------------|---------|----------|
+| luajit          | scalar        | NULL        | NULL    |          |
+| luajit_agg      | aggregate     | NULL        | NULL    |          |
+| luajit_b        | scalar        | NULL        | NULL    |          |
+| luajit_blob     | scalar        | NULL        | NULL    |          |
+| luajit_f        | scalar        | NULL        | NULL    |          |
+| luajit_i        | scalar        | NULL        | NULL    |          |
+| luajit_jit_info | scalar        | NULL        | NULL    |          |
+| luajit_l        | scalar        | NULL        | NULL    |          |
+| luajit_m        | scalar        | NULL        | NULL    |          |
+| luajit_map      | scalar        | NULL        | NULL    |          |
+| luajit_module   | table         | NULL        | NULL    |          |
+| luajit_s        | scalar        | NULL        | NULL    |          |
+| luajit_table    | table         | NULL        | NULL    |          |
+| luajit_v        | scalar        | NULL        | NULL    |          |
+| luajit_vi       | scalar        | NULL        | NULL    |          |
+| luajit_vs       | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -135,6 +151,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

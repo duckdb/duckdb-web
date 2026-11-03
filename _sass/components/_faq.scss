@@ -7,7 +7,7 @@ body.faq,
 .frequentlyaskedquestions,
 body.documentation main .wrap.frequentlyaskedquestions{
 	h3{
-		@include title-3;
+		@include headline-4;
 		cursor: pointer;
 		position: relative;
 		margin: 0;
@@ -64,7 +64,7 @@ body.documentation main .wrap.frequentlyaskedquestions{
 					transform: rotate(180deg);
 		}
 		&:hover{
-			border-color: var(--doc-codebox-border-color);
+			border-color: var(--border-color);
 		}
 	}
 	.answer{
@@ -104,7 +104,7 @@ section.faq{
 	}
 	.qa-wrap{
 		h3{
-			@include title-3;
+			@include headline-4;
 			a{
 				color: var(--main-text-primary-color, #0D0D0D);
 			}

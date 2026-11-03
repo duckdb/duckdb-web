@@ -13,7 +13,7 @@
     * [Spelling](#spelling)
   * [Example Code Snippets](#example-code-snippets)
   * [Cross-References](#cross-references)
-  * [Preview, Stable and Versioned Pages](#preview-stable-and-versioned-pages)
+  * [Preview, Stable, and Versioned Pages](#preview-stable-and-versioned-pages)
   * [Generated Pages](#generated-pages)
     * [Generated SQL Function Lists](#generated-sql-function-lists)
   * [Notice](#notice)
@@ -51,11 +51,11 @@ Before creating a pull request, please perform the following steps:
 * Preview your changes in the browser using the [site build guide](BUILDING.md).
 * Run the linters with `scripts/lint.sh` to show potential issues and run `scripts/lint.sh -f` to perform the fixes for markdownlint.
 
-When creating a PR, please check the box to "Allow edits from maintainers". This allows the maintainers to make small adjustments before merging a pull request.
+When creating a PR, please check the box to “Allow edits from maintainers”. This allows the maintainers to make small adjustments before merging a pull request.
 
-## Blog Posts, Library Entries, Events and Everywhere Entries
+## Blog Posts, Library Entries, Events, and Everywhere Entries
 
-Blog posts (`_posts`), library entries (`_library`), events (`_events`) and Everywhere entries (`_everywhere`) share one front matter schema, so that their cards and filters work the same on every overview page.
+Blog posts (`_posts`), library entries (`_library`), events (`_events`), and Everywhere entries (`_everywhere`) share one front matter schema, so that their cards and filters work the same on every overview page.
 Each folder contains a `.template.md` file to start from.
 
 ```yaml
@@ -78,13 +78,17 @@ venue: "CIDR 2023"
     * library: `article`, `book`, `paper`, `podcast`, `talk`
     * events: `meetup`, `conference`, `workshop`, `talk`, `duckcon`
     * Everywhere: `servers`, `pcs`, `phones`, `other`
-* `category` is `core` or `community` for library entries, events and Everywhere entries. Official DuckDB events are `core`. Blog posts do not use `category`.
-* `thumb` is the card image in a 1.91:1 format, `image` is the social media preview (PNG or JPG). Without `thumb`, the card shows a placeholder in the color of its source (DuckDB, DuckLake or community), e.g. for papers that have no thumbnail yet.
-* `venue` is the conference, series or publication (e.g., `VLDB 2025`, `Data Engineering Podcast`). Events additionally use `location` for the physical place, `sponsored: true` for sponsored events and optionally `end_date`.
+* `category` is `core` or `community` for library entries, events, and Everywhere entries. Official DuckDB events are `core`. Blog posts do not use `category`.
+* `thumb` is the card image in a 1.91:1 format, `image` is the social media preview (PNG or JPG). Without `thumb`, the card shows a placeholder in the color of its source (DuckDB, DuckLake, or community), e.g. for papers that have no thumbnail yet.
+* `venue` is the conference, series, or publication (e.g., `VLDB 2025`, `Data Engineering Podcast`). Events additionally use `location` for the physical place, `sponsored: true` for sponsored events, and optionally `end_date` and `library`.
 * Library entries may add `episode` and `length`. Blog posts may add `external_post_url`.
 * Labels and headings for the filters are defined in [`_data/post_types.yml`](_data/post_types.yml).
 
-When a talk event has taken place, it can be moved to `_library` with its front matter unchanged; `location` and `sponsored` are ignored there.
+Once an event has taken place, the nightly [`scripts/archive_past_events.py`](scripts/archive_past_events.py) job handles it based on its `library` flag:
+
+* `library: true` moves it to `_library` with its front matter unchanged except for a redirect from the old event URL; `location`, `sponsored`, and `library` are ignored there.
+* `library: false` deletes it, unless other files still link to it.
+* Without the flag, talks (`tag: talk`) are deleted the same way and other events are kept.
 
 ## Style Guide
 
@@ -102,6 +106,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT\`\`\`.
 * To display error messages, use \`\`\`console ERROR MESSAGE\`\`\`.
 * Quoted blocks (lines starting with `>`) are rendered as [colored boxed](https://duckdb.org/docs/current/data/insert). The following box types are available: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`, `Quote`.
+    * As `Note` is the default box type, note blocks should not start with the word `Note`. For example, write `> DuckDB supports…` instead of `> Note DuckDB supports…`.
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 * When presenting SQL statements, do not include the DuckDB prompt (`D `).
 * SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
@@ -154,6 +159,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
      * These characters are known in LaTeX code as `\langle` and `\rangle`.
      * Inline code snippets containing placeholders should be highlighted as SQL code. This can be achieved by appending `{:.language-sql .highlight}` after the code snippet (no space is required before the curly brace).
      * *Avoid* using arithmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
+* To show the DuckDB CLI prompt with the current database (e.g., to illustrate `ATTACH` or `USE`), put the database name in guillemets (`«»`) followed by `D`, e.g., `«memory» D ATTACH 'my_database.duckdb';`. Use the `sql` language tag for these code blocks, as `plsql` would add a second `D` prompt.
 
 ### Python Style
 
@@ -163,7 +169,8 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 ### Spelling
 
 * Use [American English (en-US) spelling](https://en.wikipedia.org/wiki/Oxford_spelling#Language_tag_comparison).
-* Avoid using the Oxford comma.
+* Use the [Oxford comma](https://en.wikipedia.org/wiki/Serial_comma) in lists of three or more items, e.g., “CSV, Parquet, and JSON”.
+* Refer to versions without the `v` prefix, e.g., “DuckDB 1.5.0” and “DuckLake 1.0” (not “DuckDB v1.5.0” and “DuckLake v1.0”). The form “DuckDB version 1.5.0” is also acceptable. Keep the original form in titles of talks, podcasts, papers, and blog posts, and in verbatim program output (e.g., `DuckDB v1.3.1 (Ossivalis) 2063dda3e6`).
 
 ## Example Code Snippets
 
@@ -179,7 +186,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
     * Note that the paths must contain the correct extension (most often `.md`) and they must be relative to the repository root.
     * :x: ```see [the `SELECT` statement](../../sql/statements/select)```
     * :white_check_mark: ```see [the `SELECT` statement]({% link docs/current/sql/statements/select.md %})```
-* Avoid using the term "here" for links. For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
+* Avoid using the term “here” for links. For the rationale, see a [detailed explanation on why your links should never say “click here”](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
     * :x: `see [here]({% link docs/current/sql/statements/copy.md %}#copy-from)`
     * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/current/sql/statements/copy.md %}#copy-from)```
 * Reference a specific section when possible:
@@ -187,7 +194,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
     * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/current/sql/statements/copy.md %}#copy-from)```
 * In most cases, linking related GitHub issues/discussions is discouraged. This allows the documentation to be self-contained.
 
-## Preview, Stable and Versioned Pages
+## Preview, Stable, and Versioned Pages
 
 * The `preview` pages under <https://duckdb.org/docs/current/> contains documentation for the latest preview (nightly) release of DuckDB.
 * The `stable` pages under <https://duckdb.org/docs/current/> contain documentation for the latest stable release of DuckDB (e.g., v1.2). **Most pull requests should target these pages.**
@@ -223,7 +230,7 @@ FROM duckdb_functions()
 WHERE categories != [];
 ```
 
-All data (e.g., parameter names, descriptions, examples) comes from the output of `duckdb_functions()`. Any deviations (exclusion, additions or overrides), need to be hardcoded in the script [`generate_sql_function_docs.py`](scripts/generate_sql_function_docs.py) via variables `OVERRIDES` and `EXCLUDES`.
+All data (e.g., parameter names, descriptions, examples) comes from the output of `duckdb_functions()`. Any deviations (exclusion, additions, or overrides), need to be hardcoded in the script [`generate_sql_function_docs.py`](scripts/generate_sql_function_docs.py) via variables `OVERRIDES` and `EXCLUDES`.
 
 Example: `blob.md`
 

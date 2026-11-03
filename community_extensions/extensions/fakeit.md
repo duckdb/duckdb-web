@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fakeit
   description: The FakeIt Extension enables generation of realistic fake/test data directly in SQL queries
-  version: 0.3.6
+  version: 0.4.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,8 @@ extension:
 
 repo:
   github: tobilg/duckdb-fakeit
-  ref: c79cd614a75a3800e94cd640b2663d0a82ceee53
+  ref: 80c90e4a2d9ad70f4686e524289046200d8111e2
+  variegata: c79cd614a75a3800e94cd640b2663d0a82ceee53
 
 docs:
   hello_world: |
@@ -325,13 +326,29 @@ docs:
 
     > This extension is experimental and actively being developed. See the repository for the latest updates and examples.
 
+
 extension_star_count: 17
 extension_star_count_pretty: 17
-extension_download_count: 979
-extension_download_count_pretty: 979
+extension_download_count: 1181
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_fakeit.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -349,7 +366,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -493,6 +509,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

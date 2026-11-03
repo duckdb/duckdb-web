@@ -93,11 +93,26 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 482
-extension_download_count_pretty: 482
+extension_download_count: 795
+extension_download_count_pretty: 795
 image: '/images/community_extensions/social_preview/preview_community_extension_pgvfs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -115,7 +130,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -149,9 +163,12 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|         name          |                                                                                                     description                                                                                                     | input_type | scope  | aliases |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| pgdb_refresh_interval | Seconds between checks for a newer published version of each pgdb:// database attached READ_ONLY by its plain path; a newer one is attached in its place (running transactions keep theirs). 0 turns refreshing off | DOUBLE     | GLOBAL | []      |
-| pgvfs_secret          | Name of the postgres secret pgvfs:// connects with, unless a secret named pgvfs_<volume> exists for the volume. Unset: $PGVFS_URL, else the unnamed default postgres secret (the one DuckLake's catalog uses)       | VARCHAR    | GLOBAL | []      |
+|          name          |                                                                                                     description                                                                                                     | input_type | scope  | aliases | typed_value |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| cache_local_files      | Whether the external file cache also caches local files. Remote files are always cached.                                                                                                                            | BOOLEAN    | GLOBAL | []      | true        |
+| parquet_metadata_cache | Cache Parquet metadata - useful when reading the same files multiple times                                                                                                                                          | BOOLEAN    | GLOBAL | []      | true        |
+| pgdb_refresh_interval  | Seconds between checks for a newer published version of each pgdb:// database attached READ_ONLY by its plain path; a newer one is attached in its place (running transactions keep theirs). 0 turns refreshing off | DOUBLE     | GLOBAL | []      | 10.0        |
+| pgvfs_secret           | Name of the postgres secret pgvfs:// connects with, unless a secret named pgvfs_<volume> exists for the volume. Unset: $PGVFS_URL, else the unnamed default postgres secret (the one DuckLake's catalog uses)       | VARCHAR    | GLOBAL | []      | NULL        |
+| temp_directory         | Set the directory to which temporary files are written.                                                                                                                                                             | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

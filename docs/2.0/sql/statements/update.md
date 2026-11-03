@@ -1,0 +1,180 @@
+---
+layout: docu
+railroad: statements/update.js
+redirect_from:
+- /docs/sql/statements/update
+- /docs/stable/sql/statements/update
+- /docs/current/sql/statements/update
+- /docs/lts/sql/statements/update
+- /docs/preview/sql/statements/update
+tested: true
+title: UPDATE Statement
+---
+
+The `UPDATE` statement modifies the values of rows in a table.
+
+## Examples
+
+For every row where `i` is `NULL`, set the value to 0 instead:
+
+<!-- test:setup
+CREATE TABLE tbl (i INTEGER, j INTEGER);
+INSERT INTO tbl VALUES (0, 1), (1, 2);
+CREATE TABLE new_tbl (i INTEGER, j INTEGER, id INTEGER);
+INSERT INTO new_tbl VALUES (5, 6, 1);
+-->
+
+```sql
+UPDATE tbl
+SET i = 0
+WHERE i IS NULL;
+```
+
+Set all values of `i` to 1 and all values of `j` to 2:
+
+```sql
+UPDATE tbl
+SET i = 1, j = 2;
+```
+
+## Syntax
+
+<div id="rrdiagram"></div>
+
+`UPDATE` changes the values of the specified columns in all rows that satisfy the condition. Only the columns to be modified need be mentioned in the `SET` clause; columns not explicitly modified retain their previous values.
+
+## `RETURNING` Clause
+
+The `RETURNING` clause returns the values of the rows that were updated. It uses the same syntax as the `SELECT` clause, except the `DISTINCT` modifier is not supported. The returned values reflect the state of the rows after the update.
+
+```sql
+CREATE TABLE tbl (i INTEGER, j INTEGER);
+INSERT INTO tbl VALUES (0, 1), (1, 2);
+UPDATE tbl SET j = j + 10 WHERE i = 1 RETURNING *;
+```
+
+| i | j  |
+|--:|---:|
+| 1 | 12 |
+
+## Update from Other Table
+
+A table can be updated based upon values from another table. This can be done by specifying a table in a `FROM` clause, or using a sub-select statement. Both approaches have the benefit of completing the `UPDATE` operation in bulk for increased performance.
+
+```sql
+CREATE OR REPLACE TABLE original AS
+    SELECT 1 AS key, 'original value' AS value
+    UNION ALL
+    SELECT 2 AS key, 'original value 2' AS value;
+
+CREATE OR REPLACE TABLE new AS
+    SELECT 1 AS key, 'new value' AS value
+    UNION ALL
+    SELECT 2 AS key, 'new value 2' AS value;
+
+SELECT *
+FROM original;
+```
+
+| key |      value       |
+|-----|------------------|
+| 1   | original value   |
+| 2   | original value 2 |
+
+```sql
+UPDATE original
+    SET value = new.value
+    FROM new
+    WHERE original.key = new.key;
+```
+
+Or:
+
+```sql
+UPDATE original
+    SET value = (
+        SELECT
+            new.value
+        FROM new
+        WHERE original.key = new.key
+    );
+```
+
+```sql
+SELECT *
+FROM original;
+```
+
+| key |    value    |
+|-----|-------------|
+| 1   | new value   |
+| 2   | new value 2 |
+
+### Multiple Matching Source Rows
+
+If a target row matches multiple rows in the `FROM` clause, the target row is updated only once, using the values of one of the matching source rows. Which source row is used is not specified. For example, the following query sets `v` to either `10` or `20`:
+
+```sql
+CREATE TABLE target (id INTEGER, v INTEGER);
+INSERT INTO target VALUES (1, 0);
+CREATE TABLE source (id INTEGER, v INTEGER);
+INSERT INTO source VALUES (1, 10), (1, 20);
+
+UPDATE target
+    SET v = source.v
+    FROM source
+    WHERE target.id = source.id;
+```
+
+To get deterministic results, ensure that each target row matches at most one source row, e.g., by deduplicating the source. In contrast, the sub-select form throws an error if the subquery returns more than one row (unless the [`scalar_subquery_error_on_multiple_rows` setting]({% link docs/2.0/configuration/overview.md %}#configuration-reference) is set to `false`), and [`MERGE INTO`]({% link docs/2.0/sql/statements/merge_into.md %}) throws an error if a target row matches more than one source row.
+
+## Update from Same Table
+
+The only difference between this case and the above is that a different table alias must be specified on both the target table and the source table.
+In this example `AS true_original` and `AS new` are both required.
+
+```sql
+UPDATE original AS true_original
+    SET value = (
+        SELECT
+            new.value || ' a change!' AS value
+        FROM original AS new
+        WHERE true_original.key = new.key
+    );
+```
+
+## Update Using Joins
+
+To select the rows to update, `UPDATE` statements can use the `FROM` clause and express joins via the `WHERE` clause. For example:
+
+```sql
+CREATE TABLE city (name VARCHAR, revenue BIGINT, country_code VARCHAR);
+CREATE TABLE country (code VARCHAR, name VARCHAR);
+INSERT INTO city VALUES ('Paris', 700, 'FR'), ('Lyon', 200, 'FR'), ('Brussels', 400, 'BE');
+INSERT INTO country VALUES ('FR', 'France'), ('BE', 'Belgium');
+```
+
+To increase the revenue of all cities in France, join the `city` and the `country` tables, and filter on the latter:
+
+```sql
+UPDATE city
+SET revenue = revenue + 100
+FROM country
+WHERE city.country_code = country.code
+  AND country.name = 'France';
+```
+
+```sql
+SELECT *
+FROM city;
+```
+
+|   name   | revenue | country_code |
+|----------|--------:|--------------|
+| Paris    | 800     | FR           |
+| Lyon     | 300     | FR           |
+| Brussels | 400     | BE           |
+
+## Upsert (Insert or Update)
+
+See the [Insert documentation]({% link docs/2.0/sql/statements/insert.md %}#on-conflict-clause) for details.

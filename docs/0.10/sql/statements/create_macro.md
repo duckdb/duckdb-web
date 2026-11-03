@@ -63,7 +63,7 @@ CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
 Create a table macro without parameters:
 
 ```sql
-CREATE MACRO static_table() AS TABLE 
+CREATE MACRO static_table() AS TABLE
     SELECT 'Hello' AS column1, 'World' AS column2;
 ```
 

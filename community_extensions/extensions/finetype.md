@@ -8,19 +8,22 @@ excerpt: |
 extension:
   name: finetype
   description: Semantic type classification — detects 251 data types (emails, URLs, dates, UUIDs, currencies, etc.) from raw strings
-  version: 0.6.62
+  version: 0.6.66
   language: Rust
   build: cargo
   license: MIT
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl;windows_amd64_mingw"
+  # osx_amd64 became opt-in in the DuckDB 2.0 matrix, and is opted into so
+  # Intel Macs keep a build.
+  opt_in_platforms: "osx_amd64"
   requires_toolchains: "rust"
   maintainers:
     - hughcameron
 
 repo:
   github: meridian-online/finetype
-  ref: a8ec8663862d28b1b9e0794f5026efbdb2ea3836
-  ref_next: a8ec8663862d28b1b9e0794f5026efbdb2ea3836
+  ref: 6b85e500659f44520ca7e6e70073e335cc3e3acb
+  ref_next: 6b85e500659f44520ca7e6e70073e335cc3e3acb
   variegata: a8ec8663862d28b1b9e0794f5026efbdb2ea3836
 
 docs:
@@ -141,13 +144,18 @@ docs:
     ```
 
     Because it is an aggregate, it cannot take `list(...)` — nesting one aggregate inside another is a
-    binder error. Pass the column itself, and use `GROUP BY` for one answer per group.
+    binder error. Pass the column itself, and use `GROUP BY` for one answer per group. `FILTER` and
+    `DISTINCT` work too. An aggregate-level `ORDER BY` inside the call
+    (`ft_profile(value ORDER BY value)`) works on DuckDB 2.0 and crashes DuckDB 1.5, a DuckDB bug fixed
+    in 2.0 and not backported.
 
     ### `ft_detail(value VARCHAR[, header VARCHAR]) → VARCHAR`
     Explain the verdict `ft_profile` gives a column. An **aggregate** over the same sample as
     `ft_profile`, so over the same rows its `type` is `ft_profile`'s. Returns JSON with the type,
     confidence (0.0–1.0), the recommended DuckDB type, the number of values sampled, the rule that
-    decided the type when one fired, and the per-label vote map.
+    decided the type when one fired, and the per-label vote map. It takes the same `GROUP BY`,
+    `FILTER`, `DISTINCT` and `ORDER BY` forms as `ft_profile`, with the same DuckDB 1.5 caveat on
+    `ORDER BY`.
 
     ```sql
     SELECT ft_detail(email, 'email') FROM people;
@@ -174,21 +182,40 @@ docs:
 
     ### `ft_cast(value VARCHAR) → VARCHAR`
     Normalize a value for safe `TRY_CAST()` to its detected DuckDB type. Handles date format
-    conversion (US/EU → ISO), boolean normalization, UUID lowercasing, numeric cleanup.
+    conversion (US/EU → ISO), boolean normalization, UUID lowercasing, numeric cleanup. A
+    percentage casts to a fraction, the value a spreadsheet holds.
 
     ```sql
     SELECT ft_cast('01/15/2024');  -- 2024-01-15 (US date → ISO)
+    SELECT ft_cast('95.5%');       -- 0.955 (percentage → fraction)
     ```
 
-    ### `ft_validate_text(value VARCHAR, schema_json VARCHAR) → STRUCT(valid BOOLEAN, "constraint" VARCHAR, message VARCHAR)`
+    ### `ft_validate_text(value VARCHAR, schema_json VARCHAR) → STRUCT(valid BOOLEAN, "constraint" VARCHAR, message VARCHAR, grade VARCHAR, note VARCHAR)`
     Validate a single value against a JSON Schema fragment. Returns a struct: `valid` is `true` when
     the value conforms (with `constraint` and `message` `NULL`); on failure `valid` is `false` and
     `constraint` / `message` name the failing keyword and the reason. This is the per-cell engine the
     `ft_validate` table verb runs over every column.
 
+    `grade` is `conforms`, `noted` or `fails`. A `noted` value is valid but carries a `note`, such as
+    a non-canonical form (an uppercase UUID) or a withdrawn code, when the fragment declares the
+    `x-finetype-canonical` or `x-finetype-historic` extension. `valid` still means "not a failure".
+    The scalar applies the same per-value check as `finetype validate`: enum membership ignores
+    letter-case, and when the fragment's `x-finetype-label` names a type with a check digit (ISBN,
+    IBAN, NPI and others), a right-shape value with a bad check digit fails with constraint
+    `checksum`.
+
     ```sql
     SELECT ft_validate_text('not-an-email', '{"type":"string","pattern":"^[^@]+@[^@]+\\.[^@]+$"}');
-    -- {'valid': false, 'constraint': pattern, 'message': '"not-an-email" does not match "^[^@]+@[^@]+\.[^@]+$"'}
+    -- {'valid': false, 'constraint': pattern, 'message': '"not-an-email" does not match "^[^@]+@[^@]+\.[^@]+$"', 'grade': fails, 'note': NULL}
+
+    SELECT ft_validate_text('550E8400-E29B-41D4-A716-446655440000',
+      '{"type":"string","pattern":"^[0-9a-fA-F-]{36}$",
+        "x-finetype-canonical":{"kind":"non_canonical","name":"lowercase","pattern":"^[^A-F]*$"}}');
+    -- {'valid': true, 'constraint': NULL, 'message': NULL, 'grade': noted, 'note': 'non_canonical: lowercase'}
+
+    SELECT ft_validate_text('0306406153',
+      '{"type":"string","pattern":"^[0-9]{9}[0-9X]$","x-finetype-label":"identity.commerce.isbn"}');
+    -- {'valid': false, 'constraint': checksum, 'message': '"0306406153" fails its isbn check digit', 'grade': fails, 'note': NULL}
     ```
 
     ### `ft_unpack(json VARCHAR) → VARCHAR`
@@ -215,13 +242,28 @@ docs:
 
     For more information, see the [FineType documentation](https://github.com/meridian-online/finetype).
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 1217
-extension_download_count_pretty: 1.2k
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 1051
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_finetype.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -239,7 +281,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -247,7 +288,7 @@ LOAD {{ page.extension.name }};
 |  function_name   | function_type | description | comment | examples |
 |------------------|---------------|-------------|---------|----------|
 | ft_cast          | scalar        | NULL        | NULL    |          |
-| ft_detail        | scalar        | NULL        | NULL    |          |
+| ft_detail        | aggregate     | NULL        | NULL    |          |
 | ft_infer         | scalar        | NULL        | NULL    |          |
 | ft_profile       | aggregate     | NULL        | NULL    |          |
 | ft_profile       | table_macro   | NULL        | NULL    |          |
@@ -272,6 +313,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

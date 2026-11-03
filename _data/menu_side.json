@@ -1,8 +1,8 @@
 {
   "sidemenu": [
     {
-      "page": "Sitemap",
-      "url": "/sitemap.html"
+      "page": "Blog",
+      "url": "/news/"
     },
     {
       "page": "Live Demo",

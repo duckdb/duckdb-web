@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: marc21
   description: Read, write, validate and edit MARC 21 bibliographic data (ISO 2709, MARCXML, MARC-in-JSON, breaker, Aleph; UTF-8 and MARC-8)
-  version: 1.5.6
+  version: 2.0.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,8 @@ extension:
 
 repo:
   github: mgbilby/duckdb-marc21
-  ref: 9fcea0628f6c8853a5f8e96d4e789f08ba801f7f
+  ref: d4a821d289fb0ee33c2bcf2fdbed8874a64169fa
+  variegata: 9fcea0628f6c8853a5f8e96d4e789f08ba801f7f
 
 docs:
   hello_world: |
@@ -64,8 +65,10 @@ docs:
     and DuckDB FileSystem protocols (httpfs URLs — including SRU and OAI-PMH
     responses, whose envelopes are handled).  `read_z3950` retrieves records
     live from Z39.50 servers (Library of Congress, OCLC, most ILSes) with a
-    built-in dependency-free client.  Scans parallelise across and within
-    files.
+    built-in dependency-free client.  On DuckDB v2.0 the readers are
+    multi-file readers (lists of paths, `filename` and `file_index` columns,
+    `union_by_name`, `hive_partitioning`, parallel across files).  Scans
+    parallelise across and within files.
 
     ### Write
     `COPY ... TO (FORMAT marc | marcxml | mrk | marcjson)`.  ISO 2709 output
@@ -84,11 +87,26 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 661
-extension_download_count_pretty: 661
+extension_download_count: 890
+extension_download_count_pretty: 890
 image: '/images/community_extensions/social_preview/preview_community_extension_marc21.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -106,7 +124,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -229,6 +246,14 @@ LOAD {{ page.extension.name }};
 | marc_mods_xml                    | macro         | Renders a record as a minimal well-formed MODS XML string (titleInfo, name, typeOfResource, originInfo, language, physicalDescription, subject, ISBN/ISSN identifiers), emitting only elements with source data           | NULL    | [SELECT marc_mods_xml(leader, fields) FROM read_marc('records.mrc')]                                                                                                                       |
 | marc_move_field                  | scalar        | Renumbers every field matching the tag pattern to a literal new tag in place, keeping order and indicators; moving across the control/data field boundary is an error                                                     | NULL    | [SELECT marc_move_field(fields, '440', '490') FROM read_marc('records.mrc')]                                                                                                               |
 | marc_naco                        | scalar        | Returns the NACO authority comparison form of a heading (uppercased, diacritics folded, punctuation normalized) for matching; NULL when nothing remains                                                                   | NULL    | [marc_naco('Twain, Mark, 1835-1910.')]                                                                                                                                                     |
+| marc_nearest_dupes               | table_macro   | Lists, for every record of a file, its five most title-similar other records via an exact NEAREST join, one directed row per pair; min_similarity defaults to 0.0, equal match keys always kept                           | NULL    | [SELECT * FROM marc_nearest_dupes('records.mrc', min_similarity := 0.85)]                                                                                                                  |
+| marc_nearest_headings            | table_macro   | Matches each distinct heading of a MARC file to its three most similar candidate labels (a VARCHAR list) by NACO-normalized Jaro-Winkler, one row per pair; min_similarity defaults to 0.0                                | NULL    | [SELECT * FROM marc_nearest_headings('records.mrc', ['Twain, Mark, 1835-1910', 'Rivers'])]                                                                                                 |
+| marc_nearest_key                 | macro         | Returns the title ranking key for nearest-neighbour matching: 245 $a and $b joined and NACO-normalized, without truncation; NULL when the record has no 245 $a                                                            | NULL    | [SELECT marc_nearest_key(fields) FROM read_marc('records.mrc')]                                                                                                                            |
+| marc_nearest_matches             | table_macro   | Lists, for every record of query_path, the five most title-similar records of target_path, one row per pair with similarity and same_matchkey; min_similarity defaults to 0.0                                             | NULL    | [SELECT * FROM marc_nearest_matches('records.mrc', 'records.mrc', min_similarity := 0.9)]                                                                                                  |
+| marc_nearest_matches_k           | table_macro   | Lists, for every record of query_path, the k most title-similar records of target_path (marc_nearest_matches columns, no threshold), with k any positive integer                                                          | NULL    | [SELECT * FROM marc_nearest_matches_k('records.mrc', 'records.mrc', 10)]                                                                                                                   |
+| marc_nearest_matches_sql         | macro         | Builds, without running it, the SQL text of a marc_nearest_matches-style top-k join of query_path against target_path with k neighbours; k must be a positive integer                                                     | NULL    | [marc_nearest_matches_sql('records.mrc', 'records.mrc', 10)]                                                                                                                               |
+| marc_nearest_recs                | table_macro   | Reads a MARC file or glob as one row per record with file, record_no, title (245 $a), tkey (marc_nearest_key) and matchkey, the input for NEAREST joins                                                                   | NULL    | [SELECT * FROM marc_nearest_recs('records.mrc')]                                                                                                                                           |
+| marc_nearest_sql_quote           | macro         | Helper for marc_nearest_matches_sql: wraps a string in single quotes with embedded quotes doubled, as a SQL string literal                                                                                                | NULL    | [marc_nearest_sql_quote('records.mrc')]                                                                                                                                                    |
 | marc_new_record                  | scalar        | Returns a skeleton STRUCT(leader, fields) for 'book', 'serial', 'video', 'map', 'music', 'electronic' or 'authority', with leader, 008 and an empty 245 (100 for authority); unknown materials error                      | NULL    | [marc_new_record('book')]                                                                                                                                                                  |
 | marc_ngram_fingerprint           | scalar        | Returns the OpenRefine-style n-gram clustering key of a value: sorted unique n-grams of the folded, space-less string; n must be at least 1                                                                               | NULL    | [marc_ngram_fingerprint('banana', 2)]                                                                                                                                                      |
 | marc_oai_extract_token           | macro         | Extracts the trimmed resumptionToken text from one OAI-PMH response document xml; NULL when the element is absent or empty, which marks the end of the list                                                               | NULL    | [marc_oai_extract_token('<OAI-PMH><resumptionToken>abc123</resumptionToken></OAI-PMH>')]                                                                                                   |
@@ -335,6 +360,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

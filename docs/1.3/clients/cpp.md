@@ -3,7 +3,7 @@ layout: docu
 title: C++ API
 ---
 
-> The latest version of the DuckDB C++ API is {{ site.current_duckdb_version }}.
+> The latest version of the DuckDB C++ API is {{ site.maintained_duckdb_version }}.
 
 > Warning DuckDB's C++ API is primarily intended for internal use.
 > It is not guaranteed to be stable and can change without notice.
@@ -12,7 +12,7 @@ title: C++ API
 
 ## Installation
 
-The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link install/index.html %}?environment=cplusplus) for details.
+The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link docs/2.0/installation.html %}?environment=cplusplus) for details.
 
 ## Basic API Usage
 

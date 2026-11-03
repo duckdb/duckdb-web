@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckfn_kuva
   description: Statistical plotting in SQL - a thin wrapper around the Rust library kuva, with the statistical semantics of seaborn and ggplot2 but no Python or R environment, on every platform DuckDB runs (console, JVM, Python, Node, browser)
-  version: 0.2.0
+  version: 0.3.0
   language: Rust
   build: cargo
   license: MIT
@@ -18,8 +18,8 @@ extension:
 
 repo:
   github: shijianjs/duckfn-kuva
-  ref: 229292db2882927cbaaa209687d44f6117ba1065
-  ref_next: 229292db2882927cbaaa209687d44f6117ba1065
+  ref: 5fd677c70d5572f61eab5d44ce9a157708d15486
+  ref_next: 5fd677c70d5572f61eab5d44ce9a157708d15486
 
 docs:
   hello_world: |
@@ -41,7 +41,7 @@ docs:
     -- <svg xmlns="http://www.w3.org/2000/svg" ...> ... </svg>
   extended_description: |
     Renders statistical charts from SQL. The extension wraps the Rust plotting library kuva (SVG backend
-    only) and exposes it through three scalar functions, so charts work anywhere DuckDB runs - the CLI, a
+    only) and exposes it through five scalar functions, so charts work anywhere DuckDB runs - the CLI, a
     Python or R session, the JVM, or the browser build (DuckDB-Wasm) - from one and the same extension
     binary. There is no matplotlib or ggplot2 in the loop, and no plotting environment to install.
 
@@ -49,9 +49,11 @@ docs:
     | --- | --- | --- |
     | `kuva_render(spec)` | scalar | `VARCHAR` (a JSON chart spec) -> `VARCHAR` (an SVG document) |
     | `kuva_render_terminal(spec)` | scalar | `VARCHAR` -> `VARCHAR` (terminal text: braille dots and ANSI colour) |
+    | `kuva_render_typst(spec)` | scalar | `VARCHAR` -> `VARCHAR` (Typst source: a `.typ` CETZ document for `typst compile`) |
     | `kuva_render_file(spec)` | scalar | `VARCHAR` -> `VARCHAR` (the path of the SVG file it wrote; native builds only) |
+    | `kuva_version()` | scalar | `-> VARCHAR` (the kuva version the loaded build was compiled against) |
 
-    All three take the same JSON spec, and all three also take an optional second argument: a JSON
+    All four render functions take the same JSON spec, and all four also take an optional second argument: a JSON
     object mapping dataset names to arrays of rows, so the chart config and the data can be built by
     different things - the config by a host SDK, the data by SQL. A series names a dataset with
     `dataset` and maps its columns with `encode` (roles like `x`, `y`, `value`, `name`, `group`); the
@@ -60,10 +62,13 @@ docs:
     Their own options stay in the JSON: `kuva_render_terminal` reads a top-level `terminal` object
     (`cols` / `rows` / `print`) and `kuva_render_file` reads a top-level `file` object (`dir` / `name` /
     `open`), which is what lets one statement write a chart to disk and optionally open it in a browser.
+    `kuva_render_typst` has no options object: it returns Typst source (a CETZ vector drawing) that you
+    compile yourself with `typst compile`.
 
     The JSON spec uses snake_case keys and describes the drawing rather than one particular chart. The
     top-level keys are `title`, `x_axis`, `y_axis`, `grid`, `legend`, `theme`, `palette`, `font`,
-    `annotations`, `width`, `height` and `series`. Every `series` entry carries a `type` from the table
+    `annotations`, `width`, `height` and `series` (or `figure` / `composite` instead of `series`). Every
+    `series` entry carries a `type` from the table
     below and declares only the fields that type needs, so a scatter takes `data` as `{"x":…, "y":…}`
     objects with optional `x_err` / `y_err`, a bar takes `categories` plus `values` (or several named
     `series` for grouped and stacked bars), a histogram takes `values` with optional `bins` and a `kde`
@@ -83,9 +88,12 @@ docs:
     JSON rather than a STRUCT is deliberate: the series of one figure are heterogeneous, and a STRUCT
     list cannot hold a mix of them.
 
-    Composition works two ways. Several series in one `series` array are overlaid on a shared set of
+    Composition works three ways. Several series in one `series` array are overlaid on a shared set of
     axes - a line with its scatter points on top, for instance. A top-level `figure` with `rows`,
     `cols` and `panels` switches to a multi-panel grid with shared axes and an optional shared legend.
+    A top-level `composite` object draws a genome-browser coverage figure or a population
+    allele-frequency figure (`type: coverage` or `brick_pop`); it is mutually exclusive with `series`
+    and `figure`, carries its own canvas size and does not read a dataset.
 
     `theme` selects light, dark, minimal or solarized (or overrides individual colours), `palette`
     selects one of the named palettes or an explicit colour list, and `annotations` adds reference
@@ -103,11 +111,26 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 445
-extension_download_count_pretty: 445
+extension_download_count: 778
+extension_download_count_pretty: 778
 image: '/images/community_extensions/social_preview/preview_community_extension_duckfn_kuva.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -125,16 +148,17 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type |                                                                                         description                                                                                          |                                                                                                                                                        comment                                                                                                                                                        |                                                                                                                                                             examples                                                                                                                                                             |
-|----------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| kuva_render          | scalar        | Renders a complete chart described by a JSON string into an SVG document                                                                                                                     | The full-featured, JSON-based entry point: one JSON object describes canvas, axes, legend, annotations and a heterogeneous list of series; an optional second argument is a JSON object mapping dataset names to arrays of rows, which a series names with `dataset` and maps with `encode`                           | [SELECT kuva_render('{"series":[{"type":"scatter","dataset":"sales","encode":{"x":"revenue","y":"profit"{% raw %}}}{% endraw %}]}', '{"sales":[{"revenue":10,"profit":3},{"revenue":12,"profit":5}]}'); SELECT kuva_render('{"series":[{"type":"scatter","data":[{"x":1,"y":2},{"x":3,"y":4},{"x":5,"y":3}]}]}')]                |
-| kuva_render_file     | scalar        | Renders a chart described by a JSON string to an SVG file and returns the file path; the JSON's own `file` object sets the directory, the file name and whether to open it in a browser      | Native builds only: writes the SVG to disk (default: a file in the system temp directory, created if the directory is missing) and optionally opens it in the system default browser; `file: {dir, name, open}` rides along in the JSON, and an optional second argument supplies the data as a JSON dataset registry | [SELECT kuva_render_file('{"series":[{"type":"scatter","dataset":"d","encode":{"x":"a","y":"b"{% raw %}}}{% endraw %}]}', '{"d":[{"a":1,"b":2},{"a":3,"b":4}]}'); SELECT kuva_render_file('{"file":{"dir":"/tmp/charts","name":"scatter.svg","open":true},"series":[{"type":"scatter","data":[{"x":1,"y":2},{"x":3,"y":4}]}]}')] |
-| kuva_render_terminal | scalar        | Renders a chart described by a JSON string as terminal text (braille dots and ANSI colour); the JSON's own `terminal` object sets the character grid and whether to print straight to stdout | Same JSON as kuva_render, different backend: `terminal: {cols, rows, print}` — a braille cell is 2x4 dots, defaults are 100x30, and `print: true` writes to stdout and returns NULL; an optional second argument supplies the data as a JSON dataset registry                                                         | [SELECT kuva_render_terminal('{"series":[{"type":"bar","dataset":"t","encode":{"name":"k","value":"v"{% raw %}}}{% endraw %}]}', '{"t":[{"k":"a","v":4},{"k":"b","v":7}]}'); SELECT kuva_render_terminal('{"terminal":{"cols":100,"rows":30},"series":[{"type":"line","data":[{"x":1,"y":2},{"x":2,"y":3}]}]}')]                 |
+|    function_name     | function_type |                                                                                         description                                                                                          |                                                                                                                                                            comment                                                                                                                                                            |                                                                                                                                                             examples                                                                                                                                                             |
+|----------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| kuva_render          | scalar        | Renders a complete chart described by a JSON string into an SVG document                                                                                                                     | The full-featured, JSON-based entry point: one JSON object describes canvas, axes, legend, annotations and a heterogeneous list of series; an optional second argument is a JSON object mapping dataset names to arrays of rows, which a series names with `dataset` and maps with `encode`                                   | [SELECT kuva_render('{"series":[{"type":"scatter","dataset":"sales","encode":{"x":"revenue","y":"profit"{% raw %}}}{% endraw %}]}', '{"sales":[{"revenue":10,"profit":3},{"revenue":12,"profit":5}]}'); SELECT kuva_render('{"series":[{"type":"scatter","data":[{"x":1,"y":2},{"x":3,"y":4},{"x":5,"y":3}]}]}')]                |
+| kuva_render_file     | scalar        | Renders a chart described by a JSON string to an SVG file and returns the file path; the JSON's own `file` object sets the directory, the file name and whether to open it in a browser      | Native builds only: writes the SVG to disk (default: a file in the system temp directory, created if the directory is missing) and optionally opens it in the system default browser; `file: {dir, name, open}` rides along in the JSON, and an optional second argument supplies the data as a JSON dataset registry         | [SELECT kuva_render_file('{"series":[{"type":"scatter","dataset":"d","encode":{"x":"a","y":"b"{% raw %}}}{% endraw %}]}', '{"d":[{"a":1,"b":2},{"a":3,"b":4}]}'); SELECT kuva_render_file('{"file":{"dir":"/tmp/charts","name":"scatter.svg","open":true},"series":[{"type":"scatter","data":[{"x":1,"y":2},{"x":3,"y":4}]}]}')] |
+| kuva_render_terminal | scalar        | Renders a chart described by a JSON string as terminal text (braille dots and ANSI colour); the JSON's own `terminal` object sets the character grid and whether to print straight to stdout | Same JSON as kuva_render, different backend: `terminal: {cols, rows, print}` — a braille cell is 2x4 dots, defaults are 100x30, and `print: true` writes to stdout and returns NULL; an optional second argument supplies the data as a JSON dataset registry                                                                 | [SELECT kuva_render_terminal('{"series":[{"type":"bar","dataset":"t","encode":{"name":"k","value":"v"{% raw %}}}{% endraw %}]}', '{"t":[{"k":"a","v":4},{"k":"b","v":7}]}'); SELECT kuva_render_terminal('{"terminal":{"cols":100,"rows":30},"series":[{"type":"line","data":[{"x":1,"y":2},{"x":2,"y":3}]}]}')]                 |
+| kuva_render_typst    | scalar        | Renders a chart described by a JSON string as a Typst source document (a CETZ vector drawing) for `typst compile`                                                                            | Same JSON as kuva_render, different backend: the result is a `.typ` document (page setup + an `@preview/cetz` import + CETZ primitives). kuva does not embed a Typst compiler, so run `typst compile` on the returned source to get PDF / SVG / PNG; an optional second argument supplies the data as a JSON dataset registry | [SELECT kuva_render_typst('{"series":[{"type":"bar","dataset":"t","encode":{"name":"k","value":"v"{% raw %}}}{% endraw %}]}', '{"t":[{"k":"a","v":4},{"k":"b","v":7}]}'); SELECT kuva_render_typst('{"series":[{"type":"line","data":[{"x":1,"y":2},{"x":2,"y":3}]}]}')]                                                         |
+| kuva_version         | scalar        | Returns the kuva version this extension was compiled against                                                                                                                                 | Useful when triaging an old figure: the SVG also records the version in a comment, but this answers it for the extension that is loaded right now                                                                                                                                                                             | [SELECT kuva_version()]                                                                                                                                                                                                                                                                                                          |
 
 ### Overloaded Functions
 
@@ -152,6 +176,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 
