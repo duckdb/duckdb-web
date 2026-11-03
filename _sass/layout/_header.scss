@@ -114,11 +114,15 @@ header .headerline {
 						transition: all 0.1s ease;
 						transform: scale(0.9);
 						li a {
-							display: block;
+							display: flex;
+							align-items: center;
 							text-decoration: none;
 							color: inherit;
 							@include menu-item();
-							@include menu-dropdown-item-spacing;
+							min-height: var(--header-control-size);
+							padding: 0 16px;
+							font-size: var(--type-side-menu, 13px);
+							line-height: 1;
 							border-radius: var(--page-radius-pill);
 							white-space: nowrap;
 							transition: all 0.2s;
