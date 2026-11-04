@@ -7,16 +7,16 @@ blog:
       label: Using DuckDB
       heading: Using DuckDB
     - value: benchmark
-      label: Benchmarks
+      label: Benchmark
       heading: Benchmarks
     - value: deep-dive
       label: Deep dive
       heading: Deep Dives
     - value: extensions
-      label: Extensions
+      label: Extension
       heading: Extensions
     - value: release
-      label: Releases
+      label: Release
       heading: Releases
 
 library:
