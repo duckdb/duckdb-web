@@ -327,8 +327,8 @@ docs:
     > This extension is experimental and actively being developed. See the repository for the latest updates and examples.
 
 
-extension_star_count: 17
-extension_star_count_pretty: 17
+extension_star_count: 18
+extension_star_count_pretty: 18
 extension_download_count: 1156
 extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_fakeit.png'
