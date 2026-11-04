@@ -13,7 +13,7 @@ toc: false
   <h1>Development Roadmap</h1>
 </div>
 
-_(Last updated: Oct 2026)_
+_(Last updated: Nov 2026)_
 
 This list was compiled by the DuckDB maintainers and is based on the long-term strategic vision for the DuckDB project and general interactions with users in the open-source community (GitHub Issues and Discussions, social media, etc.).
 For details on how to request features in DuckDB, please refer to the FAQ item [“I would like feature X to be implemented in DuckDB”]({% link faq.md %}#i-would-like-feature-x-to-be-implemented-in-duckdb-how-do-i-proceed).
@@ -31,6 +31,7 @@ Many of the planned features are in flight for [DuckDB 2.1](% link release_calen
 * [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104) (see Denis Hirn's [DuckPL talk]({% link _library/2026-01-30-duckpl-a-procedural-language-in-duckdb.md %}))
 * [Better error messages](https://github.com/duckdb/duckdb/pull/27387) using the new PEG parser
 * [Memory allocator improvements](https://github.com/duckdb/duckdb/pull/27520), including time-based decay, bounded background reclamation and fully-tracked allocations
+* [Many-core and NUMA-aware optimizations](https://github.com/duckdb/duckdb/pull/27782)
 
 ### Major Features
 
