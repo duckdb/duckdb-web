@@ -48,8 +48,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 63
-extension_download_count_pretty: 63
+extension_download_count: 137
+extension_download_count_pretty: 137
 image: '/images/community_extensions/social_preview/preview_community_extension_duckomo.png'
 layout: community_extension_doc
 ---

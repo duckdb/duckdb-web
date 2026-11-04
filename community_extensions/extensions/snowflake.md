@@ -82,7 +82,7 @@ docs:
 
 extension_star_count: 68
 extension_star_count_pretty: 68
-extension_download_count: 8160
+extension_download_count: 8192
 extension_download_count_pretty: 8.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
 layout: community_extension_doc

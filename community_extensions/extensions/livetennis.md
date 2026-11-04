@@ -56,8 +56,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 888
-extension_download_count_pretty: 888
+extension_download_count: 862
+extension_download_count_pretty: 862
 image: '/images/community_extensions/social_preview/preview_community_extension_livetennis.png'
 layout: community_extension_doc
 ---

@@ -78,8 +78,8 @@ docs:
 
 extension_star_count: 93
 extension_star_count_pretty: 93
-extension_download_count: 793
-extension_download_count_pretty: 793
+extension_download_count: 783
+extension_download_count_pretty: 783
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_object_storage.png'
 layout: community_extension_doc
 ---

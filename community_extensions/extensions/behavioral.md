@@ -70,7 +70,7 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 7705
+extension_download_count: 7681
 extension_download_count_pretty: 7.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_behavioral.png'
 layout: community_extension_doc
