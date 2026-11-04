@@ -28,9 +28,9 @@ For a long time, users had been asking for one thing in particular: the ability 
 
 ## Choosing DuckDB over Building Its Own
 
-JetBrains explored several approaches. It considered [Apache Calcite](https://calcite.apache.org/), handling the queries itself using PSI (the internal code representation JetBrains uses across its IDEs), and DuckDB.
+JetBrains explored several approaches. It considered [Apache Calcite](https://calcite.apache.org/), handling the queries itself using [PSI](https://plugins.jetbrains.com/docs/intellij/psi.html) (Program Structure Interface, the internal code representation JetBrains uses across its IDEs), and DuckDB.
 
-DuckDB won on ease of integration. **“DuckDB turned out to be the simplest option to integrate,”** says Ilia Epelbaum, who works on the DataGrip team. The deciding feature was the ability to register a custom table function: it gave JetBrains a straightforward way to connect DuckDB to the query-execution functionality DataGrip already had. DuckDB was also preferred over lighter alternatives such as H2 because it brought more capabilities, including query optimizations like projection pushdown.
+DuckDB won on ease of integration. **“DuckDB turned out to be the simplest option to integrate,”** says Ilia Epelbaum, who works on the DataGrip team. The deciding feature was the ability to register a custom table function: it gave JetBrains a straightforward way to connect DuckDB to the query-execution functionality DataGrip already had. DuckDB was also preferred over lighter alternatives such as [H2](https://h2database.com/html/main.html) because it brought more capabilities, including query optimizations like projection pushdown.
 
 Maxim Sobolevskiy, Head of Database Ecosystem at JetBrains, puts the result in concrete terms. **“With DuckDB and its support for custom table functions, cross-database queries have finally become practical in DataGrip,”** he says. **“Users can join data from PostgreSQL, MySQL, MongoDB, or any other supported database in one query, without setting up extra infrastructure.”** The embedded alternatives the team evaluated could not do this, because **“extending them required either native code or a complicated implementation.”**
 
