@@ -49,8 +49,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 750
-extension_download_count_pretty: 750
+extension_download_count: 722
+extension_download_count_pretty: 722
 image: '/images/community_extensions/social_preview/preview_community_extension_mentat.png'
 layout: community_extension_doc
 ---

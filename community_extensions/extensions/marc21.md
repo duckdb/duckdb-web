@@ -87,8 +87,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 890
-extension_download_count_pretty: 890
+extension_download_count: 881
+extension_download_count_pretty: 881
 image: '/images/community_extensions/social_preview/preview_community_extension_marc21.png'
 layout: community_extension_doc
 ---

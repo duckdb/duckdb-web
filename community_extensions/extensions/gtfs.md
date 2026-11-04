@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 71
-extension_download_count_pretty: 71
+extension_download_count: 138
+extension_download_count_pretty: 138
 image: '/images/community_extensions/social_preview/preview_community_extension_gtfs.png'
 layout: community_extension_doc
 ---
