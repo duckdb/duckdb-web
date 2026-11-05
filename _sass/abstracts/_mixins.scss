@@ -196,6 +196,26 @@
 	color: var(--main-text-primary-color, #0D0D0D);
 }
 
+@mixin foldout-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	border: 1px solid transparent;
+	border-radius: 50%;
+	background-color: var(--doc-codebox-button-background-color, rgba(242, 242, 242, 0.6));
+	transition: border-color .2s;
+
+	svg.icon{
+		width: 18px;
+		height: 18px;
+		stroke-width: 2;
+		color: var(--main-text-primary-color, #0D0D0D);
+		transition: transform .3s;
+	}
+}
+
 @mixin navigation-card {
 	@include card-surface;
 	text-decoration: none;

@@ -112,13 +112,12 @@ body.documentation {
             }
         }
 
-        h4+.highlighter-rouge,
-        h5+.highlighter-rouge {
-            margin-top: 0.35em;
+        :is(h1, h2, h3, h4, h5, h6) + .highlighter-rouge {
+            margin-top: 1rem;
         }
 
         p+.highlighter-rouge {
-            margin-top: 0.6em;
+            margin-top: 1rem;
         }
 
         #main_content_wrap {

@@ -144,10 +144,10 @@
       $foldout.find('.selection-head button').attr('aria-expanded', String(open));
       if (open) {
         $foldout.addClass('open');
-        if (animate) $content.stop(true, true).slideDown(150); else $content.show();
+        if (animate) $content.stop(true, true).hide().slideDown(150); else $content.show();
       } else {
         $foldout.removeClass('open');
-        if (animate) $content.stop(true, true).slideUp(150); else $content.hide();
+        if (animate) $content.stop(true, true).css('display', 'block').slideUp(150); else $content.hide();
       }
     }
 

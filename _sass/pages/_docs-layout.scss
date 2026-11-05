@@ -7,7 +7,6 @@ $docs-sidebar-width: 280px;
 // Base styles
 body {
     background: var(--main-body-background-color, #FCFCFC);
-    font-size: 100%;
 }
 
 // Documentation layout
@@ -407,17 +406,17 @@ body.documentation {
             .sidenav-search {
                 flex-shrink: 0;
                 justify-content: space-between;
-                height: auto;
-                padding: 12px;
-                border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
+                height: 36px;
+                padding: 0 12px;
+                border: 1px solid var(--border-color, rgba(217, 217, 217, 0.6));
                 border-radius: var(--page-radius-s, 6px);
                 background: none;
-                font-size: var(--type-side-menu, 13px);
+                font-size: var(--type-tiny, 12px);
                 color: var(--menu-topmenu-searchbar-shortcut-text-color, #999);
                 transition: border-color .2s;
 
                 &:hover {
-                    border-color: var(--interactive-folderbox-border-color-hover, #CCCCCC);
+                    border-color: var(--border-color-hover, #CCCCCC);
                 }
 
                 .sidenav-search-hint {
