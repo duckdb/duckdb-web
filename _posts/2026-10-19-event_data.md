@@ -5,13 +5,13 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/window-functions-2.svg"
 image: "/images/blog/thumbs/window-functions-2.png"
-excerpt: "Splitting clicks into sessions, finding the longest run of consecutive days, and checking whether a cart was followed by a purchase are all questions about ordered rows. DuckDB now answers them with `MATCH_RECOGNIZE`, the SQL standard's row pattern matching clause. This post shows how it works, with window-function equivalents for comparison."
+excerpt: "Splitting clicks into sessions, finding the longest run of consecutive days, and checking whether a cart was followed by a purchase are all questions about ordered rows. DuckDB now answers them with `MATCH_RECOGNIZE`, the SQL standard’s row pattern matching clause. This post shows how it works, with window-function equivalents for comparison."
 tag: using-duckdb
 ---
 
 A lot of analytical questions are about the order of rows, not just their values.
 
-* When did a user's session end?
+* When did a user’s session end?
 * What is the longest run of days on which someone logged in?
 * Did a visitor buy something within ten minutes of adding it to the cart?
 
@@ -118,7 +118,7 @@ ORDER BY user_id, ts;
 └─────────┴─────────────────────┴──────────┴─────────┴─────────┘
 ```
 
-`match_number()` numbers the matches within each partition, and `classifier()` shows that user 1's second `cart` was consumed as a `nonbuy` row inside the single match that runs from the first cart to the purchase. This per-row detail is exactly what the pattern-as-text workarounds cannot give you.
+`match_number()` numbers the matches within each partition, and `classifier()` shows that user 1’s second `cart` was consumed as a `nonbuy` row inside the single match that runs from the first cart to the purchase. This per-row detail is exactly what the pattern-as-text workarounds cannot give you.
 
 ## Immediate or Eventual
 
@@ -149,7 +149,7 @@ Only user 1 has a cart that is immediately followed by a purchase. User 2 viewed
 
 ## Adding a Time Limit
 
-A pattern variable's condition can look at other rows in the match through the navigation functions `prev`, `first`, and `last`. To keep only purchases that happen within ten minutes of the cart, add that constraint to the `buy` definition:
+A pattern variable’s condition can look at other rows in the match through the navigation functions `prev`, `first`, and `last`. To keep only purchases that happen within ten minutes of the cart, add that constraint to the `buy` definition:
 
 ```sql
 FROM clicks MATCH_RECOGNIZE (
@@ -177,7 +177,7 @@ ORDER BY user_id;
 └─────────┴─────────────────────┴─────────────────────┘
 ```
 
-User 1's first cart no longer matches: its only later purchase is 46 minutes away, outside the window. The engine then finds the second cart, which is followed by a purchase two minutes later.
+User 1’s first cart no longer matches: its only later purchase is 46 minutes away, outside the window. The engine then finds the second cart, which is followed by a purchase two minutes later.
 
 ## Sessions: Splitting on Gaps
 
@@ -212,7 +212,7 @@ ORDER BY user_id, started;
 └─────────┴────────────┴─────────────────────┴──────────┴────────┴──────────────────────────┘
 ```
 
-The `strt` variable has no `DEFINE`, so it matches any row and anchors the start of each session. Every following row is tested by `within`, and the 46-minute gap in user 1's stream breaks the match, which starts a second session on the next scan. Aggregates such as `count` and `string_agg` run over the rows of each match, so the summary comes straight out of `MEASURES`.
+The `strt` variable has no `DEFINE`, so it matches any row and anchors the start of each session. Every following row is tested by `within`, and the 46-minute gap in user 1’s stream breaks the match, which starts a second session on the next scan. Aggregates such as `count` and `string_agg` run over the rows of each match, so the summary comes straight out of `MEASURES`.
 
 ## Streaks: Consecutive Days
 
@@ -377,4 +377,4 @@ Both produce the same results as the `MATCH_RECOGNIZE` queries. They work everyw
 * [Windowing in DuckDB]({% post_url 2021-10-13-windowing %}) (DuckDB blog)
 * [Catching up with Windowing]({% post_url 2025-02-10-window-catchup %}) (DuckDB blog)
 * [Flying Through Windows]({% post_url 2025-02-14-window-flying %}) (DuckDB blog)
-* [DuckDB's AsOf Joins: Fuzzy Temporal Lookups]({% post_url 2023-09-15-asof-joins-fuzzy-temporal-lookups %}) (DuckDB blog)
+* [DuckDB’s AsOf Joins: Fuzzy Temporal Lookups]({% post_url 2023-09-15-asof-joins-fuzzy-temporal-lookups %}) (DuckDB blog)
