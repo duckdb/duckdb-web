@@ -80,10 +80,10 @@ docs:
     Written in C11 on the stable C API: one binary loads in DuckDB 1.5.6 and later.
     Documentation: https://github.com/hugr-lab/duck-changepoint
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 121
-extension_download_count_pretty: 121
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 199
+extension_download_count_pretty: 199
 image: '/images/community_extensions/social_preview/preview_community_extension_cpt.png'
 layout: community_extension_doc
 ---

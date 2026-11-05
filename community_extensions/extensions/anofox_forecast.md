@@ -22,8 +22,8 @@ repo:
 
 extension_star_count: 45
 extension_star_count_pretty: 45
-extension_download_count: 48148
-extension_download_count_pretty: 48.1k
+extension_download_count: 111673
+extension_download_count_pretty: 111.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---

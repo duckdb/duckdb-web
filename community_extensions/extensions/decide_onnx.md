@@ -77,10 +77,10 @@ docs:
     The extension is MIT licensed. The vela3-fast-multilingual weights are Apache-2.0. The model's probabilities are not
     calibrated; do not use it for high-risk decisions about people without independent validation.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 110
-extension_download_count_pretty: 110
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 184
+extension_download_count_pretty: 184
 image: '/images/community_extensions/social_preview/preview_community_extension_decide_onnx.png'
 layout: community_extension_doc
 ---

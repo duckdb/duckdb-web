@@ -30,8 +30,8 @@ docs:
     [documentation](https://github.com/chrispahm/duckdb-gdx).
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 646
-extension_download_count_pretty: 646
+extension_download_count: 649
+extension_download_count_pretty: 649
 image: '/images/community_extensions/social_preview/preview_community_extension_gdx.png'
 layout: community_extension_doc
 ---

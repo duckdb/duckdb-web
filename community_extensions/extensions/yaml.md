@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: yaml
   description: Read YAML files into DuckDB with native YAML type support, comprehensive extraction functions, and seamless JSON interoperability
-  version: 1.10.1
+  version: 1.12.1
   language: C++
   build: cmake
   license: MIT
@@ -21,13 +21,13 @@ extension:
 repo:
   github: teaguesterling/duckdb_yaml
   andium: 0bdc812c064fa7b85617f75680d9c1177263f741
-  ref: 4d9aaffb613d1e381087866414d25c329d7501a3
+  ref: 0c4bb9048be18b08db271b87e82b868f0a25f196
   # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
   # present and to `ref` otherwise, and unlike ref_next it has no skip branch -- so
   # once `ref` is 2.0-only a v1.5.6 build would fail rather than be skipped. Equal to
   # `ref` while both lines build; advance only to a commit v1.5.6 can still build.
   variegata: 4d9aaffb613d1e381087866414d25c329d7501a3
-  ref_next: 4d9aaffb613d1e381087866414d25c329d7501a3
+  ref_next: 0c4bb9048be18b08db271b87e82b868f0a25f196
 
 docs:
   hello_world: |
@@ -70,7 +70,7 @@ docs:
     **Key Features:**
     
     - **Native YAML Type**: Full YAML type support with automatic casting between YAML, JSON, and VARCHAR
-    - **File Reading**: Read YAML files with `read_yaml()` and `read_yaml_objects()` functions supporting multi-document files, top-level sequences, and robust error handling
+    - **File Reading**: Read YAML files with `read_yaml()` and `read_yaml_objects()` functions supporting multi-document files, top-level sequences, gzip and zstd compression, and robust error handling
     - **Direct File Querying**: Query YAML files directly using `FROM 'file.yaml'` syntax
     - **Extraction Functions**: Query YAML data with `yaml_extract()`, `yaml_type()`, `yaml_exists()`, `yaml_value()`, `->>` operator, and path-based extraction
     - **Document Operations**: Check containment with `yaml_contains()`, merge documents with `yaml_merge_patch()`, and analyze structure with `yaml_structure()`
@@ -94,10 +94,10 @@ docs:
     
     **Note**: This extension was written primarily using Claude and Claude Code as an exercise in AI-driven development.
 
-extension_star_count: 23
-extension_star_count_pretty: 23
-extension_download_count: 27640
-extension_download_count_pretty: 27.6k
+extension_star_count: 24
+extension_star_count_pretty: 24
+extension_download_count: 27721
+extension_download_count_pretty: 27.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_yaml.png'
 layout: community_extension_doc
 ---

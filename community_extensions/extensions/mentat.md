@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mentat
   description: Datomic-compatible Datalog query engine as a DuckDB extension
-  version: 1.19.0
+  version: 1.19.1
   language: Rust
   build: cargo
   license: Apache-2.0
@@ -18,8 +18,8 @@ extension:
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;linux_amd64_musl"
 repo:
   github: gburd/mentat
-  ref: 92f5e4c413705b8bca05a049b1c41f1ea1442a0a
-  variegata: 92f5e4c413705b8bca05a049b1c41f1ea1442a0a
+  ref: c9ebe020f8ff5feb71c7792fc56669101b367868
+  variegata: c9ebe020f8ff5feb71c7792fc56669101b367868
 docs:
   hello_world: |
     LOAD mentat;
@@ -49,8 +49,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 722
-extension_download_count_pretty: 722
+extension_download_count: 716
+extension_download_count_pretty: 716
 image: '/images/community_extensions/social_preview/preview_community_extension_mentat.png'
 layout: community_extension_doc
 ---

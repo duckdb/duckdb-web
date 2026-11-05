@@ -50,8 +50,8 @@ docs:
 
 extension_star_count: 137
 extension_star_count_pretty: 137
-extension_download_count: 965
-extension_download_count_pretty: 965
+extension_download_count: 940
+extension_download_count_pretty: 940
 image: '/images/community_extensions/social_preview/preview_community_extension_infera.png'
 layout: community_extension_doc
 ---
