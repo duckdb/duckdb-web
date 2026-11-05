@@ -11,7 +11,7 @@ excerpt: "JetBrains users had long asked to join data across different database 
 tag: case-study
 ---
 
-When [JetBrains](https://www.jetbrains.com/) set out to let developers join data across different database connections in a single query, it chose not to build its own cross-database query engine. Instead, [DataGrip](https://www.jetbrains.com/datagrip/), its database IDE, embeds DuckDB to execute those queries, and exposes DuckDB’s SQL dialect directly to the developers writing them.
+When [JetBrains](https://www.jetbrains.com/) set out to let developers [join data across different database connections in a single query](https://www.jetbrains.com/datagrip/whatsnew/#connectivity), it chose not to build its own cross-database query engine. Instead, [DataGrip](https://www.jetbrains.com/datagrip/), its database IDE, embeds DuckDB to execute those queries, and exposes DuckDB’s SQL dialect directly to the developers writing them.
 
 > Quote
 >
