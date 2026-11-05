@@ -317,7 +317,7 @@ sharepoint,DataZooDE/duckdb-sharepoint,9704b2b63de18beb1666872409d298e0edcc0229,
 sheetreader,polydbms/sheetreader-duckdb,c201b73ad98bd1d3c64a727d0a24168975308ab8,"Fast, parallel Excel (XLSX) loading with low memory overhead."
 shellfs,query-farm/shellfs,aa33b9b8db9f838e535df467228593a2a95418da,"Allow shell commands to be used for input and output"
 sitemap,midwork-finds-jobs/duckdb-sitemap,ab4c5718d2eda09b6123a7e7915ebef2266b3e3b,"Parse XML sitemaps from websites with automatic discovery via robots.txt"
-sitting_duck,teaguesterling/sitting_duck,cee95ef6eeb33aa6c25527769d3ebf97898aa994,"Parse and analyze source code ASTs from 28 programming languages with tree-sitter grammars, pattern matching, and structural search"
+sitting_duck,teaguesterling/sitting_duck,30704be97ef09c416ea97bfd2071e2894fabec2a,"Parse and analyze source code ASTs from 28 programming languages with tree-sitter grammars, pattern matching, and structural search"
 snowflake,iqea-ai/duckdb-snowflake,2f9048cc2aa1e264cb18c7b4a773a6df2dc10d7a,"Snowflake data source extension - query Snowflake databases directly from DuckDB"
 splink_udfs,moj-analytical-services/splink_udfs,c5b384ba3a62ea016e23c4fd408e012921595ea0,"Phonetic, text normalization and address matching functions for record linkage."
 splunk,smithclay/duckdb-splunk,1c69eeecba53c63b0e1f5eb07c7933757daf1355,"Read logs from a Splunk search REST API into OTLP-shaped tables"
