@@ -1,7 +1,5 @@
-@use 'sass:color';
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
-
 
 /** SPECIAL INSTALLATION PAGE **/
 
@@ -12,10 +10,6 @@ body.installation{
 	
 	.pagetitle h1{
 		@include headline-1;
-	}
-	
-	.aboutthispage{
-		margin-top: 60px;
 	}
 	
 	.hidden.instruction-collection{
@@ -61,13 +55,13 @@ body.installation{
 				}
 			}
 			.selected{
-				@include label;
+				@include label-1;
 				flex: 1;
 				min-width: 0;
-				color: var(--main-text-secondary-color, #666);
+				color: var(--main-text-secondary-color, #333333);
 			}
 			.foldout-icon{
-				background-color: var(--doc-codebox-button-background-color, #E6E6E6);
+				background-color: var(--doc-codebox-button-background-color, rgba(242, 242, 242, 0.6));
 				border: 1px solid transparent;
 				flex: 0 0 30px;
 				align-self: center;
@@ -77,19 +71,13 @@ body.installation{
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				-webkit-transition: border-color .2s;
-				-o-transition: border-color .2s;
 				transition: border-color .2s;
 				svg.icon{
 					width: 18px;
 					height: 18px;
 					stroke-width: 2;
 					color: var(--main-text-primary-color, #0D0D0D);
-					-webkit-transition: -webkit-transform .3s;
-					transition: -webkit-transform .3s;
-					-o-transition: transform .3s;
 					transition: transform .3s;
-					transition: transform .3s, -webkit-transform .3s;
 				}
 			}
 		}
@@ -108,18 +96,11 @@ body.installation{
 		}
 
 		&.open h3 .foldout-icon svg.icon{
-			-webkit-transform: rotate(180deg);
-				-ms-transform: rotate(180deg);
-					transform: rotate(180deg);
+			transform: rotate(180deg);
 		}
 		
 		h4{
-			@include label;
-		}
-		
-		.architecture-wrap h4{
-			margin-top: 30px;
-			margin-bottom: 15px;
+			@include label-1;
 		}
 		
 		&.disabled{
@@ -160,14 +141,13 @@ body.installation{
 			border: 1px solid transparent;
 			
 			.label{
-				@include label;
+				@include label-1;
 			}
 			
 			.symbol {
 				border-radius: var(--page-radius-box-inner);
 				border: 1px solid var(--border-color);
 				background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
-				display: block;
 				flex-shrink: 0;
 				width: 40px;
 				height: 40px;
@@ -252,7 +232,7 @@ body.installation{
 			margin-right: -4px;
 			border-radius: var(--page-radius-pill);
 			cursor: pointer;
-			@include label;
+			@include label-1;
 			color: var(--interactive-filter-unselected-text-color, #666);
 			transition: color 0.2s, opacity 0.3s;
 			white-space: nowrap;
@@ -314,26 +294,17 @@ body.installation{
 				flex-wrap: wrap;
 				gap: 10px;
 				margin-top: 30px;
-				color: var(--main-text-tertiary-color, #B2B2B2);
-				@include label;
-				font-weight: 400;
+				color: var(--main-text-tertiary-color, #666666);
+				@include label-1;
 				
 				a{
 					cursor: pointer;
-					&:after{
-						content: "";
-						display: inline-block;
-						background-size: contain;
-						background-repeat: no-repeat;
-						margin-left: 5px;
-					}
 				}
 			}
-			.docs-link{
-				//color: var(--main-text-secondary-color, #666666);
+			.docs-link,
+			.alternative-options{
 				color: var(--main-text-primary-color, #0D0D0D);
 				text-decoration: none;
-				
 				border: 1px solid var(--border-color);
 				border-radius: var(--page-radius-pill);
 				padding: 12px 20px;
@@ -358,34 +329,10 @@ body.installation{
 			}
 			.alternative-options{
 				background: none;
-				border: none;
-				padding: 0;
 				font: inherit;
-				//color: var(--main-text-secondary-color, #666666);
-				color: var(--main-text-primary-color, #0D0D0D);
-				text-decoration: none;
-				
-				border: 1px solid var(--border-color);
-				border-radius: var(--page-radius-pill);
-				padding: 12px 20px;
-				transition: border .3s;
-				
-				&:after{
-					content: none;
-				}
 
 				svg.icon{
-					width: 14px;
-					height: 14px;
-					fill: none;
-					stroke-width: 2.3;
-					margin-left: 5px;
-					vertical-align: -.15em;
 					transition: transform .3s;
-				}
-
-				&:hover{
-					border-color: var(--border-color-hover);
 				}
 			}
 			.alternative-options[aria-expanded="true"]{
@@ -403,13 +350,11 @@ body.installation{
 			font-family: $fontMono;
 			padding: 1px 0;
 			margin: 0;
-			-webkit-font-feature-settings: "ss19";
 			font-feature-settings: "ss19";
 		}
 		
 		pre {
-			padding: 16px; /* instead of 10px */
-			overflow: auto;
+			padding: 16px;
 			border-radius: var(--page-radius-box);
 			background: var(--doc-codebox-background-color, #F2F2F2);
 			white-space: pre;
@@ -417,8 +362,6 @@ body.installation{
 		
 			&.highlight {
 				tab-size: 4;
-				-moz-tab-size: 4;
-				-o-tab-size: 4;
 				padding: 15px;
 		
 				&::-webkit-scrollbar {
@@ -493,12 +436,10 @@ body.installation{
 		}
 		
 	}
-	
-	
-	
+
 	.shainfo{
 		margin-top: 8px;
-		color: var(--main-text-secondary-color, #666);
+		color: var(--main-text-secondary-color, #333333);
 		
 		span:first-child{
 			font-weight: 700;
@@ -506,255 +447,27 @@ body.installation{
 		}
 		span{
 			@include code-standard;
-			font-size: 14px;
 		}
 	}
 	
 	.shainfo + .download-btn{
-		margin-top: 3*8px;
+		margin-top: 24px;
 	}
-	
-	
 
-	
-
-	/** ORIGINAL INSTALLATION CSS **/
-	
-	main .wrap, main .wrap #main_content_wrap{
-		//max-width: 100%;
-	}
-	.yourselection{
-		position: relative;
-		border: 1px solid var(--border-color);;
-		border-radius: var(--page-radius-box);
-		margin-top: 25px;
-		.select.hide {
-			opacity: 0.4;
-			pointer-events: none;
-			ul li{
-				cursor: auto;
-				border: 1px solid var(--border-color);
-			}
-		}
-		.select li.inactive {
-			opacity: 0.4;
-			pointer-events: none;
-		}
-		.select ul{
-			padding-left: 0!important;
-		}
-	}
-	main .select{
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-		-ms-flex-wrap: wrap;
-			flex-wrap: wrap;
-		border-bottom: 1px solid var(--border-color);
-		padding: 25px 20px;
-		.info{
-			@include body-small();
-			width: 100%;
-			margin-left: 162px;
-			margin-top: 8px;
-		}
-		h3{
-			@include headline-4();
-			width: 162px;
-			-ms-flex-negative: 0;
-				flex-shrink: 0;
-			margin: 0!important;
-			letter-spacing: -0.17px;
-			padding-top: 8px;
-		}
-		ul{
-			padding: 0;
-			margin: 0;
-			list-style: none;
-			width: calc(100% - 162px);
-			display: -webkit-box;
-			display: -ms-flexbox;
-			display: flex;
-			-ms-flex-wrap: wrap;
-				flex-wrap: wrap;
-			pointer-events: all;
-			gap: 5px;
-			-webkit-box-align: center;
-				-ms-flex-align: center;
-					align-items: center;
-			.disabled-choice {
-				opacity: 0.4;
-				pointer-events: none;
-				cursor: default;
-			}
-			li{
-				line-height: 1;
-				display: block;
-				white-space: nowrap;
-				padding: 8px 14px;
-				border: 1px solid transparent;
-				background-color: transparent;
-				color: var(--interactive-filter-unselected-text-color, #666);
-				border-radius: var(--page-radius-pill);
-				font-weight: 500;
-				@include label();
-				cursor: pointer;
-				-webkit-transition: background-color .2s;
-				-o-transition: background-color .2s;
-				transition: background-color .2s;
-				-webkit-user-select: none;
-				   -moz-user-select: none;
-					-ms-user-select: none;
-						user-select: none;
-				span.versioninfo{
-					color: color.scale($duckDBlightgrey, $lightness: -40%);
-				}
-				&:hover{
-					border-color: var(--border-color-hover);
-					//background-color: var(--element-background-color);
-				}
-				&.selected{
-					background: var(--element-background-color);
-					color: var(--interactive-filter-selected-text-color, #1A1A1A);
-				}
-			}
-			.disabled-choice{
-				opacity: 0.4;
-				pointer-events: none;
-				cursor: default;
-			}
-		}
-		&.inactive{
-			opacity: .4;
-			pointer-events: none;
-		}
-		&.inactive ul{
-			pointer-events: none;
-		}
-	}
-	.select.hide .disabled-choice {
-		opacity: 1;
-	}
-	.output{
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-		padding: 25px 20px;
-		position: relative;
-		h3{
-			font-size: 17px!important;
-			font-weight: 600!important;
-			width: 162px;
-			-ms-flex-negative: 0;
-				flex-shrink: 0;
-			margin: 0!important;
-			letter-spacing: -0.17px;
-			padding-top: 8px;
-		}
-		.result{
-			@include code-standard();
-			padding: 12px 12px 14px 14px;
-			border-radius: var(--page-radius-box);
-			border: 1px solid var(--border-color);
-			background: var(--doc-codebox-background-color, #F2F2F2);
-			position: relative;
-			width: calc(100% - 162px);
-			pre{
-				padding: 0;
-				margin: 0;
-			}
-			a{
-				word-wrap: break-word;
-				word-break: break-word;
-			}
-			a.externallink{
-				line-height: 1.6;
-			}
-		}
-	}
-	.sha256_btn,
-	.sha512_btn{
-		border-radius: var(--page-radius-pill);
-		border: 1px solid var(--border-color);
-		background: var(--main-codebox-sub-background-color, rgba(230, 230, 230, 0.60));
-		cursor: pointer;
-		font-family: $fontMono;
-		padding: 3px 8px;
-		font-weight: 600;
-		font-size: 11px;
-		vertical-align: bottom;
-		display: inline-block;
-		margin-top: 10px;
-		&.active{
-			color: var(--doc-menu-info-deprecated-border-color, #A899FF);
-		}
-	}
-	.sha256.output,
-	.sha512.output{
-		padding-top: 0;
-		display: none;
-		.result{
-			word-break: break-all;
-		}
-	}
-	.link.output{
-		.result a{
-			display: block;
-		}
-	}
-	.note.output{
-		padding-top: 0px;
-		.result{
-			font-family: $fontSans;
-			color: var(--main-text-primary-color, #0D0D0D);
-			padding: 0;
-			border: 0;
-			background: transparent;
-			&::before{
-				content: "Note: ";
-			}
-		}
-	}
-	.possibleresults{
-		display: none;
-	}
-	.wrap a.sha512{
-		border-radius: var(--page-radius-pill);
-		background-color: $black300;
-		border: 1px solid var(--border-color);
-		text-decoration: none;
-		padding: 0px 7px;
+	a.download-btn{
+		border: 1px solid transparent;
 		transition: border-color .2s;
 
 		&:hover{
 			border-color: var(--border-color-hover);
+			background: transparent;
 		}
 	}
+
 	#sidebar{
 		display: none;
 	}
 }
-
-body.installation{
-	.environmentselect{
-		background-color: color.scale($duckDBlightgrey, $lightness: -5%);
-		color: black;
-		border: none;
-		border-bottom: 2px solid var(--border-color);
-		&:focus, &:active{
-			outline: 0;
-			border: none;
-			border-radius: 0;
-			border-bottom: 2px solid var(--border-color);
-		}
-	}
-}
-body.installation .environment.select label.onlymobile{
-	&::after{
-		color: black;
-	}
-}
-
 
 a.download-btn{
 	display: flex!important;
@@ -767,7 +480,7 @@ a.download-btn{
 	transition: background-color .2s;
 	text-decoration: none;
 	color: inherit;
-	@include label;
+	@include label-1;
 	
 	&:before{
 		border-radius: var(--page-radius-box-inner);
@@ -797,15 +510,5 @@ a.download-btn{
 .nightly_install{
 	&.layout_default.blog_typography #main_content_wrap div.highlight{
 		max-width: unset;
-	}
-}
-
-body.installation a.download-btn {
-	border: 1px solid transparent;
-	transition: border-color .2s;
-
-	&:hover {
-		border-color: var(--border-color-hover);
-		background: transparent;
 	}
 }

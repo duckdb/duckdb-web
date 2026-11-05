@@ -18,7 +18,7 @@ body.jobs{
 			}
 			p{
 				@include body-standard;
-				color: var(--main-text-primary-color, #F2F2F2);
+				color: var(--main-text-primary-color, #0D0D0D);
 				margin: 0 auto;
 			}
 		}
@@ -35,7 +35,7 @@ body.jobs{
 		.jobs_collection{
 			border-radius: var(--page-radius-box);
 			border: 1px solid var(--border-color);
-			background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.60));
+			background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
 
 			h3{
 				margin: 0;
@@ -45,7 +45,7 @@ body.jobs{
 				span.count{
 					@include body-small;
 					font-weight: 450;
-					color: var(--main-text-tertiary-color, #B2B2B2);
+					color: var(--main-text-tertiary-color, #666666);
 					vertical-align: 2px;
 				}
 			}
@@ -77,7 +77,7 @@ body.jobs{
 					}
 				}
 				.subline{
-					color: var(--main-text-tertiary-color, #B2B2B2);
+					color: var(--main-text-tertiary-color, #666666);
 				}
 			}
 		}

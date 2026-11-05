@@ -139,7 +139,7 @@ body.documentation main .wrap .duck-diagram-box code,
 	padding: 0 20px;
 	font-family: $fontMono;
 	font-size: 12px;
-	color: var(--main-text-secondary-color, #666);
+	color: var(--main-text-secondary-color, #333333);
 
 	&::after {
 		content: "";

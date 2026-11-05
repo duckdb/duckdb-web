@@ -15,7 +15,7 @@
 // <light mode>
 .highlight {
 	// background of syntax highlight boxes
-	background: var(--doc-codebox-background-color, #f7f7f7);
+	background: var(--doc-codebox-background-color, #F2F2F2);
 
 	// foreground
 	:is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg),
@@ -106,7 +106,7 @@ html.darkmode, .dark {
 
 	.highlight {
 		// background of syntax highlight boxes
-		background: var(--doc-codebox-background-color, #141414);
+		background: var(--doc-codebox-background-color, #F2F2F2);
 
 		// foreground
 		:is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg),

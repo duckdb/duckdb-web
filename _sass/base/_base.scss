@@ -12,12 +12,12 @@
 }
 
 html {
-	background: var(--main-body-background-color, #FAFAFA);
+	background: var(--main-body-background-color, #FCFCFC);
 }
 
 body{
 	color: var(--main-text-primary-color, #0D0D0D);
-	background: var(--main-body-background-color, #FAFAFA);
+	background: var(--main-body-background-color, #FCFCFC);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	@include body-standard();
@@ -48,7 +48,7 @@ li a,
 summary a{
 	color: inherit;
 	text-decoration: underline;
-	text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+	text-decoration-color: var(--main-text-tertiary-color, #666666);
 	text-decoration-thickness: 1px;
 	text-underline-offset: 0.16em;
 	-webkit-transition: color .3s, text-decoration-color .3s;
@@ -188,7 +188,7 @@ h1, h2, h3, h4, h5, h6 {
 		fill: none;
 		stroke-width: 2;
 		cursor: pointer;
-		color: var(--main-text-tertiary-color, #B2B2B2);
+		color: var(--main-text-tertiary-color, #666666);
 		opacity: 0;
 		transition: opacity .3s, color .3s;
 

@@ -156,7 +156,7 @@ body.landing{
 		margin-top: 0.2em;
 		margin-bottom: 0.12em;
 		white-space: nowrap;
-		border-bottom: 12px solid var(--main-marker-border-color, #EDDD0C);
+		border-bottom: 12px solid var(--main-marker-border-color, #FFF100);
 		line-height: 0.6em;
 		.typecursor{
 			font-weight: 450;
@@ -182,11 +182,11 @@ body.landing{
 	.window{
 		border-radius: var(--page-radius-box);
 		border: 1px solid var(--border-color);
-		background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.60));
+		background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
 		-webkit-backdrop-filter: blur(5px);
 				backdrop-filter: blur(5px);
-		-webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.20) inset, 2px 2px 24px 0px var(--main-codebox-dropshadow, rgba(0, 0, 0, 0.05));
-				box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.20) inset, 2px 2px 24px 0px var(--main-codebox-dropshadow, rgba(0, 0, 0, 0.05));
+		-webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.20) inset, 2px 2px 24px 0px var(--main-codebox-dropshadow, rgba(0, 0, 0, 0.03));
+				box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.20) inset, 2px 2px 24px 0px var(--main-codebox-dropshadow, rgba(0, 0, 0, 0.03));
 		.topbar {
 			border-radius: var(--page-radius-box) var(--page-radius-box) 0px 0px;
 			ul {
@@ -202,7 +202,7 @@ body.landing{
 						align-items: flex-start;
 				border-radius: var(--page-radius-pill);
 				li {
-					@include label;
+					@include label-1;
 					border-radius: var(--page-radius-pill);
 					padding: 12px 16px;
 					margin-right: -4px;
@@ -245,7 +245,7 @@ body.landing{
 				top: 20px;
 				left: 25px;
 				text-align: right;
-				color: var(--main-text-tertiary-color, #B2B2B2);
+				color: var(--main-text-tertiary-color, #666666);
 				pointer-events: none;
 				line-height: 19.6px;
 			}
@@ -283,7 +283,7 @@ body.landing{
 				column-gap: 20px; 
 			}
 			.system span{
-				color: var(--main-text-tertiary-color, #B2B2B2);
+				color: var(--main-text-tertiary-color, #666666);
 				@include body-small;
 			}
 			p{
@@ -371,7 +371,7 @@ body.landing{
 	
 	/** STYLE SELECT BOX ANYWAYS – SO IT IS COLORED DIRECTLY **/
 	select {
-	 @include label();
+	 @include label-1();
 	  -webkit-appearance: none;
 		 -moz-appearance: none;
 			  appearance: none;
@@ -455,7 +455,7 @@ body.landing{
 		position: relative;
 		color: black;
 		min-width: $select-width;
-		@include label();
+		@include label-1();
 	}
 	
 	.select-styled {
@@ -465,7 +465,7 @@ body.landing{
 		justify-content: space-between;
 		gap: 8px;
 		box-sizing: border-box;
-		color: var(--interactive-button-black-border-color, #999);
+		color: var(--interactive-button-black-border-color, #1A1A1A);
 		background: var(--menu-dropdown-background-color, #F2F2F2);
 		border: 1px solid var(--border-color);
 		padding: 12px 14px 12px 20px;
@@ -476,7 +476,7 @@ body.landing{
 		z-index: 710;
 		word-break: keep-all;
 		> span{
-			@include label();
+			@include label-1();
 			color: inherit;
 			line-height: 1;
 		}
@@ -486,7 +486,7 @@ body.landing{
 			flex-shrink: 0;
 			fill: none;
 			stroke-width: 2.5;
-			color: var(--interactive-button-black-border-color, #999);
+			color: var(--interactive-button-black-border-color, #1A1A1A);
 			-webkit-transition: transform .3s;
 			-o-transition: transform .3s;
 			transition: transform .3s;
@@ -536,7 +536,7 @@ body.landing{
 			-webkit-transition: all 0.15s ease-in;
 			-o-transition: all 0.15s ease-in;
 			transition: all 0.15s ease-in;
-			color: var(--main-text-primary-color, #F2F2F2);
+			color: var(--main-text-primary-color, #0D0D0D);
 			&:hover,
 			&.is-selected {
 				background: var(--menu-dropdown-item-background-hover, #E6E6E6);
@@ -550,7 +550,7 @@ body.landing{
 					height: 12px;
 					flex-shrink: 0;
 					stroke-width: 3;
-					color: var(--main-text-secondary-color, #666);
+					color: var(--main-text-secondary-color, #333333);
 				}
 			}
 			&[rel="hide"] {
@@ -631,7 +631,7 @@ body.landing{
 			}
 			> p{
 				@include body-standard;
-				color: var(--main-text-secondary-color, #666);
+				color: var(--main-text-secondary-color, #333333);
 				max-width: 340px;
 				margin: 0 0 24px;
 			}
@@ -642,7 +642,7 @@ body.landing{
 			display: flex;
 			flex-direction: column;
 			gap: 10px;
-			padding: var(--page-box-padding-primary, 24px);
+			padding: var(--page-box-padding-primary, 32px);
 			border-radius: var(--page-radius-box, 15px);
 			border: 1px solid var(--border-color);
 			background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
@@ -661,7 +661,7 @@ body.landing{
 				}
 				p{
 					@include body-small;
-					color: var(--main-text-secondary-color, #666);
+					color: var(--main-text-secondary-color, #333333);
 					margin: 0 0 10px;
 				}
 			}
@@ -707,14 +707,14 @@ body.landing{
 			text{
 				font-family: $fontMono;
 				font-size: 12px;
-				fill: var(--main-text-secondary-color, #666);
+				fill: var(--main-text-secondary-color, #333333);
 			}
 			.node{
-				fill: var(--main-body-background-color, #FAFAFA);
+				fill: var(--main-body-background-color, #FCFCFC);
 				stroke: var(--border-color);
 			}
 			.node-icon{
-				color: var(--main-text-tertiary-color, #B2B2B2);
+				color: var(--main-text-tertiary-color, #666666);
 				fill: none;
 				stroke-width: 2.2px;
 			}
@@ -723,7 +723,7 @@ body.landing{
 				stroke: var(--border-color);
 			}
 			.dot{
-				fill: var(--main-text-secondary-color, #666);
+				fill: var(--main-text-secondary-color, #333333);
 			}
 			.dot-duckdb{
 				offset-path: path("M110 40.5 H258.5 V100 V40.5 H410");
@@ -956,7 +956,7 @@ body.landing{
 				border: 1px solid var(--border-color);
 				-webkit-backdrop-filter: blur(5px);
 				        backdrop-filter: blur(5px);
-				color: var(--interactive-button-black-border-color, #999);
+				color: var(--interactive-button-black-border-color, #1A1A1A);
 				font-weight: 600;
 			}
 		}
@@ -967,7 +967,7 @@ body.landing{
 				margin: 50px 0 20px 0;
 			}
 			p{
-				color: var(--main-text-secondary-color, #666);
+				color: var(--main-text-secondary-color, #333333);
 				max-width: 456px;
 				margin: 0 auto 18px;
 			}
@@ -992,7 +992,7 @@ body.landing{
 		}
 		.icon-grid-item{
 			p{
-				color: var(--main-text-secondary-color, #666);
+				color: var(--main-text-secondary-color, #333333);
 			}
 		}
 	}
@@ -1017,7 +1017,7 @@ body.landing{
 				flex: 1;
 				text-align: left;
 				p{
-					color: var(--main-text-secondary-color, #666);
+					color: var(--main-text-secondary-color, #333333);
 					max-width: 456px;
 					margin: 20px 0 18px;
 				}
@@ -1058,7 +1058,7 @@ body.landing{
 				border: 0;
 				padding: 0 4px;
 				.system span{
-					@include meta;
+					@include tiny;
 				}
 			}
 		}
@@ -1076,7 +1076,7 @@ body.landing{
 				margin: 0;
 			}
 			.textbutton{
-				color: var(--main-text-secondary-color, #666);
+				color: var(--main-text-secondary-color, #333333);
 
 				&:hover{
 					color: var(--main-link-hover-color, #998B00);
@@ -1133,7 +1133,7 @@ body.landing{
 		}
 	
 		.label {
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 			@include pre-title;
 			text-align: center;
 		}
@@ -1153,11 +1153,11 @@ body.landing{
 	}
 	
 	.numbersbox-reference {
-		@include meta;
+		@include tiny;
 		width: 100%;
 		margin-top: 16px;
 		text-align: right;
-		color: var(--main-text-tertiary-color, #B2B2B2);
+		color: var(--main-text-tertiary-color, #666666);
 	
 		a {
 			color: inherit;

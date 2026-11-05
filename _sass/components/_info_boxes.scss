@@ -19,7 +19,7 @@ div.singleentry {
 		line-height: 1.5;
 
 		h1, h2, h3, h4, h5, h6 {
-			@include label;
+			@include label-1;
 			margin: 0 !important;
 		}
 
@@ -66,7 +66,7 @@ div.singleentry {
 			width: 16px;
 			height: 16px;
 			margin-top: 2px;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 
 			.icon {
 				display: block;
@@ -141,7 +141,7 @@ div.singleentry {
 
 			p.quote-author {
 				@include body-small;
-				color: var(--main-text-secondary-color, #666);
+				color: var(--main-text-secondary-color, #333333);
 				margin-top: 0.75rem;
 
 				img {
@@ -197,7 +197,7 @@ div.singleentry {
 			padding: 0;
 			border: 0;
 			background: transparent;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 			cursor: pointer;
 			transition: color .2s;
 
@@ -206,7 +206,7 @@ div.singleentry {
 			}
 
 			&.swiper-button-disabled {
-				color: var(--main-quaternary-color, #CCC);
+				color: var(--main-quaternary-color, #999999);
 				cursor: default;
 			}
 

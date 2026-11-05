@@ -11,7 +11,7 @@ body.documentation {
 
         #main_content_wrap p,
         #main_content_wrap > :is(ul, ol) {
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
         }
 
         #main_content_wrap :is(h1, h2, h3, h4, h5, h6):where(:not(.title)) {
@@ -167,7 +167,7 @@ body.documentation {
     .wrap a {
         color: var(--main-text-primary-color, #0D0D0D);
         text-decoration: underline;
-        text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+        text-decoration-color: var(--main-text-tertiary-color, #666666);
         text-decoration-thickness: 1px;
         text-underline-offset: 0.16em;
         transition: color .3s, text-decoration-color .3s;
@@ -499,7 +499,7 @@ body.layout_default.blog_typography {
                 position: sticky;
                 top: calc(69px + var(--docbanner-height, 0px));
                 z-index: 10;
-                background: var(--main-body-background-color, #FAFAFA);
+                background: var(--main-body-background-color, #FCFCFC);
                 box-shadow: inset 0 -1px 0 var(--border-color);           }
         }
     }
@@ -568,7 +568,7 @@ body.layout_default.blog_typography {
             display: block;
             padding: 8px 16px;
             text-transform: uppercase;
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
             background: var(--doc-codebox-background-color-secondary, #EDEDED);
             border-bottom: 1px solid var(--border-color);
         }
@@ -644,13 +644,13 @@ body.layout_default.blog_typography {
     details{
         margin-top: 1em;
         summary{
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
             display: inline;
             gap: 5px;
             align-items: center;
             cursor: pointer;
             text-decoration: underline;
-            text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+            text-decoration-color: var(--main-text-tertiary-color, #666666);
             text-decoration-thickness: 1px;
             text-underline-offset: 0.16em;
             transition: color .3s, text-decoration-color .3s, padding .3s;
@@ -658,7 +658,7 @@ body.layout_default.blog_typography {
             span,
             a{
                 color: inherit;
-                text-decoration-color: var(--main-text-tertiary-color, #B2B2B2) !important;
+                text-decoration-color: var(--main-text-tertiary-color, #666666) !important;
                 text-decoration-thickness: 1px !important;
                 text-underline-offset: 0.16em;
             }
@@ -678,7 +678,7 @@ body.layout_default.blog_typography {
                 mask-size: contain;
                 mask-position: center center;
                 mask-repeat: no-repeat;
-                background-color: var(--main-text-secondary-color, #666);
+                background-color: var(--main-text-secondary-color, #333333);
                 display: inline-block;
                 content: "";
                 width: 14px;
