@@ -15,9 +15,9 @@ tag: using-duckdb
 
 [SproutMe](https://sproutme.ai/) is an AI workspace that gives marketers and agencies the playbooks large advertisers run in-house: competitive analysis, account audits, cross-channel optimization and more. AI agents do most of the work, leaving marketers free to focus on long-term strategy. SproutMe was founded by [Pulkit Khurana](https://pulkitkhurana.com/), who spent 13 years at Google, most recently as Engineering Director for Google Ads.
 
-[Archit Dukhande](https://www.linkedin.com/in/archit-dukhande/) built SproutMe's data platform from scratch. For a company moving this fast, development speed directly affects the business. **“Because we are a startup, we have to work very fast,”** he says. In practice, that means shipping two to three pull requests a day without breaking anything for the businesses already using the product. **“We don't want the businesses to face problems when we push it,”** Archit explains, so every change runs end to end, both locally and in CI, before it reaches the main branch.
+[Archit Dukhande](https://www.linkedin.com/in/archit-dukhande/) built SproutMe’s data platform from scratch. For a company moving this fast, development speed directly affects the business. **“Because we are a startup, we have to work very fast,”** he says. In practice, that means shipping two to three pull requests a day without breaking anything for the businesses already using the product. **“We don’t want the businesses to face problems when we push it,”** Archit explains, so every change runs end to end, both locally and in CI, before it reaches the main branch.
 
-Local and CI runs were slow. The pipeline handles a lot of data. When a new customer joins, SproutMe pulls about 365 days of history across its ad and analytics sources, which means millions of rows to load and transform. On BigQuery, testing a change at that scale took long enough to disrupt the team's daily rhythm.
+Local and CI runs were slow. The pipeline handles a lot of data. When a new customer joins, SproutMe pulls about 365 days of history across its ad and analytics sources, which means millions of rows to load and transform. On BigQuery, testing a change at that scale took long enough to disrupt the team’s daily rhythm.
 
 ## Where DuckDB Fits
 
@@ -26,7 +26,7 @@ Archit first heard about DuckDB in LinkedIn posts about its speed. He decided to
 The pipeline looks like this:
 
 1. [Dagster](https://dagster.io/) orchestrates extraction from Google Ads, Meta Ads, and GA4.
-2. The extracted data lands in DuckDB, which acts as the analytical warehouse on the engineer's local machine.
+2. The extracted data lands in DuckDB, which acts as the analytical warehouse on the engineer’s local machine.
 3. [dbt](https://www.getdbt.com/) runs the transformations on DuckDB, following a medallion architecture: bronze for raw data, silver for cleaned and standardized data, and gold for the user-facing models.
 4. The same logic runs locally and in CI before any change is deployed.
 
@@ -34,9 +34,9 @@ The transformation stage is where DuckDB saves the most time. **“This is where
 
 ## The Numbers
 
-SproutMe chose BigQuery early because the team was already familiar with Google's infrastructure. A full end-to-end run there can take one to two hours. That works for production, but it is too slow for a team pushing several changes a day and waiting on feedback from local and CI runs each time.
+SproutMe chose BigQuery early because the team was already familiar with Google’s infrastructure. A full end-to-end run there can take one to two hours. That works for production, but it is too slow for a team pushing several changes a day and waiting on feedback from local and CI runs each time.
 
-Running the same pipeline on DuckDB shortens the wait between changes. In SproutMe's measurements, the same dbt project, command, and real data ran on both engines. The integration test step, which runs on every merge, fell from a median of 10.65 minutes to **0.76 minutes**. That is a 92.9 percent reduction across 88 CI/CD runs. The dbt runs also got faster. On local test accounts, a full backfill dropped from 180.2 seconds to 104.6 seconds, and a daily incremental build dropped from 300.3 seconds to 120.7 seconds. DuckDB times are medians of five runs.
+Running the same pipeline on DuckDB shortens the wait between changes. In SproutMe’s measurements, the same dbt project, command, and real data ran on both engines. The integration test step, which runs on every merge, fell from a median of 10.65 minutes to **0.76 minutes**. That is a 92.9 percent reduction across 88 CI/CD runs. The dbt runs also got faster. On local test accounts, a full backfill dropped from 180.2 seconds to 104.6 seconds, and a daily incremental build dropped from 300.3 seconds to 120.7 seconds. DuckDB times are medians of five runs.
 
 <div class="center_aligned_header_table"></div>
 
@@ -47,9 +47,9 @@ Running the same pipeline on DuckDB shortens the wait between changes. In Sprout
 | Daily incremental dbt build | 300.3 s | 120.7 s | 59.8% |
 | Backfill and daily build together | 480.5 s | 225.3 s | 53.1% |
 
-These results apply to SproutMe's development and testing workflow. They do not show that one engine is faster in general.
+These results apply to SproutMe’s development and testing workflow. They do not show that one engine is faster in general.
 
-For Archit, the main gain is faster debugging. Instead of spending hours reproducing an issue, he can find a bug in minutes. **“First one is the development speed. It is super fast,”** he says, calling it the first of DuckDB's advantages. The second is how easily it runs on local machines, including with the AI coding assistants the team uses, which can inspect errors and help debug them directly. The third is compatibility: the same setup runs locally and in CI without changes.
+For Archit, the main gain is faster debugging. Instead of spending hours reproducing an issue, he can find a bug in minutes. **“First one is the development speed. It is super fast,”** he says, calling it the first of DuckDB’s advantages. The second is how easily it runs on local machines, including with the AI coding assistants the team uses, which can inspect errors and help debug them directly. The third is compatibility: the same setup runs locally and in CI without changes.
 
 ## What Comes Next
 
