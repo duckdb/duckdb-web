@@ -13,7 +13,7 @@ tag: using-duckdb
 
 DuckDB is fast because it keeps its ducks in a column. Instead of storing each row as one record, it stores each column on its own, so a query that touches three columns out of fifty only reads those three.
 
-That one design choice explains most of DuckDB's tricks. Columnar storage compresses well, because a column holds values of one type that often repeat. It scans fast, because the engine processes columns in vectors of 2,048 values at a time. And it rewards you for asking only for what you need.
+That one design choice explains most of DuckDB’s tricks. Columnar storage compresses well, because a column holds values of one type that often repeat. It scans fast, because the engine processes columns in vectors of 2,048 values at a time. And it rewards you for asking only for what you need.
 
 In this post, we walk through DuckDB features that lean on that idea: lining ducks up from files, picking the right ones, counting them, letting them look at their neighbors, and keeping the pond tidy. Every example runs in the DuckDB CLI or from Python with `duckdb.sql(...)`.
 
@@ -25,7 +25,7 @@ brew install duckdb     # CLI on macOS
 
 ## Lining Up the Ducks: Querying Files Where They Sit
 
-You don't need to load data before you query it. DuckDB treats a file path as a table and infers column names and types on the way in.
+You don’t need to load data before you query it. DuckDB treats a file path as a table and infers column names and types on the way in.
 
 ```sql
 -- A CSV, sniffed automatically
@@ -50,7 +50,7 @@ WHERE seen_at >= DATE '2026-01-01'
 GROUP BY species;
 ```
 
-> Tip **Check the sniffer's work.** When a CSV comes in with odd types, ask DuckDB what it guessed before you fight it.
+> Tip **Check the sniffer’s work.** When a CSV comes in with odd types, ask DuckDB what it guessed before you fight it.
 
 ```sql
 DESCRIBE SELECT * FROM 'ponds.csv';
@@ -70,7 +70,7 @@ WHERE year = 2026 AND month = 10;
 
 ## Picking Your Ducks: Column-Level SQL
 
-DuckDB's [friendly SQL]({% link docs/2.0/sql/dialect/friendly_sql.md %}) treats columns as things you can select, drop, and transform in bulk. On wide tables, this saves both typing and I/O.
+DuckDB’s [friendly SQL]({% link docs/2.0/sql/dialect/friendly_sql.md %}) treats columns as things you can select, drop, and transform in bulk. On wide tables, this saves both typing and I/O.
 
 **Drop or swap a few ducks with `EXCLUDE` and `REPLACE`.**
 
@@ -230,7 +230,7 @@ COPY (SELECT * FROM sightings ORDER BY pond, species, seen_at)
 TO 'sightings_sorted.parquet' (FORMAT parquet, ROW_GROUP_SIZE 122_880);
 ```
 
-**Pick narrow types.** A smaller type is a smaller column. Use `ENUM` for small fixed sets, `DATE` instead of `TIMESTAMP` when you don't need the time, and `SMALLINT` when counts stay small.
+**Pick narrow types.** A smaller type is a smaller column. Use `ENUM` for small fixed sets, `DATE` instead of `TIMESTAMP` when you don’t need the time, and `SMALLINT` when counts stay small.
 
 ```sql
 CREATE TYPE species_t AS ENUM ('mallard', 'teal', 'wigeon', 'pintail');
