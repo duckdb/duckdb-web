@@ -10,7 +10,7 @@ excerpt: "DuckDB-Wasm 2.0 updates the browser engine to DuckDB 2.0 LTS. It simpl
 tag: release
 ---
 
-[DuckDB-Wasm]({% link docs/2.0/clients/wasm/overview.md %}) compiles the full DuckDB engine to [WebAssembly](https://webassembly.org/) so that it runs entirely inside the browser, with no server to send queries to and no data leaving the user's machine. Now that DuckDB 2.0.0 LTS [“Cinnamon Teal”]({% post_url 2026-10-21-announcing-duckdb-200 %}) has shipped, DuckDB-Wasm 2.0 rebuilds the browser engine on top of it.
+[DuckDB-Wasm]({% link docs/2.0/clients/wasm/overview.md %}) compiles the full DuckDB engine to [WebAssembly](https://webassembly.org/) so that it runs entirely inside the browser, with no server to send queries to and no data leaving the user’s machine. Now that DuckDB 2.0.0 LTS [“Cinnamon Teal”]({% post_url 2026-10-21-announcing-duckdb-200 %}) has shipped, DuckDB-Wasm 2.0 rebuilds the browser engine on top of it.
 
 It is a big release, and one change is breaking: how bundles are named and selected. The sections below cover what is new, followed by what you need to change when you upgrade.
 
@@ -49,7 +49,7 @@ If you declare bundles manually (for webpack, Vite, or self-hosted files), the a
 
 ## A Slimmer Binary with nanoarrow
 
-DuckDB-Wasm uses [Apache Arrow](https://arrow.apache.org/) for both data import and query results. Internally, it previously linked the full Arrow C++ library to read and write the Arrow IPC format. In 2.0, that dependency is replaced by [nanoarrow](https://arrow.apache.org/nanoarrow/), a minimal Arrow implementation. Query results are serialized with nanoarrow, Arrow IPC inserts are read with it, and CSV and JSON are now parsed through DuckDB's own readers rather than a separate code path.
+DuckDB-Wasm uses [Apache Arrow](https://arrow.apache.org/) for both data import and query results. Internally, it previously linked the full Arrow C++ library to read and write the Arrow IPC format. In 2.0, that dependency is replaced by [nanoarrow](https://arrow.apache.org/nanoarrow/), a minimal Arrow implementation. Query results are serialized with nanoarrow, Arrow IPC inserts are read with it, and CSV and JSON are now parsed through DuckDB’s own readers rather than a separate code path.
 
 The result is a smaller download and a simpler build, with no change to the data protocol on the JavaScript side. Your code keeps exchanging `apache-arrow` tables exactly as before. As in earlier releases, pin your `apache-arrow` install to the major version DuckDB-Wasm depends on (currently `^17`), because a newer major version can cause Arrow inserts to fail. See [Import Data]({% link docs/2.0/clients/wasm/data_ingestion.md %}#apache-arrow).
 
@@ -57,7 +57,7 @@ The result is a smaller download and a simpler build, with no change to the data
 
 WebAssembly [limits a module to 4 GB of memory](https://v8.dev/blog/4gb-wasm-memory), and browsers may impose stricter limits, so queries that native DuckDB handles comfortably could run out of memory in the browser. DuckDB-Wasm 2.0 spills intermediate data that does not fit in memory to a temporary directory, so many larger-than-memory queries that previously failed now complete.
 
-Spilling is on by default and writes to `js_buffer://tmp`, buffers the runtime holds outside the Wasm heap. You can turn it off with `spill: false`, or redirect it into the browser's [Origin Private File System](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API/Origin_private_file_system) by pointing `temporaryDirectory` at an `opfs://` path:
+Spilling is on by default and writes to `js_buffer://tmp`, buffers the runtime holds outside the Wasm heap. You can turn it off with `spill: false`, or redirect it into the browser’s [Origin Private File System](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API/Origin_private_file_system) by pointing `temporaryDirectory` at an `opfs://` path:
 
 ```ts
 await db.open({
@@ -93,9 +93,9 @@ On a page that is not cross-origin isolated, `selectBundle` falls back to `base`
 
 ## Better HTTP: Authentication Headers and Real Errors
 
-When DuckDB-Wasm reads a remote file through the httpfs extension, it issues the request from the browser, so it has to follow the browser's rules. DuckDB-Wasm 2.0 reworks that Wasm HTTP client in two ways:
+When DuckDB-Wasm reads a remote file through the httpfs extension, it issues the request from the browser, so it has to follow the browser’s rules. DuckDB-Wasm 2.0 reworks that Wasm HTTP client in two ways:
 
-* It forwards the request headers that DuckDB's httpfs sets, including the `Authorization` header configured through an [httpfs secret]({% link docs/2.0/core_extensions/httpfs/overview.md %}), so endpoints that require authentication can be read directly.
+* It forwards the request headers that DuckDB’s httpfs sets, including the `Authorization` header configured through an [httpfs secret]({% link docs/2.0/core_extensions/httpfs/overview.md %}), so endpoints that require authentication can be read directly.
 * On a failed request it surfaces the real HTTP status code and response body instead of a generic network error, which makes authenticated APIs such as the Iceberg REST catalog far easier to debug.
 
 CORS rules still apply, since the browser issues the request. See [Troubleshoot]({% link docs/2.0/clients/wasm/troubleshoot.md %}#network-error-when-querying-remote-files).
