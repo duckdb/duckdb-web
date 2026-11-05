@@ -141,13 +141,14 @@
 
     function setFoldoutOpen($foldout, open, animate) {
       var $content = $foldout.children('.selection-content');
+      var changed = $foldout.hasClass('open') !== open;
       $foldout.find('.selection-head button').attr('aria-expanded', String(open));
+      $foldout.toggleClass('open', open);
+      $content.stop(true, true);
       if (open) {
-        $foldout.addClass('open');
-        if (animate) $content.stop(true, true).hide().slideDown(150); else $content.show();
+        if (animate && changed) $content.hide().slideDown(150); else $content.show();
       } else {
-        $foldout.removeClass('open');
-        if (animate) $content.stop(true, true).css('display', 'block').slideUp(150); else $content.hide();
+        if (animate && changed) $content.css('display', 'block').slideUp(150); else $content.hide();
       }
     }
 
