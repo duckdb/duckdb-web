@@ -287,7 +287,7 @@ ORDER BY user_id;
 
 Before DuckDB 2.1, these questions were answered with [window functions]({% link docs/2.0/sql/functions/window_functions.md %}) and a few well-known idioms. These queries still work and remain the way to express the same logic in DuckDB 2.0 and earlier.
 
-Sessions use the "flag a boundary, then run a count" idiom. [`lag`]({% link docs/2.0/sql/functions/window_functions.md %}) gives the gap to the previous event, a boundary is flagged whenever the gap is too large, and a running [`count_if`]({% link docs/2.0/sql/functions/utility.md %}) turns the flags into session numbers:
+Sessions use the “flag a boundary, then run a count” idiom. [`lag`]({% link docs/2.0/sql/functions/window_functions.md %}) gives the gap to the previous event, a boundary is flagged whenever the gap is too large, and a running [`count_if`]({% link docs/2.0/sql/functions/utility.md %}) turns the flags into session numbers:
 
 ```sql
 SELECT
