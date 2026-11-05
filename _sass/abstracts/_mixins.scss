@@ -138,19 +138,13 @@
 }
 
 @mixin menu-dropdown-padding {
-	padding: 15px 10px;
-}
-
-@mixin menu-dropdown-item-spacing {
-	line-height: 1;
-	padding: 15px 20px;
-	margin: 0;
+	padding: 8px;
 }
 
 @mixin menu-dropdown-list {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
+	gap: 2px;
 }
 
 @mixin menu-dropdown-item-states {

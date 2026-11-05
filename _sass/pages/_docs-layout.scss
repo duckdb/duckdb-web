@@ -559,7 +559,8 @@ body.documentation {
 .versionsidebar {
     visibility: hidden;
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(-4px) scale(.98);
+    transform-origin: top right;
     position: absolute;
     top: calc(100% + 4px);
     z-index: 700;
@@ -567,12 +568,12 @@ body.documentation {
     list-style: none;
     background-color: var(--menu-dropdown-background-color, #F2F2F2);
     border: 1px solid var(--border-color);
-    border-radius: var(--page-radius-box);
+    border-radius: var(--page-radius-m);
     padding: 8px;
     right: 0;
     min-width: 100%;
     box-sizing: border-box;
-    transition: opacity .15s ease, transform .15s ease, visibility 0s linear .15s;
+    transition: opacity .1s ease-in, transform .1s ease-in, visibility 0s linear .1s;
 
     @media (prefers-reduced-motion: reduce) {
         transition: none;
@@ -595,17 +596,17 @@ body.documentation #main_content_wrap .versionsidebar {
             margin: 0;
 
             a {
-                border-radius: var(--page-radius-pill);
+                border-radius: var(--page-radius-s);
                 text-decoration: none !important;
                 cursor: pointer;
-                padding: 7px 14px;
+                padding: 8px 12px;
                 display: flex;
                 align-items: center;
                 gap: 5px;
                 width: 100%;
                 box-sizing: border-box;
                 color: var(--main-text-primary-color, #0D0D0D) !important;
-                transition: background-color .3s;
+                transition: background-color .1s;
                 white-space: nowrap;
                 @include menu-dropdown-item-states;
             }
@@ -613,7 +614,6 @@ body.documentation #main_content_wrap .versionsidebar {
             &.current a {
                 color: var(--main-text-primary-color, #0D0D0D) !important;
                 background: var(--menu-dropdown-item-background-hover, #E6E6E6);
-                border-radius: var(--page-radius-box);
 
                 svg.icon {
                     width: 12px;
@@ -631,8 +631,12 @@ body.documentation #main_content_wrap .versionsidebar {
 .version.active .versionsidebar {
     visibility: visible;
     opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0s;
+    transform: none;
+    transition: opacity .12s ease-out, transform .2s cubic-bezier(.16, 1, .3, 1), visibility 0s;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
 }
 
 // Responsive styles

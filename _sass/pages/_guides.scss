@@ -25,31 +25,20 @@ body.documentation.guides-index {
         .versionsidebar {
             left: 0;
             right: auto;
-        }
-
-        #topic-filter .versionsidebar {
-            @include menu-dropdown-padding;
-
-            li {
-                a {
-                    @include menu-dropdown-item-spacing;
-                }
-            }
+            transform-origin: top left;
         }
 
         .versiontrigger,
+        #search-input,
         #topic-filter .versionsidebar li {
             @include label-1;
+            font-weight: 400;
         }
 
         .versiontrigger {
             width: 100%;
             height: 44px;
             justify-content: space-between;
-
-            &:hover {
-                border-color: var(--border-color-hover);
-            }
 
             .selectedversion {
                 overflow: hidden;
