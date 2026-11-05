@@ -20,7 +20,7 @@ header .headerline {
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.60));
+		background: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.85));
 		backdrop-filter: blur(15px);
 		z-index: 0;
 		pointer-events: none;
@@ -103,7 +103,7 @@ header .headerline {
 					visibility: hidden;
 					
 					ul {
-						background: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.6));
+						background: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.85));
 						list-style-type: none;
 						border-radius: var(--page-radius-box);
 						border: 1px solid var(--border-color);
@@ -225,7 +225,7 @@ header .headerline {
 			button.mode {
 				border-radius: var(--page-radius-m);
 				border: 1px solid var(--border-color);
-				background-color: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.60));
+				background-color: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.85));
 				background-repeat: no-repeat;
 				background-position: center center;
 				width: var(--header-control-size);
@@ -333,16 +333,16 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 	
 	&.yellow{
 		background: linear-gradient(90deg, var(--main-ribbon-background-color-yellow, #fffa9999) 0%, var(--main-ribbon-background-color-yellow-2, #fff10099) 100%);
-		border-bottom: 1px solid var(--main-ribbon-border-color-yellow, #665d0099);
+		border-bottom: 1px solid var(--main-ribbon-border-color-yellow, rgba(204, 189, 0, 0.6));
 	}
 	
 	&.blue{
 		background: var(--main-ribbon-background-color-blue, #99d8ff99);
-		border-bottom: 1px solid var(--main-ribbon-border-color-blue, #153a5199);
+		border-bottom: 1px solid var(--main-ribbon-border-color-blue, rgba(102, 196, 255, 0.6));
 	}
 	
 	&.orange{
-		background: linear-gradient(90deg, var(--main-ribbon-background-color-orange, rgba(65, 36, 16, 0.60)) 0%, var(--main-ribbon-background-color-orange-2, rgba(121, 69, 32, 0.60)) 100%), var(--main-body-background-color, #0D0D0D);
+		background: linear-gradient(90deg, var(--main-ribbon-background-color-orange, rgba(255, 210, 178, 0.6)) 0%, var(--main-ribbon-background-color-orange-2, #FF6900) 100%), var(--main-body-background-color, #FCFCFC);
 		border-bottom: 1px solid var(--main-ribbon-border-color-orange, rgba(81, 46, 21, 0.60));
 	}
 	
@@ -416,7 +416,7 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 	padding: 3px;
 	margin-top: 0px;
 	display: none;
-	background: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.60));
+	background: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.85));
 	border: 1px solid var(--border-color);
 	border-radius: var(--page-radius-pill);
 	width: 40px;

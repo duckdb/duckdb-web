@@ -105,7 +105,7 @@ body.notfound{
 /** REDESIGNED 404 PAGE (notfoundv2) **/
 
 body.notfoundv2{
-	background: var(--main-body-background-color, #fafafa);
+	background: var(--main-body-background-color, #FCFCFC);
 
 	.notfoundv2{
 		display: flex;
@@ -159,7 +159,7 @@ body.notfoundv2{
 			width: 14px;
 			height: 14px;
 			flex-shrink: 0;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 		}
 
 		&:hover{
@@ -171,7 +171,7 @@ body.notfoundv2{
 		font-size: 14px;
 		font-weight: 400;
 		letter-spacing: -0.14px;
-		color: var(--main-text-secondary-color, #666);
+		color: var(--main-text-secondary-color, #333333);
 	}
 
 	.notfoundv2-find{

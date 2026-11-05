@@ -54,9 +54,9 @@
 	font-family: "SuisseIntl", sans-serif;
 }
 
-@mixin label {
-	font-size: var(--type-label, 14px);
-	font-weight: 400;
+@mixin label-1 {
+	font-size: var(--type-label-1, 14px);
+	font-weight: var(--type-weight-standard, 450);
 	line-height: 1;
 	letter-spacing: 0.001em;
 	font-family: "SuisseIntl", sans-serif;
@@ -105,18 +105,11 @@
 	font-family: "SuisseIntl", sans-serif;
 }
 
-@mixin meta {
-	font-size: var(--type-meta, 12px);
-	font-weight: 400;
-	line-height: 1.2;
-	font-family: "SuisseIntl", sans-serif;
-}
-
 @mixin tiny {
 	font-size: var(--type-tiny, 12px);
-	font-weight: var(--type-weight-standard, 450);
+	font-weight: 400;
 	line-height: 1.2;
-	letter-spacing: 0.005em;
+	letter-spacing: 0.02em;
 	font-family: "SuisseIntl", sans-serif;
 }
 
@@ -197,9 +190,9 @@
 }
 
 @mixin card-surface {
-	border: 1px solid var(--border-color, #E6E6E6);
-	border-radius: var(--page-radius-box-inner, 8px);
-	background: var(--main-body-background-color, #FAFAFA);
+	border: 1px solid var(--border-color, rgba(217, 217, 217, 0.6));
+	border-radius: var(--page-radius-box-inner, 10px);
+	background: var(--main-body-background-color, #FCFCFC);
 	color: var(--main-text-primary-color, #0D0D0D);
 }
 
@@ -242,7 +235,7 @@
 
 
 @mixin button {
-	@include label;
+	@include label-1;
 	display: inline-block;
 	cursor: pointer;
 	transition: all .3s;
@@ -270,9 +263,9 @@
 		}
 	}
 	&.black{
-		background: var(--main-text-primary-color, #F2F2F2);
+		background: var(--main-text-primary-color, #0D0D0D);
 		border: 1px solid black;
-		color: var(--main-body-background-color, #0D0D0D);
+		color: var(--main-body-background-color, #FCFCFC);
 		&:hover{
 	
 		}
@@ -289,7 +282,7 @@
 	&.transparent{
 		border: 1px solid var(--border-color);
 		backdrop-filter: blur(5px);
-		color: var(--interactive-button-black-border-color, #999);
+		color: var(--interactive-button-black-border-color, #1A1A1A);
 		&:hover{
 			border-color: var(--border-color-hover);
 			background: transparent;
@@ -328,7 +321,7 @@
 }
 
 @mixin textbutton{
-	@include label;
+	@include label-1;
 	color: inherit;
 	text-decoration: none;
 	display: inline;
@@ -596,7 +589,7 @@
 @mixin nav-section-label {
 	@include side-menu;
 	font-weight: 400;
-	color: var(--main-text-tertiary-color, #B2B2B2);
+	color: var(--main-text-tertiary-color, #666666);
 }
 
 @mixin nav-element-row {
@@ -610,7 +603,7 @@
 	border-left: 1px solid var(--border-color, rgba(217, 217, 217, 0.6));
 	font-weight: 400;
 	letter-spacing: 0.02em;
-	color: var(--main-text-secondary-color, #666);
+	color: var(--main-text-secondary-color, #333333);
 	text-decoration: none;
 	transition: color .2s;
 

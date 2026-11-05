@@ -10,7 +10,7 @@ body.quack {
 	main {
 		--quack-codecard-bg: var(--doc-codebox-background-color, #f2f2f2);
 		--quack-step-label-color: var(--main-benefit-icon-color, #998b00);
-		--quack-text-secondary: var(--main-text-secondary-color, #666);
+		--quack-text-secondary: var(--main-text-secondary-color, #333333);
 	}
 
 	.section-title {
@@ -32,7 +32,7 @@ body.quack {
 		.hero-subtitle {
 			margin: 20px auto 30px;
 			max-width: 640px;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 			font-size: 16px;
 			line-height: 1.4;
 
@@ -384,7 +384,7 @@ body.quack {
 			font-size: var(--type-tiny, 12px);
 			line-height: 1.2;
 			text-transform: uppercase;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 			transition: border-color 0.2s, background-color 0.2s;
 
 			a {
@@ -414,8 +414,8 @@ body.quack {
 		display: flex;
 		align-items: center;
 		gap: 16px;
-		padding: var(--page-box-padding-primary, 24px);
-		padding-bottom: calc(var(--page-box-padding-primary, 24px) / 2);
+		padding: var(--page-box-padding-primary, 32px);
+		padding-bottom: calc(var(--page-box-padding-primary, 32px) / 2);
 		border-bottom: 1px solid var(--border-color);
 	}
 
@@ -460,8 +460,8 @@ body.quack {
 		display: flex;
 		flex-direction: column;
 		flex: 1 1 auto;
-		padding: var(--page-box-padding-primary, 24px);
-		padding-top: calc(var(--page-box-padding-primary, 24px) / 2);
+		padding: var(--page-box-padding-primary, 32px);
+		padding-top: calc(var(--page-box-padding-primary, 32px) / 2);
 
 		.bento-link {
 			display: inline-flex;
@@ -470,10 +470,10 @@ body.quack {
 			gap: 7px;
 			margin-top: auto;
 			padding-top: 16px;
-			font-size: var(--type-label, 14px);
+			font-size: var(--type-label-1, 14px);
 			font-weight: var(--type-weight-standard, 450);
 			line-height: 1;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 			text-decoration: none;
 
 			.icon {
@@ -500,7 +500,7 @@ body.quack {
 			margin-right: 8px;
 			font-size: var(--type-tiny, 12px);
 			letter-spacing: 0.24px;
-			color: var(--main-text-tertiary-color, #b2b2b2);
+			color: var(--main-text-tertiary-color, #666666);
 		}
 
 		.tag {
@@ -586,7 +586,7 @@ body.quack {
 
 		.textbutton {
 			margin-top: 14px;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 
 			@media only screen and (max-width: 900px) {
 				margin-top: 0;
@@ -607,7 +607,7 @@ body.quack {
 			margin: 0;
 			font-size: 17px;
 			line-height: 1.6;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 		}
 
 		code {
@@ -759,7 +759,7 @@ body.quack {
 			}
 
 			.textbutton {
-				color: var(--main-text-secondary-color, #666);
+				color: var(--main-text-secondary-color, #333333);
 
 				&:hover {
 					color: var(--main-link-hover-color, #998B00);

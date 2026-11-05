@@ -39,7 +39,7 @@ body.documentation.guides-index {
 
         .versiontrigger,
         #topic-filter .versionsidebar li {
-            @include label;
+            @include label-1;
         }
 
         .versiontrigger {
@@ -87,7 +87,7 @@ body.documentation.guides-index {
         .guide-card-topic {
             @include tiny;
             grid-column: 1 / -1;
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
         }
 
         .guide-card-title {

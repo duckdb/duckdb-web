@@ -70,7 +70,7 @@ body.design{
 		&__caption{
 			margin: 8px 0 0;
 			font-size: 13px;
-			color: var(--main-text-secondary-color, #626262);
+			color: var(--main-text-secondary-color, #333333);
 			text-align: center;
 		}
 	}
@@ -177,7 +177,7 @@ body.design{
 		}
 
 		&__name{
-			font-size: var(--type-label, 14px);
+			font-size: var(--type-label-1, 14px);
 			font-weight: 600;
 			line-height: 1;
 			letter-spacing: 0.014px;
@@ -248,14 +248,14 @@ body.history{
 	}
 
 	.timeline-year{
-		@include label();
+		@include label-1();
 		position: sticky;
 		top: 100px;
 		z-index: 1;
 		display: flex;
 		align-items: center;
 		gap: 15px;
-		color: var(--main-text-secondary-color, #666);
+		color: var(--main-text-secondary-color, #333333);
 
 		@media only screen and (max-width: 660px){
 			gap: 8px;
