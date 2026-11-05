@@ -435,16 +435,6 @@ body.installation{
 		margin-top: 24px;
 	}
 
-	a.download-btn{
-		border: 1px solid transparent;
-		transition: border-color .2s;
-
-		&:hover{
-			border-color: var(--border-color-hover);
-			background: transparent;
-		}
-	}
-
 	#sidebar{
 		display: none;
 	}
@@ -457,8 +447,9 @@ a.download-btn{
 	width: fit-content;
 	gap: 6px;
 	padding: 5px 15px 5px 5px;
+	border: 1px solid transparent;
 	border-radius: var(--page-radius-box-inner);
-	transition: background-color .2s;
+	transition: border-color .2s;
 	text-decoration: none;
 	color: inherit;
 	@include label-1;
@@ -475,16 +466,20 @@ a.download-btn{
 		height: 40px;
 		content: "";
 		display: inline-block;
-		transition: all .3s;
+		transition: border-color .2s;
 	}
-	
+
 	&:after{
 		display: none!important;
 	}
-	
+
 	&:hover{
 		color: var(--main-text-primary-color, #0D0D0D);
-		background: var(--doc-sidebar-selected-background-color, #F2F2F2);
+		border-color: var(--border-color-hover);
+
+		&:before{
+			border-color: transparent;
+		}
 	}
 }
 
