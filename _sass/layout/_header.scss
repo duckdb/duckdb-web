@@ -96,16 +96,15 @@ header .headerline {
 				/* Dropdown Menus */
 				.hasSub+.submenuwrap {
 					position: absolute;
-					top: $site-header-height - 25px;
+					top: $site-header-height - 10px;
 					left: -15px;
-					padding-top: 30px;
 					opacity: 0;
 					visibility: hidden;
 					
 					ul {
 						background: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.85));
 						list-style-type: none;
-						border-radius: var(--page-radius-box);
+						border-radius: var(--page-radius-m);
 						border: 1px solid var(--border-color);
 						backdrop-filter: blur(15px);
 						@include menu-dropdown-padding;
@@ -123,7 +122,7 @@ header .headerline {
 							padding: 0 16px;
 							font-size: var(--type-side-menu, 13px);
 							line-height: 1;
-							border-radius: var(--page-radius-pill);
+							border-radius: var(--page-radius-s);
 							white-space: nowrap;
 							transition: all 0.2s;
 							background: transparent;

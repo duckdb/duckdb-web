@@ -39,7 +39,7 @@ $(document).ready(function(){
 			}, 300, 'swing');
 			if ($('body').hasClass('faq')) {
 				$(hash).parent('.qa-wrap').addClass('open');
-				$(hash).parent('.qa-wrap').find('.answer').slideDown(300);
+				$(hash).parent('.qa-wrap').find('.answer').slideDown(150);
 			}
 		}
 	}
@@ -289,11 +289,11 @@ $(document).ready(function(){
 		var $qaWrap = $(this);
 		if ($(event.target).is('h3') || $(event.target).closest('h3').length) {
 			$qaWrap.toggleClass('open');
-			$qaWrap.find('.answer').slideToggle(400);
+			$qaWrap.find('.answer').slideToggle(150);
 		} 
 		else if (!$qaWrap.hasClass('open')) {
 			$qaWrap.addClass('open');
-			$qaWrap.find('.answer').slideDown(400);
+			$qaWrap.find('.answer').slideDown(150);
 		}
 	});
 	$('.qa-wrap .answer a').click(function(event) {

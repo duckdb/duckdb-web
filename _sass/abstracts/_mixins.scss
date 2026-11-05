@@ -138,19 +138,13 @@
 }
 
 @mixin menu-dropdown-padding {
-	padding: 15px 10px;
-}
-
-@mixin menu-dropdown-item-spacing {
-	line-height: 1;
-	padding: 15px 20px;
-	margin: 0;
+	padding: 8px;
 }
 
 @mixin menu-dropdown-list {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
+	gap: 2px;
 }
 
 @mixin menu-dropdown-item-states {
@@ -194,6 +188,26 @@
 	border-radius: var(--page-radius-box-inner, 10px);
 	background: var(--main-body-background-color, #FCFCFC);
 	color: var(--main-text-primary-color, #0D0D0D);
+}
+
+@mixin foldout-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	border: 1px solid transparent;
+	border-radius: 50%;
+	background-color: var(--doc-codebox-button-background-color, rgba(242, 242, 242, 0.6));
+	transition: border-color .2s;
+
+	svg.icon{
+		width: 18px;
+		height: 18px;
+		stroke-width: 2;
+		color: var(--main-text-primary-color, #0D0D0D);
+		transition: transform .3s;
+	}
 }
 
 @mixin navigation-card {
