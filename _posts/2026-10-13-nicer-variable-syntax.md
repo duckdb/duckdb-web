@@ -142,4 +142,4 @@ DuckDB 2.0 makes session variables easier to read and easier to combine with pre
 * A named prepared statement parameter falls back to the session variable of the same name when you do not supply it, and an explicit argument always wins.
 * Positional parameters are matched by position only and do not fall back to variables.
 
-For the full reference, see the [`SET VARIABLE` statement]({% link docs/2.0/sql/statements/set_variable.md %}) and [prepared statements]({% link docs/2.0/sql/query_syntax/prepared_statements.md %}) pages, both listed among DuckDB's [friendly SQL features]({% link docs/2.0/sql/dialect/friendly_sql.md %}).
+For the full reference, see the [`SET VARIABLE` statement]({% link docs/2.0/sql/statements/set_variable.md %}) and [prepared statements]({% link docs/2.0/sql/query_syntax/prepared_statements.md %}) pages, both listed among DuckDB’s [friendly SQL features]({% link docs/2.0/sql/dialect/friendly_sql.md %}).
