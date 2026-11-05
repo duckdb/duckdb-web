@@ -1,6 +1,7 @@
 ---
 layout: default
 title: DuckDB Community Support Policy
+description: The DuckDB community support policy, covering where to file issues, response times, and which clients, extensions, and platforms are in scope.
 body_class: history blog_typography
 toc: true
 redirect_from:

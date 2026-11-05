@@ -1,6 +1,7 @@
 ---
 layout: default
 title: DUCKDB™ Trademark use guidelines
+description: Guidelines for using the DuckDB trademarks, held by the DuckDB Foundation.
 body_class: tmguidelines
 max_page_width: small
 redirect_from:

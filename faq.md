@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Frequently Asked Questions
+description: Frequently asked questions about DuckDB, the DuckDB Foundation, DuckDB Labs, and the project.
 body_class: faq
 max_page_width: medium
 toc: false

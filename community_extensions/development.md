@@ -1,6 +1,7 @@
 ---
 layout: community_extension_doc
 title: Development
+description: How to develop, build, and test a DuckDB Community Extension.
 ---
 
 ## Building

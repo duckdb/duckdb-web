@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Development Roadmap
+description: The development roadmap of DuckDB, compiled by the DuckDB maintainers.
 body_class: roadmap blog_typography post
 redirect_from:
 - /docs/lts/dev/roadmap
