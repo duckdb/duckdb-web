@@ -16,6 +16,8 @@ redirect_from:
   <div class="pagetitle-heading" role="heading" aria-level="1">DuckDB Preview (Alpha/Nightly) Installation</div>
 </div>
 
+> Alpha releases currently cannot load [community extensions]({% link community_extensions/index.md %}).
+
 The preview (nightly) builds provide development versions of DuckDB. As such, they are constantly in flux and they are less suitable for production use than the stable releases of DuckDB. You should only use these releases if you are looking for [recent bugfixes](https://github.com/duckdb/duckdb/pulls?q=is%3Apr+is%3Amerged) or optimizations.
 
 There are currently the following DuckDB versions under development:
