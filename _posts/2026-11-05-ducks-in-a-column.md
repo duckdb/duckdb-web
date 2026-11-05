@@ -141,7 +141,7 @@ FROM sightings
 GROUP BY ALL;
 ```
 
-**`arg_max`** answers "which duck had the biggest X" without a self-join.
+**`arg_max`** answers “which duck had the biggest X” without a self-join.
 
 ```sql
 SELECT pond, arg_max(species, weight_g) AS heaviest_species, max(weight_g)
@@ -183,7 +183,7 @@ FROM daily_counts
 WINDOW w AS (PARTITION BY pond ORDER BY seen_at);
 ```
 
-**`QUALIFY`** filters on a window result directly, so "latest sighting per duck" needs no subquery.
+**`QUALIFY`** filters on a window result directly, so “latest sighting per duck” needs no subquery.
 
 ```sql
 SELECT *
