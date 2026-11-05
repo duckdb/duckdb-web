@@ -438,140 +438,6 @@ body.landing{
 	}
 	
 	
-	/** NEW CUSTOM SELECT BOX WITH JS**/
-	$select-background: #c1b73d;
-	$select-width: 240px;
-	$select-height: 38px;
-	
-	.select-hidden {
-		display: none;
-		visibility: hidden;
-		padding-right: 10px;
-	}
-	
-	.select {
-		cursor: pointer;
-		display: inline-block;
-		position: relative;
-		color: black;
-		min-width: $select-width;
-		@include label-1();
-	}
-	
-	.select-styled {
-		position: relative;
-		display: inline-flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 8px;
-		box-sizing: border-box;
-		color: var(--interactive-button-black-border-color, #1A1A1A);
-		background: var(--menu-dropdown-background-color, #F2F2F2);
-		border: 1px solid var(--border-color);
-		padding: 12px 14px 12px 20px;
-		-webkit-transition: all 0.2s ease-in;
-		-o-transition: all 0.2s ease-in;
-		transition: all 0.2s ease-in;
-		border-radius: var(--page-radius-pill);
-		z-index: 710;
-		word-break: keep-all;
-		> span{
-			@include label-1();
-			color: inherit;
-			line-height: 1;
-		}
-		svg.arrow {
-			width: 16px;
-			height: 16px;
-			flex-shrink: 0;
-			fill: none;
-			stroke-width: 2.5;
-			color: var(--interactive-button-black-border-color, #1A1A1A);
-			-webkit-transition: transform .3s;
-			-o-transition: transform .3s;
-			transition: transform .3s;
-		}
-		&:hover {
-			//background-color: $select-background;
-		}
-		&:active,
-		&.active {
-			svg.arrow {
-				-webkit-transform: rotate(-180deg);
-					-ms-transform: rotate(-180deg);
-						transform: rotate(-180deg);
-			}
-		}
-	}
-	
-	.select-options {
-		visibility: hidden;
-		opacity: 0;
-		transform: translateY(4px);
-		position: absolute;
-		top: calc(100% + 4px);
-		z-index: 700;
-		margin: 0;
-		list-style: none;
-		background: var(--menu-dropdown-background-color, #F2F2F2);
-		border: 1px solid var(--border-color);
-		border-radius: var(--page-radius-box);
-		padding: 8px;
-		transition: opacity .15s ease, transform .15s ease, visibility 0s linear .15s;
-		-webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
-				filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
-
-		@media (prefers-reduced-motion: reduce) {
-			transition: none;
-		}
-		li {
-			word-break: keep-all;
-			margin: 2px 0;
-			padding: 8px 12px;
-			font-weight: 450;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 8px;
-			-webkit-transition: all 0.15s ease-in;
-			-o-transition: all 0.15s ease-in;
-			transition: all 0.15s ease-in;
-			color: var(--main-text-primary-color, #0D0D0D);
-			&:hover,
-			&.is-selected {
-				background: var(--menu-dropdown-item-background-hover, #E6E6E6);
-				border-radius: var(--page-radius-pill);
-			}
-			&.is-selected {
-				font-weight: 500;
-
-				svg.icon.check {
-					width: 12px;
-					height: 12px;
-					flex-shrink: 0;
-					stroke-width: 3;
-					color: var(--main-text-secondary-color, #333333);
-				}
-			}
-			&[rel="hide"] {
-				display: none;
-			}
-		}
-	}
-
-	.select-styled.active + .select-options {
-		visibility: visible;
-		opacity: 1;
-		transform: translateY(0);
-		transition-delay: 0s;
-	}
-
-	.select-styled:focus-visible {
-		outline: none;
-		border-color: var(--main-link-hover, #665d00);
-	}
-
-
 	/** WELCOME / HERO SECTION **/
 	section.welcome{
 		z-index: 11;
@@ -1053,6 +919,7 @@ body.landing{
 			}
 			.result a.download-btn{
 				margin: 0;
+				transition: border-color .2s;
 			}
 			.bottombar{
 				border: 0;
