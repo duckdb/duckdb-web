@@ -1,0 +1,11 @@
+<svg width="1200" height="628" viewBox="0 0 1200 628" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="628" fill="#1C1C1C"/>
+  <rect x="80" y="190" width="700" height="248" rx="16" fill="#242424" stroke="#3A3A3A" stroke-width="2"/>
+  <text x="112" y="258" font-family="'SF Mono','Menlo','Consolas',monospace" font-size="34" fill="#9AA0A6">SET VARIABLE x = <tspan fill="#FFF000">5</tspan>;</text>
+  <text x="112" y="326" font-family="'SF Mono','Menlo','Consolas',monospace" font-size="34" fill="#9AA0A6">SELECT <tspan fill="#FFF000" font-weight="bold">$x</tspan>;</text>
+  <text x="112" y="394" font-family="'SF Mono','Menlo','Consolas',monospace" font-size="34" fill="#5F6368">-- 5</text>
+  <text x="840" y="300" font-family="'Helvetica Neue',Arial,sans-serif" font-size="52" font-weight="bold" fill="#FFFFFF">Nicer</text>
+  <text x="840" y="358" font-family="'Helvetica Neue',Arial,sans-serif" font-size="52" font-weight="bold" fill="#FFFFFF">Variable</text>
+  <text x="840" y="416" font-family="'Helvetica Neue',Arial,sans-serif" font-size="52" font-weight="bold" fill="#FFF000">Syntax</text>
+  <text x="840" y="474" font-family="'Helvetica Neue',Arial,sans-serif" font-size="26" fill="#9AA0A6">DuckDB 2.0</text>
+</svg>
