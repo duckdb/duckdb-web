@@ -36,13 +36,13 @@ The transformation stage is where DuckDB saves the most time. **“This is where
 
 SproutMe chose BigQuery early because the team was already familiar with Google’s infrastructure. A full end-to-end run there can take one to two hours. That works for production, but it is too slow for a team pushing several changes a day and waiting on feedback from local and CI runs each time.
 
-Running the same pipeline on DuckDB shortens the wait between changes. In SproutMe’s measurements, the same dbt project, command, and real data ran on both engines. The integration test step, which runs on every merge, fell from a median of 10.65 minutes to **0.76 minutes**. That is a 92.9 percent reduction across 88 CI/CD runs. The dbt runs also got faster. On local test accounts, a full backfill dropped from 180.2 seconds to 104.6 seconds, and a daily incremental build dropped from 300.3 seconds to 120.7 seconds. DuckDB times are medians of five runs.
+Running the same pipeline on DuckDB shortens the wait between changes. In SproutMe’s measurements, the same dbt project, command, and real data ran on both engines. The integration test step, which runs on every merge, fell from a median of 10.65 minutes (639.0 seconds) to **0.76 minutes (45.6 seconds)**. That is a 92.9 percent reduction across 88 CI/CD runs. The dbt runs also got faster. On local test accounts, a full backfill dropped from 180.2 seconds to 104.6 seconds, and a daily incremental build dropped from 300.3 seconds to 120.7 seconds. DuckDB times are medians of five runs. The table below lists all timings in seconds.
 
 <div class="center_aligned_header_table"></div>
 
 | What we measured | BigQuery | DuckDB | Time saved |
-|---|---|---|---|
-| Integration test step, per merge | 10.65 min | 0.76 min | 92.9% |
+|---|---:|---:|---:|
+| Integration test step, per merge | 639.0 s | 45.6 s | 92.9% |
 | Full dbt backfill | 180.2 s | 104.6 s | 42.0% |
 | Daily incremental dbt build | 300.3 s | 120.7 s | 59.8% |
 | Backfill and daily build together | 480.5 s | 225.3 s | 53.1% |
@@ -59,4 +59,4 @@ SproutMe has used DuckDB for only a month or two, but the results have made the 
 
 SproutMe shows that DuckDB can fit into an existing Cloud data architecture without replacing anything in production. The integration tests now finish in under a minute, which keeps pace with the team. Feedback arrives sooner, which lowers the risk of shipping a regression, and BigQuery keeps serving the live product.
 
-We would like to thank Archit for the conversation. If you use DuckDB and want to share your story, email [quack@duckdb.org](mailto:quack@duckdb.org).
+We would like to thank Archit for the conversation. If you use DuckDB and want to share your story, email [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com).
