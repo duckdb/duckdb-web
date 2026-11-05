@@ -66,10 +66,10 @@ docs:
     The [publication guide](https://github.com/drive9-ai/duckdb/blob/797d2c6250592d2b84716ebf43198b39bdfd3241/docs/distribution.md)
     documents the official build and artifact-level regression tests.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 146
-extension_download_count_pretty: 146
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 218
+extension_download_count_pretty: 218
 image: '/images/community_extensions/social_preview/preview_community_extension_tidbfs.png'
 layout: community_extension_doc
 ---

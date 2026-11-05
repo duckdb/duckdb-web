@@ -73,10 +73,10 @@ docs:
     The extension is MIT licensed. The DecisionTune 1.0 weights are Apache-2.0. The model's probabilities are not
     calibrated; do not use it for high-risk decisions about people without independent validation.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 493
-extension_download_count_pretty: 493
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 540
+extension_download_count_pretty: 540
 image: '/images/community_extensions/social_preview/preview_community_extension_decision_tune.png'
 layout: community_extension_doc
 ---

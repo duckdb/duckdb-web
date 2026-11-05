@@ -23,10 +23,10 @@ repo:
   # serves both (and v1.4.5 via the ref fallback).
   variegata: 0714cb05413ac40161d1b9ec641b4fb6b974a4ea
 
-extension_star_count: 31
-extension_star_count_pretty: 31
-extension_download_count: 964
-extension_download_count_pretty: 964
+extension_star_count: 32
+extension_star_count_pretty: 32
+extension_download_count: 945
+extension_download_count_pretty: 945
 image: '/images/community_extensions/social_preview/preview_community_extension_quack_oauth.png'
 layout: community_extension_doc
 ---

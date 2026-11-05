@@ -129,10 +129,10 @@ docs:
 
     Full test suite with 2058 passing assertions across 60 test files.
 
-extension_star_count: 32
-extension_star_count_pretty: 32
-extension_download_count: 2015
-extension_download_count_pretty: 2.0k
+extension_star_count: 33
+extension_star_count_pretty: 33
+extension_download_count: 1919
+extension_download_count_pretty: 1.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc
 ---
