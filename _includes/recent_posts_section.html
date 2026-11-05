@@ -1,17 +1,17 @@
 {% if page.collection == "events" %}
 	{% assign recent_heading = "Other Events" %}
 	{% assign recent_link = "/events/" %}
-	{% assign recent_link_text = "All events" %}
+	{% assign recent_link_text = "All Events" %}
 	{% assign items = site.events | sort: "date" | reverse %}
 {% elsif page.collection == "library" or page.collection == "everywhere" %}
 	{% assign recent_heading = "Other Library Resources" %}
 	{% assign recent_link = "/library/" %}
-	{% assign recent_link_text = "All library resources" %}
+	{% assign recent_link_text = "All Library Resources" %}
 	{% assign items = site.library | concat: site.everywhere | sort: "date" | reverse %}
 {% else %}
-	{% assign recent_heading = "Recent posts" %}
+	{% assign recent_heading = "Recent Posts" %}
 	{% assign recent_link = "/news/" %}
-	{% assign recent_link_text = "All blog posts" %}
+	{% assign recent_link_text = "All Blog Posts" %}
 	{% assign items = site.posts %}
 {% endif %}
 

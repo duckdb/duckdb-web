@@ -7,13 +7,13 @@ blog:
       label: Using DuckDB
       heading: Using DuckDB
     - value: case-study
-      label: Case study
+      label: Case Study
       heading: Case Studies
     - value: benchmark
       label: Benchmark
       heading: Benchmarks
     - value: deep-dive
-      label: Deep dive
+      label: Deep Dive
       heading: Deep Dives
     - value: extensions
       label: Extension
@@ -23,7 +23,7 @@ blog:
       heading: Releases
 
 library:
-  core_toggle: Core only
+  core_toggle: Core Only
   filters:
     - value: article
       label: Article
