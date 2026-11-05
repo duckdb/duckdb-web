@@ -5,8 +5,8 @@ authors:
   - Archit Dukhande
   - Geertjan Wielenga
   - Tim Cox
-thumb: "/images/blog/thumbs/user-archit-dukhande.svg"
-image: "/images/blog/thumbs/user-archit-dukhande.png"
+thumb: "/images/blog/thumbs/sproutme.svg"
+image: "/images/blog/thumbs/sproutme.png"
 excerpt: "At [SproutMe](https://sproutme.ai/), a fast-moving, early-stage AI marketing startup, data engineer [Archit Dukhande](https://www.linkedin.com/in/archit-dukhande/) added DuckDB to their local development and CI workflow for a data-heavy AI product. Running the integration tests on DuckDB cut the step per merge by 92.9 percent, from 10.65 minutes to 0.76 minutes, so the team can ship several changes a day without putting users at risk."
 tag: using-duckdb
 ---
