@@ -1,0 +1,17 @@
+module: widget
+functions:
+  widget_from_gadget:
+    lifecycle:
+      - ["stable", "v1.5.6", "2026-07-30"]
+      - ["unstable", "v1.5.0", "2026-03-06"]
+    parameters:
+      gadget:
+        type: gadget
+        description: A gadget created with `[[create_gadget]]`.
+      kind:
+        type: MINI_KIND
+        description: The kind, see `[[MINI_KIND]]`.
+    return_type: widget
+    description: |
+      Builds a `[[widget]]` from a gadget.
+    return_description: The widget.

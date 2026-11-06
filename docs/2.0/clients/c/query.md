@@ -53,7 +53,7 @@ See the [Types]({% link docs/2.0/clients/c/types.md %}) page for more informatio
 > For optimal performance, use `duckdb_fetch_chunk` to extract data from the query result.
 > The `duckdb_value` functions perform internal type-checking, bounds-checking, and casting which makes them slower.
 
-### `duckdb_fetch_chunk`
+### Fetching Data Chunks
 
 Below is an end-to-end example that prints the above result to CSV format using the `duckdb_fetch_chunk` function.
 Note that the function is NOT generic: we do need to know exactly what the types of the result columns are.
@@ -153,15 +153,35 @@ for (idx_t row = 0; row < row_count; row++) {
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_column_logical_type"><span class="nf">duckdb_column_logical_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
 <span class="kt">duckdb_arrow_options</span> <a href="#duckdb_result_get_arrow_options"><span class="nf">duckdb_result_get_arrow_options</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_column_count"><span class="nf">duckdb_column_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_row_count"><span class="nf">duckdb_row_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_rows_changed"><span class="nf">duckdb_rows_changed</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
-<span class="kt">void</span> *<a href="#duckdb_column_data"><span class="nf">duckdb_column_data</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
-<span class="kt">bool</span> *<a href="#duckdb_nullmask_data"><span class="nf">duckdb_nullmask_data</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_result_error"><span class="nf">duckdb_result_error</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
 <span class="kt">duckdb_error_type</span> <a href="#duckdb_result_error_type"><span class="nf">duckdb_result_error_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
+<span class="kt">duckdb_result_type</span> <a href="#duckdb_result_return_type"><span class="nf">duckdb_result_return_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<span class="kt">duckdb_data_chunk</span> <a href="#duckdb_fetch_chunk"><span class="nf">duckdb_fetch_chunk</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<span class="kt">duckdb_error_data</span> <a href="#duckdb_create_error_data"><span class="nf">duckdb_create_error_data</span></a>(<span class="kt">duckdb_error_type</span> <span class="nv">type</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">message</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_error_data"><span class="nf">duckdb_destroy_error_data</span></a>(<span class="kt">duckdb_error_data</span> *<span class="nv">error_data</span>);
+<span class="kt">duckdb_error_type</span> <a href="#duckdb_error_data_error_type"><span class="nf">duckdb_error_data_error_type</span></a>(<span class="kt">duckdb_error_data</span> <span class="nv">error_data</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_error_data_message"><span class="nf">duckdb_error_data_message</span></a>(<span class="kt">duckdb_error_data</span> <span class="nv">error_data</span>);
+<span class="kt">bool</span> <a href="#duckdb_error_data_has_error"><span class="nf">duckdb_error_data_has_error</span></a>(<span class="kt">duckdb_error_data</span> <span class="nv">error_data</span>);
+<span class="kt">void</span> *<a href="#duckdb_malloc"><span class="nf">duckdb_malloc</span></a>(<span class="kt">size_t</span> <span class="nv">size</span>);
+<span class="kt">void</span> <a href="#duckdb_free"><span class="nf">duckdb_free</span></a>(<span class="kt">void</span> *<span class="nv">ptr</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_vector_size"><span class="nf">duckdb_vector_size</span></a>(<span class="kt">void</span>);
+<span class="kt">bool</span> <a href="#duckdb_string_is_inlined"><span class="nf">duckdb_string_is_inlined</span></a>(<span class="kt">duckdb_string_t</span> <span class="nv">string</span>);
+<span class="kt">uint32_t</span> <a href="#duckdb_string_t_length"><span class="nf">duckdb_string_t_length</span></a>(<span class="kt">duckdb_string_t</span> <span class="nv">string</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_string_t_data"><span class="nf">duckdb_string_t_data</span></a>(<span class="kt">duckdb_string_t</span> *<span class="nv">string</span>);
+<span class="kt">duckdb_error_data</span> <a href="#duckdb_valid_utf8_check"><span class="nf">duckdb_valid_utf8_check</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">str</span>, <span class="kt">idx_t</span> <span class="nv">len</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_row_count"><span class="nf">duckdb_row_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
+<span class="kt">void</span> *<a href="#duckdb_column_data"><span class="nf">duckdb_column_data</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="kt">bool</span> *<a href="#duckdb_nullmask_data"><span class="nf">duckdb_nullmask_data</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="kt">duckdb_data_chunk</span> <a href="#duckdb_result_get_chunk"><span class="nf">duckdb_result_get_chunk</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">chunk_index</span>);
+<span class="kt">bool</span> <a href="#duckdb_result_is_streaming"><span class="nf">duckdb_result_is_streaming</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_result_chunk_count"><span class="nf">duckdb_result_chunk_count</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<span class="kt">duckdb_data_chunk</span> <a href="#duckdb_stream_fetch_chunk"><span class="nf">duckdb_stream_fetch_chunk</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
 </code></pre></div></div>
 
 #### `duckdb_query`
+
+Stable since 0.1.0.
 
 Executes a SQL query within a connection and stores the full (materialized) result in the out_result pointer.
 If the query fails to execute, DuckDBError is returned and the error message can be retrieved by calling
@@ -172,12 +192,13 @@ query fails, otherwise the error stored within the result will not be freed corr
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_query</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">out_result
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_query(
+  duckdb_connection connection,
+  const char *query,
+  duckdb_result *out_result
+);
+```
 
 ##### Parameters
 
@@ -193,14 +214,24 @@ query fails, otherwise the error stored within the result will not be freed corr
 
 #### `duckdb_destroy_result`
 
+Stable since 0.1.0.
+
 Closes the result and de-allocates all memory allocated for that result.
+
+Destroying a streaming result whose statement has not completed aborts the statement. On autocommit, its writes
+are rolled back. Inside a transaction, a statement that may write invalidates the transaction, and a read-only
+statement just stops. Until the statement has completed, preparing or running another statement on the
+connection fails with `DUCKDB_ERROR_RESOURCE_IN_USE` and leaves it untouched. To make sure the statement takes
+effect, complete it by fetching until `duckdb_fetch_chunk` returns NULL before destroying the result. A NULL
+chunk is also returned on an error, so check `duckdb_result_error` afterwards.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_result</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
-</span>);
-</code></pre></div></div>
+```c
+void duckdb_destroy_result(
+  duckdb_result *result
+);
+```
 
 ##### Parameters
 
@@ -210,6 +241,8 @@ Closes the result and de-allocates all memory allocated for that result.
 
 #### `duckdb_column_name`
 
+Stable since 0.2.1.
+
 Returns the column name of the specified column. The result should not need to be freed; the column names will
 automatically be destroyed when the result is destroyed.
 
@@ -217,11 +250,12 @@ Returns `NULL` if the column is out of range.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_column_name</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col
-</span>);
-</code></pre></div></div>
+```c
+const char *duckdb_column_name(
+  duckdb_result *result,
+  idx_t col
+);
+```
 
 ##### Parameters
 
@@ -236,17 +270,20 @@ The column name of the specified column.
 
 #### `duckdb_column_type`
 
+Stable since 0.2.9.
+
 Returns the column type of the specified column.
 
 Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_column_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col
-</span>);
-</code></pre></div></div>
+```c
+duckdb_type duckdb_column_type(
+  duckdb_result *result,
+  idx_t col
+);
+```
 
 ##### Parameters
 
@@ -261,14 +298,17 @@ The column type of the specified column.
 
 #### `duckdb_result_statement_type`
 
+Stable since 0.10.0.
+
 Returns the statement type of the statement that was executed
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_statement_type</span> <span class="nv">duckdb_result_statement_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> <span class="nv">result
-</span>);
-</code></pre></div></div>
+```c
+duckdb_statement_type duckdb_result_statement_type(
+  duckdb_result result
+);
+```
 
 ##### Parameters
 
@@ -282,6 +322,8 @@ duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 #### `duckdb_column_logical_type`
 
+Stable since 0.3.3.
+
 Returns the logical column type of the specified column.
 
 The return type of this call should be destroyed with `duckdb_destroy_logical_type`.
@@ -290,11 +332,12 @@ Returns `NULL` if the column is out of range.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_column_logical_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col
-</span>);
-</code></pre></div></div>
+```c
+duckdb_logical_type duckdb_column_logical_type(
+  duckdb_result *result,
+  idx_t col
+);
+```
 
 ##### Parameters
 
@@ -309,15 +352,17 @@ The logical column type of the specified column.
 
 #### `duckdb_result_get_arrow_options`
 
-Returns the arrow options associated with the given result. These options are definitions of how the arrow arrays/schema
-should be produced.
+Stable since 1.5.6.
+
+Returns the arrow options associated with the given result. These options are definitions of how the arrow arrays/schema should be produced.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_arrow_options</span> <span class="nv">duckdb_result_get_arrow_options</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
-</span>);
-</code></pre></div></div>
+```c
+duckdb_arrow_options duckdb_result_get_arrow_options(
+  duckdb_result *result
+);
+```
 
 ##### Parameters
 
@@ -325,21 +370,23 @@ should be produced.
 
 ##### Return Value
 
-The arrow options associated with the given result. This must be destroyed with
-`duckdb_destroy_arrow_options`.
+The arrow options associated with the given result. This must be destroyed with `duckdb_destroy_arrow_options`.
 
 <br>
 
 #### `duckdb_column_count`
 
-Returns the number of columns present in the result object.
+Stable since 0.2.9.
+
+Returns the number of columns present in a the result object.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_column_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
-</span>);
-</code></pre></div></div>
+```c
+idx_t duckdb_column_count(
+  duckdb_result *result
+);
+```
 
 ##### Parameters
 
@@ -351,40 +398,20 @@ The number of columns present in the result object.
 
 <br>
 
-#### `duckdb_row_count`
-
-> Warning Deprecation notice. This method is scheduled for removal in a future release.
-
-Returns the number of rows present in the result object.
-
-##### Syntax
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_row_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
-</span>);
-</code></pre></div></div>
-
-##### Parameters
-
-* `result`: The result object.
-
-##### Return Value
-
-The number of rows present in the result object.
-
-<br>
-
 #### `duckdb_rows_changed`
+
+Stable since 0.2.9.
 
 Returns the number of rows changed by the query stored in the result. This is relevant only for INSERT/UPDATE/DELETE
 queries. For other queries the rows_changed will be 0.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_rows_changed</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
-</span>);
-</code></pre></div></div>
+```c
+idx_t duckdb_rows_changed(
+  duckdb_result *result
+);
+```
 
 ##### Parameters
 
@@ -396,15 +423,425 @@ The number of rows changed.
 
 <br>
 
+#### `duckdb_result_error`
+
+Stable since 0.2.9.
+
+Returns the error message contained within the result. The error is only set if `duckdb_query` returns `DuckDBError`.
+
+The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_result` is called.
+
+##### Syntax
+
+```c
+const char *duckdb_result_error(
+  duckdb_result *result
+);
+```
+
+##### Parameters
+
+* `result`: The result object to fetch the error from.
+
+##### Return Value
+
+The error of the result.
+
+<br>
+
+#### `duckdb_result_error_type`
+
+Stable since 1.1.0.
+
+Returns the result error type contained within the result. The error is only set if `duckdb_query` returns
+`DuckDBError`.
+
+##### Syntax
+
+```c
+duckdb_error_type duckdb_result_error_type(
+  duckdb_result *result
+);
+```
+
+##### Parameters
+
+* `result`: The result object to fetch the error from.
+
+##### Return Value
+
+The error type of the result.
+
+<br>
+
+#### `duckdb_result_return_type`
+
+Stable since 0.10.0.
+
+Returns the return_type of the given result, or DUCKDB_RETURN_TYPE_INVALID on error
+
+##### Syntax
+
+```c
+duckdb_result_type duckdb_result_return_type(
+  duckdb_result result
+);
+```
+
+##### Parameters
+
+* `result`: The result object
+
+##### Return Value
+
+The return_type
+
+<br>
+
+#### `duckdb_fetch_chunk`
+
+Stable since 1.0.0.
+
+Fetches a data chunk from a duckdb_result. This function should be called repeatedly until the result is exhausted.
+
+The result must be destroyed with `duckdb_destroy_data_chunk`.
+
+It is not known beforehand how many chunks will be returned by this result.
+
+##### Syntax
+
+```c
+duckdb_data_chunk duckdb_fetch_chunk(
+  duckdb_result result
+);
+```
+
+##### Parameters
+
+* `result`: The result object to fetch the data chunk from.
+
+##### Return Value
+
+The resulting data chunk. Returns `NULL` if the result has an error.
+
+<br>
+
+#### `duckdb_create_error_data`
+
+Stable since 1.5.6.
+
+Creates duckdb_error_data.
+Must be destroyed with `duckdb_destroy_error_data`.
+
+##### Syntax
+
+```c
+duckdb_error_data duckdb_create_error_data(
+  duckdb_error_type type,
+  const char *message
+);
+```
+
+##### Parameters
+
+* `type`: The error type.
+* `message`: The error message.
+
+##### Return Value
+
+The error data.
+
+<br>
+
+#### `duckdb_destroy_error_data`
+
+Stable since 1.5.6.
+
+Destroys the error data and deallocates its memory.
+
+##### Syntax
+
+```c
+void duckdb_destroy_error_data(
+  duckdb_error_data *error_data
+);
+```
+
+##### Parameters
+
+* `error_data`: The error data to destroy.
+
+<br>
+
+#### `duckdb_error_data_error_type`
+
+Stable since 1.5.6.
+
+Returns the duckdb_error_type of the error data.
+
+##### Syntax
+
+```c
+duckdb_error_type duckdb_error_data_error_type(
+  duckdb_error_data error_data
+);
+```
+
+##### Parameters
+
+* `error_data`: The error data.
+
+##### Return Value
+
+The error type.
+
+<br>
+
+#### `duckdb_error_data_message`
+
+Stable since 1.5.6.
+
+Returns the error message of the error data. Must not be freed.
+
+##### Syntax
+
+```c
+const char *duckdb_error_data_message(
+  duckdb_error_data error_data
+);
+```
+
+##### Parameters
+
+* `error_data`: The error data.
+
+##### Return Value
+
+The error message.
+
+<br>
+
+#### `duckdb_error_data_has_error`
+
+Stable since 1.5.6.
+
+Returns whether the error data contains an error or not.
+
+##### Syntax
+
+```c
+bool duckdb_error_data_has_error(
+  duckdb_error_data error_data
+);
+```
+
+##### Parameters
+
+* `error_data`: The error data.
+
+##### Return Value
+
+True, if the error data contains an exception, else false.
+
+<br>
+
+#### `duckdb_malloc`
+
+Stable since 0.2.7.
+
+Allocate `size` bytes of memory using the duckdb internal malloc function. Any memory allocated in this manner
+should be freed using `duckdb_free`.
+
+##### Syntax
+
+```c
+void *duckdb_malloc(
+  size_t size
+);
+```
+
+##### Parameters
+
+* `size`: The number of bytes to allocate.
+
+##### Return Value
+
+A pointer to the allocated memory region.
+
+<br>
+
+#### `duckdb_free`
+
+Stable since 0.2.7.
+
+Free a value returned from `duckdb_malloc`, `duckdb_value_varchar`, `duckdb_value_blob`, or
+`duckdb_value_string`.
+
+##### Syntax
+
+```c
+void duckdb_free(
+  void *ptr
+);
+```
+
+##### Parameters
+
+* `ptr`: The memory region to de-allocate.
+
+<br>
+
+#### `duckdb_vector_size`
+
+Stable since 0.3.3.
+
+The internal vector size used by DuckDB.
+This is the amount of tuples that will fit into a data chunk created by `duckdb_create_data_chunk`.
+
+##### Syntax
+
+```c
+idx_t duckdb_vector_size(void);
+```
+
+##### Return Value
+
+The vector size.
+
+<br>
+
+#### `duckdb_string_is_inlined`
+
+Stable since 0.8.0.
+
+Whether or not the duckdb_string_t value is inlined.
+This means that the data of the string does not have a separate allocation.
+
+##### Syntax
+
+```c
+bool duckdb_string_is_inlined(
+  duckdb_string_t string
+);
+```
+
+##### Return Value
+
+`bool`
+
+<br>
+
+#### `duckdb_string_t_length`
+
+Stable since 1.1.0.
+
+Get the length of a string
+
+##### Syntax
+
+```c
+uint32_t duckdb_string_t_length(
+  duckdb_string_t string
+);
+```
+
+##### Parameters
+
+* `string`: The string to get the length of.
+
+##### Return Value
+
+The length.
+
+<br>
+
+#### `duckdb_string_t_data`
+
+Stable since 1.1.0.
+
+Get a pointer to the string data of a string
+
+##### Syntax
+
+```c
+const char *duckdb_string_t_data(
+  duckdb_string_t *string
+);
+```
+
+##### Parameters
+
+* `string`: The string to get the pointer to.
+
+##### Return Value
+
+The pointer.
+
+<br>
+
+#### `duckdb_valid_utf8_check`
+
+Stable since 1.5.6.
+
+Checks if a string is valid UTF-8.
+
+##### Syntax
+
+```c
+duckdb_error_data duckdb_valid_utf8_check(
+  const char *str,
+  idx_t len
+);
+```
+
+##### Parameters
+
+* `str`: The string to check
+* `len`: The length of the string (in bytes)
+
+##### Return Value
+
+nullptr if the string is valid UTF-8. Otherwise, a duckdb_error_data containing error information. Must be destroyed with `duckdb_destroy_error_data`.
+
+<br>
+
+#### `duckdb_row_count`
+
+> Deprecated Deprecated since 1.0.0, stable since 0.2.9.
+
+This method is scheduled for removal in a future release.
+
+Returns the number of rows present in the result object.
+
+##### Syntax
+
+```c
+idx_t duckdb_row_count(
+  duckdb_result *result
+);
+```
+
+##### Parameters
+
+* `result`: The result object.
+
+##### Return Value
+
+The number of rows present in the result object.
+
+<br>
+
 #### `duckdb_column_data`
 
-> Deprecated This method has been deprecated. Prefer using `duckdb_result_get_chunk` instead.
+> Deprecated Deprecated since 1.0.0, stable since 0.2.9.
+
+Prefer using `duckdb_result_get_chunk` instead.
 
 Returns the data of a specific column of a result in columnar format.
 
 The function returns a dense array which contains the result data. The exact type stored in the array depends on the
 corresponding duckdb_type (as provided by `duckdb_column_type`). For the exact type by which the data should be
-accessed, see the comments in [the types section](types) or the `DUCKDB_TYPE` enum.
+accessed, see the comments in [the types section]({% link docs/2.0/clients/c/types.md %}) or the `DUCKDB_TYPE` enum.
 
 For example, for a column of type `DUCKDB_TYPE_INTEGER`, rows can be accessed in the following manner:
 ```c
@@ -414,11 +851,12 @@ printf("Data for row %d: %d\n", row, data[row]);
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_column_data</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col
-</span>);
-</code></pre></div></div>
+```c
+void *duckdb_column_data(
+  duckdb_result *result,
+  idx_t col
+);
+```
 
 ##### Parameters
 
@@ -433,7 +871,9 @@ The column data of the specified column.
 
 #### `duckdb_nullmask_data`
 
-> Deprecated This method has been deprecated. Prefer using `duckdb_result_get_chunk` instead.
+> Deprecated Deprecated since 1.0.0, stable since 0.2.9.
+
+Prefer using `duckdb_result_get_chunk` instead.
 
 Returns the nullmask of a specific column of a result in columnar format. The nullmask indicates for every row
 whether or not the corresponding row is `NULL`. If a row is `NULL`, the values present in the array provided
@@ -451,11 +891,12 @@ if (nullmask[row]) {
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> *<span class="nv">duckdb_nullmask_data</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col
-</span>);
-</code></pre></div></div>
+```c
+bool *duckdb_nullmask_data(
+  duckdb_result *result,
+  idx_t col
+);
+```
 
 ##### Parameters
 
@@ -468,47 +909,128 @@ The nullmask of the specified column.
 
 <br>
 
-#### `duckdb_result_error`
+#### `duckdb_result_get_chunk`
 
-Returns the error message contained within the result. The error is only set if `duckdb_query` returns `DuckDBError`.
+> Deprecated Deprecated since 1.0.0, stable since 0.3.3.
 
-The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_result` is called.
+This method is scheduled for removal in a future release.
+
+Fetches a data chunk from the duckdb_result. This function should be called repeatedly until the result is exhausted.
+
+The result must be destroyed with `duckdb_destroy_data_chunk`.
+
+This function supersedes all `duckdb_value` functions, as well as the `duckdb_column_data` and `duckdb_nullmask_data`
+functions. It results in significantly better performance, and should be preferred in newer code-bases.
+
+If this function is used, none of the other result functions can be used and vice versa (i.e. this function cannot be
+mixed with the legacy result functions).
+
+Use `duckdb_result_chunk_count` to figure out how many chunks there are in the result.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_result_error</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
-</span>);
-</code></pre></div></div>
+```c
+duckdb_data_chunk duckdb_result_get_chunk(
+  duckdb_result result,
+  idx_t chunk_index
+);
+```
 
 ##### Parameters
 
-* `result`: The result object to fetch the error from.
+* `result`: The result object to fetch the data chunk from.
+* `chunk_index`: The chunk index to fetch from.
 
 ##### Return Value
 
-The error of the result.
+The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
 
 <br>
 
-#### `duckdb_result_error_type`
+#### `duckdb_result_is_streaming`
 
-Returns the result error type contained within the result. The error is only set if `duckdb_query` returns
-`DuckDBError`.
+> Deprecated Deprecated since 1.0.0, stable since 0.8.0.
+
+This method is scheduled for removal in a future release.
+
+Checks if the type of the internal result is StreamQueryResult.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_error_type</span> <span class="nv">duckdb_result_error_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
-</span>);
-</code></pre></div></div>
+```c
+bool duckdb_result_is_streaming(
+  duckdb_result result
+);
+```
 
 ##### Parameters
 
-* `result`: The result object to fetch the error from.
+* `result`: The result object to check.
 
 ##### Return Value
 
-The error type of the result.
+Whether or not the result object is of the type StreamQueryResult
+
+<br>
+
+#### `duckdb_result_chunk_count`
+
+> Deprecated Deprecated since 1.0.0, stable since 0.3.3.
+
+This method is scheduled for removal in a future release.
+
+Returns the number of data chunks present in the result.
+
+##### Syntax
+
+```c
+idx_t duckdb_result_chunk_count(
+  duckdb_result result
+);
+```
+
+##### Parameters
+
+* `result`: The result object
+
+##### Return Value
+
+Number of data chunks present in the result.
+
+<br>
+
+#### `duckdb_stream_fetch_chunk`
+
+> Deprecated Deprecated since 1.0.0, stable since 0.8.0.
+
+This method is scheduled for removal in a future release.
+
+Fetches a data chunk from the (streaming) duckdb_result. This function should be called repeatedly until the result is
+exhausted.
+
+The result must be destroyed with `duckdb_destroy_data_chunk`.
+
+This function can only be used on duckdb_results created with 'duckdb_pending_prepared_streaming'
+
+If this function is used, none of the other result functions can be used and vice versa (i.e. this function cannot be
+mixed with the legacy result functions or the materialized result functions).
+
+It is not known beforehand how many chunks will be returned by this result.
+
+##### Syntax
+
+```c
+duckdb_data_chunk duckdb_stream_fetch_chunk(
+  duckdb_result result
+);
+```
+
+##### Parameters
+
+* `result`: The result object to fetch the data chunk from.
+
+##### Return Value
+
+The resulting data chunk. Returns `NULL` if the result has an error.
 
 <br>
