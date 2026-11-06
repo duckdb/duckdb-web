@@ -64,8 +64,8 @@ docs:
     The v1 table-function C API does not expose function-description setters,
     so the five native server functions are documented above.
 
-extension_star_count: 38
-extension_star_count_pretty: 38
+extension_star_count: 39
+extension_star_count_pretty: 39
 extension_download_count: 902
 extension_download_count_pretty: 902
 image: '/images/community_extensions/social_preview/preview_community_extension_duckflight.png'
