@@ -26,8 +26,8 @@ repo:
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 906
-extension_download_count_pretty: 906
+extension_download_count: 902
+extension_download_count_pretty: 902
 image: '/images/community_extensions/social_preview/preview_community_extension_radio.png'
 layout: community_extension_doc
 ---

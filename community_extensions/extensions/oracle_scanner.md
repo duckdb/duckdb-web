@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: oracle_scanner
   description: Read and write Oracle Database with no Oracle client
-  version: '0.6.1'
+  version: '0.6.2'
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,9 +19,9 @@ extension:
 
 repo:
   github: krokozyab/quack-oracle
-  # The commit tagged v0.6.1, built for DuckDB v2.0.0, pinned by SHA so what is
+  # The commit tagged v0.6.2, built for DuckDB v2.0.0, pinned by SHA so what is
   # built cannot move.
-  ref: 61a2b96f85d5f29006bc4c423f3ad292ae0764af
+  ref: aee367eaec18b338ea047dc7e534afe1cd7a4a0b
   # DuckDB 1.5.6 stays on v0.4.0, the last release built for that line.
   variegata: d4aa50f9bf23ca44b44f0df48fb0065ba751f5be
 
@@ -88,8 +88,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 2049
-extension_download_count_pretty: 2.0k
+extension_download_count: 2091
+extension_download_count_pretty: 2.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc
 ---
@@ -163,7 +163,7 @@ LOAD {{ page.extension.name }};
 | oracle_scanner_version               | scalar        | Returns the version of this oracle_scanner build.                                                                                                                                                                                                                                                         | NULL    | [oracle_scanner_version()]                                                                                                                                                                                                 |
 | oracle_snapshot                      | table         | Builds a local DuckDB table from a query over attached Oracle tables, reading every table of that catalog AS OF one SCN, and records the SCN and the query in the table's comment so it can be listed and refreshed.                                                                                      | NULL    | [SELECT * FROM oracle_snapshot('ora', 'departments_snapshot', 'SELECT * FROM ora.main.QUACK_DEMO_DEPARTMENTS WHERE department_id > 10');]                                                                                  |
 | oracle_snapshot_refresh              | table         | Runs the query of a table made by oracle_snapshot again, at a new SCN, and replaces its rows.                                                                                                                                                                                                             | NULL    | [SELECT * FROM oracle_snapshot_refresh('departments_snapshot');]                                                                                                                                                           |
-| oracle_snapshots                     | table         | Lists the local tables made by oracle_snapshot: the catalog, the SCN, when it was taken, the row count and the query.                                                                                                                                                                                     | NULL    | [SELECT * FROM oracle_snapshots();]                                                                                                                                                                                        |
+| oracle_snapshots                     | table         | Lists the local tables made by oracle_snapshot, in every attached database: where each is, the catalog, the SCN, when it was taken, the row count and the query.                                                                                                                                          | NULL    | [SELECT * FROM oracle_snapshots();]                                                                                                                                                                                        |
 | oracle_transaction_status            | table         | Returns local structured status of the current or most recent Oracle transaction; opens no remote session.                                                                                                                                                                                                | NULL    | [SELECT * FROM oracle_transaction_status('ora');]                                                                                                                                                                          |
 | oracle_vector_search                 | table         | Returns the k rows of an Oracle 23ai table whose VECTOR column is nearest to the query vector, with their distance, ranked by Oracle's VECTOR_DISTANCE so a vector index is used when there is one.                                                                                                       | NULL    | [SELECT * FROM oracle_vector_search('demo', 'DOCS', 'EMBEDDING', [0.1, 0.2, 0.3]::FLOAT[3], k := 5, metric := 'COSINE');]                                                                                                  |
 

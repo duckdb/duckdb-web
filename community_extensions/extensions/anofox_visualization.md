@@ -47,10 +47,10 @@ docs:
     read-only dashboard serving, and a CLI — is available from a source build of
     the project at https://github.com/DataZooDE/anofox-visualization.
 
-extension_star_count: 15
-extension_star_count_pretty: 15
-extension_download_count: 872
-extension_download_count_pretty: 872
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 857
+extension_download_count_pretty: 857
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_visualization.png'
 layout: community_extension_doc
 ---

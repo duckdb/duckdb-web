@@ -130,8 +130,8 @@ extended_description: |
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 896
-extension_download_count_pretty: 896
+extension_download_count: 884
+extension_download_count_pretty: 884
 image: '/images/community_extensions/social_preview/preview_community_extension_brew.png'
 layout: community_extension_doc
 ---

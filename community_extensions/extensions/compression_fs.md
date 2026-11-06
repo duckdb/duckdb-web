@@ -36,8 +36,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 541
-extension_download_count_pretty: 541
+extension_download_count: 545
+extension_download_count_pretty: 545
 image: '/images/community_extensions/social_preview/preview_community_extension_compression_fs.png'
 layout: community_extension_doc
 ---

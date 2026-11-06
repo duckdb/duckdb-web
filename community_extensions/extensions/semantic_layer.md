@@ -110,8 +110,8 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 561
-extension_download_count_pretty: 561
+extension_download_count: 568
+extension_download_count_pretty: 568
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_layer.png'
 layout: community_extension_doc
 ---

@@ -22,10 +22,10 @@ repo:
   ref: c0b5fc48d1d2654e804a7b0ea6aad877044dc4ba
   variegata: 5a07ae7c3bddddb05dcae8a00b15a836ccfcdb1a
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 1103
-extension_download_count_pretty: 1.1k
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 1430
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_json_schema.png'
 layout: community_extension_doc
 ---

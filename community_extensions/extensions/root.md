@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: LordVitiate/root4duckdb
-  ref: cbd7f32546d971ee0fa0113a7c655d5684dec7da
+  ref: e2d5b93038f3f0016d6fdaa8525605a506c97508
   variegata: bf55e4cd5491d9cc69e1d569009748ce457fe679
 
 docs:
@@ -33,7 +33,7 @@ docs:
     FROM read_root(
         '/data/events.root',
         dictionary := '/data/libExperiment.so',
-        path_prefix := '/PaEvent/vecTrack/chi2tot'
+        path_prefix := '/PaEvent/vecTrack'
     )
     WHERE entry_id BETWEEN 1000 AND 2000
     LIMIT 20;
@@ -96,7 +96,7 @@ docs:
     FROM read_root(
         '/data/events.root',
         dictionary := '/data/libExperiment.so',
-        path_prefix := '/PaEvent/vecTrack/chi2tot'
+        path_prefix := '/PaEvent/vecTrack'
     )
     WHERE entry_id BETWEEN 1000 AND 2000
     LIMIT 20;
@@ -127,7 +127,7 @@ docs:
     FROM read_root(
         '/data/events.root',
         dictionary := '/data/libExperiment.so',
-        path_prefix := '/PaEvent/vecTrack/chi2tot'
+        path_prefix := '/PaEvent/vecTrack'
     )
     WHERE chi2tot < 100;
     ```
@@ -146,7 +146,7 @@ docs:
     FROM read_root(
         '/data/run*.root',
         dictionary := '/data/libExperiment.so',
-        path_prefix := '/PaEvent/vecTrack/chi2tot'
+        path_prefix := '/PaEvent/vecTrack'
     )
     GROUP BY source_id
     ORDER BY source_id;
@@ -280,8 +280,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 266
-extension_download_count_pretty: 266
+extension_download_count: 369
+extension_download_count_pretty: 369
 image: '/images/community_extensions/social_preview/preview_community_extension_root.png'
 layout: community_extension_doc
 ---
