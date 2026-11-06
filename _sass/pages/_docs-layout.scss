@@ -84,7 +84,7 @@ body.documentation {
         width: calc(100% - $docs-sidebar-width);
         min-height: 100vh;
         display: grid;
-        grid-template-columns: minmax(0, 1000px) min(22%, 282px);
+        grid-template-columns: minmax(0, 1000px) min(22%, 315px);
         justify-content: center;
         max-width: unset;
         margin-left: $docs-sidebar-width;
@@ -411,7 +411,7 @@ body.documentation {
                 border: 1px solid var(--border-color, rgba(217, 217, 217, 0.6));
                 border-radius: var(--page-radius-s, 6px);
                 background: none;
-                font-size: var(--type-tiny, 12px);
+                font-size: var(--type-side-menu, 13px);
                 color: var(--menu-topmenu-searchbar-shortcut-text-color, #999);
                 transition: border-color .2s;
 
@@ -423,6 +423,7 @@ body.documentation {
                     display: flex;
                     align-items: center;
                     gap: 4px;
+                    font-size: var(--type-tiny, 12px);
                 }
 
                 svg.icon {

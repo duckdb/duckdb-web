@@ -121,7 +121,7 @@ body.landing header .headerline{
 	}
 	.headercontent .landingmenu .hamburger{
 		background: transparent;
-		border-color: var(--border-color);
+		border-color: var(--grey-transparent-50, #80808099);
 		transition: background .3s, border-color .3s;
 		&:hover{
 			border-color: var(--lake-nav-icon-hover);
@@ -129,7 +129,7 @@ body.landing header .headerline{
 	}
 	.headercontent .options button.mode{
 		background: transparent;
-		border-color: var(--border-color);
+		border-color: var(--grey-transparent-50, #80808099);
 		&:hover{
 			border-color: var(--lake-nav-icon-hover);
 			color: var(--lake-nav-icon-hover);
@@ -147,7 +147,16 @@ body.landing header .headerline{
 		.headercontent .landingmenu .hamburger{
 			background: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.85));
 		}
+		.headercontent .landingmenu .hamburger:not(:hover),
+		.headercontent .options button.mode:not(:hover){
+			border-color: var(--border-color);
+		}
 	}
+}
+
+html.darkmode body.landing header .headerline .headercontent .landingmenu .hamburger:not(:hover),
+html.darkmode body.landing header .headerline .headercontent .options button.mode:not(:hover){
+	border-color: var(--border-color);
 }
 
 
@@ -299,6 +308,10 @@ body.landing{
 				margin: 0;
 			}
 		}
+		.window button.copy{
+			top: 16px;
+			transform: none;
+		}
 		&:after{
 			display: none;
 		}
@@ -449,7 +462,7 @@ section.architecture {
 		width: calc(25% - 40px);
 		ul{
 			list-style: none;
-			padding: 5px;
+			padding: 0;
 			margin: 0;
 			display: flex;
 			flex-direction: column;
@@ -467,11 +480,11 @@ section.architecture {
 			}
 			li{
 				@include label-1;
-				padding: 13px 17px;
+				padding: 12px 16px;
 				border-radius: var(--page-radius-pill);
 				color: var(--interactive-filter-unselected-text-color, #666);
 				cursor: pointer;
-				transition: color 0.2s;
+				transition: background 0.2s, color 0.2s;
 				white-space: nowrap;
 				position: relative;
 				z-index: 1;
@@ -754,7 +767,7 @@ section.architecture {
 /** DOCS / SPECIFICATION **/
 body.documentation #ducklake_logo{
 	background-image: url("data:image/svg+xml,%3Csvg width='168' height='30' viewBox='0 0 168 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50.7627 17.4346C50.7627 18.7641 51.129 19.877 52.4941 19.877C53.859 19.8768 54.2256 18.764 54.2256 17.4346V11.7754H56.6895V17.9805C56.6894 20.4007 54.7914 21.8114 52.4941 21.8115C50.1967 21.8115 48.2989 20.4008 48.2988 17.9805V11.7754H50.7627V17.4346ZM63.125 11.5693C65.1322 11.5693 67.1213 12.7151 67.459 15.1338H65.1143C64.9187 14.1882 64.0663 13.5156 63.125 13.5156C61.8461 13.5157 60.834 14.6253 60.834 16.6621C60.8341 18.7169 61.7929 19.8631 63.1426 19.8633C63.9953 19.8633 64.8655 19.408 65.2031 18.2441H67.5479C66.9794 20.9176 65.008 21.8086 63.0186 21.8086C60.1587 21.8086 58.3291 19.6627 58.3291 16.6982C58.3291 13.7156 60.2652 11.5694 63.125 11.5693ZM92.3613 11.5693C93.5692 11.5693 94.5464 12.1154 95.0615 13.043V11.7881H97.5127V21.5723H95.0615V20.3359C94.4399 21.427 93.356 21.8086 92.3613 21.8086C90.0878 21.8084 88.1514 19.8077 88.1514 16.6797C88.1515 13.6064 90.0345 11.5695 92.3613 11.5693ZM113.538 11.5693C116.487 11.5694 118.316 13.9156 118.228 17.3711H111.176C111.318 19.0441 112.419 19.8631 113.591 19.8633C114.355 19.8633 115.101 19.59 115.599 18.7354H118.121C117.606 20.1902 116.22 21.8085 113.609 21.8086C110.536 21.8086 108.742 19.4626 108.742 16.6436C108.742 13.7336 110.714 11.5693 113.538 11.5693ZM71.4385 15.7158L74.9199 11.7871H77.6729L74.2451 15.5342L77.8682 21.5723H75.1152L72.6104 17.334L71.4385 18.626V21.5723H68.9863V8.38672H71.4385V15.7158ZM81.4219 19.4619H87.6924V21.5723H78.8809V8.38672H81.4219V19.4619ZM102.15 15.7158L105.633 11.7871H108.386L104.957 15.5342L108.581 21.5723H105.828L103.323 17.334L102.15 18.626V21.5723H99.6992V8.38672H102.15V15.7158ZM39.6699 8.38574C43.7555 8.38574 46.8291 9.73185 46.8291 14.9697C46.8291 20.2077 43.7555 21.5713 39.6699 21.5713H35.8516V8.38574H39.6699ZM92.9121 13.4971C91.6332 13.4972 90.7275 14.7887 90.7275 16.6982C90.7276 18.6078 91.6333 19.8807 92.9121 19.8809C94.2621 19.8809 95.1504 18.6985 95.1504 16.6797C95.1503 14.7157 94.2621 13.4971 92.9121 13.4971ZM38.3916 19.5352H39.5635C41.9082 19.5352 44.2002 18.9527 44.2002 14.9697C44.2002 11.0232 41.9082 10.4229 39.5635 10.4229H38.3916V19.5352ZM113.521 13.4062C112.597 13.4062 111.406 13.9885 111.211 15.6436H115.74C115.687 13.9887 114.551 13.4064 113.521 13.4062Z' fill='%231A1A1A'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M14.6504 0C6.55939 0 0 6.7159 0 15C0 23.284 6.55939 30 14.6504 30C22.7415 30 29.3008 23.284 29.3008 15C29.3008 6.7159 22.7415 0 14.6504 0Z' fill='%231A1A1A'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M13.0183 7.81055C15.682 7.81055 18.0127 9.27644 19.2447 11.4583H20.5766C22.4079 11.4583 23.9395 12.9583 23.9395 14.8673C23.9395 16.7423 22.4412 18.3105 20.5766 18.3105H19.611C18.5122 20.7992 16.1148 22.5378 13.318 22.6401H12.652C8.82293 22.4355 5.79297 19.1969 5.79297 15.2423C5.79297 11.1514 9.02271 7.81055 13.0183 7.81055ZM13.0183 10.0605C10.2547 10.0605 7.99055 12.3788 7.99055 15.2083C7.99055 18.0719 10.2547 20.356 13.0183 20.356C15.2491 20.356 17.1471 18.856 17.813 16.8105L18.0461 16.0264H20.5766C21.1759 16.0264 21.7087 15.481 21.7087 14.8673C21.7087 14.2537 21.2092 13.7083 20.5766 13.7083H17.8796L17.5799 13.0605C16.7808 11.2878 15.0494 10.0605 13.0183 10.0605Z' fill='%232EAFFF'/%3E%3Cpath d='M133.739 14.9604C133.739 10.4644 131.089 9.91616 128.366 9.91616H126.666V20.023H128.366C131.089 20.023 133.739 19.4747 133.739 14.9604ZM124.802 8.3444H128.421C132.606 8.3444 135.64 9.93444 135.64 14.9604C135.64 20.0047 132.606 21.5947 128.421 21.5947H124.802V8.3444ZM138.664 16.7149C138.664 19.3467 140.09 20.3702 141.607 20.3702C143.124 20.3702 144.549 19.2371 144.549 16.7149C144.549 14.0832 143.124 13.0597 141.607 13.0597C140.09 13.0597 138.664 14.0283 138.664 16.7149ZM141.607 11.5976C143.891 11.5976 146.322 13.1511 146.322 16.7149C146.322 20.2788 143.891 21.8323 141.607 21.8323C139.322 21.8323 136.891 20.2788 136.891 16.7149C136.891 13.1511 139.322 11.5976 141.607 11.5976ZM152.164 11.5976C154.577 11.5976 156.039 13.3704 156.276 15.0518H154.595C154.357 13.8821 153.352 13.0597 152.055 13.0597C150.592 13.0597 149.222 14.2111 149.222 16.6784C149.222 19.164 150.592 20.3702 152.055 20.3702C153.462 20.3702 154.43 19.4198 154.668 18.3964H156.386C156.039 20.2423 154.302 21.8323 152 21.8323C149.167 21.8323 147.412 19.694 147.412 16.6967C147.412 13.7725 149.258 11.5976 152.164 11.5976ZM165.351 14.6315H163.615C163.341 13.4618 162.463 13.0049 161.294 13.0049C160.325 13.0049 159.228 13.3521 159.228 14.2476C159.228 15.0335 159.777 15.3808 160.727 15.5818L162.116 15.856C163.907 16.1849 165.479 16.8977 165.479 18.7802C165.479 20.7357 163.724 21.8323 161.476 21.8323C158.899 21.8323 157.456 20.1326 157.255 18.4146H159.009C159.283 19.6757 160.051 20.425 161.513 20.425C162.774 20.425 163.797 19.895 163.797 18.9629C163.797 17.9577 162.865 17.5739 161.805 17.3363L160.343 17.0439C159.009 16.7515 157.547 16.1667 157.547 14.3208C157.547 12.5845 159.301 11.5793 161.476 11.5793C163.615 11.5793 165.04 12.749 165.351 14.6315Z' fill='%230D0D0D'/%3E%3C/svg%3E%0A");
-	width: 167.23px;
+	width: 160.8px;
 }
 
 html.darkmode body.documentation #ducklake_logo{
@@ -826,19 +839,20 @@ body.manifesto{
 			gap: 24px;
 		}
 		.architecture-tabs{
-			width: 100%;
-			max-width: 100%;
-			overflow-x: auto;
-			overscroll-behavior-x: contain;
-			-ms-scroll-chaining: none;
-			&::-webkit-scrollbar {width: 1px; background: var(--doc-scrollbar-bg, #E6E6E6); height: 2px;}
-			&::-webkit-scrollbar-track {background: var(--doc-scrollbar-bg, #E6E6E6);}
-			&::-webkit-scrollbar-thumb {background: var(--doc-scrollbar-slider, #CCC); border-radius: var(--page-radius-xs);}
+			width: auto;
+			margin: 0 -24px;
+			@include scroll-x-faded(24px);
 		}
 		.architecture-tabs ul{
 			flex-direction: row;
-			padding: 0;
 			display: inline-flex;
+			margin: 0 24px;
+			li{
+				margin-right: -4px;
+				&:last-child{
+					margin-right: 0;
+				}
+			}
 		}
 	}
 	body.landing section#quickinstall{
@@ -865,7 +879,7 @@ body.manifesto{
 	}
 	body.documentation #ducklake_logo{
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' fill='none'%3E%3Cpath fill='%231A1A1A' d='M19 0C8.524 0 0 8.524 0 19s8.524 19 19 19 19-8.524 19-19S29.476 0 19 0Z'/%3E%3Cpath fill='%232EAFFF' fill-rule='evenodd' d='M17.39 9.66a9.376 9.376 0 0 1 8.093 4.62h1.707v.01c2.357 0 4.345 1.895 4.35 4.3h.01c0 2.39-1.96 4.35-4.35 4.35h-1.264c-1.43 3.132-4.526 5.344-8.157 5.492l-.39.008-.483-.013A9.384 9.384 0 0 1 8 19.05v-.01c0-5.19 4.2-9.39 9.39-9.39v.01Zm0 2.85c-3.6 0-6.53 2.92-6.53 6.53v.01a6.531 6.531 0 0 0 12.74 2.02l.32-.99h3.28c.797 0 1.484-.674 1.49-1.48h-.01c0-.79-.66-1.46-1.49-1.46H23.7l-.38-.83a6.513 6.513 0 0 0-5.93-3.8Z' clip-rule='evenodd'/%3E%3C/svg%3E");
-		width: 38px;
+		width: 33px;
 	}
 	html.darkmode body.documentation #ducklake_logo{
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='39' height='38' fill='none'%3E%3Cpath fill='%232EAFFF' d='M19.459 0c-10.476 0-19 8.524-19 19s8.524 19 19 19 19-8.524 19-19-8.524-19-19-19Z'/%3E%3Cpath fill='%231A1A1A' fill-rule='evenodd' d='M17.849 9.66a9.376 9.376 0 0 1 8.093 4.62h1.707v.01c2.357 0 4.345 1.895 4.35 4.3h.01c0 2.39-1.96 4.35-4.35 4.35h-1.264c-1.43 3.132-4.526 5.344-8.157 5.492l-.39.008-.483-.013A9.384 9.384 0 0 1 8.46 19.05v-.01c0-5.19 4.2-9.39 9.39-9.39v.01Zm0 2.85c-3.6 0-6.53 2.92-6.53 6.53v.01a6.531 6.531 0 0 0 12.74 2.02l.32-.99h3.28c.797 0 1.484-.674 1.49-1.48h-.01c0-.79-.66-1.46-1.49-1.46h-3.49l-.38-.83a6.513 6.513 0 0 0-5.93-3.8Z' clip-rule='evenodd'/%3E%3C/svg%3E");
@@ -966,6 +980,13 @@ body.manifesto{
 	}
 	section.architecture .illustration{
 		margin: 0;
+	}
+	section.architecture .architecture-tabs{
+		margin: 0 -16px;
+		@include scroll-x-faded(16px);
+		ul{
+			margin: 0 16px;
+		}
 	}
 	body.landing {
 		section.architecture{

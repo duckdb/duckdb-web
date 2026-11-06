@@ -125,6 +125,9 @@
 	nav.mobile .hamburger {
 		display: flex !important;
 	}
+	#ducklake_logo {
+		width: 133px;
+	}
 	header .headerline .headercontent .landingmenu {
 		display: flex;
 		align-items: center;
@@ -293,7 +296,7 @@
 		}
 
 		&.sidenav-drill .nav-row {
-			min-height: 44px;
+			min-height: 38px;
 
 			&[aria-current="page"]::before {
 				top: 50%;
@@ -468,12 +471,7 @@
 	}
 
 	header .headerline .headercontent .landingmenu nav:not(.mobile) {
-		top: $site-header-height;
-	}
-
-	header .headerline .headercontent .landingmenu .hamburger{
-		width: 33px;
-		height: 33px;
+		top: 75px;
 	}
 
 	#duckdb_logo,
@@ -489,10 +487,6 @@
 
 	#duckdb_logo{
 		--duckdb-wordmark-width: 80px;
-	}
-
-	#ducklake_logo{
-		width: 121px;
 	}
 
 	header .duckdblabs_logo,
