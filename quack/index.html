@@ -11,14 +11,14 @@ max_page_width: large
 <section class="quack-hero">
 	<div class="wrap">
 		<div class="hero-content">
-			<h1 class="display-1">Quack: Turn DuckDB<br>into a client-server database</h1>
+			<h1 class="display-1">Quack: Turn DuckDB<br>into a Client-Server Database</h1>
 			<p class="hero-subtitle">
 				The Quack protocol unlocks multi-client access for DuckDB,<br>
 				turning it into a general-purpose database system
 			</p>
 			<div class="hero-buttons">
-				<a class="button yellow" href="{% post_url 2026-05-12-quack-remote-protocol %}">Read the announcement</a>
-				<a class="button transparent" href="{% link docs/2.0/quack/overview.md %}">Get started</a>
+				<a class="button yellow" href="{% post_url 2026-05-12-quack-remote-protocol %}">Read the Announcement</a>
+				<a class="button transparent" href="{% link docs/2.0/quack/overview.md %}">Get Started</a>
 			</div>
 		</div>
 
@@ -34,7 +34,7 @@ max_page_width: large
 						<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--main-highlight-yellow-background-color)" d="M19 0C8.507 0 0 8.507 0 19s8.507 19 19 19 19-8.507 19-19S29.493 0 19 0"/><path fill="var(--main-highlight-yellow-text-color)" d="m23.3 21.2-1.7-1.7a1.583 1.583 0 1 0-2.24 2.238l1.698 1.698zM29.809 27.709l-1.67-1.67-2.241 2.237 1.672 1.672c.309.31.714.464 1.12.464a1.583 1.583 0 0 0 1.12-2.703"/><path fill="var(--main-highlight-yellow-text-color)" d="M19 28.463c-5.218 0-9.463-4.245-9.463-9.463S13.782 9.537 19 9.537s9.463 4.245 9.463 9.463-4.245 9.463-9.463 9.463m0-16.023A6.567 6.567 0 0 0 12.44 19 6.567 6.567 0 0 0 19 25.56 6.567 6.567 0 0 0 25.56 19 6.57 6.57 0 0 0 19 12.44"/></svg>
 					</div>
 					<div class="quack-protocol-card-title">
-						<h3>Quack protocol</h3>
+						<h3>Quack Protocol</h3>
 						<p>Client-server access</p>
 					</div>
 				</div>
@@ -51,14 +51,14 @@ max_page_width: large
 			<a class="bento-box wide" href="{% link docs/2.0/quack/setup/overview.md %}">
 				<div class="bento-title">
 					<svg class="icon"><use href="#server-05"></use></svg>
-					<span>Client-server setup</span>
+					<span>Client-Server Setup</span>
 				</div>
 				<p>Quack allows two DuckDB processes to talk to each other over the network, enabling a client-server setup (and more). The Quack protocol supports the full DuckDB feature set.</p>
 			</a>
 			<a class="bento-box wide" href="{% post_url 2026-05-12-quack-remote-protocol %}#benchmarks">
 				<div class="bento-title">
 					<svg class="icon"><use href="#zap"></use></svg>
-					<span>Optimized for performance</span>
+					<span>Optimized for Performance</span>
 				</div>
 				<p>We designed the Quack protocol for performance. We minimized the number of round trips, and ensured that the protocol can handle both small updates and large batches of changes.</p>
 			</a>
@@ -246,10 +246,10 @@ CALL quack_serve();
 	<div class="wrap">
 		<div class="install-header">
 			<div>
-				<h2 class="section-title">Try Quack today</h2>
+				<h2 class="section-title">Try Quack Today</h2>
 				<p>Install and configure Quack in seconds</p>
 			</div>
-			<a class="textbutton arrow-right" href="{% link docs/2.0/quack/setup/deployment.md %}">More deployment options<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			<a class="textbutton arrow-right" href="{% link docs/2.0/quack/setup/deployment.md %}">More Deployment Options<svg class="icon"><use href="#arrow-right"></use></svg></a>
 		</div>
 
 		<!--
@@ -273,7 +273,7 @@ curl https://install.duckdb.org | bash
 			</div>
 			<div class="step">
 				<p class="pre-title step-label">Step 2</p>
-				<h3>Launch Quack on the server</h3>
+				<h3>Launch Quack on the Server</h3>
 {% highlight sql %}
 CALL quack_serve(
     'quack:localhost',
@@ -286,7 +286,7 @@ CREATE TABLE hello AS
 			</div>
 			<div class="step">
 				<p class="pre-title step-label">Step 3</p>
-				<h3>Connect from the client</h3>
+				<h3>Connect from the Client</h3>
 {% highlight sql %}
 CONNECT 'quack:localhost' (
     TOKEN 'super_secret'
@@ -307,14 +307,14 @@ pip install duckdb
 			</div>
 			<div class="step">
 				<p class="pre-title step-label">Step 2</p>
-				<h3>Install the Quack extension</h3>
+				<h3>Install the Quack Extension</h3>
 {% highlight python %}
 # TODO: Install the Quack extension
 {% endhighlight %}
 			</div>
 			<div class="step">
 				<p class="pre-title step-label">Step 3</p>
-				<h3>Start the server</h3>
+				<h3>Start the Server</h3>
 {% highlight python %}
 # TODO: Start the server
 {% endhighlight %}
@@ -340,7 +340,7 @@ aws cloudformation create-stack \
 
 <section class="quack-faq faq">
 	<div class="wrap">
-		<h2 class="section-title">Frequently asked questions</h2>
+		<h2 class="section-title">Frequently Asked Questions</h2>
 	</div>
 
 	<div class="frequentlyaskedquestions">
@@ -411,26 +411,26 @@ aws cloudformation create-stack \
 
 <section class="quack-ecosystem">
 	<div class="wrap">
-		<h2 class="section-title">Quack in the DuckDB ecosystem</h2>
+		<h2 class="section-title">Quack in the DuckDB Ecosystem</h2>
 		<div class="bento-grid">
 			<a class="bento-box" href="{% link docs/2.0/quack/overview.md %}">
 				<div class="bento-title">
 					<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--main-highlight-yellow-background-color)" d="M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19"/><path fill="var(--main-highlight-yellow-text-color)" d="M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795M7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.534 7.875-7.875s-3.534-7.875-7.875-7.875S7.172 14.659 7.172 19"/></svg>
-					<span>Client-server DuckDB</span>
+					<span>Client-Server DuckDB</span>
 				</div>
 				<p>Quack turns DuckDB into a client-server database for multi-writer and remote access.</p>
 			</a>
 			<a class="bento-box" href="https://ducklake.select/" target="_blank" rel="noopener">
 				<div class="bento-title">
 					<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--lake-highlight-blue-text-color)" d="M19 1.004c9.939 0 17.996 8.058 17.996 17.996S28.939 36.996 19 36.996 1.005 28.938 1.005 19C1.004 9.061 9.062 1.004 19 1.004"/><path fill="var(--lake-highlight-blue-background-color)" fill-rule="evenodd" d="M17.32 9.973a8.82 8.82 0 0 1 7.648 4.377h1.636c2.25 0 4.13 1.8 4.13 4.09 0 2.249-1.84 4.13-4.13 4.13h-1.186a8.83 8.83 0 0 1-7.73 5.195h-.818c-4.704-.246-8.426-4.131-8.426-8.876 0-4.907 3.968-8.916 8.876-8.916m0 2.7c-3.395 0-6.176 2.78-6.176 6.176a6.17 6.17 0 0 0 6.176 6.175c2.74 0 5.071-1.8 5.89-4.253l.285-.94h3.109c.736 0 1.39-.655 1.39-1.392s-.613-1.39-1.39-1.39H23.29l-.368-.777c-.982-2.127-3.108-3.6-5.603-3.6" clip-rule="evenodd"/></svg>
-					<span>DuckLake server</span>
+					<span>DuckLake Server</span>
 				</div>
 				<p>Quack supports querying DuckLake and other data lake formats.</p>
 			</a>
 			<a class="bento-box" href="/community_extensions/">
 				<div class="bento-title">
 					<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--main-highlight-purple-background, #1A1A1A)" d="M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19"/><path fill="var(--main-highlight-purple-text-color)" d="M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795M7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.534 7.875-7.875s-3.534-7.875-7.875-7.875S7.172 14.659 7.172 19"/></svg>
-					<span>Community extensions</span>
+					<span>Community Extensions</span>
 				</div>
 				<p>Quack works with all DuckDB extensions, including the Community Extension ecosystem.</p>
 			</a>
