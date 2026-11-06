@@ -204,7 +204,7 @@ duckdb_state duckdb_query(
 
 * `connection`: The connection to perform the query in.
 * `query`: The SQL query to run.
-* `out_result`: The query result.
+* `out_result`: The query result. (out)
 
 ##### Return Value
 

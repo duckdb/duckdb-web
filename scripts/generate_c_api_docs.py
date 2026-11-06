@@ -2,7 +2,8 @@
 
 Usage: python3 scripts/generate_c_api_docs.py <duckdb_checkout> [--docs-dir DIR] [--check]
 
-The spec is `api_spec/v1` of the duckdb checkout, read with `capigen.load`.
+The specs are `api_spec/v1` and `api_spec/v2` of the duckdb checkout, read with
+`capigen.load`; the v2 pages live in the `v2` folder of the docs directory.
 Each page keeps everything up to its last `## API Reference Overview` line;
 the part below it is written from the spec.
 """
@@ -14,9 +15,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 import capigen
-from capigen.anchors import rewrite_anchors
+from capigen.anchors import find_anchors, rewrite_anchors
 from capigen.states import current_state
-from capigen.tools import apply_prefix
+from capigen.tools import apply_prefix, resolve_enum_values
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DOCS_DIR = "docs/2.0/clients/c"
@@ -95,6 +96,117 @@ LEGACY_IDS = {
     ),
 }
 
+PAGES_V2 = {
+    module: None
+    for module in (
+        "common",
+        "errors",
+        "function properties",
+        "arena",
+        "cast",
+        "column_data_collection",
+        "configuration",
+        "connection",
+        "custom type",
+        "data_chunk",
+        "environment",
+        "error",
+        "extension",
+        "factory",
+        "file system",
+        "function",
+        "function docs",
+        "function signature",
+        "identifier",
+        "instance",
+        "logging",
+        "qname",
+        "query metrics",
+        "schema",
+        "tokenizer",
+        "aggregate",
+        "catalog",
+        "copy",
+        "custom_option",
+        "expression",
+        "log sink",
+        "logical_type",
+        "macro",
+        "pragma",
+        "replacement scan",
+        "scalar",
+        "sql_statement",
+        "vector",
+        "prepared_statement",
+        "query_result",
+        "table",
+        "value",
+        "arrow",
+    )
+}
+
+TITLES_V2 = {
+    "common": "Common",
+    "errors": "Errors",
+    "function properties": "Function Properties",
+    "arena": "Arena",
+    "cast": "Cast",
+    "column_data_collection": "Column Data Collection",
+    "configuration": "Configuration",
+    "connection": "Connection",
+    "custom type": "Custom Type",
+    "data_chunk": "Data Chunk",
+    "environment": "Environment",
+    "error": "Error",
+    "extension": "Extension",
+    "factory": "Factory",
+    "file system": "File System",
+    "function": "Function",
+    "function docs": "Function Docs",
+    "function signature": "Function Signature",
+    "identifier": "Identifier",
+    "instance": "Instance",
+    "logging": "Logging",
+    "qname": "Qualified Name",
+    "query metrics": "Query Metrics",
+    "schema": "Schema",
+    "tokenizer": "Tokenizer",
+    "aggregate": "Aggregate",
+    "catalog": "Catalog",
+    "copy": "Copy",
+    "custom_option": "Custom Option",
+    "expression": "Expression",
+    "log sink": "Log Sink",
+    "logical_type": "Logical Type",
+    "macro": "Macro",
+    "pragma": "Pragma",
+    "replacement scan": "Replacement Scan",
+    "scalar": "Scalar",
+    "sql_statement": "SQL Statement",
+    "vector": "Vector",
+    "prepared_statement": "Prepared Statement",
+    "query_result": "Query Result",
+    "table": "Table",
+    "value": "Value",
+    "arrow": "Arrow",
+}
+
+
+@dataclass
+class Api:
+    """The tables of one spec and the folder of its pages inside the docs directory."""
+
+    pages: dict[str, str | None]
+    titles: dict[str, str]
+    legacy_ids: dict[str, tuple[str, str]]
+    subdir: str = ""
+
+
+APIS = {
+    "v1": Api(PAGES, TITLES, LEGACY_IDS, subdir=""),
+    "v2": Api(PAGES_V2, TITLES_V2, {}, subdir="v2"),
+}
+
 
 class UnplacedModule(Exception):
     """A spec module with functions has no entry in the page or title table."""
@@ -104,12 +216,17 @@ class MissingLinkTarget(Exception):
     """A relative link in a description names a page the docs folder does not have."""
 
 
+class MixedAnchorSpan(Exception):
+    """A code span holds an anchor beside other text, which has no rendering yet."""
+
+
 @dataclass
 class Report:
     placed: dict[str, str | None] = field(default_factory=dict)
     skipped: list[str] = field(default_factory=list)
     stale: list[str] = field(default_factory=list)
     unlinked_anchors: list[str] = field(default_factory=list)
+    skipped_modules: list[str] = field(default_factory=list)
     changed: list[str] = field(default_factory=list)
 
 
@@ -129,6 +246,7 @@ class Types:
         return ("const " + base if const else base), "*" * pointers
 
     def returns(self, function):
+        """The return type of a function or callback, as spell gives it."""
         return self.spell(
             function["return_type"],
             function.get("return_pointer", 0),
@@ -146,17 +264,33 @@ class Types:
         ]
 
 
+TYPE_KINDS = ("handles", "callbacks", "aliases", "structs", "enums", "constants")
+
+
 def place_modules(spec, pages, titles):
-    """(module name, functions, topic page) per module with functions, in table order."""
-    functions = {
-        m["module"]: m["functions"] for m in spec.modules if m.get("functions")
-    }
-    for name in functions:
-        if name not in pages or name not in titles:
+    """(module name, module, topic page) in page table order, and the skipped modules.
+
+    A module with functions must be in both tables. A module that only declares
+    types is documented on the complete page when it is in the page table, and
+    skipped when it is not.
+    """
+    modules = {m["module"]: m for m in spec.modules}
+    skipped = []
+    for name, module in modules.items():
+        has_types = any(module.get(kind) for kind in TYPE_KINDS)
+        if not module.get("functions") and name not in pages:
+            if has_types:
+                skipped.append(name)
+        elif name not in pages or name not in titles:
             raise UnplacedModule(
                 f"module '{name}' has no entry in the page and title tables"
             )
-    return [(name, functions[name], pages[name]) for name in pages if name in functions]
+    placed = [
+        (name, modules[name], pages[name] if modules[name].get("functions") else None)
+        for name in pages
+        if name in modules and name not in skipped
+    ]
+    return placed, skipped
 
 
 # Render entry
@@ -164,6 +298,20 @@ def place_modules(spec, pages, titles):
 
 def c_name(spec, name):
     return apply_prefix(spec.prefix, name)
+
+
+def constant_c_name(spec, name):
+    """Constants and enum values take the upper case prefix, as the C adapter spells them."""
+    return spec.prefix.upper() + name
+
+
+def type_c_name(spec, kind, name):
+    return constant_c_name(spec, name) if kind == "constants" else spec.registry[name]
+
+
+def heading_id(name):
+    """Kramdown lowercases a heading's auto id; C names hold nothing else it changes."""
+    return name.lower()
 
 
 def site_version(version):
@@ -183,7 +331,7 @@ def status_line(spec, function):
         since = f", stable since {stable[0]}" if stable else ""
         line = f"> Deprecated Deprecated since {version}{since}."
     elif state == "unstable":
-        line = f"> Warning Unstable since {version}. The signature or behavior may change in a later release."
+        line = f"Unstable since {version}."
     else:
         raise ValueError(f"lifecycle state '{state}' has no rendering")
     renamed = function.get("renamed_from")
@@ -192,50 +340,70 @@ def status_line(spec, function):
     return line
 
 
-DEPRECATION_LABEL = re.compile(r"\A\*\*(DEPRECATION NOTICE|DEPRECATED)\*\*:\s*")
+DEPRECATION_LABEL = re.compile(r"\A\s*\*\*(DEPRECATION NOTICE|DEPRECATED)\*\*:\s*")
 ANCHOR_IN_CODE_SPAN = re.compile(r"`(\[\[\w+\]\])`")
+ANCHOR_SPAN = re.compile(r"`\[\[\w+\]\]`")
 CODE_SPAN = re.compile(r"(`[^`\n]*`)")
 ANGLE_WORD = re.compile(r"[\w:]*<[^<>\s`]+>[\w:]*")
 RELATIVE_LINK = re.compile(r"\[([^\]\n]+)\]\(([\w.-]+?)(?:\.md)?(#[\w-]+)?\)")
 QUOTED = re.compile(r'"([^"\n]*)"')
+BULLET = re.compile(r"\A(\s*)[-+](?=\s)")
 IDENTIFIER = re.compile(r"[A-Za-z_]\w*(\.[A-Za-z_]\w*)*")
 
 
 class TextRenderer:
     """Turns spec descriptions into the Markdown of one page."""
 
-    def __init__(self, spec, docs_dir, link_root, headings, report):
+    def __init__(self, spec, docs_dir, link_root, headings, documented, report):
         self.spec = spec
         self.docs_dir = Path(docs_dir)
         self.link_root = link_root
         self.headings = headings
+        self.documented = documented
         self.report = report
-        self.functions = {n for m in spec.modules for n in m.get("functions", {})}
+        self.targets = {
+            n: c_name(spec, n) for m in spec.modules for n in m.get("functions", {})
+        }
+        self.targets.update(
+            (n, type_c_name(spec, kind, n))
+            for m in spec.modules
+            for kind in TYPE_KINDS
+            for n in m.get(kind, {})
+        )
 
     def __call__(self, text):
-        if not text:
-            return ""
-        lines, in_fence = [], False
-        for line in text.strip().split("\n"):
+        lines = (text or "").split("\n")
+        while lines and not lines[0].strip():
+            lines.pop(0)
+        while lines and not lines[-1].strip():
+            lines.pop()
+        rendered, in_fence = [], False
+        for line in lines:
             if line.lstrip().startswith("```"):
                 in_fence = not in_fence
             elif not in_fence:
                 line = self.prose(line)
-            lines.append(line)
-        return "\n".join(lines)
+            rendered.append(line)
+        return "\n".join(rendered)
 
     def anchor(self, name):
-        if name in self.functions:
-            target = c_name(self.spec, name)
-            if target in self.headings:
-                return f"[`{target}`](#{target})"
-            return f"[`{target}`]({{% link {self.link_root}/{COMPLETE_PAGE}.md %}}#{target})"
+        target = self.targets.get(name, c_name(self.spec, name))
+        if target in self.headings:
+            return f"[`{target}`](#{heading_id(target)})"
+        if target in self.documented:
+            return f"[`{target}`]({{% link {self.link_root}/{COMPLETE_PAGE}.md %}}#{heading_id(target)})"
         if name not in self.report.unlinked_anchors:
             self.report.unlinked_anchors.append(name)
-        return f"`{self.spec.registry.get(name, c_name(self.spec, name))}`"
+        return f"`{target}`"
 
     def prose(self, line):
-        """Rewrites anchors, then the parts of the line outside code spans."""
+        """Rewrites the bullet marker and anchors, then the parts outside code spans."""
+        line = BULLET.sub(r"\1*", line)
+        for span in CODE_SPAN.findall(line):
+            if find_anchors(span) and not ANCHOR_SPAN.fullmatch(span):
+                raise MixedAnchorSpan(
+                    f"code span {span} holds the anchor [[{find_anchors(span)[0]}]] beside other text"
+                )
         line = rewrite_anchors(ANCHOR_IN_CODE_SPAN.sub(r"\1", line), self.anchor)
         parts = CODE_SPAN.split(line)
         for i in range(0, len(parts), 2):
@@ -261,9 +429,8 @@ def quote(m):
     return f"“{inner}”"
 
 
-def syntax_block(spec, types, name, function):
-    base, stars = types.returns(function)
-    head = f"{base} {stars}{c_name(spec, name)}"
+def syntax_block(types, head, function):
+    """A fenced prototype of a function or callback, one parameter per line."""
     params = [
         f"  {ptype} {pstars}{pname}"
         for pname, ptype, pstars in types.parameters(function)
@@ -274,6 +441,27 @@ def syntax_block(spec, types, name, function):
     return f"```c\n{prototype}\n```"
 
 
+OWNERSHIP_TAGS = {
+    "IN": "",
+    "OUT": "(out)",
+    "OUT_BORROW": "(out, borrowed)",
+    "IN_TRANSFER": "(ownership passes to the callee)",
+}
+
+
+def parameter_items(function, text):
+    """The parameter list items: a parameter with text or with an ownership tag."""
+    items = []
+    for pname, parameter in function.get("parameters", {}).items():
+        words = [
+            text(parameter.get("description")),
+            OWNERSHIP_TAGS[parameter.get("kind", "IN")],
+        ]
+        if any(words):
+            items.append(f"* `{pname}`: " + " ".join(w for w in words if w))
+    return items
+
+
 def render_entry(spec, types, name, function, text):
     blocks = [f"#### `{c_name(spec, name)}`"]
     status = status_line(spec, function)
@@ -281,23 +469,81 @@ def render_entry(spec, types, name, function, text):
         blocks.append(status)
     description = function.get("description") or ""
     if current_state(function) == "deprecated":
-        description = DEPRECATION_LABEL.sub("", description.strip())
+        description = DEPRECATION_LABEL.sub("", description)
     if description.strip():
         blocks.append(text(description))
-    blocks += ["##### Syntax", syntax_block(spec, types, name, function)]
-    items = [
-        f"* `{pname}`: {text(parameter['description'])}"
-        for pname, parameter in function.get("parameters", {}).items()
-        if (parameter.get("description") or "").strip()
-    ]
+    base, stars = types.returns(function)
+    head = f"{base} {stars}{c_name(spec, name)}"
+    blocks += ["##### Syntax", syntax_block(types, head, function)]
+    items = parameter_items(function, text)
     if items:
         blocks += ["##### Parameters", "\n".join(items)]
-    base, stars = types.returns(function)
     returns = text(function.get("return_description"))
     if not returns and (base, stars) != ("void", ""):
         returns = f"`{base} {stars}`" if stars else f"`{base}`"
     if returns:
         blocks += ["##### Return Value", returns]
+    blocks.append("<br>")
+    return "\n\n".join(blocks)
+
+
+def field_items(types, fields, text, indent=""):
+    """The list items of struct fields; a union or nested struct nests its members."""
+    lines = []
+    for f in fields:
+        members = f.get("union", f.get("fields"))
+        if members is not None:
+            spelled = "union" if "union" in f else "struct"
+        else:
+            base, stars = types.spell(
+                f["type"], f.get("pointer", 0), f.get("const", False)
+            )
+            spelled = f"{base} {stars}" if stars else base
+            if f.get("array_size"):
+                spelled += f"[{f['array_size']}]"
+        description = text(f.get("description"))
+        lines.append(
+            f"{indent}* `{f['name']}` (`{spelled}`)"
+            + (f": {description}" if description else "")
+        )
+        if members is not None:
+            lines += field_items(types, members, text, indent + "    ")
+    return lines
+
+
+def render_type(spec, types, kind, name, declaration, text):
+    """The entry of a handle, callback, alias, struct, enum or constant."""
+    target = type_c_name(spec, kind, name)
+    blocks = [f"#### `{target}`"]
+    description = text(declaration.get("description"))
+    if description:
+        blocks.append(description)
+    if kind == "callbacks":
+        base, stars = types.returns(declaration)
+        head = f"typedef {base} {stars}(*{target})"
+        blocks += ["##### Syntax", syntax_block(types, head, declaration)]
+        items = parameter_items(declaration, text)
+        if items:
+            blocks += ["##### Parameters", "\n".join(items)]
+    elif kind == "aliases":
+        underlying = types.names[declaration["underlying"]]
+        blocks += ["##### Syntax", f"```c\ntypedef {underlying} {target};\n```"]
+    elif kind == "structs" and declaration.get("fields"):
+        blocks += [
+            "##### Fields",
+            "\n".join(field_items(types, declaration["fields"], text)),
+        ]
+    elif kind == "enums" and declaration.get("values"):
+        items = []
+        for value_name, value in resolve_enum_values(declaration):
+            value_text = text(declaration["values"][value_name].get("description"))
+            items.append(
+                f"* `{constant_c_name(spec, value_name)}` = {value}"
+                + (f": {value_text}" if value_text else "")
+            )
+        blocks += ["##### Values", "\n".join(items)]
+    elif kind == "constants":
+        blocks.append(f"Value: `{declaration['value']}`.")
     blocks.append("<br>")
     return "\n\n".join(blocks)
 
@@ -317,7 +563,7 @@ def quick_reference(spec, types, functions):
             for pname, ptype, pstars in types.parameters(function)
         ]
         rows.append(
-            f'{kt(base)} {stars}<a href="#{target}"><span class="nf">{target}</span></a>'
+            f'{kt(base)} {stars}<a href="#{heading_id(target)}"><span class="nf">{target}</span></a>'
             f"({', '.join(params) if params else kt('void')});\n"
         )
     return (
@@ -330,13 +576,23 @@ def quick_reference(spec, types, functions):
 # Render page
 
 
-def render_section(spec, types, sections, titled, legacy_ids, text):
-    """The generated part of a page: per module an optional title, legacy anchors,
-    the quick reference and the entries."""
+def render_section(spec, types, sections, complete, legacy_ids, text):
+    """The generated part of a page: per module an optional title, on the complete
+    page the type entries, then the quick reference, legacy anchors and the
+    function entries."""
     blocks = []
-    for index, (module, functions, title) in enumerate(sections):
-        if titled or index > 0:
+    for index, (module, title) in enumerate(sections):
+        if complete or index > 0:
             blocks.append(f"### {title}")
+        if complete:
+            blocks += [
+                render_type(spec, types, kind, name, declaration, text)
+                for kind in TYPE_KINDS
+                for name, declaration in module.get(kind, {}).items()
+            ]
+        functions = module.get("functions", {})
+        if not functions:
+            continue
         blocks.append(quick_reference(spec, types, functions))
         for name, function in functions.items():
             blocks += [
@@ -378,9 +634,10 @@ def generate(
     legacy_ids = LEGACY_IDS if legacy_ids is None else legacy_ids
     spec = capigen.load(spec_dir)
     types = Types(spec)
-    placed = place_modules(spec, pages, titles)
+    placed, skipped_modules = place_modules(spec, pages, titles)
     report = Report(
-        placed={module: page and f"{page}.md" for module, _, page in placed}
+        placed={name: page and f"{page}.md" for name, _, page in placed},
+        skipped_modules=skipped_modules,
     )
 
     page_modules = {COMPLETE_PAGE: placed}
@@ -388,18 +645,28 @@ def generate(
         if entry[2] is not None:
             page_modules.setdefault(entry[2], []).append(entry)
 
+    def page_headings(modules, complete):
+        names = {c_name(spec, n) for _, m, _ in modules for n in m.get("functions", {})}
+        if complete:
+            names.update(
+                type_c_name(spec, kind, n)
+                for _, m, _ in modules
+                for kind in TYPE_KINDS
+                for n in m.get(kind, {})
+            )
+        return names
+
+    documented = page_headings(placed, complete=True)
     for page, modules in page_modules.items():
         path = Path(docs_dir) / f"{page}.md"
-        headings = {c_name(spec, n) for _, functions, _ in modules for n in functions}
-        text = TextRenderer(spec, docs_dir, link_root, headings, report)
-        sections = [
-            (module, functions, titles[module]) for module, functions, _ in modules
-        ]
+        headings = page_headings(modules, page == COMPLETE_PAGE)
+        text = TextRenderer(spec, docs_dir, link_root, headings, documented, report)
+        sections = [(module, titles[name]) for name, module, _ in modules]
         section = render_section(
             spec, types, sections, page == COMPLETE_PAGE, legacy_ids, text
         )
-        before = path.read_text()
-        after = splice(before, section)
+        before = path.read_text() if path.is_file() else None
+        after = None if before is None else splice(before, section)
         if after is None:
             report.skipped.append(path.name)
         elif after != before:
@@ -432,26 +699,55 @@ def main(argv=None):
     docs_dir = (REPO_ROOT / args.docs_dir).resolve()
     if not docs_dir.is_relative_to(REPO_ROOT):
         parser.error(f"--docs-dir {args.docs_dir} is not inside {REPO_ROOT}")
-    link_root = docs_dir.relative_to(REPO_ROOT).as_posix()
-    spec_dir = args.duckdb_checkout / "api_spec" / "v1"
-    report = generate(spec_dir, docs_dir, link_root, check=args.check)
 
-    for page in report.skipped:
-        print(f"{page}: no '{MARKER}' line, left unchanged", file=sys.stderr)
-    for page in report.stale:
-        print(
-            f"{page}: carries the generated section but receives no module",
-            file=sys.stderr,
+    failed, found = False, False
+    for name, api in APIS.items():
+        spec_dir = args.duckdb_checkout / "api_spec" / name
+        if not spec_dir.is_dir():
+            print(
+                f"{spec_dir}: no such spec, the {name} pages are left unchanged",
+                file=sys.stderr,
+            )
+            continue
+        found = True
+        target = docs_dir / api.subdir
+        report = generate(
+            spec_dir,
+            target,
+            target.relative_to(REPO_ROOT).as_posix(),
+            api.pages,
+            api.titles,
+            api.legacy_ids,
+            check=args.check,
         )
-    for name in report.unlinked_anchors:
-        print(
-            f"anchor [[{name}]] has no heading, rendered as a code span",
-            file=sys.stderr,
+        where = f"{api.subdir}/" if api.subdir else ""
+        for page in report.skipped:
+            print(
+                f"{where}{page}: missing, or no '{MARKER}' line, left unchanged",
+                file=sys.stderr,
+            )
+        for page in report.stale:
+            print(
+                f"{where}{page}: carries the generated section but receives no module",
+                file=sys.stderr,
+            )
+        if report.skipped_modules:
+            print(
+                f"{name}: types of modules outside the page table are not documented: "
+                + ", ".join(report.skipped_modules),
+                file=sys.stderr,
+            )
+        for anchor in report.unlinked_anchors:
+            print(
+                f"{name}: anchor [[{anchor}]] has no heading, rendered as a code span",
+                file=sys.stderr,
+            )
+        for page in report.changed:
+            print(f"{where}{page}: {'would change' if args.check else 'updated'}")
+        failed = failed or bool(
+            report.skipped or report.stale or (args.check and report.changed)
         )
-    for page in report.changed:
-        print(f"{page}: {'would change' if args.check else 'updated'}")
-    failed = report.skipped or report.stale or (args.check and report.changed)
-    return 1 if failed else 0
+    return 1 if failed or not found else 0
 
 
 if __name__ == "__main__":

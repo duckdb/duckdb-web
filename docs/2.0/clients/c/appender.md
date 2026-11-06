@@ -115,7 +115,7 @@ duckdb_state duckdb_appender_create(
 * `connection`: The connection context to create the appender in.
 * `schema`: The schema of the table to append to, or `nullptr` for the default schema.
 * `table`: The table name to append to.
-* `out_appender`: The resulting appender object.
+* `out_appender`: The resulting appender object. (out)
 
 ##### Return Value
 
@@ -149,7 +149,7 @@ duckdb_state duckdb_appender_create_ext(
 * `catalog`: The catalog of the table to append to, or `nullptr` for the default catalog.
 * `schema`: The schema of the table to append to, or `nullptr` for the default schema.
 * `table`: The table name to append to.
-* `out_appender`: The resulting appender object.
+* `out_appender`: The resulting appender object. (out)
 
 ##### Return Value
 
@@ -187,7 +187,7 @@ duckdb_state duckdb_appender_create_query(
 * `types`: The types of the columns to append.
 * `table_name`: (optionally) the table name used to refer to the appended data, defaults to `appended_data`.
 * `column_names`: (optionally) the list of column names, defaults to `col1`, `col2`, ...
-* `out_appender`: The resulting appender object.
+* `out_appender`: The resulting appender object. (out)
 
 ##### Return Value
 
@@ -1080,7 +1080,7 @@ duckdb_state duckdb_table_description_create(
 * `connection`: The connection context.
 * `schema`: The schema of the table, or `nullptr` for the default schema.
 * `table`: The table name.
-* `out`: The resulting table description object.
+* `out`: The resulting table description object. (out)
 
 ##### Return Value
 
@@ -1112,7 +1112,7 @@ duckdb_state duckdb_table_description_create_ext(
 * `catalog`: The catalog (database) name of the table, or `nullptr` for the default catalog.
 * `schema`: The schema of the table, or `nullptr` for the default schema.
 * `table`: The table name.
-* `out`: The resulting table description object.
+* `out`: The resulting table description object. (out)
 
 ##### Return Value
 
@@ -1186,7 +1186,7 @@ duckdb_state duckdb_column_has_default(
 
 * `table_description`: The table_description to query.
 * `index`: The index of the column to query.
-* `out`: The out-parameter used to store the result.
+* `out`: The out-parameter used to store the result. (out)
 
 ##### Return Value
 

@@ -44,7 +44,7 @@ duckdb_state duckdb_create_gadget(
 ##### Parameters
 
 * `path`: Path to the gadget file on disk. Both `nullptr` and `:memory:` open an in-memory gadget.
-* `out_gadget`: The result gadget object.
+* `out_gadget`: The result gadget object. (out)
 
 ##### Return Value
 
@@ -136,7 +136,7 @@ The column data of the specified column, `col_data` when the gadget is â€œplainâ
 
 #### `duckdb_gadget_peek`
 
-> Warning Unstable since 1.5.0. The signature or behavior may change in a later release.
+Unstable since 1.5.0.
 
 Peeks at the gadget without consuming anything. See [`duckdb_widget_from_gadget`]({% link docs/2.0/clients/c/api.md %}#duckdb_widget_from_gadget).
 

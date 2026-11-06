@@ -22,6 +22,9 @@ SCRIPT = HERE.parent / "scripts" / "generate_c_api_docs.py"
 sys.path.insert(0, str(SCRIPT.parent))
 import generate_c_api_docs as gen  # noqa: E402
 
+SPEC_V2 = FIXTURES / "api_spec_mini_v2"
+PAGES_V2 = {"mini_common": None, "gizmo": None}
+TITLES_V2 = {"mini_common": "Mini Common", "gizmo": "Gizmo"}
 PAGES = {"gadget": "gadget", "trinket": "gadget", "widget": None}
 TITLES = {
     "gadget": "Gadget Interface",
@@ -44,6 +47,14 @@ def run(docs_dir, spec=SPEC, **overrides):
     tables = dict(pages=PAGES, titles=TITLES, legacy_ids=LEGACY_IDS)
     tables.update(overrides)
     return gen.generate(spec, docs_dir, link_root="docs/2.0/clients/c", **tables)
+
+
+def run_v2(docs_dir, spec=SPEC_V2, **overrides):
+    tables = dict(pages=PAGES_V2, titles=TITLES_V2, legacy_ids={})
+    tables.update(overrides)
+    return gen.generate(
+        spec, docs_dir / "v2", link_root="docs/2.0/clients/c/v2", **tables
+    )
 
 
 def heading_id_present(text, anchor_id):
@@ -91,10 +102,10 @@ def test_splice_keeps_prose_above_marker(docs_dir):
 
 
 def test_check_mode_exit_codes(docs_dir, monkeypatch):
-    monkeypatch.setattr(gen, "PAGES", PAGES)
-    monkeypatch.setattr(gen, "TITLES", TITLES)
-    monkeypatch.setattr(gen, "LEGACY_IDS", LEGACY_IDS)
     monkeypatch.setattr(gen, "REPO_ROOT", docs_dir.parents[3])
+    monkeypatch.setattr(
+        gen, "APIS", {"v1": gen.Api(PAGES, TITLES, LEGACY_IDS, subdir="")}
+    )
     rel = docs_dir.relative_to(docs_dir.parents[3]).as_posix()
     checkout = docs_dir.parents[3] / "duckdb"
     (checkout / "api_spec").mkdir(parents=True)
@@ -304,7 +315,7 @@ def test_deprecated_function_gets_callout(docs_dir):
 def test_unstable_function_is_marked(docs_dir):
     run(docs_dir)
     block = entry((docs_dir / "gadget.md").read_text(), "duckdb_gadget_peek")
-    assert block.startswith("\n> Warning Unstable since 1.5.0.")
+    assert block.startswith("\nUnstable since 1.5.0.\n")
 
 
 def test_renamed_function_names_old_name(docs_dir):
@@ -423,6 +434,7 @@ def test_non_function_anchor_is_code_span(docs_dir):
 @pytest.mark.skipif(shutil.which("npx") is None, reason="node is not installed")
 def test_output_passes_markdownlint(docs_dir):
     run(docs_dir)
+    run_v2(docs_dir)
     config = HERE.parent / ".markdownlint.jsonc"
     result = subprocess.run(
         [
@@ -433,11 +445,244 @@ def test_output_passes_markdownlint(docs_dir):
             str(config),
             str(docs_dir / "api.md"),
             str(docs_dir / "gadget.md"),
+            str(docs_dir / "v2" / "api.md"),
         ],
         capture_output=True,
         text=True,
     )
     assert result.returncode == 0, result.stdout + result.stderr
+
+
+# The v2 spec: type headings, anchors to types, ownership tags, lists
+
+
+def test_v2_complete_page_golden(docs_dir):
+    run_v2(docs_dir)
+    assert (docs_dir / "v2" / "api.md").read_text() == (
+        FIXTURES / "expected" / "v2" / "api.md"
+    ).read_text()
+
+
+def test_type_headings(docs_dir):
+    run_v2(docs_dir)
+    text = (docs_dir / "v2" / "api.md").read_text()
+    for name in (
+        "duckdb_v2_gizmo_handle",
+        "duckdb_v2_error_info_handle",
+        "duckdb_v2_gizmo_visit_fn",
+        "duckdb_v2_sel_t",
+        "duckdb_v2_view",
+        "DUCKDB_V2_GIZMO_KIND",
+        "DUCKDB_V2_GIZMO_MAX_ITEMS",
+    ):
+        assert text.count(f"#### `{name}`\n") == 1, name
+    types_end = text.index("### Gizmo")
+    assert (
+        text.index("#### `DUCKDB_V2_GIZMO_MAX_ITEMS`")
+        < types_end
+        < text.index("#### `duckdb_v2_gizmo_create`")
+    )
+    assert "Unstable since" not in text[:types_end]
+
+
+def test_type_only_module_outside_the_table_is_skipped(docs_dir):
+    report = run_v2(docs_dir, pages={"gizmo": None})
+    text = (docs_dir / "v2" / "api.md").read_text()
+    assert "#### `duckdb_v2_gizmo_handle`" not in text
+    assert report.skipped_modules == ["mini_common"]
+    assert "gizmo_destroy" not in report.unlinked_anchors
+    assert sorted(report.unlinked_anchors) == [
+        "GIZMO_KIND",
+        "GIZMO_MAX_ITEMS",
+        "gizmo_visit",
+        "sel",
+        "view",
+    ]
+
+
+def test_every_anchor_target_has_a_heading(docs_dir):
+    report = run_v2(docs_dir)
+    assert report.unlinked_anchors == [] and report.skipped_modules == []
+    text = (docs_dir / "v2" / "api.md").read_text()
+    assert "[[" not in text
+    for href in re.findall(r"\]\(#([^)]+)\)", text):
+        assert heading_id_present(text, href), href
+
+
+def test_type_anchor_becomes_link(docs_dir):
+    run_v2(docs_dir)
+    text = (docs_dir / "v2" / "api.md").read_text()
+    assert (
+        "Destroy it with [`duckdb_v2_gizmo_destroy`](#duckdb_v2_gizmo_destroy)." in text
+    )
+    assert "see [`duckdb_v2_gizmo_handle`](#duckdb_v2_gizmo_handle)." in text
+    assert "one of [`DUCKDB_V2_GIZMO_KIND`](#duckdb_v2_gizmo_kind)." in text
+    assert (
+        "at most [`DUCKDB_V2_GIZMO_MAX_ITEMS`](#duckdb_v2_gizmo_max_items) items."
+        in text
+    )
+    assert (
+        "A [`duckdb_v2_view`](#duckdb_v2_view) of the item names, each a [`duckdb_v2_sel_t`](#duckdb_v2_sel_t) long."
+        in text
+    )
+    assert "see [`duckdb_v2_gizmo_visit_fn`](#duckdb_v2_gizmo_visit_fn)." in text
+
+
+def test_mixed_anchor_span_fails(docs_dir, tmp_path):
+    spec = tmp_path / "spec"
+    shutil.copytree(SPEC_V2, spec)
+    yaml_path = spec / "common" / "common.yaml"
+    yaml_path.write_text(
+        yaml_path.read_text().replace("`[[gizmo_destroy]]`", "`[[gizmo_destroy]]()`")
+    )
+    with pytest.raises(gen.MixedAnchorSpan, match=r"gizmo_destroy"):
+        run_v2(docs_dir, spec=spec)
+
+
+def test_parameter_kind_tags(docs_dir):
+    run_v2(docs_dir)
+    text = (docs_dir / "v2" / "api.md").read_text()
+    create = entry(text, "duckdb_v2_gizmo_create")
+    assert (
+        "* `kind`: The kind, one of [`DUCKDB_V2_GIZMO_KIND`](#duckdb_v2_gizmo_kind).\n"
+        in create
+    )
+    assert "* `out_gizmo`: Receives the new gizmo. (out)\n" in create
+    assert "* `err`: (out, borrowed)\n" in create
+    destroy = entry(text, "duckdb_v2_gizmo_destroy")
+    assert (
+        "* `gizmo`: The gizmo to destroy. (ownership passes to the callee)\n" in destroy
+    )
+
+
+def test_list_passes_through(docs_dir):
+    run_v2(docs_dir)
+    create = entry((docs_dir / "v2" / "api.md").read_text(), "duckdb_v2_gizmo_create")
+    assert (
+        "The kind decides the layout:\n* plain gizmos hold items in order,\n"
+        "* fancy gizmos hold at most [`DUCKDB_V2_GIZMO_MAX_ITEMS`](#duckdb_v2_gizmo_max_items) items.\n\n"
+        "Creation runs in two steps:\n1. the layout is chosen,\n2. the items are allocated.\n"
+    ) in create
+
+
+def test_callback_and_alias_syntax(docs_dir):
+    run_v2(docs_dir)
+    text = (docs_dir / "v2" / "api.md").read_text()
+    assert (
+        "```c\ntypedef bool (*duckdb_v2_gizmo_visit_fn)(\n  idx_t item,\n  void *user_data,\n"
+        "  duckdb_v2_error_info_handle *err\n);\n```"
+    ) in text
+    assert (
+        "* `err`: Live error slot. Populate it to fail the visiting call. (out, borrowed)\n"
+        in text
+    )
+    assert "```c\ntypedef uint32_t duckdb_v2_sel_t;\n```" in text
+    assert (
+        "* `ptr` (`const char *`): The first byte.\n* `len` (`idx_t`): The number of bytes.\n"
+        in text
+    )
+    assert "* `DUCKDB_V2_GIZMO_KIND_PLAIN` = 0: A plain gizmo.\n" in text
+    assert "* `DUCKDB_V2_GIZMO_KIND_HOLLOW` = 2\n" in text
+    assert "The most items a gizmo holds.\n\nValue: `12`.\n" in text
+    assert "##### Value\n" not in text
+    assert (
+        "* `value` (`union`)\n    * `pointer` (`struct`)\n        * `length` (`uint32_t`)\n"
+        "        * `prefix` (`char[4]`): The first four bytes.\n        * `ptr` (`char *`)\n"
+        "    * `inlined` (`struct`)\n        * `length` (`uint32_t`)\n        * `inlined` (`char[12]`)\n"
+    ) in text
+
+
+def test_description_keeps_first_line_indentation(docs_dir, tmp_path):
+    spec = tmp_path / "spec"
+    shutil.copytree(SPEC_V2, spec)
+    yaml_path = spec / "gizmo" / "gizmo.yaml"
+    yaml_path.write_text(
+        yaml_path.read_text().replace(
+            "    description: |\n      Visits every item of a gizmo.\n",
+            "    description: \"  - first item\\n  - second item\\n\"\n",
+        )
+    )
+    run_v2(docs_dir, spec=spec)
+    block = entry((docs_dir / "v2" / "api.md").read_text(), "duckdb_v2_gizmo_visit_all")
+    assert "\n  * first item\n  * second item\n" in block
+    v1 = tmp_path / "v1"
+    shutil.copytree(SPEC, v1)
+    yaml_path = v1 / "trinket" / "trinket.yaml"
+    yaml_path.write_text(
+        yaml_path.read_text().replace(
+            "    description: |\n      Does nothing useful any more.\n",
+            "    description: \"**DEPRECATED**: gone.\\n  - first item\\n  - second item\\n\"\n",
+        )
+    )
+    run(docs_dir, spec=v1)
+    block = entry((docs_dir / "gadget.md").read_text(), "duckdb_trinket_old")
+    assert "\ngone.\n  * first item\n  * second item\n" in block
+
+
+def fixture_checkout(docs_dir, with_v2=True):
+    root = docs_dir.parents[3]
+    checkout = root / "duckdb"
+    (checkout / "api_spec").mkdir(parents=True)
+    shutil.copytree(SPEC, checkout / "api_spec" / "v1")
+    if with_v2:
+        shutil.copytree(SPEC_V2, checkout / "api_spec" / "v2")
+    return checkout
+
+
+def test_two_specs_in_one_run(docs_dir, monkeypatch):
+    monkeypatch.setattr(gen, "REPO_ROOT", docs_dir.parents[3])
+    monkeypatch.setattr(
+        gen,
+        "APIS",
+        {
+            "v1": gen.Api(PAGES, TITLES, LEGACY_IDS, subdir=""),
+            "v2": gen.Api(PAGES_V2, TITLES_V2, {}, subdir="v2"),
+        },
+    )
+    checkout = fixture_checkout(docs_dir)
+    rel = docs_dir.relative_to(docs_dir.parents[3]).as_posix()
+    assert gen.main([str(checkout), "--docs-dir", rel]) == 0
+    assert (docs_dir / "gadget.md").read_text() == (
+        FIXTURES / "expected" / "gadget.md"
+    ).read_text()
+    assert (docs_dir / "v2" / "api.md").read_text() == (
+        FIXTURES / "expected" / "v2" / "api.md"
+    ).read_text()
+    assert gen.main([str(checkout), "--docs-dir", rel, "--check"]) == 0
+
+
+def test_no_spec_folder_at_all_fails(docs_dir, monkeypatch, capsys):
+    monkeypatch.setattr(gen, "REPO_ROOT", docs_dir.parents[3])
+    checkout = docs_dir.parents[3] / "duckdb"
+    checkout.mkdir()
+    rel = docs_dir.relative_to(docs_dir.parents[3]).as_posix()
+    assert gen.main([str(checkout), "--docs-dir", rel]) == 1
+    assert "api_spec" in capsys.readouterr().err
+
+
+def test_missing_page_file_is_reported(docs_dir):
+    (docs_dir / "v2" / "api.md").unlink()
+    report = run_v2(docs_dir)
+    assert report.skipped == ["api.md"]
+    assert not (docs_dir / "v2" / "api.md").exists()
+
+
+def test_missing_v2_spec_is_skipped(docs_dir, monkeypatch, capsys):
+    monkeypatch.setattr(gen, "REPO_ROOT", docs_dir.parents[3])
+    monkeypatch.setattr(
+        gen,
+        "APIS",
+        {
+            "v1": gen.Api(PAGES, TITLES, LEGACY_IDS, subdir=""),
+            "v2": gen.Api(PAGES_V2, TITLES_V2, {}, subdir="v2"),
+        },
+    )
+    checkout = fixture_checkout(docs_dir, with_v2=False)
+    rel = docs_dir.relative_to(docs_dir.parents[3]).as_posix()
+    stale_v2 = (docs_dir / "v2" / "api.md").read_text()
+    assert gen.main([str(checkout), "--docs-dir", rel]) == 0
+    assert (docs_dir / "v2" / "api.md").read_text() == stale_v2
+    assert "api_spec/v2" in capsys.readouterr().err
 
 
 # Real spec
@@ -483,3 +728,69 @@ def test_real_spec_round_trip(tmp_path):
         page_text = (target / page).read_text()
         for name in module["functions"]:
             assert page_text.count(f"#### `duckdb_{name}`\n") == 1, (page, name)
+
+
+@pytest.mark.skipif(
+    "DUCKDB_CHECKOUT" not in os.environ, reason="DUCKDB_CHECKOUT is not set"
+)
+def test_real_v2_spec_round_trip(tmp_path):
+    import capigen
+
+    checkout = Path(os.environ["DUCKDB_CHECKOUT"])
+    spec_dir = checkout / "api_spec" / "v2"
+    target = tmp_path / "docs" / "2.0" / "clients" / "c"
+    shutil.copytree(HERE.parent / "docs" / "2.0" / "clients" / "c", target)
+    api = gen.APIS["v2"]
+    report = gen.generate(
+        spec_dir,
+        target / api.subdir,
+        link_root=f"docs/2.0/clients/c/{api.subdir}",
+        pages=api.pages,
+        titles=api.titles,
+        legacy_ids=api.legacy_ids,
+    )
+    spec = capigen.load(spec_dir)
+    text = (target / api.subdir / "api.md").read_text()
+    functions = sorted(
+        f"duckdb_v2_{n}" for m in spec.modules for n in m.get("functions", {})
+    )
+    types = sorted(
+        spec.registry[n]
+        for m in spec.modules
+        for k in ("handles", "callbacks", "aliases", "structs", "enums")
+        for n in m.get(k, {})
+    )
+    constants = sorted(
+        f"DUCKDB_V2_{n}" for m in spec.modules for n in m.get("constants", {})
+    )
+    headings = re.findall(r"^#### `([^`]+)`$", text, re.M)
+    assert (
+        sorted(h for h in headings if h not in types and h not in constants)
+        == functions
+    )
+    assert sorted(h for h in headings if h not in functions) == sorted(
+        types + constants
+    )
+    assert len(headings) == len(set(headings))
+    assert report.unlinked_anchors == [] and report.skipped == [] and report.stale == []
+    assert "[[" not in text
+    hrefs = [
+        h for b in quick_reference(text) for h in re.findall(r'<a href="#([^"]+)">', b)
+    ]
+    hrefs += re.findall(r"\]\(#([^)]+)\)", text)
+    unresolved = sorted({h for h in hrefs if not heading_id_present(text, h)})
+    assert unresolved == []
+    if shutil.which("npx"):
+        result = subprocess.run(
+            [
+                "npx",
+                "--no-install",
+                "markdownlint-cli",
+                "--config",
+                str(HERE.parent / ".markdownlint.jsonc"),
+                str(target / api.subdir / "api.md"),
+            ],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0, result.stdout + result.stderr
