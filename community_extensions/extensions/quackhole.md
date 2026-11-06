@@ -102,8 +102,8 @@ docs:
       seconds, and cached connections are never evicted.
     - Native only: macOS, Linux, Windows. This is not a wasm extension.
 
-extension_star_count: 9
-extension_star_count_pretty: 9
+extension_star_count: 10
+extension_star_count_pretty: 10
 extension_download_count: 887
 extension_download_count_pretty: 887
 image: '/images/community_extensions/social_preview/preview_community_extension_quackhole.png'
