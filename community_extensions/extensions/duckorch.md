@@ -148,8 +148,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 911
-extension_download_count_pretty: 911
+extension_download_count: 895
+extension_download_count_pretty: 895
 image: '/images/community_extensions/social_preview/preview_community_extension_duckorch.png'
 layout: community_extension_doc
 ---

@@ -84,8 +84,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 210
-extension_download_count_pretty: 210
+extension_download_count: 277
+extension_download_count_pretty: 277
 image: '/images/community_extensions/social_preview/preview_community_extension_apt.png'
 layout: community_extension_doc
 ---

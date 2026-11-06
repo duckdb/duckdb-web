@@ -21,10 +21,10 @@ repo:
   ref: 41cb7be30f5568b3675ac4ec34abd57bfedbf53f
   variegata: b08d5d26620a193785e40668c839a861db4be6ce
 
-extension_star_count: 25
-extension_star_count_pretty: 25
-extension_download_count: 945
-extension_download_count_pretty: 945
+extension_star_count: 26
+extension_star_count_pretty: 26
+extension_download_count: 939
+extension_download_count_pretty: 939
 image: '/images/community_extensions/social_preview/preview_community_extension_geosilo.png'
 layout: community_extension_doc
 ---
