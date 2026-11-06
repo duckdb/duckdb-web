@@ -374,7 +374,7 @@ void duckdb_table_function_get_client_context(
 ##### Parameters
 
 * `info`: The bind info object of the table function.
-* `out_context`: The client context of the bind info. Must be destroyed with `duckdb_destroy_client_context`.
+* `out_context`: The client context of the bind info. Must be destroyed with `duckdb_destroy_client_context`. (out)
 
 <br>
 

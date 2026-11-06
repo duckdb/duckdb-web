@@ -132,7 +132,7 @@ duckdb_state duckdb_prepare(
 
 * `connection`: The connection object
 * `query`: The SQL query to prepare
-* `out_prepared_statement`: The resulting prepared statement object
+* `out_prepared_statement`: The resulting prepared statement object (out)
 
 ##### Return Value
 
@@ -492,6 +492,10 @@ duckdb_state duckdb_bind_parameter_index(
   const char *name
 );
 ```
+
+##### Parameters
+
+* `param_idx_out`: (out)
 
 ##### Return Value
 
@@ -1033,7 +1037,7 @@ duckdb_state duckdb_execute_prepared(
 ##### Parameters
 
 * `prepared_statement`: The prepared statement to execute.
-* `out_result`: The query result.
+* `out_result`: The query result. (out)
 
 ##### Return Value
 
@@ -1067,7 +1071,7 @@ idx_t duckdb_extract_statements(
 
 * `connection`: The connection object
 * `query`: The SQL query to extract
-* `out_extracted_statements`: The resulting extracted statements object
+* `out_extracted_statements`: The resulting extracted statements object (out)
 
 ##### Return Value
 
@@ -1101,7 +1105,7 @@ duckdb_state duckdb_prepare_extracted_statement(
 * `connection`: The connection object
 * `extracted_statements`: The extracted statements object
 * `index`: The index of the extracted statement to prepare
-* `out_prepared_statement`: The resulting prepared statement object
+* `out_prepared_statement`: The resulting prepared statement object (out)
 
 ##### Return Value
 
@@ -1180,7 +1184,7 @@ duckdb_state duckdb_execute_prepared_streaming(
 ##### Parameters
 
 * `prepared_statement`: The prepared statement to execute.
-* `out_result`: The query result.
+* `out_result`: The query result. (out)
 
 ##### Return Value
 
@@ -1213,7 +1217,7 @@ duckdb_state duckdb_pending_prepared_streaming(
 ##### Parameters
 
 * `prepared_statement`: The prepared statement to execute.
-* `out_result`: The pending query result.
+* `out_result`: The pending query result. (out)
 
 ##### Return Value
 
@@ -1255,7 +1259,7 @@ duckdb_state duckdb_pending_prepared(
 ##### Parameters
 
 * `prepared_statement`: The prepared statement to execute.
-* `out_result`: The pending query result.
+* `out_result`: The pending query result. (out)
 
 ##### Return Value
 
@@ -1399,7 +1403,7 @@ duckdb_state duckdb_execute_pending(
 ##### Parameters
 
 * `pending_result`: The pending result to execute.
-* `out_result`: The result object.
+* `out_result`: The result object. (out)
 
 ##### Return Value
 

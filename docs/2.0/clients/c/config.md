@@ -264,7 +264,7 @@ duckdb_value duckdb_client_context_get_config_option(
 * `name`: The name of the configuration option to retrieve.
 * `out_scope`: Output parameter to optionally store the scope that the configuration option was retrieved from.
 If this is `nullptr`, the scope is not returned.
-If the requested option does not exist the scope is set to `DUCKDB_CONFIG_OPTION_SCOPE_INVALID`.
+If the requested option does not exist the scope is set to `DUCKDB_CONFIG_OPTION_SCOPE_INVALID`. (out)
 
 ##### Return Value
 

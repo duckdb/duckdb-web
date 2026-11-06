@@ -99,10 +99,10 @@ duckdb_state duckdb_get_or_create_from_cache(
 
 * `instance_cache`: The instance cache in which to create the database, or from which to take the database.
 * `path`: Path to the database file on disk. Both `nullptr` and `:memory:` open or retrieve an in-memory database.
-* `out_database`: The resulting cached database.
+* `out_database`: The resulting cached database. (out)
 * `config`: (Optional) configuration used to create the database.
 * `out_error`: If set and the function returns `DuckDBError`, this contains the error message.
-Note that the error message must be freed using `duckdb_free`.
+Note that the error message must be freed using `duckdb_free`. (out)
 
 ##### Return Value
 
@@ -150,7 +150,7 @@ duckdb_state duckdb_open(
 ##### Parameters
 
 * `path`: Path to the database file on disk. Both `nullptr` and `:memory:` open an in-memory database.
-* `out_database`: The result database object.
+* `out_database`: The result database object. (out)
 
 ##### Return Value
 
@@ -179,10 +179,10 @@ duckdb_state duckdb_open_ext(
 ##### Parameters
 
 * `path`: Path to the database file on disk. Both `nullptr` and `:memory:` open an in-memory database.
-* `out_database`: The result database object.
+* `out_database`: The result database object. (out)
 * `config`: (Optional) configuration used to start up the database.
 * `out_error`: If set and the function returns `DuckDBError`, this contains the error message.
-Note that the error message must be freed using `duckdb_free`.
+Note that the error message must be freed using `duckdb_free`. (out)
 
 ##### Return Value
 
@@ -256,7 +256,7 @@ duckdb_state duckdb_create_config(
 
 ##### Parameters
 
-* `out_config`: The result configuration object.
+* `out_config`: The result configuration object. (out)
 
 ##### Return Value
 
@@ -306,8 +306,8 @@ duckdb_state duckdb_get_config_flag(
 ##### Parameters
 
 * `index`: The index of the configuration option (between 0 and `duckdb_config_count`)
-* `out_name`: A name of the configuration flag.
-* `out_description`: A description of the configuration flag.
+* `out_name`: A name of the configuration flag. (out)
+* `out_description`: A description of the configuration flag. (out)
 
 ##### Return Value
 
@@ -402,7 +402,7 @@ duckdb_state duckdb_connect(
 ##### Parameters
 
 * `database`: The database file to connect to.
-* `out_connection`: The result connection object.
+* `out_connection`: The result connection object. (out)
 
 ##### Return Value
 
@@ -492,7 +492,7 @@ void duckdb_connection_get_client_context(
 ##### Parameters
 
 * `connection`: The connection.
-* `out_context`: The client context of the connection. Must be destroyed with `duckdb_destroy_client_context`.
+* `out_context`: The client context of the connection. Must be destroyed with `duckdb_destroy_client_context`. (out)
 
 <br>
 
@@ -514,6 +514,7 @@ void duckdb_connection_get_arrow_options(
 ##### Parameters
 
 * `connection`: The connection.
+* `out_arrow_options`: (out)
 
 <br>
 

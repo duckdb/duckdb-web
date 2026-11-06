@@ -79,10 +79,10 @@ duckdb_state duckdb_get_or_create_from_cache(
 
 * `instance_cache`: The instance cache in which to create the database, or from which to take the database.
 * `path`: Path to the database file on disk. Both `nullptr` and `:memory:` open or retrieve an in-memory database.
-* `out_database`: The resulting cached database.
+* `out_database`: The resulting cached database. (out)
 * `config`: (Optional) configuration used to create the database.
 * `out_error`: If set and the function returns `DuckDBError`, this contains the error message.
-Note that the error message must be freed using `duckdb_free`.
+Note that the error message must be freed using `duckdb_free`. (out)
 
 ##### Return Value
 
@@ -130,7 +130,7 @@ duckdb_state duckdb_open(
 ##### Parameters
 
 * `path`: Path to the database file on disk. Both `nullptr` and `:memory:` open an in-memory database.
-* `out_database`: The result database object.
+* `out_database`: The result database object. (out)
 
 ##### Return Value
 
@@ -159,10 +159,10 @@ duckdb_state duckdb_open_ext(
 ##### Parameters
 
 * `path`: Path to the database file on disk. Both `nullptr` and `:memory:` open an in-memory database.
-* `out_database`: The result database object.
+* `out_database`: The result database object. (out)
 * `config`: (Optional) configuration used to start up the database.
 * `out_error`: If set and the function returns `DuckDBError`, this contains the error message.
-Note that the error message must be freed using `duckdb_free`.
+Note that the error message must be freed using `duckdb_free`. (out)
 
 ##### Return Value
 
@@ -236,7 +236,7 @@ duckdb_state duckdb_create_config(
 
 ##### Parameters
 
-* `out_config`: The result configuration object.
+* `out_config`: The result configuration object. (out)
 
 ##### Return Value
 
@@ -286,8 +286,8 @@ duckdb_state duckdb_get_config_flag(
 ##### Parameters
 
 * `index`: The index of the configuration option (between 0 and `duckdb_config_count`)
-* `out_name`: A name of the configuration flag.
-* `out_description`: A description of the configuration flag.
+* `out_name`: A name of the configuration flag. (out)
+* `out_description`: A description of the configuration flag. (out)
 
 ##### Return Value
 
@@ -382,7 +382,7 @@ duckdb_state duckdb_connect(
 ##### Parameters
 
 * `database`: The database file to connect to.
-* `out_connection`: The result connection object.
+* `out_connection`: The result connection object. (out)
 
 ##### Return Value
 
@@ -472,7 +472,7 @@ void duckdb_connection_get_client_context(
 ##### Parameters
 
 * `connection`: The connection.
-* `out_context`: The client context of the connection. Must be destroyed with `duckdb_destroy_client_context`.
+* `out_context`: The client context of the connection. Must be destroyed with `duckdb_destroy_client_context`. (out)
 
 <br>
 
@@ -494,6 +494,7 @@ void duckdb_connection_get_arrow_options(
 ##### Parameters
 
 * `connection`: The connection.
+* `out_arrow_options`: (out)
 
 <br>
 
@@ -806,7 +807,7 @@ duckdb_value duckdb_client_context_get_config_option(
 * `name`: The name of the configuration option to retrieve.
 * `out_scope`: Output parameter to optionally store the scope that the configuration option was retrieved from.
 If this is `nullptr`, the scope is not returned.
-If the requested option does not exist the scope is set to `DUCKDB_CONFIG_OPTION_SCOPE_INVALID`.
+If the requested option does not exist the scope is set to `DUCKDB_CONFIG_OPTION_SCOPE_INVALID`. (out)
 
 ##### Return Value
 
@@ -1002,7 +1003,7 @@ duckdb_state duckdb_query(
 
 * `connection`: The connection to perform the query in.
 * `query`: The SQL query to run.
-* `out_result`: The query result.
+* `out_result`: The query result. (out)
 
 ##### Return Value
 
@@ -6964,7 +6965,7 @@ void duckdb_table_function_get_client_context(
 ##### Parameters
 
 * `info`: The bind info object of the table function.
-* `out_context`: The client context of the bind info. Must be destroyed with `duckdb_destroy_client_context`.
+* `out_context`: The client context of the bind info. Must be destroyed with `duckdb_destroy_client_context`. (out)
 
 <br>
 
@@ -7697,7 +7698,7 @@ duckdb_state duckdb_prepare(
 
 * `connection`: The connection object
 * `query`: The SQL query to prepare
-* `out_prepared_statement`: The resulting prepared statement object
+* `out_prepared_statement`: The resulting prepared statement object (out)
 
 ##### Return Value
 
@@ -8057,6 +8058,10 @@ duckdb_state duckdb_bind_parameter_index(
   const char *name
 );
 ```
+
+##### Parameters
+
+* `param_idx_out`: (out)
 
 ##### Return Value
 
@@ -8598,7 +8603,7 @@ duckdb_state duckdb_execute_prepared(
 ##### Parameters
 
 * `prepared_statement`: The prepared statement to execute.
-* `out_result`: The query result.
+* `out_result`: The query result. (out)
 
 ##### Return Value
 
@@ -8632,7 +8637,7 @@ idx_t duckdb_extract_statements(
 
 * `connection`: The connection object
 * `query`: The SQL query to extract
-* `out_extracted_statements`: The resulting extracted statements object
+* `out_extracted_statements`: The resulting extracted statements object (out)
 
 ##### Return Value
 
@@ -8666,7 +8671,7 @@ duckdb_state duckdb_prepare_extracted_statement(
 * `connection`: The connection object
 * `extracted_statements`: The extracted statements object
 * `index`: The index of the extracted statement to prepare
-* `out_prepared_statement`: The resulting prepared statement object
+* `out_prepared_statement`: The resulting prepared statement object (out)
 
 ##### Return Value
 
@@ -8745,7 +8750,7 @@ duckdb_state duckdb_execute_prepared_streaming(
 ##### Parameters
 
 * `prepared_statement`: The prepared statement to execute.
-* `out_result`: The query result.
+* `out_result`: The query result. (out)
 
 ##### Return Value
 
@@ -8778,7 +8783,7 @@ duckdb_state duckdb_pending_prepared_streaming(
 ##### Parameters
 
 * `prepared_statement`: The prepared statement to execute.
-* `out_result`: The pending query result.
+* `out_result`: The pending query result. (out)
 
 ##### Return Value
 
@@ -8820,7 +8825,7 @@ duckdb_state duckdb_pending_prepared(
 ##### Parameters
 
 * `prepared_statement`: The prepared statement to execute.
-* `out_result`: The pending query result.
+* `out_result`: The pending query result. (out)
 
 ##### Return Value
 
@@ -8964,7 +8969,7 @@ duckdb_state duckdb_execute_pending(
 ##### Parameters
 
 * `pending_result`: The pending result to execute.
-* `out_result`: The result object.
+* `out_result`: The result object. (out)
 
 ##### Return Value
 
@@ -9065,7 +9070,7 @@ duckdb_state duckdb_appender_create(
 * `connection`: The connection context to create the appender in.
 * `schema`: The schema of the table to append to, or `nullptr` for the default schema.
 * `table`: The table name to append to.
-* `out_appender`: The resulting appender object.
+* `out_appender`: The resulting appender object. (out)
 
 ##### Return Value
 
@@ -9099,7 +9104,7 @@ duckdb_state duckdb_appender_create_ext(
 * `catalog`: The catalog of the table to append to, or `nullptr` for the default catalog.
 * `schema`: The schema of the table to append to, or `nullptr` for the default schema.
 * `table`: The table name to append to.
-* `out_appender`: The resulting appender object.
+* `out_appender`: The resulting appender object. (out)
 
 ##### Return Value
 
@@ -9137,7 +9142,7 @@ duckdb_state duckdb_appender_create_query(
 * `types`: The types of the columns to append.
 * `table_name`: (optionally) the table name used to refer to the appended data, defaults to `appended_data`.
 * `column_names`: (optionally) the list of column names, defaults to `col1`, `col2`, ...
-* `out_appender`: The resulting appender object.
+* `out_appender`: The resulting appender object. (out)
 
 ##### Return Value
 
@@ -10030,7 +10035,7 @@ duckdb_state duckdb_table_description_create(
 * `connection`: The connection context.
 * `schema`: The schema of the table, or `nullptr` for the default schema.
 * `table`: The table name.
-* `out`: The resulting table description object.
+* `out`: The resulting table description object. (out)
 
 ##### Return Value
 
@@ -10062,7 +10067,7 @@ duckdb_state duckdb_table_description_create_ext(
 * `catalog`: The catalog (database) name of the table, or `nullptr` for the default catalog.
 * `schema`: The schema of the table, or `nullptr` for the default schema.
 * `table`: The table name.
-* `out`: The resulting table description object.
+* `out`: The resulting table description object. (out)
 
 ##### Return Value
 
@@ -10136,7 +10141,7 @@ duckdb_state duckdb_column_has_default(
 
 * `table_description`: The table_description to query.
 * `index`: The index of the column to query.
-* `out`: The out-parameter used to store the result.
+* `out`: The out-parameter used to store the result. (out)
 
 ##### Return Value
 
@@ -11081,7 +11086,7 @@ void duckdb_scalar_function_get_client_context(
 ##### Parameters
 
 * `info`: The bind info object of the scalar function.
-* `out_context`: The client context of the bind info. Must be destroyed with `duckdb_destroy_client_context`.
+* `out_context`: The client context of the bind info. Must be destroyed with `duckdb_destroy_client_context`. (out)
 
 <br>
 
@@ -11364,7 +11369,7 @@ void duckdb_scalar_function_init_get_client_context(
 ##### Parameters
 
 * `info`: The init info object of the scalar function.
-* `out_context`: The client context of the init info. Must be destroyed with `duckdb_destroy_client_context`.
+* `out_context`: The client context of the init info. Must be destroyed with `duckdb_destroy_client_context`. (out)
 
 <br>
 
@@ -12571,7 +12576,7 @@ duckdb_error_data duckdb_to_arrow_schema(
 * `types`: The DuckDB logical types for each column in the schema.
 * `names`: The names for each column in the schema.
 * `column_count`: The number of columns that exist in the schema.
-* `out_schema`: The resulting arrow schema. Must be destroyed with `out_schema->release(out_schema)`.
+* `out_schema`: The resulting arrow schema. Must be destroyed with `out_schema->release(out_schema)`. (out)
 
 ##### Return Value
 
@@ -12599,7 +12604,7 @@ duckdb_error_data duckdb_data_chunk_to_arrow(
 
 * `arrow_options`: The Arrow settings used to produce arrow.
 * `chunk`: The DuckDB data chunk to convert.
-* `out_arrow_array`: The output Arrow structure that will hold the converted data. Must be released with `out_arrow_array->release(out_arrow_array)`
+* `out_arrow_array`: The output Arrow structure that will hold the converted data. Must be released with `out_arrow_array->release(out_arrow_array)` (out)
 
 ##### Return Value
 
@@ -12627,7 +12632,7 @@ duckdb_error_data duckdb_schema_from_arrow(
 
 * `connection`: The connection to get the transformation settings from.
 * `schema`: The input Arrow schema. Must be released with `schema->release(schema)`.
-* `out_types`: The Arrow converted schema with extra information about the arrow types. Must be destroyed with `duckdb_destroy_arrow_converted_schema`.
+* `out_types`: The Arrow converted schema with extra information about the arrow types. Must be destroyed with `duckdb_destroy_arrow_converted_schema`. (out)
 
 ##### Return Value
 
@@ -12657,7 +12662,7 @@ duckdb_error_data duckdb_data_chunk_from_arrow(
 * `connection`: The connection to get the transformation settings from.
 * `arrow_array`: The input Arrow array. Data ownership is passed on to DuckDB's DataChunk, the underlying object does not need to be released and won't have ownership of the data.
 * `converted_schema`: The Arrow converted schema with extra information about the arrow types.
-* `out_chunk`: The resulting DuckDB data chunk. Must be destroyed by duckdb_destroy_data_chunk.
+* `out_chunk`: The resulting DuckDB data chunk. Must be destroyed by duckdb_destroy_data_chunk. (out)
 
 ##### Return Value
 
@@ -12712,7 +12717,7 @@ duckdb_state duckdb_query_arrow(
 
 * `connection`: The connection to perform the query in.
 * `query`: The SQL query to run.
-* `out_result`: The query result.
+* `out_result`: The query result. (out)
 
 ##### Return Value
 
@@ -12741,7 +12746,7 @@ duckdb_state duckdb_query_arrow_schema(
 ##### Parameters
 
 * `result`: The result to fetch the schema from.
-* `out_schema`: The output schema.
+* `out_schema`: The output schema. (out)
 
 ##### Return Value
 
@@ -12770,7 +12775,7 @@ duckdb_state duckdb_prepared_arrow_schema(
 ##### Parameters
 
 * `prepared`: The prepared statement to fetch the schema from.
-* `out_schema`: The output schema.
+* `out_schema`: The output schema. (out)
 
 ##### Return Value
 
@@ -12801,7 +12806,7 @@ void duckdb_result_arrow_array(
 
 * `result`: The result object the data chunk have been fetched from.
 * `chunk`: The data chunk to convert.
-* `out_array`: The output array.
+* `out_array`: The output array. (out)
 
 <br>
 
@@ -12829,7 +12834,7 @@ duckdb_state duckdb_query_arrow_array(
 ##### Parameters
 
 * `result`: The result to fetch the array from.
-* `out_array`: The output array.
+* `out_array`: The output array. (out)
 
 ##### Return Value
 
@@ -13010,7 +13015,7 @@ duckdb_state duckdb_execute_prepared_arrow(
 ##### Parameters
 
 * `prepared_statement`: The prepared statement to execute.
-* `out_result`: The query result.
+* `out_result`: The query result. (out)
 
 ##### Return Value
 
@@ -13075,7 +13080,7 @@ duckdb_state duckdb_arrow_array_scan(
 * `table_name`: Name of the temporary view to create.
 * `arrow_schema`: Arrow schema wrapper.
 * `arrow_array`: Arrow array wrapper.
-* `out_stream`: Output array stream that wraps around the passed schema, for releasing/deleting once done.
+* `out_stream`: Output array stream that wraps around the passed schema, for releasing/deleting once done. (out)
 
 ##### Return Value
 
@@ -13179,7 +13184,7 @@ duckdb_error_data duckdb_expression_fold(
 
 * `context`: The client context.
 * `expr`: The expression. Must be foldable.
-* `out_value`: The folded value, if folding was successful. Must be destroyed with `duckdb_destroy_value`.
+* `out_value`: The folded value, if folding was successful. Must be destroyed with `duckdb_destroy_value`. (out)
 
 ##### Return Value
 
@@ -13694,7 +13699,7 @@ duckdb_state duckdb_file_system_open(
 * `file_system`: The file system instance.
 * `path`: The path to the file.
 * `options`: The file open options specifying how to open the file.
-* `out_file`: The resulting file handle instance, or `nullptr` if the open failed. Must be destroyed with `duckdb_destroy_file_handle`.
+* `out_file`: The resulting file handle instance, or `nullptr` if the open failed. Must be destroyed with `duckdb_destroy_file_handle`. (out)
 
 ##### Return Value
 
