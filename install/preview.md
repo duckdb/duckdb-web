@@ -167,6 +167,9 @@ dependencies {
 
 ### Java v2.1-dev
 
+The Java v2.1-dev release is currently not available.
+
+{% comment %}
 #### Maven
 
 ```xml
@@ -217,6 +220,7 @@ dependencies {
 #### Direct Download
 
 <a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.next_duckdb_java_dev_version }}/duckdb_jdbc-{{ site.next_duckdb_java_dev_version }}.jar" class="download-btn">duckdb_jdbc-{{ site.next_duckdb_java_dev_version }}.jar</a>
+{% endcomment %}
 
 ## ODBC
 
