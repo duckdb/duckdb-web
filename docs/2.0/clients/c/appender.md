@@ -54,9 +54,9 @@ duckdb_appender_destroy(&appender);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_create_query"><span class="nf">duckdb_appender_create_query</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">idx_t</span> <span class="nv">column_count</span>, <span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">column_names</span>, <span class="kt">duckdb_appender</span> *<span class="nv">out_appender</span>);
 <span class="kt">idx_t</span> <a href="#duckdb_appender_column_count"><span class="nf">duckdb_appender_column_count</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_appender_column_type"><span class="nf">duckdb_appender_column_type</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_appender_error"><span class="nf">duckdb_appender_error</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
-<span class="nv">duckdb_error_data</span> <a href="#duckdb_appender_error_data"><span class="nf">duckdb_appender_error_data</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_error_data</span> <a href="#duckdb_appender_error_data"><span class="nf">duckdb_appender_error_data</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_flush"><span class="nf">duckdb_appender_flush</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_appender_clear"><span class="nf">duckdb_appender_clear</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_close"><span class="nf">duckdb_appender_close</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_destroy"><span class="nf">duckdb_appender_destroy</span></a>(<span class="kt">duckdb_appender</span> *<span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_appender_add_column"><span class="nf">duckdb_appender_add_column</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
@@ -88,9 +88,12 @@ duckdb_appender_destroy(&appender);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_null"><span class="nf">duckdb_append_null</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_value"><span class="nf">duckdb_append_value</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_value</span> <span class="nv">value</span>);
 <span class="kt">duckdb_state</span> <a href="#duckdb_append_data_chunk"><span class="nf">duckdb_append_data_chunk</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_appender_error"><span class="nf">duckdb_appender_error</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
 </code></pre></div></div>
 
 #### `duckdb_appender_create`
+
+Stable since 0.2.5.
 
 Creates an appender object.
 
@@ -98,13 +101,14 @@ Note that the object must be destroyed with `duckdb_appender_destroy`.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_create</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>,<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> *<span class="nv">out_appender
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_appender_create(
+  duckdb_connection connection,
+  const char *schema,
+  const char *table,
+  duckdb_appender *out_appender
+);
+```
 
 ##### Parameters
 
@@ -121,20 +125,23 @@ Note that the object must be destroyed with `duckdb_appender_destroy`.
 
 #### `duckdb_appender_create_ext`
 
+Stable since 1.2.0.
+
 Creates an appender object.
 
 Note that the object must be destroyed with `duckdb_appender_destroy`.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_create_ext</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">catalog</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>,<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> *<span class="nv">out_appender
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_appender_create_ext(
+  duckdb_connection connection,
+  const char *catalog,
+  const char *schema,
+  const char *table,
+  duckdb_appender *out_appender
+);
+```
 
 ##### Parameters
 
@@ -152,22 +159,25 @@ Note that the object must be destroyed with `duckdb_appender_destroy`.
 
 #### `duckdb_appender_create_query`
 
+Stable since 1.5.6.
+
 Creates an appender object that executes the given query with any data appended to it.
 
 Note that the object must be destroyed with `duckdb_appender_destroy`.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_create_query</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">column_count</span>,<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">column_names</span>,<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> *<span class="nv">out_appender
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_appender_create_query(
+  duckdb_connection connection,
+  const char *query,
+  idx_t column_count,
+  duckdb_logical_type *types,
+  const char *table_name,
+  const char **column_names,
+  duckdb_appender *out_appender
+);
+```
 
 ##### Parameters
 
@@ -187,15 +197,18 @@ Note that the object must be destroyed with `duckdb_appender_destroy`.
 
 #### `duckdb_appender_column_count`
 
+Stable since 0.10.0.
+
 Returns the number of columns that belong to the appender.
 If there is no active column list, then this equals the table's physical columns.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_appender_column_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
-</span>);
-</code></pre></div></div>
+```c
+idx_t duckdb_appender_column_count(
+  duckdb_appender appender
+);
+```
 
 ##### Parameters
 
@@ -209,18 +222,20 @@ The number of columns in the data chunks.
 
 #### `duckdb_appender_column_type`
 
-Returns the type of the column at the specified index. This is either a type in the active column list, or the same type
-as a column in the receiving table.
+Stable since 0.10.0.
+
+Returns the type of the column at the specified index. This is either a type in the active column list, or the same type as a column in the receiving table.
 
 Note: The resulting type must be destroyed with `duckdb_destroy_logical_type`.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_appender_column_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col_idx
-</span>);
-</code></pre></div></div>
+```c
+duckdb_logical_type duckdb_appender_column_type(
+  duckdb_appender appender,
+  idx_t col_idx
+);
+```
 
 ##### Parameters
 
@@ -233,44 +248,20 @@ The `duckdb_logical_type` of the column.
 
 <br>
 
-#### `duckdb_appender_error`
-
-> Warning Deprecation notice. This method is scheduled for removal in a future release.
-Use duckdb_appender_error_data instead.
-
-Returns the error message associated with the appender.
-If the appender has no error message, this returns `nullptr` instead.
-
-The error message should not be freed. It will be de-allocated when `duckdb_appender_destroy` is called.
-
-##### Syntax
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_appender_error</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
-</span>);
-</code></pre></div></div>
-
-##### Parameters
-
-* `appender`: The appender to get the error from.
-
-##### Return Value
-
-The error message, or `nullptr` if there is none.
-
-<br>
-
 #### `duckdb_appender_error_data`
+
+Stable since 1.5.6.
 
 Returns the error data associated with the appender.
 Must be destroyed with duckdb_destroy_error_data.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">duckdb_error_data</span> <span class="nv">duckdb_appender_error_data</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
-</span>);
-</code></pre></div></div>
+```c
+duckdb_error_data duckdb_appender_error_data(
+  duckdb_appender appender
+);
+```
 
 ##### Parameters
 
@@ -284,17 +275,21 @@ The error data.
 
 #### `duckdb_appender_flush`
 
-Flush the appender to the table, forcing the cache of the appender to be cleared. If flushing the data triggers a
-constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
+Stable since 0.2.5.
+
+Flush the appender to the table, forcing the cache of the appender to be cleared. Requires a connection with no open
+result. If flushing the data triggers a constraint violation or any other error, then all data is invalidated, and
+this function returns DuckDBError.
 It is not possible to append more values. Call duckdb_appender_error_data to obtain the error data followed by
 duckdb_appender_destroy to destroy the invalidated appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_flush</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_appender_flush(
+  duckdb_appender appender
+);
+```
 
 ##### Parameters
 
@@ -306,7 +301,33 @@ duckdb_appender_destroy to destroy the invalidated appender.
 
 <br>
 
+#### `duckdb_appender_clear`
+
+Stable since 1.5.6.
+
+Clears all buffered data from the appender without flushing it to the table. This discards any data that has been appended but not yet written. The appender can continue to be used after clearing.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_appender_clear(
+  duckdb_appender appender
+);
+```
+
+##### Parameters
+
+* `appender`: The appender to clear.
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
 #### `duckdb_appender_close`
+
+Stable since 0.2.5.
 
 Closes the appender by flushing all intermediate states and closing it for further appends. If flushing the data
 triggers a constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
@@ -315,10 +336,11 @@ appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_close</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_appender_close(
+  duckdb_appender appender
+);
+```
 
 ##### Parameters
 
@@ -332,6 +354,8 @@ appender.
 
 #### `duckdb_appender_destroy`
 
+Stable since 0.2.5.
+
 Closes the appender by flushing all intermediate states to the table and destroying it. By destroying it, this function
 de-allocates all memory associated with the appender. If flushing the data triggers a constraint violation,
 then all data is invalidated, and this function returns DuckDBError. Due to the destruction of the appender, it is no
@@ -340,10 +364,11 @@ before destroying the appender, if you need insights into the specific error.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_destroy</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> *<span class="nv">appender
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_appender_destroy(
+  duckdb_appender *appender
+);
+```
 
 ##### Parameters
 
@@ -357,18 +382,20 @@ before destroying the appender, if you need insights into the specific error.
 
 #### `duckdb_appender_add_column`
 
+Stable since 1.2.0.
+
 Appends a column to the active column list of the appender. Immediately flushes all previous data.
 
-The active column list specifies all columns that are expected when flushing the data. Any non-active columns are filled
-with their default values, or NULL.
+The active column list specifies all columns that are expected when flushing the data. Any non-active columns are filled with their default values, or NULL.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_add_column</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_appender_add_column(
+  duckdb_appender appender,
+  const char *name
+);
+```
 
 ##### Parameters
 
@@ -382,15 +409,17 @@ with their default values, or NULL.
 
 #### `duckdb_appender_clear_columns`
 
-Removes all columns from the active column list of the appender, resetting the appender to treat all columns as active.
-Immediately flushes all previous data.
+Stable since 1.2.0.
+
+Removes all columns from the active column list of the appender, resetting the appender to treat all columns as active. Immediately flushes all previous data.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_clear_columns</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_appender_clear_columns(
+  duckdb_appender appender
+);
+```
 
 ##### Parameters
 
@@ -404,26 +433,37 @@ Immediately flushes all previous data.
 
 #### `duckdb_appender_begin_row`
 
+Stable since 0.2.5.
+
 A nop function, provided for backwards compatibility reasons. Does nothing. Only `duckdb_appender_end_row` is required.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_begin_row</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_appender_begin_row(
+  duckdb_appender appender
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_appender_end_row`
+
+Stable since 0.2.5.
 
 Finish the current row of appends. After end_row is called, the next row can be appended.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_end_row</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_appender_end_row(
+  duckdb_appender appender
+);
+```
 
 ##### Parameters
 
@@ -437,31 +477,41 @@ Finish the current row of appends. After end_row is called, the next row can be 
 
 #### `duckdb_append_default`
 
+Stable since 1.1.0.
+
 Append a DEFAULT value (NULL if DEFAULT not available for column) to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_default</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_default(
+  duckdb_appender appender
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_default_to_chunk`
 
-Append a DEFAULT value, at the specified row and column, (NULL if DEFAULT not available for column) to the chunk created
-from the specified appender. The default value of the column must be a constant value. Non-deterministic expressions
-like nextval('seq') or random() are not supported.
+Stable since 1.5.6.
+
+Append a DEFAULT value, at the specified row and column, (NULL if DEFAULT not available for column) to the chunk created from the specified appender.
+The default value of the column must be a constant value. Non-deterministic expressions like nextval('seq') or random() are not supported.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_default_to_chunk</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">row
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_default_to_chunk(
+  duckdb_appender appender,
+  duckdb_data_chunk chunk,
+  idx_t col,
+  idx_t row
+);
+```
 
 ##### Parameters
 
@@ -478,303 +528,482 @@ like nextval('seq') or random() are not supported.
 
 #### `duckdb_append_bool`
 
+Stable since 0.2.5.
+
 Append a bool value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_bool</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">bool</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_bool(
+  duckdb_appender appender,
+  bool value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_int8`
+
+Stable since 0.2.5.
 
 Append an int8_t value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int8</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">int8_t</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_int8(
+  duckdb_appender appender,
+  int8_t value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_int16`
+
+Stable since 0.2.5.
 
 Append an int16_t value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int16</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">int16_t</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_int16(
+  duckdb_appender appender,
+  int16_t value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_int32`
+
+Stable since 0.2.5.
 
 Append an int32_t value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int32</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">int32_t</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_int32(
+  duckdb_appender appender,
+  int32_t value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_int64`
+
+Stable since 0.2.5.
 
 Append an int64_t value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">int64_t</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_int64(
+  duckdb_appender appender,
+  int64_t value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_hugeint`
+
+Stable since 0.2.9.
 
 Append a duckdb_hugeint value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_hugeint</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_hugeint</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_hugeint(
+  duckdb_appender appender,
+  duckdb_hugeint value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_uint8`
+
+Stable since 0.2.5.
 
 Append a uint8_t value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint8</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">uint8_t</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_uint8(
+  duckdb_appender appender,
+  uint8_t value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_uint16`
+
+Stable since 0.2.5.
 
 Append a uint16_t value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint16</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">uint16_t</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_uint16(
+  duckdb_appender appender,
+  uint16_t value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_uint32`
+
+Stable since 0.2.5.
 
 Append a uint32_t value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint32</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">uint32_t</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_uint32(
+  duckdb_appender appender,
+  uint32_t value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_uint64`
+
+Stable since 0.2.5.
 
 Append a uint64_t value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">uint64_t</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_uint64(
+  duckdb_appender appender,
+  uint64_t value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_uhugeint`
+
+Stable since 0.10.0.
 
 Append a duckdb_uhugeint value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uhugeint</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_uhugeint</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_uhugeint(
+  duckdb_appender appender,
+  duckdb_uhugeint value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_float`
+
+Stable since 0.2.5.
 
 Append a float value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_float</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">float</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_float(
+  duckdb_appender appender,
+  float value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_double`
+
+Stable since 0.2.5.
 
 Append a double value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_double</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">double</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_double(
+  duckdb_appender appender,
+  double value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_date`
+
+Stable since 0.2.9.
 
 Append a duckdb_date value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_date</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_date</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_date(
+  duckdb_appender appender,
+  duckdb_date value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_time`
+
+Stable since 0.2.9.
 
 Append a duckdb_time value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_time</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_time</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_time(
+  duckdb_appender appender,
+  duckdb_time value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_timestamp`
+
+Stable since 0.2.9.
 
 Append a duckdb_timestamp value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_timestamp</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_timestamp(
+  duckdb_appender appender,
+  duckdb_timestamp value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_interval`
+
+Stable since 0.2.9.
 
 Append a duckdb_interval value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_interval</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_interval</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_interval(
+  duckdb_appender appender,
+  duckdb_interval value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_varchar`
 
+Stable since 0.2.5.
+
 Append a varchar value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_varchar</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_varchar(
+  duckdb_appender appender,
+  const char *val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_varchar_length`
 
+Stable since 0.2.5.
+
 Append a varchar value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_varchar_length</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">length
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_varchar_length(
+  duckdb_appender appender,
+  const char *val,
+  idx_t length
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_blob`
+
+Stable since 0.2.5.
 
 Append a blob value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_blob</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">length
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_blob(
+  duckdb_appender appender,
+  const void *data,
+  idx_t length
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_null`
+
+Stable since 0.2.5.
 
 Append a NULL value to the appender (of any type).
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_null</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_null(
+  duckdb_appender appender
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_value`
+
+Stable since 1.2.0.
 
 Append a duckdb_value to the appender.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_value</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_value</span> <span class="nv">value
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_value(
+  duckdb_appender appender,
+  duckdb_value value
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_append_data_chunk`
+
+Stable since 0.3.3.
 
 Appends a pre-filled data chunk to the specified appender.
  Attempts casting, if the data chunk types do not match the active appender types.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_data_chunk</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_append_data_chunk(
+  duckdb_appender appender,
+  duckdb_data_chunk chunk
+);
+```
 
 ##### Parameters
 
@@ -784,5 +1013,261 @@ Appends a pre-filled data chunk to the specified appender.
 ##### Return Value
 
 `DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+#### `duckdb_appender_error`
+
+> Deprecated Deprecated since 1.4.0, stable since 0.2.9.
+
+This method is scheduled for removal in a future release.
+Use duckdb_appender_error_data instead.
+
+Returns the error message associated with the appender.
+If the appender has no error message, this returns `nullptr` instead.
+
+The error message should not be freed. It will be de-allocated when `duckdb_appender_destroy` is called.
+
+##### Syntax
+
+```c
+const char *duckdb_appender_error(
+  duckdb_appender appender
+);
+```
+
+##### Parameters
+
+* `appender`: The appender to get the error from.
+
+##### Return Value
+
+The error message, or `nullptr` if there is none.
+
+<br>
+
+### Table Description
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_table_description_create"><span class="nf">duckdb_table_description_create</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="kt">duckdb_table_description</span> *<span class="nv">out</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_table_description_create_ext"><span class="nf">duckdb_table_description_create_ext</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">catalog</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="kt">duckdb_table_description</span> *<span class="nv">out</span>);
+<span class="kt">void</span> <a href="#duckdb_table_description_destroy"><span class="nf">duckdb_table_description_destroy</span></a>(<span class="kt">duckdb_table_description</span> *<span class="nv">table_description</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_table_description_error"><span class="nf">duckdb_table_description_error</span></a>(<span class="kt">duckdb_table_description</span> <span class="nv">table_description</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_column_has_default"><span class="nf">duckdb_column_has_default</span></a>(<span class="kt">duckdb_table_description</span> <span class="nv">table_description</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">bool</span> *<span class="nv">out</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_table_description_get_column_count"><span class="nf">duckdb_table_description_get_column_count</span></a>(<span class="kt">duckdb_table_description</span> <span class="nv">table_description</span>);
+<span class="kt">char</span> *<a href="#duckdb_table_description_get_column_name"><span class="nf">duckdb_table_description_get_column_name</span></a>(<span class="kt">duckdb_table_description</span> <span class="nv">table_description</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">duckdb_logical_type</span> <a href="#duckdb_table_description_get_column_type"><span class="nf">duckdb_table_description_get_column_type</span></a>(<span class="kt">duckdb_table_description</span> <span class="nv">table_description</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+</code></pre></div></div>
+
+#### `duckdb_table_description_create`
+
+Stable since 1.1.0.
+
+Creates a table description object. Note that `duckdb_table_description_destroy` should always be called on the resulting table_description, even if the function returns `DuckDBError`.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_table_description_create(
+  duckdb_connection connection,
+  const char *schema,
+  const char *table,
+  duckdb_table_description *out
+);
+```
+
+##### Parameters
+
+* `connection`: The connection context.
+* `schema`: The schema of the table, or `nullptr` for the default schema.
+* `table`: The table name.
+* `out`: The resulting table description object.
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+#### `duckdb_table_description_create_ext`
+
+Stable since 1.2.0.
+
+Creates a table description object. Note that `duckdb_table_description_destroy` must be called on the resulting table_description, even if the function returns `DuckDBError`.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_table_description_create_ext(
+  duckdb_connection connection,
+  const char *catalog,
+  const char *schema,
+  const char *table,
+  duckdb_table_description *out
+);
+```
+
+##### Parameters
+
+* `connection`: The connection context.
+* `catalog`: The catalog (database) name of the table, or `nullptr` for the default catalog.
+* `schema`: The schema of the table, or `nullptr` for the default schema.
+* `table`: The table name.
+* `out`: The resulting table description object.
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+#### `duckdb_table_description_destroy`
+
+Stable since 1.1.0.
+
+Destroy the TableDescription object.
+
+##### Syntax
+
+```c
+void duckdb_table_description_destroy(
+  duckdb_table_description *table_description
+);
+```
+
+##### Parameters
+
+* `table_description`: The table_description to destroy.
+
+<br>
+
+#### `duckdb_table_description_error`
+
+Stable since 1.1.0.
+
+Returns the error message associated with the given table_description.
+If the table_description has no error message, this returns `nullptr` instead.
+The error message should not be freed. It will be de-allocated when `duckdb_table_description_destroy` is called.
+
+##### Syntax
+
+```c
+const char *duckdb_table_description_error(
+  duckdb_table_description table_description
+);
+```
+
+##### Parameters
+
+* `table_description`: The table_description to get the error from.
+
+##### Return Value
+
+The error message, or `nullptr` if there is none.
+
+<br>
+
+#### `duckdb_column_has_default`
+
+Stable since 1.1.0.
+
+Check if the column at 'index' index of the table has a DEFAULT expression.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_column_has_default(
+  duckdb_table_description table_description,
+  idx_t index,
+  bool *out
+);
+```
+
+##### Parameters
+
+* `table_description`: The table_description to query.
+* `index`: The index of the column to query.
+* `out`: The out-parameter used to store the result.
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+#### `duckdb_table_description_get_column_count`
+
+Stable since 1.5.6.
+
+Return the number of columns of the described table.
+
+##### Syntax
+
+```c
+idx_t duckdb_table_description_get_column_count(
+  duckdb_table_description table_description
+);
+```
+
+##### Parameters
+
+* `table_description`: The table_description to query.
+
+##### Return Value
+
+The column count.
+
+<br>
+
+#### `duckdb_table_description_get_column_name`
+
+Stable since 1.2.0.
+
+Obtain the column name at 'index'.
+The out result must be destroyed with `duckdb_free`.
+
+##### Syntax
+
+```c
+char *duckdb_table_description_get_column_name(
+  duckdb_table_description table_description,
+  idx_t index
+);
+```
+
+##### Parameters
+
+* `table_description`: The table_description to query.
+* `index`: The index of the column to query.
+
+##### Return Value
+
+The column name.
+
+<br>
+
+#### `duckdb_table_description_get_column_type`
+
+Stable since 1.5.6.
+
+Obtain the column type at 'index'.
+The return value must be destroyed with `duckdb_destroy_logical_type`.
+
+##### Syntax
+
+```c
+duckdb_logical_type duckdb_table_description_get_column_type(
+  duckdb_table_description table_description,
+  idx_t index
+);
+```
+
+##### Parameters
+
+* `table_description`: The table_description to query.
+* `index`: The index of the column to query.
+
+##### Return Value
+
+The column type.
 
 <br>

@@ -73,9 +73,43 @@ It is not required that the `duckdb_bind` family of functions matches the prepar
 <span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_prepared_statement_column_name"><span class="nf">duckdb_prepared_statement_column_name</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
 <span class="kt">duckdb_logical_type</span> <a href="#duckdb_prepared_statement_column_logical_type"><span class="nf">duckdb_prepared_statement_column_logical_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
 <span class="kt">duckdb_type</span> <a href="#duckdb_prepared_statement_column_type"><span class="nf">duckdb_prepared_statement_column_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_value"><span class="nf">duckdb_bind_value</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_value</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_parameter_index"><span class="nf">duckdb_bind_parameter_index</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> *<span class="nv">param_idx_out</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_boolean"><span class="nf">duckdb_bind_boolean</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">bool</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int8"><span class="nf">duckdb_bind_int8</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int8_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int16"><span class="nf">duckdb_bind_int16</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int16_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int32"><span class="nf">duckdb_bind_int32</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int32_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int64"><span class="nf">duckdb_bind_int64</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int64_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_hugeint"><span class="nf">duckdb_bind_hugeint</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_hugeint</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uhugeint"><span class="nf">duckdb_bind_uhugeint</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_uhugeint</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_decimal"><span class="nf">duckdb_bind_decimal</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_decimal</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint8"><span class="nf">duckdb_bind_uint8</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint8_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint16"><span class="nf">duckdb_bind_uint16</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint16_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint32"><span class="nf">duckdb_bind_uint32</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint32_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint64"><span class="nf">duckdb_bind_uint64</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint64_t</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_float"><span class="nf">duckdb_bind_float</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">float</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_double"><span class="nf">duckdb_bind_double</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">double</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_date"><span class="nf">duckdb_bind_date</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_date</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_time"><span class="nf">duckdb_bind_time</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_time</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_timestamp"><span class="nf">duckdb_bind_timestamp</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_timestamp</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_timestamp_tz"><span class="nf">duckdb_bind_timestamp_tz</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_timestamp</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_interval"><span class="nf">duckdb_bind_interval</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_interval</span> <span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_varchar"><span class="nf">duckdb_bind_varchar</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_varchar_length"><span class="nf">duckdb_bind_varchar_length</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_blob"><span class="nf">duckdb_bind_blob</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_bind_null"><span class="nf">duckdb_bind_null</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared"><span class="nf">duckdb_execute_prepared</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
+<span class="kt">idx_t</span> <a href="#duckdb_extract_statements"><span class="nf">duckdb_extract_statements</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">duckdb_extracted_statements</span> *<span class="nv">out_extracted_statements</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_prepare_extracted_statement"><span class="nf">duckdb_prepare_extracted_statement</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">duckdb_extracted_statements</span> <span class="nv">extracted_statements</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">duckdb_prepared_statement</span> *<span class="nv">out_prepared_statement</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_extract_statements_error"><span class="nf">duckdb_extract_statements_error</span></a>(<span class="kt">duckdb_extracted_statements</span> <span class="nv">extracted_statements</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_extracted"><span class="nf">duckdb_destroy_extracted</span></a>(<span class="kt">duckdb_extracted_statements</span> *<span class="nv">extracted_statements</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared_streaming"><span class="nf">duckdb_execute_prepared_streaming</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_pending_prepared_streaming"><span class="nf">duckdb_pending_prepared_streaming</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_pending_result</span> *<span class="nv">out_result</span>);
 </code></pre></div></div>
 
 #### `duckdb_prepare`
+
+Stable since 0.1.0.
 
 Create a prepared statement object from a query.
 
@@ -86,12 +120,13 @@ If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason 
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_prepare</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
-</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> *<span class="nv">out_prepared_statement
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_prepare(
+  duckdb_connection connection,
+  const char *query,
+  duckdb_prepared_statement *out_prepared_statement
+);
+```
 
 ##### Parameters
 
@@ -107,14 +142,17 @@ If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason 
 
 #### `duckdb_destroy_prepare`
 
+Stable since 0.1.0.
+
 Closes the prepared statement and de-allocates all memory allocated for the statement.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_prepare</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> *<span class="nv">prepared_statement
-</span>);
-</code></pre></div></div>
+```c
+void duckdb_destroy_prepare(
+  duckdb_prepared_statement *prepared_statement
+);
+```
 
 ##### Parameters
 
@@ -124,6 +162,8 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 
 #### `duckdb_prepare_error`
 
+Stable since 0.2.8.
+
 Returns the error message associated with the given prepared statement.
 If the prepared statement has no error message, this returns `nullptr` instead.
 
@@ -131,10 +171,11 @@ The error message should not be freed. It will be de-allocated when `duckdb_dest
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_prepare_error</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
-</span>);
-</code></pre></div></div>
+```c
+const char *duckdb_prepare_error(
+  duckdb_prepared_statement prepared_statement
+);
+```
 
 ##### Parameters
 
@@ -148,24 +189,33 @@ The error message, or `nullptr` if there is none.
 
 #### `duckdb_nparams`
 
+Stable since 0.1.1.
+
 Returns the number of parameters that can be provided to the given prepared statement.
 
 Returns 0 if the query was not successfully prepared.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_nparams</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
-</span>);
-</code></pre></div></div>
+```c
+idx_t duckdb_nparams(
+  duckdb_prepared_statement prepared_statement
+);
+```
 
 ##### Parameters
 
 * `prepared_statement`: The prepared statement to obtain the number of parameters for.
 
+##### Return Value
+
+`idx_t`
+
 <br>
 
 #### `duckdb_parameter_name`
+
+Stable since 0.9.0.
 
 Returns the name used to identify the parameter
 The returned string should be freed using `duckdb_free`.
@@ -174,19 +224,26 @@ Returns NULL if the index is out of range for the provided prepared statement.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_parameter_name</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">index
-</span>);
-</code></pre></div></div>
+```c
+const char *duckdb_parameter_name(
+  duckdb_prepared_statement prepared_statement,
+  idx_t index
+);
+```
 
 ##### Parameters
 
 * `prepared_statement`: The prepared statement for which to get the parameter name from.
 
+##### Return Value
+
+`const char *`
+
 <br>
 
 #### `duckdb_param_type`
+
+Stable since 0.2.9.
 
 Returns the parameter type for the parameter at the given index.
 
@@ -194,11 +251,12 @@ Returns `DUCKDB_TYPE_INVALID` if the parameter index is out of range or the stat
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_param_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx
-</span>);
-</code></pre></div></div>
+```c
+duckdb_type duckdb_param_type(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx
+);
+```
 
 ##### Parameters
 
@@ -213,6 +271,8 @@ The parameter type
 
 #### `duckdb_param_logical_type`
 
+Stable since 1.2.0.
+
 Returns the logical type for the parameter at the given index.
 
 Returns `nullptr` if the parameter index is out of range or the statement was not successfully prepared.
@@ -221,11 +281,12 @@ The return type of this call should be destroyed with `duckdb_destroy_logical_ty
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_param_logical_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">param_idx
-</span>);
-</code></pre></div></div>
+```c
+duckdb_logical_type duckdb_param_logical_type(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx
+);
+```
 
 ##### Parameters
 
@@ -240,26 +301,37 @@ The logical type of the parameter
 
 #### `duckdb_clear_bindings`
 
+Stable since 0.5.0.
+
 Clear the params bind to the prepared statement.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_clear_bindings</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
-</span>);
-</code></pre></div></div>
+```c
+duckdb_state duckdb_clear_bindings(
+  duckdb_prepared_statement prepared_statement
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
 <br>
 
 #### `duckdb_prepared_statement_type`
+
+Stable since 0.10.0.
 
 Returns the statement type of the statement to be executed
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_statement_type</span> <span class="nv">duckdb_prepared_statement_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">statement
-</span>);
-</code></pre></div></div>
+```c
+duckdb_statement_type duckdb_prepared_statement_type(
+  duckdb_prepared_statement statement
+);
+```
 
 ##### Parameters
 
@@ -273,15 +345,17 @@ duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 #### `duckdb_prepared_statement_column_count`
 
-Returns the number of columns present in the result of the prepared statement. If any of the column types are invalid,
-the result will be 1.
+Stable since 1.5.6.
+
+Returns the number of columns present in a the result of the prepared statement. If any of the column types are invalid, the result will be 1.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_prepared_statement_column_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
-</span>);
-</code></pre></div></div>
+```c
+idx_t duckdb_prepared_statement_column_count(
+  duckdb_prepared_statement prepared_statement
+);
+```
 
 ##### Parameters
 
@@ -295,6 +369,8 @@ The number of columns present in the result of the prepared statement.
 
 #### `duckdb_prepared_statement_column_name`
 
+Stable since 1.5.6.
+
 Returns the name of the specified column of the result of the prepared_statement.
 The returned string should be freed using `duckdb_free`.
 
@@ -302,11 +378,12 @@ Returns `nullptr` if the column is out of range.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_prepared_statement_column_name</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col_idx
-</span>);
-</code></pre></div></div>
+```c
+const char *duckdb_prepared_statement_column_name(
+  duckdb_prepared_statement prepared_statement,
+  idx_t col_idx
+);
+```
 
 ##### Parameters
 
@@ -321,6 +398,8 @@ The column name of the specified column.
 
 #### `duckdb_prepared_statement_column_logical_type`
 
+Stable since 1.5.6.
+
 Returns the column type of the specified column of the result of the prepared_statement.
 
 Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
@@ -328,11 +407,12 @@ The return type of this call should be destroyed with `duckdb_destroy_logical_ty
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_prepared_statement_column_logical_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col_idx
-</span>);
-</code></pre></div></div>
+```c
+duckdb_logical_type duckdb_prepared_statement_column_logical_type(
+  duckdb_prepared_statement prepared_statement,
+  idx_t col_idx
+);
+```
 
 ##### Parameters
 
@@ -347,17 +427,20 @@ The logical type of the specified column.
 
 #### `duckdb_prepared_statement_column_type`
 
+Stable since 1.5.6.
+
 Returns the column type of the specified column of the result of the prepared_statement.
 
 Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_prepared_statement_column_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col_idx
-</span>);
-</code></pre></div></div>
+```c
+duckdb_type duckdb_prepared_statement_column_type(
+  duckdb_prepared_statement prepared_statement,
+  idx_t col_idx
+);
+```
 
 ##### Parameters
 
@@ -367,5 +450,984 @@ Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
 ##### Return Value
 
 The type of the specified column.
+
+<br>
+
+#### `duckdb_bind_value`
+
+Stable since 0.9.0.
+
+Binds a value to the prepared statement at the specified index.
+
+Supersedes all type-specific bind functions (e.g., `duckdb_bind_varchar`, `duckdb_bind_int64`, etc.).
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_value(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  duckdb_value val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_parameter_index`
+
+Stable since 0.9.0.
+
+Retrieve the index of the parameter for the prepared statement, identified by name
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_parameter_index(
+  duckdb_prepared_statement prepared_statement,
+  idx_t *param_idx_out,
+  const char *name
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_boolean`
+
+Stable since 0.1.0.
+
+Binds a bool value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_boolean(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  bool val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_int8`
+
+Stable since 0.1.0.
+
+Binds an int8_t value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_int8(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  int8_t val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_int16`
+
+Stable since 0.1.0.
+
+Binds an int16_t value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_int16(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  int16_t val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_int32`
+
+Stable since 0.1.0.
+
+Binds an int32_t value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_int32(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  int32_t val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_int64`
+
+Stable since 0.1.0.
+
+Binds an int64_t value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_int64(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  int64_t val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_hugeint`
+
+Stable since 0.2.9.
+
+Binds a duckdb_hugeint value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_hugeint(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  duckdb_hugeint val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_uhugeint`
+
+Stable since 0.10.0.
+
+Binds a duckdb_uhugeint value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_uhugeint(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  duckdb_uhugeint val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_decimal`
+
+Stable since 0.6.0.
+
+Binds a duckdb_decimal value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_decimal(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  duckdb_decimal val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_uint8`
+
+Stable since 0.2.5.
+
+Binds a uint8_t value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_uint8(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  uint8_t val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_uint16`
+
+Stable since 0.2.5.
+
+Binds a uint16_t value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_uint16(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  uint16_t val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_uint32`
+
+Stable since 0.2.5.
+
+Binds a uint32_t value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_uint32(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  uint32_t val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_uint64`
+
+Stable since 0.2.5.
+
+Binds a uint64_t value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_uint64(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  uint64_t val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_float`
+
+Stable since 0.1.0.
+
+Binds a float value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_float(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  float val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_double`
+
+Stable since 0.1.0.
+
+Binds a double value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_double(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  double val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_date`
+
+Stable since 0.2.9.
+
+Binds a duckdb_date value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_date(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  duckdb_date val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_time`
+
+Stable since 0.2.9.
+
+Binds a duckdb_time value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_time(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  duckdb_time val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_timestamp`
+
+Stable since 0.2.9.
+
+Binds a duckdb_timestamp value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_timestamp(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  duckdb_timestamp val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_timestamp_tz`
+
+Stable since 1.1.0.
+
+Binds a duckdb_timestamp value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_timestamp_tz(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  duckdb_timestamp val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_interval`
+
+Stable since 0.2.9.
+
+Binds a duckdb_interval value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_interval(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  duckdb_interval val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_varchar`
+
+Stable since 0.1.0.
+
+Binds a null-terminated varchar value to the prepared statement at the specified index.
+
+Superseded by `duckdb_bind_value`.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_varchar(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  const char *val
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_varchar_length`
+
+Stable since 0.2.5.
+
+Binds a varchar value to the prepared statement at the specified index.
+
+Superseded by `duckdb_bind_value`.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_varchar_length(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  const char *val,
+  idx_t length
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_blob`
+
+Stable since 0.2.5.
+
+Binds a blob value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_blob(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx,
+  const void *data,
+  idx_t length
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_bind_null`
+
+Stable since 0.1.2.
+
+Binds a NULL value to the prepared statement at the specified index.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_bind_null(
+  duckdb_prepared_statement prepared_statement,
+  idx_t param_idx
+);
+```
+
+##### Return Value
+
+`duckdb_state`
+
+<br>
+
+#### `duckdb_execute_prepared`
+
+Stable since 0.1.0.
+
+Executes the prepared statement with the given bound parameters, and returns a materialized query result.
+
+This method can be called multiple times for each prepared statement, and the parameters can be modified
+between calls to this function.
+
+Note that the result must be freed with `duckdb_destroy_result`.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_execute_prepared(
+  duckdb_prepared_statement prepared_statement,
+  duckdb_result *out_result
+);
+```
+
+##### Parameters
+
+* `prepared_statement`: The prepared statement to execute.
+* `out_result`: The query result.
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+<a id="extract-statements"></a>
+
+#### `duckdb_extract_statements`
+
+Stable since 0.7.0.
+
+Extract all statements from a query.
+Note that after calling `duckdb_extract_statements`, the extracted statements should always be destroyed using
+`duckdb_destroy_extracted`, even if no statements were extracted.
+
+If the extract fails, `duckdb_extract_statements_error` can be called to obtain the reason why the extract failed.
+
+##### Syntax
+
+```c
+idx_t duckdb_extract_statements(
+  duckdb_connection connection,
+  const char *query,
+  duckdb_extracted_statements *out_extracted_statements
+);
+```
+
+##### Parameters
+
+* `connection`: The connection object
+* `query`: The SQL query to extract
+* `out_extracted_statements`: The resulting extracted statements object
+
+##### Return Value
+
+The number of extracted statements or 0 on failure.
+
+<br>
+
+#### `duckdb_prepare_extracted_statement`
+
+Stable since 0.7.0.
+
+Prepare an extracted statement.
+Note that after calling `duckdb_prepare_extracted_statement`, the prepared statement should always be destroyed using
+`duckdb_destroy_prepare`, even if the prepare fails.
+
+If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason why the prepare failed.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_prepare_extracted_statement(
+  duckdb_connection connection,
+  duckdb_extracted_statements extracted_statements,
+  idx_t index,
+  duckdb_prepared_statement *out_prepared_statement
+);
+```
+
+##### Parameters
+
+* `connection`: The connection object
+* `extracted_statements`: The extracted statements object
+* `index`: The index of the extracted statement to prepare
+* `out_prepared_statement`: The resulting prepared statement object
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+#### `duckdb_extract_statements_error`
+
+Stable since 0.7.0.
+
+Returns the error message contained within the extracted statements.
+The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_extracted` is called.
+
+##### Syntax
+
+```c
+const char *duckdb_extract_statements_error(
+  duckdb_extracted_statements extracted_statements
+);
+```
+
+##### Parameters
+
+* `extracted_statements`: The extracted statements to fetch the error from.
+
+##### Return Value
+
+The error of the extracted statements.
+
+<br>
+
+#### `duckdb_destroy_extracted`
+
+Stable since 0.7.0.
+
+De-allocates all memory allocated for the extracted statements.
+
+##### Syntax
+
+```c
+void duckdb_destroy_extracted(
+  duckdb_extracted_statements *extracted_statements
+);
+```
+
+##### Parameters
+
+* `extracted_statements`: The extracted statements to destroy.
+
+<br>
+
+#### `duckdb_execute_prepared_streaming`
+
+> Deprecated Deprecated since 1.0.0, stable since 0.10.0.
+
+This method is scheduled for removal in a future release.
+
+Executes the prepared statement with the given bound parameters, and returns an optionally-streaming query result.
+To determine if the resulting query was in fact streamed, use `duckdb_result_is_streaming`
+
+This method can be called multiple times for each prepared statement, and the parameters can be modified
+between calls to this function.
+
+Note that the result must be freed with `duckdb_destroy_result`.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_execute_prepared_streaming(
+  duckdb_prepared_statement prepared_statement,
+  duckdb_result *out_result
+);
+```
+
+##### Parameters
+
+* `prepared_statement`: The prepared statement to execute.
+* `out_result`: The query result.
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+#### `duckdb_pending_prepared_streaming`
+
+> Deprecated Deprecated since 1.0.0, stable since 0.8.0.
+
+This method is scheduled for removal in a future release.
+
+Executes the prepared statement with the given bound parameters, and returns a pending result.
+This pending result will create a streaming duckdb_result when executed.
+The pending result represents an intermediate structure for a query that is not yet fully executed.
+
+Note that after calling `duckdb_pending_prepared_streaming`, the pending result should always be destroyed using
+`duckdb_destroy_pending`, even if this function returns DuckDBError.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_pending_prepared_streaming(
+  duckdb_prepared_statement prepared_statement,
+  duckdb_pending_result *out_result
+);
+```
+
+##### Parameters
+
+* `prepared_statement`: The prepared statement to execute.
+* `out_result`: The pending query result.
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+### Pending Result Interface
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_pending_prepared"><span class="nf">duckdb_pending_prepared</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_pending_result</span> *<span class="nv">out_result</span>);
+<span class="kt">void</span> <a href="#duckdb_destroy_pending"><span class="nf">duckdb_destroy_pending</span></a>(<span class="kt">duckdb_pending_result</span> *<span class="nv">pending_result</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_pending_error"><span class="nf">duckdb_pending_error</span></a>(<span class="kt">duckdb_pending_result</span> <span class="nv">pending_result</span>);
+<span class="kt">duckdb_pending_state</span> <a href="#duckdb_pending_execute_task"><span class="nf">duckdb_pending_execute_task</span></a>(<span class="kt">duckdb_pending_result</span> <span class="nv">pending_result</span>);
+<span class="kt">duckdb_pending_state</span> <a href="#duckdb_pending_execute_check_state"><span class="nf">duckdb_pending_execute_check_state</span></a>(<span class="kt">duckdb_pending_result</span> <span class="nv">pending_result</span>);
+<span class="kt">duckdb_state</span> <a href="#duckdb_execute_pending"><span class="nf">duckdb_execute_pending</span></a>(<span class="kt">duckdb_pending_result</span> <span class="nv">pending_result</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
+<span class="kt">bool</span> <a href="#duckdb_pending_execution_is_finished"><span class="nf">duckdb_pending_execution_is_finished</span></a>(<span class="kt">duckdb_pending_state</span> <span class="nv">pending_state</span>);
+</code></pre></div></div>
+
+#### `duckdb_pending_prepared`
+
+Stable since 0.5.0.
+
+Executes the prepared statement with the given bound parameters, and returns a pending result.
+The pending result represents an intermediate structure for a query that is not yet fully executed.
+The pending result can be used to incrementally execute a query, returning control to the client between tasks.
+
+Note that after calling `duckdb_pending_prepared`, the pending result should always be destroyed using
+`duckdb_destroy_pending`, even if this function returns DuckDBError.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_pending_prepared(
+  duckdb_prepared_statement prepared_statement,
+  duckdb_pending_result *out_result
+);
+```
+
+##### Parameters
+
+* `prepared_statement`: The prepared statement to execute.
+* `out_result`: The pending query result.
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+#### `duckdb_destroy_pending`
+
+Stable since 0.5.0.
+
+Closes the pending result and de-allocates all memory allocated for the result.
+
+Destroying a pending result whose statement has not completed aborts the statement. On autocommit, its writes
+are rolled back. Inside a transaction, a statement that may write invalidates the transaction, and a read-only
+statement just stops. Until the statement has completed, preparing or running another statement on the
+connection fails with `DUCKDB_ERROR_RESOURCE_IN_USE` and leaves it untouched.
+`duckdb_pending_execution_is_finished` reporting true does not mean that the statement completed. To make sure
+a statement takes effect, complete it before destroying the pending result: call `duckdb_execute_pending`, and
+fetch a streaming result until `duckdb_fetch_chunk` returns NULL. A NULL chunk is also returned on an error, so
+check `duckdb_result_error` afterwards.
+
+##### Syntax
+
+```c
+void duckdb_destroy_pending(
+  duckdb_pending_result *pending_result
+);
+```
+
+##### Parameters
+
+* `pending_result`: The pending result to destroy.
+
+<br>
+
+#### `duckdb_pending_error`
+
+Stable since 0.5.0.
+
+Returns the error message contained within the pending result.
+
+The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_pending` is called.
+
+##### Syntax
+
+```c
+const char *duckdb_pending_error(
+  duckdb_pending_result pending_result
+);
+```
+
+##### Parameters
+
+* `pending_result`: The pending result to fetch the error from.
+
+##### Return Value
+
+The error of the pending result.
+
+<br>
+
+#### `duckdb_pending_execute_task`
+
+Stable since 0.5.0.
+
+Executes a single task within the query, returning whether or not the query is ready.
+
+If this returns DUCKDB_PENDING_RESULT_READY, the duckdb_execute_pending function can be called to obtain the result.
+If this returns DUCKDB_PENDING_RESULT_NOT_READY, the duckdb_pending_execute_task function should be called again.
+If this returns DUCKDB_PENDING_ERROR, an error occurred during execution.
+
+The error message can be obtained by calling duckdb_pending_error on the pending_result.
+
+##### Syntax
+
+```c
+duckdb_pending_state duckdb_pending_execute_task(
+  duckdb_pending_result pending_result
+);
+```
+
+##### Parameters
+
+* `pending_result`: The pending result to execute a task within.
+
+##### Return Value
+
+The state of the pending result after the execution.
+
+<br>
+
+#### `duckdb_pending_execute_check_state`
+
+Stable since 0.10.0.
+
+If this returns DUCKDB_PENDING_RESULT_READY, the duckdb_execute_pending function can be called to obtain the result.
+If this returns DUCKDB_PENDING_RESULT_NOT_READY, the duckdb_pending_execute_check_state function should be called again.
+If this returns DUCKDB_PENDING_ERROR, an error occurred during execution.
+
+The error message can be obtained by calling duckdb_pending_error on the pending_result.
+
+##### Syntax
+
+```c
+duckdb_pending_state duckdb_pending_execute_check_state(
+  duckdb_pending_result pending_result
+);
+```
+
+##### Parameters
+
+* `pending_result`: The pending result.
+
+##### Return Value
+
+The state of the pending result.
+
+<br>
+
+#### `duckdb_execute_pending`
+
+Stable since 0.5.0.
+
+Fully execute a pending query result, returning the final query result.
+
+If duckdb_pending_execute_task has been called until DUCKDB_PENDING_RESULT_READY was returned, this will return fast.
+Otherwise, all remaining tasks must be executed first.
+
+Note that the result must be freed with `duckdb_destroy_result`.
+
+##### Syntax
+
+```c
+duckdb_state duckdb_execute_pending(
+  duckdb_pending_result pending_result,
+  duckdb_result *out_result
+);
+```
+
+##### Parameters
+
+* `pending_result`: The pending result to execute.
+* `out_result`: The result object.
+
+##### Return Value
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+#### `duckdb_pending_execution_is_finished`
+
+Stable since 0.9.0.
+
+Returns whether a duckdb_pending_state is finished executing. For example if `pending_state` is
+DUCKDB_PENDING_RESULT_READY, this function will return true.
+
+##### Syntax
+
+```c
+bool duckdb_pending_execution_is_finished(
+  duckdb_pending_state pending_state
+);
+```
+
+##### Parameters
+
+* `pending_state`: The pending state on which to decide whether to finish execution.
+
+##### Return Value
+
+Boolean indicating pending execution should be considered finished.
 
 <br>

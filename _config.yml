@@ -154,7 +154,7 @@ toc:
   max_level: 3
   ordered_list: false
 
-exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/cache', 'vendor/gems', 'vendor/ruby', 'bundle']
+exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/cache', 'vendor/gems', 'vendor/ruby', 'bundle', 'tests']
 
 include:
   - docs/1.4/clients/python/reference/objects.inv
