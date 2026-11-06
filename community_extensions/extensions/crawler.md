@@ -67,8 +67,8 @@ docs:
 
     For full documentation see: https://github.com/midwork-finds-jobs/duckdb-crawler
 
-extension_star_count: 17
-extension_star_count_pretty: 17
+extension_star_count: 18
+extension_star_count_pretty: 18
 extension_download_count: 868
 extension_download_count_pretty: 868
 image: '/images/community_extensions/social_preview/preview_community_extension_crawler.png'

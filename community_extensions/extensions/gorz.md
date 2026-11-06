@@ -123,11 +123,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
@@ -151,11 +151,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| read_gor      | table         | NULL        | NULL    |          |
-| read_gord     | table         | NULL        | NULL    |          |
-| read_gorz     | table         | NULL        | NULL    |          |
+| function_name | function_type |                                                                                                                                                                                     description                                                                                                                                                                                      | comment |                                                                                      examples                                                                                      |
+|---------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| read_gor      | table         | Reads a GORpipe .gorz file or .gord dictionary (a dictionary file or a .gord folder) as a table; the kind is taken from the path. Named parameters: range := 'chrN[:start-end]' keeps one genomic range (GOR's -p); for a .gord, f := ['tag', ...] and ff := 'tag-file' keep only the partitions with those tags (GOR's -f / -ff) and source := 'name' renames the Source column.    | NULL    | [SELECT * FROM read_gor('variants.gorz', range := 'chr1:1500-2500'), SELECT * FROM read_gor('cohort.gord', f := ['sample1', 'sample99'])]                                          |
+| read_gord     | table         | Reads a GORpipe .gord dictionary (a dictionary file or a .gord folder) as one table, with a trailing Source column holding each row's partition tag. Named parameters: f := ['tag', ...] and ff := 'tag-file' keep only the partitions with those tags (GOR's -f / -ff), source := 'name' renames the Source column, range := 'chrN[:start-end]' keeps one genomic range (GOR's -p). | NULL    | [SELECT * FROM read_gord('cohort.gord', f := ['sample1', 'sample99']), SELECT count(*) FROM read_gord('cohort.gord', ff := 'tags.txt', range := 'chr7')]                           |
+| read_gorz     | table         | Reads a GORpipe .gorz file as a table, whatever the path's extension. chrom / pos predicates in the WHERE clause seek to the matching blocks; range := 'chrN[:start-end]' keeps one genomic range (GOR's -p).                                                                                                                                                                        | NULL    | [SELECT chrom, pos, ref, alt FROM read_gorz('variants.gorz') WHERE chrom = 'chr1' AND pos BETWEEN 1500 AND 2500, SELECT count(*) FROM read_gorz('variants.gorz', range := 'chr7')] |
 
 ### Overloaded Functions
 
@@ -173,8 +173,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|         name          |                                                 description                                                  | input_type | scope  | aliases |
-|-----------------------|--------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| gorz_scan_chunk_bytes | Byte size of each parallel .gorz full-scan range (0 = automatic: one range per thread, at least 16 MiB each) | BIGINT     | GLOBAL | []      |
+|         name          |                                                 description                                                  | input_type | scope  | aliases | typed_value |
+|-----------------------|--------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| gorz_scan_chunk_bytes | Byte size of each parallel .gorz full-scan range (0 = automatic: one range per thread, at least 16 MiB each) | BIGINT     | GLOBAL | []      | 0           |
+| temp_directory        | Set the directory to which temporary files are written.                                                      | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 
