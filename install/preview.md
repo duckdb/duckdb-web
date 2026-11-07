@@ -51,7 +51,7 @@ pip install "duckdb<2.1.0" --pre --upgrade
 pip install duckdb --pre --upgrade
 ```
 
-## Command Line Interface (CLI) Client
+## Command Line Interface (CLI)
 
 ### CLI v1.5-dev
 
