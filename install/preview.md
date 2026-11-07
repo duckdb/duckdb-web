@@ -218,28 +218,6 @@ dependencies {
 
 <a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.next_duckdb_java_dev_version }}/duckdb_jdbc-{{ site.next_duckdb_java_dev_version }}.jar" class="download-btn">duckdb_jdbc-{{ site.next_duckdb_java_dev_version }}.jar</a>
 
-## ODBC
-
-For ODBC, the preview builds are based on the `main` branch of the [`duckdb/duckdb-odbc` repository](https://github.com/duckdb/duckdb-odbc/).
-
-| Platform | Architecture | ODBC client                                                                 |
-| -------- | ------------ | --------------------------------------------------------------------------- |
-| Linux    | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-arm64.zip)   |
-| Linux    | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip)   |
-| macOS    | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-arm64.zip)   |
-| macOS    | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-amd64.zip)   |
-| Windows  | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-arm64.zip) |
-| Windows  | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip) |
-
-## R
-
-In R, run the following to install the latest DuckDB from source based on the `main` branch of the [`duckdb/duckdb-r` repository](https://github.com/duckdb/duckdb-r/).
-
-```R
-install.packages("pak")
-pak::pak("duckdb/duckdb-r")
-```
-
 ## C/C++ Libraries
 
 ### v1.5-dev C/C++ Libraries
@@ -276,6 +254,30 @@ To download the v2.1-dev C/C++ libraries, use the following links:
 | macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/main/duckdb-shared-libs-osx-universal.tar.gz) |
 | Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/main/duckdb-shared-libs-windows-arm64.tar.gz) |
 | Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/main/duckdb-shared-libs-windows-amd64.tar.gz) |
+
+## ODBC
+
+### v2.0-dev
+
+For ODBC, the preview builds are based on the `main` branch of the [`duckdb/duckdb-odbc` repository](https://github.com/duckdb/duckdb-odbc/).
+
+| Platform | Architecture | ODBC client                                                                 |
+| -------- | ------------ | --------------------------------------------------------------------------- |
+| Linux    | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-arm64.zip)   |
+| Linux    | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip)   |
+| macOS    | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-arm64.zip)   |
+| macOS    | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-amd64.zip)   |
+| Windows  | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-arm64.zip) |
+| Windows  | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip) |
+
+## R
+
+In R, run the following to install the latest DuckDB from source based on the `main` branch of the [`duckdb/duckdb-r` repository](https://github.com/duckdb/duckdb-r/).
+
+```R
+install.packages("pak")
+pak::pak("duckdb/duckdb-r")
+```
 
 ## Node.js (Neo)
 
