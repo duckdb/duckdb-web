@@ -4,6 +4,12 @@
 
 /* SYNTAX HIGHLIGHTING COLORS */
 
+// languages where variables (e.g., $name) are highlighted
+// other lexers (e.g., YAML, Make, Swift) use the variable tokens for other purposes
+$variable-languages: '.language-sql, .language-plsql, .language-bash, .language-batch, .language-sh, .language-shell, .language-zsh, .language-powershell, .language-ps1, .language-pwsh, .language-posh';
+// variable tokens
+$variable-tokens: '.nv, .vc, .vg, .vi, .vm';
+
 .language-batch code:before {
 	content: '$ ';
 }
@@ -82,6 +88,14 @@
 	{
 		text-decoration: underline;
 	}
+}
+
+// variables
+// there is no distinct color for variables yet, so we use the color of functions
+:is(#{$variable-languages}) .highlight :is(#{$variable-tokens})
+{
+	color: #008700;
+	font-family: $fontMonoBold;
 }
 
 th .k {
@@ -168,6 +182,14 @@ html.darkmode, .dark {
 			color: #ff6a6a;
 			font-family: $fontMonoItalic;
 		}
+	}
+
+	// variables
+	// there is no distinct color for variables yet, so we use the color of functions
+	:is(#{$variable-languages}) .highlight :is(#{$variable-tokens})
+	{
+		color: #00af00;
+		font-family: $fontMonoBold;
 	}
 }
 // </dark mode>
