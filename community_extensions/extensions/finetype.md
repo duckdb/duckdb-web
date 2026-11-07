@@ -244,8 +244,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 949
-extension_download_count_pretty: 949
+extension_download_count: 927
+extension_download_count_pretty: 927
 image: '/images/community_extensions/social_preview/preview_community_extension_finetype.png'
 layout: community_extension_doc
 ---
