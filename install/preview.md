@@ -253,7 +253,6 @@ To download the C/C++ libraries, use the following links:
 | macOS    | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-osx.zip)         |
 | Windows  | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-windows.zip)     |
 
-
 ### v2.0-dev C/C++ Libraries
 
 To download the v2.0-dev C/C++ libraries, use the following links:
@@ -265,6 +264,18 @@ To download the v2.0-dev C/C++ libraries, use the following links:
 | macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-osx-universal.tar.gz) |
 | Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-windows-arm64.tar.gz) |
 | Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-windows-amd64.tar.gz) |
+
+### v2.1-dev C/C++ Libraries
+
+To download the v2.1-dev C/C++ libraries, use the following links:
+
+| Platform | Architecture       | v2.1-dev C/C++ library                                                              |
+| -------- | ------------------ | ----------------------------------------------------------------------------------- |
+| Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/main/duckdb-shared-libs-linux-arm64.tar.gz)   |
+| Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/main/duckdb-shared-libs-linux-amd64.tar.gz)   |
+| macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/main/duckdb-shared-libs-osx-universal.tar.gz) |
+| Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/main/duckdb-shared-libs-windows-arm64.tar.gz) |
+| Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/main/duckdb-shared-libs-windows-amd64.tar.gz) |
 
 ## Node.js (Neo)
 
