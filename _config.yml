@@ -77,7 +77,7 @@ latest_duckdb_csharp_version: ""
 latest_duckdb_hash: "d54cbbe3df"
 latest_duckdb_r_version: "2.0.0"
 # preview (v2.1-dev) version information
-next_duckdb_java_dev_version: "2.0.0-dev-679d526"
+next_duckdb_java_dev_version: "2.1.0-alpha52095-929"
 # more Jekyll config
 livereload: true
 highlighter: rouge
