@@ -88,7 +88,7 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 2091
+extension_download_count: 2075
 extension_download_count_pretty: 2.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc
