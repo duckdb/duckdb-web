@@ -24,9 +24,9 @@ There are currently the following DuckDB versions under development:
 
 * v1.5: a regular release with extended support to allow users sufficient time to transition to v2.0.
 * v2.0: an LTS release.
-* v2.1: the upcoming DuckDB version, in an early stage of the development.
+* v2.1: the upcoming DuckDB version, in an early stage of the development. See the [roadmap]({% link roadmap.md %}) for a list of upcoming features, which include [`MATCH_RECOGNIZE` support](https://github.com/duckdb/duckdb/pull/25255), [better error messages](https://github.com/duckdb/duckdb/pull/27387), and [improved memory allocation](https://github.com/duckdb/duckdb/pull/27520).
 
-Note that for most users, we recommend the [stable DuckDB releases]({% link docs/2.0/installation.html %}).
+Note that for most users, we recommend [stable DuckDB releases]({% link docs/2.0/installation.html %}).
 
 ## Python
 
