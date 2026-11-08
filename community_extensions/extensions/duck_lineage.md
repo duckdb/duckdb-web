@@ -102,10 +102,10 @@ docs:
     - duck_lineage_ssl_verify: verify the backend's TLS certificate (default: true)
     - duck_lineage_proxy: proxy for OpenLineage requests (default: honors the proxy environment variables)
 
-extension_star_count: 81
-extension_star_count_pretty: 81
-extension_download_count: 1670
-extension_download_count_pretty: 1.7k
+extension_star_count: 82
+extension_star_count_pretty: 82
+extension_download_count: 1638
+extension_download_count_pretty: 1.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_lineage.png'
 layout: community_extension_doc
 ---

@@ -52,8 +52,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 875
-extension_download_count_pretty: 875
+extension_download_count: 850
+extension_download_count_pretty: 850
 image: '/images/community_extensions/social_preview/preview_community_extension_holtfs.png'
 layout: community_extension_doc
 ---

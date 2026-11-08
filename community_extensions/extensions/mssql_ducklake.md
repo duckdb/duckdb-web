@@ -49,10 +49,10 @@ docs:
 
     Experimental. The catalog is shaped for SQL Server on creation (primary keys, UTF-8 binary collation, indexes, forced parameterization), a commit goes to the server as one T-SQL batch, and the catalog loads in one statement and is kept per ATTACH. On equal Azure VMs the 500-table benchmark takes 0.63x of the PostgreSQL backend's time; what is not there yet is on the limitations page.
 
-extension_star_count: 12
-extension_star_count_pretty: 12
-extension_download_count: 944
-extension_download_count_pretty: 944
+extension_star_count: 13
+extension_star_count_pretty: 13
+extension_download_count: 901
+extension_download_count_pretty: 901
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql_ducklake.png'
 layout: community_extension_doc
 ---

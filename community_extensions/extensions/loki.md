@@ -80,8 +80,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 463
-extension_download_count_pretty: 463
+extension_download_count: 579
+extension_download_count_pretty: 579
 image: '/images/community_extensions/social_preview/preview_community_extension_loki.png'
 layout: community_extension_doc
 ---

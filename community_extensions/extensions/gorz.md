@@ -14,11 +14,12 @@ extension:
   license: MIT
   maintainers:
     - gorfather
+  opt_in_platforms: "osx_amd64"
 
 repo:
   github: gorfather/duckdb-gorz
-  ref: 819405bf684cc57194fbdd06b2a2143df6e7557b
-  variegata: 719675390296f6525d20e86d00d7f36d28b7007c
+  ref: 5c51c4734e432cf645232bc6a59899ace464b7ed
+  variegata: 40b5ec3be5dfe17b460566528aa0ad3aab6daeed
 
 docs:
   hello_world: |
@@ -110,8 +111,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 893
-extension_download_count_pretty: 893
+extension_download_count: 883
+extension_download_count_pretty: 883
 image: '/images/community_extensions/social_preview/preview_community_extension_gorz.png'
 layout: community_extension_doc
 ---
@@ -125,7 +126,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |

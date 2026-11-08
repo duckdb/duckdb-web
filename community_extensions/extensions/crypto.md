@@ -26,8 +26,8 @@ repo:
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 24857
-extension_download_count_pretty: 24.9k
+extension_download_count: 25535
+extension_download_count_pretty: 25.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---

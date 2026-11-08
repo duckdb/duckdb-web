@@ -50,8 +50,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 351
-extension_download_count_pretty: 351
+extension_download_count: 427
+extension_download_count_pretty: 427
 image: '/images/community_extensions/social_preview/preview_community_extension_coworkingview.png'
 layout: community_extension_doc
 ---
