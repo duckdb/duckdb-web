@@ -86,10 +86,10 @@ docs:
     Storage — a different product with a different API. For `az://`/`abfss://`
     containers use the `azure` extension.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 629
-extension_download_count_pretty: 629
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 654
+extension_download_count_pretty: 654
 image: '/images/community_extensions/social_preview/preview_community_extension_sharepoint.png'
 layout: community_extension_doc
 ---

@@ -73,8 +73,8 @@ docs:
 
 extension_star_count: 60
 extension_star_count_pretty: 60
-extension_download_count: 940
-extension_download_count_pretty: 940
+extension_download_count: 919
+extension_download_count_pretty: 919
 image: '/images/community_extensions/social_preview/preview_community_extension_yardstick.png'
 layout: community_extension_doc
 ---

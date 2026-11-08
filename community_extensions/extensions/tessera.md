@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: tessera
   description: Fast join-aggregates (pair counts and sums of self-joins and two-relation joins) over skewed sparse relations, with a sparse product and a CPU matrix accelerator
-  version: 1.3.0
+  version: 1.4.1
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: GyuyeongKim/Tessera-public
-  ref: 84948c1429e0c3546240e058dc659d1009ef0627
+  ref: fc8259cdeebd91b5f4c9647ecb0a55819bebf4ef
 
 docs:
   hello_world: |
@@ -35,18 +35,21 @@ docs:
   extended_description: |
     Tessera is an optimizer rule and operator for join-aggregates, queries that count or sum the joined rows of each
     pair of values: `SELECT a.x, b.x, COUNT(*) FROM R a JOIN R b ON a.k = b.k GROUP BY a.x, b.x`, also with
-    `SUM(a.v * b.v)`, `AVG`, `COUNT(DISTINCT a.k)`, `a.x < b.x`, `a.x <> b.x`, `HAVING`, `ORDER BY ... LIMIT`, further
-    group columns, keys of several columns, NULL groups, filters on the inputs, or a second relation. It never builds
-    the joined rows. It computes each pair once on a sparse path, drops the values that cannot reach a `HAVING` or top-k threshold
-    before any product, and runs the dense block of the most frequent values on Intel AMX where the CPU has it. The rule
+    `SUM(a.v * b.v)`, `AVG`, `COUNT(DISTINCT a.k)`, `a.x < b.x`, `a.x <> b.x`, `HAVING`, `ORDER BY ... LIMIT`, the top
+    values of each group (`RANK() OVER (PARTITION BY a.x ORDER BY ...) <= k`), several sums in one query such as a
+    cosine, further group columns, keys of several columns, NULLs in group and summed columns, filters on the inputs, or
+    a second relation, over tables, pandas DataFrames, and Parquet and CSV files. It never builds the joined rows. It
+    computes each pair once on a sparse path, drops the values that cannot reach a `HAVING` or top-k threshold before
+    any product, and runs the dense block of the most frequent values on Intel AMX where the CPU has it. The rule
     replaces matching plans by itself, so the SQL stays unchanged. Settings: `tessera_enabled`, `tessera_frontier`,
-    `tessera_min_expansion`, `tessera_min_expansion_cross`. See https://github.com/GyuyeongKim/Tessera-public for the
-    supported queries, the PostgreSQL, SQLite, and Spark adapters, and the C interface.
+    `tessera_min_expansion`, `tessera_min_expansion_cross`, `tessera_min_expansion_measured`. See
+    https://github.com/GyuyeongKim/Tessera-public for the supported queries, the PostgreSQL, SQLite, and Spark adapters,
+    and the C interface.
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 344
-extension_download_count_pretty: 344
+extension_download_count: 468
+extension_download_count_pretty: 468
 image: '/images/community_extensions/social_preview/preview_community_extension_tessera.png'
 layout: community_extension_doc
 ---
@@ -106,13 +109,14 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|            name             |                                              description                                              | input_type | scope  | aliases | typed_value |
-|-----------------------------|-------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
-| temp_directory              | Set the directory to which temporary files are written.                                               | VARCHAR    | GLOBAL | []      | post.db.tmp |
-| tessera_enabled             | Replace self-join aggregates by the Tessera operator                                                  | BOOLEAN    | GLOBAL | []      | true        |
-| tessera_frontier            | Tessera dense frontier: items < H on the matrix engine (-1: cost model)                               | BIGINT     | GLOBAL | []      | -1          |
-| tessera_min_expansion       | Tessera: the engine's plan keeps self-joins with fewer estimated joined rows per input row (0: never) | DOUBLE     | GLOBAL | []      | 6.0         |
-| tessera_min_expansion_cross | Tessera: the same limit for products of two relations (0: never)                                      | DOUBLE     | GLOBAL | []      | 6.0         |
-| tessera_reorder             | Tessera: shingle order of the rows for the dense grid                                                 | BOOLEAN    | GLOBAL | []      | true        |
+|              name              |                                                             description                                                              | input_type | scope  | aliases | typed_value |
+|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory                 | Set the directory to which temporary files are written.                                                                              | VARCHAR    | GLOBAL | []      | post.db.tmp |
+| tessera_enabled                | Replace self-join aggregates by the Tessera operator                                                                                 | BOOLEAN    | GLOBAL | []      | true        |
+| tessera_frontier               | Tessera dense frontier: items < H on the matrix engine (-1: cost model)                                                              | BIGINT     | GLOBAL | []      | -1          |
+| tessera_min_expansion          | Tessera: the engine's plan keeps self-joins with fewer estimated joined rows per input row (0: never)                                | DOUBLE     | GLOBAL | []      | 6.0         |
+| tessera_min_expansion_cross    | Tessera: the same limit for products of two relations (0: never)                                                                     | DOUBLE     | GLOBAL | []      | 6.0         |
+| tessera_min_expansion_measured | Tessera: the limit on the joined rows per input row that the rule counted itself, on inputs without distinct counts (0: run Tessera) | DOUBLE     | GLOBAL | []      | 6.0         |
+| tessera_reorder                | Tessera: shingle order of the rows for the dense grid                                                                                | BOOLEAN    | GLOBAL | []      | true        |
 
 
