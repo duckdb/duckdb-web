@@ -9,6 +9,8 @@ thumb: /images/blog/thumbs/sqlrooms-local-analytics.svg
 image: /images/blog/thumbs/sqlrooms-local-analytics.png
 excerpt: From interactive maps to graph exploration, DuckDB makes it possible to analyze data without a database server. Ilya Boyandin shares how this approach led to SQLRooms, a toolkit for building analytics applications that bring data, visualizations, and AI-assisted analysis together on the user’s machine.
 tag: using-duckdb
+redirect_from:
+  - /2026/11/03/local-first-analytics-needs-no-database-server.html
 ---
 
 [Ilya Boyandin](https://www.linkedin.com/in/ilyabo/) is a software engineer, the creator of [SQLRooms](https://sqlrooms.org), [FlowmapBlue](https://flowmap.blue), and [Flowmap City](https://flowmap.city/). He worked on geospatial data analytics at Unfolded, the company founded by the team behind the open-source data visualization projects [deck.gl](https://deck.gl) and [kepler.gl](https://kepler.gl), which was later acquired by Foursquare.
@@ -97,7 +99,7 @@ An HTTP server running locally as part of the Electron desktop app serves the ti
 
 ## Graph Analytics on the Fly with Cosmograph
 
-SQLRooms also powers the analytical workspace in [Cosmograph](https://ilya.boyandin.me/p/cosmograph), a browser-based graph exploration tool developed by [Nikita Rokotyan](https://rokotyan.com/) and Thor Whalen. Ilya helped integrate SQLRooms into the application, which can visualize graphs with millions of edges.
+SQLRooms also powers the analytical workspace in [Cosmograph](https://cosmograph.app), a browser-based graph exploration tool developed by [Nikita Rokotyan](https://rokotyan.com/) and Thor Whalen. Ilya helped integrate SQLRooms into the application, which can visualize graphs with millions of edges.
 
 <video src="https://ilya.boyandin.me/media/projects/cosmograph/cosmograph-2.0.mp4"
        controls muted loop playsinline style="width: 100%; height: auto;"></video>
