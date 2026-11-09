@@ -4,7 +4,13 @@ title: DataGrip
 how_to_topic: tools-meta
 ---
 
-[DataGrip](https://www.jetbrains.com/datagrip/) is a JetBrains IDE for working with multiple databases, including DuckDB. This guide covers the quickest way to connect. For more detailed instructions on how to start working with DuckDB, check out the DataGrip documentation.
+[DataGrip](https://www.jetbrains.com/datagrip/) is a JetBrains IDE for working with multiple databases, including DuckDB. This guide covers the quickest way to connect. For more detailed instructions on how to start working with DuckDB, check out the [DataGrip documentation](https://www.jetbrains.com/help/datagrip/duckdb.html).
+
+> Quote
+>
+> DuckDB turned out to be the simplest option to integrate.
+>
+> – Ilia Epelbaum, DataGrip, JetBrains, from the [“How JetBrains Built Cross-Database Queries into DataGrip with DuckDB” blog post]({% post_url 2026-11-05-jetbrains-datagrip %})
 
 ## Installing DataGrip
 
@@ -54,7 +60,19 @@ Running `SELECT * FROM actor` shows the results in the *Database Output* pane, a
 
 <img src="/images/guides/datagrip/query_results.png" alt="DataGrip Query Results" title="DataGrip Query Results"/>
 
+> Quote
+>
+> We highlight that it’s DuckDB.
+>
+> – Ilia Epelbaum, DataGrip, JetBrains, from the [“How JetBrains Built Cross-Database Queries into DataGrip with DuckDB” blog post]({% post_url 2026-11-05-jetbrains-datagrip %})
+
 ## Where to Learn More
+
+> Quote
+>
+> With DuckDB and its support for custom table functions, cross-database queries have finally become practical in DataGrip. Users can join data from PostgreSQL, MySQL, MongoDB, or any other supported database in one query, without setting up extra infrastructure.
+>
+> – Maxim Sobolevskiy, Head of Database Ecosystem at JetBrains, from the [“How JetBrains Built Cross-Database Queries into DataGrip with DuckDB” blog post]({% post_url 2026-11-05-jetbrains-datagrip %})
 
 This guide only describes how to get started with DuckDB in DataGrip.
 To see everything DataGrip allows you to do, watch the videos in the DataGrip playlist on YouTube or explore the features overview page or the [DataGrip home page](https://www.jetbrains.com/datagrip/).
