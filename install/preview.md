@@ -257,18 +257,33 @@ To download the v2.1-dev C/C++ libraries, use the following links:
 
 ## ODBC
 
-### v2.0-dev
+For ODBC, the preview builds are based on the [`duckdb/duckdb-odbc` repository](https://github.com/duckdb/duckdb-odbc/).
 
-For ODBC, the preview builds are based on the `main` branch of the [`duckdb/duckdb-odbc` repository](https://github.com/duckdb/duckdb-odbc/).
+### ODBC v2.0-dev
 
-| Platform | Architecture | ODBC client                                                                 |
-| -------- | ------------ | --------------------------------------------------------------------------- |
-| Linux    | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-arm64.zip)   |
-| Linux    | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip)   |
-| macOS    | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-arm64.zip)   |
-| macOS    | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-amd64.zip)   |
-| Windows  | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-arm64.zip) |
-| Windows  | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip) |
+To download the v2.0-dev ODBC driver (`v{{ site.latest_duckdb_odbc_dev_version }}`), use the following links:
+
+| Platform | Architecture | ODBC client |
+| -------- | ------------ | ----------- |
+| Linux | `arm64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.latest_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-arm64.zip) |
+| Linux | `x86_64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.latest_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-amd64.zip) |
+| macOS | `arm64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.latest_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-macos-arm64.zip) |
+| macOS | `x86_64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.latest_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-macos-amd64.zip) |
+| Windows | `arm64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.latest_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-arm64.zip) |
+| Windows | `x86_64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.latest_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-amd64.zip) |
+
+### ODBC v2.1-dev
+
+To download the v2.1-dev ODBC driver (`v{{ site.next_duckdb_odbc_dev_version }}`), use the following links:
+
+| Platform | Architecture | ODBC client |
+| -------- | ------------ | ----------- |
+| Linux | `arm64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.next_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-arm64.zip) |
+| Linux | `x86_64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.next_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-amd64.zip) |
+| macOS | `arm64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.next_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-macos-arm64.zip) |
+| macOS | `x86_64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.next_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-macos-amd64.zip) |
+| Windows | `arm64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.next_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-arm64.zip) |
+| Windows | `x86_64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.next_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-amd64.zip) |
 
 ## R
 
