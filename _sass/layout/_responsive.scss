@@ -125,6 +125,9 @@
 	nav.mobile .hamburger {
 		display: flex !important;
 	}
+	#duckdb_logo {
+		--duckdb-wordmark-width: 114.4px;
+	}
 	#ducklake_logo {
 		width: 133px;
 	}
@@ -483,10 +486,6 @@
 	#duckcon8_logo,
 	#foundation_logo{
 		height: $site-header-height;
-	}
-
-	#duckdb_logo{
-		--duckdb-wordmark-width: 80px;
 	}
 
 	header .duckdblabs_logo,
