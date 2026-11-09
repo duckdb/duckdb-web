@@ -383,27 +383,144 @@
 	}
 }
 
+// Vertical rhythm shared by docs and blog content.
+// $scope limits the rules that must not reach elements outside of the article, such as the TOC.
+@mixin content-flow($scope) {
+	#{$scope} :is(h1, h2, h3, h4, h5, h6):where(:not(.title)) {
+		margin-block: 2.5rem 0;
+	}
+
+	#{$scope} :is(blockquote, table, .monospace_table, .highlighter-rouge, .highlight) + :is(h1, h2, h3, h4, h5, h6) {
+		margin-top: 2rem;
+	}
+
+	#{$scope} :is(h1, h2, h3, h4, h5, h6, .headlinebar) + :is(h1, h2, h3, h4, h5, h6) {
+		margin-top: 1rem;
+	}
+
+	p {
+		margin-top: 1rem;
+		margin-bottom: 0;
+	}
+
+	#{$scope} :is(h1, h2, h3, h4, h5, h6, .headlinebar) + p {
+		margin-top: 0.75rem;
+	}
+
+	#{$scope} {
+		:is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) {
+			margin-bottom: 0;
+		}
+
+		:is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) + :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) {
+			margin-top: 1rem;
+		}
+
+		:is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) + p {
+			margin-top: 1.5rem;
+		}
+	}
+
+	:is(h1, h2, h3, h4, h5, h6) + :is(.highlighter-rouge, .download-btn) {
+		margin-top: 1rem;
+	}
+
+	p + .highlighter-rouge {
+		margin-top: 1rem;
+	}
+
+	#{$scope} {
+		:is(p, blockquote, div.highlighter-rouge, div.highlight, .headlinebar, h1, h2, h3, h4, h5, h6) + table,
+		:is(p, blockquote, div.highlighter-rouge, div.highlight, .headlinebar, h1, h2, h3, h4, h5, h6) + div:empty:not(.nostroke_table) + table {
+			margin-top: 1rem;
+		}
+	}
+}
+
+// Lists, rules, and image spacing shared by docs and blog content.
+@mixin content-blocks {
+	img {
+		margin: 20px 0;
+	}
+
+	table img {
+		margin: 0;
+		margin-bottom: -4px;
+	}
+
+	dl,
+	ol,
+	ul {
+		margin-bottom: 1.3em;
+	}
+
+	li {
+		line-height: 1.65;
+		font-weight: 400;
+	}
+
+	ol {
+		list-style-position: inside;
+		list-style: decimal;
+		padding-left: 20px;
+		font-size: var(--type-body-docs, 15px);
+	}
+
+	dl {
+		dt {
+			font-weight: bold;
+		}
+
+		dd,
+		p {
+			padding-left: 20px;
+			font-style: italic;
+		}
+	}
+
+	hr {
+		margin: 20px 0 10px 0;
+		border: 0.5px solid var(--border-color);
+	}
+
+	ul {
+		list-style-position: outside;
+		list-style-type: '\2022 \00a0\00a0';
+		padding: 0 0 0 20px;
+		font-size: var(--type-body-docs, 15px);
+
+		ul {
+			padding-left: 20px;
+			margin: 0;
+		}
+	}
+}
+
 @mixin blog-typography {
-	p, ul li, ol li {
+	@include content-flow('&');
+	@include content-blocks;
+
+	.graphics-box img,
+	.graphic-box img {
+		margin: 0;
+	}
+
+	p {
 		@include body-standard();
 		font-weight: 400;
-		margin: 1.65em 0;
+	}
+
+	p, ul li, ol li {
 		i, em {
 			font-family: $fontSans;
 			font-style: italic;
 		}
 	}
-	
-	ul li, ol li {
-		margin-top: 0;
-		margin-bottom: 0;
-	}
-	
+
 	h1 {
-		margin-top: 2.2em;
 		font-weight: 500;
 	}
-	
+
 	h2 {
 		@include headline-3();
 	}
@@ -416,158 +533,41 @@
 		@include headline-5();
 	}
 
-	h2,
-	h3,
-	h4,
-	h5 {
-		margin-top: 2.2em;
-	}
-
-	h2,
-	h3,
-	h4 {
-		margin-bottom: 1em;
-	}
-
 	h1, h2, h3, h4, h5, h6 {
 		&:hover svg.anchor-icon {
 			opacity: 1;
 		}
 	}
 
-	h2 + h3,
-	h3 + h4 {
-		margin-top: 1.25em;
-	}
-	
-	blockquote {
-		h1, h2, h3, h4, h5, h6 {
-			@include headline-4;
-			margin-top: 0;
-		}
-		ul {
-			padding: 0 0 0 20px;
-		}
-		ul li,
-		ol li,
-		p {
-			@include body-standard();
-			font-weight: 400;
-		}
-		p {
-			margin: .8em 0;
-		}
-	}
-	
 	table {
-		text-align: left;
-		code {
-			@include code-standard();
-		}
 		code.highlight {
 			padding: 2px 6px;
 			border-radius: var(--page-radius-s) !important;
 			margin-left: 0;
 			line-height: 27px;
 		}
-		tr{
-			border-bottom: 1px solid var(--border-color)
-		}
-		th{
-			padding: 5px 10px;
-		}
-	}
-
-	table thead th {
-		@include body-standard();
-		font-weight: 600;
 	}
 
 	table thead:not(:has(th:not(:empty))) {
 		display: none;
 	}
 
-	table tbody td {
-		@include body-standard();
-		font-weight: 400;
-		padding: 10px;
-		vertical-align: middle;
-	}
-	
-	table tbody tr:hover {
-		background: var(--interactive-table-row-hover);
-	}
-	
-	div.highlight {
-		max-width: 750px;
-		border-radius: var(--page-radius-m);
-		border: 1px solid var(--border-color);
-		position: relative;
-		overflow: hidden;
-	}
-	
-	pre.highlight {
-		tab-size: 4;
-		white-space: pre;
-		overflow-x: auto;
-		padding: 15px;
-		padding-right: 0;
-		margin: 0;
-		border-radius: var(--page-radius-m);
-
-		> code {
-			width: fit-content;
-			padding-right: 15px;
-		}
-	}
-	
-	div.highlighter-rouge + table,
-	table + div.highlighter-rouge,
-	blockquote + div.highlighter-rouge {
-		margin-top: 2.15em;
-	}
-
-	blockquote + table {
-		margin-top: 1.875em;
-	}
-
-	table + blockquote {
-		margin-top: 2.15em;
-	}
-	
-	.highlighter-rouge,
-	table {
-		margin-bottom: 1.25em;
-	}
-	
-	hr {
-		margin: 50px 0 50px 0;
-		border: 0.5px solid var(--border-color);
-	}
-	
 	iframe {
 		outline: 0;
 		border: 1px solid var(--border-color);
 	}
-	
-	code,
-	pre {
-		@include code-standard;
-	}
 
 	p code,
-	li code,
-	code.highlighter-rouge,
-	code.language-plaintext {
+	li code {
 		border: 1px solid var(--border-color);
 		background: var(--doc-codebox-background-color, #F2F2F2);
 		font-family: "JetBrainsMono-Medium", monospace;
 		border-radius: var(--page-radius-xs);
 		padding: 0px 2px;
 		margin: 0;
-		margin-bottom: 0px;
 	}
-	li .highlight pre > code{
+
+	li .highlight pre > code {
 		border: none;
 		padding: 0;
 		background: unset;
