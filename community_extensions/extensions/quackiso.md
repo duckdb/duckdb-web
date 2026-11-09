@@ -372,8 +372,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 703
-extension_download_count_pretty: 703
+extension_download_count: 699
+extension_download_count_pretty: 699
 image: '/images/community_extensions/social_preview/preview_community_extension_quackiso.png'
 layout: community_extension_doc
 ---
