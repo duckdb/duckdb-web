@@ -21,7 +21,7 @@ Download DataGrip from the [official JetBrains website](https://www.jetbrains.co
 ## Creating a DuckDB Data Source
 
 Go to *File* | *New* | *Data Source* and select *DuckDB*.
-Alternatively, open the database explorer (⌘1), click *New* (+), and go to *Data Source* | *DuckDB*.
+Alternatively, open the database explorer (⌘1 on macOS, Alt+1 on Windows and Linux), click *New* (+), and go to *Data Source* | *DuckDB*.
 
 <img src="/images/guides/datagrip/new_data_source_menu.png" alt="DataGrip New Data Source Menu" title="DataGrip New Data Source Menu"/>
 
@@ -50,7 +50,7 @@ Then click *Test Connection*, and then *OK*.
 
 ## Running Queries
 
-Select your data source in the database explorer and press ⌘↓ to open a query console.
+Select your data source in the database explorer and press F4 to open a query console.
 
 <img src="/images/guides/datagrip/database_explorer.png" alt="DataGrip Database Explorer" title="DataGrip Database Explorer"/>
 
