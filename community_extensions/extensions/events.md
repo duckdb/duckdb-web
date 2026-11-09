@@ -22,8 +22,8 @@ repo:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 733
-extension_download_count_pretty: 733
+extension_download_count: 729
+extension_download_count_pretty: 729
 image: '/images/community_extensions/social_preview/preview_community_extension_events.png'
 layout: community_extension_doc
 ---

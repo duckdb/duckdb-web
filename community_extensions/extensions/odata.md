@@ -105,8 +105,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 20
-extension_download_count_pretty: 20
+extension_download_count: 93
+extension_download_count_pretty: 93
 image: '/images/community_extensions/social_preview/preview_community_extension_odata.png'
 layout: community_extension_doc
 ---
