@@ -487,36 +487,6 @@ div.graphic-box{
 }
 
 
-body.post {
-	table {
-		min-width: 100%;
-		max-width: 100%;
-		width: 100%;
-		-webkit-box-pack: center;
-			-ms-flex-pack: center;
-				justify-content: center;
-		text-align: center;
-		margin: 6px 0;
-		font-variant-numeric: tabular-nums;
-	}
-	table td, table th {
-		padding: 5px 10px;
-	}
-	  table tbody td {
-		@include label-2();
-		color: var(--main-text-primary-color, #0D0D0D);
-	}
-	code,
-	pre {
-		@include code-large;
-	}
-
-	h1, h2, h3, h4, h5 {
-		code, pre {
-			font-size: inherit;
-		}
-	}
-}
 div.small_code_block + .language-text code {
 	font-size: 12px;
 }
@@ -682,6 +652,7 @@ h5 a {
 				ul li{
 					img{
 						height: 100%;
+						margin: 0;
 					}
 				}
 				&.silver{
@@ -779,6 +750,7 @@ h5 a {
 					   object-fit: cover;
 					width: 100%;
 					height: 100%;
+					margin: 0;
 				}
 				&.spriteicon{
 					background-image: none;
@@ -877,6 +849,7 @@ h5 a {
 				display: block;
 				box-sizing: border-box;
 				flex: none;
+				margin: 0;
 				width: 32px;
 				height: 32px;
 				border: 1px solid var(--main-body-background-color, #FCFCFC);
@@ -964,9 +937,6 @@ h5 a {
 				margin-bottom: 30px;
 				margin-top: 0;
 			}
-			.highlight{
-				border-radius: var(--page-radius-box);
-			}
 			.excerpt{
 				em{
 					font-weight: 600;
@@ -977,7 +947,6 @@ h5 a {
 			p > img{
 				max-width: 100%;
 				height: auto;
-				margin: 0;
 				padding: 0;
 				vertical-align: middle;
 				text-align: center;
@@ -1134,29 +1103,6 @@ footer{
 	.newswrap .postwrap .postcontent .singleentry {
 		padding-top: 50px;
 		padding-bottom: 50px;
-		p {
-			margin: 20px 0;
-		}
-		h2 {
-			margin: 35px 0 20px;
-		}
-		h3 {
-			margin: 35px 0 20px;
-			&:first-child {
-				margin-top: 0;
-			}
-		}
-		h4 {
-			margin: 35px 0 20px;
-			&:first-child {
-				margin-top: 0;
-			}
-		}
-		ul li {
-			ul {
-				margin-top: 0;
-			}
-		}
 	}
 	.newswrap .postwrap .postcontent iframe{
 		width: 100%;

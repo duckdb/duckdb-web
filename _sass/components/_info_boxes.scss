@@ -4,7 +4,8 @@
 
 body.documentation #main_content_wrap,
 body.layout_default #main_content_wrap,
-div.singleentry {
+body.layout_default.blog_typography #main_content_wrap,
+.newswrap .postwrap .postcontent {
 	blockquote {
 		display: flex;
 		align-items: flex-start;
