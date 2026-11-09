@@ -220,7 +220,7 @@ dependencies {
 
 ## C/C++ Libraries
 
-### v1.5-dev C/C++ Libraries
+### C/C++ Libraries v1.5-dev
 
 To download the C/C++ libraries, use the following links:
 
@@ -231,7 +231,7 @@ To download the C/C++ libraries, use the following links:
 | macOS    | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-osx.zip)         |
 | Windows  | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-windows.zip)     |
 
-### v2.0-dev C/C++ Libraries
+### C/C++ Libraries v2.0-dev
 
 To download the v2.0-dev C/C++ libraries, use the following links:
 
@@ -243,7 +243,7 @@ To download the v2.0-dev C/C++ libraries, use the following links:
 | Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-windows-arm64.tar.gz) |
 | Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-windows-amd64.tar.gz) |
 
-### v2.1-dev C/C++ Libraries
+### C/C++ Libraries v2.1-dev
 
 To download the v2.1-dev C/C++ libraries, use the following links:
 
