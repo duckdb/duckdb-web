@@ -362,6 +362,7 @@ urlpattern,teaguesterling/duckdb_urlpattern,0e14b580454ea92ff0120bdbac9ab836c407
 us_address_standardizer,ericmanning/duckdb-address-standardizer,3421cf7326ce60e16feb932a801a62a483909c4b,"US address parsing and standardization (PAGC + Rust addrust)"
 usd,brannn/duckdb-usd,ee5db2c2f0954a01c766dbbab72a72ece39c8db7,"Query Universal Scene Description (USD) files with SQL"
 valhalla_routing,midwork-finds-jobs/duckdb-valhalla-routing,7d4bf9ad8f3fb7ba5031519cf982d535c16c0eab,"DuckDB extension for routing and travel time calculations using Valhalla routing engine"
+vgi,query-farm/vgi,a94777f6cb3921fa0bee2d79e8639de5f2ed4278,"Call table, scalar, aggregate and COPY functions served by remote workers over Apache Arrow IPC. Installs from the Query.Farm extension repository."
 waddle,duckdb/extension-template,cfaf3e236008e782d27f4341b0ee036002d0a449,"Provides a hello world example demo"
 warc,midwork-finds-jobs/duckdb_warc,954cbe42e5fdb6f90d6e3ad20879fc36bcaeff3b,"Parse WARC (Web ARChive) records for Common Crawl data processing"
 web_archive,midwork-finds-jobs/duckdb-web-archive,57e51a7e4a89e8ad6fd7f00700095ca3baf1cd39,"Query Common Crawl and Wayback Machine web archive CDX APIs directly from SQL"
