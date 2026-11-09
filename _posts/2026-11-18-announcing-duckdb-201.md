@@ -9,7 +9,9 @@ excerpt: "TODO"
 tag: release
 ---
 
-TODO: Gather major fixes in DuckDB core, primary clients, and core extensions.
+TODO: Gather major fixes in DuckDB core, primary clients, and extensions.
+
+TODO: announce new core extensions
 
 ## DuckDB 1.4 Reached EOL
 
