@@ -20,6 +20,8 @@ Read a CSV file from disk, auto-infer options:
 SELECT * FROM 'flights.csv';
 ```
 
+As discussed in the [“From Spreadsheets to DuckLake” blog post]({% post_url 2026-10-29-from-spreadsheets-to-ducklake %}), Matt Martin said, “There actually is something out there that's easy to use and doesn't require a bunch of infrastructure overhead.”
+
 Use the `read_csv` function with custom options:
 
 ```sql

@@ -57,6 +57,8 @@ SELECT *
 FROM 's3://⟨your-bucket⟩/⟨your_file⟩.parquet';
 ```
 
+As discussed in the [“From Spreadsheets to DuckLake” blog post]({% post_url 2026-10-29-from-spreadsheets-to-ducklake %}), once a secret is in place, files on S3 can be queried with the same SQL as local files.
+
 ### `credential_chain` Provider
 
 The `credential_chain` provider automatically fetches credentials using the AWS SDK (profiles, SSO, assumed roles, web identities, instance metadata, and more). It is provided by the [`aws` extension]({% link docs/2.0/core_extensions/aws.md %}). For example, to use the AWS SDK default provider:

@@ -17,6 +17,12 @@ title: DuckLake
 The `ducklake` extension adds support for attaching to databases stored in the [DuckLake format](http://ducklake.select/).
 The complete documentation of this extension is available at the [DuckLake website](https://ducklake.select/docs/stable/duckdb/introduction).
 
+> Quote
+>
+> There actually is something out there that's easy to use and doesn't require a bunch of infrastructure overhead.
+>
+> – Matt Martin, from the [“From Spreadsheets to DuckLake” blog post]({% post_url 2026-10-29-from-spreadsheets-to-ducklake %})
+
 ## Installing and Loading
 
 To install `ducklake`, run:
@@ -38,6 +44,12 @@ LOAD ducklake;
 ATTACH 'ducklake:metadata.ducklake' AS my_ducklake (DATA_PATH 'data_files');
 USE my_ducklake;
 ```
+
+> Quote
+>
+> Organizations have been doing SQL for over four decades and have gotten very, very good at optimizing queries.
+>
+> – Matt Martin, from the [“From Spreadsheets to DuckLake” blog post]({% post_url 2026-10-29-from-spreadsheets-to-ducklake %})
 
 ## Tables
 

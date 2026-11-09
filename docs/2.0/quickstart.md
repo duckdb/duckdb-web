@@ -6,6 +6,12 @@ title: Quickstart
 
 Run your first query and read a CSV file using the DuckDB command line interface (CLI). To try SQL without installing anything, open [DuckDB in your browser](https://shell.duckdb.org).
 
+> Quote
+>
+> I like the simplicity of just a small thing running and working. And then you can get more complex.
+>
+> – Ryan Hamilton, founder, [TimeStored](https://www.timestored.com/), from the [“Bringing Local Analytics to the Quant’s Desktop” blog post]({% post_url 2026-11-03-bringing-local-analytics-to-the-quants-desktop %})
+
 ## Install DuckDB
 
 Follow the [installation instructions]({% link docs/2.0/installation.html %}?environment=cli) for your platform.
