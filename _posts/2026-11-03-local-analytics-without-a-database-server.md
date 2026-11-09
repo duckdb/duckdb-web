@@ -9,6 +9,8 @@ thumb: /images/blog/thumbs/sqlrooms-local-analytics.svg
 image: /images/blog/thumbs/sqlrooms-local-analytics.png
 excerpt: From interactive maps to graph exploration, DuckDB makes it possible to analyze data without a database server. Ilya Boyandin shares how this approach led to SQLRooms, a toolkit for building analytics applications that bring data, visualizations, and AI-assisted analysis together on the user’s machine.
 tag: using-duckdb
+redirect_from:
+- /2026/11/03/local-first-analytics-needs-no-database-server.html
 ---
 
 [Ilya Boyandin](https://www.linkedin.com/in/ilyabo/) is a software engineer, the creator of [SQLRooms](https://sqlrooms.org), [FlowmapBlue](https://flowmap.blue), and [Flowmap City](https://flowmap.city/). He worked on geospatial data analytics at Unfolded, the company founded by the team behind the open-source data visualization projects [deck.gl](https://deck.gl) and [kepler.gl](https://kepler.gl), which was later acquired by Foursquare.
