@@ -34,7 +34,11 @@ docs:
     CREATE TABLE items(id BIGINT, vec FLOAT[]);
     INSERT INTO items VALUES (0, [0.0,1.0]), (1, [1.0,0.0]), (2, [0.9,0.1]);
     SELECT * FROM ivf_create_index('items_vec', 'items', 'id', 'vec', 4, 10, true);
-    SELECT * FROM ivf_search_exact('items_vec', 'items', 'vec', 2);
+    -- the query vector is read from a single-row table via query_column
+    CREATE TABLE q(vec FLOAT[]);
+    INSERT INTO q VALUES ([0.95, 0.05]);
+    SELECT * FROM ivf_search_exact('items_vec', 'q', 'vec', top_k := 2);
+    SELECT * FROM ivf_search('items_vec', 'q', 'vec', top_k := 2, nprobe := 2);
 
   extended_description: |
     ## ivf — OSA Levenshtein + typo tolerance for DuckDB FTS
@@ -74,8 +78,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_download_count: 418
+extension_download_count_pretty: 418
 image: '/images/community_extensions/social_preview/preview_community_extension_ivf.png'
 layout: community_extension_doc
 ---

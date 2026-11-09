@@ -1,0 +1,26 @@
+module: trinket
+functions:
+  trinket_count:
+    lifecycle:
+      - ["stable", "v0.1.0", "2019-06-27"]
+    parameters:
+      trinket:
+        type: trinket
+      n:
+        type: idx
+        description: How many to count.
+    return_type: idx
+    description: |
+      Counts trinkets.
+    return_description: The count.
+  trinket_old:
+    renamed_from: { name: trinket_ancient, version: "v1.4.0" }
+    lifecycle:
+      - ["deprecated", "v1.5.0", "2026-03-06"]
+    parameters:
+      trinket:
+        type: trinket
+        description: The trinket.
+    return_type: void
+    description: |
+      Does nothing useful any more.

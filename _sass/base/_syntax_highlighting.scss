@@ -4,6 +4,12 @@
 
 /* SYNTAX HIGHLIGHTING COLORS */
 
+// languages where variables (e.g., $name) are highlighted
+// other lexers (e.g., YAML, Make, Swift) use the variable tokens for other purposes
+$variable-languages: '.language-sql, .language-plsql, .language-bash, .language-batch, .language-sh, .language-shell, .language-zsh, .language-powershell, .language-ps1, .language-pwsh, .language-posh';
+// variable tokens
+$variable-tokens: '.nv, .vc, .vg, .vi, .vm';
+
 .language-batch code:before {
 	content: '$ ';
 }
@@ -15,7 +21,7 @@
 // <light mode>
 .highlight {
 	// background of syntax highlight boxes
-	background: var(--doc-codebox-background-color, #f7f7f7);
+	background: var(--doc-codebox-background-color, #F2F2F2);
 
 	// foreground
 	:is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg),
@@ -84,6 +90,14 @@
 	}
 }
 
+// variables
+// there is no distinct color for variables yet, so we use the color of functions
+:is(#{$variable-languages}) .highlight :is(#{$variable-tokens})
+{
+	color: #008700;
+	font-family: $fontMonoBold;
+}
+
 th .k {
 	color: #ffffff;
 	font-family: $fontMonoBold;
@@ -106,7 +120,7 @@ html.darkmode, .dark {
 
 	.highlight {
 		// background of syntax highlight boxes
-		background: var(--doc-codebox-background-color, #141414);
+		background: var(--doc-codebox-background-color, #F2F2F2);
 
 		// foreground
 		:is(.g, .l, .no, .nd, .nx, .w, .nn, .n, .vg),
@@ -168,6 +182,14 @@ html.darkmode, .dark {
 			color: #ff6a6a;
 			font-family: $fontMonoItalic;
 		}
+	}
+
+	// variables
+	// there is no distinct color for variables yet, so we use the color of functions
+	:is(#{$variable-languages}) .highlight :is(#{$variable-tokens})
+	{
+		color: #00af00;
+		font-family: $fontMonoBold;
 	}
 }
 // </dark mode>

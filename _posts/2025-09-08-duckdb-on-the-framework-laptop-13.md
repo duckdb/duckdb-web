@@ -138,6 +138,6 @@ Here's the cost breakdown of the laptop using retail prices in euros (including 
 | USB-C Expansion Card – Translucent Green (2 pcs)                                            |        20.00 |
 | [WD_BLACK SN850X NVMe SSD 8TB](https://www.amazon.nl/dp/B0D9WT512W?th=1)                    |       582.69 |
 | [Crucial DDR5 RAM 128GB Kit](https://www.amazon.nl/dp/B0DSQMKYLN)                           |       327.87 |
-| **Total (euros, VAT included)**                                                             | **2,974.87** |
+| **Total (euros, VAT included)**                                                             | **2,958.56** |
 
 Note that Framework currently only sells 96 GB memory kits but both the motherboard and the CPU can handle 128 GB (2 × 64 GB) kits.

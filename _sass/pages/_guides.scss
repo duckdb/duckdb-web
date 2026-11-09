@@ -1,11 +1,6 @@
 @use '../abstracts/mixins' as *;
 
 body.documentation.guides-index {
-    main > .wrap #main_content_wrap {
-        width: 100%;
-        max-width: 1200px;
-    }
-
     .filterbar {
         flex-wrap: nowrap;
         margin-top: 24px;
@@ -30,21 +25,14 @@ body.documentation.guides-index {
         .versionsidebar {
             left: 0;
             right: auto;
-        }
-
-        #topic-filter .versionsidebar {
-            @include menu-dropdown-padding;
-
-            li {
-                a {
-                    @include menu-dropdown-item-spacing;
-                }
-            }
+            transform-origin: top left;
         }
 
         .versiontrigger,
+        #search-input,
         #topic-filter .versionsidebar li {
-            @include label;
+            @include label-1;
+            font-weight: 400;
         }
 
         .versiontrigger {
@@ -88,7 +76,7 @@ body.documentation.guides-index {
         .guide-card-topic {
             @include tiny;
             grid-column: 1 / -1;
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
         }
 
         .guide-card-title {

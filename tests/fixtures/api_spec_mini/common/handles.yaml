@@ -1,0 +1,24 @@
+module: mini_common
+handles:
+  gadget:
+    lifecycle:
+      - ["stable", "v0.1.0", "2019-06-27"]
+    description: "A gadget. Must be destroyed with duckdb_destroy_gadget."
+    cleanup_with: destroy_gadget
+  widget:
+    lifecycle:
+      - ["stable", "v1.5.6", "2026-07-30"]
+      - ["unstable", "v1.5.0", "2026-03-06"]
+    description: "A widget made from a gadget."
+  trinket:
+    lifecycle:
+      - ["stable", "v0.1.0", "2019-06-27"]
+    description: "A trinket."
+enums:
+  MINI_KIND:
+    description: The kind of a gadget.
+    values:
+      MINI_KIND_PLAIN:
+        description: A plain gadget.
+      MINI_KIND_FANCY:
+        description: A fancy gadget.

@@ -125,6 +125,12 @@
 	nav.mobile .hamburger {
 		display: flex !important;
 	}
+	#duckdb_logo {
+		--duckdb-wordmark-width: 114.4px;
+	}
+	#ducklake_logo {
+		width: 133px;
+	}
 	header .headerline .headercontent .landingmenu {
 		display: flex;
 		align-items: center;
@@ -293,7 +299,7 @@
 		}
 
 		&.sidenav-drill .nav-row {
-			min-height: 44px;
+			min-height: 38px;
 
 			&[aria-current="page"]::before {
 				top: 50%;
@@ -460,20 +466,15 @@
 
 @media only screen and (max-width: 720px) {
 	header .headerline{
-		height: 55px;
+		height: $site-header-height;
 	}
 
 	main.inactive::before {
-		top: calc(54px + var(--docbanner-height, 0px));
+		top: calc($site-header-height - 1px + var(--docbanner-height, 0px));
 	}
 
 	header .headerline .headercontent .landingmenu nav:not(.mobile) {
-		top: 70px;
-	}
-
-	header .headerline .headercontent .landingmenu .hamburger{
-		width: 33px;
-		height: 33px;
+		top: 75px;
 	}
 
 	#duckdb_logo,
@@ -484,15 +485,7 @@
 	#duckcon7_logo,
 	#duckcon8_logo,
 	#foundation_logo{
-		height: 55px;
-	}
-
-	#duckdb_logo{
-		--duckdb-wordmark-width: 80px;
-	}
-
-	#ducklake_logo{
-		width: 121px;
+		height: $site-header-height;
 	}
 
 	header .duckdblabs_logo,
@@ -847,7 +840,7 @@
 	.opensearch:hover,
 	body.documentation div.version .versiontrigger:hover{
 		border-color: var(--border-color) !important;
-		color: var(--main-text-secondary-color, #666) !important;
+		color: var(--main-text-secondary-color, #333333) !important;
 	}
 	svg.anchor-icon{
 		opacity: 0 !important;

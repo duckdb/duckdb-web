@@ -1111,6 +1111,19 @@
               "path": "/docs/2.0/clients/c/api"
             },
             {
+              "page": "C API v2",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "path": "/docs/2.0/clients/c/v2/overview"
+                },
+                {
+                  "page": "API Reference",
+                  "path": "/docs/2.0/clients/c/v2/api"
+                }
+              ]
+            },
+            {
               "page": "C++",
               "path": "/docs/2.0/clients/cpp"
             }

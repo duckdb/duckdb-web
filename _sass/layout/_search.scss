@@ -31,7 +31,7 @@ body.search {
 		top: 90px;
 		left: calc(50% - 400px);
 		width: 800px;
-		background: var(--main-body-background-color, #FAFAFA);
+		background: var(--main-body-background-color, #FCFCFC);
 		border: 1px solid var(--border-color);
 		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
@@ -55,23 +55,23 @@ body.search {
 				color: var(--main-text-primary-color, #0D0D0D);
 
 				&::-webkit-input-placeholder {
-					color: var(--main-text-secondary-color, #666);
+					color: var(--main-text-secondary-color, #333333);
 				}
 
 				&::-moz-placeholder {
-					color: var(--main-text-secondary-color, #666);
+					color: var(--main-text-secondary-color, #333333);
 				}
 
 				&:-ms-input-placeholder {
-					color: var(--main-text-secondary-color, #666);
+					color: var(--main-text-secondary-color, #333333);
 				}
 
 				&::-ms-input-placeholder {
-					color: var(--main-text-secondary-color, #666);
+					color: var(--main-text-secondary-color, #333333);
 				}
 
 				&::placeholder {
-					color: var(--main-text-secondary-color, #666);
+					color: var(--main-text-secondary-color, #333333);
 				}
 
 				&:active,
@@ -101,7 +101,7 @@ body.search {
 			position: fixed;
 			bottom: 20px;
 			right: 20px;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 			@include tiny();
 
 			span {
@@ -175,7 +175,7 @@ body.search {
 
 				.search_text {
 					@include body-small();
-					color: var(--main-text-secondary-color, #666);
+					color: var(--main-text-secondary-color, #333333);
 
 					u {
 						font-weight: normal;

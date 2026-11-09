@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Code of Conduct
+description: The code of conduct for the DuckDB community.
 body_class: code-of-conduct blog_typography
 max_page_width: small
 redirect_from:

@@ -72,7 +72,7 @@ body.documentation {
         }
 
         .version-suffix {
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
         }
 
         .versiontrigger {
@@ -85,15 +85,15 @@ body.documentation {
             white-space: nowrap;
             width: auto;
             height: 33px;
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
             display: flex;
             align-items: center;
             gap: 5px;
-            transition: border .3s;
+            transition: border-color .2s;
 
             &:hover,
             &:focus-visible {
-                border: 1px solid var(--main-link-hover, #665d00);
+                border-color: var(--border-color-hover, #CCCCCC);
             }
         }
 
@@ -103,7 +103,7 @@ body.documentation {
             fill: none;
             color: var(--main-text-tertiary-color);
             stroke-width: 1.6;
-            transition: transform .3s;
+            transition: transform .2s cubic-bezier(.16, 1, .3, 1);
         }
 
         &.active svg.arrow {
@@ -349,7 +349,7 @@ body.documentation {
         justify-content: space-between;
         margin-top: 8em;
         width: 100%;
-        color: var(--main-text-secondary-color, #666);
+        color: var(--main-text-secondary-color, #333333);
 
         h5 {
             @include headline-4();
@@ -381,13 +381,13 @@ body.documentation {
             gap: 6px;
             white-space: nowrap;
             text-decoration: none;
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
 
             svg.icon {
                 width: 16px;
                 height: 16px;
                 flex-shrink: 0;
-                color: var(--main-text-secondary-color, #666);
+                color: var(--main-text-secondary-color, #333333);
                 transition: color .3s;
             }
 
@@ -418,7 +418,7 @@ body.documentation {
         width: 100%;
         margin-top: 80px;
         font-weight: 400;
-        color: var(--main-text-tertiary-color, #B2B2B2);
+        color: var(--main-text-tertiary-color, #666666);
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -460,6 +460,7 @@ body.documentation.docs-overview .box-link {
 }
 
 .box-link {
+    border: 1px solid var(--border-color);
     border-radius: var(--page-radius-box-inner);
     padding: 5px;
     display: flex;
@@ -467,10 +468,14 @@ body.documentation.docs-overview .box-link {
     position: relative;
     gap: 6px;
     @include body-small();
-    transition: background-color .2s;
+    transition: border-color .2s;
 
     &:hover {
-        background: var(--doc-sidebar-selected-background-color, #F2F2F2);
+        border-color: var(--border-color-hover);
+
+        .symbol {
+            border-color: transparent;
+        }
     }
 
     >a {
@@ -537,11 +542,11 @@ body.documentation.docs-overview .box-link {
     }
     
     span:not(.symbol):not(.chevron) {
-        @include label;
+        @include label-1;
     }
     
     span.subline{
-        color: var(--main-text-tertiary-color, #B2B2B2);
+        color: var(--main-text-tertiary-color, #666666);
         margin-top: 2px;
         display: inline-block;
     }
@@ -556,7 +561,7 @@ body.documentation.docs-overview .box-link {
 
         span.month,
         span.week {
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
             @include tiny();
         }
 

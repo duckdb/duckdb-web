@@ -134,10 +134,10 @@ docs:
 
     Column reference: https://github.com/mgbilby/yorc-duckdb/blob/main/docs/REFERENCE.md
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 503
-extension_download_count_pretty: 503
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 521
+extension_download_count_pretty: 521
 image: '/images/community_extensions/social_preview/preview_community_extension_yorc.png'
 layout: community_extension_doc
 ---

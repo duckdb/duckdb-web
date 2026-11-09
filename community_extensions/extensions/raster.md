@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: raster
   description: DuckDB extension for reading and writing geospatial raster data using SQL.
-  version: 1.7.1
+  version: 1.8.0
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-raster
-  ref: 8806f1c3e8b51d8e51df182b2e062272a029359d
+  ref: 57d28a4fc64aacacf6f965916fc580dc7e1232e3
 
 docs:
   hello_world: |
@@ -381,10 +381,10 @@ docs:
     - `GEOMETRY_COLUMN`: The name of the column that contains the geometry of the tiles. This column will be used to determine the spatial location and the resolution of the tiles in the output raster file.
     - `DATABAND_COLUMNS`: A list with the names of the columns that contain the data of the bands. The order of the columns in the list will determine the order of the bands in the output raster file.
 
-extension_star_count: 61
-extension_star_count_pretty: 61
-extension_download_count: 1234
-extension_download_count_pretty: 1.2k
+extension_star_count: 62
+extension_star_count_pretty: 62
+extension_download_count: 1075
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_raster.png'
 layout: community_extension_doc
 ---
@@ -493,7 +493,9 @@ LOAD {{ page.extension.name }};
 | RT_Cube2TypeInt16   | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2ArrayUInt16 | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2TypeUInt32  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
+| RT_RasterValueArray | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | ^                   | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
+| RT_CoordValueArray  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2ArrayUInt64 | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 
 ### Overloaded Functions

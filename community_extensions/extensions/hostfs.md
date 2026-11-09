@@ -60,8 +60,8 @@ docs:
     For more information, please see the [HostFS documentation](https://github.com/gropaul/hostFS).
 extension_star_count: 33
 extension_star_count_pretty: 33
-extension_download_count: 1310
-extension_download_count_pretty: 1.3k
+extension_download_count: 928
+extension_download_count_pretty: 928
 image: '/images/community_extensions/social_preview/preview_community_extension_hostfs.png'
 layout: community_extension_doc
 ---

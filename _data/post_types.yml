@@ -6,17 +6,20 @@ blog:
     - value: using-duckdb
       label: Using DuckDB
       heading: Using DuckDB
+    - value: case-study
+      label: Case study
+      heading: Case Studies
     - value: benchmark
-      label: Benchmarks
+      label: Benchmark
       heading: Benchmarks
     - value: deep-dive
       label: Deep dive
       heading: Deep Dives
     - value: extensions
-      label: Extensions
+      label: Extension
       heading: Extensions
     - value: release
-      label: Releases
+      label: Release
       heading: Releases
 
 library:
@@ -93,6 +96,7 @@ tag_labels:
   tools-meta: Tools & Meta
   troubleshooting: Troubleshooting
   using-duckdb: Using DuckDB
+  case-study: Case Study
   benchmark: Benchmark
   deep-dive: Deep Dive
   extensions: Extensions

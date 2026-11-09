@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Security
+description: DuckDB's security model, how to report vulnerabilities, and the list of CVEs filed against DuckDB.
 body_class: history blog_typography
 max_page_width: medium
 toc: true

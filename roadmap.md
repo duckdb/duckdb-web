@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Development Roadmap
+description: The development roadmap of DuckDB, compiled by the DuckDB maintainers.
 body_class: roadmap blog_typography post
 redirect_from:
 - /docs/lts/dev/roadmap
@@ -13,7 +14,7 @@ toc: false
   <h1>Development Roadmap</h1>
 </div>
 
-_(Last updated: Oct 2026)_
+_(Last updated: Nov 2026)_
 
 This list was compiled by the DuckDB maintainers and is based on the long-term strategic vision for the DuckDB project and general interactions with users in the open-source community (GitHub Issues and Discussions, social media, etc.).
 For details on how to request features in DuckDB, please refer to the FAQ item [“I would like feature X to be implemented in DuckDB”]({% link faq.md %}#i-would-like-feature-x-to-be-implemented-in-duckdb-how-do-i-proceed).
@@ -27,10 +28,11 @@ This section lists the features that the DuckDB team plans to work on **in the c
 Many of the planned features are in flight for [DuckDB 2.1](% link release_calendar.md %).
 
 * Stabilizing the [C API v2]({% link docs/2.0/clients/c/overview.md %}) and the [C extension API](https://github.com/duckdb/extension-template-c)
-* [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
+* [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/pull/25255) for pattern matching
 * [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104) (see Denis Hirn's [DuckPL talk]({% link _library/2026-01-30-duckpl-a-procedural-language-in-duckdb.md %}))
 * [Better error messages](https://github.com/duckdb/duckdb/pull/27387) using the new PEG parser
 * [Memory allocator improvements](https://github.com/duckdb/duckdb/pull/27520), including time-based decay, bounded background reclamation and fully-tracked allocations
+* [Many-core and NUMA-aware optimizations](https://github.com/duckdb/duckdb/pull/27782)
 
 ### Major Features
 

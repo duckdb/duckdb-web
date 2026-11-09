@@ -28,7 +28,7 @@
   p {
     font-size: var(--type-body-normal, 15px);
     line-height: 1.5;
-    color: var(--main-text-secondary-color, #666);
+    color: var(--main-text-secondary-color, #333333);
     margin: 18px 0 0;
     max-width: 537px;
     letter-spacing: 0.04px;
@@ -119,7 +119,7 @@
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-    color: var(--main-text-secondary-color, #666);
+    color: var(--main-text-secondary-color, #333333);
   }
 }
 
@@ -167,7 +167,7 @@
   padding: 11px;
   cursor: pointer;
   position: relative;
-  transition: background 0.2s, border-color 0.2s;
+  transition: border-color 0.2s;
   z-index: 10;
   text-decoration: none;
   color: inherit;
@@ -179,8 +179,7 @@
   }
 
   &:hover {
-    border: 1px solid var(--border-color);
-    background: var(--interactive-folderbox-background-color-hover, rgba(242, 242, 242, 0.6));
+    border-color: var(--border-color-hover);
   }
 
   &:hover .ecosystem-icon__label {

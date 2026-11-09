@@ -74,7 +74,7 @@ venue: "CIDR 2023"
 
 * `authors` is always a list, even for a single person. Write names exactly as in [`_data/authors.yml`](_data/authors.yml) to show an avatar and, if set there, a `role` below the name on the post page. Organizations such as `DuckDB` or `The DuckDB team` are valid entries.
 * `tag` holds exactly one lowercase value, which is the filter value on the overview page:
-    * blog: `using-duckdb`, `benchmark`, `deep-dive`, `extensions`, `release`
+    * blog: `using-duckdb`, `case-study`, `benchmark`, `deep-dive`, `extensions`, `release`
     * library: `article`, `book`, `paper`, `podcast`, `talk`
     * events: `meetup`, `conference`, `workshop`, `talk`, `duckcon`
     * Everywhere: `servers`, `pcs`, `phones`, `other`

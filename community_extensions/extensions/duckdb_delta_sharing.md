@@ -8,17 +8,18 @@ excerpt: |
 extension:
   name: duckdb_delta_sharing
   description: The most efficient way to query Delta Lake tables directly from DuckDB via the Delta Sharing protocol.
-  version: 0.6.1
+  version: 0.8.0
   language: C++
   build: cmake
   license: Apache-2.0
-  excluded_platforms: "windows_amd64_mingw"
+  excluded_platforms: "windows_amd64;windows_amd64_mingw"
   maintainers:
     - prequel-co
 
 repo:
   github: prequel-co/DuckDB-Delta-Sharing
-  ref: a9ab9dd48160fa108861120bc1006b5d3546d0f3
+  variegata: a40b7c829fc44e9b55850cbda948adb3d113691a
+  ref: 8efa5920e3e60e0d4f27a2c76b940c5368010e0b
 
 docs:
   hello_world: |
@@ -82,8 +83,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 5255
-extension_download_count_pretty: 5.3k
+extension_download_count: 6076
+extension_download_count_pretty: 6.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_delta_sharing.png'
 layout: community_extension_doc
 ---
@@ -95,13 +96,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -123,13 +124,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name         | function_type | description | comment | examples |
-|------------------------------|---------------|-------------|---------|----------|
-| delta_share_change_data_feed | table         | NULL        | NULL    |          |
-| delta_share_list             | table         | NULL        | NULL    |          |
-| delta_share_list_all_tables  | table         | NULL        | NULL    |          |
-| delta_share_list_files       | scalar        | NULL        | NULL    |          |
-| delta_share_read             | table         | NULL        | NULL    |          |
+|        function_name         | function_type |                                               description                                               | comment |                                                  examples                                                  |
+|------------------------------|---------------|---------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------|
+| delta_share_change_data_feed | table         | Query Change Data Feed (CDF) changes for a Delta table starting from a specific version or timestamp.   | NULL    | [SELECT * FROM delta_share_change_data_feed('my_share', 'my_schema', 'my_table', 10);]                     |
+| delta_share_change_data_feed | table         | Query Change Data Feed (CDF) changes for a Delta table starting from version 0.                         | NULL    | [SELECT * FROM delta_share_change_data_feed('my_share', 'my_schema', 'my_table');]                         |
+| delta_share_change_data_feed | table         | Query Change Data Feed (CDF) changes for a Delta table within a version or timestamp range.             | NULL    | [SELECT * FROM delta_share_change_data_feed('my_share', 'my_schema', 'my_table', 10, 20);]                 |
+| delta_share_list             | table         | List shares, schemas in a share, tables in a schema, or columns in a table from a Delta Sharing server. | NULL    | [SELECT * FROM delta_share_list();]                                                                        |
+| delta_share_list_all_tables  | table         | List all tables across all schemas in a Delta Sharing share.                                            | NULL    | [SELECT * FROM delta_share_list_all_tables('my_share');]                                                   |
+| delta_share_list_files       | scalar        | Return a list of storage file URLs for a Delta table from a Delta Sharing server.                       | NULL    | [delta_share_list_files('my_share', 'my_schema', 'my_table')]                                              |
+| delta_share_list_files       | scalar        | Return a list of storage file URLs for a Delta table matching SQL predicate hints.                      | NULL    | [delta_share_list_files('my_share', 'my_schema', 'my_table', 'date >= ''2024-01-01''')]                    |
+| delta_share_read             | table         | Read a remote Delta Lake table via Delta Sharing as a DuckDB table.                                     | NULL    | [SELECT * FROM delta_share_read('my_share', 'my_schema', 'my_table');]                                     |
+| delta_share_read             | table         | Read a remote Delta Lake table via Delta Sharing as of a specific historical timestamp.                 | NULL    | [SELECT * FROM delta_share_read('my_share', 'my_schema', 'my_table', TIMESTAMP '2024-04-09 12:00:00');]    |
+| delta_share_read             | table         | Read a remote Delta Lake table via Delta Sharing as of a specific historical timestamptz.               | NULL    | [SELECT * FROM delta_share_read('my_share', 'my_schema', 'my_table', TIMESTAMPTZ '2024-04-09 12:00:00Z');] |
 
 ### Overloaded Functions
 
@@ -147,8 +153,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                 name                  |                      description                      | input_type | scope  | aliases |
-|---------------------------------------|-------------------------------------------------------|------------|--------|---------|
-| delta_sharing_query_telemetry_enabled | Enable sending full SQL query to server for telemetry | BOOLEAN    | GLOBAL | []      |
+|                 name                  |                                     description                                     | input_type | scope  | aliases | typed_value |
+|---------------------------------------|-------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| delta_sharing_max_pages               | Most pages a Delta Sharing listing or query may take before it fails (0 = no limit) | UBIGINT    | GLOBAL | []      | 1000        |
+| delta_sharing_query_telemetry_enabled | Enable sending full SQL query to server for telemetry                               | BOOLEAN    | GLOBAL | []      | false       |
+| temp_directory                        | Set the directory to which temporary files are written.                             | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

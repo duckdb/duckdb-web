@@ -5,7 +5,7 @@
 	text-align: center;
 	padding: 50px;
 	border-radius: var(--page-radius-box);
-	background: var(--main-infobox-labs-background-color, rgba(26, 26, 26, 0.60));
+	background: var(--main-infobox-labs-background-color, rgba(242, 242, 242, 0.6));
 	border: 1px solid var(--border-color);
 
 	h2{
@@ -15,7 +15,7 @@
 
 	p{
 		@include body-standard;
-		color: var(--main-text-primary-color, #F2F2F2);
+		color: var(--main-text-primary-color, #0D0D0D);
 		margin: 0 0 24px;
 	}
 }

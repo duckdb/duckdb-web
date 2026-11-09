@@ -27,6 +27,8 @@ The C API v2 is declared in the `duckdb_v2.h` header. Extensions that target it 
 
 Before marking the C API v2 as stable, we would like to test it in the field. Please give it a try and [send us your feedback](https://github.com/duckdb/duckdb/discussions/27525)!
 
+The [C API v2 overview]({% link docs/2.0/clients/c/v2/overview.md %}) explains how to opt in and how to read its reference.
+
 ## Installation
 
 The DuckDB C API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link docs/2.0/installation.html %}?environment=c) for details.

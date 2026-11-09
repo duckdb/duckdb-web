@@ -32,13 +32,13 @@ body.wasm{
 				margin: 0;
 				padding-right: 55px;
 				.selected{
-					@include label;
+					@include label-1;
 					margin-left: 20px;
 				}
 				&::after{
 					content: " ";
 					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'%3E%3Cpath stroke='%230D0D0D' stroke-linecap='square' stroke-width='1.5' d='m18 9.5-6 6-6-6'/%3E%3C/svg%3E");
-					background-color: var(--doc-codebox-button-background-color, #E6E6E6);
+					background-color: var(--doc-codebox-button-background-color, rgba(242, 242, 242, 0.6));
 					background-size: contain;
 					background-repeat: no-repeat;
 					width: 28px;
@@ -72,7 +72,7 @@ body.wasm{
 		}
 
 		h4{
-			@include label;
+			@include label-1;
 		}
 
 		&.disabled{
@@ -106,7 +106,7 @@ body.wasm{
 
 			label{
 				display: block;
-				@include label;
+				@include label-1;
 				margin-bottom: 8px;
 				font-weight: 600;
 			}
@@ -139,7 +139,7 @@ body.wasm{
 					border: none;
 					border-radius: var(--page-radius-xs);
 					background: transparent;
-					color: var(--main-text-tertiary-color, #B2B2B2);
+					color: var(--main-text-tertiary-color, #666666);
 					font-weight: 400;
 					cursor: pointer;
 					appearance: none;
@@ -149,7 +149,7 @@ body.wasm{
 					background-size: 16px;
 
 					&:hover{
-						color: var(--main-text-secondary-color, #666);
+						color: var(--main-text-secondary-color, #333333);
 					}
 
 					&:focus{
@@ -177,7 +177,7 @@ body.wasm{
 			background: var(--main-background-color, #FFFFFF);
 			color: var(--main-text-primary-color, #0D0D0D);
 			text-decoration: none;
-			@include label;
+			@include label-1;
 			transition: all .3s;
 
 			&:hover{
@@ -251,9 +251,9 @@ body.wasm{
 		margin: 8px 0;
 
 		&#last_query_status{
-			@include label;
+			@include label-1;
 			font-weight: 600;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 			margin-top: 16px;
 			position: relative;
 			padding-left: 20px; 

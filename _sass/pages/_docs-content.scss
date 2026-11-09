@@ -11,19 +11,14 @@ body.documentation {
 
         #main_content_wrap p,
         #main_content_wrap > :is(ul, ol) {
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
         }
 
-        #main_content_wrap :is(h1, h2, h3, h4, h5, h6):where(:not(.title)) {
-            margin-block: 2.5rem 0;
-        }
+        @include content-flow('#main_content_wrap');
 
-        #main_content_wrap :is(blockquote, table, .monospace_table, .highlighter-rouge, .highlight) + :is(h1, h2, h3, h4, h5, h6) {
-            margin-top: 2rem;
-        }
-
-        #main_content_wrap :is(h1, h2, h3, h4, h5, h6, .headlinebar) + :is(h1, h2, h3, h4, h5, h6) {
-            margin-top: 1rem;
+        #main_content_wrap .installationselection :is(.selection-head > h3, .installation-heading > h2),
+        #main_content_wrap .qa-wrap > h3 {
+            margin-block: 0;
         }
 
         // Headings
@@ -76,51 +71,12 @@ body.documentation {
             @include headline-5;
         }
 
-        p {
-            margin-top: 1rem;
-            margin-bottom: 0;
-        }
-
         // The following content owns the gap below the page title.
         #main_content_wrap .headlinebar:has(
             + :is(p, h1, h2, h3, h4, h5, h6, table),
-            + :is(.monospace_table, .center_aligned_header_table) + table
+            + div:empty:not(.nostroke_table) + table
         ) {
             margin-bottom: 0;
-        }
-
-        #main_content_wrap :is(h1, h2, h3, h4, h5, h6, .headlinebar) + p {
-            margin-top: 0.75rem;
-        }
-
-        #main_content_wrap {
-            :is(blockquote, div.highlighter-rouge, div.highlight) {
-                margin-bottom: 0;
-            }
-
-            :is(blockquote, div.highlighter-rouge, div.highlight) + :is(blockquote, div.highlighter-rouge, div.highlight) {
-                margin-top: 1rem;
-            }
-
-            :is(blockquote, div.highlighter-rouge, div.highlight) + p {
-                margin-top: 1.5rem;
-            }
-        }
-
-        h4+.highlighter-rouge,
-        h5+.highlighter-rouge {
-            margin-top: 0.35em;
-        }
-
-        p+.highlighter-rouge {
-            margin-top: 0.6em;
-        }
-
-        #main_content_wrap {
-            :is(p, blockquote, div.highlighter-rouge, div.highlight, .headlinebar, h1, h2, h3, h4, h5, h6) + table,
-            :is(p, blockquote, div.highlighter-rouge, div.highlight, .headlinebar, h1, h2, h3, h4, h5, h6) + :is(.monospace_table, .center_aligned_header_table) + table {
-                margin-top: 1rem;
-            }
         }
 
         .limit-width {
@@ -132,15 +88,12 @@ body.documentation {
             img {
                 width: 100%;
                 height: auto;
-                margin: 20px 0;
             }
 
             table {
                 img {
                     width: auto;
                     height: auto;
-                    margin: 0;
-                    margin-bottom: -4px;
                 }
             }
 
@@ -162,7 +115,7 @@ body.documentation {
     .wrap a {
         color: var(--main-text-primary-color, #0D0D0D);
         text-decoration: underline;
-        text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+        text-decoration-color: var(--main-text-tertiary-color, #666666);
         text-decoration-thickness: 1px;
         text-underline-offset: 0.16em;
         transition: color .3s, text-decoration-color .3s;
@@ -171,6 +124,15 @@ body.documentation {
             color: var(--main-link-hover-color, #998B00);
             text-decoration-color: var(--main-link-hover-color, #998B00);
             text-decoration-thickness: 1px;
+        }
+    }
+
+    .wrap a.download-btn {
+        text-decoration: none;
+        transition: border-color .2s;
+
+        &:hover {
+            color: var(--main-text-primary-color, #0D0D0D);
         }
     }
 
@@ -235,53 +197,7 @@ body.documentation {
 
         }
         
-        // Lists
-        dl,
-        ol,
-        ul {
-            margin-bottom: 1.3em;
-        }
-
-        li {
-            line-height: 1.65;
-            font-weight: 400;
-        }
-        
-        ol {
-            list-style-position: inside;
-            list-style: decimal;
-            padding-left: 20px;
-            font-size: var(--type-body-docs, 15px);
-        }
-        
-        dl {
-            dt {
-                font-weight: bold;
-            }
-        
-            dd,
-            p {
-                padding-left: 20px;
-                font-style: italic;
-            }
-        }
-        
-        hr {
-            margin: 20px 0 10px 0;
-            border: 0.5px solid var(--border-color);
-        }
-        
-        ul {
-            list-style-position: outside;
-            list-style-type: '\2022 \00a0\00a0';
-            padding: 0 0 0 20px;
-            font-size: var(--type-body-docs, 15px);
-            
-            ul {
-                padding-left: 20px;
-                margin: 0;
-            }
-        }
+        @include content-blocks;
 
         table.bench {
             a {
@@ -352,7 +268,7 @@ body.layout_default.blog_typography {
         }
 
         >tbody>tr:hover {
-            background: var(--element-background-color);
+            background: var(--interactive-table-row-hover);
         }
 
         a {
@@ -396,6 +312,10 @@ body.layout_default.blog_typography {
 
         thead th {
             text-align: left !important;
+        }
+
+        :not(pre) > code {
+            font-size: var(--type-code-small, 12px);
         }
     }
 
@@ -494,7 +414,7 @@ body.layout_default.blog_typography {
                 position: sticky;
                 top: calc(69px + var(--docbanner-height, 0px));
                 z-index: 10;
-                background: var(--main-body-background-color, #FAFAFA);
+                background: var(--main-body-background-color, #FCFCFC);
                 box-shadow: inset 0 -1px 0 var(--border-color);           }
         }
     }
@@ -563,7 +483,7 @@ body.layout_default.blog_typography {
             display: block;
             padding: 8px 16px;
             text-transform: uppercase;
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
             background: var(--doc-codebox-background-color-secondary, #EDEDED);
             border-bottom: 1px solid var(--border-color);
         }
@@ -639,13 +559,13 @@ body.layout_default.blog_typography {
     details{
         margin-top: 1em;
         summary{
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
             display: inline;
             gap: 5px;
             align-items: center;
             cursor: pointer;
             text-decoration: underline;
-            text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+            text-decoration-color: var(--main-text-tertiary-color, #666666);
             text-decoration-thickness: 1px;
             text-underline-offset: 0.16em;
             transition: color .3s, text-decoration-color .3s, padding .3s;
@@ -653,7 +573,7 @@ body.layout_default.blog_typography {
             span,
             a{
                 color: inherit;
-                text-decoration-color: var(--main-text-tertiary-color, #B2B2B2) !important;
+                text-decoration-color: var(--main-text-tertiary-color, #666666) !important;
                 text-decoration-thickness: 1px !important;
                 text-underline-offset: 0.16em;
             }
@@ -673,7 +593,7 @@ body.layout_default.blog_typography {
                 mask-size: contain;
                 mask-position: center center;
                 mask-repeat: no-repeat;
-                background-color: var(--main-text-secondary-color, #666);
+                background-color: var(--main-text-secondary-color, #333333);
                 display: inline-block;
                 content: "";
                 width: 14px;
