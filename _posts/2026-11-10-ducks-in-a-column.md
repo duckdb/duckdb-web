@@ -11,16 +11,15 @@ tag: using-duckdb
 
 ## Why Columns?
 
-DuckDB is fast because it keeps its ducks in a column. Instead of storing each row as one record, it stores each column on its own, so a query that touches three columns out of fifty only reads those three.
+DuckDB is fast because it keeps its ducks in ~~a row~~ a column. Instead of storing each row as one record, it stores each column on its own, so a query that touches three columns out of fifty only reads those three.
 
 That one design choice explains most of DuckDB’s tricks. Columnar storage compresses well, because a column holds values of one type that often repeat. It scans fast, because the engine processes columns in vectors of 2,048 values at a time. And it rewards you for asking only for what you need.
 
 In this post, we walk through DuckDB features that lean on that idea: lining ducks up from files, picking the right ones, counting them, letting them look at their neighbors, and keeping the pond tidy. Every example runs in the DuckDB CLI or from Python with `duckdb.sql(...)`.
 
 ```bash
-# Get a duck in under a minute
-pip install duckdb      # Python
-brew install duckdb     # CLI on macOS
+pip install duckdb                        # Python
+curl https://install.duckdb.org | bash    # CLI
 ```
 
 ## Lining Up the Ducks: Querying Files Where They Sit
@@ -40,7 +39,7 @@ GROUP BY filename;
 SELECT * FROM 's3://wetlands/2026/*.parquet';
 ```
 
-Parquet is where the column story pays off most. It is columnar on disk too, so DuckDB reads only the columns your query names. It also skips whole row groups whose min/max statistics rule them out.
+The Parquet file format also follows the principle of columnar storage. It aligns really well with DuckDB's own storage and internal representation formats, so DuckDB reads only the columns your query names. Using both the DuckDB and the Parquet format allow you to skip whole _row groups_ based in the lightweight indexes (min/max statistics).
 
 ```sql
 -- Reads two columns, skips row groups with no 2026 dates
@@ -134,14 +133,14 @@ ORDER BY ALL;
 ```sql
 SELECT
     pond,
-    count(*) FILTER (WHERE species = 'mallard')  AS mallards,
-    count(*) FILTER (WHERE species = 'teal')     AS teals,
-    count(*) FILTER (WHERE weight_g > 1200)      AS heavyweights
+    count(*) FILTER (WHERE species = 'mallard') AS mallards,
+    count(*) FILTER (WHERE species = 'teal')    AS teals,
+    count(*) FILTER (WHERE weight_g > 1200)     AS heavyweights
 FROM sightings
 GROUP BY ALL;
 ```
 
-**`arg_max`** answers “which duck had the biggest X” without a self-join.
+**`arg_max`** answers “which duck had the biggest value X” without a self-join.
 
 ```sql
 SELECT pond, arg_max(species, weight_g) AS heaviest_species, max(weight_g)
@@ -177,8 +176,8 @@ SELECT
     pond,
     seen_at,
     ducks,
-    ducks - lag(ducks) OVER w                       AS change,
-    avg(ducks) OVER (w ROWS 6 PRECEDING)            AS rolling_7
+    ducks - lag(ducks) OVER w            AS change,
+    avg(ducks) OVER (w ROWS 6 PRECEDING) AS rolling_7
 FROM daily_counts
 WINDOW w AS (PARTITION BY pond ORDER BY seen_at);
 ```
@@ -205,9 +204,9 @@ ASOF JOIN weather w
 
 ```sql
 SELECT pond,
-       list(species ORDER BY seen_at)              AS visit_order,
-       list_distinct(list(species))                AS species_seen,
-       len(list_distinct(list(species)))           AS variety
+       list(species ORDER BY seen_at)    AS visit_order,
+       list_distinct(list(species))      AS species_seen,
+       len(list_distinct(list(species))) AS variety
 FROM sightings
 GROUP BY ALL;
 ```
@@ -246,7 +245,7 @@ SELECT species, count(*) FROM 'lake/**/*.parquet' WHERE pond = 'north' GROUP BY 
 
 > Tip **Name your columns; avoid `SELECT *` in production.** Every column you leave out is a column DuckDB never decompresses. On a 60-column table, asking for 4 can cut I/O by an order of magnitude.
 
-> Tip **Hand ducks to Python without copying.** DuckDB queries pandas and Polars DataFrames and Arrow tables in place, and returns results in the same formats.
+**Hand ducks to Python without copying.** DuckDB queries pandas and Polars DataFrames and Arrow tables in place, and returns results in the same formats.
 
 ```python
 import duckdb
@@ -275,6 +274,8 @@ Every trick above comes back to one habit: touch as few columns, and as few valu
 | `ORDER BY` before `COPY` | Poor compression and unskippable row groups |
 | `EXPLAIN ANALYZE` | Guessing where the time went |
 
-Row stores line ducks up single file, one whole duck at a time. DuckDB lines them up by feature: all the bills together, all the feet together. Ask for bills, and you only wade through bills.
+Row stores such as transactional database systems line ducks up single file, one whole duck at a time.
+DuckDB lines them up by feature: all the bills together, all the feet together.
+Ask for bills, and you only wade through bills.
 
 Keep your ducks in a column, and your queries will keep up.
