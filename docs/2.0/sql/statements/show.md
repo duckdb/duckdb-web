@@ -77,3 +77,35 @@ SHOW SCHEMAS;
 | memory        | main        | true    |
 
 The `current` column indicates which schema is the default schema (set via the [`USE` statement]({% link docs/2.0/sql/statements/use.md %})).
+
+## `SHOW EXTERNAL RESOURCES` Statement
+
+> New Support for listing external resources was introduced in DuckDB 2.0.
+
+`SHOW EXTERNAL RESOURCES` lists external resources that are currently registered in the session.
+`SHOW ALL EXTERNAL RESOURCES` also discovers remote resources by calling each registered resource type's list callback (equivalent to `duckdb_external_resources(discover := true)`).
+
+```sql
+SHOW EXTERNAL RESOURCES;
+SHOW ALL EXTERNAL RESOURCES;
+```
+
+### Filtering by type
+
+Append `WITH TYPE` to restrict the listing (and, with `ALL`, discovery) to one resource type.
+This is syntactic sugar for the `type` argument of `duckdb_external_resources`, so the statement can also be used as a subquery:
+
+```sql
+SHOW EXTERNAL RESOURCES WITH TYPE 'aws:s3tables:table-bucket';
+SHOW ALL EXTERNAL RESOURCES WITH TYPE 'aws:s3tables:table-bucket';
+
+SELECT count(*)
+FROM (SHOW ALL EXTERNAL RESOURCES WITH TYPE 'aws:s3tables:table-bucket');
+```
+
+A bare identifier is accepted as the type name when the type is a plain name (no special characters).
+Quoted string literals are matched exactly.
+
+Without `ALL`, `WITH TYPE` only filters already-registered resources and does not run discovery callbacks.
+With `SHOW ALL ... WITH TYPE`, discovering an unknown type returns an error.
+
