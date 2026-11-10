@@ -150,6 +150,10 @@ The `schema` and `search_path` configuration options both control the *search pa
 
 Each entry in the search path is a schema. An entry may be qualified with a catalog (attached database) name in the form `⟨catalog⟩.⟨schema⟩` to select a schema in a specific database; an unqualified entry refers to a schema in the current catalog. This is why the descriptions mention both schemas and catalogs: the path is a list of schemas, whose entries may optionally be catalog-qualified.
 
+## Optimistic Writes
+
+`enable_optimistic_write` (default `true`) lets DuckDB spill large appends to disk before the commit finishes. Leave it enabled for normal workloads. Set it to `false` when you want bulk appends to stay in memory — for example when comparing in-memory ingest benchmarks where early disk writes would skew results.
+
 ## Asynchronous I/O Settings
 
 > New Asynchronous I/O, along with the settings that tune it, was introduced in DuckDB 2.0.
