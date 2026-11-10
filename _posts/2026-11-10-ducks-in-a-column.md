@@ -13,7 +13,7 @@ tag: using-duckdb
 
 DuckDB is fast because it keeps its ducks in ~~a row~~ a column. Instead of storing each row as one record, it stores each column on its own, so a query that touches three columns out of fifty only reads those three.
 
-That one design choice explains most of DuckDB’s tricks. Columnar storage compresses well, because a column holds values of one type that often repeat. It scans fast, because the engine processes columns in vectors of 2,048 values at a time. And it rewards you for asking only for what you need.
+That one design choice explains most of DuckDB’s tricks. Columnar storage [compresses well]({% post_url 2022-10-28-lightweight-compression %}), because a column holds values of one type that often repeat. It scans fast, because the engine processes columns in vectors of 2,048 values at a time. And it rewards you for asking only for what you need.
 
 In this post, we walk through DuckDB features that lean on that idea: lining ducks up from files, picking the right ones, counting them, letting them look at their neighbors, and keeping the pond tidy. Every example runs in the DuckDB CLI or from Python with `duckdb.sql(...)`.
 
@@ -39,7 +39,7 @@ GROUP BY filename;
 SELECT * FROM 's3://wetlands/2026/*.parquet';
 ```
 
-The Parquet file format also follows the principle of columnar storage. It aligns really well with DuckDB's own storage and internal representation formats, so DuckDB reads only the columns your query names. Using both the DuckDB and the Parquet format allow you to skip whole _row groups_ based in the lightweight indexes (min/max statistics).
+The [Parquet file format]({% link docs/2.0/data/parquet/overview.md %}) also follows the principle of columnar storage. It aligns really well with DuckDB’s own storage and internal representation formats, so DuckDB reads only the columns your query names. Using both the DuckDB and the Parquet formats allows you to skip whole _row groups_ based on the lightweight indexes ([min/max statistics]({% link docs/2.0/guides/performance/indexing.md %}#zonemaps)).
 
 ```sql
 -- Reads two columns, skips row groups with no 2026 dates
@@ -119,7 +119,7 @@ SUMMARIZE SELECT * FROM 'sightings/*.parquet';
 
 Aggregates are where a columnar engine shines: summing one column means streaming one tightly packed array. DuckDB adds syntax so the SQL stays as short as the work.
 
-**`GROUP BY ALL`** groups by every non-aggregated column in the `SELECT` clause, so you never repeat the list.
+**[`GROUP BY ALL`]({% link docs/2.0/sql/query_syntax/groupby.md %}#group-by-all)** groups by every non-aggregated column in the `SELECT` clause, so you never repeat the list.
 
 ```sql
 SELECT pond, species, count(*) AS ducks, avg(weight_g) AS avg_weight
@@ -190,7 +190,7 @@ FROM sightings
 QUALIFY row_number() OVER (PARTITION BY ring_id ORDER BY seen_at DESC) = 1;
 ```
 
-**`ASOF JOIN`** matches each row to the nearest earlier row in another table. It is the right tool when two time series never share exact timestamps, such as sightings and weather readings.
+**[`ASOF JOIN`]({% post_url 2023-09-15-asof-joins-fuzzy-temporal-lookups %})** matches each row to the nearest earlier row in another table. It is the right tool when two time series never share exact timestamps, such as sightings and weather readings.
 
 ```sql
 SELECT s.ring_id, s.seen_at, w.temp_c, w.wind_kmh
