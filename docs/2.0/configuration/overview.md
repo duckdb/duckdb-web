@@ -38,6 +38,12 @@ Set the memory limit of the system to 10 GB.
 SET memory_limit = '10GB';
 ```
 
+Or as a percentage of available system memory:
+
+```sql
+SET memory_limit = '50%';
+```
+
 Configure the system to use 1 thread.
 
 ```sql
@@ -285,7 +291,7 @@ Configuration options come with different default [scopes]({% link docs/2.0/sql/
 | `logging_storage` | Set the logging storage, options are 'memory', 'stdout', 'file', '<custom>'. | `VARCHAR` | `memory` (`shell_log_storage` in the CLI) |
 | `max_execution_time` | The maximum execution time per query in milliseconds (0 = no limit). | `BIGINT` | `0` |
 | `max_expression_depth` | The maximum expression depth limit in the parser. WARNING: increasing this setting and using very deep expressions might lead to stack overflow errors. | `UBIGINT` | `1000` |
-| `max_memory`, `memory_limit` | The maximum memory of the system (e.g., 1GB). | `VARCHAR` | 80% of RAM |
+| `max_memory`, `memory_limit` | The maximum memory of the system. Accepts absolute sizes (e.g., `1GB`) or a percentage of available system memory (e.g., `50%`). | `VARCHAR` | 80% of RAM |
 | `max_temp_directory_size` | The maximum amount of data stored inside the 'temp_directory' (when set) (e.g., 1GB). | `VARCHAR` | `90% of available disk space` |
 | `max_vacuum_tasks` | The maximum number of vacuum tasks to schedule during a checkpoint. | `UBIGINT` | `100` |
 | `merge_http_secret_into_s3_request` | Merges HTTP secret parameters into S3 requests | `BOOLEAN` | `true` |
