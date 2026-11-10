@@ -19,7 +19,7 @@ The `GEOMETRY` type was part of the [`spatial` extension]({% link docs/2.0/core_
 
 ## `GEOGRAPHY`
 
-> New The `GEOGRAPHY` type was introduced in DuckDB 2.0 (storage version v2.1.0).
+> New The `GEOGRAPHY` type was introduced in DuckDB 2.0.
 
 `GEOGRAPHY` uses the same shape model as `GEOMETRY` (points, lines, polygons, and collections), but edges are interpreted as **arcs on a sphere** rather than straight lines in planar space. Use `GEOGRAPHY` when features are far enough apart that Earth curvature matters; use `GEOMETRY` for local/planar analysis.
 
