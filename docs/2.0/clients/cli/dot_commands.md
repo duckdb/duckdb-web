@@ -51,6 +51,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.manual ⟨FUNCTION⟩`{:.language-sql .highlight}                       | Show the manual page (signatures, descriptions, and examples) for a SQL function. See the [manual section](#displaying-function-documentation)                                    |
 | `.maxbytes ⟨COUNT⟩`{:.language-sql .highlight}                        | Sets the maximum number of bytes of rows for display (`0` = all). Only for [agent mode]({% link docs/2.0/clients/cli/agent_mode.md %})                                       |
 | `.maxcellwidth ⟨COUNT⟩`{:.language-sql .highlight}                    | Sets the maximum number of characters per cell (`0` = all). Only for [agent mode]({% link docs/2.0/clients/cli/agent_mode.md %})                                             |
+| `.materialize` / `.materialize preview`{:.language-sql .highlight}    | Control whether query results are fully materialized before display. `.materialize preview` streams a fast preview (first rows + a “more rows” hint) without waiting for the full result; `.materialize` restores full materialization. Preview mode may not surface errors that only appear after the preview cutoff. |
 | `.maxrows ⟨COUNT⟩`{:.language-sql .highlight}                         | Sets the maximum number of rows for display (default: `40`, `-1` = all). For [duckbox mode]({% link docs/2.0/clients/cli/output_formats.md %}) and [agent mode]({% link docs/2.0/clients/cli/agent_mode.md %}) |
 | `.maxwidth ⟨COUNT⟩`{:.language-sql .highlight}                        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/2.0/clients/cli/output_formats.md %})                               |
 | `.mode ⟨MODE⟩ ⟨TABLE⟩`{:.language-sql .highlight}                     | Set [output mode]({% link docs/2.0/clients/cli/output_formats.md %})                                                                                                         |
@@ -100,6 +101,8 @@ The `.help` text may be filtered by passing in a text string as the first argume
   FUNCTION may be qualified: [database.][schema.]function.
 .maxbytes COUNT        Sets the maximum number of bytes of rows for display (0 = all). Only for markdown mode in -agent mode.
 .maxcellwidth COUNT    Sets the maximum number of characters per cell (0 = all). Only for markdown mode in -agent mode.
+.materialize           Fully materialize query results before display (default).
+.materialize preview   Stream a fast preview of results (first rows + more-rows hint). Errors past the preview cutoff may not be thrown.
 .maxrows COUNT         Sets the maximum number of rows for display (default: 40, -1 = all). Only for duckbox mode and for markdown mode in -agent mode.
 .maxwidth COUNT        Sets the maximum width in characters. 0 defaults to terminal width. Only for duckbox mode.
 .mode MODE ?TABLE?     Set output mode
