@@ -67,6 +67,7 @@ The functions below are difficult to categorize into specific function types and
 | [`sha256(string)`](#sha256string) | Returns a `VARCHAR` with the SHA-256 hash of the `string`. |
 | [`sleep_ms(milliseconds)`](#sleep_msmilliseconds) | Pause execution for the specified number of milliseconds. Returns `NULL`. |
 | [`stats(expression)`](#statsexpression) | Returns a `VARIANT` with statistics about the expression. Expression can be a column, constant, or SQL expression. |
+| [`last_commit(database)`](#last_commitdatabase) | Commit id of the last committed transaction that modified the given attached database, or `0` if none since attach. Read-only transactions do not advance it. |
 | [`txid_current()`](#txid_current) | Returns the current transaction's identifier, a `UBIGINT` value. It will assign a new one if the current transaction does not have one already. |
 | [`typeof(expression)`](#typeofexpression) | Returns the name of the data type of the result of the expression. |
 | [`uuid()`](#uuid) | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
@@ -462,6 +463,14 @@ The functions below are difficult to categorize into specific function types and
 | **Description** | Returns a `VARIANT` with statistics about the expression. Expression can be a column, constant, or SQL expression. |
 | **Example** | `stats(5)` |
 | **Result** | `{'approx_unique': 1, 'has_no_null': true, 'has_null': false, 'max': 5, 'min': 5}` |
+
+#### `last_commit(database)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Commit id of the last committed transaction that modified the given attached database, or `0` if none has been committed since it was attached. Unlike a row count, this also advances on updates and deletes that do not change the row count, and unlike a WAL size, it never goes backwards across a checkpoint. Read-only transactions do not advance it. |
+| **Example** | `last_commit('memory')` |
+| **Result** | `0` |
 
 #### `txid_current()`
 
