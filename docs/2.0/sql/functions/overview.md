@@ -93,3 +93,21 @@ ORDER BY function_name;
 | bit_length    | scalar        | BIGINT      | [col0]                 | [VARCHAR]                        | Number of bits in a string                                                                                                               |
 | bit_position  | scalar        | INTEGER     | [substring, bitstring] | [BIT, BIT]                       | Returns first starting index of the specified substring within bits, or zero if it is not present. The first (leftmost) bit is indexed 1 |
 | bitstring     | scalar        | BIT         | [bitstring, length]    | [VARCHAR, INTEGER]               | Pads the bitstring until the specified length                                                                                            |
+
+## Alternative Function Spellings
+
+DuckDB accepts several alternative function names used in other SQL dialects when they mean the same thing as an existing DuckDB function. Examples include:
+
+| Alias | Equivalent |
+|---|---|
+| `approx_distinct` | [`approx_count_distinct`]({% link docs/2.0/sql/functions/aggregates.md %}) |
+| `approx_percentile` | [`approx_quantile`]({% link docs/2.0/sql/functions/aggregates.md %}) |
+| `regexp_like` | [`regexp_matches`]({% link docs/2.0/sql/functions/text.md %}) |
+| `regexp_substr` | [`regexp_extract`]({% link docs/2.0/sql/functions/text.md %}) (with additional optional arguments in some overloads) |
+| `nvl` | [`coalesce`]({% link docs/2.0/sql/functions/utility.md %}) |
+| `sysdate` | [`current_timestamp`]({% link docs/2.0/sql/functions/timestamp.md %}) |
+| `charindex` | [`instr`]({% link docs/2.0/sql/functions/text.md %}) / [`strpos`]({% link docs/2.0/sql/functions/text.md %}) |
+| `dateadd` | [`date_add`]({% link docs/2.0/sql/functions/date.md %}) |
+
+Look-alike names whose common meaning differs from DuckDB's similarly named function are intentionally **not** added (for example `collect_list` vs `list`, or `day_of_week` vs `dayofweek`).
+

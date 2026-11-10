@@ -36,7 +36,7 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/2.0/sq
 
 | Name                                                                                | Description                                                                                                                                                                                                                                                 |
 | :---------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`date_add(date, interval)`](#date_adddate-interval)                                | Add the interval to the date and return a `DATETIME` value.                                                                                                                                                                                                 |
+| [`date_add(date, interval)`](#date_adddate-interval) / [`date_add(part, n, ts)`](#date_adddate-interval) | Add an interval to a date/timestamp, or add `n` units of `part` (unit-first form).                                                                                                                                                                          |
 | [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate)           | The number of [`part`]({% link docs/2.0/sql/functions/datepart.md %}) boundaries between `startdate` and `enddate`, inclusive of the larger date and exclusive of the smaller date.                                                                     |
 | [`date_part(part, date)`](#date_partpart-date)                                      | Get [subfield]({% link docs/2.0/sql/functions/datepart.md %}) (equivalent to `extract`).                                                                                                                                                                |
 | [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate)             | The signed length of the interval between `startdate` and `enddate`, truncated to whole multiples of [`part`]({% link docs/2.0/sql/functions/datepart.md %}).                                                                                           |
@@ -64,6 +64,16 @@ Dates can also be manipulated with the [timestamp functions]({% link docs/2.0/sq
 | **Description** | Add the interval to the date and return a `DATETIME` value. |
 | **Example** | `date_add(DATE '1992-09-15', INTERVAL 2 MONTH)` |
 | **Result** | `1992-11-15 00:00:00` |
+
+`date_add` also accepts a unit-first form used in other SQL dialects: `date_add(part, n, ts)`. The `part` names follow [`date_part`]({% link docs/2.0/sql/functions/datepart.md %}) (for example `'day'`, `'month'`, `'hour'`). With a `DATE` input the result is a `DATE` (sub-day units are truncated); `TIMESTAMP` / `TIMESTAMPTZ` / `TIME` keep their type. The two-argument and three-argument forms are resolved by arity.
+
+```sql
+SELECT date_add('month', 2, DATE '1992-09-15') AS d;
+```
+
+| d |
+|---|
+| 1992-11-15 |
 
 #### `date_diff(part, startdate, enddate)`
 
