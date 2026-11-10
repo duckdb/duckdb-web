@@ -1,0 +1,174 @@
+@use '../../abstracts/variables' as *;
+@use '../../abstracts/mixins' as *;
+
+/* Box: agent mode
+   The agent (left) runs the DuckDB CLI locally (right). Reuses the Quack page's
+   .codecard / .chip / .connector-row / .connector-arrow styles. */
+
+body.overview #agent-mode {
+
+	.agent-diagram {
+		display: grid;
+		grid-template-columns: 96px 90px minmax(0, 1fr);
+		grid-template-rows: auto;
+		align-items: center;
+		width: 100%;
+	}
+
+	/* ----- Agent ----- */
+	.agent-actor {
+		grid-column: 1;
+		grid-row: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+
+		img {
+			display: block;
+			width: 80px;
+			height: auto;
+		}
+	}
+
+	.agent-actor-label {
+		font-family: $fontMono;
+		font-size: 12px;
+		color: var(--quack-text-secondary);
+		white-space: nowrap;
+	}
+
+	/* ----- Connectors ----- */
+	.agent-connector {
+		display: flex;
+		justify-content: center;
+		grid-column: 2;
+
+		&.local {
+			grid-row: 1;
+		}
+	}
+
+	/* ----- Code cards ----- */
+	.agent-card {
+		grid-column: 3;
+
+		&.local {
+			grid-row: 1;
+		}
+	}
+
+	.codecard-header {
+		flex-wrap: wrap;
+		row-gap: 6px;
+		padding-right: 12px;
+	}
+
+	.chip .icon {
+		width: 14px;
+		height: 14px;
+		flex-shrink: 0;
+		color: var(--main-benefit-icon-color, #998b00);
+	}
+
+	.agent-duck {
+		display: block;
+		width: 16px;
+		height: 16px;
+		flex-shrink: 0;
+	}
+
+	.agent-badge {
+		margin-left: auto;
+		padding: 2px 8px;
+		border: 1px solid var(--interactive-installation-box-border, rgba(204, 189, 0, 0.6));
+		border-radius: var(--page-radius-pill);
+		background: var(--interactive-installation-box-background, rgba(241, 230, 94, 0.3));
+		font-family: $fontMono;
+		font-size: 11px;
+		font-weight: normal;
+		line-height: 1.4;
+		color: var(--main-text-primary-color, #0d0d0d);
+		white-space: nowrap;
+	}
+
+	.agent-protocol {
+		padding: 0 2px;
+		font-family: $fontMono;
+		font-size: 12px;
+		font-weight: normal;
+		color: var(--quack-text-secondary);
+	}
+
+	/* Compact (whitespace-free) agent mode output below the command */
+	.agent-output {
+		margin-top: 12px;
+		padding-top: 12px;
+		border-top: 1px dashed var(--border-color);
+	}
+
+	.codecard-meta .icon {
+		color: var(--main-benefit-icon-color, #998b00);
+	}
+
+	/* ----- Responsive ----- */
+	@media only screen and (max-width: 640px) {
+		.agent-diagram {
+			grid-template-columns: minmax(0, 1fr);
+			grid-template-rows: none;
+			row-gap: 0;
+		}
+
+		.agent-actor,
+		.agent-connector,
+		.agent-card {
+			grid-column: 1;
+			grid-row: auto;
+
+			&.local {
+				grid-row: auto;
+			}
+		}
+
+		.agent-actor {
+			flex-direction: row;
+			justify-content: center;
+
+			img {
+				width: 56px;
+			}
+		}
+
+		.agent-connector {
+			padding: 4px 0;
+
+			.connector-row {
+				flex-direction: row-reverse;
+				gap: 6px;
+			}
+
+			/* Rotate the horizontal double arrow to point downward */
+			.connector-arrow {
+				transform: rotate(90deg);
+				margin: 18px -18px;
+			}
+		}
+	}
+
+	@media only screen and (max-width: 480px) {
+		.codecard-body {
+			padding: 12px;
+
+			pre,
+			code,
+			figure.highlight,
+			div.highlight {
+				font-size: 11px;
+			}
+		}
+
+		.agent-badge {
+			margin-left: 0;
+		}
+	}
+}

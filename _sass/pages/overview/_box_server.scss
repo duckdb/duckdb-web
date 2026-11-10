@@ -1,0 +1,149 @@
+@use '../../abstracts/variables' as *;
+@use '../../abstracts/mixins' as *;
+
+/* Box: server
+   Compact, vertical version of the Quack “Architecture” board
+   (clients → quack: → server → read/write → storage).
+   Reuses the .architecture-board / .codecard / .chip / .arch-connector
+   styles from _quack.scss and overrides layout and sizes. */
+
+body.overview #server {
+
+	.architecture-board {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		width: 100%;
+		max-width: 640px;
+		margin: 0 auto;
+		padding: 0;
+		background: none;
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	/* _quack.scss adds a top margin to subsequent columns below 980px */
+	.arch-col {
+		gap: 0;
+		margin-top: 0;
+	}
+
+	.arch-stack {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 12px;
+	}
+
+	.codecard-header {
+		flex-wrap: wrap;
+		row-gap: 2px;
+		padding: 10px 12px;
+
+		.chip .icon {
+			width: 16px;
+			height: 16px;
+			flex-shrink: 0;
+			color: var(--main-benefit-icon-color, #998b00);
+		}
+	}
+
+	.codecard-body {
+		padding: 12px 14px;
+
+		figure.highlight + figure.highlight,
+		div.highlight + div.highlight {
+			margin-top: 8px !important;
+		}
+	}
+
+	/* Vertical connectors: rotate the double arrow by 90 degrees.
+	   The arrow box is 58×22; negative/positive margins make its layout box
+	   match the rotated (22×58) footprint. */
+	.arch-connector {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 12px;
+		min-width: 0;
+		margin: 0;
+		padding: 4px 0;
+
+		&.single {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+
+	.connector-row {
+		position: relative;
+		flex-direction: row;
+		justify-content: center;
+		gap: 0;
+	}
+
+	.connector-arrow {
+		flex-shrink: 0;
+		margin: 18px -18px;
+		transform: rotate(90deg);
+	}
+
+	.connector-label {
+		position: absolute;
+		top: 50%;
+		left: calc(50% + 16px);
+		transform: translateY(-50%);
+		white-space: nowrap;
+	}
+
+	/* Server: header only */
+	/* Narrower than the board, centered; still spans both client arrows */
+	.arch-server .codecard {
+		width: 57%;
+		margin: 0 auto;
+	}
+
+	.arch-server .codecard-header {
+		justify-content: center;
+		border-bottom: 0;
+	}
+
+	/* Storage: single DuckDB file */
+	.codecard.storage {
+		.codecard-header {
+			justify-content: space-between;
+			column-gap: 12px;
+		}
+
+	}
+
+
+	.storage-tags {
+		padding: 12px;
+
+		a {
+			text-decoration: none;
+		}
+
+		.tag {
+			font-size: var(--type-micro, 10px);
+		}
+	}
+
+	@media only screen and (max-width: 480px) {
+		.overview-box-illustration {
+			padding: 20px 16px;
+		}
+
+		.arch-stack {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		/* One quack: connector is enough once the clients are stacked */
+		.arch-connector-quack {
+			grid-template-columns: minmax(0, 1fr);
+
+			.connector-row + .connector-row {
+				display: none;
+			}
+		}
+	}
+}

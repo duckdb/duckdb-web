@@ -1,0 +1,51 @@
+<section class="overview-box" id="in-process">
+	<div class="wrap">
+		<div class="overview-box-card">
+			<div class="overview-box-text">
+				<p class="pre-title">01</p>
+				<h2>In-process database</h2>
+				<p>DuckDB is a full-fledged SQL database that runs as a library inside your application – the CLI, Python, Java, and many more.</p>
+				<p>Besides its own database file, DuckDB reads and writes CSV, Parquet, JSON, and other file formats.</p>
+				<div class="overview-box-links">
+					<a class="tag" href="{% link docs/2.0/clients/overview.md %}">Clients</a>
+					<a class="tag" href="{% link docs/2.0/clients/cli/overview.md %}">CLI</a>
+					<a class="tag" href="{% link docs/2.0/clients/python/overview.md %}">Python</a>
+					<a class="tag" href="{% link docs/2.0/clients/java/overview.md %}">Java</a>
+					<a class="tag" href="{% link docs/2.0/connect/overview.md %}">Database files</a>
+					<a class="tag" href="{% link docs/2.0/data/data_sources.md %}">Data sources</a>
+				</div>
+				<a class="overview-box-blog" href="{% post_url 2021-05-14-sql-on-pandas %}">Read the blog post<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="overview-box-illustration">
+				<div class="ip-diagram" role="img" aria-label="A host process, such as the DuckDB CLI or a Python or Java application, runs DuckDB inside it. DuckDB reads from and writes to the database file dbfile.duckdb.">
+					<div class="ip-host-frame" aria-hidden="true"></div>
+					<div class="ip-host-header" aria-hidden="true">
+						<svg class="icon"><use href="#cpu-chip-01"></use></svg>
+						<span>host process</span>
+					</div>
+					<div class="ip-host-apps" aria-hidden="true">
+						<span class="chip"><svg class="icon"><use href="#terminal"></use></svg>CLI</span>
+						<span class="chip"><svg class="brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22"><path fill="currentColor" d="M10.719.106c-.86.004-1.682.078-2.405.206-2.13.376-2.516 1.163-2.516 2.615v1.918h5.032v.64H3.91c-1.463 0-2.743.878-3.144 2.55-.462 1.917-.482 3.113 0 5.115.358 1.49 1.212 2.55 2.675 2.55h1.73v-2.298c0-1.661 1.437-3.126 3.143-3.126h5.026c1.4 0 2.516-1.152 2.516-2.557V2.927c0-1.363-1.15-2.388-2.516-2.615a15.695 15.695 0 0 0-2.62-.206ZM7.998 1.65c.52 0 .944.431.944.962a.95.95 0 0 1-.944.956.95.95 0 0 1-.945-.956c0-.53.423-.962.945-.962Z"/><path fill="currentColor" d="M16.483 5.484V7.72c0 1.732-1.47 3.19-3.144 3.19H8.313c-1.377 0-2.516 1.179-2.516 2.557v4.792c0 1.364 1.186 2.166 2.516 2.557 1.593.468 3.12.553 5.026 0 1.267-.367 2.516-1.105 2.516-2.557V16.34h-5.026v-.64h7.542c1.462 0 2.007-1.02 2.516-2.55.525-1.577.503-3.092 0-5.114-.361-1.456-1.052-2.552-2.516-2.552h-1.888ZM13.656 17.62a.95.95 0 0 1 .944.956c0 .53-.423.961-.944.961a.955.955 0 0 1-.945-.962c0-.528.425-.956.945-.956Z"/></svg>Python</span>
+						<span class="chip"><svg class="brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.931 21.931"><path fill="currentColor" d="M7.705 16.826s-.831.483.591.646c1.724.197 2.605.17 4.506-.191 0 0 .499.314 1.197.585-4.26 1.825-9.64-.106-6.294-1.041m-.52-2.383s-.932.69.492.838c1.842.189 3.296.205 5.812-.28 0 0 .348.353.896.546-5.15 1.506-10.885.12-7.2-1.104m4.388-3.82c1.05 1.209-.275 2.296-.275 2.296s2.664-1.375 1.44-3.098c-1.142-1.606-2.02-2.404 2.726-5.156 0 0-7.449 1.86-3.89 5.959z"/><path fill="currentColor" d="M17.205 18.587s.615.508-.677.9c-2.458.744-10.232.968-12.391.03-.776-.339.68-.807 1.137-.907.478-.102.75-.083.75-.083-.862-.608-5.58 1.194-2.395 1.711 8.683 1.407 15.829-.634 13.576-1.65m-9.098-6.612s-3.955.94-1.401 1.28c1.079.144 3.228.112 5.23-.056 1.637-.138 3.28-.43 3.28-.43s-.578.246-.995.53c-4.015 1.058-11.772.565-9.538-.515 1.888-.913 3.424-.809 3.424-.809M15.2 15.94c4.082-2.12 2.194-4.16.877-3.885-.322.068-.467.125-.467.125s.12-.187.35-.268c2.605-.916 4.61 2.702-.842 4.135 0 0 .063-.057.082-.107M12.738.608s2.26 2.261-2.144 5.738c-3.533 2.79-.805 4.38-.002 6.197-2.061-1.86-3.573-3.497-2.56-5.022 1.49-2.237 5.617-3.322 4.706-6.913"/><path fill="currentColor" d="M8.506 21.55c3.918.25 9.935-.14 10.076-1.994 0 0-.273.703-3.237 1.26-3.344.63-7.469.557-9.915.154 0 0 .5.414 3.076.58"/></svg>Java</span>
+						<span class="ip-more">…</span>
+					</div>
+					<div class="ip-duckdb" aria-hidden="true">
+						<svg class="ip-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38"><path fill="var(--main-highlight-yellow-background-color)" d="M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19"/><path fill="var(--main-highlight-yellow-text-color)" d="M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795M7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.534 7.875-7.875s-3.534-7.875-7.875-7.875S7.172 14.659 7.172 19"/></svg>
+						<div class="ip-duckdb-text">
+							<span class="ip-duckdb-name">DuckDB</span>
+							<span class="ip-duckdb-sub">runs as a library</span>
+						</div>
+					</div>
+					<div class="ip-connector" aria-hidden="true">
+						<span class="ip-connector-label">read/write</span>
+						<svg class="ip-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 22" fill="none"><path stroke="currentColor" d="M0 3.5h118"/><path fill="currentColor" d="M124 3.5 118 0v7z"/><path stroke="currentColor" d="M6 18.5h118"/><path fill="currentColor" d="M0 18.5 6 15v7z"/></svg>
+					</div>
+					<div class="ip-file" aria-hidden="true">
+						<img src="{{ site.baseurl }}/images/overview/dbfile.svg" alt="" width="56" height="65">
+						<span class="ip-file-name">dbfile.duckdb</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

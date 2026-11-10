@@ -1,0 +1,91 @@
+<section class="overview-box" id="lakehouse">
+	<div class="wrap">
+		<div class="overview-box-card">
+			<div class="overview-box-text">
+				<p class="pre-title">03</p>
+				<h2>Lakehouse engine</h2>
+				<p>DuckDB reads and writes lakehouse formats such as DuckLake and Iceberg, including Amazon S3 Tables. This lets multiple DuckDB instances read and write the same tables concurrently.</p>
+				<div class="overview-box-links">
+					<a class="tag" href="{% link docs/2.0/core_extensions/ducklake.md %}">DuckLake</a>
+					<a class="tag" href="{% link docs/2.0/core_extensions/iceberg/overview.md %}">Iceberg</a>
+					<a class="tag" href="{% link docs/2.0/core_extensions/iceberg/catalogs.md %}">Iceberg REST catalogs</a>
+					<a class="tag" href="{% link docs/2.0/core_extensions/iceberg/catalogs.md %}#amazon-s3-tables">Amazon S3 Tables</a>
+				</div>
+				<div class="lakehouse-blog-links">
+					<a class="overview-box-blog" href="{% post_url 2026-04-13-ducklake-10 %}">Read the DuckLake 1.0 announcement<svg class="icon"><use href="#arrow-right"></use></svg></a>
+					<a class="overview-box-blog" href="{% post_url 2025-11-28-iceberg-writes-in-duckdb %}">Read about Iceberg writes in DuckDB<svg class="icon"><use href="#arrow-right"></use></svg></a>
+				</div>
+			</div>
+			<div class="overview-box-illustration">
+				<svg class="lh-defs" aria-hidden="true" focusable="false" width="0" height="0">
+					<symbol id="lakehouse-duckdb-logo" viewBox="0 0 100 100">
+						<path class="lh-logo-circle" style="fill: var(--main-highlight-yellow-background-color, #1a1a1a)" d="M50 99C22.9 99 1 77.1 1 50S22.9 1 50 1s49 21.9 49 49-21.9 49-49 49z"/>
+						<path class="lh-logo-mark" style="fill: var(--main-highlight-yellow-text-color, #fff100)" d="M76.2 42.7h-9.6v14.5h9.6c4 0 7.3-3.3 7.3-7.3s-3.3-7.2-7.3-7.2M19.5 50c0 11.2 9.1 20.3 20.3 20.3S60.1 61.2 60.1 50 51 29.7 39.8 29.7 19.5 38.8 19.5 50"/>
+					</symbol>
+				</svg>
+
+				<div class="lh-diagram" role="img" aria-label="Two DuckDB instances read and write the same lakehouse, which consists of a catalog and object storage holding Parquet files">
+
+					<div class="codecard lh-instance lh-instance-1">
+						<div class="codecard-header">
+							<svg class="lh-logo" aria-hidden="true"><use href="#lakehouse-duckdb-logo"></use></svg>
+							<span class="chip">DuckDB</span>
+						</div>
+						<div class="codecard-body">
+{% highlight sql %}
+FROM lake.orders;
+{% endhighlight %}
+						</div>
+					</div>
+
+					<div class="codecard lh-instance lh-instance-2">
+						<div class="codecard-header">
+							<svg class="lh-logo" aria-hidden="true"><use href="#lakehouse-duckdb-logo"></use></svg>
+							<span class="chip">DuckDB</span>
+						</div>
+						<div class="codecard-body">
+{% highlight sql %}
+INSERT INTO lake.orders
+VALUES (42, 'duck');
+{% endhighlight %}
+						</div>
+					</div>
+
+					<span class="connector-arrow lh-arrow lh-arrow-1" aria-hidden="true"></span>
+					<span class="connector-arrow lh-arrow lh-arrow-2" aria-hidden="true"></span>
+
+					<div class="codecard lh-lake">
+						<div class="codecard-header">
+							<svg class="icon lh-lake-icon" aria-hidden="true"><use href="#waves"></use></svg>
+							<span class="chip">Lakehouse</span>
+						</div>
+
+						<div class="lh-part lh-catalog">
+							<img class="lh-part-image" src="{{ site.baseurl }}/images/overview/database.svg" alt="" width="40" height="47">
+							<div class="lh-part-text">
+								<span class="lh-part-title">Catalog</span>
+								<span class="lh-part-subtitle">transactions and snapshots</span>
+								<div class="lh-formats">
+									<a class="lh-format" href="{% link docs/2.0/core_extensions/ducklake.md %}">DuckLake</a>
+									<a class="lh-format" href="{% link docs/2.0/core_extensions/iceberg/catalogs.md %}#attaching-an-iceberg-rest-catalog">Iceberg REST</a>
+									<span class="lh-format">…</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="lh-tracks" aria-hidden="true"><span>tracks files</span></div>
+
+						<div class="lh-part lh-storage">
+							<img class="lh-part-image" src="{{ site.baseurl }}/images/overview/bucket.svg" alt="" width="40" height="42">
+							<div class="lh-part-text">
+								<span class="lh-part-title">Object storage</span>
+								<span class="lh-part-subtitle">S3, GCS, etc., storing Parquet files</span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
