@@ -83,6 +83,27 @@ SELECT i, CASE WHEN i = 1 THEN 10 WHEN i = 2 THEN 20 WHEN i = 3 THEN 30 END AS t
 FROM integers;
 ```
 
+> New As of DuckDB 2.0, a simple `CASE` `WHEN` clause may list several comma-separated operands. The clause matches if any operand matches (SQL standard F263). Comparison operators are also allowed on individual operands.
+
+```sql
+SELECT x,
+       CASE x WHEN 0, 1, 2 THEN 'good'
+              WHEN 3, 7, 9 THEN 'bad'
+       END AS verdict
+FROM (VALUES (1), (5), (7)) t(x);
+```
+
+| x | verdict |
+|--:|---------|
+| 1 | good    |
+| 5 | NULL    |
+| 7 | bad     |
+
+```sql
+SELECT CASE x WHEN < 1, > 8 THEN 'outside' ELSE 'inside' END
+FROM (VALUES (0), (4), (9)) t(x);
+```
+
 ## `SWITCH` Expression
 
 The `SWITCH` expression is syntactic sugar for the `CASE` expression. It takes an expression, a [`MAP`]({% link docs/2.0/sql/data_types/map.md %}) of values to results, and an optional default value.
