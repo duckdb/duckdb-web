@@ -150,6 +150,10 @@ The `schema` and `search_path` configuration options both control the *search pa
 
 Each entry in the search path is a schema. An entry may be qualified with a catalog (attached database) name in the form `⟨catalog⟩.⟨schema⟩` to select a schema in a specific database; an unqualified entry refers to a schema in the current catalog. This is why the descriptions mention both schemas and catalogs: the path is a list of schemas, whose entries may optionally be catalog-qualified.
 
+## Logging Storage
+
+Selects where DuckDB stores log records (for example `memory` so logs are queryable). The CLI default shell storage prints to the console but is not queryable — switch to `memory` before querying `duckdb_logs`.
+
 ## Asynchronous I/O Settings
 
 > New Asynchronous I/O, along with the settings that tune it, was introduced in DuckDB 2.0.
