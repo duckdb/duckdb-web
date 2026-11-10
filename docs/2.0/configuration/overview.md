@@ -325,6 +325,7 @@ Configuration options come with different default [scopes]({% link docs/2.0/sql/
 | `storage_compatibility_version` | Sets the DuckDB version for which data is serialized to the DuckDB file during checkpointing. Can differ from the version of the DuckDB instance. | `VARCHAR` | `latest` |
 | `table_function_identifier_conversion` | Configures the use of deprecated implicit conversion of unbound identifiers to strings in table function arguments. | `VARCHAR` | `DEFAULT` |
 | `temp_directory` | Set the directory to which temporary files are written. | `VARCHAR` | `⟨database_name⟩.tmp` or `.tmp` (in in-memory mode) |
+| `temp_file_io_mode` | I/O mode for temporary files: `BUFFERED_IO` (default) or `DIRECT_IO`. `DIRECT_IO` bypasses the operating system page cache for temp files. Database files use attach options instead. | `VARCHAR` | `BUFFERED_IO` |
 | `temp_file_encryption` | Encrypt all temporary files, if the database is encrypted. | `BOOLEAN` | `false` |
 | `threads`, `worker_threads` | The number of total background threads used by the system. | `BIGINT` | # CPU cores |
 | `user`, `username` | The username to use. Kept for legacy compatibility. | `VARCHAR` |  |
