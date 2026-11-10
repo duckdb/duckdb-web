@@ -93,9 +93,22 @@ SELECT TRY(a::INTEGER) AS x FROM cte;
 | NULL |
 | 235  |
 
+## Scalar Subqueries
+
+`TRY` can wrap a [scalar subquery]({% link docs/2.0/sql/expressions/subqueries.md %}#scalar-subquery).
+The subquery is bound as an ordinary scalar subquery, then `TRY` is lowered onto its bound plan, so names, overloads, and aggregate ownership resolve the same way as without `TRY`.
+
+```sql
+SELECT TRY((SELECT 1 // 0));
+```
+
+```text
+NULL
+```
+
 ## Limitations
 
-`TRY` cannot be used in combination with a volatile function, an aggregate function, or a [scalar subquery]({% link docs/2.0/sql/expressions/subqueries.md %}#scalar-subquery).
+`TRY` cannot be used in combination with a volatile function or an aggregate function.
 For example:
 
 ```sql
