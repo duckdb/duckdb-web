@@ -150,6 +150,10 @@ The `schema` and `search_path` configuration options both control the *search pa
 
 Each entry in the search path is a schema. An entry may be qualified with a catalog (attached database) name in the form `⟨catalog⟩.⟨schema⟩` to select a schema in a specific database; an unqualified entry refers to a schema in the current catalog. This is why the descriptions mention both schemas and catalogs: the path is a list of schemas, whose entries may optionally be catalog-qualified.
 
+## Allocator Background Threads
+
+`allocator_background_threads` (default `false`) starts helper threads that flush and return memory from DuckDB's allocator in the background. Enable it on long-running servers where you want allocator cleanup off the query hot path; leave it off for short-lived CLI or embedded sessions.
+
 ## Asynchronous I/O Settings
 
 > New Asynchronous I/O, along with the settings that tune it, was introduced in DuckDB 2.0.
