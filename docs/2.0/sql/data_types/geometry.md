@@ -23,7 +23,7 @@ The `GEOMETRY` type was part of the [`spatial` extension]({% link docs/2.0/core_
 
 `GEOGRAPHY` uses the same shape model as `GEOMETRY` (points, lines, polygons, and collections), but edges are interpreted as **arcs on a sphere** rather than straight lines in planar space. Use `GEOGRAPHY` when features are far enough apart that Earth curvature matters; use `GEOMETRY` for local/planar analysis.
 
-Like `GEOMETRY`, most processing functions live in the [`spatial` extension]({% link docs/2.0/core_extensions/spatial/overview.md %}). Separate overloads (for example for distance or area) can specialize on `GEOGRAPHY` vs `GEOMETRY` for type-safe spherical vs planar behavior.
+Like `GEOMETRY`, most processing functions live in the [`spatial` extension]({% link docs/2.0/core_extensions/spatial/overview.md %}). Separate overloads (for example for distance or area) can specialize on `GEOGRAPHY` vs `GEOMETRY` for type-safe spherical vs. planar behavior.
 
 ## Types of Geometries
 
