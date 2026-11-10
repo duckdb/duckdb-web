@@ -398,6 +398,8 @@ The table below shows the available general aggregate functions.
 
 | **Description** | A table macro (not an aggregate function) that computes a histogram over column `col_name` of table `source`, returning the upper boundary of each bin and its count. The optional third argument, `bin_count`, sets the number of bins. The optional fourth argument, `technique`, selects the binning method and is one of `auto`, `sample`, `equi-height`, `equi-width`, or `equi-width-nice`. |
 | **Example** | `histogram_values(integers, i, 2, 'equi-width')` |
+| **Example** | `histogram_values(integers, i, bin_count := 2)` |
+| **Example** | `histogram_values(integers, i, technique := 'equi-width')` |
 
 #### `last(arg)`
 
