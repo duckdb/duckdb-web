@@ -150,6 +150,15 @@ The `schema` and `search_path` configuration options both control the *search pa
 
 Each entry in the search path is a schema. An entry may be qualified with a catalog (attached database) name in the form `⟨catalog⟩.⟨schema⟩` to select a schema in a specific database; an unqualified entry refers to a schema in the current catalog. This is why the descriptions mention both schemas and catalogs: the path is a list of schemas, whose entries may optionally be catalog-qualified.
 
+## Checkpoint and WAL Settings
+
+Automatic checkpoints are driven by WAL size (`checkpoint_threshold` / `wal_autocheckpoint`). Two related knobs change that behavior:
+
+* `auto_checkpoint_skip_wal_threshold` — when the estimated WAL write for a commit is at least this many bytes (default `100000`), DuckDB may skip appending to the WAL and only checkpoint. That shortens the WAL path for large commits but blocks concurrent commits while the checkpoint runs.
+* `checkpoint_on_detach` — overrides detach-time checkpointing for a connection: `ENABLED` requests a checkpoint (skipped if another connection still references the database), `DISABLED` never checkpoints on detach, and `DEFAULT` follows the global `checkpoint_on_shutdown` setting.
+
+See also the [`CHECKPOINT` statement]({% link docs/2.0/sql/statements/checkpoint.md %}).
+
 ## Asynchronous I/O Settings
 
 > New Asynchronous I/O, along with the settings that tune it, was introduced in DuckDB 2.0.
