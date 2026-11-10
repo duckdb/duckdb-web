@@ -3,6 +3,8 @@ layout: post
 title: "Analytical Java with DuckDB"
 authors:
   - Geertjan Wielenga
+thumb: "/images/events/thumbs/jfall-2026.svg"
+image: "/images/events/thumbs/jfall-2026.png"
 excerpt: ""
 tag: talk
 category: community

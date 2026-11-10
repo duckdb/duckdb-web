@@ -245,9 +245,11 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` if the `list` contains the `element`. |
+| **Description** | Returns `true` if the `list` contains the `element`. An empty list returns `false` for any element, including `NULL` (same as `x IN ()`). A `NULL` list still returns `NULL`. A `NULL` element in a non-empty list returns `NULL`. |
 | **Example** | `contains([1, 2, NULL], 1)` |
 | **Result** | `true` |
+| **Example 2** | `contains([], NULL)` |
+| **Result** | `false` |
 
 #### `flatten(nested_list)`
 
@@ -369,9 +371,11 @@ title: List Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns true if the list contains the element. |
+| **Description** | Returns true if the list contains the element. An empty list returns `false` for any element, including `NULL` (same as `x IN ()`). A `NULL` list still returns `NULL`. A `NULL` element in a non-empty list returns `NULL`. |
 | **Example** | `list_contains([1, 2, NULL], 1)` |
 | **Result** | `true` |
+| **Example 2** | `list_contains([], NULL)` |
+| **Result** | `false` |
 | **Aliases** | `array_contains`, `array_has`, `list_has` |
 
 #### `list_cosine_distance(list1, list2)`
