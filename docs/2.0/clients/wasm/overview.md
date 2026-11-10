@@ -100,6 +100,20 @@ See [Troubleshoot]({% link docs/2.0/clients/wasm/troubleshoot.md %}) for workaro
 
 ## Further Reading
 
+
+## Web Shell File Commands
+
+The [DuckDB Web Shell](https://shell.duckdb.org/) exposes `.files` meta-commands for the in-browser virtual filesystem:
+
+| Command | Purpose |
+|---|---|
+| `.files add ⟨name⟩` | Register a file under `⟨name⟩` (use the shell's import UI or provide the file contents as prompted). |
+| `.files download ⟨name⟩` | Download a previously registered file named `⟨name⟩`. |
+| `.files list` | List registered files. |
+
+Both `.files add` and `.files download` require the file name argument. Omitting it should report a missing-argument error. If you see a message claiming `.files add` is unsupported after a successful `.files add`, that is a shell bug — retry with an explicit name, for example `.files download s`.
+
+
 * [Instantiate]({% link docs/2.0/clients/wasm/instantiation.md %}) — the bundle-selection patterns for jsDelivr, webpack, Vite, and statically served files.
 * [Import Data]({% link docs/2.0/clients/wasm/data_ingestion.md %}) — registering files and inserting Apache Arrow, CSV, JSON, and Parquet data.
 * [Run Queries]({% link docs/2.0/clients/wasm/query.md %}) — materialized and streaming queries, prepared statements, and exporting results.
