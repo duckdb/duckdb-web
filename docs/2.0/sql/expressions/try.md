@@ -93,9 +93,25 @@ SELECT TRY(a::INTEGER) AS x FROM cte;
 | NULL |
 | 235  |
 
+### Scalar Subqueries
+
+`TRY` can wrap a [scalar subquery]({% link docs/2.0/sql/expressions/subqueries.md %}#scalar-subquery).
+If an expression inside the subquery raises an execution error, the subquery result is `NULL` as a whole:
+
+```sql
+CREATE TABLE t AS SELECT * FROM (VALUES (1), (0), (2)) s(x);
+SELECT TRY((SELECT max(1 // x) FROM t));
+```
+
+```text
+NULL
+```
+
+For aggregate projections, DuckDB also probes inputs with `has_error` so a single failing row does not silently drop from the aggregate; empty-input aggregates keep their usual results.
+
 ## Limitations
 
-`TRY` cannot be used in combination with a volatile function, an aggregate function, or a [scalar subquery]({% link docs/2.0/sql/expressions/subqueries.md %}#scalar-subquery).
+`TRY` cannot be used in combination with a volatile function or an aggregate function used *outside* a scalar subquery rewrite.
 For example:
 
 ```sql
