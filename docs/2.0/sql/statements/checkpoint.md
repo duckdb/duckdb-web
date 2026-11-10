@@ -52,7 +52,7 @@ Starting with v1.4.0, in-memory tables support checkpointing. This has two key b
 
 <div id="rrdiagram1"></div>
 
-Checkpoint operations happen automatically based on the WAL size (see [Configuration]({% link docs/2.0/configuration/overview.md %})). This
+Checkpoint operations happen automatically based on the WAL size (see [Configuration]({% link docs/2.0/configuration/overview.md %}#checkpoint-and-wal-settings) for `checkpoint_threshold`, `auto_checkpoint_skip_wal_threshold`, and `checkpoint_on_detach`). This
 statement is for manual checkpoint actions.
 
 ## Behavior
