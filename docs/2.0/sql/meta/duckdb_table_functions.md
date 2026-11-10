@@ -273,6 +273,17 @@ The `duckdb_keywords()` function provides metadata about DuckDB's keywords and r
 | `keyword_name` | The keyword. | `VARCHAR` |
 | `keyword_category` | The category of the keyword: `reserved` (cannot be used as an identifier without quoting), `unreserved` (can be used as an identifier), `column_name` (usable as a column name but not as a type or function name), or `type_function` (usable as a type or function name but not as a column name). See [Keywords and Identifiers]({% link docs/2.0/sql/dialect/keywords_and_identifiers.md %}). | `VARCHAR` |
 
+
+## `duckdb_live_query_metrics`
+
+The `duckdb_live_query_metrics()` function returns live (and most-recent) query metrics for every connection.
+See [Live Query Metrics]({% link docs/2.0/dev/metrics.md %}#live-query-metrics) for details.
+
+| Column | Description | Type |
+|:--|:-----|:-|
+| `connection_id` | Connection identifier | `UBIGINT` |
+| `metric_name` | Metric name (e.g. `io.total_bytes_read`) | `VARCHAR` |
+| `metric_value` | Metric value | `VARIANT` |
 ## `duckdb_log_contexts`
 
 The `duckdb_log_contexts()` function provides information on the contexts of DuckDB log entries.
