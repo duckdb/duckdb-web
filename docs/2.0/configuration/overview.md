@@ -256,7 +256,7 @@ Configuration options come with different default [scopes]({% link docs/2.0/sql/
 | `fsync_mode` | How to synchronize database file changes to stable storage (`STANDARD`, NONE or FULL). NONE may cause database corruption after an operating system or hardware crash. FULL uses fullfsync on macOS. | `VARCHAR` | `STANDARD` |
 | `geometry_minimum_shredding_size` | Minimum size of a row group to enable GEOMETRY shredding. Set to -1 to disable shredding entirely. Defaults to 1/4th of a row group. | `BIGINT` | `30000` |
 | `home_directory` | Sets the home directory of the database instance. | `VARCHAR` |  |
-| `http_client_pool_capacity` | HTTP client pool capacity derived from CPU and async thread counts unless explicitly set | `BIGINT` | Derived automatically (max. 256) |
+| `http_client_pool_capacity` | HTTP client pool capacity. When unset, derived from CPU and `async_threads` (respecting the OS file-descriptor budget, max 256) and resized when `async_threads` changes. Set a positive integer to pin the pool; `RESET http_client_pool_capacity` restores automatic sizing. See the [I/O page]({% link docs/2.0/data/io.md %}). | `BIGINT` | Derived automatically (max. 256) |
 | `http_keep_alive` | Keep alive connections. Setting this to false can help when running into connection failures | `BOOLEAN` | `true` |
 | `http_proxy_password` | The password for the HTTP proxy. | `VARCHAR` |  |
 | `http_proxy_username` | The username for the HTTP proxy. | `VARCHAR` |  |
