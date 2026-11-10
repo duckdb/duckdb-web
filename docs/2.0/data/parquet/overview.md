@@ -251,6 +251,8 @@ DuckDB supports projection pushdown into the Parquet file itself. That is to say
 
 DuckDB also supports filter pushdown into the Parquet reader. When you apply a filter to a column that is scanned from a Parquet file, the filter will be pushed down into the scan, and can even be used to skip parts of the file using the built-in zonemaps. Note that this will depend on whether or not your Parquet file contains zonemaps.
 
+> New As of DuckDB 2.0, DuckDB reads and writes the Parquet [page index](https://parquet.apache.org/docs/file-format/pageindex/) (`ColumnIndex` and `OffsetIndex` per column chunk). On read, matching filters can skip data pages that cannot contain qualifying rows—important for files from writers such as Spark / parquet-mr that omit page-header statistics. On write, DuckDB emits the page index so other engines can prune pages the same way.
+
 Filter and projection pushdown provide significant performance benefits. See [our blog post “Querying Parquet with Precision Using DuckDB”]({% post_url 2021-06-25-querying-parquet %}) for more information.
 
 ## Inserts and Views
