@@ -405,3 +405,12 @@ For the time being, DuckDB and [core extensions]({% link docs/2.0/core_extension
 These were a few highlights, but there are many more features and improvements in this release. There have been almost 20,000 commits by many contributors since DuckDB 1.5, shipping smaller features as well as performance and usability improvements. The full [release notes can be found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.0).
 
 We would like to thank our community for the detailed issue reports and feedback that have driven this release, and our special thanks go to our contributors!
+
+We are also grateful to the following people, whose reports helped us make DuckDB more robust when reading malformed or corrupted files:
+
+* [@GameZoneHacker](https://github.com/GameZoneHacker) for suggesting additional checks on exception counts, exception positions, and bit widths in ALP decompression.
+* [@iaohkut](https://github.com/iaohkut) for suggesting checks on metadata offsets in ALP decompression and on bounds in fixed-size column scans.
+* [@TristanInSec](https://github.com/TristanInSec) for suggesting bounds checks in bitpacking, ALP, Chimp, and Patas decompression.
+* [@yonatanasd232132](https://github.com/yonatanasd232132) for suggesting checks on database block allocation sizes.
+* [@aramosf](https://github.com/aramosf) for reporting an edge case in Parquet `DELTA` decoding.
+* [@zenniskayy2k4](https://github.com/zenniskayy2k4) for reporting an edge case in Parquet `DELTA_BYTE_ARRAY` and `DELTA_LENGTH_BYTE_ARRAY` decoding.
