@@ -39,6 +39,8 @@ Multiple `LIST`-typed values may be unnested within the same `SELECT`-clause, so
 Each result becomes a column of the output table, aligning their values by ordinal position, and backfilling columns with `NULL`-values when a particular result has a smaller number of elements than any of the other results.
 In a final step, the columns of the input row are added to this result. In other words, the repeating group is created only once, and for all `unnest()` results, rather than again for each individual `unnest()` result.
 
+When one of the calls uses [recursive unnesting](#recursive-unnesting) (`recursive := true` or `max_depth > 1`) alongside another `unnest()` in the same `SELECT` list, prefer expanding the recursive list in a subquery (or CTE) first, then unnest sibling lists in an outer query. Mixing recursive and non-recursive `unnest()` calls in one select list can produce surprising row counts because the recursive expansion changes how ordinal positions line up.
+
 #### Getting the Element Index
 
 Unnesting a value of the `LIST`-type yields only the element values. To also keep track of their indices (the subscripts), you can use the built-in macro [`generate_subscripts()`]({% link docs/2.0/sql/functions/list.md %}#generate_subscriptsarr-dim).
