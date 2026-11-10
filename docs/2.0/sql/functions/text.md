@@ -62,7 +62,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`like_escape(string, like_specifier, escape_character)`](#like_escapestring-like_specifier-escape_character) | Returns `true` if the `string` matches the `like_specifier` (see [Pattern Matching]({% link docs/2.0/sql/functions/pattern_matching.md %})) using case-sensitive matching. `escape_character` is used to search for wildcard characters in the `string`. |
 | [`lower(string)`](#lowerstring) | Converts `string` to lower case. |
 | [`lpad(string, count, character)`](#lpadstring-count-character) | Pads the `string` with the `character` on the left until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
-| [`ltrim(string[, characters])`](#ltrimstring-characters) | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. |
+| [`ltrim(string[, characters])`](#ltrimstring-characters) | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to Unicode space separators (category Zs), such as regular space and NBSP — not tabs or newlines. |
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
 | [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `UHUGEINT`. |
 | [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
@@ -96,7 +96,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`right(string, count)`](#rightstring-count) | Extract the right-most `count` characters. |
 | [`right_grapheme(string, count)`](#right_graphemestring-count) | Extracts the right-most `count` grapheme clusters. |
 | [`rpad(string, count, character)`](#rpadstring-count-character) | Pads the `string` with the `character` on the right until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
-| [`rtrim(string[, characters])`](#rtrimstring-characters) | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. |
+| [`rtrim(string[, characters])`](#rtrimstring-characters) | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to Unicode space separators (category Zs), such as regular space and NBSP — not tabs or newlines. |
 | [`sha1(value)`](#sha1value) | Returns a `VARCHAR` with the SHA-1 hash of the `value`. |
 | [`sha256(value)`](#sha256value) | Returns a `VARCHAR` with the SHA-256 hash of the `value`. |
 | [`split(string, separator)`](#string_splitstring-separator) | Alias for `string_split`. |
@@ -119,7 +119,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`to_binary(string)`](#binstring) | Alias for `bin`. |
 | [`to_hex(string)`](#hexstring) | Alias for `hex`. |
 | [`translate(string, from, to)`](#translatestring-from-to) | Replaces each character in `string` that matches a character in the `from` set with the corresponding character in the `to` set. If `from` is longer than `to`, occurrences of the extra characters in `from` are deleted. |
-| [`trim(string[, characters])`](#trimstring-characters) | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to `space`. |
+| [`trim(string[, characters])`](#trimstring-characters) | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to Unicode space separators (category Zs), such as regular space and NBSP — not tabs or newlines. |
 | [`ucase(string)`](#upperstring) | Alias for `upper`. |
 | [`unbin(value)`](#unbinvalue) | Converts a `value` from binary representation to a blob. |
 | [`unhex(value)`](#unhexvalue) | Converts a `value` from hexadecimal representation to a blob. |
@@ -414,7 +414,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. |
+| **Description** | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to Unicode space separators (category Zs), such as regular space and NBSP — not tabs or newlines. |
 | **Example 1** | <code class="language-plaintext highlighter-rouge">ltrim('&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;&nbsp;')</code> |
 | **Result** | <code class="language-plaintext highlighter-rouge">test&nbsp;&nbsp;</code> |
 | **Example 2** | `ltrim('>>>>test<<', '><')` |
@@ -665,7 +665,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. |
+| **Description** | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to Unicode space separators (category Zs), such as regular space and NBSP — not tabs or newlines. |
 | **Example 1** | <code class="language-plaintext highlighter-rouge">rtrim('&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;&nbsp;')</code> |
 | **Result** | <code class="language-plaintext highlighter-rouge">&nbsp;&nbsp;&nbsp;&nbsp;test</code> |
 | **Example 2** | `rtrim('>>>>test<<', '><')` |
@@ -797,7 +797,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to `space`. |
+| **Description** | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to Unicode space separators (category Zs), such as regular space and NBSP — not tabs or newlines. |
 | **Example 1** | <code class="language-plaintext highlighter-rouge">trim('&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;&nbsp;')</code> |
 | **Result** | `test` |
 | **Example 2** | `trim('>>>>test<<', '><')` |
