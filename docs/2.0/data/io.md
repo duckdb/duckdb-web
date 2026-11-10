@@ -74,6 +74,13 @@ SET http_retry_wait_ms = 50;
 SET http_retry_backoff = 2;
 ```
 
+When many requests share a host and throttling empties the per-host retry quota, set `http_retry_quota_throttled = false` so 429/503 retries can continue, and optionally raise `http_retry_throttled_wait_ms` so throttled backoff starts from a larger floor (for example `1000`):
+
+```sql
+SET http_retry_quota_throttled = false;
+SET http_retry_throttled_wait_ms = 1000;
+```
+
 As the row group is the unit of parallelism for Parquet scans, asynchronous I/O works best if Parquet files have at least as many row groups as the number of threads. Files with only a few very large row groups cannot keep enough requests in flight to saturate the network.
 
 > New As of DuckDB 2.0, the size of the HTTP client pool can be tuned with the `http_client_pool_capacity` setting. By default the capacity is derived automatically from the number of CPU threads and asynchronous threads, bounded by the operating system file-descriptor limit, and capped at 256. Resizing `async_threads` also resizes the automatic pool so that it tracks the asynchronous pool. To pin the pool to a fixed size, set a positive integer; use `RESET http_client_pool_capacity` to return to the automatic value.

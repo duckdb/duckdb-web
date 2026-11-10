@@ -264,6 +264,8 @@ Configuration options come with different default [scopes]({% link docs/2.0/sql/
 | `http_retries` | HTTP retries on I/O error | `UBIGINT` | `3` |
 | `http_retry_backoff` | Backoff factor for exponentially increasing retry wait time | `FLOAT` | `4.0` |
 | `http_retry_wait_ms` | Time between retries | `UBIGINT` | `100` |
+| `http_retry_quota_throttled` | When `true` (default), an empty per-host HTTP retry quota refuses further retries, including for throttled responses (HTTP 429/503). Set to `false` so throttled retries may continue when the quota is empty (they still consume any remaining tokens; server-error and connection retries still require quota). | `BOOLEAN` | `true` |
+| `http_retry_throttled_wait_ms` | Minimum base wait in milliseconds between throttled HTTP retries. When `0` (default), throttled retries use `http_retry_wait_ms`. Set a larger value (e.g. `1000`) so throttled backoff starts from that floor. | `UBIGINT` | `0` |
 | `http_timeout` | HTTP timeout read/write/connection/retry (in seconds) | `UBIGINT` | `30` |
 | `httpfs_client_implementation` | Select which HTTP client implementation is used | `VARCHAR` | `default` |
 | `httpfs_connection_caching` | Enable connection caching for HTTP requests | `BOOLEAN` | `true` |
