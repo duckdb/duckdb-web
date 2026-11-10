@@ -155,6 +155,12 @@ header .headerline {
 				
 				.hasSub {
 					cursor: pointer;
+
+					&:focus-visible {
+						outline: 2px solid var(--main-link-hover-color, #5647B8);
+						outline-offset: 4px;
+						border-radius: 2px;
+					}
 					
 					.chevron-down {
 						width: 16px;
@@ -192,10 +198,20 @@ header .headerline {
 					align-items: center;
 					cursor: pointer;
 					display: none;
+					background: none;
+					border: none;
+					padding: 0;
+					color: inherit;
 					
 					&:hover {
 						color: var(--main-link-hover, #665d00);
-					} 
+					}
+
+					&:focus-visible {
+						outline: 2px solid var(--main-link-hover-color, #5647B8);
+						outline-offset: 4px;
+						border-radius: 2px;
+					}
 					
 					svg.icon{
 						width: 16px;
@@ -467,4 +483,12 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 .hamburger.is-active .hamburger-inner:after, 
 .hamburger.is-active .hamburger-inner:before {
 	background-color: var(--main-text-primary-color, #0D0D0D);
+}
+
+
+/* Keyboard focus for top navigation links */
+header .headerline .headercontent .landingmenu nav a:focus-visible {
+	outline: 2px solid var(--main-link-hover-color, #5647B8);
+	outline-offset: 4px;
+	border-radius: 2px;
 }

@@ -1,7 +1,7 @@
 <nav>
-	<div class="search_icon">
-		<svg class="icon"><use href="#search-md"></use></svg>
-	</div>
+	<button type="button" class="search_icon" aria-label="Open search (Ctrl+K or ⌘K)">
+		<svg class="icon" aria-hidden="true"><use href="#search-md"></use></svg>
+	</button>
 	{% assign archive_url_slug = '/docs' %}
 	{% if site.data.secondarymenu.toc2[0] %}
 		{% for item in site.data.secondarymenu.toc2 %}

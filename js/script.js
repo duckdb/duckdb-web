@@ -737,6 +737,19 @@ $('#main_content_wrap, .singleentry .content').find('a.externallink, a.downloadl
 	$('nav .search_icon').on('click', function(){
 		toggleSearch();
 	});
+	$('nav .search_icon').on('keydown', function(e){
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			toggleSearch();
+		}
+	});
+	// Top-nav dropdown folders: open/close with Enter/Space when focused
+	$('nav .hasSub').attr('tabindex', '0').on('keydown', function(e){
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			$(this).trigger('click');
+		}
+	});
 	$('.opensearch').on('click', function(){
 		toggleSearch();
 	});
