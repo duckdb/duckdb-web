@@ -18,3 +18,8 @@ TODO: announce new core extensions
 TODO: announce this
 
 ## Conclusion
+
+We are grateful to the following people, whose reports helped us make DuckDB more robust when reading malformed or corrupted data:
+
+* [@TristanInSec](https://github.com/TristanInSec) for reporting out-of-bounds reads and a string-length buffer sizing overflow in `DICT_FSST` decompression, and for reporting missing validation of Arrow string offsets.
+* [@zerovulnlabs](https://github.com/zerovulnlabs) for reporting missing page-size validation when reading uncompressed Parquet V2 pages.
