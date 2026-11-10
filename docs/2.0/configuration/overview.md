@@ -150,6 +150,10 @@ The `schema` and `search_path` configuration options both control the *search pa
 
 Each entry in the search path is a schema. An entry may be qualified with a catalog (attached database) name in the form `⟨catalog⟩.⟨schema⟩` to select a schema in a specific database; an unqualified entry refers to a schema in the current catalog. This is why the descriptions mention both schemas and catalogs: the path is a list of schemas, whose entries may optionally be catalog-qualified.
 
+## Extension Metadata Mismatch
+
+`allow_extensions_metadata_mismatch` — Allows loading extensions whose metadata is not marked compatible (default `false`). Keep the default unless you are deliberately testing mismatched extension builds.
+
 ## Asynchronous I/O Settings
 
 > New Asynchronous I/O, along with the settings that tune it, was introduced in DuckDB 2.0.
