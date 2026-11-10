@@ -230,6 +230,28 @@ FROM read_parquet('integers.parquet', schema = MAP {
 
 > The `schema` parameter cannot be combined with `union_by_name = true`.
 
+Nested Parquet columns can pass an optional `children` field on each schema entry. Use it when the remapped type is a `STRUCT`, `LIST`, or `MAP` so nested fields keep explicit names and types (and nested defaults) instead of only a top-level `type` string:
+
+```sql
+SELECT *
+FROM read_parquet(
+    'nested.parquet',
+    schema = MAP {
+        'payload': {
+            name: 'payload',
+            type: 'STRUCT(a INTEGER, b VARCHAR)',
+            default_value: NULL,
+            children: {
+                'a': {name: 'a', type: 'INTEGER', default_value: NULL},
+                'b': {name: 'b', type: 'VARCHAR', default_value: 'n/a'}
+            }
+        }
+    }
+);
+```
+
+The number and names of `children` must match the nested type. Leaf columns must not define `children`.
+
 ## The `file_row_group_number` Virtual Column
 
 > New As of DuckDB 2.0, the `file_row_group_number` virtual column exposes the Parquet row group that each row belongs to.
