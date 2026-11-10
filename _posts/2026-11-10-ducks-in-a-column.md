@@ -405,7 +405,7 @@ SELECT
     pond,
     seen_at,
     ducks,
-    ducks - lag(ducks) OVER w                       AS change,
+    ducks - lag(ducks) OVER w                      AS change,
     round(avg(ducks) OVER (w ROWS 6 PRECEDING), 2) AS rolling_7
 FROM daily_counts
 WINDOW w AS (PARTITION BY pond ORDER BY seen_at)
