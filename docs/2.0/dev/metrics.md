@@ -73,6 +73,8 @@ Metrics on the data read from and written to storage.
 |--------------------------|----------|--------|----------------------------------------------|
 | `io.total_bytes_read`    | `uint64` | bytes  | The total amount of bytes read from storage  |
 | `io.total_bytes_written` | `uint64` | bytes  | The total amount of bytes written to storage |
+| `io.total_read_operations` | `uint64` | count | The number of read operations issued to storage (one file-system read call each) |
+| `io.total_write_operations` | `uint64` | count | The number of write operations issued to storage (one file-system write call each) |
 
 ### `storage` Metrics
 
