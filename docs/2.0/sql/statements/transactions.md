@@ -64,6 +64,8 @@ DuckDB's concurrency model guarantees snapshot isolation. Transactions that viol
 
 Using [PostgreSQL's transaction isolation levels](https://www.postgresql.org/docs/current/transaction-iso.html), DuckDB guarantees *repeatable reads*.
 
+Concurrent writers that touch the same row conflict and one transaction is aborted. That includes `DELETE` vs `UPDATE` of the same row (in either order), not only `UPDATE` vs `UPDATE` or `DELETE` vs `DELETE`. Expect errors such as `Conflict on tuple deletion!` or `Conflict on update!` when a concurrent transaction already deleted or updated the row under snapshot isolation.
+
 ## Example
 
 We illustrate the use of transactions through a simple example.

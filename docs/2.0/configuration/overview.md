@@ -253,7 +253,7 @@ Configuration options come with different default [scopes]({% link docs/2.0/sql/
 | `force_compression` | Forces the usage of a specific compression method. | `VARCHAR` | `auto` |
 | `force_download_threshold` | Forces upfront download of files smaller than the given size in bytes | `UBIGINT` | `0` |
 | `force_download` | Forces upfront download of file | `BOOLEAN` | `false` |
-| `fsync_mode` | How to synchronize database file changes to stable storage (`STANDARD`, NONE or FULL). NONE may cause database corruption after an operating system or hardware crash. FULL uses fullfsync on macOS. | `VARCHAR` | `STANDARD` |
+| `fsync_mode` | How to synchronize database file changes to stable storage (`STANDARD`, `NONE`, or `FULL`). `STANDARD` keeps fsync enabled (DuckDB's default durability). `NONE` disables fsync for performance-critical workloads and may cause data loss or corruption after an OS/hardware crash. `FULL` uses fullfsync on macOS. | `VARCHAR` | `STANDARD` |
 | `geometry_minimum_shredding_size` | Minimum size of a row group to enable GEOMETRY shredding. Set to -1 to disable shredding entirely. Defaults to 1/4th of a row group. | `BIGINT` | `30000` |
 | `home_directory` | Sets the home directory of the database instance. | `VARCHAR` |  |
 | `http_client_pool_capacity` | HTTP client pool capacity derived from CPU and async thread counts unless explicitly set | `BIGINT` | Derived automatically (max. 256) |

@@ -777,19 +777,19 @@
               "path": "/docs/2.0/clients/python/relational_api"
             },
             {
-              "page": "Function API",
+              "page": "User-defined functions",
               "path": "/docs/2.0/clients/python/function"
             },
             {
-              "page": "Types API",
+              "page": "Types",
               "path": "/docs/2.0/clients/python/types"
             },
             {
-              "page": "Expression API",
+              "page": "Expressions",
               "path": "/docs/2.0/clients/python/expression"
             },
             {
-              "page": "Spark API",
+              "page": "Spark API (experimental)",
               "path": "/docs/2.0/clients/python/spark_api"
             },
             {

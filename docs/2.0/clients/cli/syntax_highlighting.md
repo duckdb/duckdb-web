@@ -35,6 +35,8 @@ Colors are specified by name. The following basic colors are supported by all te
 
 `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `brightgray`, `gray`, `brightred`, `brightgreen`, `brightyellow`, `brightblue`, `brightmagenta`, `brightcyan`, `white`
 
+> There is no `brightblack` color name. Use `gray` or `brightgray` instead. An unknown name in `~/.duckdbrc` causes the CLI to exit on startup—run `.display_colors` for the full list.
+
 In addition, 8-bit colors can be used. Run `.display_colors` to list all available color names, see [8-Bit Colors]({% link docs/2.0/clients/cli/friendly_cli.md %}#8-bit-colors).
 
 The optional intensity can be `standard`, `bold`, `underline`, or `bold_underline`.

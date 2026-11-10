@@ -73,6 +73,8 @@ Metrics on the data read from and written to storage.
 |--------------------------|----------|--------|----------------------------------------------|
 | `io.total_bytes_read`    | `uint64` | bytes  | The total amount of bytes read from storage  |
 | `io.total_bytes_written` | `uint64` | bytes  | The total amount of bytes written to storage |
+| `io.total_read_operations` | `uint64` | count | The number of read operations issued to storage (one file-system read call each) |
+| `io.total_write_operations` | `uint64` | count | The number of write operations issued to storage (one file-system write call each) |
 
 ### `storage` Metrics
 
@@ -239,3 +241,51 @@ The contents of the output file:
     }
 }
 ```
+
+## Live Query Metrics
+
+A subset of metrics is readable **while a query is still running**, without enabling profiling.
+These live metrics use the same names as the final profile: `io.total_bytes_read`, `io.total_bytes_written`, and `system.total_memory_allocated`.
+
+Use them to watch I/O progress from another connection, or to interrupt a query that has read more than a limit (similar to `max_execution_time` for wall time).
+
+### SQL: `duckdb_live_query_metrics()`
+
+`duckdb_live_query_metrics()` returns one row per connection and metric.
+For an idle connection, it shows the metrics of that connection's most recent query.
+`metric_value` is a `VARIANT` so each metric keeps its own type.
+
+```sql
+DESCRIBE SELECT * FROM duckdb_live_query_metrics();
+```
+
+```text
+┌────────────────┬─────────┐
+│  column_name   │  type   │
+├────────────────┼─────────┤
+│ connection_id  │ UBIGINT │
+│ metric_name    │ VARCHAR │
+│ metric_value   │ VARIANT │
+└────────────────┴─────────┘
+```
+
+Monitor another connection:
+
+```sql
+SELECT metric_value::UBIGINT AS bytes_read
+FROM duckdb_live_query_metrics()
+WHERE connection_id = 4 AND metric_name = 'io.total_bytes_read';
+```
+
+### C++ API
+
+`ClientContext::GetLiveQueryMetrics()` returns a snapshot keyed by metric name.
+It is safe to call from another thread while the query runs:
+
+```cpp
+auto metrics = con.context->GetLiveQueryMetrics();
+auto bytes_read = metrics["io.total_bytes_read"].GetValue<idx_t>();
+```
+
+Counters reset when the next statement starts on that connection.
+A finished, failed, or interrupted query keeps its values until then.

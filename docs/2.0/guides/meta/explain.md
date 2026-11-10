@@ -80,6 +80,20 @@ Shows both the physical and optimized plans.
 SET explain_output = 'all';
 ```
 
+## `EXPLAIN (SQL)`
+
+`EXPLAIN (SQL)` exports the optimized logical plan as executable DuckDB SQL. Unlike the default graphical/text operator plan, the result is a SQL statement you can copy, inspect, or feed into other tools without depending on DuckDB's internal plan representation.
+
+```sql
+EXPLAIN (SQL)
+SELECT region, sum(amount) AS total
+FROM (VALUES ('north', 10), ('north', 20), ('south', 5)) sales(region, amount)
+GROUP BY region
+ORDER BY total DESC;
+```
+
+The result uses the usual `explain_key` / `explain_value` columns. The SQL in `explain_value` is the rewritten plan; it is not executed by `EXPLAIN` itself.
+
 ## See Also
 
 For more information, see the [”Profiling” page]({% link docs/2.0/dev/profiling.md %}).
