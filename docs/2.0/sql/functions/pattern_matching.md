@@ -11,11 +11,12 @@ redirect_from:
 title: Pattern Matching
 ---
 
-There are four separate approaches to pattern matching provided by DuckDB:
+There are four separate approaches to **string** pattern matching provided by DuckDB:
 the traditional SQL [`LIKE` operator](#like),
 the more recent [`SIMILAR TO` operator](#similar-to) (added in SQL:1999),
 a [`GLOB` operator](#glob),
 and POSIX-style [regular expressions](#regular-expressions).
+For matching **sequences of rows**, see [`MATCH_RECOGNIZE`]({% link docs/2.0/sql/query_syntax/match_recognize.md %}).
 
 ## `LIKE`
 
