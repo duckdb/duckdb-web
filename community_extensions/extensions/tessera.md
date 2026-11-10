@@ -46,10 +46,10 @@ docs:
     https://github.com/GyuyeongKim/Tessera-public for the supported queries, the PostgreSQL, SQLite, and Spark adapters,
     and the C interface.
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 539
-extension_download_count_pretty: 539
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 544
+extension_download_count_pretty: 544
 image: '/images/community_extensions/social_preview/preview_community_extension_tessera.png'
 layout: community_extension_doc
 ---
