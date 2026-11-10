@@ -308,7 +308,6 @@ With few exceptions, the below options are applicable to all formats written wit
 | `PRESERVE_ORDER` | Whether or not to [preserve order]({% link docs/2.0/sql/dialect/order_preservation.md %}) during the copy operation. Defaults to the value of the `preserve_insertion_order` [configuration option]({% link docs/2.0/configuration/overview.md %}). | `BOOL`| (*) |
 | `RETURN_FILES` | Whether or not to include the created filepath(s) (as a `files VARCHAR[]` column) in the query result. | `BOOL` | `false` |
 | `RETURN_STATS` | Whether or not to return the files and their column statistics that were written as part of the `COPY` statement. | `BOOL`| `false` |
-| `RETURN_COLUMN_TYPES` | Whether or not to include a `columns` result column of type `STRUCT(name VARCHAR, type TYPE)[]` describing each written column's name and type (useful for formats that do not preserve DuckDB types, such as CSV). | `BOOL` | `false` |
 | `RETURN_COLUMN_TYPES` | When `true`, include a `columns` result column of type `STRUCT(name VARCHAR, type TYPE)[]` describing each written column's name and DuckDB type. Useful for formats that do not preserve full type fidelity (CSV) or that map several DuckDB types to one physical type (Parquet / Arrow). Added in DuckDB 2.0. | `BOOL` | `false` |
 | `WRITE_PARTITION_COLUMNS` | Whether or not to write partition columns into files. Only has an effect when used with `PARTITION_BY`. | `BOOL` | `false` |
 
