@@ -90,7 +90,7 @@ SHOW EXTERNAL RESOURCES;
 SHOW ALL EXTERNAL RESOURCES;
 ```
 
-### Filtering by type
+### Filtering by Type
 
 Append `WITH TYPE` to restrict the listing (and, with `ALL`, discovery) to one resource type.
 This is syntactic sugar for the `type` argument of `duckdb_external_resources`, so the statement can also be used as a subquery:
