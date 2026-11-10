@@ -297,6 +297,7 @@ Configuration options come with different default [scopes]({% link docs/2.0/sql/
 | `parquet_prefetch_column_gap` | Byte gap under which Parquet prefetch I/O ranges are coalesced (NULL lets the cost model adapt it) | `UBIGINT` | NULL |
 | `partitioned_write_flush_threshold` | The number of rows threshold after which a thread state is flushed when writing using `PARTITION_BY`. | `UBIGINT` | `524288` |
 | `partitioned_write_max_open_files` | The maximum amount of files the system can keep open before flushing to disk when writing using `PARTITION_BY`. | `UBIGINT` | `100` |
+| `parquet_can_have_nan` | Default for the Parquet reader's `can_have_nan` option when the scan does not set it explicitly. When true, float columns in files without `nan_count` are treated as possibly containing `NaN`, which disables upper-bound pruning that would otherwise drop those row groups. An explicit `can_have_nan` on `read_parquet` still wins. Autoloads the `parquet` extension. | `BOOLEAN` | `false` |
 | `password` | The password to use. Kept for legacy compatibility. | `VARCHAR` |  |
 | `perfect_ht_threshold` | Threshold in bytes for when to use a perfect hash table. | `UBIGINT` | `12` |
 | `pin_threads` | Whether to pin threads to cores. Linux only, and the default is AUTO. AUTO means the setting is on when there are more than 64 cores. | `VARCHAR` | `auto` |
