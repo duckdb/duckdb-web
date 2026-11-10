@@ -150,6 +150,14 @@ The `schema` and `search_path` configuration options both control the *search pa
 
 Each entry in the search path is a schema. An entry may be qualified with a catalog (attached database) name in the form `⟨catalog⟩.⟨schema⟩` to select a schema in a specific database; an unqualified entry refers to a schema in the current catalog. This is why the descriptions mention both schemas and catalogs: the path is a list of schemas, whose entries may optionally be catalog-qualified.
 
+## Extra HTTP Headers
+
+`extra_http_headers` adds a map of header name/value pairs to every HTTP request DuckDB makes (for example object-store or `httpfs` reads). Use it for required gateway headers; avoid putting secrets here when a [secret]({% link docs/2.0/configuration/secrets_manager.md %}) or provider credential already covers authentication.
+
+```sql
+SET extra_http_headers = map {'X-Request-Source': 'analytics'};
+```
+
 ## Asynchronous I/O Settings
 
 > New Asynchronous I/O, along with the settings that tune it, was introduced in DuckDB 2.0.
