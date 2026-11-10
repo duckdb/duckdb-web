@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckomo
   description: Query Open-Meteo OM arrays with selective reads and geographic coordinates
-  version: 0.3.5-rc.1
+  version: 0.4.0
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,14 +19,14 @@ extension:
 
 repo:
   github: chorust/duckomo
-  ref: 55d66f3fbd3199d7471b8cd569c43cc91a8cec7e
+  ref: 1bc76c3a36d26607b463909153cff9c255e19919
 
 docs:
   hello_world: |
     LOAD duckomo;
     SELECT DISTINCT function_name
     FROM duckdb_functions()
-    WHERE function_name IN ('read_om', 'read_om_raw', 'read_om_regions', 'om_grid_info')
+    WHERE function_name IN ('read_om', 'read_om_raw', 'read_om_regions', 'read_om_series', 'om_grid_info')
     ORDER BY function_name;
   extended_description: |
     DuckOMO reads Float32 arrays in Open-Meteo OM v3 files as SQL tables.
@@ -39,11 +39,11 @@ docs:
     Linux glibc x86_64/ARM64 and macOS Intel/Apple Silicon. Separate source
     compatibility checks also cover DuckDB 1.5.4, 1.5.5, and 1.5.6.
 
-    This source version is a prerelease. Async remote I/O remains experimental
-    and has not shown a consistent speedup. Experimental cross-batch prefetch
-    is disabled by default; some first local queries exceed the project's
-    performance target. Grid validation is limited to the documented objects
-    and domains; it does not establish support for every OM file or grid.
+    Async remote I/O remains experimental and has not shown a consistent
+    speedup. Experimental cross-batch prefetch is disabled by default; some
+    first local queries exceed the project's performance target. Grid
+    validation is limited to the documented objects and domains; it does not
+    establish support for every OM file or grid.
     See https://github.com/chorust/duckomo for supported inputs and examples.
 
 extension_star_count: 1
@@ -96,6 +96,7 @@ LOAD {{ page.extension.name }};
 | read_om                   | table         | NULL        | NULL    |          |
 | read_om_raw               | table         | NULL        | NULL    |          |
 | read_om_regions           | table         | NULL        | NULL    |          |
+| read_om_series            | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
