@@ -241,6 +241,19 @@ Return the files and their column statistics that were written as part of the `C
 COPY (SELECT l_orderkey, l_comment FROM lineitem) TO 'lineitem_part.parquet' (RETURN_STATS);
 ```
 
+Return the DuckDB column names and types that were written (in addition to the usual row `Count`):
+
+```sql
+COPY (
+    SELECT 1.23::DECIMAL(10, 2) AS amount,
+           '00000000-0000-0000-0000-000000000001'::UUID AS id
+) TO 'out.csv' (RETURN_COLUMN_TYPES);
+```
+
+| Count | columns |
+|------:|---------|
+| 1 | `[{'name': amount, 'type': 'DECIMAL(10,2)'}, {'name': id, 'type': UUID}]` |
+
 |       filename        | count  | file_size_bytes | footer_size_bytes |                                                                                   column_statistics                                                                                    | partition_keys |
 |-----------------------|-------:|----------------:|------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
 | lineitem_part.parquet | 600572 | 8579141         | 1445              | {'"l_comment"'={column_size_bytes=7642227, max=zzle. slyly, min=' Tiresias above the blit', null_count=0}, '"l_orderkey"'={column_size_bytes=935457, max=600000, min=1, null_count=0}} | NULL           |
@@ -295,6 +308,7 @@ With few exceptions, the below options are applicable to all formats written wit
 | `PRESERVE_ORDER` | Whether or not to [preserve order]({% link docs/2.0/sql/dialect/order_preservation.md %}) during the copy operation. Defaults to the value of the `preserve_insertion_order` [configuration option]({% link docs/2.0/configuration/overview.md %}). | `BOOL`| (*) |
 | `RETURN_FILES` | Whether or not to include the created filepath(s) (as a `files VARCHAR[]` column) in the query result. | `BOOL` | `false` |
 | `RETURN_STATS` | Whether or not to return the files and their column statistics that were written as part of the `COPY` statement. | `BOOL`| `false` |
+| `RETURN_COLUMN_TYPES` | When `true`, include a `columns` result column of type `STRUCT(name VARCHAR, type TYPE)[]` describing each written column's name and DuckDB type. Useful for formats that do not preserve full type fidelity (CSV) or that map several DuckDB types to one physical type (Parquet / Arrow). Added in DuckDB 2.0. | `BOOL` | `false` |
 | `WRITE_PARTITION_COLUMNS` | Whether or not to write partition columns into files. Only has an effect when used with `PARTITION_BY`. | `BOOL` | `false` |
 
 ### Syntax
