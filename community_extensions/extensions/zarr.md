@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: zarr
   description: Query Zarr array stores (v2 and v3) with SQL — read xarray-convention datasets as tables
-  version: 0.2.1
+  version: 0.2.2
   language: Rust
   build: cargo
   requires_toolchains: "rust;python3"
@@ -20,8 +20,8 @@ extension:
 
 repo:
   github: xqlsystems/duckdb-zarr
-  ref: 473cb3b203ff0c2f7f330bc6a4c0cbe4ed5c6474
-  variegata: 473cb3b203ff0c2f7f330bc6a4c0cbe4ed5c6474
+  ref: 78a19c11beb5aa371ba59fbac21b8c526b253ae9
+  variegata: 78a19c11beb5aa371ba59fbac21b8c526b253ae9
 
 docs:
   hello_world: |
@@ -100,8 +100,8 @@ docs:
 
 extension_star_count: 66
 extension_star_count_pretty: 66
-extension_download_count: 752
-extension_download_count_pretty: 752
+extension_download_count: 739
+extension_download_count_pretty: 739
 image: '/images/community_extensions/social_preview/preview_community_extension_zarr.png'
 layout: community_extension_doc
 ---
@@ -113,13 +113,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ✅ |
+| WebAssembly | ❌ | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

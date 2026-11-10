@@ -16,13 +16,13 @@ extension:
   requires_toolchains: rust
 repo:
   github: DataZooDE/anofox-statistics
-  ref: afc9ebca4b7c91c97df3edaed751640645e0209a
-  variegata: afc9ebca4b7c91c97df3edaed751640645e0209a
+  ref: 748a24549cf657697030d9b970ec073b42a77a5a
+  variegata: 748a24549cf657697030d9b970ec073b42a77a5a
 
 extension_star_count: 20
 extension_star_count_pretty: 20
-extension_download_count: 2683
-extension_download_count_pretty: 2.7k
+extension_download_count: 2792
+extension_download_count_pretty: 2.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_statistics.png'
 layout: community_extension_doc
 ---

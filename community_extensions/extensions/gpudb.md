@@ -12,7 +12,7 @@ excerpt: |
 extension:
   name: gpudb
   description: GPU-accelerated plain DuckDB SQL on Apple Silicon Metal and NVIDIA CUDA - GROUP BY, joins, filters and top-k run on the GPU when measured faster, with the same answers. First SQL execution engine that targets Apple Silicon GPUs.
-  version: 0.7.0
+  version: 0.7.1
   language: C++
   build: cmake
   license: Apache-2.0
@@ -23,7 +23,7 @@ extension:
 
 repo:
   github: singhpratech/duckdbgpumetaldbram
-  ref: b712f4b7624b83873ca9c221f70a4a9b5ce5f3f7  # the commit the v0.7.0 tag points at; rebuilt unchanged for DuckDB 1.5.6 (stable C API, no source change)
+  ref: 80a632e381ff155fad06916a7f328efe26bf2f0a  # the commit the v0.7.1 tag points at
 
 docs:
   hello_world: |
@@ -99,7 +99,8 @@ docs:
     make columns resident once; `gpu_sum_resident`, `gpu_groupby_sum_resident`
     (`_having`, `_topk`), `gpu_topk_resident`, `gpu_inner_join` and the exact
     `gpu_groupby_exact_*` family read them from GPU memory. `gpu_last_stats()` reports
-    which processor ran and for how long.
+    which processor ran and for how long. `SELECT * FROM gpu_functions()` lists every
+    function with its parameters, a description and an example.
 
     ### What runs on the device
 
@@ -227,8 +228,8 @@ docs:
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 830
-extension_download_count_pretty: 830
+extension_download_count: 824
+extension_download_count_pretty: 824
 image: '/images/community_extensions/social_preview/preview_community_extension_gpudb.png'
 layout: community_extension_doc
 ---
@@ -279,6 +280,7 @@ LOAD {{ page.extension.name }};
 | gpu_build_info                          | scalar        | NULL        | NULL    |          |
 | gpu_drop_column                         | scalar        | NULL        | NULL    |          |
 | gpu_drop_resident                       | scalar        | NULL        | NULL    |          |
+| gpu_functions                           | table         | NULL        | NULL    |          |
 | gpu_groupby_count_resident              | table         | NULL        | NULL    |          |
 | gpu_groupby_count_resident_having       | table         | NULL        | NULL    |          |
 | gpu_groupby_count_resident_topk         | table         | NULL        | NULL    |          |

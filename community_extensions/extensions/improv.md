@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: improv
   description: Improv's spreadsheet formula language (681 functions) and multidimensional models (categories, measures, formulas over them) on DuckDB tables
-  version: 0.13.0
+  version: 0.14.0
   language: Rust
   build: cargo
   license: MIT OR Apache-2.0
@@ -23,7 +23,7 @@ repo:
   github: gburd/improv
   # A commit SHA, filled in once that commit is qualified on every platform
   # (.github/workflows/duckdb.yml).
-  ref: 6aa70f7f388126e42cb82b8fcd93ce65da870904
+  ref: de14c773daf81080650485581d229e1f4108feb1
 docs:
   hello_world: |
     LOAD improv;
@@ -68,10 +68,10 @@ docs:
     The same engine runs Improv's desktop GUI, terminal UI, CLI and its
     PostgreSQL extension (pg_improv). Source: https://codeberg.org/gregburd/improv
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 529
-extension_download_count_pretty: 529
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 523
+extension_download_count_pretty: 523
 image: '/images/community_extensions/social_preview/preview_community_extension_improv.png'
 layout: community_extension_doc
 ---
