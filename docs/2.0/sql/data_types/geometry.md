@@ -10,11 +10,20 @@ title: Geometry Data Type
 
 | Name | Description |
 |:--|:-----|
-| `GEOMETRY` | Geospatial entity |
+| `GEOMETRY` | Geospatial entity in planar (Cartesian) space |
+| `GEOGRAPHY` | Geospatial entity on a sphere (geographic / ellipsoidal semantics) |
 
 The `GEOMETRY` data type is used to store and manipulate geometric objects, such as points, lines, and polygons.
 
 The `GEOMETRY` type was part of the [`spatial` extension]({% link docs/2.0/core_extensions/spatial/overview.md %}) but became a built-in data type in DuckDB 1.5. Most of the benefits of having `GEOMETRY` as a built-in type (e.g., storage optimizations, statistics, etc.) are therefore only available in databases using [storage version v1.5]({% link docs/2.0/internals/storage.md %}) and above. However, almost all of the associated functions for working with geometries (e.g., calculating distances, areas, intersections) are still part of `spatial`.
+
+## `GEOGRAPHY`
+
+> New The `GEOGRAPHY` type was introduced in DuckDB 2.0 (storage version v2.1.0).
+
+`GEOGRAPHY` uses the same shape model as `GEOMETRY` (points, lines, polygons, and collections), but edges are interpreted as **arcs on a sphere** rather than straight lines in planar space. Use `GEOGRAPHY` when features are far enough apart that Earth curvature matters; use `GEOMETRY` for local/planar analysis.
+
+Like `GEOMETRY`, most processing functions live in the [`spatial` extension]({% link docs/2.0/core_extensions/spatial/overview.md %}). Separate overloads (for example for distance or area) can specialize on `GEOGRAPHY` vs `GEOMETRY` for type-safe spherical vs planar behavior.
 
 ## Types of Geometries
 
