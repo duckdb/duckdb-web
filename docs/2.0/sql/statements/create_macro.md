@@ -56,6 +56,18 @@ Macros may declare parameters. The parameter declarations appear as a comma-sepa
 * A parameter that specifies a default value cannot appear before a definition of a parameter that does not have a default value. In other words, parameters without default values have to be defined “in the front”; any parameters with default values appear “at the back”.
 * Multiple parameter declarations are separated from one another with a comma.
 
+### Declaring a return type
+
+> New As of DuckDB 2.0, any scalar macro member may declare a `RETURNS` type. The declaration is enforced as an ordinary cast of the member's result: `NULL` passes through, values the type cannot represent raise a conversion error, and a wider body result is narrowed. Members without `RETURNS` keep inferred typing. Table macros reject the clause at parse time.
+
+```sql
+CREATE MACRO narrowing(x) RETURNS SMALLINT AS x + 1;
+CREATE MACRO multi(a) RETURNS BIGINT AS a, (a, b) RETURNS VARCHAR AS a || b;
+CREATE FUNCTION fn_kw(x) RETURNS INTEGER AS x + 1;
+```
+
+`duckdb_functions()` fills `return_type` for macro members that declare one, and definition rendering reproduces the clause.
+
 ### Overloading
 
 Macros support overloading:
