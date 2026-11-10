@@ -1,22 +1,24 @@
 # Contributing
 
-* [Contributing](#contributing)
-  * [Code of Conduct](#code-of-conduct)
-  * [Contributing to the DuckDB Documentation](#contributing-to-the-duckdb-documentation)
-  * [Eligibility](#eligibility)
-  * [Adding a New Page](#adding-a-new-page)
-  * [Style Guide](#style-guide)
-    * [Formatting](#formatting)
-    * [Headers](#headers)
-    * [SQL Style](#sql-style)
-    * [Python Style](#python-style)
-    * [Spelling](#spelling)
-  * [Example Code Snippets](#example-code-snippets)
-  * [Cross-References](#cross-references)
-  * [Preview, Stable, and Versioned Pages](#preview-stable-and-versioned-pages)
-  * [Generated Pages](#generated-pages)
-    * [Generated SQL Function Lists](#generated-sql-function-lists)
-  * [Notice](#notice)
+- [Contributing](#contributing)
+  - [Code of Conduct](#code-of-conduct)
+  - [Contributing to the DuckDB Documentation](#contributing-to-the-duckdb-documentation)
+  - [Eligibility](#eligibility)
+  - [Adding a New Page](#adding-a-new-page)
+  - [Blog Posts](#blog-posts)
+  - [Frontmatters for Blog / Event / Library Entries](#frontmatters-for-blog--event--library-entries)
+  - [Style Guide](#style-guide)
+    - [Formatting](#formatting)
+    - [Headers](#headers)
+    - [SQL Style](#sql-style)
+    - [Python Style](#python-style)
+    - [Spelling](#spelling)
+  - [Example Code Snippets](#example-code-snippets)
+  - [Cross-References](#cross-references)
+  - [Preview, Stable, and Versioned Pages](#preview-stable-and-versioned-pages)
+  - [Generated Pages](#generated-pages)
+    - [Generated SQL Function Lists](#generated-sql-function-lists)
+  - [Notice](#notice)
 
 ## Code of Conduct
 
@@ -53,7 +55,34 @@ Before creating a pull request, please perform the following steps:
 
 When creating a PR, please check the box to “Allow edits from maintainers”. This allows the maintainers to make small adjustments before merging a pull request.
 
-## Blog Posts, Library Entries, Events, and Everywhere Entries
+## Blog Posts
+
+The `duckdb.org` blog contains engineering insights and user stories. We only publish original, high-quality blog posts. Each post should convey a story: what problem you faced, what you tried, what you learned, and why it matters to DuckDB users. Posts should not focus on coding instructions – step-by-step tutorials are better published as [guides](#adding-a-new-page).
+
+Topics that fit the blog, along with their `tag` values:
+
+* Deep dives into how a DuckDB feature or component works internally (`deep-dive`).
+* Benchmarks with a clearly described, reproducible methodology (`benchmark`).
+* Case studies of how an organization or project uses DuckDB, including the trade-offs behind choosing it (`case-study`).
+* Overviews of DuckDB features and the workflows they enable (`using-duckdb`).
+* Introductions to DuckDB extensions (`extensions`).
+
+Topics that do not fit the blog:
+
+* Tutorials and how-to articles. Contribute these as guides instead.
+* Announcements or promotional content for third-party tools. Add these to the [Awesome DuckDB community repository](https://github.com/davidgasquez/awesome-duckdb).
+* Content that has already been published elsewhere.
+
+To submit a blog post:
+
+* Please reach out to the DuckDB team (`gabor@ducklabs.com`, `geertjan@ducklabs.com`) to discuss the idea.
+* Copy [`_posts/.template.md`](_posts/.template.md) to `_posts/⟨yyyy-mm-dd⟩-⟨short-title⟩.md`, where the date is the planned publication date. Maintainers may adjust the date before merging.
+* Fill in the front matter as described in the [next section](#frontmatters-for-blog--event--library-entries). The `excerpt` is a 1–3 sentence summary shown on the post's card and should make readers want to click.
+* Add each author to [`_data/authors.yml`](_data/authors.yml) with a `picture` pointing to a square photo (e.g., 256×256 pixels) in `images/blog/authors/`.
+* Put the post's images in a dedicated folder, `images/blog/⟨topic⟩/`, and the card thumbnail in `images/blog/thumbs/` (an SVG or PNG for `thumb` and a PNG for `image`).
+* Follow the [style guide](#style-guide) and make code examples self-contained so readers can reproduce them.
+
+## Frontmatters for Blog / Event / Library Entries
 
 Blog posts (`_posts`), library entries (`_library`), events (`_events`), and Everywhere entries (`_everywhere`) share one front matter schema, so that their cards and filters work the same on every overview page.
 Each folder contains a `.template.md` file to start from.
