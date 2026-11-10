@@ -174,7 +174,31 @@ There are a number of options exposed that can be passed to the `read_parquet` f
 | `prefetch_strategy` | Strategy for prefetching column data of row groups (applies unless prefetching is disabled with the `disable_parquet_prefetching` setting). With `auto`, DuckDB picks a strategy at runtime based on the projections and filters of the query. With `whole_group`, the entire row group is always prefetched. Added in DuckDB 2.0. | `VARCHAR` | `auto` |
 | `union_by_name` | Whether the columns of multiple schemas should be [unified by name]({% link docs/2.0/data/multiple_files/combining_schemas.md %}), rather than using the schema of the first file. | `BOOL` | `false` |
 | `schema` | Allows you to read a Parquet file as if it has the supplied schema. The `MAP` can be keyed by field-id (`INTEGER`) or by column name (`VARCHAR`). | `MAP` | `NULL` |
+| `column_statistics` | Optional MAP of quoted column paths to statistic maps (`min`, `max`, `count`, `null_count`, `distinct_count`, …) so multi-file scans can use caller-supplied stats for join ordering instead of opening every footer. Same shape as `COPY ... (RETURN_STATS)` reports. | `MAP` | `NULL` |
 | `utf8_validation` | How to handle invalid UTF-8 in string columns. With `strict`, an error is thrown. With `replace`, invalid bytes are replaced by `?`. With `ignore`, invalid bytes are removed. Added in DuckDB 2.0. | `VARCHAR` | `strict` |
+
+## Using the `column_statistics` Parameter
+
+> New The `column_statistics` option was introduced in DuckDB 2.0.
+
+Multi-file Parquet scans normally see little per-column selectivity because DuckDB will not open every footer just for stats. When you already know the combined statistics (for example from a catalog or from `COPY ... (RETURN_STATS)`), pass them with `column_statistics` so the optimizer can plan joins more accurately:
+
+```sql
+SELECT *
+FROM read_parquet(
+    ['part-*.parquet'],
+    column_statistics := MAP {
+        'id': MAP {
+            'min': '0',
+            'max': '199999',
+            'count': '200000',
+            'null_count': '0'
+        }
+    }
+);
+```
+
+Keys must be quoted column paths that exist in the scan. Statistic values that are counts must be numeric.
 
 ## Using the `schema` Parameter
 
