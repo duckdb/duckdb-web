@@ -448,6 +448,18 @@
 		margin-bottom: -4px;
 	}
 
+	.figure-title {
+		margin: 1.25rem 0 0.75rem;
+	}
+
+	.figure-title + p {
+		margin-top: 0;
+
+		> img {
+			margin-top: 0;
+		}
+	}
+
 	dl,
 	ol,
 	ul {
