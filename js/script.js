@@ -48,16 +48,23 @@ $(document).ready(function(){
 	
 	/** DARK MODE SWITCH */
 	var isDark = document.documentElement.classList.contains('darkmode');
-	$('.mode').attr('data-mode', isDark ? 'light' : 'dark');
+	var modeButtons = document.querySelectorAll('.mode');
+	modeButtons.forEach(function (button) {
+		button.setAttribute('data-mode', isDark ? 'light' : 'dark');
+	});
 
 	setTimeout(() => {
 		document.documentElement.classList.remove('disable-transitions');
 	}, 300);
 	
-	$('.mode').on('click', function() {
-		var isDark = $(this).attr('data-mode') === 'dark';
-		$('html').toggleClass('darkmode', isDark);
-		$(this).attr('data-mode', isDark ? 'light' : 'dark');
+	modeButtons.forEach(function (button) {
+		button.addEventListener('click', onModeClick);
+	});
+
+	function onModeClick() {
+		var isDark = this.getAttribute('data-mode') === 'dark';
+		document.documentElement.classList.toggle('darkmode', isDark);
+		this.setAttribute('data-mode', isDark ? 'light' : 'dark');
 		localStorage.setItem('mode', isDark ? 'dark' : 'light');
 		if (isDark) {
 			document.documentElement.style.backgroundColor = '#0d0d0d';
@@ -70,13 +77,15 @@ $(document).ready(function(){
 		setTimeout(() => {
 			document.documentElement.classList.remove('disable-transitions');
 		}, 300);
-	});
+	}
 
 	
 
 	var OSdatid = detectPlatform();
 	var OSName = OSdatid === 'macos' ? 'macOS' : OSdatid === 'windows' ? 'Windows' : OSdatid === 'linux' ? 'Linux' : 'Unknown OS';
-	$('.systemdetected').html('System detected: '+OSName);
+	document.querySelectorAll('.systemdetected').forEach(function (el) {
+		el.textContent = 'System detected: ' + OSName;
+	});
 	
 	
 	
