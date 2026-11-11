@@ -8,7 +8,7 @@ image: "/images/events/thumbs/reinvent-2026.png"
 excerpt: ""
 tag: meetup
 category: core
-location: "Las Vegas"
+location: "The Stadium at The Venetian, Las Vegas"
 ---
 
 Calling all DuckDB fans! Join us for a happy hour at [AWS re:Invent 2026](https://reinvent.awsevents.com/) to celebrate DuckDB 2.0, AWS’s acquisition of DuckLabs, and the week’s keynote launches. Meet the AWS and DuckLabs teams and fellow DuckDB users over food, drinks, and conversation before re:Play.
