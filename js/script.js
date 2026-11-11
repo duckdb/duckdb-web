@@ -291,53 +291,79 @@ $(document).ready(function(){
 
 
 	/* SIDENAVIGATION Documentation */
-	const $drillNav = $('.sidenav-drill');
-	const $navRoot = $drillNav.children('.sidenav');
+	const drillNav = document.querySelector('.sidenav-drill');
+	const navRoot = drillNav ? Array.from(drillNav.children).find(function (el) { return el.classList.contains('sidenav'); }) : null;
 	const navMotionKey = 'docs-sidebar-enter';
 
-	$drillNav.on('click', '.sidenav > .hasSub > a.nav-row', function(e) {
-		if ($navRoot.hasClass('is-drilled') || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
-		if (window.matchMedia('(max-width: 900px)').matches) {
-			e.preventDefault();
-			enterDrill($(this).parent());
-			return;
+	function setDrill(item, open) {
+		if (navRoot) navRoot.classList.add('nav-motion');
+		item.classList.toggle('is-open', open);
+		Array.from(item.children).forEach(function (child) {
+			if (child.classList.contains('nav-drill')) child.setAttribute('aria-expanded', String(open));
+		});
+		if (item.parentElement && item.parentElement.classList.contains('nav-list')) {
+			item.parentElement.classList.toggle('is-drilled', open);
 		}
-		try { sessionStorage.setItem(navMotionKey, new URL(this.href).pathname); } catch (e) {}
-	});
-
-	$navRoot.on('animationend', function(e) {
-		if (e.originalEvent.animationName !== 'docs-sidebar-enter') return;
-		$(this).removeClass('nav-motion');
-		document.documentElement.classList.remove('docs-sidebar-enter');
-	});
-
-	function setDrill($item, open) {
-		$navRoot.addClass('nav-motion');
-		$item.toggleClass('is-open', open);
-		$item.children('.nav-drill').attr('aria-expanded', open);
-		$item.parent('.nav-list').toggleClass('is-drilled', open);
 	}
 
-	function enterDrill($item) {
-		setDrill($item, true);
-		$drillNav.add($drillNav.children('.sidenav')).scrollTop(0);
-		$item.find('> .nav-list > .nav-back > button').trigger('focus');
+	function enterDrill(item) {
+		setDrill(item, true);
+		drillNav.scrollTop = 0;
+		Array.from(drillNav.children).forEach(function (child) {
+			if (child.classList.contains('sidenav')) child.scrollTop = 0;
+		});
+		const backButton = item.querySelector(':scope > .nav-list > .nav-back > button');
+		if (backButton) backButton.focus();
 	}
 
-	$drillNav.on('click', '.nav-drill', function() {
-		enterDrill($(this).parent());
-	});
+	if (drillNav) {
+		drillNav.addEventListener('click', function (e) {
+			const sectionLink = e.target.closest('a.nav-row');
+			if (sectionLink && drillNav.contains(sectionLink) && sectionLink.matches('.sidenav > .hasSub > a.nav-row')) {
+				if ((navRoot && navRoot.classList.contains('is-drilled')) || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
+				if (window.matchMedia('(max-width: 900px)').matches) {
+					e.preventDefault();
+					enterDrill(sectionLink.parentElement);
+					return;
+				}
+				try { sessionStorage.setItem(navMotionKey, new URL(sectionLink.href).pathname); } catch (err) {}
+				return;
+			}
 
-	$drillNav.on('click', '.nav-back button', function() {
-		const $item = $(this).closest('.nav-list').parent('.nav-item');
-		setDrill($item, false);
-		$item.children('.nav-row').trigger('focus');
-	});
+			const drillButton = e.target.closest('.nav-drill');
+			if (drillButton && drillNav.contains(drillButton)) {
+				enterDrill(drillButton.parentElement);
+				return;
+			}
 
-	$drillNav.on('click', '.nav-expand', function() {
-		const open = $(this).attr('aria-expanded') !== 'true';
-		$(this).attr('aria-expanded', open).parent().toggleClass('is-open', open);
-	});
+			const backButton = e.target.closest('.nav-back button');
+			if (backButton && drillNav.contains(backButton)) {
+				const list = backButton.closest('.nav-list');
+				const item = list && list.parentElement && list.parentElement.classList.contains('nav-item') ? list.parentElement : null;
+				if (!item) return;
+				setDrill(item, false);
+				Array.from(item.children).forEach(function (child) {
+					if (child.classList.contains('nav-row')) child.focus();
+				});
+				return;
+			}
+
+			const expandButton = e.target.closest('.nav-expand');
+			if (expandButton && drillNav.contains(expandButton)) {
+				const open = expandButton.getAttribute('aria-expanded') !== 'true';
+				expandButton.setAttribute('aria-expanded', String(open));
+				expandButton.parentElement.classList.toggle('is-open', open);
+			}
+		});
+	}
+
+	if (navRoot) {
+		navRoot.addEventListener('animationend', function (e) {
+			if (e.animationName !== 'docs-sidebar-enter') return;
+			navRoot.classList.remove('nav-motion');
+			document.documentElement.classList.remove('docs-sidebar-enter');
+		});
+	}
 
 	const currentNavRow = document.querySelector('.sidenav-drill [aria-current="page"]');
 	if (currentNavRow) {
@@ -412,26 +438,33 @@ $(document).ready(function(){
 
     
 	// Appending Content-List of Overview-Pages
-	function cleanNavClone($list) {
-		$list.find('.nav-back').remove();
-		$list.find('svg').remove();
-		$list.find('.nav-drill, .nav-expand').replaceWith(function() {
-			return $('<span>').text($(this).text());
+	function cleanNavClone(list) {
+		list.querySelectorAll('.nav-back, svg').forEach(function (el) { el.remove(); });
+		list.querySelectorAll('.nav-drill, .nav-expand').forEach(function (el) {
+			const span = document.createElement('span');
+			span.textContent = el.textContent;
+			el.replaceWith(span);
 		});
-		$list.removeClass('is-drilled').find('.is-open, .is-drilled').removeClass('is-open is-drilled');
-		return $list;
+		list.classList.remove('is-drilled');
+		list.querySelectorAll('.is-open, .is-drilled').forEach(function (el) { el.classList.remove('is-open', 'is-drilled'); });
+		return list;
 	}
 
-	const $currentNavLink = $('.sidenav-drill [aria-current="page"]');
-	if (window.location.href.includes("/overview") && $currentNavLink.length) {
-		const $overviewList = $currentNavLink.closest('.nav-list').clone().removeClass('sidenav');
-		$overviewList.find('[aria-current="page"]').parent().remove();
-		$('#main_content_wrap .index').append(cleanNavClone($overviewList));
+	const currentNavLink = document.querySelector('.sidenav-drill [aria-current="page"]');
+	const overviewIndex = document.querySelector('#main_content_wrap .index');
+	if (window.location.href.includes("/overview") && currentNavLink && overviewIndex) {
+		const overviewList = currentNavLink.closest('.nav-list').cloneNode(true);
+		overviewList.classList.remove('sidenav');
+		const currentInClone = overviewList.querySelector('[aria-current="page"]');
+		if (currentInClone && currentInClone.parentElement) currentInClone.parentElement.remove();
+		overviewIndex.appendChild(cleanNavClone(overviewList));
 	}
 
 	// Appending Content-List of Documentation
-	if ($('#docusitemaphere').length) {
-		$('#docusitemaphere').append(cleanNavClone($('.sidenav-drill ul.sidenav').clone()));
+	const docuSitemap = document.getElementById('docusitemaphere');
+	const sitemapSource = document.querySelector('.sidenav-drill ul.sidenav');
+	if (docuSitemap && sitemapSource) {
+		docuSitemap.appendChild(cleanNavClone(sitemapSource.cloneNode(true)));
 	}
 	
 // Add class-name to external Links
@@ -567,86 +600,104 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 });
 
 	// Documentation version and topic dropdowns share the same interaction.
-	var $docDropdowns = $('.options .version, #topic-filter');
+	var docDropdowns = Array.from(document.querySelectorAll('.options .version, #topic-filter'));
+	function setDropdownOpen(dropdown, open) {
+		dropdown.classList.toggle('active', open);
+		dropdown.querySelectorAll('.versiontrigger').forEach(function (trigger) {
+			trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+		});
+	}
 	function closeVersionSelect() {
-		var $open = $docDropdowns.filter('.active');
-		if (!$open.length) return false;
-		$open.removeClass('active').find('.versiontrigger').attr('aria-expanded', 'false');
+		var open = docDropdowns.filter(function (dropdown) { return dropdown.classList.contains('active'); });
+		if (!open.length) return false;
+		open.forEach(function (dropdown) { setDropdownOpen(dropdown, false); });
 		return true;
 	}
 
-	$docDropdowns.find('.versiontrigger').on('click', function(){
-		var $version = $(this).closest('.version');
-		var open = !$version.hasClass('active');
-		closeVersionSelect();
-		$version.toggleClass('active', open);
-		$(this).attr('aria-expanded', open ? 'true' : 'false');
+	docDropdowns.forEach(function (dropdown) {
+		dropdown.querySelectorAll('.versiontrigger').forEach(function (trigger) {
+			trigger.addEventListener('click', function () {
+				var version = trigger.closest('.version');
+				if (!version) return;
+				var open = !version.classList.contains('active');
+				closeVersionSelect();
+				version.classList.toggle('active', open);
+				trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+			});
+		});
+
+		dropdown.addEventListener('keydown', function (e) {
+			if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+			e.preventDefault();
+			var links = Array.from(dropdown.querySelectorAll('.versionsidebar a'));
+			if (!links.length) return;
+			var index = links.indexOf(document.activeElement);
+			closeVersionSelect();
+			setDropdownOpen(dropdown, true);
+			index = e.key === 'ArrowDown' ? (index + 1) % links.length : (index <= 0 ? links.length - 1 : index - 1);
+			links[index].focus();
+		});
+
+		dropdown.addEventListener('focusout', function (e) {
+			if (!dropdown.contains(e.relatedTarget)) {
+				setDropdownOpen(dropdown, false);
+			}
+		});
 	});
 
-	$(document).on('click', function(e){
-		if ($(e.target).closest('.options .version, #topic-filter').length) return;
+	document.addEventListener('click', function (e) {
+		if (e.target.closest('.options .version, #topic-filter')) return;
 		closeVersionSelect();
 	});
 
-	$(document).on('keydown', function(e){
+	document.addEventListener('keydown', function (e) {
 		if (e.key !== 'Escape') return;
-		var $trigger = $docDropdowns.filter('.active').find('.versiontrigger');
-		if (closeVersionSelect()) {
-			$trigger.trigger('focus');
-		}
-	});
-
-	$docDropdowns.on('keydown', function(e) {
-		if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
-		e.preventDefault();
-		var $dropdown = $(this);
-		var $links = $dropdown.find('.versionsidebar a');
-		var index = $links.index(document.activeElement);
-		closeVersionSelect();
-		$dropdown.addClass('active').find('.versiontrigger').attr('aria-expanded', 'true');
-		index = e.key === 'ArrowDown' ? (index + 1) % $links.length : (index <= 0 ? $links.length - 1 : index - 1);
-		$links.eq(index).trigger('focus');
-	});
-
-	$docDropdowns.on('focusout', function(e) {
-		if (!this.contains(e.relatedTarget)) {
-			$(this).removeClass('active').find('.versiontrigger').attr('aria-expanded', 'false');
+		var triggers = [];
+		docDropdowns.forEach(function (dropdown) {
+			if (dropdown.classList.contains('active')) triggers = triggers.concat(Array.from(dropdown.querySelectorAll('.versiontrigger')));
+		});
+		if (closeVersionSelect() && triggers[0]) {
+			triggers[0].focus();
 		}
 	});
 
 	// COPY PAGE AS MARKDOWN
-	$('.headlinebar .copy-markdown').on('click', function(){
-		var $btn = $(this);
-		if ($btn.hasClass('copied')) return;
+	document.querySelectorAll('.headlinebar .copy-markdown').forEach(function (btn) {
+		btn.addEventListener('click', function () {
+			if (btn.classList.contains('copied')) return;
 
-		var markdownPromise = fetch($btn.attr('data-source')).then(function(response){
-			if (!response.ok) throw new Error('HTTP ' + response.status);
-			return response.text();
-		});
-
-		function markCopied() {
-			$btn.addClass('copied');
-			$btn.find('use').attr('href', '#check');
-			$btn.find('span').text('Copied');
-			setTimeout(function(){
-				$btn.removeClass('copied');
-				$btn.find('use').attr('href', '#copy-01');
-				$btn.find('span').text('Copy Markdown');
-			}, 2000);
-		}
-
-		if (navigator.clipboard && window.ClipboardItem) {
-			var item = new ClipboardItem({
-				'text/plain': markdownPromise.then(function(text){
-					return new Blob([text], { type: 'text/plain' });
-				})
+			var markdownPromise = fetch(btn.getAttribute('data-source')).then(function (response) {
+				if (!response.ok) throw new Error('HTTP ' + response.status);
+				return response.text();
 			});
-			navigator.clipboard.write([item]).then(markCopied);
-		} else if (navigator.clipboard) {
-			markdownPromise.then(function(text){
-				return navigator.clipboard.writeText(text);
-			}).then(markCopied);
-		}
+
+			function setLabel(icon, label) {
+				btn.querySelectorAll('use').forEach(function (use) { use.setAttribute('href', icon); });
+				btn.querySelectorAll('span').forEach(function (span) { span.textContent = label; });
+			}
+
+			function markCopied() {
+				btn.classList.add('copied');
+				setLabel('#check', 'Copied');
+				setTimeout(function () {
+					btn.classList.remove('copied');
+					setLabel('#copy-01', 'Copy Markdown');
+				}, 2000);
+			}
+
+			if (navigator.clipboard && window.ClipboardItem) {
+				var item = new ClipboardItem({
+					'text/plain': markdownPromise.then(function (text) {
+						return new Blob([text], { type: 'text/plain' });
+					})
+				});
+				navigator.clipboard.write([item]).then(markCopied);
+			} else if (navigator.clipboard) {
+				markdownPromise.then(function (text) {
+					return navigator.clipboard.writeText(text);
+				}).then(markCopied);
+			}
+		});
 	});
 	
 	
@@ -678,7 +729,7 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 	
 	// SEARCH 
 	var resultSelected;
-	if( OSdatid == "macos" && $('.sidenavigation').length && !$drillNav.length ){
+	if( OSdatid == "macos" && $('.sidenavigation').length && !drillNav ){
 		$('.opensearch .shortcut.win').hide();
 		$('.opensearch .shortcut.mac').show();
 	}
