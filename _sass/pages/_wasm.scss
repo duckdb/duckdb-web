@@ -12,17 +12,13 @@ body.wasm{
 	}
 
 	.selection-foldout{
-		padding: 16px;
-		background: var(--doc-codebox-background-color, #F2F2F2);
-		-webkit-transition: background-color .3s;
-		-o-transition: background-color .3s;
-		transition: background-color .3s;
-		margin-bottom: 8px;
-		border-radius: var(--page-radius-m);
-		border: 1px solid transparent;
-		-webkit-transition: border .3s;
-		-o-transition: border .3s;
-		transition: border .3s;
+		@include card-surface;
+		padding: 24px;
+		margin-bottom: 16px;
+
+		@media only screen and (max-width: 660px) {
+			padding: 16px;
+		}
 
 		.selection-head{
 			h3{
@@ -35,24 +31,15 @@ body.wasm{
 					@include label-1;
 					margin-left: 20px;
 				}
-				&::after{
-					content: " ";
-					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'%3E%3Cpath stroke='%230D0D0D' stroke-linecap='square' stroke-width='1.5' d='m18 9.5-6 6-6-6'/%3E%3C/svg%3E");
-					background-color: var(--doc-codebox-button-background-color, rgba(242, 242, 242, 0.6));
-					background-size: contain;
-					background-repeat: no-repeat;
-					width: 28px;
-					height: 28px;
-					border-radius: 50%;
+				.foldout-icon{
+					@include foldout-icon;
 					position: absolute;
-					right: 0px;
-					top: -5px;
-					-webkit-transition: -webkit-transform .3s;
-					transition: -webkit-transform .3s;
-					-o-transition: transform .3s;
-					transition: transform .3s;
-					transition: transform .3s, -webkit-transform .3s;
+					top: -6px;
+					right: 0;
 					cursor: pointer;
+				}
+				&:hover .foldout-icon{
+					border-color: var(--border-color-hover);
 				}
 			}
 
@@ -61,14 +48,8 @@ body.wasm{
 			}
 		}
 
-		&.open h3::after{
-			-webkit-transform: rotate(180deg);
-				-ms-transform: rotate(180deg);
-					transform: rotate(180deg);
-		}
-
-		&:hover{
-			border-color: var(--border-color);
+		&.open h3 .foldout-icon svg.icon{
+			transform: rotate(180deg);
 		}
 
 		h4{
@@ -83,14 +64,10 @@ body.wasm{
 
 	.selection-foldout:not(.open) .selection-content{
 		display: none;
-		max-width: calc(100% - 55px);
-		>p:first-child{
-			margin-top: 0;
-		}
 	}
 
 	.selection-head + .selection-content{
-		padding-top: 24px;
+		padding-top: 16px;
 	}
 
 	// Form styling

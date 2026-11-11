@@ -80,13 +80,13 @@
 	
 	{% include footer.html %}
 	
+	<script src="{{ '/js/helpers.js' | fingerprint }}" defer></script>
 	<script src="/js/minisearch.js" defer></script>
-	<script src="/js/search.js" defer></script>
-	<script src="/js/jquery-3.7.1.min.js" defer></script>
+	<script src="{{ '/js/search.js' | fingerprint }}" defer></script>
 	<script src="/js/isotope.pkgd.min.js" defer></script>
-	<script src="/js/noteboxes.js" defer></script>
+	<script src="{{ '/js/noteboxes.js' | fingerprint }}" defer></script>
 	<script src="{{ '/js/script.js' | fingerprint }}" defer></script>
-	<script src="/js/copy_button.js" defer></script>
+	<script src="{{ '/js/copy_button.js' | fingerprint }}" defer></script>
 	
 </body>
 </html>

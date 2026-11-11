@@ -7,7 +7,6 @@
 
 	{% include darkmode_init.html %}
 
-	<script src="/js/jquery-3.7.1.min.js"></script>
 	<link rel="stylesheet" href="{{ '/css/main.css' | fingerprint }}">
 	<link rel="stylesheet" href="{{ '/css/communityextensions.css' | fingerprint }}">
 
@@ -168,12 +167,13 @@ Page URL: <{{ site.url }}{{ page.url }}>
 		{% include icons.html %}
 	</div>
 
+	<script src="{{ '/js/helpers.js' | fingerprint }}" defer></script>
 	<script src="/js/minisearch.js" defer></script>
-	<script src="/js/search.js" defer></script>
+	<script src="{{ '/js/search.js' | fingerprint }}" defer></script>
 
-	<script src="/js/noteboxes.js" defer></script>
+	<script src="{{ '/js/noteboxes.js' | fingerprint }}" defer></script>
 	<script src="{{ '/js/script.js' | fingerprint }}" defer></script>
-	<script src="/js/copy_button.js" defer></script>
+	<script src="{{ '/js/copy_button.js' | fingerprint }}" defer></script>
 
 </body>
 </html>
