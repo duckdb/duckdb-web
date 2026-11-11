@@ -112,6 +112,23 @@ See [what's new in the 2.0 documentation]({% link docs/2.0/whats_new_in_the_docs
     </a>
 </div>
 
+## Lakehouse Formats
+
+<div class="box-link-wrapper">
+    <a class="box-link third-width" href="{% link docs/2.0/core_extensions/delta.md %}">
+        <span class="symbol"><img src="{% link images/icons/delta.svg %}"></span>
+        <span>Delta Lake</span>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/core_extensions/ducklake.md %}">
+        <span class="symbol"><img src="{% link images/icons/ducklake.svg %}"></span>
+        <span>DuckLake</span>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/core_extensions/iceberg/overview.md %}">
+        <span class="symbol"><img src="{% link images/icons/iceberg.svg %}"></span>
+        <span>Iceberg</span>
+    </a>
+</div>
+
 ## More Resources
 
 <div class="box-link-wrapper">

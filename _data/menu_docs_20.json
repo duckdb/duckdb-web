@@ -1322,7 +1322,32 @@
             },
             {
               "page": "Iceberg",
-              "path": "/docs/2.0/core_extensions/iceberg/overview"
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "path": "/docs/2.0/core_extensions/iceberg/overview"
+                },
+                {
+                  "page": "Writing to Iceberg",
+                  "path": "/docs/2.0/core_extensions/iceberg/writing_to_iceberg"
+                },
+                {
+                  "page": "Iceberg Functions",
+                  "path": "/docs/2.0/core_extensions/iceberg/iceberg_functions"
+                },
+                {
+                  "page": "Iceberg Options",
+                  "path": "/docs/2.0/core_extensions/iceberg/iceberg_options"
+                },
+                {
+                  "page": "Iceberg REST Catalogs",
+                  "path": "/docs/2.0/core_extensions/iceberg/catalogs"
+                },
+                {
+                  "page": "Troubleshooting",
+                  "path": "/docs/2.0/core_extensions/iceberg/troubleshooting"
+                }
+              ]
             },
             {
               "page": "ICU",

@@ -1,6 +1,6 @@
 .box-link .symbol {
-    @each $icon in "bicycle", "c", "cli", "cpp", "design", "download", "duckdb",
-                   "duckdb-labs", "ducklake", "github", "go", "java", "linux", "macos",
+    @each $icon in "bicycle", "c", "cli", "cpp", "delta", "design", "download", "duckdb",
+                   "duckdb-labs", "ducklake", "github", "go", "iceberg", "java", "linux", "macos",
                    "nodejs", "odbc", "pdf", "python", "quack", "r", "rust", "scrolldown",
                    "star", "train", "webassembly", "wheelchair", "windows", "yaml" {
         &:has(img[src$="/#{$icon}.svg"])::before {
