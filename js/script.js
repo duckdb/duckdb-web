@@ -44,7 +44,6 @@ $(document).ready(function(){
 		}
 	}
 	
-	var windowWidth = $( window ).width();
 	
 	
 	/** DARK MODE SWITCH */
@@ -80,22 +79,6 @@ $(document).ready(function(){
 	$('.systemdetected').html('System detected: '+OSName);
 	
 	
-	// Get URL Parameter
-	var getUrlParameter = function getUrlParameter(sParam) {
-	    var sPageURL = window.location.search.substring(1),
-	        sURLVariables = sPageURL.split('&'),
-	        sParameterName,
-	        i;
-	
-	    for (i = 0; i < sURLVariables.length; i++) {
-	        sParameterName = sURLVariables[i].split('=');
-	
-	        if (sParameterName[0] === sParam) {
-	            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-	        }
-	    }
-	return "undefined";
-	};
 	
 	
 	/** FILTER LINE  */
@@ -663,7 +646,6 @@ $('#main_content_wrap, .singleentry .content').find('a.externallink, a.downloadl
 
 	
 	// SEARCH 
-	var base_url = window.location.origin;
 	var resultSelected;
 	if( OSdatid == "macos" && $('.sidenavigation').length && !$drillNav.length ){
 		$('.opensearch .shortcut.win').hide();
@@ -1001,7 +983,7 @@ $('#main_content_wrap, .singleentry .content').find('a.externallink, a.downloadl
 
 	// Initialize the slider if present on page
 	if ($duckconSlider.length) {
-		const slider = new Swiper(duckconSliderClass, duckconSliderOptions);
+		new Swiper(duckconSliderClass, duckconSliderOptions);
 	}
 
 	// QUOTE SLIDER

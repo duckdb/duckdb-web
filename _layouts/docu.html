@@ -215,7 +215,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	<script src="/js/copy_button.js" defer></script>
 	{% if page.install_version %}
 	<script src="/js/ua-parser.min.js" defer></script>
-	<script src="/js/install.js" defer></script>
+	<script src="{{ '/js/install.js' | fingerprint }}" defer></script>
 	{% endif %}
 
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
