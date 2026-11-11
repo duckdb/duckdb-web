@@ -120,7 +120,7 @@ Extensions from custom repositories are installed into a separate subdirectory f
 * A plain `LOAD my_ext;` does not find the extension. For the same reason, these extensions are never [autoloaded]({% link docs/2.0/extensions/overview.md %}#autoloading-extensions).
 * In `INSTALL AND LOAD`, the repository has to be given as an identifier: `INSTALL AND LOAD my_ext FROM 'my_repo';` installs the extension but then fails to load it.
 * [`UPDATE EXTENSIONS`]({% link docs/2.0/sql/statements/update_extensions.md %}) skips these extensions. To upgrade one, run `FORCE INSTALL my_ext FROM my_repo;`.
-* [`duckdb_extensions()`]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_extensions) only lists these extensions once they are loaded, reporting `installed` as `false` and `signature_key_fingerprint` as `NULL`.
+* [`duckdb_extensions()`]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_extensions) lists these extensions once they are installed, reporting `installed` as `true`, the repository name in `installed_from`, and the signing key fingerprint in `signature_key_fingerprint`. `loaded` is `false` until the extension is loaded.
 
 The pinned keys only apply when the repository is referred to by name. The following statements verify the extension against DuckDB's built-in `core` keys instead, so they reject extensions signed with your own key unless `allow_unsigned_extensions` is enabled:
 
