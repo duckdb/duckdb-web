@@ -1,5 +1,4 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
-<style id="thin-strokes">@media (min-width: 500px) { [stroke-width="3.2"] { stroke-width: 2; } [stroke-width="3.21"] { stroke-width: 2.006; } }</style>
 <g clip-path="url(#clip0_20258_43878)">
 <rect width="1200" height="630" fill="url(#paint0_linear_20258_43878)"/>
 <g clip-path="url(#clip1_20258_43878)">
@@ -16,7 +15,7 @@
 <path d="M660.945 273.252C660.945 281.056 682 287.384 707.972 287.384C733.944 287.384 754.999 281.056 754.999 273.252" stroke-width="3.2" stroke-miterlimit="10" stroke="#998B00"/>
 <path d="M707.972 260.069C733.944 260.069 754.999 253.742 754.999 245.937C754.999 238.132 733.944 231.805 707.972 231.805C682 231.805 660.945 238.132 660.945 245.937C660.945 253.742 682 260.069 707.972 260.069Z" fill="#FFFDCC" stroke-width="3.2" stroke-miterlimit="10" stroke="#998B00"/>
 <path d="M495.898 194.772C499.232 194.772 501.934 197.475 501.934 200.809V276.6C501.934 279.933 499.232 282.636 495.898 282.636C492.565 282.636 489.863 279.933 489.863 276.6V200.809C489.863 197.475 492.565 194.772 495.898 194.772Z" fill="#FFFDCC" stroke-width="3.2" stroke-miterlimit="10" stroke="#998B00"/>
-<rect x="475.703" y="190.081" width="40.3903" height="14.6773" rx="3" fill="#FFFDCC" stroke="#998B00" stroke-width="3.2" stroke-miterlimit="10"/>
+<rect x="475.703" y="190.081" width="40.3903" height="14.6773" rx="3" fill="#FFFDCC" stroke-width="3.2" stroke-miterlimit="10" stroke="#998B00"/>
 <path d="M553.828 221.038C555.522 222.732 555.522 225.478 553.828 227.172L515.319 265.681C513.625 267.375 510.879 267.375 509.185 265.681C507.492 263.988 507.492 261.242 509.185 259.548L547.695 221.038C549.389 219.345 552.135 219.345 553.828 221.038Z" fill="#FFFDCC" stroke-width="3.2" stroke-miterlimit="10" stroke="#998B00"/>
 <rect x="545.855" y="210.073" width="27.1098" height="9.85137" rx="3" transform="rotate(45 545.855 210.073)" fill="#FFFDCC" stroke="#998B00" stroke-width="3.2" stroke-miterlimit="10"/>
 <path d="M495.897 339.162C529.15 339.162 556.106 312.205 556.106 278.953C556.106 245.7 529.15 218.743 495.897 218.743C462.644 218.743 435.688 245.7 435.688 278.953C435.688 312.205 462.644 339.162 495.897 339.162Z" fill="#FFF100"/>
