@@ -3,8 +3,8 @@ layout: post
 title: "When Did the Session End? Did They Buy?"
 authors:
   - The DuckDB team
-thumb: "/images/blog/thumbs/window-functions-2.svg"
-image: "/images/blog/thumbs/window-functions-2.png"
+thumb: "/images/blog/thumbs/event_data.svg"
+image: "/images/blog/thumbs/event_data.png"
 excerpt: "Splitting clicks into sessions, finding the longest run of consecutive days, and checking whether a cart was followed by a purchase are all questions about ordered rows. DuckDB now answers them with `MATCH_RECOGNIZE`, the SQL standard’s row pattern matching clause. This post shows how it works, with window-function equivalents for comparison."
 tag: using-duckdb
 ---
