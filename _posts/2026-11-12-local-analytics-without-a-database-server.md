@@ -146,4 +146,4 @@ Ilya’s [five-minute talk](https://www.youtube.com/watch?v=fV1LXnPl4ng) from Du
 
 SQLRooms is open source and available at [sqlrooms.org](https://sqlrooms.org). Its [examples page](https://sqlrooms.org/examples) is a good place to start. [Flowmap City](https://flowmap.city/), [Foursquare Spatial Desktop](https://foursquare.com/products/spatial-desktop/), and [Cosmograph](https://cosmograph.app) are free to try.
 
-We would like to thank Ilya for the conversation. You can follow his writing on DuckDB and SQLRooms on [his website](https://ilya.boyandin.me/). And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [quack@duckdb.org](mailto:quack@duckdb.org).
+We would like to thank Ilya for the conversation. You can follow his writing on DuckDB and SQLRooms on [his website](https://ilya.boyandin.me/). And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com).
