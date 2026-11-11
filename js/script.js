@@ -427,55 +427,71 @@ $(document).ready(function(){
 	}
 	
 // Add class-name to external Links
-$('a').filter(function() {
-	return this.hostname && this.hostname !== location.hostname && $(this).find('img, svg').length === 0 && !$(this).hasClass('button');
-}).addClass("externallink").attr('target','_blank');
+function linksWithIcon(classes) {
+	return Array.from(document.querySelectorAll(['#main_content_wrap', '.singleentry .content'].map(function (scope) {
+		return classes.map(function (cls) { return scope + ' a.' + cls; }).join(', ');
+	}).join(', ')));
+}
 
-$('.headercontent a, .box-link a, .footercontent a, .highlight a, .button, .download-btn, .ecosystem-diagram a, a.tag, a:has(> .tag)').removeClass('externallink');
-$('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); 
-$('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); 
+function markLinks(test, addClass, removeClasses, exclude, githubTables, supporterBoard, onMatch) {
+	document.querySelectorAll('a').forEach(function (a) {
+		if (test(a)) {
+			a.classList.add(addClass);
+			removeClasses.forEach(function (cls) { a.classList.remove(cls); });
+			if (onMatch) onMatch(a);
+		}
+	});
+	document.querySelectorAll(exclude).forEach(function (a) { a.classList.remove(addClass); });
+	if (githubTables) {
+		document.querySelectorAll('table a.' + addClass).forEach(function (a) {
+			if (a.textContent.includes('GitHub')) {
+				a.classList.remove(addClass);
+				a.classList.add('nobg');
+			}
+		});
+	}
+	if (supporterBoard) {
+		document.querySelectorAll('.supporterboard a.' + addClass).forEach(function (a) {
+			a.classList.remove(addClass);
+			a.classList.add('nobg');
+		});
+	}
+}
+
+function hrefMatches(a, pattern) {
+	var href = a.getAttribute('href');
+	return Boolean(href) && pattern.test(href) && !a.querySelector('img') && !a.classList.contains('button');
+}
+
+markLinks(function (a) {
+	return a.hostname && a.hostname !== location.hostname && !a.querySelector('img, svg') && !a.classList.contains('button');
+}, 'externallink', [], '.headercontent a, .box-link a, .footercontent a, .highlight a, .button, .download-btn, .ecosystem-diagram a, a.tag, a:has(> .tag)', true, true, function (a) {
+	a.setAttribute('target', '_blank');
+});
 
 // Add download icon to links pointing to downloadable files
-$('a').filter(function() {
-	var href = $(this).attr('href');
-	if (!href) return false;
-	return /\.(pdf|zip|gz|tar|jar|csv|parquet|mp3)(\?.*)?$/i.test(href) && $(this).find('img').length === 0 && !$(this).hasClass('button');
-}).addClass("downloadlink").removeClass("externallink");
-
-$('.headercontent a, .box-link a, .footercontent a, .highlight a, .button, .download-btn, .ecosystem-diagram a').removeClass('downloadlink');
-$('table a.downloadlink:contains(GitHub)').removeClass('downloadlink').addClass('nobg');
-$('.supporterboard a.downloadlink').removeClass('downloadlink').addClass('nobg');
+markLinks(function (a) {
+	return hrefMatches(a, /\.(pdf|zip|gz|tar|jar|csv|parquet|mp3)(\?.*)?$/i);
+}, 'downloadlink', ['externallink'], '.headercontent a, .box-link a, .footercontent a, .highlight a, .button, .download-btn, .ecosystem-diagram a', true, true);
 
 // Add play icon to links pointing to YouTube or Vimeo
-$('a').filter(function() {
-	var href = $(this).attr('href');
-	if (!href) return false;
-	return /^(https?:)?\/\/(www\.|m\.)?(youtube\.com|youtu\.be|vimeo\.com)\//i.test(href) && $(this).find('img').length === 0 && !$(this).hasClass('button');
-}).addClass("videolink").removeClass("externallink downloadlink");
-
-$('.headercontent a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a').removeClass('videolink');
-$('table a.videolink:contains(GitHub)').removeClass('videolink').addClass('nobg');
-$('.supporterboard a.videolink').removeClass('videolink').addClass('nobg');
+markLinks(function (a) {
+	return hrefMatches(a, /^(https?:)?\/\/(www\.|m\.)?(youtube\.com|youtu\.be|vimeo\.com)\//i);
+}, 'videolink', ['externallink', 'downloadlink'], '.headercontent a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a', true, true);
 
 // Add podcast icon to links pointing to Spotify or Apple Podcasts
-$('a').filter(function() {
-	var href = $(this).attr('href');
-	if (!href) return false;
-	return /^(https?:)?\/\/(open\.spotify\.com|podcasts\.apple\.com)\//i.test(href) && $(this).find('img').length === 0 && !$(this).hasClass('button');
-}).addClass("podcastlink").removeClass("externallink downloadlink videolink");
-
-$('.headercontent a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a').removeClass('podcastlink');
-$('.supporterboard a.podcastlink').removeClass('podcastlink').addClass('nobg');
+markLinks(function (a) {
+	return hrefMatches(a, /^(https?:)?\/\/(open\.spotify\.com|podcasts\.apple\.com)\//i);
+}, 'podcastlink', ['externallink', 'downloadlink', 'videolink'], '.headercontent a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a', false, true);
 
 // Glue the anchor icon to the last word of a heading so it never wraps alone
-$('h1, h2, h3, h4, h5, h6').find('svg.anchor-icon').each(function() {
-	var $svg = $(this);
-	var $a = $svg.parent('a');
-	if (!$a.length || $a.find('.anchor-wrap').length) return;
-	var contents = $a.contents();
+document.querySelectorAll(':is(h1, h2, h3, h4, h5, h6) svg.anchor-icon').forEach(function (svg) {
+	var a = svg.parentElement;
+	if (!a || a.tagName !== 'A' || a.querySelector('.anchor-wrap')) return;
+	var contents = Array.from(a.childNodes);
 	var last = null;
 	for (var i = contents.length - 1; i >= 0; i--) {
-		if (contents[i] === this) continue;
+		if (contents[i] === svg) continue;
 		last = contents[i];
 		break;
 	}
@@ -483,58 +499,65 @@ $('h1, h2, h3, h4, h5, h6').find('svg.anchor-icon').each(function() {
 	var match = last.nodeValue.match(/(\S+)(\s*)$/);
 	if (!match) return;
 	last.nodeValue = last.nodeValue.slice(0, match.index);
-	$('<span class="anchor-wrap"></span>').text(match[1]).append($svg).appendTo($a);
+	var wrap = document.createElement('span');
+	wrap.className = 'anchor-wrap';
+	wrap.textContent = match[1];
+	wrap.appendChild(svg);
+	a.appendChild(wrap);
 });
 
 // Append sprite icons to external, download, video and podcast links, gluing the icon to the last word
-$('#main_content_wrap, .singleentry .content').find('a.externallink, a.downloadlink, a.videolink, a.podcastlink').each(function() {
-	var $a = $(this);
-	if ($a.find('svg.linkicon').length) return;
-	var icon = $a.hasClass('videolink') ? 'youtube' : ($a.hasClass('podcastlink') ? 'headphones-01' : ($a.hasClass('downloadlink') ? 'download-01' : 'link-external-02'));
-	var $svg = $('<svg class="icon linkicon"><use href="#' + icon + '"></use></svg>');
-	var contents = $a.contents();
-	var last = contents.length ? contents[contents.length - 1] : null;
+linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forEach(function (a) {
+	if (a.querySelector('svg.linkicon')) return;
+	var icon = a.classList.contains('videolink') ? 'youtube' : (a.classList.contains('podcastlink') ? 'headphones-01' : (a.classList.contains('downloadlink') ? 'download-01' : 'link-external-02'));
+	var svgMarkup = '<svg class="icon linkicon"><use href="#' + icon + '"></use></svg>';
+	var last = a.lastChild;
 	var match = (last && last.nodeType === 3) ? last.nodeValue.match(/(\S+)(\s*)$/) : null;
 	if (match) {
 		last.nodeValue = last.nodeValue.slice(0, match.index);
-		$('<span class="linkicon-wrap"></span>').text(match[1]).append($svg).appendTo($a);
+		var wrap = document.createElement('span');
+		wrap.className = 'linkicon-wrap';
+		wrap.textContent = match[1];
+		wrap.insertAdjacentHTML('beforeend', svgMarkup);
+		a.appendChild(wrap);
 	} else {
-		$a.append($svg);
+		a.insertAdjacentHTML('beforeend', svgMarkup);
 	}
 });
 
 // Copy the heading URL to the clipboard when the anchor-link icon is clicked
-$(document).on('click', 'svg.anchor-icon', function(e) {
+var anchorIconState = new WeakMap();
+document.addEventListener('click', function (e) {
+	var svg = e.target.closest('svg.anchor-icon');
+	if (!svg) return;
 	e.preventDefault();
-	e.stopPropagation();
-	var $svg = $(this);
-	var anchor = this.closest('a');
+	e.stopImmediatePropagation();
+	var anchor = svg.closest('a');
 	var url = anchor ? anchor.href : (location.origin + location.pathname + location.hash);
 	if (navigator.clipboard && navigator.clipboard.writeText) {
 		navigator.clipboard.writeText(url);
 	}
-	var $use = $svg.find('use');
-	if (!$svg.data('original-icon')) {
-		$svg.data('original-icon', $use.attr('href'));
-	}
-	$use.attr('href', '#check');
-	$svg.addClass('copied');
-	clearTimeout($svg.data('reset-timer'));
-	$svg.data('reset-timer', setTimeout(function() {
-		$use.attr('href', $svg.data('original-icon'));
-		$svg.removeClass('copied');
-	}, 1500));
+	var use = svg.querySelector('use');
+	var iconState = anchorIconState.get(svg) || { original: use ? use.getAttribute('href') : null, timer: null };
+	anchorIconState.set(svg, iconState);
+	if (use) use.setAttribute('href', '#check');
+	svg.classList.add('copied');
+	clearTimeout(iconState.timer);
+	iconState.timer = setTimeout(function () {
+		if (use) use.setAttribute('href', iconState.original);
+		svg.classList.remove('copied');
+	}, 1500);
 });
 
 // Glue trailing punctuation to the link icon with a word joiner so it never wraps alone
-$('#main_content_wrap, .singleentry .content').find('a.externallink, a.downloadlink, a.videolink, a.podcastlink').each(function () {
-	var next = this.nextSibling;
+linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forEach(function (a) {
+	var next = a.nextSibling;
 	if (!next || next.nodeType !== 3) return;
 	var match = next.nodeValue.match(/^\s*[.,;:)]/);
 	if (!match) return;
 	next.nodeValue = '\u2060' + next.nodeValue.slice(match[0].length - 1);
 });
-	
+
 	// Documentation version and topic dropdowns share the same interaction.
 	var $docDropdowns = $('.options .version, #topic-filter');
 	function closeVersionSelect() {
