@@ -5,8 +5,8 @@ authors:
   - Ilya Boyandin
   - Geertjan Wielenga
   - Tim Cox
-thumb: /images/blog/thumbs/sqlrooms-local-analytics.svg
-image: /images/blog/thumbs/sqlrooms-local-analytics.png
+thumb: /images/blog/thumbs/local-analytics-without-a-database-server.svg
+image: /images/blog/thumbs/local-analytics-without-a-database-server.png
 excerpt: From interactive maps to graph exploration, DuckDB makes it possible to analyze data without a database server. Ilya Boyandin shares how this approach led to SQLRooms, a toolkit for building analytics applications that bring data, visualizations, and AI-assisted analysis together on the user’s machine.
 tag: using-duckdb
 ---
