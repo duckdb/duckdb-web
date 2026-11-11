@@ -2,8 +2,14 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-img.downloadlogo{
-	width: 180px;
+header .duckdblabs_logo{
+	width: 117.6px;
+}
+
+@media only screen and (max-width: 900px) {
+	header .duckdblabs_logo{
+		width: 134.6px;
+	}
 }
 
 header .headerline .headercontent .landingmenu nav a:hover,
@@ -22,7 +28,7 @@ header .headerline .headercontent .header-actions {
 	align-items: center;
 	gap: 35px;
 	z-index: 25;
-	font-size: 15px;
+	@include menu-item();
 
 	a {
 		text-decoration: none;
@@ -487,6 +493,10 @@ body.contact{
 			align-items: center;
 	gap: 8px;
 	min-width: 0;
+
+	.source-icon{
+		stroke: none;
+	}
 
 	> span{
 		min-width: 0;
