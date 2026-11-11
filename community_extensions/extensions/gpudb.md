@@ -228,8 +228,8 @@ docs:
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 824
-extension_download_count_pretty: 824
+extension_download_count: 827
+extension_download_count_pretty: 827
 image: '/images/community_extensions/social_preview/preview_community_extension_gpudb.png'
 layout: community_extension_doc
 ---

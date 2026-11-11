@@ -226,8 +226,8 @@ docs:
 
 extension_star_count: 38
 extension_star_count_pretty: 38
-extension_download_count: 816
-extension_download_count_pretty: 816
+extension_download_count: 798
+extension_download_count_pretty: 798
 image: '/images/community_extensions/social_preview/preview_community_extension_pql.png'
 layout: community_extension_doc
 ---

@@ -48,8 +48,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 544
-extension_download_count_pretty: 544
+extension_download_count: 556
+extension_download_count_pretty: 556
 image: '/images/community_extensions/social_preview/preview_community_extension_tessera.png'
 layout: community_extension_doc
 ---
