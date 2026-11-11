@@ -81,6 +81,14 @@ $(document).ready(function(){
 				if (!$last.find('img').length) {
 					$last.prepend($author.find('img.avatar').clone());
 				}
+				if ($last.find('img').length) {
+					var dashNode = $last.contents().filter(function() {
+						return this.nodeType === 3 && this.nodeValue.trim();
+					}).get(0);
+					if (dashNode) {
+						dashNode.nodeValue = dashNode.nodeValue.replace(/^\s*(–|—|--)\s*/, ' ');
+					}
+				}
 			}
 			var $quoteText = $content.children('p').not('.quote-author');
 			$quoteText.first().addClass('quote-open').html(function(_, html) {

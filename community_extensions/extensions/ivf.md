@@ -78,8 +78,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 418
-extension_download_count_pretty: 418
+extension_download_count: 495
+extension_download_count_pretty: 495
 image: '/images/community_extensions/social_preview/preview_community_extension_ivf.png'
 layout: community_extension_doc
 ---

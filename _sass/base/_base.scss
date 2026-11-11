@@ -88,11 +88,6 @@ em.caption{
 
 .figure-title{
 	@include headline-4();
-	margin-bottom: 12px;
-}
-
-.figure-title + p{
-	margin-top: 0!important;
 }
 
 

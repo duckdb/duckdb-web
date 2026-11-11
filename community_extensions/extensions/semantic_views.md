@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: semantic_views
   description: "Semantic views -- a declarative layer for dimensions, metrics, and relationships"
-  version: 0.17.0
+  version: 0.18.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: s-layer/duckdb-semantic-views
-  ref: a3a5547e516984903508c6d027fbd374175ce723
+  ref: d97aebff88ba382138c896414ba6d30a9bd58e4c
   variegata: 71ea4f11e76c6ad2542bbc77c8669ac491ebc2a4
 
 docs:
@@ -46,8 +46,8 @@ docs:
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 1295
-extension_download_count_pretty: 1.3k
+extension_download_count: 1206
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_views.png'
 layout: community_extension_doc
 ---
