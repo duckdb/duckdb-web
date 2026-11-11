@@ -147,8 +147,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 2055
-extension_download_count_pretty: 2.1k
+extension_download_count: 1799
+extension_download_count_pretty: 1.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_lance_conversion.png'
 layout: community_extension_doc
 ---
@@ -188,11 +188,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type |                                                          description                                                           | comment |                      examples                      |
-|------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------|
-| read_atif        | table         | Reads ATIF agent trajectories from a local, S3, or HTTP(S) JSON or JSONL file, optionally gzipped, embedding referenced media. | NULL    | [SELECT * FROM read_atif('trajectories.jsonl');]   |
-| read_huggingface | table         | Reads a Hugging Face dataset's Parquet files.                                                                                  | NULL    | [SELECT * FROM read_huggingface('lhoestq/demo1');] |
-| read_warc        | table         | Reads records from a local, S3, or HTTP(S) WARC file or Common Crawl crawl or segment.                                         | NULL    | [SELECT * FROM read_warc('archive.warc.gz');]      |
+|  function_name   | function_type |                                                                      description                                                                      | comment |                                      examples                                       |
+|------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------|
+| read_atif        | table         | Reads ATIF agent trajectories from a local, S3, or HTTP(S) JSON or JSONL file, optionally gzipped, embedding referenced media.                        | NULL    | [SELECT * FROM read_atif('trajectories.jsonl');]                                    |
+| read_huggingface | table         | Reads a Hugging Face dataset's Parquet files.                                                                                                         | NULL    | [SELECT * FROM read_huggingface('lhoestq/demo1');]                                  |
+| read_warc        | table         | Reads records from a local, S3, or HTTP(S) WARC file or Common Crawl crawl or segment.                                                                | NULL    | [SELECT * FROM read_warc('archive.warc.gz');]                                       |
+| read_xml_records | table         | Reads one row per XML element at record_element from a local, S3, or HTTP(S) file, optionally gzipped, inferring the schema from the leading records. | NULL    | [SELECT * FROM read_xml_records('catalog.xml', record_element := '/catalog/book');] |
 
 ### Overloaded Functions
 

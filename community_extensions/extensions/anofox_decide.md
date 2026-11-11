@@ -122,8 +122,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 841
-extension_download_count_pretty: 841
+extension_download_count: 824
+extension_download_count_pretty: 824
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_decide.png'
 layout: community_extension_doc
 ---
