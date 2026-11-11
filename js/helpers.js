@@ -42,10 +42,24 @@
 		return { direction: current.direction, from: from };
 	}
 
+	const defaultDisplays = {};
+
+	function defaultDisplay(el) {
+		const tag = el.nodeName;
+		if (!defaultDisplays[tag]) {
+			const probe = document.createElement(tag);
+			document.body.appendChild(probe);
+			const display = getComputedStyle(probe).display;
+			probe.remove();
+			defaultDisplays[tag] = display === 'none' ? 'block' : display;
+		}
+		return defaultDisplays[tag];
+	}
+
 	function reveal(el) {
 		el.style.display = '';
 		if (getComputedStyle(el).display === 'none') {
-			el.style.display = savedDisplay.get(el) || 'block';
+			el.style.display = savedDisplay.get(el) || defaultDisplay(el);
 		}
 	}
 

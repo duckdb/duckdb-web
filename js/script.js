@@ -728,100 +728,101 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 
 	
 	// SEARCH 
-	var resultSelected;
-	if( OSdatid == "macos" && $('.sidenavigation').length && !drillNav ){
-		$('.opensearch .shortcut.win').hide();
-		$('.opensearch .shortcut.mac').show();
+	var resultSelected = null;
+	var searchOverlay = document.querySelector('.searchoverlay');
+	var searchInputs = function () { return document.querySelectorAll('.searchoverlay form input'); };
+	if( OSdatid == "macos" && document.querySelector('.sidenavigation') && !drillNav ){
+		document.querySelectorAll('.opensearch .shortcut.win').forEach(function (el) { Helpers.hide(el); });
+		document.querySelectorAll('.opensearch .shortcut.mac').forEach(function (el) { Helpers.show(el); });
+	}
+	function setSearchOpen(open) {
+		document.querySelectorAll('.searchoverlay').forEach(function (el) { el.classList.toggle('active', open); });
+		document.body.classList.toggle('search', open);
 	}
 	var toggleSearch = function(){
-		if( $('body').hasClass('search') ){
-			$('.searchoverlay').removeClass('active');
-			$('body').removeClass('search');
+		if (document.body.classList.contains('search')) {
+			setSearchOpen(false);
 		} else {
-			$('.searchoverlay').addClass('active');
-			$('body').addClass('search');
-			$( ".searchoverlay form input" ).trigger('focus');
+			setSearchOpen(true);
+			var input = searchInputs()[0];
+			if (input) input.focus();
 		}
-	}
-	$(window).on('keydown', function (e){
+	};
+	window.addEventListener('keydown', function (e){
+		var searchOpen = document.body.classList.contains('search');
 		// close Search on ESC
-		if( ( e.which === 27 ) && $('body').hasClass('search') ){
-			$('.searchoverlay').removeClass('active');
-			$('body').removeClass('search');
+		if (e.key === 'Escape' && searchOpen) {
+			setSearchOpen(false);
 		}
-		
-		if ( e.metaKey && ( e.which === 75 ) || e.ctrlKey && ( e.which === 75 ) ) {
+
+		if ((e.metaKey || e.ctrlKey) && (e.code === 'KeyK' || (e.key && e.key.toLowerCase() === 'k'))) {
 			// open search on cmd/ctrl + k
 			e.preventDefault(); // Prevent default browser behavior for all browsers
-			if( $('.searchoverlay').length ){
+			if (searchOverlay) {
 				toggleSearch();
 			}
 		}
 		// de-focus input when on enter or follow the result-link
-		if ( e.which === 13  && $('body').hasClass('search') ){
-			if( $('.search_result.selected').length ){
-				var link = $('.search_result.selected').find('a').attr('href');
-				document.location.href = link
+		if (e.key === 'Enter' && document.body.classList.contains('search')) {
+			var selected = document.querySelector('.search_result.selected');
+			if (selected) {
+				var selectedLink = selected.querySelector('a');
+				if (selectedLink) document.location.href = selectedLink.getAttribute('href');
 			} else {
-				$( ".searchoverlay form input" ).trigger('blur');
+				searchInputs().forEach(function (input) { input.blur(); });
 			}
 		}
-		
+
 		// scroll through results with up and down keys
-		if ( !($("input").is(":focus")) && e.which === 40 && $('body').hasClass('search') || !($("input").is(":focus")) && e.which === 38 && $('body').hasClass('search') ) {
-			var result = $('.search_result');
-			if(e.which === 40){
-				if(resultSelected){
-					resultSelected.removeClass('selected');
-					next = resultSelected.next();
-					if(next.length > 0){
-						resultSelected = next.addClass('selected');
-					}else{
-						resultSelected = result.eq(0).addClass('selected');
-					}
-				}else{
-					resultSelected = result.eq(0).addClass('selected');
-				}
-			}else if(e.which === 38){
-				if(resultSelected){
-					resultSelected.removeClass('selected');
-					next = resultSelected.prev();
-					if(next.length > 0){
-						resultSelected = next.addClass('selected');
-					}else{
-						resultSelected = result.last().addClass('selected');
-					}
-				}else{
-					resultSelected = result.last().addClass('selected');
-				}
+		var focused = document.activeElement;
+		var otherInputFocused = focused && focused.tagName === 'INPUT' && !focused.closest('.searchoverlay');
+		if (!otherInputFocused && (e.key === 'ArrowDown' || e.key === 'ArrowUp') && document.body.classList.contains('search')) {
+			e.preventDefault();
+			var results = document.querySelectorAll('.search_result');
+			var next;
+			if (resultSelected) {
+				resultSelected.classList.remove('selected');
+				next = e.key === 'ArrowDown' ? resultSelected.nextElementSibling : resultSelected.previousElementSibling;
+			}
+			if (!next) {
+				next = e.key === 'ArrowDown' ? results[0] : results[results.length - 1];
+			}
+			resultSelected = next || null;
+			if (resultSelected) {
+				resultSelected.classList.add('selected');
+				resultSelected.scrollIntoView({ block: 'nearest' });
 			}
 		}
 	});
-	
-	$('nav .search_icon').on('click', function(){
-		toggleSearch();
+
+	document.querySelectorAll('nav .search_icon, .opensearch').forEach(function (el) {
+		el.addEventListener('click', toggleSearch);
 	});
-	$('.opensearch').on('click', function(){
-		toggleSearch();
+	document.querySelectorAll('.searchoverlay').forEach(function (overlay) {
+		overlay.addEventListener('click', function (e) {
+			if (e.target !== this) return;
+			toggleSearch();
+		});
 	});
-	$('.searchoverlay').on('click', function(e){
-		if (e.target !== this)
-			return;
-		toggleSearch();
+	document.querySelectorAll('.searchoverlay .empty_input').forEach(function (button) {
+		button.addEventListener('click', function () {
+			searchInputs().forEach(function (input) { input.value = ''; });
+			var input = searchInputs()[0];
+			if (input) input.focus();
+			var results = document.getElementById('search_results');
+			if (results) results.innerHTML = '';
+			button.classList.remove('visible');
+		});
 	});
-	$('.searchoverlay .empty_input').on('click', function(){
-		$(".searchoverlay form input").val('').trigger('focus');
-		$("#search_results").empty();
-		$(this).removeClass('visible');
-	})
-	
+
 	// Show/hide empty_input button based on input content
-	$(".searchoverlay form input").on('input', function() {
-		if($(this).val().length > 0) {
-			$('.searchoverlay .empty_input').addClass('visible');
-		} else {
-			$('.searchoverlay .empty_input').removeClass('visible');
-		}
+	searchInputs().forEach(function (input) {
+		input.addEventListener('input', function () {
+			var filled = this.value.length > 0;
+			document.querySelectorAll('.searchoverlay .empty_input').forEach(function (button) {
+				button.classList.toggle('visible', filled);
+			});
+		});
 	});
 	document.querySelectorAll('.search_icon').forEach(function (icon) {
 		icon.addEventListener('click', function () {

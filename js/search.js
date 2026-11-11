@@ -181,7 +181,6 @@ function on_update(e) {
 	perform_search(e.target.value);
 }
 
-text_div.addEventListener('keyup', on_update);
 text_div.addEventListener('input', on_update);
 
 text_div.addEventListener('keydown', function(e) {
