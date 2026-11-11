@@ -60,8 +60,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 2140
-extension_download_count_pretty: 2.1k
+extension_download_count: 1959
+extension_download_count_pretty: 2.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_clickhouse_scanner.png'
 layout: community_extension_doc
 ---
