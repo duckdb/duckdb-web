@@ -1103,9 +1103,9 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 	// DUCKCON EVENT PAGES
 	const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1Ijoiam9uYXRoYW4tYXVjaCIsImEiOiJjbDllMHhxNHowbG50M29vZ3Y0NnZhdHY1In0.XQxUUmkkSGKUkNThK1p9Yg';
 	const MAPBOX_STYLES_URL = 'mapbox://styles/jonathan-auch/cmhz38wfd001801sbe3c06ece'
-	const $duckconMap = $('.js-duckcon-map');
+	const duckconMap = document.querySelector('.js-duckcon-map');
 	const duckconSliderClass = '.js-duckcon-slider';
-	const $duckconSlider = $(duckconSliderClass);
+	const duckconSlider = document.querySelector(duckconSliderClass);
 
 	const duckconSliderOptions = {
 		slidesPerView: "auto",
@@ -1119,8 +1119,8 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 	}
 
 	// Initialize the map if present on page
-	if ($duckconMap.length) {
-		const mapEl = $duckconMap[0];
+	if (duckconMap) {
+		const mapEl = duckconMap;
 		const lng = parseFloat(mapEl.dataset.lng);
 		const lat = parseFloat(mapEl.dataset.lat);
 		const label = mapEl.dataset.label;
@@ -1141,43 +1141,47 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 	}
 
 	// Initialize the slider if present on page
-	if ($duckconSlider.length) {
+	if (duckconSlider) {
 		new Swiper(duckconSliderClass, duckconSliderOptions);
 	}
 
 	// QUOTE SLIDER
-	$('.quote-slider').each(function() {
-		var $wrap = $(this);
-		var $quotes = $wrap.children('blockquote.quote');
-		if ($quotes.length < 2 || typeof Swiper === 'undefined') return;
+	document.querySelectorAll('.quote-slider').forEach(function (wrap) {
+		var quotes = Array.prototype.filter.call(wrap.children, function (el) { return el.matches('blockquote.quote'); });
+		if (quotes.length < 2 || typeof Swiper === 'undefined') return;
 
-		var $swiper = $('<div class="swiper"><div class="swiper-wrapper"></div></div>');
-		var $track = $swiper.find('.swiper-wrapper');
-		$quotes.each(function() {
-			$('<div class="swiper-slide"></div>').append(this).appendTo($track);
+		var swiper = document.createElement('div');
+		swiper.className = 'swiper';
+		var track = document.createElement('div');
+		track.className = 'swiper-wrapper';
+		swiper.appendChild(track);
+		quotes.forEach(function (quote) {
+			var slide = document.createElement('div');
+			slide.className = 'swiper-slide';
+			slide.appendChild(quote);
+			track.appendChild(slide);
 		});
 
-		var $controls = $(
-			'<div class="quote-slider-controls">' +
-				'<button type="button" class="quote-slider-prev" aria-label="Previous quote">' +
-					'<svg class="icon"><use href="#chevron-left"></use></svg>' +
-				'</button>' +
-				'<button type="button" class="quote-slider-next" aria-label="Next quote">' +
-					'<svg class="icon"><use href="#chevron-right"></use></svg>' +
-				'</button>' +
-			'</div>'
-		);
+		var controls = document.createElement('div');
+		controls.className = 'quote-slider-controls';
+		controls.innerHTML =
+			'<button type="button" class="quote-slider-prev" aria-label="Previous quote">' +
+				'<svg class="icon"><use href="#chevron-left"></use></svg>' +
+			'</button>' +
+			'<button type="button" class="quote-slider-next" aria-label="Next quote">' +
+				'<svg class="icon"><use href="#chevron-right"></use></svg>' +
+			'</button>';
 
-		$wrap.empty().append($swiper).append($controls);
+		wrap.replaceChildren(swiper, controls);
 
 		function trailingSpace() {
-			var slide = $swiper[0].querySelector('.swiper-slide');
-			return slide ? Math.max(0, $swiper[0].clientWidth - slide.offsetWidth) : 0;
+			var slide = swiper.querySelector('.swiper-slide');
+			return slide ? Math.max(0, swiper.clientWidth - slide.offsetWidth) : 0;
 		}
 
-		var delay = parseInt($wrap.data('autoplay'), 10);
+		var delay = parseInt(wrap.getAttribute('data-autoplay'), 10);
 
-		new Swiper($swiper[0], {
+		new Swiper(swiper, {
 			slidesPerView: 'auto',
 			spaceBetween: 20,
 			slidesOffsetAfter: trailingSpace(),
@@ -1190,30 +1194,32 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 				stopOnLastSlide: true
 			} : false,
 			navigation: {
-				nextEl: $controls.find('.quote-slider-next')[0],
-				prevEl: $controls.find('.quote-slider-prev')[0]
+				nextEl: controls.querySelector('.quote-slider-next'),
+				prevEl: controls.querySelector('.quote-slider-prev')
 			},
 			on: {
 				init: function() {
-					$wrap.toggleClass('is-end', this.isEnd);
+					wrap.classList.toggle('is-end', this.isEnd);
 				},
 				resize: function() {
 					this.params.slidesOffsetAfter = trailingSpace();
 					this.update();
 				},
 				reachEnd: function() {
-					$wrap.addClass('is-end');
+					wrap.classList.add('is-end');
 				},
 				fromEdge: function() {
-					$wrap.removeClass('is-end');
+					wrap.classList.remove('is-end');
 				}
 			}
 		});
 	});
 
 	// Author marquee: keep the scroll speed constant regardless of name length
-	$(document).on('mouseenter', '.postpreview', function() {
-		var author = this.querySelector('.byline .author, .meta .author');
+	document.addEventListener('mouseover', function (e) {
+		var card = e.target.closest ? e.target.closest('.postpreview') : null;
+		if (!card || (e.relatedTarget && card.contains(e.relatedTarget))) return;
+		var author = card.querySelector('.byline .author, .meta .author');
 		if (!author) return;
 		var span = author.querySelector('span');
 		if (!span) return;
