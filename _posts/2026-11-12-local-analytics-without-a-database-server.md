@@ -11,6 +11,13 @@ excerpt: From interactive maps to graph exploration, DuckDB makes it possible to
 tag: using-duckdb
 ---
 
+> Quote
+>
+> You should own your data. It can live on your computer, not everything has to live in the Cloud. It can be synced via the cloud, but you decide when to keep it local and when not.
+>
+> — Ilya Boyandin, creator of [SQLRooms](https://sqlrooms.org)
+{: .quote-large}
+
 [Ilya Boyandin](https://www.linkedin.com/in/ilyabo/) is a software engineer, the creator of [SQLRooms](https://sqlrooms.org), [FlowmapBlue](https://flowmap.blue), and [Flowmap City](https://flowmap.city/). He worked on geospatial data analytics at Unfolded, the company founded by the team behind the open-source data visualization projects [deck.gl](https://deck.gl) and [kepler.gl](https://kepler.gl), which was later acquired by Foursquare.
 
 ## How DuckDB Entered the Picture
