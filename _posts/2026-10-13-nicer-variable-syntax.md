@@ -3,8 +3,8 @@ layout: post
 title: "Nicer Variable Syntax in DuckDB 2.0"
 authors:
   - The DuckDB team
-thumb: "/images/blog/thumbs/variable-syntax.svg"
-image: "/images/blog/thumbs/variable-syntax.png"
+thumb: "/images/blog/thumbs/nicer-variable-syntax.svg"
+image: "/images/blog/thumbs/nicer-variable-syntax.png"
 excerpt: "DuckDB 2.0 lets you read a session variable with a `$name` reference instead of a `getvariable` call, and prepared statements can fall back to session variables when a named parameter is not supplied. This post shows how the new syntax works and how the two features fit together."
 tag: using-duckdb
 ---
