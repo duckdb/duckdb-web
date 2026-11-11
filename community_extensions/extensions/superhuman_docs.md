@@ -40,8 +40,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 802
-extension_download_count_pretty: 802
+extension_download_count: 807
+extension_download_count_pretty: 807
 image: '/images/community_extensions/social_preview/preview_community_extension_superhuman_docs.png'
 layout: community_extension_doc
 ---

@@ -236,8 +236,8 @@ docs:
 
 extension_star_count: 49
 extension_star_count_pretty: 49
-extension_download_count: 707
-extension_download_count_pretty: 707
+extension_download_count: 701
+extension_download_count_pretty: 701
 image: '/images/community_extensions/social_preview/preview_community_extension_differential.png'
 layout: community_extension_doc
 ---

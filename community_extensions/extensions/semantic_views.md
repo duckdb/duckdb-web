@@ -44,10 +44,10 @@ docs:
 
     Documentation: https://s-layer.github.io/duckdb-semantic-views/
 
-extension_star_count: 21
-extension_star_count_pretty: 21
-extension_download_count: 1206
-extension_download_count_pretty: 1.2k
+extension_star_count: 22
+extension_star_count_pretty: 22
+extension_download_count: 1386
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_views.png'
 layout: community_extension_doc
 ---
