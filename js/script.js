@@ -25,22 +25,15 @@ function detectPlatform() {
 }
 
 $(document).ready(function(){
-	if (window.location.hash) {
-		var hash = window.location.hash;
-		var has_hash = true;
-		try {
-			$(hash);
-		} catch {
-			has_hash = false;
-		}
-		if (has_hash) if ($(hash).length) {
-			$('html, body').animate({
-				scrollTop: $(hash).offset().top - 90 - docBannerHeight()
-			}, 300, 'swing');
-			if ($('body').hasClass('faq')) {
-				$(hash).parent('.qa-wrap').addClass('open');
-				$(hash).parent('.qa-wrap').find('.answer').slideDown(150);
-			}
+	var initialHashTarget = Helpers.hashTarget(window.location.hash);
+	if (initialHashTarget) {
+		Helpers.scrollToTarget(initialHashTarget);
+		var hashParent = initialHashTarget.parentElement;
+		if (document.body.classList.contains('faq') && hashParent && hashParent.classList.contains('qa-wrap')) {
+			hashParent.classList.add('open');
+			hashParent.querySelectorAll('.answer').forEach(function (answer) {
+				Helpers.slideDown(answer, 150);
+			});
 		}
 	}
 	
@@ -245,51 +238,55 @@ $(document).ready(function(){
 
 	
 	// Same Page Anchor Scroll Navigation
-	var scrollspeed = 1000;
-	$('a[href*="#"]')
-		.not('[href="#"]')
-		.not('[href="#0"]')
-		.on('click', function(event) {
+	document.querySelectorAll('a[href*="#"]:not([href="#"]):not([href="#0"])').forEach(function (link) {
+		link.addEventListener('click', function (event) {
 			if (event.target.closest('svg.anchor-icon')) {
 				return;
 			}
-			if ($(this).parent().hasClass('toc-entry')) {
-				scrollspeed = 100;
-			}
 			if (
-				location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') &&
-				location.hostname == this.hostname
+				location.pathname.replace(/^\//, '') !== this.pathname.replace(/^\//, '') ||
+				location.hostname !== this.hostname ||
+				location.search !== this.search
 			) {
-				var target = $(this.hash);
-				target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-	
-				if (target.length) {
-					// event.preventDefault();
-					var stickyVideo = document.querySelector('.video-container.sticky');
-					var stickyOffset = stickyVideo ? stickyVideo.offsetHeight + 20 : 0;
-					$('html, body').animate({
-						scrollTop: target.offset().top - 90 - stickyOffset - docBannerHeight()
-					}, scrollspeed);
-				}
+				return;
 			}
+			var target = Helpers.hashTarget(this.hash);
+			if (!target) {
+				return;
+			}
+			event.preventDefault();
+			if (location.hash !== this.hash) {
+				history.pushState(null, '', this.hash);
+			}
+			Helpers.scrollToTarget(target);
 		});
+	});
 
     
     // FAQs
-	$('.qa-wrap h3').append('<span class="faq-icon"><svg class="icon"><use href="#chevron-down"></use></svg></span>');
-	$('.qa-wrap').on('click', function(event) {
-		var $qaWrap = $(this);
-		if ($(event.target).is('h3') || $(event.target).closest('h3').length) {
-			$qaWrap.toggleClass('open');
-			$qaWrap.find('.answer').slideToggle(150);
-		} 
-		else if (!$qaWrap.hasClass('open')) {
-			$qaWrap.addClass('open');
-			$qaWrap.find('.answer').slideDown(150);
-		}
+	document.querySelectorAll('.qa-wrap h3').forEach(function (heading) {
+		heading.insertAdjacentHTML('beforeend', '<span class="faq-icon"><svg class="icon"><use href="#chevron-down"></use></svg></span>');
 	});
-	$('.qa-wrap .answer a').on('click', function(event) {
-		event.stopPropagation();
+	document.querySelectorAll('.qa-wrap').forEach(function (qaWrap) {
+		qaWrap.addEventListener('click', function (event) {
+			var answers = qaWrap.querySelectorAll('.answer');
+			if (event.target.closest('h3')) {
+				qaWrap.classList.toggle('open');
+				answers.forEach(function (answer) {
+					Helpers.slideToggle(answer, 150);
+				});
+			} else if (!qaWrap.classList.contains('open')) {
+				qaWrap.classList.add('open');
+				answers.forEach(function (answer) {
+					Helpers.slideDown(answer, 150);
+				});
+			}
+		});
+	});
+	document.querySelectorAll('.qa-wrap .answer a').forEach(function (link) {
+		link.addEventListener('click', function (event) {
+			event.stopPropagation();
+		});
 	});
 
 
