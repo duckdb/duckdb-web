@@ -1,4 +1,4 @@
-$(document).ready(function(){
+(function () {
 
 	var icons = {
 		note: "info-circle",
@@ -11,65 +11,55 @@ $(document).ready(function(){
 		new: "stars-01"
 	};
 
-	$('#main_content_wrap blockquote, .singleentry blockquote').each(function() {
-		var $blockquote = $(this);
-		var firstWord = $blockquote.children('p').first().text().trim().split(/\s+/)[0];
+	var keywords = {
+		Note: "note",
+		Warning: "warning",
+		Tip: "tip",
+		Bestpractice: "bestpractice",
+		Deprecated: "deprecated",
+		Update: "update",
+		Installation: "installation",
+		Quote: "quote",
+		New: "new"
+	};
 
-		var className = "";
+	var dashPattern = /^(–|—|--)/;
 
-		switch (firstWord) {
-			case "Note":
-				className = "note";
-				break;
-			case "Warning":
-				className = "warning";
-				break;
-			case "Tip":
-				className = "tip";
-				break;
-			case "Bestpractice":
-				className = "bestpractice";
-				break;
-			case "Deprecated":
-				className = "deprecated";
-				break;
-			case "Update":
-				className = "update";
-				break;
-			case "Installation":
-				className = "installation";
-				break;
-			case "Quote":
-				className = "quote";
-				break;
-			case "New":
-				className = "new";
-				break;
-			default:
-				className = "";
-				break;
-		}
+	function childParagraphs(el) {
+		return Array.prototype.filter.call(el.children, function (child) {
+			return child.tagName === 'P';
+		});
+	}
 
-		var hasKeyword = className !== "";
+	document.querySelectorAll('#main_content_wrap blockquote, .singleentry blockquote').forEach(function (blockquote) {
+		var firstParagraph = childParagraphs(blockquote)[0];
+		var firstWord = firstParagraph ? firstParagraph.textContent.trim().split(/\s+/)[0] : '';
+
+		var className = Object.prototype.hasOwnProperty.call(keywords, firstWord) ? keywords[firstWord] : '';
+		var hasKeyword = className !== '';
 		if (!hasKeyword) {
-			className = "note";
+			className = 'note';
 		}
 
-		$blockquote.addClass(className);
+		blockquote.classList.add(className);
 
 		if (hasKeyword) {
-			$blockquote.find('p:first-child').html(function(_, oldHtml) {
-				return oldHtml.replace(firstWord, '').trim();
+			blockquote.querySelectorAll('p:first-child').forEach(function (p) {
+				p.innerHTML = p.innerHTML.replace(firstWord, '').trim();
 			});
 		}
 
-		$blockquote.wrapInner('<div class="content"></div>');
+		var content = document.createElement('div');
+		content.className = 'content';
+		while (blockquote.firstChild) {
+			content.appendChild(blockquote.firstChild);
+		}
+		blockquote.appendChild(content);
 
-		if (className === "quote") {
-			var $content = $blockquote.children('.content');
-			var $first = $content.children('p').first();
-			if (!$first.text().trim() && !$first.find('img').length) {
-				$first.remove();
+		if (className === 'quote') {
+			var first = childParagraphs(content)[0];
+			if (first && !first.textContent.trim() && !first.querySelector('img')) {
+				first.remove();
 			}
 			var $last = $blockquote.find('.content > p:last-child');
 			if (/^(\u2013|\u2014|--)/.test($last.text().trim())) {
@@ -85,29 +75,33 @@ $(document).ready(function(){
 				if (!$last.find('img').length) {
 					$last.prepend($author.find('img.avatar').clone());
 				}
-				if ($last.find('img').length) {
-					var dashNode = $last.contents().filter(function() {
-						return this.nodeType === 3 && this.nodeValue.trim();
-					}).get(0);
+				if (last.querySelector('img')) {
+					var dashNode = Array.prototype.find.call(last.childNodes, function (node) {
+						return node.nodeType === Node.TEXT_NODE && node.nodeValue.trim();
+					});
 					if (dashNode) {
 						dashNode.nodeValue = dashNode.nodeValue.replace(/^\s*(–|—|--)\s*/, ' ');
 					}
 				}
 			}
-			var $quoteText = $content.children('p').not('.quote-author');
-			$quoteText.first().addClass('quote-open').html(function(_, html) {
-				return html.replace(/^(\s*(?:<[^>]+>\s*)*)[“"]/, '$1');
+			var quoteText = childParagraphs(content).filter(function (p) {
+				return !p.classList.contains('quote-author');
 			});
-			if (!/[”"]$/.test($quoteText.last().text().trim())) {
-				$quoteText.last().addClass('quote-close');
+			if (quoteText.length) {
+				quoteText[0].classList.add('quote-open');
+				quoteText[0].innerHTML = quoteText[0].innerHTML.replace(/^(\s*(?:<[^>]+>\s*)*)[“"]/, '$1');
+				var lastQuote = quoteText[quoteText.length - 1];
+				if (!/[”"]$/.test(lastQuote.textContent.trim())) {
+					lastQuote.classList.add('quote-close');
+				}
 			}
-			$content.prepend('<span class="sr-only">Quote</span>');
+			content.insertAdjacentHTML('afterbegin', '<span class="sr-only">Quote</span>');
 		} else {
-			var label = (className == "bestpractice") ? 'Best practice' : (hasKeyword ? firstWord : 'Note');
-			$blockquote.find('.content').prepend('<span class="sr-only">' + label + '</span>');
-			$blockquote.prepend('<div class="symbol" title="' + label + '"><svg class="icon"><use href="#' + icons[className] + '"></use></svg></div>');
+			var label = (className === 'bestpractice') ? 'Best practice' : (hasKeyword ? firstWord : 'Note');
+			content.insertAdjacentHTML('afterbegin', '<span class="sr-only">' + label + '</span>');
+			blockquote.insertAdjacentHTML('afterbegin', '<div class="symbol" title="' + label + '"><svg class="icon"><use href="#' + icons[className] + '"></use></svg></div>');
 		}
 
 	});
 
-});
+})();

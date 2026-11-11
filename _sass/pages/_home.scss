@@ -592,7 +592,7 @@ body.landing{
 				fill: var(--main-text-secondary-color, #333333);
 			}
 			.dot-duckdb{
-				offset-path: path("M110 40.5 H258.5 V100 V40.5 H410");
+				offset-path: path("M106 40.5 H258.5 V100 V40.5 H413");
 				animation: stack-dot-duckdb 5.75s linear infinite;
 			}
 			.dot-quack-app{
@@ -657,16 +657,16 @@ body.landing{
 
 	@keyframes stack-dot-duckdb{
 		0%{ offset-distance: 0%; }
-		15%{ offset-distance: 19.6%; }
-		21%{ offset-distance: 35.4%; }
-		24%{ offset-distance: 43.8%; }
-		27%{ offset-distance: 47.7%; }
-		28%{ offset-distance: 49.6%; }
-		38%{ offset-distance: 49.6%; }
-		40%{ offset-distance: 53.1%; }
+		15%{ offset-distance: 19.8%; }
+		21%{ offset-distance: 35.8%; }
+		24%{ offset-distance: 44%; }
+		27%{ offset-distance: 47.9%; }
+		28%{ offset-distance: 49.8%; }
+		38%{ offset-distance: 49.8%; }
+		40%{ offset-distance: 53.2%; }
 		42%{ offset-distance: 55.6%; }
-		45%{ offset-distance: 63.8%; }
-		51%{ offset-distance: 80%; }
+		45%{ offset-distance: 63.7%; }
+		51%{ offset-distance: 79.9%; }
 		64%{ offset-distance: 96.9%; }
 		65%, 100%{ offset-distance: 100%; }
 	}
