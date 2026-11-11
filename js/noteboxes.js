@@ -76,7 +76,11 @@ $(document).ready(function(){
 				$last.addClass('quote-author');
 				var authorName = $last.text().trim().replace(/^(\u2013|\u2014|--)\s*/, '');
 				var $author = $('.postheader-author').filter(function() {
-					return $(this).find('.name').text().trim() === authorName;
+					// Match if the attribution starts with the author's name,
+					// e.g., "Ilya Boyandin, creator of SQLRooms" matches "Ilya Boyandin"
+					var name = $(this).find('.name').text().trim();
+					return name !== '' && authorName.indexOf(name) === 0 &&
+						!/^[\p{L}\p{N}]/u.test(authorName.slice(name.length));
 				}).first();
 				if (!$last.find('img').length) {
 					$last.prepend($author.find('img.avatar').clone());
