@@ -488,6 +488,10 @@ body.contact{
 	gap: 8px;
 	min-width: 0;
 
+	.source-icon{
+		stroke: none;
+	}
+
 	> span{
 		min-width: 0;
 		overflow: hidden;
