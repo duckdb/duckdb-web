@@ -171,7 +171,16 @@
 		window.scrollTo({ top: top, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
 	}
 
+	function ready(fn) {
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', fn);
+		} else {
+			fn();
+		}
+	}
+
 	window.Helpers = {
+		ready: ready,
 		isVisible: isVisible,
 		stop: function (el) { stop(el); },
 		show: reveal,

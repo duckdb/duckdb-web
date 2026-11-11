@@ -24,10 +24,11 @@ function detectPlatform() {
 	return 'macos';
 }
 
-$(document).ready(function(){
+Helpers.ready(function(){
 	var initialHashTarget = Helpers.hashTarget(window.location.hash);
 	if (initialHashTarget) {
-		Helpers.scrollToTarget(initialHashTarget);
+		// Wait for the browser's own fragment scroll, then apply the header offset
+		setTimeout(function () { Helpers.scrollToTarget(initialHashTarget); }, 0);
 		var hashParent = initialHashTarget.parentElement;
 		if (document.body.classList.contains('faq') && hashParent && hashParent.classList.contains('qa-wrap')) {
 			hashParent.classList.add('open');
