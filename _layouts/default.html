@@ -173,28 +173,28 @@
 	{% include footer.html %}
 	
 	{% if page.ecosystem %}
-	<script src="/js/ecosystem_diagram.js" defer></script>
+	<script src="{{ '/js/ecosystem_diagram.js' | fingerprint }}" defer></script>
 	{% endif %}
 	<script src="{{ '/js/helpers.js' | fingerprint }}" defer></script>
 	<script src="/js/minisearch.js" defer></script>
-	<script src="/js/search.js" defer></script>
-	<script src="/js/copy_button.js" defer></script>
+	<script src="{{ '/js/search.js' | fingerprint }}" defer></script>
+	<script src="{{ '/js/copy_button.js' | fingerprint }}" defer></script>
 	{% if page.body_class contains "landing" or page.body_class contains "installation" %}
 	<script src="/js/ua-parser.min.js" defer></script>
 	{% endif %}
 	{% if page.body_class contains "duckcon" or page.content contains "quote-slider" %}
 	<script src="/js/swiper-bundle.min.js" defer></script>
 	{% endif %}
-	<script src="/js/noteboxes.js" defer></script>
+	<script src="{{ '/js/noteboxes.js' | fingerprint }}" defer></script>
 	<script src="{{ '/js/script.js' | fingerprint }}" defer></script>
 	{% if page.body_class contains "installation" %}
 	<script src="{{ '/js/install.js' | fingerprint }}" defer></script>
 	{% endif %}
 	{% if page.body_class contains "wasm" %}
-	<script src="/js/wasm.js" defer></script>
+	<script src="{{ '/js/wasm.js' | fingerprint }}" defer></script>
 	{% endif %}
 	{% if page.body_class contains "quack" %}
-	<script src="/js/quack.js" defer></script>
+	<script src="{{ '/js/quack.js' | fingerprint }}" defer></script>
 	{% endif %}
 
 </body>
