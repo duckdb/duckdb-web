@@ -349,62 +349,64 @@ $(document).ready(function(){
 	}
 	
 	/* MOBILE MENU / SUBMENU */
-	const $hamburger = $(".hamburger");
-	const $landingMenu = $(".landingmenu nav");
-	const $sideNavigation = $(".sidenavigation");
-	const $banner = $(".banner").not(".docversion");
+	const hamburgers = document.querySelectorAll('.hamburger');
+	const landingMenus = Array.from(document.querySelectorAll('.landingmenu nav'));
+	const sideNavigations = document.querySelectorAll('.sidenavigation');
+	const banners = Array.from(document.querySelectorAll('.banner')).filter(function (banner) {
+		return !banner.classList.contains('docversion');
+	});
+	let bannersHiddenByMenu = [];
 
-	if ($hamburger.length > 0) {
-		$hamburger.on("click", function() {
-			$(this).toggleClass("is-active");
+	if (hamburgers.length > 0) {
+		hamburgers.forEach(function (hamburger) {
+			hamburger.addEventListener('click', function () {
+				this.classList.toggle('is-active');
 
-			if ($landingMenu.length > 0) { // Menu 1: Landingmenu
-				$landingMenu.toggleClass("slidein");
-				$("body main").toggleClass("inactive");
-			}
-
-			if ($sideNavigation.length > 0) { // Menu 2: Sidenavigation
-				$sideNavigation.toggleClass("slidein");
-				$("body.documentation main .wrap").toggleClass("inactive");
-			}
-
-			// Banner hide/show mobile menu
-			if ($banner.length > 0) {
-				const isActive = $(this).hasClass("is-active");
-				if (isActive) {
-					$banner.slideUp(250);
-				} else {
-					$banner.slideDown(250);
+				if (landingMenus.length > 0) { // Menu 1: Landingmenu
+					landingMenus.forEach(function (nav) { nav.classList.toggle('slidein'); });
+					document.querySelectorAll('body main').forEach(function (main) { main.classList.toggle('inactive'); });
 				}
-			}
+
+				if (sideNavigations.length > 0) { // Menu 2: Sidenavigation
+					sideNavigations.forEach(function (nav) { nav.classList.toggle('slidein'); });
+					document.querySelectorAll('body.documentation main .wrap').forEach(function (wrap) { wrap.classList.toggle('inactive'); });
+				}
+
+				// Banner hide/show mobile menu, restoring only banners the menu hid
+				if (this.classList.contains('is-active')) {
+					bannersHiddenByMenu = banners.filter(Helpers.isVisible);
+					bannersHiddenByMenu.forEach(function (banner) {
+						Helpers.slideUp(banner, 250);
+					});
+				} else {
+					bannersHiddenByMenu.forEach(function (banner) {
+						Helpers.slideDown(banner, 250);
+					});
+					bannersHiddenByMenu = [];
+				}
+			});
 		});
 
 		// Menu 1 Open Submenu
-		function setupMobileMenu() {
-			if ($landingMenu.length > 0 && window.innerWidth <= 900) {
-				$landingMenu.off("click", ".hasSub");
-				$landingMenu.on("click", ".hasSub", function(e) {
-					e.preventDefault();
-					const $submenu = $(this).next(".submenuwrap");
-					if ($(this).hasClass("open")) {
-						$(this).removeClass("open");
-						$submenu.stop().slideUp();
-					} else {
-						$landingMenu.find(".hasSub").removeClass("open");
-						$landingMenu.find(".submenuwrap").slideUp();
-						$(this).addClass("open");
-						$submenu.stop().slideDown();
-					}
-				});
-			} else {
-				$landingMenu.off("click", ".hasSub");
-			}
-		}
-
-		setupMobileMenu();
-
-		$(window).on('resize', function() {
-			setupMobileMenu();
+		landingMenus.forEach(function (nav) {
+			nav.addEventListener('click', function (e) {
+				if (window.innerWidth > 900) return;
+				const item = e.target.closest('.hasSub');
+				if (!item || !nav.contains(item)) return;
+				e.preventDefault();
+				const submenu = item.nextElementSibling && item.nextElementSibling.classList.contains('submenuwrap') ? item.nextElementSibling : null;
+				if (item.classList.contains('open')) {
+					item.classList.remove('open');
+					if (submenu) Helpers.slideUp(submenu);
+				} else {
+					landingMenus.forEach(function (menu) {
+						menu.querySelectorAll('.hasSub').forEach(function (el) { el.classList.remove('open'); });
+						menu.querySelectorAll('.submenuwrap').forEach(function (el) { Helpers.slideUp(el); });
+					});
+					item.classList.add('open');
+					if (submenu) Helpers.slideDown(submenu);
+				}
+			});
 		});
 	}
 
@@ -770,27 +772,29 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 			$('.searchoverlay .empty_input').removeClass('visible');
 		}
 	});
-	if( $('.hamburger').is(':visible') ){
-		$('.search_icon').on('click', function(e){
-			if ( $('.hamburger').hasClass('is-active') ){
-				if( $('body').hasClass('search') ){
-					$('.hamburger').removeClass('is-active');
-					$('body.documentation main .wrap.inactive').removeClass('inactive');
-					$('.sidenavigation.slidein').removeClass('slidein');
-					$('nav.slidein').removeClass('slidein');
-				} else {
-					$('.sidenavigation').addClass('slidein')
-					$('body.documentation main .wrap').addClass('inactive');
-				}
+	document.querySelectorAll('.search_icon').forEach(function (icon) {
+		icon.addEventListener('click', function () {
+			const allHamburgers = Array.from(document.querySelectorAll('.hamburger'));
+			if (!allHamburgers.some(Helpers.isVisible)) return;
+			if (!allHamburgers.some(function (h) { return h.classList.contains('is-active'); })) return;
+			if (document.body.classList.contains('search')) {
+				allHamburgers.forEach(function (h) { h.classList.remove('is-active'); });
+				document.querySelectorAll('body.documentation main .wrap.inactive').forEach(function (el) { el.classList.remove('inactive'); });
+				document.querySelectorAll('.sidenavigation.slidein, nav.slidein').forEach(function (el) { el.classList.remove('slidein'); });
+			} else {
+				document.querySelectorAll('.sidenavigation').forEach(function (el) { el.classList.add('slidein'); });
+				document.querySelectorAll('body.documentation main .wrap').forEach(function (el) { el.classList.add('inactive'); });
 			}
-		})
-	}
-	$('.hamburger').on('click', function(){
-		if( !$(this).hasClass('is-active') && $('body').hasClass('search') ){
-			toggleSearch();
-			$('.sidenavigation').fadeIn();
-			$('body.documentation main .wrap.inactive').removeClass('inactive');
-		}
+		});
+	});
+	document.querySelectorAll('.hamburger').forEach(function (hamburger) {
+		hamburger.addEventListener('click', function () {
+			if (!this.classList.contains('is-active') && document.body.classList.contains('search')) {
+				toggleSearch();
+				document.querySelectorAll('.sidenavigation').forEach(function (el) { Helpers.fadeIn(el); });
+				document.querySelectorAll('body.documentation main .wrap.inactive').forEach(function (el) { el.classList.remove('inactive'); });
+			}
+		});
 	});
 	
 	// UPDATE HIGHLIGHT ELEMENT
