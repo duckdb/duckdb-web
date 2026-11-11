@@ -177,9 +177,10 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	svg.anchor-icon {
-		width: 16px;
-		height: 16px;
+		width: 14px;
+		height: 14px;
 		margin-left: 8px;
+		vertical-align: -2px;
 		fill: none;
 		stroke-width: 2;
 		cursor: pointer;

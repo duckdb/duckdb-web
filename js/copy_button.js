@@ -1,42 +1,46 @@
-$(document).ready(function() {
-    var codeBlocks = [].concat(...document.querySelectorAll('pre.highlight'), ...document.querySelectorAll('figure.highlight'));
+(function () {
+    var codeBlocks = document.querySelectorAll('pre.highlight, figure.highlight');
 
     codeBlocks.forEach(function (codeBlock) {
-        if (!$(codeBlock).parents().hasClass('language-console')) {
-            var copyButton = document.createElement('button');
-            copyButton.className = 'copy';
-            copyButton.type = 'button';
-            copyButton.ariaLabel = 'Copy code to clipboard';
-            copyButton.innerHTML = '<span class="copy"></span>';
-            codeBlock.append(copyButton);
+        if (codeBlock.closest('.language-console') || codeBlock.querySelector(':scope > button.copy')) {
+            return;
         }
+        var copyButton = document.createElement('button');
+        copyButton.className = 'copy';
+        copyButton.type = 'button';
+        copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+        copyButton.innerHTML = '<span class="copy"></span>';
+        codeBlock.append(copyButton);
     });
-    
-    $('main').on('click', 'button.copy', function() {
-        var elem = $(this);
-        var codeElem = $(this).parent().find('code')[0];
 
-        function extractTextWithLinebreaks(node) { // <br> to \n 
-            var text = '';
-            node.childNodes.forEach(function(child) {
-                if (child.nodeType === Node.TEXT_NODE) {
-                    text += child.textContent;
-                } else if (child.nodeName === 'BR') {
-                    text += '\n';
-                } else {
-                    text += extractTextWithLinebreaks(child);
-                }
-            });
-            return text;
+    function extractTextWithLinebreaks(node) { // <br> to \n
+        var text = '';
+        node.childNodes.forEach(function (child) {
+            if (child.nodeType === Node.TEXT_NODE) {
+                text += child.textContent;
+            } else if (child.nodeName === 'BR') {
+                text += '\n';
+            } else {
+                text += extractTextWithLinebreaks(child);
+            }
+        });
+        return text;
+    }
+
+    document.addEventListener('click', function (event) {
+        var button = event.target.closest('main button.copy');
+        if (!button) {
+            return;
         }
-
-        var text = extractTextWithLinebreaks(codeElem).trim();
-        window.navigator.clipboard.writeText(text);
-        elem.html('<span class="copied"></span>');
+        var codeElem = button.parentElement.querySelector('code');
+        if (!codeElem) {
+            return;
+        }
+        window.navigator.clipboard.writeText(extractTextWithLinebreaks(codeElem).trim());
+        button.innerHTML = '<span class="copied"></span>';
 
         setTimeout(function () {
-            elem.html('<span class="copy"></span>');
+            button.innerHTML = '<span class="copy"></span>';
         }, 3500);
     });
-    
-});
+})();
