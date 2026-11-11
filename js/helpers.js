@@ -36,6 +36,9 @@
 		const from = current.type === 'fade' ? { opacity: getComputedStyle(el).opacity } : readBox(el);
 		current.animation.cancel();
 		running.delete(el);
+		if (current.type === 'slide') {
+			el.style.overflow = '';
+		}
 		return { direction: current.direction, from: from };
 	}
 
@@ -136,6 +139,9 @@
 
 	window.Helpers = {
 		isVisible: isVisible,
+		stop: function (el) { stop(el); },
+		show: reveal,
+		hide: conceal,
 		slideDown: slideDown,
 		slideUp: slideUp,
 		slideToggle: slideToggle,
