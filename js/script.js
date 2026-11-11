@@ -95,7 +95,6 @@ Helpers.ready(function(){
 			return new Isotope(el, {
 				itemSelector: '.postpreview',
 				layoutMode: 'fitRows',
-				isJQueryFiltering: false,
 				fitRows: {
 					gutter: document.querySelector('.guides-list') ? 16 : 32,
 					equalheight: true
