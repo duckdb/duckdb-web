@@ -27,8 +27,15 @@ function detectPlatform() {
 Helpers.ready(function(){
 	var initialHashTarget = Helpers.hashTarget(window.location.hash);
 	if (initialHashTarget) {
-		// Wait for the browser's own fragment scroll, then apply the header offset
-		setTimeout(function () { Helpers.scrollToTarget(initialHashTarget); }, 0);
+		// The browser keeps re-scrolling to the fragment while the page loads, so apply the header offset afterwards
+		var scrollToInitialHash = function () {
+			setTimeout(function () { Helpers.scrollToTarget(initialHashTarget); }, 0);
+		};
+		if (document.readyState === 'complete') {
+			scrollToInitialHash();
+		} else {
+			window.addEventListener('load', scrollToInitialHash, { once: true });
+		}
 		var hashParent = initialHashTarget.parentElement;
 		if (document.body.classList.contains('faq') && hashParent && hashParent.classList.contains('qa-wrap')) {
 			hashParent.classList.add('open');
