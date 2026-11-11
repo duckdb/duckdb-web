@@ -20,7 +20,9 @@ Working with a small budget, Ilya wanted to keep Flowmap City easy to operate wi
 
 As users pan, zoom, or change filters in Flowmap City, DuckDB-Wasm runs SQL queries in the browser to update the map. A single interaction can trigger a number of queries preparing the data for the current viewport:
 
-<video src="https://ilya.boyandin.me/media/projects/flowmap-city/flowmap-city.mp4" controls muted loop playsinline style="width: 100%; height: auto;"></video>
+<div class="video-container">
+<video src="https://blobs.duckdb.org/videos/flowmap-city.mp4" controls muted loop playsinline></video>
+</div>
 
 Ilya explains: **“We can now do much of the analysis and visualization in the browser. This keeps infrastructure requirements low and can be faster because queries don’t need a round trip to the server.”**
 
@@ -42,7 +44,7 @@ At Foursquare, Ilya’s team has been developing [Foursquare Spatial Desktop](ht
 
 Ilya explains: **“For this particular product, DuckDB embedded into the desktop app is just the perfect fit. It enables analysis workflows which users can execute locally.”** SQLite is embeddable too, he says, but it is not column-oriented and was not designed for analytics on larger datasets.
 
-![Foursquare Spatial Desktop](https://ilya.boyandin.me/media/projects/fsq-spatial-desktop/fsq-spatial-desktop-earthquakes.webp)
+![Foursquare Spatial Desktop](/images/blog/local-analytics/fsq-spatial-desktop-earthquakes.webp)
 
 Modern laptops have substantial computing power and GPUs well suited to visualization, Ilya adds. **“I’m seeing renewed interest in applications that keep data and computation on the user’s own machine.”**
 
@@ -52,7 +54,9 @@ Spatial Desktop uses [deck.gl](https://deck.gl/) to render maps, but drawing mil
 
 Map tiles are often prepared in advance for fast loading. Spatial Desktop can also generate tiles from users’ own datasets on demand, using the local DuckDB database, so users can start exploring without preparing a tileset first. For each requested tile, it selects nearby features and takes a random sample to keep dense tiles manageable. It also simplifies lines and polygons according to the zoom level, retaining more detail as the user zooms in.
 
-<video src="https://ilya.boyandin.me/media/projects/fsq-spatial-desktop/fsq-spatial-desktop-dynamic-tiling-4-1500.mp4" controls muted loop playsinline style="width: 100%; height: auto;"></video>
+<div class="video-container">
+<video src="https://blobs.duckdb.org/videos/fsq-spatial-desktop-dynamic-tiling-4-1500.mp4" controls muted loop playsinline></video>
+</div>
 
 The following simplified query shows the main steps. It assumes the source geometries are already in Web Mercator coordinates (`EPSG:3857`). The tile width determines both a small buffer around the search area and a simplification tolerance equivalent to roughly half a pixel:
 
@@ -99,8 +103,9 @@ An HTTP server running locally as part of the Electron desktop app serves the ti
 
 SQLRooms also powers the analytical workspace in [Cosmograph](https://cosmograph.app), a browser-based graph exploration tool developed by [Nikita Rokotyan](https://rokotyan.com/) and Thor Whalen. Ilya helped integrate SQLRooms into the application, which can visualize graphs with millions of edges.
 
-<video src="https://ilya.boyandin.me/media/projects/cosmograph/cosmograph-2.0.mp4"
-       controls muted loop playsinline style="width: 100%; height: auto;"></video>
+<div class="video-container">
+<video src="https://blobs.duckdb.org/videos/cosmograph-2.0.mp4" controls muted loop playsinline></video>
+</div>
 
 Cosmograph has been tested with datasets ranging from tens of thousands of points to several million. DuckDB-Wasm handles data loading and SQL queries in a background worker, helping keep the interface responsive. It lets the app filter and summarize data as users explore, while columnar query results reduce the conversion work needed to prepare data for visualization.
 
@@ -112,14 +117,15 @@ Users can ask questions in natural language. The assistant generates SQL queries
 
 In the Spatial Desktop example below, the assistant generates SQL to retrieve data from available sources and calculate a combined score for wine-growing suitability across Italy. The resulting map is accompanied by AI-generated regional analysis:
 
-![Foursquare Spatial Desktop showing a wine-growing suitability map of Italy alongside AI-generated regional analysis](https://ilya.boyandin.me/media/projects/fsq-spatial-desktop/italy-wine-suitability-with-sidebar.webp)
+![Foursquare Spatial Desktop showing a wine-growing suitability map of Italy alongside AI-generated regional analysis](/images/blog/local-analytics/italy-wine-suitability-with-sidebar.webp)
 
 ## Where SQLRooms Goes Next
 
 Ilya is extending SQLRooms’ workspace model so users can bring their analysis together in interactive documents. These documents combine text with blocks such as charts or SQL queries, letting users explain their findings alongside the analysis that produced them.
 
-<video src="https://ilya.boyandin.me/media/projects/sqlrooms/sqlrooms-cars-document.mp4"
-       controls muted loop playsinline style="width: 100%; height: auto;"></video>
+<div class="video-container">
+<video src="https://blobs.duckdb.org/videos/sqlrooms-cars-document.mp4" controls muted loop playsinline></video>
+</div>
 
 Ilya is also exploring other ways to work with these analytical projects. At [DuckCon #7]({% link _events/2026-06-24-duckcon7.html %}) in Amsterdam, he demonstrated a SQLRooms command-line tool with a notebook-style interface. It saves both the data and the analysis artifacts in a single DuckDB database file. The goal is to let users continue the same project through a graphical application or the command line. The CLI design is still evolving.
 
