@@ -67,7 +67,7 @@ Extensions are signed using 2048-bit RSA keys. The key can be provided either in
 
 The fingerprint is the SHA-256 hash of the DER-encoded public key. To compute it for a public key file:
 
-```batch
+```bash
 openssl pkey -pubin -in signing_key.pub -outform DER | openssl dgst -sha256
 ```
 
@@ -83,14 +83,14 @@ The signed value is not a plain hash of the file. The bytes before the signature
 
 To create a key pair:
 
-```batch
+```bash
 openssl genrsa -out signing_key.pem 2048
 openssl rsa -in signing_key.pem -pubout -out signing_key.pub
 ```
 
 To sign an extension and add it to the [repository's directory structure]({% link docs/2.0/extensions/extension_distribution.md %}#creating-a-custom-repository):
 
-```batch
+```bash
 size=$(wc -c < my_ext.duckdb_extension)
 head -c $((size - 256)) my_ext.duckdb_extension > my_ext.unsigned
 ./scripts/compute-extension-hash.sh my_ext.unsigned > my_ext.hash
