@@ -119,12 +119,8 @@ $(document).ready(function(){
 			var tags = button.closest('.filtertags');
 			var highlight = tags && tags.querySelector('.filter-highlight');
 			if (!highlight || !Helpers.isVisible(button)) return;
-			var parent = button.offsetParent || document.documentElement;
-			var buttonRect = button.getBoundingClientRect();
-			var parentRect = parent.getBoundingClientRect();
-			var marginLeft = parseFloat(getComputedStyle(button).marginLeft) || 0;
-			highlight.style.left = (buttonRect.left - parentRect.left - parent.clientLeft - marginLeft) + 'px';
-			highlight.style.width = buttonRect.width + 'px';
+			highlight.style.left = Helpers.positionLeft(button) + 'px';
+			highlight.style.width = button.getBoundingClientRect().width + 'px';
 		}
 
 		function setActiveFilter(value) {
@@ -906,86 +902,99 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 	});
 	
 	// UPDATE HIGHLIGHT ELEMENT
-	function updateHighlight($container, $item) {
-		const $highlight = $container.find(".select-highlight");
-		if ($highlight.length && $item.length) {
-			const itemOffset = $item.position();
-			const itemWidth = $item.outerWidth();
-			$highlight.css({
-				left: itemOffset.left || 0,
-				width: itemWidth || 0,
-			});
-		}
+	function updateHighlight(container, item) {
+		if (!container || !item) return;
+		var highlights = container.querySelectorAll('.select-highlight');
+		if (!highlights.length) return;
+		var left = Helpers.positionLeft(item) || 0;
+		var width = item.getBoundingClientRect().width || 0;
+		highlights.forEach(function (highlight) {
+			highlight.style.left = left + 'px';
+			highlight.style.width = width + 'px';
+		});
 	}
-	
+
+	function tabItems(containers) {
+		var items = [];
+		containers.forEach(function (container) {
+			container.querySelectorAll(':scope > ul > li').forEach(function (li) { items.push(li); });
+		});
+		return items;
+	}
+
 	// QUICK INSTALLATION ON LANDING/HOME PAGE
-	if ($(".install .environment").length) {
-		const $envTopbar = $(".install .environment");
-		const $envItems = $envTopbar.find("> ul > li");
-		const $activeEnvItem = $envItems.filter(".active");
-		
-		function updateInstallation($item) {
-			updateHighlight($envTopbar, $item);
-			const activeClient = $item.attr("data-client");
-			let $installDiv = $(
-				`#quick-installation div[data-install='${activeClient} ${OSdatid}']`
-			);
-			if (!$installDiv.length) {
-				$installDiv = $(
-					`#quick-installation div[data-install='${activeClient}']`
-				);
+	var envTopbars = document.querySelectorAll('.install .environment');
+	if (envTopbars.length) {
+		var envTopbar = envTopbars[0];
+		var envItems = tabItems(envTopbars);
+
+		var updateInstallation = function (item) {
+			updateHighlight(envTopbar, item);
+			var activeClient = item ? item.getAttribute('data-client') : undefined;
+			var installDiv = document.querySelector('#quick-installation div[data-install=\'' + activeClient + ' ' + OSdatid + '\']') ||
+				document.querySelector('#quick-installation div[data-install=\'' + activeClient + '\']');
+			if (installDiv) {
+				document.querySelectorAll('.result').forEach(function (el) { el.innerHTML = installDiv.innerHTML; });
 			}
-			$(".result").html($installDiv.html());
-			const version = $installDiv.attr("data-version");
-			const $versionSpan = $(".bottombar .version");
-			if (version) {
-				$versionSpan.text("Latest version: " + version).show();
-			} else {
-				$versionSpan.hide();
-			}
-		}
-		
-		updateInstallation($activeEnvItem);
-	
-		$envItems.on('click', function () {
-			$envItems.removeClass("active");
-			$(this).addClass("active");
-			updateInstallation($(this));
+			var version = installDiv ? installDiv.getAttribute('data-version') : null;
+			document.querySelectorAll('.bottombar .version').forEach(function (el) {
+				if (version) {
+					el.textContent = 'Latest version: ' + version;
+					Helpers.show(el);
+				} else {
+					Helpers.hide(el);
+				}
+			});
+		};
+
+		updateInstallation(envItems.filter(function (li) { return li.classList.contains('active'); })[0]);
+
+		envItems.forEach(function (li) {
+			li.addEventListener('click', function () {
+				envItems.forEach(function (other) { other.classList.remove('active'); });
+				li.classList.add('active');
+				updateInstallation(li);
+			});
 		});
 	}
 
 	// DUCKSTACK TABS ON LANDING/HOME PAGE
-	if ($("section.duckstack .topbar").length) {
-		const $stackTopbar = $("section.duckstack .topbar");
-		const $stackItems = $stackTopbar.find("> ul > li");
-		const $stackPanels = $("section.duckstack .stack-panel");
+	var stackTopbars = document.querySelectorAll('section.duckstack .topbar');
+	if (stackTopbars.length) {
+		var stackTopbar = stackTopbars[0];
+		var stackItems = tabItems(stackTopbars);
+		var stackPanels = document.querySelectorAll('section.duckstack .stack-panel');
 
-		updateHighlight($stackTopbar, $stackItems.filter(".active"));
+		updateHighlight(stackTopbar, stackItems.filter(function (li) { return li.classList.contains('active'); })[0]);
 
-		$stackItems.on('click', function () {
-			$stackItems.removeClass("active");
-			$(this).addClass("active");
-			updateHighlight($stackTopbar, $(this));
-			const stack = $(this).attr("data-stack");
-			$stackPanels.removeClass("active");
-			$stackPanels.filter(`[data-stack='${stack}']`).addClass("active");
+		stackItems.forEach(function (li) {
+			li.addEventListener('click', function () {
+				stackItems.forEach(function (other) { other.classList.remove('active'); });
+				li.classList.add('active');
+				updateHighlight(stackTopbar, li);
+				var stack = li.getAttribute('data-stack');
+				stackPanels.forEach(function (panel) {
+					panel.classList.toggle('active', panel.getAttribute('data-stack') === stack);
+				});
+			});
 		});
 	}
 
 	/** HIGHLIGHT TOC MENU **/
-	const tocItems = $('.toc-entry > a[href^="#"]').map(function() {
-		const heading = document.getElementById(decodeURIComponent(this.getAttribute('href').slice(1)));
-		return heading ? { heading: heading, entry: this.parentNode } : null;
-	}).get();
+	var tocItems = [];
+	document.querySelectorAll('.toc-entry > a[href^="#"]').forEach(function (link) {
+		var heading = document.getElementById(decodeURIComponent(link.getAttribute('href').slice(1)));
+		if (heading) tocItems.push({ heading: heading, entry: link.parentNode });
+	});
 
 	if (tocItems.length) {
-		const $tocEntries = $('.toc-entry');
-		let tocTicking = false;
+		var tocEntries = document.querySelectorAll('.toc-entry');
+		var tocTicking = false;
 
-		const updateToc = function() {
+		var updateToc = function() {
 			tocTicking = false;
-			const scrollPos = window.scrollY + 150;
-			let current = null;
+			var scrollPos = window.scrollY + 150;
+			var current = null;
 
 			if (scrollPos + window.innerHeight >= document.documentElement.scrollHeight - 20) {
 				current = tocItems[tocItems.length - 1].entry;
@@ -997,36 +1006,46 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 				});
 			}
 
-			$tocEntries.removeClass('current');
+			tocEntries.forEach(function (entry) { entry.classList.remove('current'); });
 			if (current) {
 				current.classList.add('current');
 			}
 		};
 
-		$(window).on('scroll', function() {
+		window.addEventListener('scroll', function() {
 			if (!tocTicking) {
 				tocTicking = true;
 				window.requestAnimationFrame(updateToc);
 			}
-		});
+		}, { passive: true });
 	}
 
 
 	/** HIDE BANNER **/
-	const $homeBanner = $('.banner').not('.docversion');
-	const currentBannerVersion = $homeBanner.data('banner-version') || 'default';
-	const storedBannerData = getWithExpiry("homeBanner");
-	const shouldShowBanner = !storedBannerData || storedBannerData.version !== currentBannerVersion;
+	var homeBanners = Array.prototype.filter.call(document.querySelectorAll('.banner'), function (el) {
+		return !el.classList.contains('docversion');
+	});
+	var bannerVersion = function () {
+		var value = homeBanners.length ? homeBanners[0].getAttribute('data-banner-version') : null;
+		if (value !== null && value !== '' && String(+value) === value) return +value;
+		return value || 'default';
+	};
+	var currentBannerVersion = bannerVersion();
+	var storedBannerData = getWithExpiry("homeBanner");
+	var shouldShowBanner = !storedBannerData || storedBannerData.version !== currentBannerVersion;
 
-	if (!shouldShowBanner) {
-		$homeBanner.hide();
-	} else {
-		$homeBanner.css('display', 'flex');
-	}
-	$homeBanner.find('.close').on('click', function(){
-		const bannerVersion = $homeBanner.data('banner-version') || 'default';
-		setWithExpiry('homeBanner', {version: bannerVersion, closed: true}, 172800000); // 900000 = 15 min, 172800000 = 2 days
-		$homeBanner.slideUp(300);
+	homeBanners.forEach(function (banner) {
+		if (!shouldShowBanner) {
+			Helpers.hide(banner);
+		} else {
+			banner.style.display = 'flex';
+		}
+		banner.querySelectorAll('.close').forEach(function (close) {
+			close.addEventListener('click', function(){
+				setWithExpiry('homeBanner', {version: bannerVersion(), closed: true}, 172800000); // 900000 = 15 min, 172800000 = 2 days
+				homeBanners.forEach(function (el) { Helpers.slideUp(el, 300); });
+			});
+		});
 	});
 
 	/** DOCS VERSION BANNER HEIGHT **/
@@ -1042,45 +1061,44 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 
 	/** BANNER ROTATOR **/
 	(function() {
-		var $rotator = $('.banner-rotator');
-		var $items = $rotator.find('.banner-item');
-		if ($items.length > 1) {
-			var interval = ($rotator.data('interval') || 7) * 1000;
+		var rotator = document.querySelector('.banner-rotator');
+		var items = document.querySelectorAll('.banner-rotator .banner-item');
+		if (items.length > 1) {
+			var interval = (Number(rotator.getAttribute('data-interval')) || 7) * 1000;
 			var current = 0;
 			setInterval(function() {
-				$items.eq(current).removeClass('active');
-				current = (current + 1) % $items.length;
-				$items.eq(current).addClass('active');
+				items[current].classList.remove('active');
+				current = (current + 1) % items.length;
+				items[current].classList.add('active');
 			}, interval);
 		}
 	})();
 
 
 	/** ADD WORD-BOXES TO CODE TABLES */
-	$('.monospace_table + table tbody td').each(function() {
-		var $cell = $(this);
-		var $children = $cell.contents().filter(function() {
-			return this.nodeType !== Node.TEXT_NODE || $.trim(this.nodeValue).length > 0;
+	document.querySelectorAll('.monospace_table + table tbody td').forEach(function (cell) {
+		var children = Array.prototype.filter.call(cell.childNodes, function (node) {
+			return node.nodeType !== Node.TEXT_NODE || node.nodeValue.trim().length > 0;
 		});
-		if ($children.length === 1 && $children[0].nodeType === Node.ELEMENT_NODE && $children[0].tagName === 'CODE') {
+		if (children.length === 1 && children[0].nodeType === Node.ELEMENT_NODE && children[0].tagName === 'CODE') {
 			return;
 		}
-		$cell.wrapInner('<code class="language-plaintext"></code>');
+		var code = document.createElement('code');
+		code.className = 'language-plaintext';
+		while (cell.firstChild) {
+			code.appendChild(cell.firstChild);
+		}
+		cell.appendChild(code);
 	});
 	
 	/** RE-CALCULATE SELECT-ACTIVE-BUBBLES */
-	$(window).on('load', function() {
-		$('.topbar, .environment').each(function() {
-			var $activeItem = $(this).find('li.active');
-			updateHighlight($(this), $activeItem);
+	var updateAllHighlights = function () {
+		document.querySelectorAll('.topbar, .environment').forEach(function (container) {
+			updateHighlight(container, container.querySelector('li.active'));
 		});
-	});
-	$(window).on('resize', function() {
-		$('.topbar, .environment').each(function() {
-			var $activeItem = $(this).find('li.active');
-			updateHighlight($(this), $activeItem);
-		});
-	});
+	};
+	window.addEventListener('load', updateAllHighlights);
+	window.addEventListener('resize', updateAllHighlights);
 
 	// DUCKCON EVENT PAGES
 	const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1Ijoiam9uYXRoYW4tYXVjaCIsImEiOiJjbDllMHhxNHowbG50M29vZ3Y0NnZhdHY1In0.XQxUUmkkSGKUkNThK1p9Yg';

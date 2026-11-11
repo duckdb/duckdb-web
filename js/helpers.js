@@ -132,6 +132,26 @@
 		return animate(el, [{ opacity: from }, { opacity: getComputedStyle(el).opacity }], duration, 'fade', 'in', function () {});
 	}
 
+	function positionLeft(el) {
+		const style = getComputedStyle(el);
+		const marginLeft = parseFloat(style.marginLeft) || 0;
+		if (style.position === 'fixed') {
+			return el.getBoundingClientRect().left - marginLeft;
+		}
+		const pageLeft = function (node) {
+			return node.getClientRects().length ? node.getBoundingClientRect().left + window.scrollX : 0;
+		};
+		let parent = el.offsetParent || document.documentElement;
+		while (parent && (parent === document.body || parent === document.documentElement) && getComputedStyle(parent).position === 'static') {
+			parent = parent.parentNode;
+		}
+		let parentLeft = 0;
+		if (parent && parent !== el && parent.nodeType === 1) {
+			parentLeft = pageLeft(parent) + (parseFloat(getComputedStyle(parent).borderLeftWidth) || 0);
+		}
+		return pageLeft(el) - parentLeft - marginLeft;
+	}
+
 	function hashTarget(hash) {
 		const id = decodeURIComponent((hash || '').replace(/^#/, ''));
 		if (!id) {
@@ -160,6 +180,7 @@
 		slideUp: slideUp,
 		slideToggle: slideToggle,
 		fadeIn: fadeIn,
+		positionLeft: positionLeft,
 		hashTarget: hashTarget,
 		scrollToTarget: scrollToTarget
 	};
