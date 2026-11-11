@@ -84,69 +84,101 @@ $(document).ready(function(){
 	
 	
 	/** FILTER LINE  */
-	if ($('.filterbar').length !== 0) {
+	var filterbars = document.querySelectorAll('.filterbar');
+	if (filterbars.length && typeof Isotope !== 'undefined') {
 
 		/* CUSTOM FITROWS FUNCTION FOR ISOTOPE TO GET EQUAL HEIGHT TILES */
 		!function(t){"use strict";function i(t){var i=t.create("fitRows");return i.prototype._resetLayout=function(){if(this.x=0,this.y=0,this.maxY=0,this.row=0,this.rows=[],this._getMeasurement("gutter","outerWidth"),this.options.equalheight)for(var t=0;t<this.isotope.items.length;t++)this.isotope.items[t].css({height:"auto"})},i.prototype._getItemLayoutPosition=function(t){t.getSize();var i=this.gutter||0,s=t.size.outerWidth,o=Math.ceil(this.isotope.size.innerWidth+i);0!==this.x&&s+this.x+i>o&&(this.x=0,this.y=this.maxY+i),0===this.x&&0!==this.y&&this.row++;var e={x:this.x,y:this.y};return this.maxY=Math.max(this.maxY,this.y+t.size.outerHeight),this.x+=s+i,void 0===this.rows[this.row]?(this.rows[this.row]=[],this.rows[this.row].start=this.y,this.rows[this.row].end=this.maxY):this.rows[this.row].end=Math.max(this.rows[this.row].end,this.maxY),t.row=this.row,e},i.prototype._equalHeight=function(){for(var t=0;t<this.isotope.items.length;t++){var i=this.isotope.items[t].row,s=this.rows[i];if(s){var o=s.end-s.start;o-=this.isotope.items[t].size.borderTopWidth+this.isotope.items[t].size.borderBottomWidth,o-=this.isotope.items[t].size.marginTop+this.isotope.items[t].size.marginBottom,o-=this.gutter.height||0,!1==this.isotope.items[t].size.isBorderBox&&(o-=this.isotope.items[t].size.paddingTop+this.isotope.items[t].size.paddingBottom),this.isotope.items[t].size.height=o,this.isotope.items[t].css({height:o.toString()+"px"})}}},i.prototype._getContainerSize=function(){return this.options.equalheight&&this._equalHeight(),{height:this.maxY}},i}"function"==typeof define&&define.amd?define(["../layout-mode"],i):"object"==typeof exports?module.exports=i(require("../layout-mode")):i(t.Isotope.LayoutMode)}(window);
 
-		var $grid = $('.newstiles').isotope({
-			itemSelector: '.postpreview',
-			layoutMode: 'fitRows',
-			fitRows: {
-				gutter: $('.guides-list').length ? 16 : 32,
-				equalheight: true
-			}
+		var grids = Array.prototype.map.call(document.querySelectorAll('.newstiles'), function (el) {
+			return new Isotope(el, {
+				itemSelector: '.postpreview',
+				layoutMode: 'fitRows',
+				isJQueryFiltering: false,
+				fitRows: {
+					gutter: document.querySelector('.guides-list') ? 16 : 32,
+					equalheight: true
+				}
+			});
 		});
 
-		var $heading = $('.pagetitle h1').first();
-		var defaultHeading = $.trim($heading.text());
-		var $search = $('#search-input');
-		var $topicFilter = $('#topic-filter');
-		var $coreToggle = $('#core-toggle');
-		var $empty = $('.filter-empty');
+		var heading = document.querySelector('.pagetitle h1');
+		var defaultHeading = heading ? heading.textContent.trim() : '';
+		var search = document.getElementById('search-input');
+		var topicFilter = document.getElementById('topic-filter');
+		var coreToggle = document.getElementById('core-toggle');
+		var emptyMessages = document.querySelectorAll('.filter-empty');
 		var activeFilter = '*';
 
-		function updateFilterHighlight($button) {
-			var $highlight = $button.closest('.filtertags').find('.filter-highlight');
-			if ($highlight.length && $button.is(':visible')) {
-				$highlight.css({
-					left: $button.position().left,
-					width: $button.outerWidth()
-				});
-			}
+		function filterButtons(scope) {
+			return Array.prototype.slice.call(scope.querySelectorAll('[data-filter]'));
+		}
+
+		function updateFilterHighlight(button) {
+			if (!button) return;
+			var tags = button.closest('.filtertags');
+			var highlight = tags && tags.querySelector('.filter-highlight');
+			if (!highlight || !Helpers.isVisible(button)) return;
+			var parent = button.offsetParent || document.documentElement;
+			var buttonRect = button.getBoundingClientRect();
+			var parentRect = parent.getBoundingClientRect();
+			var marginLeft = parseFloat(getComputedStyle(button).marginLeft) || 0;
+			highlight.style.left = (buttonRect.left - parentRect.left - parent.clientLeft - marginLeft) + 'px';
+			highlight.style.width = buttonRect.width + 'px';
 		}
 
 		function setActiveFilter(value) {
 			activeFilter = value;
-			var $topics = $topicFilter.find('[data-filter]');
-			var $topic = $topics.filter(function() { return $(this).attr('data-filter') === value; });
-			$topics.removeAttr('aria-current').parent().removeClass('current');
-			$topic.attr('aria-current', 'true').parent().addClass('current');
-			$topicFilter.find('.selectedversion').text($topic.text());
-			$topicFilter.find('.versiontrigger').attr('aria-label', 'Filter guides by topic: ' + $topic.text());
-			$('.filterbar .filtertags').each(function() {
-				var $buttons = $(this).find('.filter-btn').removeClass('active');
-				var $match = $buttons.filter('[data-filter="' + value + '"]').addClass('active');
-				updateFilterHighlight($match);
+			if (topicFilter) {
+				var topics = filterButtons(topicFilter);
+				var matches = topics.filter(function (topic) { return topic.getAttribute('data-filter') === value; });
+				topics.forEach(function (topic) {
+					topic.removeAttribute('aria-current');
+					if (topic.parentElement) topic.parentElement.classList.remove('current');
+				});
+				matches.forEach(function (topic) {
+					topic.setAttribute('aria-current', 'true');
+					if (topic.parentElement) topic.parentElement.classList.add('current');
+				});
+				var label = matches.map(function (topic) { return topic.textContent; }).join('');
+				topicFilter.querySelectorAll('.selectedversion').forEach(function (el) { el.textContent = label; });
+				topicFilter.querySelectorAll('.versiontrigger').forEach(function (el) { el.setAttribute('aria-label', 'Filter guides by topic: ' + label); });
+			}
+			document.querySelectorAll('.filterbar .filtertags').forEach(function (tags) {
+				var match = null;
+				tags.querySelectorAll('.filter-btn').forEach(function (button) {
+					button.classList.remove('active');
+					if (button.getAttribute('data-filter') === value) {
+						button.classList.add('active');
+						match = match || button;
+					}
+				});
+				updateFilterHighlight(match);
 			});
-			var heading = $('.filterbar .filter-btn.active').first().attr('data-heading');
-			$heading.text(heading || defaultHeading);
+			if (heading) {
+				var active = document.querySelector('.filterbar .filter-btn.active');
+				heading.textContent = (active && active.getAttribute('data-heading')) || defaultHeading;
+			}
 		}
 
 		function readFiltersFromURL() {
 			var params = new URLSearchParams(window.location.search);
 			var type = params.get('type');
-			if (type && $('.filterbar [data-filter]').filter(function() {
-				return $(this).attr('data-filter') === '.' + type;
-			}).length) {
+			if (type && Array.prototype.some.call(document.querySelectorAll('.filterbar [data-filter]'), function (el) {
+				return el.getAttribute('data-filter') === '.' + type;
+			})) {
 				setActiveFilter('.' + type);
 			}
-			if (params.get('q')) {
-				$search.val(params.get('q'));
+			if (params.get('q') && search) {
+				search.value = params.get('q');
 			}
-			if (params.get('core') === '1') {
-				$coreToggle.prop('checked', true);
+			if (params.get('core') === '1' && coreToggle) {
+				coreToggle.checked = true;
 			}
+		}
+
+		function searchValue() {
+			return search ? search.value : '';
 		}
 
 		function writeFiltersToURL() {
@@ -154,80 +186,104 @@ $(document).ready(function(){
 			if (activeFilter !== '*') {
 				params.set('type', activeFilter.replace(/^\./, ''));
 			}
-			if ($coreToggle.is(':checked')) {
+			if (coreToggle && coreToggle.checked) {
 				params.set('core', '1');
 			}
-			if ($search.val()) {
-				params.set('q', $search.val());
+			if (searchValue()) {
+				params.set('q', searchValue());
 			}
 			history.replaceState(null, '', window.location.pathname + (params.toString() ? '?' + params.toString() : ''));
 		}
 
 		function applyFilters() {
-			var searchValue = $search.val().toLowerCase().trim();
-			var coreOnly = $coreToggle.is(':checked');
+			var query = searchValue().toLowerCase().trim();
+			var coreOnly = Boolean(coreToggle && coreToggle.checked);
 
-			$grid.closest('.events-section').removeClass('is-empty');
+			grids.forEach(function (iso) {
+				var section = iso.element.closest('.events-section');
+				if (section) section.classList.remove('is-empty');
+			});
 
-			$grid.isotope({
-				filter: function() {
-					var $item = $(this);
-					if (activeFilter !== '*' && !$item.is(activeFilter)) return false;
-					if (coreOnly && $item.attr('data-core') !== 'true') return false;
-					if (searchValue && ($item.attr('data-search') || '').indexOf(searchValue) === -1) return false;
-					return true;
-				}
+			grids.forEach(function (iso) {
+				iso.arrange({
+					filter: function (item) {
+						if (activeFilter !== '*' && !item.matches(activeFilter)) return false;
+						if (coreOnly && item.getAttribute('data-core') !== 'true') return false;
+						if (query && (item.getAttribute('data-search') || '').indexOf(query) === -1) return false;
+						return true;
+					}
+				});
 			});
 
 			var visible = 0;
-			$grid.each(function() {
-				var iso = $(this).data('isotope');
-				var count = iso ? iso.filteredItems.length : 0;
+			grids.forEach(function (iso) {
+				var count = iso.filteredItems.length;
 				visible += count;
-				$(this).closest('.events-section').toggleClass('is-empty', count === 0);
+				var section = iso.element.closest('.events-section');
+				if (section) section.classList.toggle('is-empty', count === 0);
 			});
-			$empty.prop('hidden', visible > 0);
+			emptyMessages.forEach(function (el) { el.hidden = visible > 0; });
 		}
 
-		$('.filterbar').on('click', '[data-filter]', function(e) {
-			e.preventDefault();
-			setActiveFilter($(this).attr('data-filter'));
-			applyFilters();
-			writeFiltersToURL();
-			if ($(this).closest($topicFilter).length) {
-				$topicFilter.removeClass('active').find('.versiontrigger').attr('aria-expanded', 'false').trigger('focus');
-			}
+		filterbars.forEach(function (bar) {
+			bar.addEventListener('click', function (e) {
+				var option = e.target.closest('[data-filter]');
+				if (!option || !bar.contains(option)) return;
+				e.preventDefault();
+				setActiveFilter(option.getAttribute('data-filter'));
+				applyFilters();
+				writeFiltersToURL();
+				if (topicFilter && topicFilter.contains(option)) {
+					topicFilter.classList.remove('active');
+					topicFilter.querySelectorAll('.versiontrigger').forEach(function (trigger) {
+						trigger.setAttribute('aria-expanded', 'false');
+					});
+					var trigger = topicFilter.querySelector('.versiontrigger');
+					if (trigger) trigger.focus();
+				}
+			});
 		});
 
-		$search.on('input', function() {
-			applyFilters();
-			writeFiltersToURL();
-		});
+		if (search) {
+			search.addEventListener('input', function () {
+				applyFilters();
+				writeFiltersToURL();
+			});
+		}
 
-		$coreToggle.on('change', function() {
-			applyFilters();
-			writeFiltersToURL();
-		});
+		if (coreToggle) {
+			coreToggle.addEventListener('change', function () {
+				applyFilters();
+				writeFiltersToURL();
+			});
+		}
 
 		// --- Mobile filter modal ---
-		var $filterToggle = $('.filter-toggle');
-		var $filterModal = $('.filter-modal');
-		var $filterOverlay = $('.filter-overlay');
+		var filterToggles = document.querySelectorAll('.filter-toggle');
+		var filterModals = document.querySelectorAll('.filter-modal');
+		var filterOverlays = document.querySelectorAll('.filter-overlay');
 
 		function setFilterModal(open) {
-			$filterToggle.toggleClass('is-open', open);
-			$filterModal.toggleClass('is-open', open);
-			$filterOverlay.toggleClass('is-open', open);
+			[filterToggles, filterModals, filterOverlays].forEach(function (list) {
+				list.forEach(function (el) { el.classList.toggle('is-open', open); });
+			});
 			if (open) {
-				updateFilterHighlight($filterModal.find('.filter-btn.active'));
+				filterModals.forEach(function (modal) {
+					updateFilterHighlight(modal.querySelector('.filter-btn.active'));
+				});
 			}
 		}
 
-		$filterToggle.on('click', function() {
-			setFilterModal(!$filterModal.hasClass('is-open'));
+		filterToggles.forEach(function (toggle) {
+			toggle.addEventListener('click', function () {
+				var anyOpen = Array.prototype.some.call(filterModals, function (modal) { return modal.classList.contains('is-open'); });
+				setFilterModal(!anyOpen);
+			});
 		});
-		$filterOverlay.on('click', function() {
-			setFilterModal(false);
+		filterOverlays.forEach(function (overlay) {
+			overlay.addEventListener('click', function () {
+				setFilterModal(false);
+			});
 		});
 
 		setActiveFilter(activeFilter);
