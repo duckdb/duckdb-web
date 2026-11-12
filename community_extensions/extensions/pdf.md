@@ -95,8 +95,8 @@ docs:
     **Scope** — deterministic extraction, not ML document AI. **License** —
     GPL-2.0-or-later (Poppler).
 
-extension_star_count: 12
-extension_star_count_pretty: 12
+extension_star_count: 13
+extension_star_count_pretty: 13
 extension_download_count: 981
 extension_download_count_pretty: 981
 image: '/images/community_extensions/social_preview/preview_community_extension_pdf.png'

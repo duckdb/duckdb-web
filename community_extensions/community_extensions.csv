@@ -232,6 +232,7 @@ mssql_ducklake,hugr-lab/mssql-ducklake,d4d7a40beafda896ada610faf0bd64bf5db642e8,
 nanoarrow,paleolimbot/duckdb-nanoarrow,e390b9b4f8a41e64e41488888defb27d8f1e1421,"Allows the consumption and production of the Apache Arrow interprocess communication (IPC) format, both from files and directly from stream buffers."
 nanodbc,Hugoberry/duckdb-nanodbc-extension,0740a99bc20a9c5d1c07c39b0779104e5b5b88e5,"Connect to any ODBC-compatible database and query data directly from DuckDB"
 nats_js,brannn/duckdb-nats-jetstream,e3a8038757a187f2df1afcec4b687ff0587c26f5,"Query NATS JetStream message streams directly with SQL"
+nats_rw,robert-guangzhou/duckdb-nats-rw,34776855201e614ed4f94ab3a861c34285698569,"Read and write NATS JetStream streams with SQL"
 netquack,hatamiarash7/duckdb-netquack,f3a5e34242bf6c20c0e8b6cbf2ca63522ac472d2,"DuckDB extension for parsing, extracting, and analyzing domains, URIs, and paths with ease."
 ng_postcode,Adeniyikayodee/ng-postcode-duckdb,a584158edc26f40554ee5fb8a3290ff3eca1c90a,"Parse, validate, format, and group Nigeria's NIPOST digital postcode (NDAPS)"
 nsv,nsv-format/nsv-duckdb,52da7b3a2248a4c11dbd51251c89555e9587c282,"Read and write NSV (Newline-Separated Values) files"
