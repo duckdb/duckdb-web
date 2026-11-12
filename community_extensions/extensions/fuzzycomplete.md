@@ -24,10 +24,10 @@ repo:
   ref: b632926cf27221b3afbbdd7b7f2dcc3e55f21601
   variegata: 040136c2f5148f1dcd4f4ac60921ed2c40c615bb
 
-extension_star_count: 33
-extension_star_count_pretty: 33
-extension_download_count: 1581
-extension_download_count_pretty: 1.6k
+extension_star_count: 34
+extension_star_count_pretty: 34
+extension_download_count: 1683
+extension_download_count_pretty: 1.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_fuzzycomplete.png'
 layout: community_extension_doc
 ---

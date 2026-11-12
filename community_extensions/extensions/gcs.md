@@ -37,8 +37,8 @@ docs:
 
 extension_star_count: 32
 extension_star_count_pretty: 32
-extension_download_count: 74911
-extension_download_count_pretty: 74.9k
+extension_download_count: 73019
+extension_download_count_pretty: 73.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_gcs.png'
 layout: community_extension_doc
 ---

@@ -8,11 +8,10 @@ excerpt: |
 extension:
   name: aixchess
   description: Efficiently query large chess game collections
-  version: 0.3.0
+  version: 0.3.1
   language: C++
   build: cmake
   license: GPL-3.0
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
   opt_in_platforms: "windows_arm64;"
   requires_toolchains: rust
   maintainers:
@@ -20,7 +19,7 @@ extension:
 
 repo:
   github: thomas-daniels/aix
-  ref: 907b5107601ebe95bb4e567e0a3f4ad03afeff27
+  ref: 990eebc1c7fccb89f5eea1c7d51808a9cf87271b
 
 docs:
   hello_world: |
@@ -49,8 +48,8 @@ docs:
     See the [GitHub repository](https://github.com/thomas-daniels/aix) or [blog post](https://thomasd.be/2026/02/01/aix-storing-querying-chess-games.html) for more details.
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 844
-extension_download_count_pretty: 844
+extension_download_count: 849
+extension_download_count_pretty: 849
 image: '/images/community_extensions/social_preview/preview_community_extension_aixchess.png'
 layout: community_extension_doc
 ---
@@ -68,7 +67,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql

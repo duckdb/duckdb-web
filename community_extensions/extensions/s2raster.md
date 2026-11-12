@@ -48,10 +48,10 @@ docs:
     **Platforms:** Linux x64, macOS arm64/x64, Windows x64 (MSVC).
     **Install:** `INSTALL s2raster FROM community;`
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 801
-extension_download_count_pretty: 801
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 806
+extension_download_count_pretty: 806
 image: '/images/community_extensions/social_preview/preview_community_extension_s2raster.png'
 layout: community_extension_doc
 ---
