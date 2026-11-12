@@ -187,6 +187,8 @@ The `duckdb_extension_repositories()` function provides metadata about the [exte
 
 The `duckdb_extensions()` function provides metadata about the extensions available in the DuckDB instance.
 
+An extension that is installed from more than one repository has one row per repository, so the same `extension_name` can appear multiple times with a different `installed_from`.
+
 | Column | Description | Type |
 |:--|:------|:-|
 | `extension_name` | The name of the extension. | `VARCHAR` |
@@ -197,8 +199,8 @@ The `duckdb_extensions()` function provides metadata about the extensions availa
 | `aliases` | List of alternative names for this extension. | `VARCHAR[]` |
 | `extension_version` | The version of the extension (`vX.Y.Z` for stable versions and 6-character hash for unstable versions). | `VARCHAR` |
 | `install_mode` | The installation mode that was used to install the extension: `UNKNOWN`, `REPOSITORY`, `CUSTOM_PATH`, `STATICALLY_LINKED`, `NOT_INSTALLED`, `NULL`. | `VARCHAR` |
-| `installed_from` | Name of the repository the extension was installed from, e.g., `community` or `core_nightly`. The empty string denotes the `core` repository. | `VARCHAR` |
-| `signature_key_fingerprint` | The SHA-256 fingerprint of the public key that verified the extension when it was installed. `NULL` if no fingerprint is available, e.g., for built-in extensions and for extensions from [custom extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}#using-a-repository). Available as of DuckDB 2.0. | `VARCHAR` |
+| `installed_from` | Name of the repository the extension was installed from, e.g., `community` or `core_nightly`. The empty string denotes the `core` repository. For extensions from a [custom extension repository]({% link docs/2.0/extensions/extension_repositories.md %}#using-a-repository), this is the name of the repository. | `VARCHAR` |
+| `signature_key_fingerprint` | The SHA-256 fingerprint of the public key that verified the extension when it was installed. `NULL` if no fingerprint is available, e.g., for built-in extensions. Available as of DuckDB 2.0. | `VARCHAR` |
 
 ## `duckdb_functions`
 
