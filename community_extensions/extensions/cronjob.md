@@ -75,10 +75,10 @@ repo:
   ref: 1a8304ef9c98c73e8293525db67eb681b9ceee56
   variegata: 40e96fd97cb8ce393578f4b64622c9cd5b8a3280
 
-extension_star_count: 57
-extension_star_count_pretty: 57
-extension_download_count: 896
-extension_download_count_pretty: 896
+extension_star_count: 58
+extension_star_count_pretty: 58
+extension_download_count: 880
+extension_download_count_pretty: 880
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'
 layout: community_extension_doc
 ---

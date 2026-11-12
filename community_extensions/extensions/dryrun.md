@@ -38,10 +38,10 @@ docs:
     bytes, files, row groups used versus total row groups, confidence, and
     notes (if any).
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 516
-extension_download_count_pretty: 516
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 508
+extension_download_count_pretty: 508
 image: '/images/community_extensions/social_preview/preview_community_extension_dryrun.png'
 layout: community_extension_doc
 ---

@@ -136,10 +136,10 @@ docs:
       ;
       ```
 
-extension_star_count: 27
-extension_star_count_pretty: 27
-extension_download_count: 822
-extension_download_count_pretty: 822
+extension_star_count: 28
+extension_star_count_pretty: 28
+extension_download_count: 810
+extension_download_count_pretty: 810
 image: '/images/community_extensions/social_preview/preview_community_extension_stac.png'
 layout: community_extension_doc
 ---

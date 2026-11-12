@@ -23,10 +23,10 @@ repo:
   ref: 820ca74ba108b8e0d7c8d7a1caf74f6340a49837
   variegata: d7d89361c2802c032ba5af73aa65718f5a26804b
 
-extension_star_count: 61
-extension_star_count_pretty: 61
-extension_download_count: 820
-extension_download_count_pretty: 820
+extension_star_count: 62
+extension_star_count_pretty: 62
+extension_download_count: 806
+extension_download_count_pretty: 806
 image: '/images/community_extensions/social_preview/preview_community_extension_tributary.png'
 layout: community_extension_doc
 ---
