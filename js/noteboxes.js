@@ -23,8 +23,6 @@
 		New: "new"
 	};
 
-	var dashPattern = /^(?:–|—|--|-(?=\s))/;
-
 	function childParagraphs(el) {
 		return Array.prototype.filter.call(el.children, function (child) {
 			return child.tagName === 'P';
@@ -61,32 +59,7 @@
 			if (first && !first.textContent.trim() && !first.querySelector('img')) {
 				first.remove();
 			}
-			var last = content.querySelector(':scope > p:last-child');
-			if (last && dashPattern.test(last.textContent.trim())) {
-				last.classList.add('quote-author');
-				var authorName = last.textContent.trim().replace(dashPattern, '').trim();
-				// Match if the attribution starts with the author's name,
-				// e.g., "Ilya Boyandin, creator of SQLRooms" matches "Ilya Boyandin"
-				var author = Array.prototype.find.call(document.querySelectorAll('.postheader-author'), function (el) {
-					var nameEl = el.querySelector('.name');
-					var name = nameEl ? nameEl.textContent.trim() : '';
-					return name !== '' && authorName.indexOf(name) === 0 &&
-						!/^[\p{L}\p{N}]/u.test(authorName.slice(name.length));
-				});
-				var avatar = author && author.querySelector('img.avatar');
-				if (!last.querySelector('img') && avatar) {
-					last.prepend(avatar.cloneNode(true));
-				}
-				var walker = document.createTreeWalker(last, NodeFilter.SHOW_TEXT);
-				var dashNode;
-				while ((dashNode = walker.nextNode()) && !dashNode.nodeValue.trim()) {}
-				if (dashNode) {
-					dashNode.nodeValue = dashNode.nodeValue.replace(/^\s*/, '').replace(dashPattern, '').replace(/^\s*/, '');
-				}
-			}
-			var quoteText = childParagraphs(content).filter(function (p) {
-				return !p.classList.contains('quote-author');
-			});
+			var quoteText = childParagraphs(content);
 			if (quoteText.length) {
 				quoteText[0].classList.add('quote-open');
 				quoteText[0].innerHTML = quoteText[0].innerHTML.replace(/^(\s*(?:<[^>]+>\s*)*)[“"]/, '$1');

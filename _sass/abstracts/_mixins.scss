@@ -390,7 +390,7 @@
 		margin-block: 2.5rem 0;
 	}
 
-	#{$scope} :is(blockquote, table, .monospace_table, .highlighter-rouge, .highlight) + :is(h1, h2, h3, h4, h5, h6) {
+	#{$scope} :is(blockquote, figure.quote, table, .monospace_table, .highlighter-rouge, .highlight) + :is(h1, h2, h3, h4, h5, h6) {
 		margin-top: 2rem;
 	}
 

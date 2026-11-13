@@ -1154,7 +1154,7 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 
 	// QUOTE SLIDER
 	document.querySelectorAll('.quote-slider').forEach(function (wrap) {
-		var quotes = Array.prototype.filter.call(wrap.children, function (el) { return el.matches('blockquote.quote'); });
+		var quotes = Array.prototype.filter.call(wrap.children, function (el) { return el.matches('blockquote.quote, figure.quote'); });
 		if (quotes.length < 2 || typeof Swiper === 'undefined') return;
 
 		var swiper = document.createElement('div');

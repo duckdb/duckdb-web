@@ -139,22 +139,32 @@ body.layout_default.blog_typography #main_content_wrap,
 			.quote-close::after {
 				content: "”";
 			}
+		}
+	}
 
-			p.quote-author {
-				@include body-small;
-				color: var(--main-text-secondary-color, #333333);
-				margin-top: 0.5rem;
+	figure.quote {
+		margin-block: 2rem;
 
-				img {
-					display: inline-block;
-					width: 14px;
-					height: 14px;
-					margin: 0 4px 0 0;
-					border-radius: 50%;
-					object-fit: cover;
-					vertical-align: middle;
-				}
-			}
+		blockquote.quote {
+			margin-block: 0;
+		}
+	}
+
+	figure.quote .quote-author {
+		@include body-small;
+		color: var(--main-text-secondary-color, #333333);
+		margin-top: 0.5rem;
+
+		img {
+			display: inline-block;
+			width: 14px;
+			height: 14px;
+			margin: 0 6px 0 0;
+			border-radius: 50%;
+			object-fit: cover;
+			vertical-align: middle;
+			position: relative;
+			top: -1px;
 		}
 	}
 
@@ -179,7 +189,8 @@ body.layout_default.blog_typography #main_content_wrap,
 			height: auto;
 		}
 
-		blockquote.quote {
+		> .quote,
+		.swiper-slide > .quote {
 			margin: 0;
 			height: 100%;
 			padding-inline-start: 0.75rem;

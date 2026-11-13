@@ -45,7 +45,8 @@ table{
 table a,
 p a,
 li a,
-summary a{
+summary a,
+figcaption a{
 	color: inherit;
 	text-decoration: underline;
 	text-decoration-color: var(--main-text-tertiary-color, #666666);
