@@ -23,8 +23,6 @@
 		New: "new"
 	};
 
-	var dashPattern = /^(–|—|--)/;
-
 	function childParagraphs(el) {
 		return Array.prototype.filter.call(el.children, function (child) {
 			return child.tagName === 'P';
@@ -61,32 +59,7 @@
 			if (first && !first.textContent.trim() && !first.querySelector('img')) {
 				first.remove();
 			}
-			var $last = $blockquote.find('.content > p:last-child');
-			if (/^(\u2013|\u2014|--)/.test($last.text().trim())) {
-				$last.addClass('quote-author');
-				var authorName = $last.text().trim().replace(/^(\u2013|\u2014|--)\s*/, '');
-				var $author = $('.postheader-author').filter(function() {
-					// Match if the attribution starts with the author's name,
-					// e.g., "Ilya Boyandin, creator of SQLRooms" matches "Ilya Boyandin"
-					var name = $(this).find('.name').text().trim();
-					return name !== '' && authorName.indexOf(name) === 0 &&
-						!/^[\p{L}\p{N}]/u.test(authorName.slice(name.length));
-				}).first();
-				if (!$last.find('img').length) {
-					$last.prepend($author.find('img.avatar').clone());
-				}
-				if (last.querySelector('img')) {
-					var dashNode = Array.prototype.find.call(last.childNodes, function (node) {
-						return node.nodeType === Node.TEXT_NODE && node.nodeValue.trim();
-					});
-					if (dashNode) {
-						dashNode.nodeValue = dashNode.nodeValue.replace(/^\s*(–|—|--)\s*/, ' ');
-					}
-				}
-			}
-			var quoteText = childParagraphs(content).filter(function (p) {
-				return !p.classList.contains('quote-author');
-			});
+			var quoteText = childParagraphs(content);
 			if (quoteText.length) {
 				quoteText[0].classList.add('quote-open');
 				quoteText[0].innerHTML = quoteText[0].innerHTML.replace(/^(\s*(?:<[^>]+>\s*)*)[“"]/, '$1');
