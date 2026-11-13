@@ -262,18 +262,6 @@ LIMIT 5;
 | 0         | l_linenumber | 4        | INTEGER | false    | NULL | true       |
 | 0         | l_quantity   | 5        | INTEGER | false    | NULL | true       |
 
-The function returns the following columns:
-
-| Column | Type | Description |
-| --- | --- | --- |
-| `schema_id` | `INTEGER` | The ID of the schema. |
-| `name` | `VARCHAR` | The name of the field. |
-| `field_id` | `INTEGER` | The ID of the field. |
-| `type` | `VARCHAR` | The DuckDB type the field is read as, e.g., `BIGINT`, `DECIMAL(15,2)`, or `STRUCT(col1 VARCHAR)`. |
-| `required` | `BOOLEAN` | Whether the field is required (`NOT NULL`). |
-| `doc` | `VARCHAR` | The documentation of the field (e.g., set with `COMMENT ON COLUMN`), or `NULL` if it has none. |
-| `is_current` | `BOOLEAN` | Whether the schema is the current schema of the table. |
-
 ## `iceberg_scan_plan`
 
 The `iceberg_scan_plan(table)` function is an advanced function that returns the scan tasks DuckDB would read for a table, i.e., one row per data file together with its partition values and the delete files that apply to it. The `table` argument is the fully qualified name of a table in an attached Iceberg REST Catalog as a string (e.g., `'my_datalake.default.t'`), or a table location. It accepts the following named parameters:
