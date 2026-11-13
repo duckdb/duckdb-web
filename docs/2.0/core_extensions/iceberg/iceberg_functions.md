@@ -274,18 +274,6 @@ The function returns the following columns:
 | `doc` | `VARCHAR` | The documentation of the field (e.g., set with `COMMENT ON COLUMN`), or `NULL` if it has none. |
 | `is_current` | `BOOLEAN` | Whether the schema is the current schema of the table. |
 
-The rows are ordered by schema ID and then by the order of the fields in the schema. Only top-level fields are listed: a `STRUCT` column is returned as a single row, and its nested fields are shown in its `type`. The `type` column contains the DuckDB type, as shown by `DESCRIBE`, rather than the Iceberg type name. Iceberg types without a DuckDB equivalent are shown as the extension's own types, e.g., `fixed[5]` is shown as `ICEBERG_FIXED(5)`.
-
-The `source` can be a table path, a metadata file, or a table in an attached catalog. For table paths, the function accepts the [scan options]({% link docs/2.0/core_extensions/iceberg/iceberg_options.md %}#scan-options) `metadata_compression_codec`, `version`, and `version_name_format`. To look at a single schema, filter on `schema_id` or `is_current`:
-
-```sql
-SELECT field_id, name, type
-FROM iceberg_schemas(my_datalake.default.t)
-WHERE is_current;
-```
-
-When a column is dropped and added again, the new column gets a new field ID, so comparing the `field_id` values across schemas shows how the schema of the table evolved.
-
 ## `iceberg_scan_plan`
 
 The `iceberg_scan_plan(table)` function is an advanced function that returns the scan tasks DuckDB would read for a table, i.e., one row per data file together with its partition values and the delete files that apply to it. The `table` argument is the fully qualified name of a table in an attached Iceberg REST Catalog as a string (e.g., `'my_datalake.default.t'`), or a table location. It accepts the following named parameters:
