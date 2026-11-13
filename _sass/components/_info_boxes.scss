@@ -143,12 +143,12 @@ body.layout_default.blog_typography #main_content_wrap,
 			p.quote-author {
 				@include body-small;
 				color: var(--main-text-secondary-color, #333333);
-				margin-top: 0.75rem;
+				margin-top: 0.5rem;
 
 				img {
 					display: inline-block;
-					width: 18px;
-					height: 18px;
+					width: 14px;
+					height: 14px;
 					margin: 0 4px 0 0;
 					border-radius: 50%;
 					object-fit: cover;

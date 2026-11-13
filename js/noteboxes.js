@@ -23,7 +23,7 @@
 		New: "new"
 	};
 
-	var dashPattern = /^(–|—|--)/;
+	var dashPattern = /^(?:–|—|--|-(?=\s))/;
 
 	function childParagraphs(el) {
 		return Array.prototype.filter.call(el.children, function (child) {
@@ -61,27 +61,27 @@
 			if (first && !first.textContent.trim() && !first.querySelector('img')) {
 				first.remove();
 			}
-			var $last = $blockquote.find('.content > p:last-child');
-			if (/^(\u2013|\u2014|--)/.test($last.text().trim())) {
-				$last.addClass('quote-author');
-				var authorName = $last.text().trim().replace(/^(\u2013|\u2014|--)\s*/, '');
-				var $author = $('.postheader-author').filter(function() {
-					// Match if the attribution starts with the author's name,
-					// e.g., "Ilya Boyandin, creator of SQLRooms" matches "Ilya Boyandin"
-					var name = $(this).find('.name').text().trim();
+			var last = content.querySelector(':scope > p:last-child');
+			if (last && dashPattern.test(last.textContent.trim())) {
+				last.classList.add('quote-author');
+				var authorName = last.textContent.trim().replace(dashPattern, '').trim();
+				// Match if the attribution starts with the author's name,
+				// e.g., "Ilya Boyandin, creator of SQLRooms" matches "Ilya Boyandin"
+				var author = Array.prototype.find.call(document.querySelectorAll('.postheader-author'), function (el) {
+					var nameEl = el.querySelector('.name');
+					var name = nameEl ? nameEl.textContent.trim() : '';
 					return name !== '' && authorName.indexOf(name) === 0 &&
 						!/^[\p{L}\p{N}]/u.test(authorName.slice(name.length));
-				}).first();
-				if (!$last.find('img').length) {
-					$last.prepend($author.find('img.avatar').clone());
+				});
+				var avatar = author && author.querySelector('img.avatar');
+				if (!last.querySelector('img') && avatar) {
+					last.prepend(avatar.cloneNode(true));
 				}
-				if (last.querySelector('img')) {
-					var dashNode = Array.prototype.find.call(last.childNodes, function (node) {
-						return node.nodeType === Node.TEXT_NODE && node.nodeValue.trim();
-					});
-					if (dashNode) {
-						dashNode.nodeValue = dashNode.nodeValue.replace(/^\s*(–|—|--)\s*/, ' ');
-					}
+				var walker = document.createTreeWalker(last, NodeFilter.SHOW_TEXT);
+				var dashNode;
+				while ((dashNode = walker.nextNode()) && !dashNode.nodeValue.trim()) {}
+				if (dashNode) {
+					dashNode.nodeValue = dashNode.nodeValue.replace(/^\s*/, '').replace(dashPattern, '').replace(/^\s*/, '');
 				}
 			}
 			var quoteText = childParagraphs(content).filter(function (p) {
