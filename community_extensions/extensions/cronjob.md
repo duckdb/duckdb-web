@@ -77,8 +77,8 @@ repo:
 
 extension_star_count: 58
 extension_star_count_pretty: 58
-extension_download_count: 880
-extension_download_count_pretty: 880
+extension_download_count: 879
+extension_download_count_pretty: 879
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'
 layout: community_extension_doc
 ---

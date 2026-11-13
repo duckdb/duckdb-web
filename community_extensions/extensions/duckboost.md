@@ -81,8 +81,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 524
-extension_download_count_pretty: 524
+extension_download_count: 533
+extension_download_count_pretty: 533
 image: '/images/community_extensions/social_preview/preview_community_extension_duckboost.png'
 layout: community_extension_doc
 ---

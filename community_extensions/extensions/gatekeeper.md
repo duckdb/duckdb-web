@@ -346,8 +346,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 958
-extension_download_count_pretty: 958
+extension_download_count: 984
+extension_download_count_pretty: 984
 image: '/images/community_extensions/social_preview/preview_community_extension_gatekeeper.png'
 layout: community_extension_doc
 ---

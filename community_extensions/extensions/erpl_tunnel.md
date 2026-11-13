@@ -31,8 +31,8 @@ repo:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 786
-extension_download_count_pretty: 786
+extension_download_count: 798
+extension_download_count_pretty: 798
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_tunnel.png'
 layout: community_extension_doc
 ---
