@@ -25,6 +25,7 @@ The `iceberg` extension provides the following functions:
 | `iceberg_history(source)`                                 | Returns the history of the table's current snapshot.                 |
 | `iceberg_refs(source)`                                    | Returns the branches and tags of an Iceberg table.                   |
 | `iceberg_partition_specs(source)`                         | Returns the partition specs of an Iceberg table.                     |
+| `iceberg_schemas(source)`                                 | Returns the fields of every schema of an Iceberg table.              |
 | `iceberg_scan_plan(table)`                                | Returns the scan tasks (files to read) planned for an Iceberg table. |
 | `iceberg_view_metadata(view)`                             | Returns the raw `LoadView` response of the REST Catalog.             |
 | `iceberg_table_properties(table)`                         | Returns all properties of the specified table.                       |
@@ -238,6 +239,52 @@ FROM iceberg_files(my_datalake.default.t);
 SELECT *
 FROM iceberg_partition_specs(my_datalake.default.t);
 ```
+
+## `iceberg_schemas`
+
+> The `iceberg_schemas` function is not available in DuckDB 2.0.0. It ships with the next DuckDB release.
+
+An Iceberg table keeps every schema it has had in its metadata, and exactly one of them is the current schema. The `iceberg_schemas` function returns one row per top-level field of every schema:
+
+```sql
+SELECT *
+FROM iceberg_schemas('data/iceberg/lineitem_iceberg')
+LIMIT 5;
+```
+
+<div class="monospace_table"></div>
+
+| schema_id |     name     | field_id |  type   | required | doc  | is_current |
+|----------:|--------------|---------:|---------|----------|------|------------|
+| 0         | l_orderkey   | 1        | INTEGER | false    | NULL | true       |
+| 0         | l_partkey    | 2        | INTEGER | false    | NULL | true       |
+| 0         | l_suppkey    | 3        | INTEGER | false    | NULL | true       |
+| 0         | l_linenumber | 4        | INTEGER | false    | NULL | true       |
+| 0         | l_quantity   | 5        | INTEGER | false    | NULL | true       |
+
+The function returns the following columns:
+
+| Column | Type | Description |
+| --- | --- | --- |
+| `schema_id` | `INTEGER` | The ID of the schema. |
+| `name` | `VARCHAR` | The name of the field. |
+| `field_id` | `INTEGER` | The ID of the field. |
+| `type` | `VARCHAR` | The DuckDB type the field is read as, e.g., `BIGINT`, `DECIMAL(15,2)`, or `STRUCT(col1 VARCHAR)`. |
+| `required` | `BOOLEAN` | Whether the field is required (`NOT NULL`). |
+| `doc` | `VARCHAR` | The documentation of the field (e.g., set with `COMMENT ON COLUMN`), or `NULL` if it has none. |
+| `is_current` | `BOOLEAN` | Whether the schema is the current schema of the table. |
+
+The rows are ordered by schema ID and then by the order of the fields in the schema. Only top-level fields are listed: a `STRUCT` column is returned as a single row, and its nested fields are shown in its `type`. The `type` column contains the DuckDB type, as shown by `DESCRIBE`, rather than the Iceberg type name. Iceberg types without a DuckDB equivalent are shown as the extension's own types, e.g., `fixed[5]` is shown as `ICEBERG_FIXED(5)`.
+
+The `source` can be a table path, a metadata file, or a table in an attached catalog. For table paths, the function accepts the [scan options]({% link docs/2.0/core_extensions/iceberg/iceberg_options.md %}#scan-options) `metadata_compression_codec`, `version`, and `version_name_format`. To look at a single schema, filter on `schema_id` or `is_current`:
+
+```sql
+SELECT field_id, name, type
+FROM iceberg_schemas(my_datalake.default.t)
+WHERE is_current;
+```
+
+When a column is dropped and added again, the new column gets a new field ID, so comparing the `field_id` values across schemas shows how the schema of the table evolved.
 
 ## `iceberg_scan_plan`
 
