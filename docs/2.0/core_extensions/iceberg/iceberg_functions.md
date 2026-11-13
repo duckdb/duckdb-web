@@ -262,7 +262,7 @@ LIMIT 5;
 | 0         | l_linenumber | 4        | INTEGER | false    | NULL | true       |
 | 0         | l_quantity   | 5        | INTEGER | false    | NULL | true       |
 
-The rows are ordered by schema ID and then by the order of the fields in the schema. Only top-level fields are listed: a `STRUCT` column is returned as a single row, and its nested fields are shown in its `type`. The `type` column contains the DuckDB type, as shown by `DESCRIBE`, rather than the Iceberg type name. Iceberg types without a DuckDB equivalent are shown as the extension's own types, e.g., `fixed[5]` is shown as `ICEBERG_FIXED(5)`.
+The rows are ordered by schema ID and then by the order of the fields in the schema. Only top-level fields are listed: a `STRUCT` column is returned as a single row, and its nested fields are shown in its `type`. The `type` column contains the DuckDB type, as shown by `DESCRIBE`, rather than the Iceberg type name. Iceberg types without a DuckDB equivalent are shown as the extension’s own types, e.g., `fixed[5]` is shown as `ICEBERG_FIXED(5)`.
 
 ## `iceberg_scan_plan`
 
