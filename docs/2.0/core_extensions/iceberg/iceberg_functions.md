@@ -262,6 +262,8 @@ LIMIT 5;
 | 0         | l_linenumber | 4        | INTEGER | false    | NULL | true       |
 | 0         | l_quantity   | 5        | INTEGER | false    | NULL | true       |
 
+The rows are ordered by schema ID and then by the order of the fields in the schema. Only top-level fields are listed: a `STRUCT` column is returned as a single row, and its nested fields are shown in its `type`. The `type` column contains the DuckDB type, as shown by `DESCRIBE`, rather than the Iceberg type name. Iceberg types without a DuckDB equivalent are shown as the extension's own types, e.g., `fixed[5]` is shown as `ICEBERG_FIXED(5)`.
+
 ## `iceberg_scan_plan`
 
 The `iceberg_scan_plan(table)` function is an advanced function that returns the scan tasks DuckDB would read for a table, i.e., one row per data file together with its partition values and the delete files that apply to it. The `table` argument is the fully qualified name of a table in an attached Iceberg REST Catalog as a string (e.g., `'my_datalake.default.t'`), or a table location. It accepts the following named parameters:
