@@ -224,10 +224,10 @@ docs:
       features, leakage, the two model architectures, and the OPTIMIZE solvers.
     - Issues and questions: https://github.com/Guepard-Corp/duckdb-pql/issues
 
-extension_star_count: 39
-extension_star_count_pretty: 39
-extension_download_count: 791
-extension_download_count_pretty: 791
+extension_star_count: 40
+extension_star_count_pretty: 40
+extension_download_count: 809
+extension_download_count_pretty: 809
 image: '/images/community_extensions/social_preview/preview_community_extension_pql.png'
 layout: community_extension_doc
 ---

@@ -51,8 +51,8 @@ docs:
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 837
-extension_download_count_pretty: 837
+extension_download_count: 832
+extension_download_count_pretty: 832
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql_ducklake.png'
 layout: community_extension_doc
 ---
