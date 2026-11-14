@@ -47,8 +47,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 830
-extension_download_count_pretty: 830
+extension_download_count: 873
+extension_download_count_pretty: 873
 image: '/images/community_extensions/social_preview/preview_community_extension_prometheus.png'
 layout: community_extension_doc
 ---

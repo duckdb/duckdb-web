@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: orkidea
   description: Read, write, upsert, and alter Oracle Database tables through a Rust ADBC driver, with no Oracle client
-  version: '0.1.0'
+  version: '0.2.0'
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: Tnsor-Labs/duckdb-orkidea
-  # The commit tagged v0.1.0, built for DuckDB v2.0.0.
-  ref: 4ac753a0642d2be301106daaa45c7a336635a35c
+  # The commit tagged v0.2.0, built for DuckDB v2.0.0.
+  ref: ff9d35c86d30a2843fa1b504425d0d3dcff40273
 
 docs:
   hello_world: |
@@ -41,7 +41,7 @@ docs:
     INSERT INTO ora.dept VALUES (50, 'RESEARCH', 'BOSTON') ON CONFLICT DO NOTHING;
 
     -- Or run Oracle SQL directly
-    FROM orkidea_query('ora', 'SELECT * FROM v$version');
+    FROM orkidea_query('ora', 'SELECT * FROM emp WHERE deptno = :dept', params := {'dept': 10});
     FROM orkidea_execute('ora', 'BEGIN dbms_stats.gather_table_stats(USER, ''EMP''); END;');
   extended_description: |
     Orkidea makes an Oracle schema behave like a DuckDB database you can
@@ -62,20 +62,21 @@ docs:
 
     - **Secrets**: host/port/service, connect strings, `tnsnames.ora`
       aliases, wallets, and TLS.
-    - **ATTACH**: filters, projections, `LIMIT`, and top-N queries are pushed
-      down to Oracle.
+    - **ATTACH**: filters, projections, `LIMIT`, top-N queries, and
+      `GROUP BY` aggregates are pushed down to Oracle.
     - **Parallel scans**: large tables are read by several sessions over
       ROWID ranges at one SCN, so the result is a consistent snapshot.
     - **Federation**: join Oracle with Postgres, Parquet, or any other source
       DuckDB reads.
-    - `orkidea_query` and `orkidea_execute` run Oracle SQL and PL/SQL.
+    - `orkidea_query` and `orkidea_execute` run Oracle SQL and PL/SQL, with
+      bind parameters.
 
     Not affiliated with, sponsored by, or endorsed by Oracle Corporation.
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 108
-extension_download_count_pretty: 108
+extension_download_count: 208
+extension_download_count_pretty: 208
 image: '/images/community_extensions/social_preview/preview_community_extension_orkidea.png'
 layout: community_extension_doc
 ---
@@ -140,6 +141,7 @@ This extension does not add any types.
 
 |              name              |                                                                          description                                                                           | input_type | scope  | aliases | typed_value |
 |--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| orkidea_aggregate_pushdown     | Whether GROUP BY and aggregates (COUNT, SUM, MIN, MAX, AVG) directly over an attached Oracle table run in Oracle                                               | BOOLEAN    | GLOBAL | []      | true        |
 | orkidea_parallel_scan          | How many Oracle sessions one scan of an attached table may read through at once: -1 chooses (DuckDB's thread count, up to 8), 0 or 1 reads through one session | BIGINT     | GLOBAL | []      | -1          |
 | orkidea_parallel_scan_min_rows | Oracle tables with fewer rows than this (by their optimizer statistics) are read through one session                                                           | UBIGINT    | GLOBAL | []      | 500000      |
 | temp_directory                 | Set the directory to which temporary files are written.                                                                                                        | VARCHAR    | GLOBAL | []      | post.db.tmp |
