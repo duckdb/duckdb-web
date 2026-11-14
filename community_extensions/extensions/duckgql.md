@@ -155,8 +155,8 @@ docs:
       `MERGE`, `INSERT ... RETURN`, and label changes on referenced graphs are
       not yet supported.
 
-extension_star_count: 56
-extension_star_count_pretty: 56
+extension_star_count: 57
+extension_star_count_pretty: 57
 extension_download_count: 808
 extension_download_count_pretty: 808
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgql.png'
