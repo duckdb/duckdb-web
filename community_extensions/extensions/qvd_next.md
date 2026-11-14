@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: qvd_next
   description: Read (streaming) and write Qlik QVD files - next-generation build of qvd on the DuckDB C API v2
-  version: 0.1.1
+  version: 0.1.2
   language: Rust
   build: cmake          # community label; the actual build goes through the Rust C-API Makefile
   license: Apache-2.0
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: snouhaud/DuckDB-QVD-Extension
-  ref: 04c78140a0b96c65d0ffefdc850d456d6fc8c829
+  ref: d6f915a2e88c130c1f7be4c5fe4632984f84e46b
 
 docs:
   hello_world: |
@@ -60,8 +60,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 556
-extension_download_count_pretty: 556
+extension_download_count: 570
+extension_download_count_pretty: 570
 image: '/images/community_extensions/social_preview/preview_community_extension_qvd_next.png'
 layout: community_extension_doc
 ---
