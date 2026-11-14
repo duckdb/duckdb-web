@@ -359,6 +359,8 @@ As always, DuckDB's [friendly SQL dialect]({% link docs/2.0/sql/dialect/friendly
 
 There is more: DuckDB 2.0.0 supports the SQL-standard [`FETCH FIRST`]({% link docs/2.0/sql/query_syntax/limit.md %}#fetch-first) and allows [`UNNEST` in the `GROUP BY` clause]({% link docs/2.0/sql/query_syntax/groupby.md %}#grouping-by-unnest). It also ensures well-defined [`MERGE`]({% link docs/2.0/sql/statements/merge_into.md %}) and [`UPDATE ... FROM`]({% link docs/2.0/sql/statements/update.md %}) semantics for cases when multiple rows are matched.
 
+> Update [DuckDB 2.0.1]({% post_url 2026-11-18-announcing-duckdb-201 %}) reverts the `MERGE` and `UPDATE ... FROM` change because it caused a significant performance regression ([`#28701`](https://github.com/duckdb/duckdb/pull/28701)). A target row that matches multiple source rows is again updated once per match, as in DuckDB 1.x. We plan to ship a proper fix in DuckDB 2.1.
+
 ## Migrating to 2.0
 
 DuckDB 2.0 comes with a small set of breaking changes. For most users, upgrading is straightforward, but complex deployments running many DuckDB processes need more care. The storage format is the most likely source of problems: DuckDB versions before 2.0 cannot read database files created by DuckDB 2.0. DuckDB 2.0 can still read and write your existing database files, and these remain readable by older versions. We recommend testing 2.0.0 on a shadow system before switching production over. And, if your workload is mission-critical, you may want to wait for the first patch release, [coming in November]({% link release_calendar.md %}#upcoming-releases).
