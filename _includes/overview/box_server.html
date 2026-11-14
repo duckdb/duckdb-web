@@ -1,0 +1,92 @@
+<section class="overview-box" id="server">
+	<div class="wrap">
+		<div class="overview-box-card">
+			<div class="overview-box-text">
+				<p class="pre-title">02</p>
+				<h2>Server</h2>
+				<p>With the <a href="{% link quack/index.html %}">Quack remote protocol</a>, DuckDB runs as a server. Both the client and the server are DuckDB instances.</p>
+				<p>Quack unlocks multiple writers for DuckDB.</p>
+				<div class="overview-box-links">
+					<a class="tag" href="{% link docs/2.0/quack/overview.md %}">Quack overview</a>
+					<a class="tag" href="{% link docs/2.0/quack/setup/overview.md %}">Client-server setup</a>
+					<a class="tag" href="{% link docs/2.0/quack/security.md %}">Security</a>
+					<a class="tag" href="{% link docs/2.0/connect/concurrency.md %}">Concurrency</a>
+				</div>
+				<a class="overview-box-blog" href="{% post_url 2026-05-12-quack-remote-protocol %}">Read the blog post<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="overview-box-illustration">
+				<div class="architecture-board">
+
+					<div class="arch-col arch-clients">
+						<div class="arch-stack">
+							<div class="codecard">
+								<div class="codecard-header">
+									<span class="chip duckdb"><svg class="icon"><use href="#code-browser"></use></svg>DuckDB client</span>
+								</div>
+								<div class="codecard-body">
+{% highlight sql %}
+INSERT INTO orders
+    VALUES (3, 'tool', 29.99);
+{% endhighlight %}
+								</div>
+							</div>
+							<div class="codecard">
+								<div class="codecard-header">
+									<span class="chip duckdb"><svg class="icon"><use href="#code-browser"></use></svg>DuckDB client</span>
+								</div>
+								<div class="codecard-body">
+{% highlight sql %}
+UPDATE orders
+    SET total = 45.00 WHERE id = 1;
+{% endhighlight %}
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="arch-connector arch-connector-quack">
+						<div class="connector-row">
+							<span class="connector-arrow"></span>
+							<span class="connector-label">quack:</span>
+						</div>
+						<div class="connector-row">
+							<span class="connector-arrow"></span>
+							<span class="connector-label">quack:</span>
+						</div>
+					</div>
+
+					<div class="arch-col arch-server">
+						<div class="codecard">
+							<div class="codecard-header">
+								<span class="chip duckdb"><svg class="icon"><use href="#database-01"></use></svg>DuckDB server</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="arch-connector single">
+						<div class="connector-row">
+							<span class="connector-arrow"></span>
+							<span class="connector-label">read/write</span>
+						</div>
+					</div>
+
+					<div class="arch-col arch-storage">
+						<div class="codecard storage">
+							<div class="codecard-header">
+								<span class="chip"><svg class="icon"><use href="#hard-drive"></use></svg>my_database.duckdb</span>
+							</div>
+							<div class="storage-tags">
+								<a href="{% link docs/2.0/sql/statements/create_table.md %}"><span class="tag">TABLES</span></a>
+								<a href="{% link docs/2.0/sql/statements/create_view.md %}"><span class="tag">VIEWS</span></a>
+								<a href="{% link docs/2.0/sql/statements/transactions.md %}"><span class="tag">ACID TRANSACTIONS</span></a>
+								<a href="{% link docs/2.0/sql/constraints.md %}"><span class="tag">PRIMARY KEYS</span></a>
+								<a href="{% link docs/2.0/sql/indexes.md %}"><span class="tag">INDEXES</span></a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

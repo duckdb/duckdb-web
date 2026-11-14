@@ -1,0 +1,265 @@
+@use '../../abstracts/variables' as *;
+
+/* ===========================================================================
+   Box: in-process
+   Illustration: a “host process” frame (CLI / Python / Java app) with DuckDB
+   running inside it, connected by a read/write arrow to `dbfile.duckdb`.
+
+   The frame is a separate grid item spanning all rows of column 1, so that the
+   DuckDB card, the connector, and the file can share a grid row and line up.
+   =========================================================================== */
+
+body.overview #in-process {
+
+	.ip-diagram {
+		display: grid;
+		grid-template-columns: minmax(0, 300px) auto auto;
+		grid-template-rows: auto auto auto;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		max-width: 520px;
+		margin: 0 auto;
+	}
+
+	/* ----- Host process frame ----- */
+	.ip-host-frame {
+		grid-column: 1;
+		grid-row: 1 / 4;
+		align-self: stretch;
+		background: var(--quack-codecard-bg);
+		border: 1px dashed var(--main-text-tertiary-color, #666666);
+		border-radius: var(--page-radius-box-inner);
+	}
+
+	.ip-host-header {
+		grid-column: 1;
+		grid-row: 1;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 16px 20px 0;
+		font-family: $fontMono;
+		font-size: var(--type-tiny, 12px);
+		letter-spacing: 0.24px;
+		color: var(--main-text-tertiary-color, #666666);
+
+		.icon {
+			width: 14px;
+			height: 14px;
+			flex-shrink: 0;
+			color: var(--main-benefit-icon-color, #998b00);
+		}
+	}
+
+	.ip-host-apps {
+		grid-column: 1;
+		grid-row: 2;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 6px;
+		padding: 14px 20px 0;
+
+		.chip {
+			padding: 5px 10px;
+			border: 1px solid var(--border-color);
+			border-radius: var(--page-radius-pill);
+			background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
+			font-size: 12px;
+			line-height: 1.2;
+		}
+
+		.icon,
+		.brand {
+			width: 13px;
+			height: 13px;
+			flex-shrink: 0;
+		}
+
+		.brand {
+			display: inline-block;
+		}
+
+		.ip-more {
+			padding: 0 4px;
+			font-weight: 600;
+			color: var(--main-text-tertiary-color, #666666);
+		}
+	}
+
+	/* ----- DuckDB, running inside the host ----- */
+	.ip-duckdb {
+		position: relative;
+		z-index: 1;
+		grid-column: 1;
+		grid-row: 3;
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		margin: 16px 20px 20px;
+		padding: 16px 18px;
+		background: var(--interactive-installation-box-background, rgba(241, 230, 94, 0.3));
+		border: 1px solid var(--interactive-installation-box-border, rgba(204, 189, 0, 0.6));
+		border-radius: var(--page-radius-box-inner);
+	}
+
+	.ip-logo {
+		display: block;
+		width: 44px;
+		height: 44px;
+		flex-shrink: 0;
+	}
+
+	.ip-duckdb-text {
+		display: flex;
+		flex-direction: column;
+		gap: 3px;
+		min-width: 0;
+	}
+
+	.ip-duckdb-name {
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 1.2;
+		color: var(--main-text-primary-color-strong, #050505);
+	}
+
+	.ip-duckdb-sub {
+		font-size: 12px;
+		line-height: 1.3;
+		color: var(--quack-text-secondary);
+	}
+
+	/* ----- Read/write connector -----
+	   Pulled left by the DuckDB card's right margin so the arrow starts at the
+	   card and crosses the host-process boundary. The label sits above the
+	   arrow, right-aligned, so it stays outside the frame. The bottom margin
+	   offsets the card's asymmetric vertical margins so the arrow lines up
+	   with the card's center. */
+	.ip-connector {
+		position: relative;
+		z-index: 1;
+		grid-column: 2;
+		grid-row: 3;
+		margin: 0 0 4px -20px;
+		padding: 0;
+		font-family: $fontMono;
+		font-size: 12px;
+		line-height: 1;
+		color: var(--quack-text-secondary);
+	}
+
+	.ip-connector-label {
+		position: absolute;
+		left: 50%;
+		bottom: calc(100% + 8px);
+		transform: translateX(-50%);
+		white-space: nowrap;
+	}
+
+	.ip-arrow {
+		display: block;
+		width: 124px;
+		height: 22px;
+		color: var(--main-text-tertiary-color, #666666);
+	}
+
+	/* ----- Database file ----- */
+	.ip-file {
+		position: relative;
+		grid-column: 3;
+		grid-row: 3;
+		margin-bottom: 4px;
+
+		img {
+			display: block;
+			width: 56px;
+			height: auto;
+		}
+	}
+
+	/* Positioned below the icon so the icon itself lines up with the arrow */
+	.ip-file-name {
+		position: absolute;
+		top: calc(100% + 8px);
+		left: 50%;
+		transform: translateX(-50%);
+		font-family: $fontMono;
+		font-size: 12px;
+		line-height: 1;
+		color: var(--main-text-primary-color, #0d0d0d);
+		white-space: nowrap;
+	}
+
+	/* ----- Responsive ----- */
+	@media only screen and (max-width: 900px) {
+		.ip-diagram {
+			max-width: 500px;
+		}
+	}
+
+	/* Narrow screens: stack the file below the host process */
+	@media only screen and (max-width: 480px) {
+		.ip-diagram {
+			grid-template-columns: minmax(0, 1fr);
+			grid-template-rows: auto auto auto auto auto;
+		}
+
+		.ip-host-header {
+			padding: 14px 16px 0;
+		}
+
+		.ip-host-apps {
+			padding: 12px 16px 0;
+		}
+
+		.ip-duckdb {
+			margin: 12px 16px 16px;
+			padding: 14px 16px;
+		}
+
+		/* Vertical arrow from the bottom of the DuckDB card down to the file */
+		.ip-connector {
+			grid-column: 1;
+			grid-row: 4;
+			justify-self: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 22px;
+			height: 106px;
+			margin: -16px 0 0;
+			padding: 0;
+		}
+
+		.ip-arrow {
+			flex-shrink: 0;
+			transform: rotate(90deg);
+		}
+
+		.ip-connector-label {
+			right: auto;
+			bottom: auto;
+			top: 50%;
+			left: calc(100% + 10px);
+			transform: translateY(-50%);
+		}
+
+		.ip-file {
+			grid-column: 1;
+			grid-row: 5;
+			justify-self: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 8px;
+			margin: 0;
+		}
+
+		.ip-file-name {
+			position: static;
+			transform: none;
+		}
+	}
+}

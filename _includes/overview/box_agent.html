@@ -1,0 +1,63 @@
+<section class="overview-box" id="agent-mode">
+	<div class="wrap">
+		<div class="overview-box-card">
+			<div class="overview-box-text">
+				<p class="pre-title">04</p>
+				<h2>Agent mode</h2>
+				<p>Since DuckDB 2.0, the CLI has an agent mode that frontloads key information and strips whitespace from tables to save tokens.</p>
+				<p>Queries prototyped locally also run on a <a href="{% link docs/2.0/quack/overview.md %}">Quack</a> server without any changes to the SQL.</p>
+				<div class="overview-box-links">
+					<a class="tag" href="{% link docs/2.0/clients/cli/agent_mode.md %}">Agent mode</a>
+					<a class="tag" href="{% link docs/2.0/clients/cli/overview.md %}">DuckDB CLI</a>
+					<a class="tag" href="{% link docs/2.0/quack/overview.md %}">Quack</a>
+				</div>
+				<a class="overview-box-blog" href="{% post_url 2026-10-09-agent-mode %}">Read the blog post<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="overview-box-illustration">
+				<div class="agent-diagram">
+
+					<div class="agent-actor">
+						<img src="{{ site.baseurl }}/images/overview/agent.svg" alt="AI coding agent" width="169" height="182">
+						<span class="agent-actor-label">AI agent</span>
+					</div>
+
+					<div class="agent-connector local">
+						<div class="connector-row">
+							<span class="connector-label">runs</span>
+							<span class="connector-arrow"></span>
+						</div>
+					</div>
+
+					<div class="codecard agent-card local">
+						<div class="codecard-header">
+							<span class="chip duckdb">
+								<svg class="agent-duck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" aria-hidden="true"><path fill="var(--main-highlight-yellow-background-color)" d="M250 500C111.93 500 0 388.07 0 250S111.36 0 250 0s250 111.93 250 250-111.93 250-250 250"/><path fill="var(--main-highlight-yellow-text-color)" d="M190.05 146.59c-56.82 0-103.41 46.59-103.41 103.41 0 57.39 46.59 103.41 103.41 103.41S293.46 306.82 293.46 250s-46.59-103.41-103.41-103.41M376.14 212.78h-49.15v74.44h49.15c20.55 0 37.22-16.67 37.22-37.22s-16.67-37.22-37.22-37.22"/></svg>
+								DuckDB CLI
+							</span>
+							<span class="agent-badge">agent mode</span>
+						</div>
+						<div class="codecard-body">
+{% highlight bash %}
+duckdb shop.duckdb -c "
+    SELECT region, sum(amount) AS revenue
+    FROM orders
+    GROUP BY ALL
+    ORDER BY revenue DESC;"
+{% endhighlight %}
+							<div class="agent-output">
+{% highlight text %}
+| region:VARCHAR | revenue:DECIMAL(38,2) |
+|---|---|
+| EMEA | 48211.50 |
+| AMER | 39020.75 |
+| APAC | 27118.00 |
+{% endhighlight %}
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
