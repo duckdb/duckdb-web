@@ -2,10 +2,11 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+$docs-sidebar-width: 280px;
+
 // Base styles
 body {
-    background: var(--main-body-background-color, #FAFAFA);
-    font-size: 100%;
+    background: var(--main-body-background-color, #FCFCFC);
 }
 
 // Documentation layout
@@ -38,7 +39,7 @@ body.documentation {
             width: 16px;
             height: 16px;
             flex-shrink: 0;
-            color: var(--main-text-secondary-color, #666);
+            color: var(--main-text-secondary-color, #333333);
         }
 
         a {
@@ -69,8 +70,8 @@ body.documentation {
     // Main content wrapper
     @media only screen and (min-width: 901px) {
         &.sidenav-drilldown main .wrap {
-            width: calc(100% - 249px);
-            margin-left: 249px;
+            width: calc(100% - $docs-sidebar-width);
+            margin-left: $docs-sidebar-width;
             padding-left: 32px;
         }
 
@@ -80,31 +81,32 @@ body.documentation {
     }
 
     main .wrap {
-        width: calc(100% - 275px);
+        width: calc(100% - $docs-sidebar-width);
         min-height: 100vh;
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: minmax(0, 1000px) min(22%, 315px);
+        justify-content: center;
         max-width: unset;
-        margin-left: 275px;
+        margin-left: $docs-sidebar-width;
         padding: 0 0 0 30px;
         position: relative;
 
+        @media only screen and (max-width: 1200px) {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
         #main_content_wrap {
-            width: calc(100% - 22%);
-            max-width: 1000px;
-            margin-top: calc(55px + var(--docbanner-height, 0px));
+            width: 100%;
+            margin-inline: auto;
+            margin-top: calc($site-header-height + var(--docbanner-height, 0px));
             padding: 30px 30px 30px 0;
 
-            @media only screen and (max-width: 1200px) {
-                width: 100%;
-                max-width: 100%;
-            }
         }
     }
     
     header .headerline {
         top: var(--docbanner-height, 0px);
-        height: 55px;
+        height: $site-header-height;
     }
 
     header .headerline .headercontent{
@@ -112,7 +114,7 @@ body.documentation {
     }
 
     main.inactive::before {
-        top: calc(55px + var(--docbanner-height, 0px));
+        top: calc($site-header-height + var(--docbanner-height, 0px));
     }
 
     // Headline bar
@@ -164,7 +166,7 @@ body.documentation {
             flex-shrink: 0;
             gap: 6px;
             margin-bottom: 10px;
-            color: var(--main-text-tertiary-color, #B2B2B2);
+            color: var(--main-text-tertiary-color, #666666);
             transition: color .3s;
 
             svg.icon {
@@ -199,8 +201,8 @@ body.documentation {
     #sidebar {
         background: transparent;
         position: relative;
-        width: 22%;
-        padding: calc(85px + var(--docbanner-height, 0px)) 20px 20px 20px;
+        min-width: 0;
+        padding: calc($site-header-height + 30px + var(--docbanner-height, 0px)) 20px 20px 20px;
 
         @media only screen and (max-width: 1200px) {
             display: none;
@@ -210,8 +212,8 @@ body.documentation {
     // Table of contents menu
     main .wrap .toc_menu {
         position: sticky;
-        top: calc(85px + var(--docbanner-height, 0px));
-        height: calc(100vh - 85px - var(--docbanner-height, 0px));
+        top: calc($site-header-height + 30px + var(--docbanner-height, 0px));
+        height: calc(100vh - $site-header-height - 30px - var(--docbanner-height, 0px));
         overflow: auto;
         -ms-overflow-style: none;
         scrollbar-width: none;
@@ -234,10 +236,10 @@ body.documentation {
     // Side navigation
     .sidenavigation {
         position: fixed;
-        top: calc(55px + var(--docbanner-height, 0px));
+        top: calc($site-header-height + var(--docbanner-height, 0px));
         border-right: 1px solid var(--border-color);
-        width: 275px;
-        height: calc(100vh - 55px - var(--docbanner-height, 0px));
+        width: $docs-sidebar-width;
+        height: calc(100vh - $site-header-height - var(--docbanner-height, 0px));
         padding: 15px;
         z-index: 999;
         overflow: auto;
@@ -257,7 +259,7 @@ body.documentation {
 
         &:not(.sidenav-drill) {
             a {
-                color: var(--main-text-secondary-color, #666);
+                color: var(--main-text-secondary-color, #333333);
                 text-decoration: none;
 
                 &:hover {
@@ -294,7 +296,7 @@ body.documentation {
                     &.hasSub {
                         background: transparent;
                         font-weight: 450;
-                        color: var(--main-text-secondary-color, #666);
+                        color: var(--main-text-secondary-color, #333333);
                     }
                 }
             
@@ -342,7 +344,7 @@ body.documentation {
 
             ul.sidenav {
                 @include side-menu;
-                color: var(--main-text-secondary-color, #666);
+                color: var(--main-text-secondary-color, #333333);
                 overflow: visible;
 
                 >li.item-menu.active {
@@ -396,7 +398,7 @@ body.documentation {
             gap: 16px;
 
             @media only screen and (min-width: 901px) {
-                width: 249px;
+                width: $docs-sidebar-width;
                 padding: 20px;
                 border-right-color: var(--doc-codebox-background-color-secondary, #EDEDED);
             }
@@ -404,9 +406,9 @@ body.documentation {
             .sidenav-search {
                 flex-shrink: 0;
                 justify-content: space-between;
-                height: auto;
-                padding: 12px;
-                border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
+                height: 36px;
+                padding: 0 12px;
+                border: 1px solid var(--border-color, rgba(217, 217, 217, 0.6));
                 border-radius: var(--page-radius-s, 6px);
                 background: none;
                 font-size: var(--type-side-menu, 13px);
@@ -414,13 +416,14 @@ body.documentation {
                 transition: border-color .2s;
 
                 &:hover {
-                    border-color: var(--interactive-folderbox-border-color-hover, #CCCCCC);
+                    border-color: var(--border-color-hover, #CCCCCC);
                 }
 
                 .sidenav-search-hint {
                     display: flex;
                     align-items: center;
                     gap: 4px;
+                    font-size: var(--type-tiny, 12px);
                 }
 
                 svg.icon {
@@ -557,20 +560,21 @@ body.documentation {
 .versionsidebar {
     visibility: hidden;
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(-4px) scale(.98);
+    transform-origin: top right;
     position: absolute;
     top: calc(100% + 4px);
     z-index: 700;
     margin: 0;
     list-style: none;
-    background-color: var(--menu-dropdown-background-color, #0D0D0D);
+    background-color: var(--menu-dropdown-background-color, #F2F2F2);
     border: 1px solid var(--border-color);
-    border-radius: var(--page-radius-box);
-    padding: 8px;
+    border-radius: var(--page-radius-m);
+    padding: 6px;
     right: 0;
     min-width: 100%;
     box-sizing: border-box;
-    transition: opacity .15s ease, transform .15s ease, visibility 0s linear .15s;
+    transition: opacity .1s ease-in, transform .1s ease-in, visibility 0s linear .1s;
 
     @media (prefers-reduced-motion: reduce) {
         transition: none;
@@ -582,7 +586,7 @@ body.documentation {
 body.documentation #main_content_wrap .versionsidebar {
     >ul {
         @include menu-dropdown-list;
-        color: var(--main-text-primary-color, #F2F2F2);
+        color: var(--main-text-primary-color, #0D0D0D);
         padding: 0;
         margin: 0;
         list-style: none;
@@ -593,25 +597,24 @@ body.documentation #main_content_wrap .versionsidebar {
             margin: 0;
 
             a {
-                border-radius: var(--page-radius-pill);
+                border-radius: var(--page-radius-s);
                 text-decoration: none !important;
                 cursor: pointer;
-                padding: 7px 14px;
+                padding: 8px 12px;
                 display: flex;
                 align-items: center;
                 gap: 5px;
                 width: 100%;
                 box-sizing: border-box;
-                color: var(--main-text-primary-color, #F2F2F2) !important;
-                transition: background-color .3s;
+                color: var(--main-text-primary-color, #0D0D0D) !important;
+                transition: background-color .1s;
                 white-space: nowrap;
                 @include menu-dropdown-item-states;
             }
 
             &.current a {
-                color: var(--main-text-primary-color, #F2F2F2) !important;
-                background: var(--menu-dropdown-item-background-hover, #333);
-                border-radius: var(--page-radius-box);
+                color: var(--main-text-primary-color, #0D0D0D) !important;
+                background: var(--menu-dropdown-item-background-hover, #E6E6E6);
 
                 svg.icon {
                     width: 12px;
@@ -619,7 +622,7 @@ body.documentation #main_content_wrap .versionsidebar {
                     flex-shrink: 0;
                     margin-left: auto;
                     stroke-width: 2.2;
-                    color: var(--main-text-secondary-color, #B2B2B2);
+                    color: var(--main-text-secondary-color, #333333);
                 }
             }
         }
@@ -629,8 +632,12 @@ body.documentation #main_content_wrap .versionsidebar {
 .version.active .versionsidebar {
     visibility: visible;
     opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0s;
+    transform: none;
+    transition: opacity .12s ease-out, transform .2s cubic-bezier(.16, 1, .3, 1), visibility 0s;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
 }
 
 // Responsive styles

@@ -181,8 +181,37 @@ We run this script using three DuckDB prompts:
 
 | Database setup              | DuckDB prompt                                               | Execution time |
 | --------------------------- | ----------------------------------------------------------- | -------------: |
-| In-memory DB (uncompressed) | `duckdb`                                                    |         4.22 s |
-| In-memory DB (compressed)   | `duckdb -cmd "ATTACH ':memory:' AS db (COMPRESS); USE db;"` |         0.55 s |
-| Persistent DB (compressed)  | `duckdb tpch-sf30.db`                                       |         0.56 s |
+| In-memory DB (uncompressed) | `duckdb`                                                    |         0.23 s |
+| In-memory DB (compressed)   | `duckdb -cmd "ATTACH ':memory:' AS db (COMPRESS); USE db;"` |         0.15 s |
+| Persistent DB (compressed)  | `duckdb tpch-sf30.db`                                       |         0.15 s |
 
-We can observe that the compressed databases are about 8× faster compared to the uncompressed in-memory database.
+We can observe that the compressed databases are about 1.5× faster compared to the uncompressed in-memory database.
+
+> Compression is applied when the data is checkpointed. For the compressed in-memory database, run an explicit [`CHECKPOINT`]({% link docs/2.0/sql/statements/checkpoint.md %}) after loading the data (in the example above, after the `CALL dbgen(sf = 30);` statement).
+
+<!--
+Note on in-memory compression in DuckDB v2.0.0 (observed on 2026-11-03, to be clarified with the core team):
+
+* In v1.4.5, an in-memory database attached with the COMPRESS option compresses the data on load,
+  while the default in-memory database never compresses its data, not even after a CHECKPOINT.
+* In v2.0.0, neither of them compresses the data on load: the data stays uncompressed until a CHECKPOINT,
+  which then compresses the data in both cases. That is, the COMPRESS option seems to have no effect.
+* Without the CHECKPOINT, the compressed in-memory setup in the table above runs TPC-H Q1 in 0.23 s,
+  the same as the uncompressed one.
+
+This contradicts docs/2.0/internals/storage.md, docs/2.0/sql/statements/checkpoint.md,
+and the description of the COMPRESS option in docs/2.0/sql/statements/attach.md.
+If the behavior is intended, update these pages. If it is a regression, remove the CHECKPOINT note above once it is fixed.
+
+To reproduce, run microbenchmarks/ub-in-memory-vs-persistent.sh or the following statements:
+
+ATTACH ':memory:' AS db (COMPRESS);
+USE db;
+CREATE TABLE t AS SELECT range AS i, range % 10 AS j FROM range(10_000_000);
+SELECT DISTINCT compression FROM pragma_storage_info('t');
+CHECKPOINT;
+SELECT DISTINCT compression FROM pragma_storage_info('t');
+
+The first query returns Uncompressed, the second one returns BitPacking and Constant.
+-->
+

@@ -36,10 +36,10 @@ The results of the microbenchmark are as follows:
 
 | Column type | Storage size | Query time |
 | ----------- | -----------: | ---------: |
-| `DATETIME`  |       3.3 GB |      0.9 s |
-| `VARCHAR`   |       5.2 GB |      3.9 s |
+| `DATETIME`  |      3.3 GiB |     0.19 s |
+| `VARCHAR`   |      5.3 GiB |     1.85 s |
 
-The results show that using the `DATETIME` value yields smaller storage sizes and faster processing.
+The results show that using the `DATETIME` value yields smaller storage sizes and approx. 10× faster processing.
 
 ### Microbenchmark: Joining on Strings
 
@@ -53,13 +53,17 @@ JOIN Comment c2 ON c1.ParentCommentId = c2.id;
 
 In the first experiment, we use the correct (most restrictive) types, i.e., both the `id` and the `ParentCommentId` columns are defined as `BIGINT`.
 In the second experiment, we define all columns with the `VARCHAR` type.
-While the results of the queries are the same for both experiments, their runtimes vary significantly.
-The results below show that joining on `BIGINT` columns is approx. 1.8× faster than performing the same join on `VARCHAR`-typed columns encoding the same value.
+We then repeat the experiment with randomly generated [`UUID`]({% link docs/2.0/sql/data_types/numeric.md %}#universally-unique-identifiers-uuids) identifiers, stored once using the `UUID` type and once using the `VARCHAR` type.
+While the results of the queries are the same for all experiments, their runtimes vary.
+The results below show that joining on `UUID` columns is approx. 1.9× faster than performing the same join on `VARCHAR`-typed columns encoding the same values.
+For `BIGINT` identifiers, the difference is smaller for this join (approx. 5%).
 
-| Join column payload type | Join column schema type | Example value      | Query time |
-| ------------------------ | ----------------------- | ------------------ | ---------: |
-| `BIGINT`                 | `BIGINT`                | `70368755640078`   |      1.2 s |
-| `BIGINT`                 | `VARCHAR`               | `'70368755640078'` |      2.1 s |
+| Join column payload type | Join column schema type | Example value                            | Query time |
+| ------------------------ | ----------------------- | ---------------------------------------- | ---------: |
+| `BIGINT`                 | `BIGINT`                | `70368755640078`                         |     0.92 s |
+| `BIGINT`                 | `VARCHAR`               | `'70368755640078'`                       |     0.97 s |
+| `UUID`                   | `UUID`                  | `18b04b27-73bd-4500-8b96-733d32a7952b`   |     0.71 s |
+| `UUID`                   | `VARCHAR`               | `'18b04b27-73bd-4500-8b96-733d32a7952b'` |     1.38 s |
 
 > Bestpractice Avoid representing numeric values as strings, especially if you intend to perform e.g., join operations on them.
 
@@ -110,9 +114,11 @@ In all cases, we take the data from `.csv.gz` files, and measure the time requir
 
 |                  Operation                    | Execution time |
 |-----------------------------------------------|---------------:|
-| Load with primary key                         |        461.6 s |
-| Load without primary key                      |        121.0 s |
-| Load without primary key then add primary key |        242.0 s |
+| Load with primary key                         |        159.3 s |
+| Load without primary key                      |         45.0 s |
+| Load without primary key then add primary key |         77.5 s |
+
+Loading the data into a table with a primary key is approx. 3.5× slower than loading it into a table without one, and approx. 2× slower than loading the data first and adding the primary key afterwards.
 
 For this dataset, primary keys will only have a (small) positive effect on highly selective queries such as when filtering on a single identifier.
 Defining primary keys (or indexes) will not have an effect on join and aggregation operators.
