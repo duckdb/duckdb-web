@@ -61,10 +61,10 @@ repo:
   ref: f8885ec49e233d0d246f3aad5406ca11fd148868
   variegata: 9db208efbb157cd481d64b23b95b0fca1a86887f
 
-extension_star_count: 81
-extension_star_count_pretty: 81
-extension_download_count: 2452
-extension_download_count_pretty: 2.5k
+extension_star_count: 82
+extension_star_count_pretty: 82
+extension_download_count: 2193
+extension_download_count_pretty: 2.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---
