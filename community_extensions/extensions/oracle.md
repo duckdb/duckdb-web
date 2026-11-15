@@ -67,8 +67,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 713
-extension_download_count_pretty: 713
+extension_download_count: 707
+extension_download_count_pretty: 707
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle.png'
 layout: community_extension_doc
 ---
