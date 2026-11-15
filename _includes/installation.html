@@ -16,7 +16,7 @@
 
         <div class="selection-content" id="installation-client-options">
             <div class="selection-options" data-role="environment">
-                <div class="option" aria-checked="false" tabindex="0" data-value="cli" data-display-label="Command Line Interface (CLI)"><span class="symbol"><img src="/images/icons/cli.svg" aria-hidden="true"></span><span class="label">Command line</span></div>
+                <div class="option" aria-checked="false" tabindex="0" data-value="cli" data-display-label="Command Line Interface (CLI)"><span class="symbol"><img src="/images/icons/cli.svg" aria-hidden="true"></span><span class="label">CLI</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="python"><span class="symbol"><img src="/images/icons/python.svg" aria-hidden="true"></span><span class="label">Python</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="go"><span class="symbol"><img src="/images/icons/go.svg" aria-hidden="true"></span><span class="label">Go</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="java"><span class="symbol"><img src="/images/icons/java.svg" aria-hidden="true"></span><span class="label">Java</span></div>
@@ -97,7 +97,7 @@ The newest release offering a client gets unversioned install commands, older on
 {%- capture downloads_url -%}https://install.duckdb.org/v{{ v_core }}{%- endcapture -%}
 {%- capture docker_cmd -%}docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb:{{ v_core }}{%- endcapture -%}
 
-{%- comment -%} Command line {%- endcomment -%}
+{%- comment -%} CLI {%- endcomment -%}
 {%- capture docs -%}{% include install/docs_url.html release=release_version client="cli" %}{%- endcapture -%}
 {%- capture curl_cmd -%}curl https://install.duckdb.org | {% unless newest_release %}DUCKDB_VERSION={{ v_core }} {% endunless %}bash{%- endcapture -%}
 {%- capture powershell_cmd -%}powershell -NoExit -ExecutionPolicy Bypass -Command "{% unless newest_release %}$env:DUCKDB_VERSION = '{{ v_core }}'; {% endunless %}irm https://install.duckdb.org/install.ps1 | iex"{%- endcapture %}
