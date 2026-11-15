@@ -21,7 +21,7 @@ body.foundation {
 
 		p {
 			@include body-small;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 			margin: 0;
 			max-width: 585px;
 		}
@@ -46,7 +46,7 @@ body.foundation {
 
 		.meta {
 			@include body-small;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 		}
 	}
 
@@ -95,7 +95,7 @@ body.foundation {
 					width: 20px;
 					height: 20px;
 					flex-shrink: 0;
-					color: var(--main-text-secondary-color, #666);
+					color: var(--main-text-secondary-color, #333333);
 				}
 
 				span {
@@ -106,7 +106,7 @@ body.foundation {
 
 			p {
 				@include body-small;
-				color: var(--main-text-secondary-color, #666);
+				color: var(--main-text-secondary-color, #333333);
 				margin: 0;
 			}
 		}
@@ -155,7 +155,7 @@ body.foundation {
 						display: block;
 						width: 120px;
 						height: 100%;
-						background-color: var(--main-text-secondary-color, #666);
+						background-color: var(--main-text-secondary-color, #333333);
 						-webkit-mask-size: contain;
 						mask-size: contain;
 						-webkit-mask-repeat: no-repeat;
@@ -237,10 +237,10 @@ body.foundation {
 
 				.role {
 					@include tiny;
-					color: var(--main-text-tertiary-color, #B2B2B2);
+					color: var(--main-text-tertiary-color, #666666);
 
 					.divider {
-						color: var(--main-quaternary-color, #CCC);
+						color: var(--main-quaternary-color, #999999);
 						margin: 0 8px;
 					}
 				}
@@ -248,7 +248,7 @@ body.foundation {
 
 			p {
 				@include body-small;
-				color: var(--main-text-secondary-color, #666);
+				color: var(--main-text-secondary-color, #333333);
 				margin: 0;
 				grid-column: 1 / -1;
 			}
@@ -293,7 +293,7 @@ body.foundation {
 
 				li {
 					@include body-small;
-					color: var(--main-text-secondary-color, #666);
+					color: var(--main-text-secondary-color, #333333);
 					display: flex;
 					align-items: center;
 					gap: 5px;

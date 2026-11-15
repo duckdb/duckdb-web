@@ -302,41 +302,7 @@
             },
             {
               "page": "Java (JDBC)",
-              "slug": "java",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Define Connections",
-                  "url": "connecting"
-                },
-                {
-                  "page": "Run Queries",
-                  "url": "querying"
-                },
-                {
-                  "page": "Import Data",
-                  "url": "data_import"
-                },
-                {
-                  "page": "Handle Results",
-                  "url": "result_handling"
-                },
-                {
-                  "page": "Define Functions",
-                  "url": "functions"
-                },
-                {
-                  "page": "Profile and Monitor",
-                  "url": "profiling"
-                },
-                {
-                  "page": "Troubleshoot",
-                  "url": "known_issues"
-                }
-              ]
+              "url": "java"
             },
             {
               "page": "Julia",
@@ -1183,6 +1149,10 @@
               "url": "lance"
             },
             {
+              "page": "MotherDuck",
+              "url": "motherduck"
+            },
+            {
               "page": "MySQL",
               "url": "mysql"
             },
@@ -1682,10 +1652,6 @@
               "page": "Installing DuckDB",
               "slug": "installing_duckdb",
               "subsubfolderitems": [
-                {
-                  "page": "Requirements",
-                  "url": "requirements"
-                },
                 {
                   "page": "Install Script",
                   "url": "install_script"

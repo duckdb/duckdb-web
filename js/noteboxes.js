@@ -1,4 +1,4 @@
-$(document).ready(function(){
+(function () {
 
 	var icons = {
 		note: "info-circle",
@@ -8,78 +8,73 @@ $(document).ready(function(){
 		deprecated: "alert-circle",
 		update: "refresh-cw-02",
 		installation: "settings-02",
-		quote: "quotation_mark",
 		new: "stars-01"
 	};
 
-	$('#main_content_wrap blockquote, .singleentry blockquote').each(function() {
-		var $blockquote = $(this);
-		var blockquoteText = $blockquote.text().trim();
-		var firstWord = blockquoteText.split(' ')[0];
+	var keywords = {
+		Note: "note",
+		Warning: "warning",
+		Tip: "tip",
+		Bestpractice: "bestpractice",
+		Deprecated: "deprecated",
+		Update: "update",
+		Installation: "installation",
+		Quote: "quote",
+		New: "new"
+	};
 
-		var className = "";
+	function childParagraphs(el) {
+		return Array.prototype.filter.call(el.children, function (child) {
+			return child.tagName === 'P';
+		});
+	}
 
-		switch (firstWord) {
-			case "Note":
-				className = "note";
-				break;
-			case "Warning":
-				className = "warning";
-				break;
-			case "Tip":
-				className = "tip";
-				break;
-			case "Bestpractice":
-				className = "bestpractice";
-				break;
-			case "Deprecated":
-				className = "deprecated";
-				break;
-			case "Update":
-				className = "update";
-				break;
-			case "Installation":
-				className = "installation";
-				break;
-			case "Quote":
-				className = "quote";
-				break;
-			case "New":
-				className = "new";
-				break;
-			default:
-				className = "";
-				break;
-		}
+	document.querySelectorAll('#main_content_wrap blockquote, .singleentry blockquote').forEach(function (blockquote) {
+		var firstParagraph = childParagraphs(blockquote)[0];
+		var firstWord = firstParagraph ? firstParagraph.textContent.trim().split(/\s+/)[0] : '';
 
-		var hasKeyword = className !== "";
+		var className = Object.prototype.hasOwnProperty.call(keywords, firstWord) ? keywords[firstWord] : '';
+		var hasKeyword = className !== '';
 		if (!hasKeyword) {
-			className = "note";
+			className = 'note';
 		}
 
-		$blockquote.addClass(className);
+		blockquote.classList.add(className);
 
 		if (hasKeyword) {
-			$blockquote.find('p:first-child').html(function(_, oldHtml) {
-				return oldHtml.replace(firstWord, '').trim();
+			blockquote.querySelectorAll('p:first-child').forEach(function (p) {
+				p.innerHTML = p.innerHTML.replace(firstWord, '').trim();
 			});
 		}
 
-		$blockquote.wrapInner('<div class="content"></div>');
+		var content = document.createElement('div');
+		content.className = 'content';
+		while (blockquote.firstChild) {
+			content.appendChild(blockquote.firstChild);
+		}
+		blockquote.appendChild(content);
 
-		if (className === "quote") {
-			var $last = $blockquote.find('.content > p:last-child');
-			if (/^(\u2013|\u2014|--)/.test($last.text().trim())) {
-				$last.addClass('quote-author');
+		if (className === 'quote') {
+			var first = childParagraphs(content)[0];
+			if (first && !first.textContent.trim() && !first.querySelector('img')) {
+				first.remove();
 			}
-			$blockquote.find('.content').prepend('<span class="sr-only">Quote</span>');
-			$blockquote.prepend('<div class="symbol" title="Quote"><svg class="icon"><use href="#' + icons.quote + '"></use></svg></div>');
+			var quoteText = childParagraphs(content);
+			if (quoteText.length) {
+				quoteText[0].classList.add('quote-open');
+				quoteText[0].innerHTML = quoteText[0].innerHTML.replace(/^(\s*(?:<[^>]+>\s*)*)[“"]/, '$1');
+				var lastQuote = quoteText[quoteText.length - 1];
+				if (!/[”"]$/.test(lastQuote.textContent.trim())) {
+					lastQuote.classList.add('quote-close');
+				}
+			}
+			content.insertAdjacentHTML('afterbegin', '<span class="sr-only">Quote</span>');
 		} else {
-			var label = (className == "bestpractice") ? 'Best practice' : (hasKeyword ? firstWord : 'Note');
-			$blockquote.find('.content').prepend('<span class="sr-only">' + label + '</span>');
-			$blockquote.prepend('<div class="symbol" title="' + label + '"><svg class="icon"><use href="#' + icons[className] + '"></use></svg></div>');
+			var label = (className === 'bestpractice') ? 'Best practice' : (hasKeyword ? firstWord : 'Note');
+			content.insertAdjacentHTML('afterbegin', '<span class="sr-only">' + label + '</span>');
+			blockquote.insertAdjacentHTML('afterbegin', '<div class="symbol" title="' + label + '"><svg class="icon"><use href="#' + icons[className] + '"></use></svg></div>');
 		}
 
 	});
 
-});
+})();

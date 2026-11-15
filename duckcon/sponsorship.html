@@ -1,0 +1,96 @@
+---
+layout: default
+title: "Sponsor DuckCon #8 Amsterdam"
+description: "DuckCon is where the people building and using DuckDB meet in person. Sponsorship puts your company in front of them."
+body_class: duckcon duckcon-sponsorship
+force_dark: true
+toc: false
+duckcon_event_url: /events/2026/06/24/duckcon7/
+duckcon_menu:
+- title: Program
+  anchor: program
+- title: Speakers
+  anchor: speakers
+- title: Venue
+  anchor: venue
+- title: Sponsors
+  anchor: sponsors
+permalink: /duckcon/sponsorship/
+redirect_from:
+- /duckcon/sponsoring
+---
+
+<section class="sponsorship-intro">
+  <h1 class="display-2">Sponsor DuckCon<!--&nbsp;#8 Amsterdam--></h1>
+  <p class="text-secondary-color">DuckCon is where the people building and using DuckDB meet in person.<br/>Sponsorship puts your company in front of them.</p>
+  <hr class="divider" />
+</section>
+
+<section class="packages w-large" id="packages">
+  {% include duckcon/section_header.html title="Sponsorship Packages" description="The following sponsorship packages are available, prices are incl. VAT.<br>Custom packages are possible for companies with specific needs." %}
+  <div class="wrap packages-list">
+    <div class="benefit-box silver">
+      <header class="benefit-box-header">
+        <h3 class="benefit-box-title">Silver</h3>
+        <p class="benefit-box-price">
+          <span class="price display-3">15,000&nbsp;€</span>
+          <span class="availability">Up to five<br/>sponsorship opportunities.</span>
+        </p>
+      </header>
+      <ul class="benefit-box-benefits">
+        <li><svg class="icon"><use href="#check-square"></use></svg><span>Your company name and logo on the website and on the projector screen between talks</span></li>
+        <li><svg class="icon"><use href="#check-square"></use></svg><span>Mention in the opening remarks.</span></li>
+        <li><svg class="icon"><use href="#check-square"></use></svg><span>One piece of merchandise (one size fits all, e.g., bottle openers, baseball caps) plus stickers</span></li>
+        <li><svg class="icon"><use href="#check-square"></use></svg><span>Announcement featured in social media (Twitter, LinkedIn, Bluesky) before and after the event</span></li>
+      </ul>
+    </div>
+    <div class="benefit-box gold">
+      <header class="benefit-box-header">
+        <h3 class="benefit-box-title">Gold</h3>
+        <p class="benefit-box-price">
+          <span class="price display-3">30,000&nbsp;€</span>
+          <span class="availability">Up to two<br/>sponsorship opportunities.</span>
+        </p>
+      </header>
+      <ul class="benefit-box-benefits">
+        <li><svg class="icon"><use href="#check-square"></use></svg><span>Your company name and logo on the website and on the projector screen between talks</span></li>
+        <li><svg class="icon"><use href="#check-square"></use></svg><span>Mention in the opening remarks.</span></li>
+        <li><svg class="icon"><use href="#check-square"></use></svg><span>Three pieces of merchandise (one size fits all, e.g., bottle openers, baseball caps) plus stickers</span></li>
+        <li><svg class="icon"><use href="#check-square"></use></svg><span>Announcement featured in social media (Twitter, LinkedIn, Bluesky) before and after the event</span></li>
+        <li><svg class="icon"><use href="#check-square"></use></svg><span>One A4 leaflet on the sponsor table in the foyer.</span></li>
+        <li><svg class="icon"><use href="#check-square"></use></svg><span>Access to a breakout room before and after the main talks for conversations, demos, or short presentations.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="packages-cta">
+    <a class="button yellow" href="mailto:hello@ducklabs.com?subject=DuckCon%20%238%20Sponsorship%20Inquiry">Contact us about sponsorship</a>
+  </div>
+  <hr class="divider" />
+</section>
+
+<section class="what-to-expect" id="what-to-expect">
+  {% include duckcon/section_header.html title="What to expect" description="Here are some impressions from previous editions of DuckCon to see how your brand is represented at DuckCon." %}
+</section>
+
+<section class="slider">
+  <div class="swiper js-duckcon-slider">
+    <div class="swiper-wrapper">
+      {% for image in site.data.duckcon.sponsor_image_slider %}
+      <div class="swiper-slide">
+        <img src="{{ image.image }}" alt="{{ image.description }}">
+        <p class="text-secondary-color">{{ image.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+  <hr class="divider" />
+</section>
+
+<section class="join-us">
+  <div class="card">
+    {% include duckcon/section_header.html title="Sponsor DuckCon #8 Amsterdam" title_class="display-3" description="DuckCon is where the DuckDB community meets in person.<br>Sponsorship puts your company in front of the people building and using DuckDB." %}
+    <a class="button yellow" href="mailto:hello@ducklabs.com?subject=DuckCon%20%238%20Sponsorship%20Inquiry">Contact us about sponsorship</a>
+  </div>
+</section>

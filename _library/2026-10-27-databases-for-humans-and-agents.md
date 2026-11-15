@@ -3,6 +3,8 @@ layout: post
 title: "Databases for Humans and Agents"
 authors:
   - Hannes Mühleisen
+thumb: "/images/library/thumbs/data-renegades-hannes.png"
+image: "/images/library/thumbs/data-renegades-hannes.png"
 tag: podcast
 category: core
 length: "50 min"
