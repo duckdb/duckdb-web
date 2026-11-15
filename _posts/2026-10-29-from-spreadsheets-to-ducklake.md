@@ -8,8 +8,15 @@ authors:
 thumb: "/images/blog/thumbs/user-matt-martin.svg"
 image: "/images/blog/thumbs/user-matt-martin.png"
 excerpt: "After nearly two decades working with increasingly sophisticated data infrastructure, data engineer [Matt Martin](https://www.linkedin.com/in/mattmartin14/) discovered DuckDB could handle many of the analytical tasks he cared about without the operational complexity he had come to associate with big data. The same preference for familiar SQL and simpler infrastructure drew him to DuckLake, and he has since become an active tester and advocate of DuckDB's evolving capabilities."
-tag: using-duckdb
+tag: case-study
 ---
+
+> Quote
+>
+> There actually is something out there that's easy to use and doesn't require a bunch of infrastructure overhead.
+>
+> — Matt Martin
+{: .quote-large}
 
 ## From Copy-Paste to Code
 
@@ -142,4 +149,4 @@ He has written about [serving a DuckLake on an Amazon EC2 instance via Quack](ht
 
 Matt's journey does not suggest that distributed systems are unnecessary. It illustrates a different engineering principle: start with the requirements of the workload, and introduce additional infrastructure only when those requirements justify it. For Matt, DuckDB and DuckLake demonstrate how much analytical capability can be delivered without making the underlying system unnecessarily complicated.
 
-We would like to thank Matt for the conversation. You can follow his writing on DuckDB and DuckLake on [his Substack](https://performancede.substack.com/). And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [quack@duckdb.org](mailto:quack@duckdb.org).
+We would like to thank Matt for the conversation. You can follow his writing on DuckDB and DuckLake on [his Substack](https://performancede.substack.com/). And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com).

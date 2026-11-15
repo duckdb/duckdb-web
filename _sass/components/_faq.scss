@@ -13,75 +13,43 @@ body.documentation main .wrap.frequentlyaskedquestions{
 		margin: 0;
 		padding-right: 55px;
 		.faq-icon{
-			background-color: var(--doc-codebox-button-background-color, #E6E6E6);
-			width: 30px;
-			height: 30px;
-			border-radius: 50%;
+			@include foldout-icon;
 			position: absolute;
-			right: 0px;
-			top: -5px;
+			top: -6px;
+			right: 0;
 			cursor: pointer;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			-webkit-transition: background-color .3s;
-			-o-transition: background-color .3s;
-			transition: background-color .3s;
-			svg.icon{
-				width: 18px;
-				height: 18px;
-				stroke-width: 2;
-				color: var(--main-text-primary-color, #0D0D0D);
-				-webkit-transition: -webkit-transform .3s;
-				transition: -webkit-transform .3s;
-				-o-transition: transform .3s;
-				transition: transform .3s;
-				transition: transform .3s, -webkit-transform .3s;
-			}
-			&:hover{
-				background-color: var(--doc-codebox-button-background-color-hover, #b2b2b299);
-			}
+		}
+		&:hover .faq-icon{
+			border-color: var(--border-color-hover);
 		}
 		a:hover{
 			background-color: transparent;
 		}
 	}
 	.qa-wrap{
-		padding: 20px;
-		background: var(--doc-codebox-background-color, #F2F2F2);
-		-webkit-transition: background-color .3s;
-		-o-transition: background-color .3s;
-		transition: background-color .3s;
-		margin-bottom: 10px;
-		border-radius: var(--page-radius-m);
-		border: 1px solid transparent;
-		-webkit-transition: border .3s;
-		-o-transition: border .3s;
-		transition: border .3s;
+		@include card-surface;
+		padding: 24px;
+		margin-bottom: 16px;
 		&.open h3 .faq-icon svg.icon{
-			-webkit-transform: rotate(180deg);
-				-ms-transform: rotate(180deg);
-					transform: rotate(180deg);
+			transform: rotate(180deg);
 		}
-		&:hover{
-			border-color: var(--border-color);
+		@media only screen and (max-width: 660px) {
+			padding: 16px;
 		}
 	}
 	.answer{
 		display: none;
 		max-width: calc(100% - 55px);
-		padding-top: 20px;
+		padding-top: 16px;
 		>p:first-child{
 			margin-top: 0;
 		}
 		a{
 			color: var(--main-text-primary-color, #0D0D0D);
 			text-decoration: underline;
-			text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+			text-decoration-color: var(--main-text-tertiary-color, #666666);
 			text-decoration-thickness: 1px;
 			text-underline-offset: 0.2em;
-			-webkit-transition: color .3s, text-decoration-color .3s;
-			-o-transition: color .3s, text-decoration-color .3s;
 			transition: color .3s, text-decoration-color .3s;
 			&:hover{
 				color: var(--main-link-hover-color, #998B00);
