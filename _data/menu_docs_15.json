@@ -246,6 +246,10 @@
               "url": "cpp"
             },
             {
+              "page": "C# (.NET)",
+              "url": "dotnet"
+            },
+            {
               "page": "CLI",
               "slug": "cli",
               "subsubfolderitems": [
@@ -1893,6 +1897,10 @@
               "page": "Installing DuckDB",
               "slug": "installing_duckdb",
               "subsubfolderitems": [
+                {
+                  "page": "Requirements",
+                  "url": "requirements"
+                },
                 {
                   "page": "Install Script",
                   "url": "install_script"

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: History
+description: The history of DuckDB and the projects and organizations around it.
 body_class: history blog_typography
 toc: true
 permalink: /history/
