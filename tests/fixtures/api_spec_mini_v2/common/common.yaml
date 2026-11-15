@@ -1,0 +1,73 @@
+module: mini_common
+handles:
+  gizmo:
+    description: |
+      An owned handle to a gizmo. Destroy it with `[[gizmo_destroy]]`.
+    cleanup_with: gizmo_destroy
+  error_info:
+    description: A live error slot.
+callbacks:
+  gizmo_visit:
+    description: |
+      Called once per item of a gizmo. Return false to stop.
+    return_type: bool
+    parameters:
+      item:
+        type: idx
+        description: The item index.
+      user_data:
+        type: void
+        indirection: 1
+        description: The pointer handed to the visiting call, passed through untouched.
+      err:
+        type: error_info
+        indirection: 1
+        kind: OUT_BORROW
+        description: Live error slot. Populate it to fail the visiting call.
+aliases:
+  sel:
+    underlying: u32
+    description: An entry in a selection vector.
+structs:
+  view:
+    description: |
+      A borrowed, length-delimited view: `ptr` points at `len` bytes.
+    fields:
+      - name: ptr
+        type: char
+        pointer: 1
+        const: true
+        description: The first byte.
+      - name: len
+        type: idx
+        description: The number of bytes.
+  blob:
+    description: |
+      Sixteen bytes of storage for a gizmo name.
+    fields:
+      - name: value
+        union:
+          - name: pointer
+            fields:
+              - {name: length, type: u32}
+              - {name: prefix, type: char, array_size: 4, description: The first four bytes.}
+              - {name: ptr, type: char, pointer: 1}
+          - name: inlined
+            fields:
+              - {name: length, type: u32}
+              - {name: inlined, type: char, array_size: 12}
+enums:
+  GIZMO_KIND:
+    description: The kind of a gizmo, see `[[gizmo]]`.
+    values:
+      GIZMO_KIND_PLAIN:
+        value: 0
+        description: A plain gizmo.
+      GIZMO_KIND_FANCY:
+        value: 1
+        description: A fancy gizmo.
+      GIZMO_KIND_HOLLOW: {}
+constants:
+  GIZMO_MAX_ITEMS:
+    value: 12
+    description: The most items a gizmo holds.

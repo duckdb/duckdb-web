@@ -23,7 +23,7 @@ body.about{
 			}
 			p{
 				@include body-standard;
-				color: var(--main-text-primary-color, #F2F2F2);
+				color: var(--main-text-primary-color, #0D0D0D);
 				max-width: 700px;
 				margin: 0 auto;
 			}
@@ -49,7 +49,7 @@ body.about{
 
 		.founders-caption{
 			@include body-small;
-			color: var(--main-text-tertiary-color, #b2b2b2);
+			color: var(--main-text-tertiary-color, #666666);
 			text-align: center;
 			margin: 8px 0 0;
 		}
@@ -102,7 +102,7 @@ body.about{
 			}
 			p{
 				@include body-standard;
-				color: var(--main-text-secondary-color, #666);
+				color: var(--main-text-secondary-color, #333333);
 				margin: 0;
 			}
 		}
@@ -175,7 +175,7 @@ body.about{
 
 				li{
 					@include body-small;
-					color: var(--main-text-tertiary-color, #b2b2b2);
+					color: var(--main-text-tertiary-color, #666666);
 					padding: 4px 0;
 					position: relative;
 					padding-left: 16px;

@@ -1,0 +1,65 @@
+module: gizmo
+functions:
+  gizmo_create:
+    role: constructor
+    lifecycle:
+      - ["unstable", "v2.0.0", "2026-10-21"]
+    parameters:
+      kind:
+        type: GIZMO_KIND
+        description: The kind, one of `[[GIZMO_KIND]]`.
+      out_gizmo:
+        type: gizmo
+        indirection: 1
+        kind: OUT
+        description: Receives the new gizmo.
+      err:
+        type: error_info
+        indirection: 1
+        kind: OUT_BORROW
+    return_type: bool
+    description: |
+      Creates a gizmo.
+
+      The kind decides the layout:
+      - plain gizmos hold items in order,
+      + fancy gizmos hold at most `[[GIZMO_MAX_ITEMS]]` items.
+
+      Creation runs in two steps:
+      1. the layout is chosen,
+      2. the items are allocated.
+  gizmo_destroy:
+    role: destructor
+    lifecycle:
+      - ["unstable", "v2.0.0", "2026-10-21"]
+    parameters:
+      gizmo:
+        type: gizmo
+        indirection: 1
+        kind: IN_TRANSFER
+        description: The gizmo to destroy.
+    return_type: void
+    description: |
+      Destroys the gizmo and frees its memory.
+  gizmo_visit_all:
+    lifecycle:
+      - ["unstable", "v2.0.0", "2026-10-21"]
+    parameters:
+      gizmo:
+        type: gizmo
+        description: The gizmo.
+      visit:
+        type: gizmo_visit
+        description: Called per item, see `[[gizmo_visit]]`.
+      user_data:
+        type: void
+        indirection: 1
+        description: Passed to `visit` untouched.
+      view:
+        type: view
+        indirection: 1
+        const: true
+        description: A `[[view]]` of the item names, each a `[[sel]]` long.
+    return_type: void
+    description: |
+      Visits every item of a gizmo.

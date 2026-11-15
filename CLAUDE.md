@@ -110,7 +110,7 @@ Link tags cause build failures if the target doesn't exist, catching broken link
 - Do not include the `D ` prompt in SQL examples
 
 ### Callout Boxes
-Blockquotes render as colored callout boxes. Types: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`, `Update`, `Installation`, `New`, `Quote`. For `Quote`, a last paragraph starting with an en dash, em dash or `--` is styled as the author line.
+Blockquotes render as colored callout boxes. Types: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`, `Update`, `Installation`, `New`, `Quote`. For `Quote`, a last paragraph starting with a dash (`–`, `—`, `--` or `-`) becomes the author line; if it starts with a name from `_data/authors.yml` that has a `picture`, the photo is shown in front of it.
 
 ### Tables
 - Prepend `<div class="monospace_table"></div>` for code-heavy output tables
