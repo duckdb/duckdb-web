@@ -1,10 +1,10 @@
-(function ($) {
+(function () {
   'use strict';
 
   window.updateStatusIndicator = function(statusText) {
     var statusElement = document.getElementById("last_query_status");
     if (!statusElement) return;
-    
+
     if (statusText.includes("Idle")) {
       statusElement.setAttribute('data-status', 'idle');
     } else if (statusText.includes("Error")) {
@@ -14,87 +14,68 @@
     }
   };
 
-  $(function () {
-    if (!$('body').hasClass('wasm')) return;
+  if (!document.body.classList.contains('wasm')) return;
 
-    var $container = $('.content-container');
-    var $foldouts = $container.find('.selection-foldout');
+  var container = document.querySelector('.content-container');
+  if (!container) return;
+  var foldouts = container.querySelectorAll('.selection-foldout');
 
-    function setFoldoutOpen($foldout, open, animate) {
-      var $content = $foldout.children('.selection-content');
-      if (open) {
-        $foldout.addClass('open');
-        if (animate) $content.stop(true, true).slideDown(150); else $content.show();
-      } else {
-        $foldout.removeClass('open');
-        if (animate) $content.stop(true, true).slideUp(150); else $content.hide();
-      }
+  function contentOf(foldout) {
+    return foldout.querySelector(':scope > .selection-content');
+  }
+
+  function openFoldout(foldout) {
+    var content = contentOf(foldout);
+    if (content) window.Helpers.slideDown(content, 150);
+    foldout.classList.add('open');
+  }
+
+  function closeFoldout(foldout) {
+    var content = contentOf(foldout);
+    if (content) {
+      content.style.display = 'block';
+      window.Helpers.slideUp(content, 150);
     }
+    foldout.classList.remove('open');
+  }
 
-    function wire() {
-      $container.on('click', '.selection-content', function (e) {
-        e.stopPropagation();
-      });
-
-      $container.on('click', '.selection-foldout', function () {
-        var $fold = $(this);
-        if ($fold.hasClass('disabled')) return;
-        if (!$fold.hasClass('open')) {
-          var $content = $fold.children('.selection-content');
-          $content.stop(true, true).slideDown(150);
-          $fold.addClass('open');
-        }
-      });
-
-      $container.on('click', '.selection-head', function (e) {
-        e.stopPropagation();
-        var $fold = $(this).closest('.selection-foldout');
-        if ($fold.hasClass('disabled')) return;
-        var $content = $fold.children('.selection-content');
-        if ($fold.hasClass('open')) {
-          $content.stop(true, true).slideUp(150);
-          $fold.removeClass('open');
-        } else {
-          $content.stop(true, true).slideDown(150);
-          $fold.addClass('open');
-        }
-      });
-
-      $foldouts.each(function () {
-        var $fold = $(this);
-        var isOpen = $fold.hasClass('open');
-        var $content = $fold.children('.selection-content');
-        if (isOpen) $content.show(); else $content.hide();
-      });
+  container.addEventListener('click', function (e) {
+    var head = e.target.closest('.selection-head');
+    if (head && container.contains(head)) {
+      e.stopPropagation();
+      var fold = head.closest('.selection-foldout');
+      if (!fold || fold.classList.contains('disabled')) return;
+      if (fold.classList.contains('open')) closeFoldout(fold); else openFoldout(fold);
+      return;
     }
-
-    function updateSelectedSpan($foldout) {
-      if ($foldout.data('foldout') !== 'credentials') return;
-      
-      var $selected = $foldout.find('.selection-head .selected');
-      var $form = $foldout.find('form');
-      var values = [];
-      
-      $form.find('input[type="text"]').each(function() {
-        var $input = $(this);
-        var value = $input.val().trim();
-        if (value) {
-          var label = $input.prev('label').text().replace(':', '').trim();
-          values.push(label + ': ' + value);
-        }
-      });
-      $selected.text('');
+    var content = e.target.closest('.selection-content');
+    if (content && container.contains(content)) {
+      e.stopPropagation();
+      return;
     }
-
-    $container.on('input change', '.selection-foldout[data-foldout="credentials"] input[type="text"]', function() {
-      var $foldout = $(this).closest('.selection-foldout');
-      updateSelectedSpan($foldout);
-    });
-
-    $foldouts.filter('[data-foldout="credentials"]').each(function() {
-      updateSelectedSpan($(this));
-    });
-
-    wire();
+    var foldout = e.target.closest('.selection-foldout');
+    if (foldout && container.contains(foldout) && !foldout.classList.contains('disabled') && !foldout.classList.contains('open')) {
+      openFoldout(foldout);
+    }
   });
-})(jQuery);
+
+  foldouts.forEach(function (fold) {
+    var content = contentOf(fold);
+    if (content) content.style.display = fold.classList.contains('open') ? '' : 'none';
+  });
+
+  function clearSelectedSpan(foldout) {
+    if (foldout.dataset.foldout !== 'credentials') return;
+    var selected = foldout.querySelector('.selection-head .selected');
+    if (selected) selected.textContent = '';
+  }
+
+  ['input', 'change'].forEach(function (type) {
+    container.addEventListener(type, function (e) {
+      if (!e.target.matches('.selection-foldout[data-foldout="credentials"] input[type="text"]')) return;
+      clearSelectedSpan(e.target.closest('.selection-foldout'));
+    });
+  });
+
+  foldouts.forEach(clearSelectedSpan);
+})();

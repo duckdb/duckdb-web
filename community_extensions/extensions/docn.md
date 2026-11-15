@@ -67,10 +67,10 @@ docs:
     do_embed turns text into embedding vectors.
     See https://github.com/digitalocean-labs/duckdb-do for documentation.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 80
-extension_download_count_pretty: 80
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 535
+extension_download_count_pretty: 535
 image: '/images/community_extensions/social_preview/preview_community_extension_docn.png'
 layout: community_extension_doc
 ---

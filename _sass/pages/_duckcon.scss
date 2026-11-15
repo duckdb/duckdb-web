@@ -218,7 +218,7 @@
 
             td:first-child {
                 @include code-standard;
-                color: var(--main-text-secondary-color, #B2B2B2);
+                color: var(--main-text-secondary-color, #333333);
             }
 
             td:nth-child(2) {
@@ -493,7 +493,7 @@
             margin: 45px auto 0;
             padding: var(--page-margin-l, 32px);
             border-radius: var(--page-radius-box);
-            border: 1px solid var(--main-infobox-border-color, rgba(51, 51, 51, 0.6));
+            border: 1px solid var(--main-infobox-border-color, rgba(212, 204, 255, 0.6));
             background-color: var(--grey-transparent-10, rgba(26, 26, 26, 0.6));
             text-align: center;
         }
@@ -568,14 +568,14 @@
             @include tiny;
             margin: 25px auto 0;
             text-align: center;
-            color: var(--main-text-tertiary-color, #808080);
+            color: var(--main-text-tertiary-color, #666666);
 
             a {
                 color: inherit;
                 text-decoration: underline;
 
                 &:hover {
-                    color: var(--main-text-secondary-color, #B2B2B2);
+                    color: var(--main-text-secondary-color, #333333);
                 }
 
                 &.downloadlink svg.linkicon {
@@ -693,7 +693,7 @@
             flex: 1;
             padding: 32px;
             border-radius: var(--page-radius-box);
-            border: 1px solid var(--main-infobox-border-color, rgba(51, 51, 51, 0.6));
+            border: 1px solid var(--main-infobox-border-color, rgba(212, 204, 255, 0.6));
             background-color: var(--grey-transparent-10, rgba(26, 26, 26, 0.6));
 
             &.gold {
@@ -720,7 +720,7 @@
                 font-size: 22px;
                 font-weight: var(--type-weight-standard, 450);
                 line-height: 1.2;
-                color: var(--main-text-primary-color-strong, #FFF);
+                color: var(--main-text-primary-color-strong, #050505);
             }
 
             .benefit-box-price {
@@ -730,13 +730,13 @@
                 margin: 0;
 
                 .price {
-                    color: var(--main-text-primary-color-strong, #FFF);
+                    color: var(--main-text-primary-color-strong, #050505);
                 }
 
                 .availability {
                     @include body-small;
                     line-height: 1.1;
-                    color: var(--main-text-tertiary-color, #808080);
+                    color: var(--main-text-tertiary-color, #666666);
                 }
             }
         }
@@ -753,7 +753,7 @@
                 @include reset-list-item;
                 display: flex;
                 gap: 7px;
-                color: var(--main-text-secondary-color, #B2B2B2);
+                color: var(--main-text-secondary-color, #333333);
 
                 .icon {
                     flex-shrink: 0;

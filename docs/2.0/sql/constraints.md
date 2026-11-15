@@ -118,6 +118,24 @@ Constraint Error:
 Duplicate key "i: 1, j: 2" violates unique constraint.
 ```
 
+### Deferred primary key and unique checks
+
+> New As of DuckDB 2.0, `PRIMARY KEY` and `UNIQUE` constraints may be declared `DEFERRED`. Deferred constraints are checked when the transaction commits instead of during statement execution, so a transaction may temporarily violate uniqueness as long as the violation is resolved before `COMMIT`. If it is not, the commit fails with a duplicate key error.
+
+```sql
+CREATE TABLE items (
+    id INTEGER PRIMARY KEY DEFERRED,
+    note VARCHAR
+);
+
+BEGIN;
+INSERT INTO items VALUES (1, 'keep'), (1, 'remove'); -- does not fail eagerly
+DELETE FROM items WHERE note = 'remove';
+COMMIT; -- succeeds
+```
+
+`NOT NULL` on a deferred primary key is still checked eagerly. A foreign key cannot reference a deferred key, and a deferred constraint cannot be an `ON CONFLICT` target. `duckdb_constraints()` includes an `is_deferred` column.
+
 ## Foreign Keys
 
 Foreign keys define a column, or set of columns, that refer to a primary key or unique constraint from *another* table. The constraint enforces that the key exists in the other table.

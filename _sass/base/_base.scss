@@ -12,12 +12,12 @@
 }
 
 html {
-	background: var(--main-body-background-color, #FAFAFA);
+	background: var(--main-body-background-color, #FCFCFC);
 }
 
 body{
 	color: var(--main-text-primary-color, #0D0D0D);
-	background: var(--main-body-background-color, #FAFAFA);
+	background: var(--main-body-background-color, #FCFCFC);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	@include body-standard();
@@ -45,10 +45,11 @@ table{
 table a,
 p a,
 li a,
-summary a{
+summary a,
+figcaption a{
 	color: inherit;
 	text-decoration: underline;
-	text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+	text-decoration-color: var(--main-text-tertiary-color, #666666);
 	text-decoration-thickness: 1px;
 	text-underline-offset: 0.16em;
 	-webkit-transition: color .3s, text-decoration-color .3s;
@@ -88,11 +89,6 @@ em.caption{
 
 .figure-title{
 	@include headline-4();
-	margin-bottom: 12px;
-}
-
-.figure-title + p{
-	margin-top: 0!important;
 }
 
 
@@ -122,7 +118,7 @@ main.f-md{
 }
 
 main > .pagehead{
-	margin-top: 70px;
+	margin-top: $site-header-height;
 }
 
 
@@ -139,7 +135,7 @@ main{
 		margin: 0 auto;
 	}
 	#main_content_wrap{
-		margin-top: 70px;
+		margin-top: $site-header-height;
 	}
 	> .pagehead + .wrap > #main_content_wrap{
 		margin-top: 0;
@@ -182,13 +178,14 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	svg.anchor-icon {
-		width: 16px;
-		height: 16px;
+		width: 14px;
+		height: 14px;
 		margin-left: 8px;
+		vertical-align: -2px;
 		fill: none;
 		stroke-width: 2;
 		cursor: pointer;
-		color: var(--main-text-tertiary-color, #B2B2B2);
+		color: var(--main-text-tertiary-color, #666666);
 		opacity: 0;
 		transition: opacity .3s, color .3s;
 

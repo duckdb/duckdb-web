@@ -1,0 +1,92 @@
+module: gadget
+functions:
+  create_gadget:
+    lifecycle:
+      - ["stable", "v0.1.0", "2019-06-27"]
+    parameters:
+      path:
+        type: char
+        indirection: 1
+        const: true
+        description: Path to the gadget file on disk. Both `nullptr` and `:memory:` open an in-memory gadget.
+      out_gadget:
+        type: gadget
+        indirection: 1
+        kind: OUT
+        description: The result gadget object.
+    return_type: state
+    description: |
+      Creates a new gadget or opens an existing gadget file stored at the given path.
+      If no path is given a new in-memory gadget is created instead.
+      The gadget must be destroyed with 'duckdb_destroy_gadget'.
+    return_description: "`DuckDBSuccess` on success or `DuckDBError` on failure."
+  destroy_gadget:
+    lifecycle:
+      - ["stable", "v0.1.0", "2019-06-27"]
+    parameters:
+      gadget:
+        type: gadget
+        indirection: 1
+        description: The gadget to destroy.
+    return_type: void
+    description: |
+      Destroys the gadget and frees its memory.
+  gadget_count:
+    lifecycle:
+      - ["stable", "v0.2.9", "2021-09-06"]
+    parameters:
+      gadget:
+        type: gadget
+        description: The gadget.
+    return_type: idx
+    description: |
+      Returns the number of "items" in the gadget, or MinValue<idx_t> if the gadget is empty.
+  gadget_data:
+    lifecycle:
+      - ["deprecated", "v1.0.0", "2024-05-29"]
+      - ["stable", "v0.2.9", "2021-09-06"]
+    parameters:
+      gadget:
+        type: gadget
+        description: The gadget.
+      col:
+        type: idx
+        description: The column index.
+    return_type: void
+    return_pointer: 1
+    description: |
+      **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
+      Prefer using `duckdb_gadget_count` instead.
+
+      Returns the data of a specific column of a gadget in columnar format. See [the types section](types)
+      for how the data is laid out.
+
+      ```c
+      int32_t *data = (int32_t *) duckdb_gadget_data(gadget, 0);
+      printf("Data for row %d: %d\n", row, data[row]);
+      /* see [[create_gadget]] for the "col0" layout */
+      ```
+    return_description: The column data of the specified column, "col_data" when the gadget is "plain".
+  gadget_peek:
+    lifecycle:
+      - ["unstable", "v1.5.0", "2026-03-06"]
+    parameters:
+      gadget:
+        type: gadget
+        description: The gadget.
+    return_type: bool
+    description: |
+      Peeks at the gadget without consuming anything. See `[[widget_from_gadget]]`.
+    return_description: Whether the gadget has more items.
+  gadget_size:
+    renamed_from: { name: gadget_length, version: "v1.4.0" }
+    lifecycle:
+      - ["stable", "v1.2.0", "2025-02-05"]
+    parameters:
+      gadget:
+        type: gadget
+        description: The gadget.
+    return_type: idx
+    description: |
+      Returns the size of the gadget in bytes.
+    return_description: The size in bytes.

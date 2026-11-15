@@ -1,6 +1,7 @@
 ---
 layout: community_extension_doc
 title: Download Metrics
+description: How download metrics for DuckDB Community Extensions are collected and reported.
 ---
 
 ## What Do We Measure?

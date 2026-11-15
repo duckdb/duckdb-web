@@ -1,6 +1,7 @@
 ---
 layout: default
 title: DuckDB Library Submission Guidelines
+description: Guidelines for submitting papers, talks, podcasts, books, and projects to the DuckDB Library.
 body_class: blog_typography
 toc: false
 ---

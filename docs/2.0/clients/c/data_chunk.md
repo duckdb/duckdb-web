@@ -38,20 +38,23 @@ The primary manner of interfacing with data chunks is by obtaining the internal 
 
 #### `duckdb_create_data_chunk`
 
+Stable since 0.3.3.
+
 Creates an empty data chunk with the specified column types.
 The result must be destroyed with `duckdb_destroy_data_chunk`.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nv">duckdb_create_data_chunk</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">column_count
-</span>);
-</code></pre></div></div>
+```c
+duckdb_data_chunk duckdb_create_data_chunk(
+  duckdb_logical_type *types,
+  idx_t column_count
+);
+```
 
 ##### Parameters
 
-* `types`: An array of column types. Column types cannot contain ANY and INVALID types.
+* `types`: An array of column types. Column types can not contain ANY and INVALID types.
 * `column_count`: The number of columns.
 
 ##### Return Value
@@ -62,14 +65,17 @@ The data chunk.
 
 #### `duckdb_destroy_data_chunk`
 
+Stable since 0.3.3.
+
 Destroys the data chunk and de-allocates all memory allocated for that chunk.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_data_chunk</span>(<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> *<span class="nv">chunk
-</span>);
-</code></pre></div></div>
+```c
+void duckdb_destroy_data_chunk(
+  duckdb_data_chunk *chunk
+);
+```
 
 ##### Parameters
 
@@ -79,16 +85,19 @@ Destroys the data chunk and de-allocates all memory allocated for that chunk.
 
 #### `duckdb_data_chunk_reset`
 
+Stable since 0.3.3.
+
 Resets a data chunk, clearing the validity masks and setting the cardinality of the data chunk to 0.
 After calling this method, you must call `duckdb_vector_get_validity` and `duckdb_vector_get_data` to obtain current
 data and validity pointers
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_data_chunk_reset</span>(<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
-</span>);
-</code></pre></div></div>
+```c
+void duckdb_data_chunk_reset(
+  duckdb_data_chunk chunk
+);
+```
 
 ##### Parameters
 
@@ -98,14 +107,17 @@ data and validity pointers
 
 #### `duckdb_data_chunk_get_column_count`
 
+Stable since 0.3.3.
+
 Retrieves the number of columns in a data chunk.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_data_chunk_get_column_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
-</span>);
-</code></pre></div></div>
+```c
+idx_t duckdb_data_chunk_get_column_count(
+  duckdb_data_chunk chunk
+);
+```
 
 ##### Parameters
 
@@ -119,6 +131,8 @@ The number of columns in the data chunk
 
 #### `duckdb_data_chunk_get_vector`
 
+Stable since 0.3.3.
+
 Retrieves the vector at the specified column index in the data chunk.
 
 The pointer to the vector is valid for as long as the chunk is alive.
@@ -126,11 +140,12 @@ It does NOT need to be destroyed.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_data_chunk_get_vector</span>(<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">col_idx
-</span>);
-</code></pre></div></div>
+```c
+duckdb_vector duckdb_data_chunk_get_vector(
+  duckdb_data_chunk chunk,
+  idx_t col_idx
+);
+```
 
 ##### Parameters
 
@@ -144,14 +159,17 @@ The vector
 
 #### `duckdb_data_chunk_get_size`
 
+Stable since 0.3.3.
+
 Retrieves the current number of tuples in a data chunk.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_data_chunk_get_size</span>(<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
-</span>);
-</code></pre></div></div>
+```c
+idx_t duckdb_data_chunk_get_size(
+  duckdb_data_chunk chunk
+);
+```
 
 ##### Parameters
 
@@ -165,15 +183,18 @@ The number of tuples in the data chunk
 
 #### `duckdb_data_chunk_set_size`
 
+Stable since 0.3.3.
+
 Sets the current number of tuples in a data chunk.
 
 ##### Syntax
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_data_chunk_set_size</span>(<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
-</span>  <span class="kt">idx_t</span> <span class="nv">size
-</span>);
-</code></pre></div></div>
+```c
+void duckdb_data_chunk_set_size(
+  duckdb_data_chunk chunk,
+  idx_t size
+);
+```
 
 ##### Parameters
 

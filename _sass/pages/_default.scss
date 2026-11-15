@@ -22,13 +22,6 @@
     }
 }
 
-.layout_default.blog_typography.post #main_content_wrap{
-    
-    div.highlight{
-        max-width: 100%;
-    }
-}
-
 body:not(.layout_default) .blog_typography{
     @include blog-typography;
 }
@@ -84,7 +77,7 @@ body:not(.layout_default) .blog_typography{
             
             h5 {
                 @include pre-title();
-                color: var(--main-text-tertiary-color, #B2B2B2);
+                color: var(--main-text-tertiary-color, #666666);
                 margin-left: 12px;
                 margin-top: 0;
             }

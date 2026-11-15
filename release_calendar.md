@@ -8,6 +8,7 @@ redirect_from:
 - /docs/dev/release_calendar
 - /docs/current/dev/release_calendar
 title: Release Calendar
+description: Release dates of past and upcoming DuckDB releases.
 body_class: release-calendar blog_typography post
 max_page_width: medium
 toc: false

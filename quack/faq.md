@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Frequently Asked Questions for Quack
+description: Frequently asked questions about Quack, the remote protocol for connecting DuckDB instances.
 body_class: faq
 max_page_width: medium
 toc: false
