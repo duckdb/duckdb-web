@@ -5,7 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<title>{{ page.title }} – DuckDB Community Extensions</title>
 
-	<script src="/js/jquery-3.7.1.min.js"></script>
 	<link rel="stylesheet" href="{{ '/css/main.css' | fingerprint }}">
 	<link rel="stylesheet" href="{{ '/css/communityextensions_screenshot.css' | fingerprint }}">
 
@@ -34,16 +33,15 @@
 	</main>
 	
 	<script>
-		$(document).ready(function() {
-			$('#ce_screenshot_wrap .highlighter-rouge:first-of-type span.k').each(function() {
-				var text = $(this).text().trim();
-				if (text === "FROM") {
-					$(this).addClass('from').before("\n");
-				}
-				if (text === "LOAD") {
-					$(this).before("\n");
-				}
-			});
+		document.querySelectorAll('#ce_screenshot_wrap .highlighter-rouge:first-of-type span.k').forEach(function(keyword) {
+			var text = keyword.textContent.trim();
+			if (text === "FROM") {
+				keyword.classList.add('from');
+				keyword.before("\n");
+			}
+			if (text === "LOAD") {
+				keyword.before("\n");
+			}
 		});
 	</script>
 

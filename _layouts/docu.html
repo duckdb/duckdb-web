@@ -21,7 +21,6 @@
 		} catch (e) {}
 	</script>
 
-	<script src="/js/jquery-3.7.1.min.js" defer></script>
 
 	<link rel="stylesheet" href="{{ '/css/main.css' | fingerprint }}">
 	<link rel="preload" href="/css/webfont/SuisseIntl-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
@@ -206,21 +205,23 @@ Page URL: <https://duckdb.org{{ page.url }}>
 		{% include icons.html %}
 	</div>
 	
+	<script src="{{ '/js/helpers.js' | fingerprint }}" defer></script>
 	<script src="/js/minisearch.js" defer></script>
-	<script src="/js/search.js" defer></script>
+	<script src="{{ '/js/search.js' | fingerprint }}" defer></script>
 
-	<script src="/js/noteboxes.js" defer></script>
+	<script src="{{ '/js/noteboxes.js' | fingerprint }}" defer></script>
 	{% if page.isotope %}<script src="/js/isotope.pkgd.min.js" defer></script>{% endif %}
 	<script src="{{ '/js/script.js' | fingerprint }}" defer></script>
-	<script src="/js/copy_button.js" defer></script>
+	<script src="{{ '/js/copy_button.js' | fingerprint }}" defer></script>
 	{% if page.install_version %}
 	<script src="/js/ua-parser.min.js" defer></script>
-	<script src="/js/install.js" defer></script>
+	<script src="{{ '/js/install.js' | fingerprint }}" defer></script>
 	{% endif %}
 
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
-		<script src="/js/{{ version_viewed }}/railroad.js" defer></script>
-		<script src="/js/{{ version_viewed }}/{{ page.railroad }}" defer></script>
+		{% assign railroad_dir = '/js/' | append: version_viewed | append: '/' %}
+		<script src="{{ railroad_dir | append: 'railroad.js' | fingerprint }}" defer></script>
+		<script src="{{ railroad_dir | append: page.railroad | fingerprint }}" defer></script>
 	{% endif %}
 
 </body>

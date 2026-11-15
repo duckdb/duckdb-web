@@ -46,10 +46,10 @@ docs:
     or the [Onager documentation](https://cogitatortech.github.io/onager/).
     You can also try Onager in your browser [here](https://cogitatortech.github.io/onager/playground/).
 
-extension_star_count: 153
-extension_star_count_pretty: 153
-extension_download_count: 1015
-extension_download_count_pretty: 1.0k
+extension_star_count: 155
+extension_star_count_pretty: 155
+extension_download_count: 965
+extension_download_count_pretty: 965
 image: '/images/community_extensions/social_preview/preview_community_extension_onager.png'
 layout: community_extension_doc
 ---

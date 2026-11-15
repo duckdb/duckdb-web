@@ -68,18 +68,18 @@ To download the v1.5-dev command line client, use the following links:
 
 #### v2.0-dev macOS and Linux Install Script
 
-To install the preview build on Linux and macOS, run:
+To install the latest v2.0-dev alpha build on Linux and macOS, run:
 
 ```bash
-curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
+curl https://install.duckdb.org | DUCKDB_VERSION=2.0-alpha sh
 ```
 
 #### v2.0-dev Windows PowerShell Script
 
-To install the preview build on Windows, run:
+To install the latest v2.0-dev alpha build on Windows, run:
 
 ```powershell
-$env:DUCKDB_VERSION = "alpha"; irm https://install.duckdb.org/install.ps1 | iex
+$env:DUCKDB_VERSION = "2.0-alpha"; irm https://install.duckdb.org/install.ps1 | iex
 ```
 
 #### v2.0-dev CLI Packages
@@ -95,6 +95,24 @@ To download the v2.0-dev command line client, use the following links:
 | Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz) |
 
 ### CLI v2.1-dev
+
+#### v2.1-dev macOS and Linux Install Script
+
+To install the latest v2.1-dev alpha build on Linux and macOS, run:
+
+```bash
+curl https://install.duckdb.org | DUCKDB_VERSION=2.1-alpha sh
+```
+
+#### v2.1-dev Windows PowerShell Script
+
+To install the latest v2.1-dev alpha build on Windows, run:
+
+```powershell
+$env:DUCKDB_VERSION = "2.1-alpha"; irm https://install.duckdb.org/install.ps1 | iex
+```
+
+#### v2.1-dev CLI Packages
 
 To download the v2.1-dev command line client, use the following links:
 
@@ -297,3 +315,11 @@ pak::pak("duckdb/duckdb-r")
 ## Node.js (Neo)
 
 For the DuckDB Node Neo driver, the nightly release is currently not available.
+
+## C# (.NET)
+
+For the [DuckDB C# client]({% link docs/2.0/clients/dotnet.md %}), version `{{ site.latest_duckdb_csharp_preview_version }}` is available as a [pre-release NuGet package](https://www.nuget.org/packages/DuckDB.NET.Data.Full/{{ site.latest_duckdb_csharp_preview_version }}). To install it, run:
+
+```batch
+dotnet add package DuckDB.NET.Data.Full --prerelease
+```

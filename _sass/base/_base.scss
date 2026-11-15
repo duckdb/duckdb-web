@@ -45,7 +45,8 @@ table{
 table a,
 p a,
 li a,
-summary a{
+summary a,
+figcaption a{
 	color: inherit;
 	text-decoration: underline;
 	text-decoration-color: var(--main-text-tertiary-color, #666666);
@@ -88,11 +89,6 @@ em.caption{
 
 .figure-title{
 	@include headline-4();
-	margin-bottom: 12px;
-}
-
-.figure-title + p{
-	margin-top: 0!important;
 }
 
 
@@ -182,9 +178,10 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	svg.anchor-icon {
-		width: 16px;
-		height: 16px;
+		width: 14px;
+		height: 14px;
 		margin-left: 8px;
+		vertical-align: -2px;
 		fill: none;
 		stroke-width: 2;
 		cursor: pointer;
