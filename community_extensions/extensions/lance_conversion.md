@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lance_conversion
   description: Stream any DuckDB query into Lance datasets with Blob v2 storage and scalar, vector, text, and Bloom filter indexes
-  version: 0.2.1
+  version: 0.2.2
   language: C++ & Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb_lance_conversion
-  ref: 46a105d76e886df3bac24d47322345664225b733
+  ref: ba481d653f64875d5825d1b5409ed281206a74d1
 
 docs:
   hello_world: |
@@ -147,8 +147,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 2034
-extension_download_count_pretty: 2.0k
+extension_download_count: 1414
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_lance_conversion.png'
 layout: community_extension_doc
 ---
@@ -188,11 +188,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type |                                                          description                                                           | comment |                      examples                      |
-|------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------|
-| read_atif        | table         | Reads ATIF agent trajectories from a local, S3, or HTTP(S) JSON or JSONL file, optionally gzipped, embedding referenced media. | NULL    | [SELECT * FROM read_atif('trajectories.jsonl');]   |
-| read_huggingface | table         | Reads a Hugging Face dataset's Parquet files.                                                                                  | NULL    | [SELECT * FROM read_huggingface('lhoestq/demo1');] |
-| read_warc        | table         | Reads records from a local, S3, or HTTP(S) WARC file or Common Crawl crawl or segment.                                         | NULL    | [SELECT * FROM read_warc('archive.warc.gz');]      |
+|  function_name   | function_type |                                                                      description                                                                      | comment |                                      examples                                       |
+|------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------|
+| read_atif        | table         | Reads ATIF agent trajectories from a local, S3, or HTTP(S) JSON or JSONL file, optionally gzipped, embedding referenced media.                        | NULL    | [SELECT * FROM read_atif('trajectories.jsonl');]                                    |
+| read_huggingface | table         | Reads a Hugging Face dataset's Parquet files.                                                                                                         | NULL    | [SELECT * FROM read_huggingface('lhoestq/demo1');]                                  |
+| read_warc        | table         | Reads records from a local, S3, or HTTP(S) WARC file or Common Crawl crawl or segment.                                                                | NULL    | [SELECT * FROM read_warc('archive.warc.gz');]                                       |
+| read_xml_records | table         | Reads one row per XML element at record_element from a local, S3, or HTTP(S) file, optionally gzipped, inferring the schema from the leading records. | NULL    | [SELECT * FROM read_xml_records('catalog.xml', record_element := '/catalog/book');] |
 
 ### Overloaded Functions
 

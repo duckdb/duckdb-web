@@ -49,10 +49,10 @@ repo:
   ref: dfc77480cf1035f95c447b3a50725ea782d9370b
   variegata: c1022cee7c834461ca717d18c11862e83bdf8b93
 
-extension_star_count: 15
-extension_star_count_pretty: 15
-extension_download_count: 954
-extension_download_count_pretty: 954
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 932
+extension_download_count_pretty: 932
 image: '/images/community_extensions/social_preview/preview_community_extension_quickjs.png'
 layout: community_extension_doc
 ---

@@ -149,4 +149,4 @@ He has written about [serving a DuckLake on an Amazon EC2 instance via Quack](ht
 
 Matt's journey does not suggest that distributed systems are unnecessary. It illustrates a different engineering principle: start with the requirements of the workload, and introduce additional infrastructure only when those requirements justify it. For Matt, DuckDB and DuckLake demonstrate how much analytical capability can be delivered without making the underlying system unnecessarily complicated.
 
-We would like to thank Matt for the conversation. You can follow his writing on DuckDB and DuckLake on [his Substack](https://performancede.substack.com/). And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [quack@duckdb.org](mailto:quack@duckdb.org).
+We would like to thank Matt for the conversation. You can follow his writing on DuckDB and DuckLake on [his Substack](https://performancede.substack.com/). And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com).
