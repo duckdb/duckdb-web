@@ -120,10 +120,10 @@ docs:
     [project repository](https://github.com/DataZooDE/anofox-decide) for the full SQL API, examples
     and troubleshooting.
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 874
-extension_download_count_pretty: 874
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 831
+extension_download_count_pretty: 831
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_decide.png'
 layout: community_extension_doc
 ---

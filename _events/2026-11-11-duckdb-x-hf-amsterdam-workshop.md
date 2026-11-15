@@ -8,7 +8,7 @@ thumb: "/images/events/thumbs/duckdb-x-hf-amsterdam-workshop.svg"
 image: "/images/events/thumbs/duckdb-x-hf-amsterdam-workshop.png"
 excerpt: ""
 tag: workshop
-category: community
+category: core
 location: "Mr. Treublaan 7, Amsterdam"
 ---
 

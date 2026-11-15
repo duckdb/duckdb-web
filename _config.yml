@@ -75,6 +75,7 @@ latest_duckdb_rust_crate_version: "1.20000.0"
 latest_duckdb_rust_version: "2.0.0"
 latest_duckdb_wasm_version: "2.0.0"
 latest_duckdb_csharp_version: ""
+latest_duckdb_csharp_preview_version: "2.0.0-preview.1"
 latest_duckdb_hash: "d54cbbe3df"
 latest_duckdb_r_version: "2.0.0"
 # preview (v2.1-dev) version information
@@ -149,7 +150,7 @@ repository: "duckdb/duckdb-web"
 #   - vendor/gems/
 #   - vendor/ruby/
 
-star_count: '43.0k'
+star_count: '43.1k'
 
 toc:
   min_level: 1

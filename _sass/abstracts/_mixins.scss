@@ -55,7 +55,7 @@
 }
 
 @mixin label-1 {
-	font-size: var(--type-label-1, 14px);
+	font-size: var(--type-label-1, 13px);
 	font-weight: var(--type-weight-standard, 450);
 	line-height: 1;
 	letter-spacing: 0.001em;
@@ -390,7 +390,7 @@
 		margin-block: 2.5rem 0;
 	}
 
-	#{$scope} :is(blockquote, table, .monospace_table, .highlighter-rouge, .highlight) + :is(h1, h2, h3, h4, h5, h6) {
+	#{$scope} :is(blockquote, figure.quote, table, .monospace_table, .highlighter-rouge, .highlight) + :is(h1, h2, h3, h4, h5, h6) {
 		margin-top: 2rem;
 	}
 
@@ -446,6 +446,18 @@
 	table img {
 		margin: 0;
 		margin-bottom: -4px;
+	}
+
+	.figure-title {
+		margin: 1.25rem 0 0.75rem;
+	}
+
+	.figure-title + p {
+		margin-top: 0;
+
+		> img {
+			margin-top: 0;
+		}
 	}
 
 	dl,

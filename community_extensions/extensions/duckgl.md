@@ -50,10 +50,10 @@ docs:
     for map libraries and base-map tiles. SVG and PNG are north-up geometry overviews without tiles.
     Attached database selection and large integer identifiers retain their exact identity.
 
-extension_star_count: 12
-extension_star_count_pretty: 12
-extension_download_count: 868
-extension_download_count_pretty: 868
+extension_star_count: 13
+extension_star_count_pretty: 13
+extension_download_count: 865
+extension_download_count_pretty: 865
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgl.png'
 layout: community_extension_doc
 ---

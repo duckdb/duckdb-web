@@ -76,10 +76,10 @@ docs:
     Load with `INSTALL ivf FROM community;` (or `LOAD 'ivf.duckdb_extension'`
     with `-unsigned` for local builds).
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 418
-extension_download_count_pretty: 418
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 545
+extension_download_count_pretty: 545
 image: '/images/community_extensions/social_preview/preview_community_extension_ivf.png'
 layout: community_extension_doc
 ---

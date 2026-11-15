@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 011f2b2119f93c0426d6dcf82967a0bf905cc4c5
+  revision: d79f24205434e16240ee310be7bd98a073531840
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -36,7 +36,7 @@ GEM
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
-    ethon (0.19.1)
+    ethon (0.19.2)
       ffi (>= 1.15.0)
       logger
     eventmachine (1.2.7)
@@ -236,21 +236,21 @@ GEM
     safe_yaml (1.0.5)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
-    sass-embedded (1.108.1-aarch64-linux-gnu)
+    sass-embedded (1.108.2-aarch64-linux-gnu)
       google-protobuf (~> 4.31)
-    sass-embedded (1.108.1-aarch64-linux-musl)
+    sass-embedded (1.108.2-aarch64-linux-musl)
       google-protobuf (~> 4.31)
-    sass-embedded (1.108.1-arm-linux-gnueabihf)
+    sass-embedded (1.108.2-arm-linux-gnueabihf)
       google-protobuf (~> 4.31)
-    sass-embedded (1.108.1-arm-linux-musleabihf)
+    sass-embedded (1.108.2-arm-linux-musleabihf)
       google-protobuf (~> 4.31)
-    sass-embedded (1.108.1-arm64-darwin)
+    sass-embedded (1.108.2-arm64-darwin)
       google-protobuf (~> 4.31)
-    sass-embedded (1.108.1-x86_64-darwin)
+    sass-embedded (1.108.2-x86_64-darwin)
       google-protobuf (~> 4.31)
-    sass-embedded (1.108.1-x86_64-linux-gnu)
+    sass-embedded (1.108.2-x86_64-linux-gnu)
       google-protobuf (~> 4.31)
-    sass-embedded (1.108.1-x86_64-linux-musl)
+    sass-embedded (1.108.2-x86_64-linux-musl)
       google-protobuf (~> 4.31)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)

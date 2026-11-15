@@ -61,10 +61,10 @@ docs:
     [function reference](https://shijianjs.github.io/duckfn-open/docs/category/functions) ·
     [source and development notes](https://github.com/shijianjs/duckfn-open).
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 536
-extension_download_count_pretty: 536
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 523
+extension_download_count_pretty: 523
 image: '/images/community_extensions/social_preview/preview_community_extension_duckfn_open.png'
 layout: community_extension_doc
 ---
