@@ -191,6 +191,16 @@ SET max_execution_time = 5000;
 
 This is a per-connection setting with a global fallback: a local value overrides a value set with `SET GLOBAL`, and `RESET max_execution_time` restores the global value.
 
+#### Operator Memory Limit
+
+> New As of DuckDB 2.0, the `operator_memory_limit` setting bounds memory used for query intermediates such as sort buffers and hash tables, per connection. Unlike `memory_limit` / `max_memory` (the hard process-wide cap), this limit targets operator working memory so individual queries can be constrained without lowering the global budget. The default is unset (`NULL`), meaning operators use the normal memory allocator budget. Values use the same human-readable memory syntax as `memory_limit` (for example `256MB`).
+
+```sql
+SET operator_memory_limit = '256MB';
+```
+
+When an operator would exceed the limit, the query fails with an out-of-memory error. `RESET operator_memory_limit` (or `SET operator_memory_limit = NULL`) clears the limit.
+
 ## Collations
 
 List all available collations:

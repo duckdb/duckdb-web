@@ -8,10 +8,10 @@ excerpt: |
 extension:
   name: pdal
   description: Extension that adds support for manipulating point cloud data using SQL.
-  version: 0.6.0
+  version: 0.7.1
   language: C++
   build: cmake
-  excluded_platforms: "windows_amd64;windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: "windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
   requires_toolchains: "parser_tools"
   license: MIT / Overall PDAL license (BSD) - https://pdal.org/en/latest/copyright.html
   maintainers:
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-pdal
-  ref: 1fecc62fa37a02bbac8c8cdbcf59c5ae1e5bf658
+  ref: 35365e7086d6a875fb0498159e8675f34c6e324e
 
 docs:
   hello_world: |
@@ -162,10 +162,10 @@ docs:
     ;
     ```
 
-extension_star_count: 29
-extension_star_count_pretty: 29
-extension_download_count: 1018
-extension_download_count_pretty: 1.0k
+extension_star_count: 31
+extension_star_count_pretty: 31
+extension_download_count: 896
+extension_download_count_pretty: 896
 image: '/images/community_extensions/social_preview/preview_community_extension_pdal.png'
 layout: community_extension_doc
 ---
@@ -181,7 +181,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 

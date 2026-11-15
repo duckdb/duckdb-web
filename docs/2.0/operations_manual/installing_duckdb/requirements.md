@@ -14,14 +14,14 @@ DuckDB is designed to be [portable]({% link why_duckdb.md %}#portable) and has v
 
 DuckDB officially supports Linux, macOS, and Windows on both x86_64 (AMD64) and AArch64 (ARM64) CPU architectures. Official binaries are distributed for these platforms for both the latest stable version and the preview version (nightly build).
 
-| Platform name   | Operating system | Architecture    | CPU types                      | Support level |
-| --------------- | ---------------- | --------------- | ------------------------------ | ------------- |
-| `linux_amd64`   | Linux            | x86_64 (AMD64)  | Intel, AMD, etc.               | Full          |
-| `linux_arm64`   | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc. | Full          |
-| `osx_amd64`     | macOS 12+        | x86_64 (AMD64)  | Intel                          | Partial       |
-| `osx_arm64`     | macOS 12+        | AArch64 (ARM64) | Apple Silicon M1, M2, etc.     | Full          |
-| `windows_amd64` | Windows 10+      | x86_64 (AMD64)  | Intel, AMD, etc.               | Full          |
-| `windows_arm64` | Windows 10+      | AArch64 (ARM64) | Copilot+ PC with Qualcomm CPU  | Full          |
+| Platform name   | Operating system | Architecture    | CPU types                                   | Support level |
+| --------------- | ---------------- | --------------- | ------------------------------------------- | ------------- |
+| `linux_amd64`   | Linux            | x86_64 (AMD64)  | Intel, AMD, etc.                            | Full          |
+| `linux_arm64`   | Linux            | AArch64 (ARM64) | AWS Graviton, NVIDIA Vera, Snapdragon, etc. | Full          |
+| `osx_amd64`     | macOS 12+        | x86_64 (AMD64)  | Intel                                       | Partial       |
+| `osx_arm64`     | macOS 12+        | AArch64 (ARM64) | Apple Silicon M1, M2, etc.                  | Full          |
+| `windows_amd64` | Windows 10+      | x86_64 (AMD64)  | Intel, AMD, etc.                            | Full          |
+| `windows_arm64` | Windows 10+      | AArch64 (ARM64) | Copilot+ PC with Qualcomm CPU               | Full          |
 
 > Warning macOS on Intel CPUs (`osx_amd64`) is only partially supported. DuckDB binaries and [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are still distributed for this platform but, starting with DuckDB 2.0.0, [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are only built for it on a best-effort basis. DuckDB 2.1 will stop supporting `osx_amd64`.
 

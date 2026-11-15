@@ -1,6 +1,7 @@
 ---
 layout: community_extension_doc
 title: Frequently Asked Questions
+description: Frequently asked questions about DuckDB Community Extensions.
 ---
 
 
