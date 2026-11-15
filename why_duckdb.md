@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Why DuckDB
+description: The design goals of DuckDB and the trade-offs that make it a good fit for analytical workloads.
 body_class: why-duckdb blog_typography
 toc: true
 ---

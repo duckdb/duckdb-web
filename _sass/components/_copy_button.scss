@@ -10,7 +10,7 @@
 pre.highlight > button,
 .highlight button.copy{
 	position: absolute;
-	background: var(--doc-codebox-button-background-color, rgba(217, 217, 217, 0.60));
+	background: var(--doc-codebox-button-background-color, rgba(242, 242, 242, 0.6));
 	backdrop-filter: blur(1.5px);
 	border-radius: var(--page-radius-pill);
 	width: 30px;
@@ -26,7 +26,7 @@ pre.highlight > button,
 	transition: background .3s;
 	
 	&:hover{
-		background-color: var(--doc-codebox-button-background-color-hover, #b2b2b299);
+		background-color: var(--doc-codebox-button-background-color-hover, rgba(204, 204, 204, 0.6));
 	}
 	
 	span.copy{

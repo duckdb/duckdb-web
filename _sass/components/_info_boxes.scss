@@ -4,7 +4,8 @@
 
 body.documentation #main_content_wrap,
 body.layout_default #main_content_wrap,
-div.singleentry {
+body.layout_default.blog_typography #main_content_wrap,
+.newswrap .postwrap .postcontent {
 	blockquote {
 		display: flex;
 		align-items: flex-start;
@@ -19,7 +20,7 @@ div.singleentry {
 		line-height: 1.5;
 
 		h1, h2, h3, h4, h5, h6 {
-			@include label;
+			@include label-1;
 			margin: 0 !important;
 		}
 
@@ -32,6 +33,11 @@ div.singleentry {
 		ul {
 			font-size: var(--type-body-small, 13px);
 			margin: 0.8em 0 0 0;
+		}
+
+		p code,
+		li code {
+			font-size: var(--type-code-small, 12px);
 		}
 
 		.sr-only + p,
@@ -61,14 +67,14 @@ div.singleentry {
 			width: 16px;
 			height: 16px;
 			margin-top: 2px;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 
 			.icon {
 				display: block;
 				width: 16px;
 				height: 16px;
 				fill: none;
-				stroke-width: 2.4;
+				stroke-width: 2;
 			}
 		}
 
@@ -103,25 +109,62 @@ div.singleentry {
 		}
 
 		&.quote {
-			padding: 18px 20px;
+			--quote-size: var(--type-body-normal, 15px);
+			margin-block: 2rem;
+			padding: 0;
+			border: 0;
+			background: transparent;
 
-			.symbol {
-				margin-top: 4px;
+			&.quote-large {
+				--quote-size: var(--type-body-large, 22.5px);
 			}
-			border-radius: var(--page-radius-m, 10px);
-			background: var(--doc-codebox-background-color, #F2F2F2);
-			border-color: var(--border-color);
 
 			p {
-				font-size: var(--type-body-normal, 15px);
-				line-height: 1.5;
+				font-size: var(--quote-size);
+				font-weight: 400;
+				line-height: 1.4;
+				color: var(--main-text-primary-color, #0D0D0D);
 			}
 
-			p.quote-author {
-				@include body-small();
-				color: var(--main-text-secondary-color, #666);
-				margin-top: 20px;
+			.quote-open {
+				position: relative;
+
+				&::before {
+					content: "“";
+					position: absolute;
+					inset-inline-end: 100%;
+				}
 			}
+
+			.quote-close::after {
+				content: "”";
+			}
+		}
+	}
+
+	figure.quote {
+		margin-block: 2rem;
+
+		blockquote.quote {
+			margin-block: 0;
+		}
+	}
+
+	figure.quote .quote-author {
+		@include body-small;
+		color: var(--main-text-secondary-color, #333333);
+		margin-top: 0.5rem;
+
+		img {
+			display: inline-block;
+			width: 14px;
+			height: 14px;
+			margin: 0 6px 0 0;
+			border-radius: 50%;
+			object-fit: cover;
+			vertical-align: middle;
+			position: relative;
+			top: -1px;
 		}
 	}
 
@@ -146,9 +189,11 @@ div.singleentry {
 			height: auto;
 		}
 
-		blockquote.quote {
+		> .quote,
+		.swiper-slide > .quote {
 			margin: 0;
 			height: 100%;
+			padding-inline-start: 0.75rem;
 		}
 	}
 
@@ -164,7 +209,7 @@ div.singleentry {
 			padding: 0;
 			border: 0;
 			background: transparent;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 			cursor: pointer;
 			transition: color .2s;
 
@@ -173,7 +218,7 @@ div.singleentry {
 			}
 
 			&.swiper-button-disabled {
-				color: var(--main-quaternary-color, #CCC);
+				color: var(--main-quaternary-color, #999999);
 				cursor: default;
 			}
 

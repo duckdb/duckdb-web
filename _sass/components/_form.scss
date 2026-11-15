@@ -28,7 +28,7 @@
 
 		p{
 			@include body-small();
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 			margin: 0;
 		}
 
@@ -50,14 +50,14 @@
 
 	.responseinfo{
 		font-size: var(--type-tiny, 12px);
-		color: var(--main-text-secondary-color, #666);
+		color: var(--main-text-secondary-color, #333333);
 		margin-top: 32px;
 	}
 
 	.required{
 		margin-bottom: 6px;
 		text-align: right;
-		color: var(--main-text-tertiary-color, #B2B2B2);
+		color: var(--main-text-tertiary-color, #666666);
 		@include body-small();
 	}
 
@@ -108,8 +108,8 @@
 		}
 	}
 
-	$hl-color: var(--main-text-secondary-color, #666);
-	$muted-color: var(--main-text-secondary-color, #666);
+	$hl-color: var(--main-text-secondary-color, #333333);
+	$muted-color: var(--main-text-secondary-color, #333333);
 	$trans-time: 300ms;
 	$width: 100%;
 
@@ -193,7 +193,7 @@
 	  }
 
 	  > .label {
-		color: var(--main-text-tertiary-color, #B2B2B2);
+		color: var(--main-text-tertiary-color, #666666);
 		white-space: nowrap;
 		overflow: hidden;
 		width: calc(100% - 50px);
@@ -268,7 +268,7 @@
 	.legal{
 		margin-top: 16px;
 		font-size: var(--type-tiny);
-		color: var(--main-text-tertiary-color, #B2B2B2);
+		color: var(--main-text-tertiary-color, #666666);
 	}
 
 	/** BUBBLE SELECT **/
@@ -310,7 +310,7 @@
 				line-height: 14px;
 				letter-spacing: 0.04px;
 				font-weight: 600;
-				color: var(--main-text-secondary-color, #B2B2B2);
+				color: var(--main-text-secondary-color, #333333);
 				transition: all 0.2s ease;
 			}
 
@@ -370,7 +370,7 @@
 			cursor: pointer;
 			font-family: "SuisseIntl";
 			font-size: 16px;
-			color: var(--main-text-secondary-color, #666);
+			color: var(--main-text-secondary-color, #333333);
 			line-height: 1.4;
 		}
 	}
@@ -422,7 +422,7 @@
 				}
 
 				option[disabled] {
-					color: var(--main-text-tertiary-color, #B2B2B2);
+					color: var(--main-text-tertiary-color, #666666);
 					background-color: var(--main-section-background-gradient-start-color, #FAFAFA);
 				}
 
@@ -434,7 +434,7 @@
 			// Placeholder style when nothing selected
 			select:invalid,
 			select:has(option[disabled]:checked) {
-				color: var(--main-text-tertiary-color, #B2B2B2);
+				color: var(--main-text-tertiary-color, #666666);
 				font-family: "SuisseIntl";
 				font-size: 18px;
 				font-weight: 400;
