@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: semantic_layer
   description: Define metrics, dimensions and relationships once in SQL, then query them at the right grain
-  version: "0.1.0"
+  version: "0.2.0"
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: altertable-ai/duckdb-semantic_layer
-  ref: d03fcadc22627eae229e5a416d31289e3bc70873
+  ref: 2b2a186cfb94f6f90ee70fc24e61469975fa1ab7
   variegata: 1cea189f6d4f9e6af30c09ecb085883784cd04e0
 
 docs:
@@ -84,6 +84,25 @@ docs:
       WHERE metric_time.year = DATE '1997-01-01'
     )
     ORDER BY month;
+
+    -- Query-time filters and transforms, without defining a metric first.
+    SELECT * FROM SEMANTIC_VIEW(
+      sales
+      DIMENSIONS metric_time.year
+      METRICS lines.revenue,
+              AGG(lines.revenue) FILTER (WHERE customers.segment = 'BUILDING') AS building_revenue,
+              time_shift(lines.revenue, INTERVAL 1 YEAR)                       AS revenue_last_year,
+              cumulative(lines.revenue)                                        AS running_revenue
+    )
+    ORDER BY year;
+
+    -- Window functions and QUALIFY work in queries by name.
+    SELECT segment, order_year, AGG(revenue) AS revenue,
+           RANK() OVER (PARTITION BY order_year ORDER BY AGG(revenue) DESC) AS rnk
+    FROM sales
+    GROUP BY ALL
+    QUALIFY rnk <= 2
+    ORDER BY order_year, rnk;
   extended_description: |
     **semantic_layer** is a semantic layer inside DuckDB. Describe logical tables, the
     relationships between them, and the facts, dimensions and metrics that matter, with
@@ -100,6 +119,9 @@ docs:
       offsets, running totals, to-date and trailing windows.
     - Many-to-many relationships, semi-additive metrics, role-playing relationships,
       time-dependent and range joins, metric filters and window metrics.
+    - At query time, without defining a metric first: `time_shift(...)` and
+      `cumulative(...)` shift or accumulate a metric, and `AGG(<metric>) FILTER (WHERE ...)`
+      filters one. Queries by name also take window functions and `QUALIFY`.
     - Materializations pre-aggregate metrics at a chosen grain. Matching queries read
       them, and DuckLake sources can be refreshed incrementally.
     - Semantic views show up in `information_schema` like regular views, with one typed
@@ -110,8 +132,8 @@ docs:
 
 extension_star_count: 23
 extension_star_count_pretty: 23
-extension_download_count: 564
-extension_download_count_pretty: 564
+extension_download_count: 594
+extension_download_count_pretty: 594
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_layer.png'
 layout: community_extension_doc
 ---
@@ -151,25 +173,27 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|               function_name                | function_type | description | comment | examples |
-|--------------------------------------------|---------------|-------------|---------|----------|
-| __semantic_view_add_materialization        | table         | NULL        | NULL    |          |
-| __semantic_view_create                     | table         | NULL        | NULL    |          |
-| __semantic_view_describe                   | table         | NULL        | NULL    |          |
-| __semantic_view_drop                       | table         | NULL        | NULL    |          |
-| __semantic_view_drop_materialization       | table         | NULL        | NULL    |          |
-| __semantic_view_placeholder                | table         | NULL        | NULL    |          |
-| __semantic_view_query                      | table         | NULL        | NULL    |          |
-| __semantic_view_refresh_materialization    | table         | NULL        | NULL    |          |
-| __semantic_view_rename                     | table         | NULL        | NULL    |          |
-| __semantic_view_set_comment                | table         | NULL        | NULL    |          |
-| __semantic_view_set_max_staleness          | table         | NULL        | NULL    |          |
-| __semantic_view_show_dimensions_for_metric | table         | NULL        | NULL    |          |
-| __semantic_view_show_materializations      | table         | NULL        | NULL    |          |
-| __semantic_view_show_members               | table         | NULL        | NULL    |          |
-| __semantic_view_show_views                 | table         | NULL        | NULL    |          |
-| semantic_layer_peg_parse                   | table         | NULL        | NULL    |          |
-| semantic_view_sql                          | table         | NULL        | NULL    |          |
+|               function_name                | function_type |                                                                                                           description                                                                                                           | comment |                                                                                                                                                                                                examples                                                                                                                                                                                                 |
+|--------------------------------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| __semantic_view_add_materialization        | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_create                     | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_describe                   | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_drop                       | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_drop_materialization       | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_placeholder                | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_query                      | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_refresh_materialization    | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_rename                     | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_set_comment                | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_set_max_staleness          | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_show_dimensions_for_metric | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_show_materializations      | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_show_members               | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| __semantic_view_show_views                 | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| cumulative                                 | scalar        | Query-time form of a CUMULATIVE metric: a running total, a trailing window (trailing_window) or a period to date (to_date) of the metric. Only valid in the METRICS of a semantic query; dimension defaults to metric_time.day. | NULL    | [SELECT * FROM SEMANTIC_VIEW(sales DIMENSIONS metric_time.month METRICS cumulative(revenue) AS running), SELECT * FROM SEMANTIC_VIEW(sales DIMENSIONS metric_time.day METRICS cumulative(revenue, trailing_window := INTERVAL 7 DAYS) AS revenue_7d), SELECT * FROM SEMANTIC_VIEW(sales DIMENSIONS metric_time.month METRICS cumulative(revenue, to_date := 'year', period := 'first') AS revenue_ytd)] |
+| semantic_layer_peg_parse                   | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| semantic_view_sql                          | table         | NULL                                                                                                                                                                                                                            | NULL    |                                                                                                                                                                                                                                                                                                                                                                                                         |
+| time_shift                                 | scalar        | Query-time form of an OFFSET metric: the metric computed over the rows dated one interval earlier (a negative interval looks forward). Only valid in the METRICS of a semantic query; dimension defaults to metric_time.day.    | NULL    | [SELECT * FROM SEMANTIC_VIEW(sales DIMENSIONS metric_time.month METRICS time_shift(revenue, INTERVAL 1 YEAR) AS revenue_ly), SELECT orders.order_month, time_shift(AGG(revenue), INTERVAL 1 MONTH, dimension := orders.order_date) FROM sales GROUP BY orders.order_month]                                                                                                                              |
 
 ### Overloaded Functions
 

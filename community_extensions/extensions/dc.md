@@ -85,10 +85,10 @@ docs:
     Full SQL reference and runnable examples:
     https://github.com/prasanthj/duckdb-dual-cognition
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 686
-extension_download_count_pretty: 686
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 699
+extension_download_count_pretty: 699
 image: '/images/community_extensions/social_preview/preview_community_extension_dc.png'
 layout: community_extension_doc
 ---

@@ -54,8 +54,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 654
-extension_download_count_pretty: 654
+extension_download_count: 657
+extension_download_count_pretty: 657
 image: '/images/community_extensions/social_preview/preview_community_extension_oxedi.png'
 layout: community_extension_doc
 ---

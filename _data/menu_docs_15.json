@@ -246,6 +246,10 @@
               "url": "cpp"
             },
             {
+              "page": "C# (.NET)",
+              "url": "dotnet"
+            },
+            {
               "page": "CLI",
               "slug": "cli",
               "subsubfolderitems": [

@@ -3,7 +3,7 @@ layout: post
 title: "DuckLake: The Lakehouse That's Just SQL and Parquet"
 authors:
   - Pedro Holanda
-  - Guillermo Sanchez Dionis
+  - Guillermo Sanchez
 tag: podcast
 category: core
 length: "70 min"
@@ -18,7 +18,7 @@ venue: "Talk Python to Me"
 |-------|-------|
 | **Podcast** | [Talk Python to Me](https://talkpython.fm/) |
 | **Host** | Michael Kennedy |
-| **Guests** | Pedro Holanda and Guillermo Sanchez Dionis (DuckLabs) |
+| **Guests** | Pedro Holanda and Guillermo Sanchez (DuckLabs) |
 | **Episode site** | [DuckLake: The Lakehouse That's Just SQL and Parquet](https://talkpython.fm/episodes/show/562/ducklake-the-lakehouse-thats-just-sql-and-parquet) |
 | **YouTube** | [Watch](https://www.youtube.com/watch?v=wEKbbY5tPtI) |
 | **Spotify** | [Listen](https://open.spotify.com/episode/7l8OCAjs5PTPhIeGSCiRHE) |

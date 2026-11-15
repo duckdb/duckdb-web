@@ -68,8 +68,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 535
-extension_download_count_pretty: 535
+extension_download_count: 534
+extension_download_count_pretty: 534
 image: '/images/community_extensions/social_preview/preview_community_extension_midi.png'
 layout: community_extension_doc
 ---

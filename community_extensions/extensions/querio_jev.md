@@ -38,8 +38,8 @@ docs:
 
 extension_star_count: {"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
 extension_star_count_pretty: n/a
-extension_download_count: 529
-extension_download_count_pretty: 529
+extension_download_count: 541
+extension_download_count_pretty: 541
 image: '/images/community_extensions/social_preview/preview_community_extension_querio_jev.png'
 layout: community_extension_doc
 ---
