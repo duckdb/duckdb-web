@@ -16,7 +16,7 @@
 
         <div class="selection-content" id="installation-client-options">
             <div class="selection-options" data-role="environment">
-                <div class="option" aria-checked="false" tabindex="0" data-value="cli" data-display-label="Command Line Interface (CLI)"><span class="symbol"><img src="/images/icons/cli.svg" aria-hidden="true"></span><span class="label">Command line</span></div>
+                <div class="option" aria-checked="false" tabindex="0" data-value="cli" data-display-label="Command Line Interface (CLI)"><span class="symbol"><img src="/images/icons/cli.svg" aria-hidden="true"></span><span class="label">CLI</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="python"><span class="symbol"><img src="/images/icons/python.svg" aria-hidden="true"></span><span class="label">Python</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="go"><span class="symbol"><img src="/images/icons/go.svg" aria-hidden="true"></span><span class="label">Go</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="java"><span class="symbol"><img src="/images/icons/java.svg" aria-hidden="true"></span><span class="label">Java</span></div>
@@ -24,6 +24,7 @@
                 <div class="option" aria-checked="false" tabindex="-1" data-value="c"><span class="symbol"><img src="/images/icons/cpp.svg" aria-hidden="true"></span><span class="label">C / C++</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="r"><span class="symbol"><img src="/images/icons/r.svg" aria-hidden="true"></span><span class="label">R</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="rust"><span class="symbol"><img src="/images/icons/rust.svg" aria-hidden="true"></span><span class="label">Rust</span></div>
+                <div class="option" aria-checked="false" tabindex="-1" data-value="csharp"><span class="symbol"><img src="/images/icons/csharp.svg" aria-hidden="true"></span><span class="label">C# (.NET)</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="odbc"><span class="symbol"><img src="/images/icons/odbc.svg" aria-hidden="true"></span><span class="label">ODBC</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="wasm" data-display-label="WebAssembly (Wasm)"><span class="symbol"><img src="/images/icons/webassembly.svg" aria-hidden="true"></span><span class="label">Wasm</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="claude"><span class="symbol"><img src="/images/icons/claude.svg" aria-hidden="true"></span><span class="label">Claude</span></div>
@@ -86,7 +87,7 @@ The newest release offering a client gets unversioned install commands, older on
 <div class="hidden instruction-collection" hidden aria-hidden="true">
 
 {%- assign platforms = "linux,macos,windows" | split: "," -%}
-{%- assign newest_r = true -%}{%- assign newest_rust = true -%}{%- assign newest_go = true -%}{%- assign newest_nodejs = true -%}{%- assign newest_wasm = true -%}
+{%- assign newest_r = true -%}{%- assign newest_rust = true -%}{%- assign newest_go = true -%}{%- assign newest_csharp = true -%}{%- assign newest_nodejs = true -%}{%- assign newest_wasm = true -%}
 {%- for r in site.data.releases -%}
 {%- include install/versions.html release=r -%}
 {%- assign release_version = r.version -%}
@@ -96,7 +97,7 @@ The newest release offering a client gets unversioned install commands, older on
 {%- capture downloads_url -%}https://install.duckdb.org/v{{ v_core }}{%- endcapture -%}
 {%- capture docker_cmd -%}docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb:{{ v_core }}{%- endcapture -%}
 
-{%- comment -%} Command line {%- endcomment -%}
+{%- comment -%} CLI {%- endcomment -%}
 {%- capture docs -%}{% include install/docs_url.html release=release_version client="cli" %}{%- endcapture -%}
 {%- capture curl_cmd -%}curl https://install.duckdb.org | {% unless newest_release %}DUCKDB_VERSION={{ v_core }} {% endunless %}bash{%- endcapture -%}
 {%- capture powershell_cmd -%}powershell -NoExit -ExecutionPolicy Bypass -Command "{% unless newest_release %}$env:DUCKDB_VERSION = '{{ v_core }}'; {% endunless %}irm https://install.duckdb.org/install.ps1 | iex"{%- endcapture %}
@@ -316,6 +317,33 @@ which would resolve to the newest 1.x crate, i.e., the newest DuckDB release. {%
 
 </div>
 {%- assign newest_go = false -%}
+{%- endif -%}
+
+{%- comment -%} C# (.NET): a release without a stable client can offer a pre-release NuGet package (csharp_preview_version in _config.yml).
+Releases without a docs page for the client link to the DuckDB.NET website. {%- endcomment -%}
+{%- capture csharp_docs_exists -%}{% file_exists docs/{{ release_version }}/clients/dotnet.md %}{%- endcapture -%}
+{%- if csharp_docs_exists == "true" -%}
+{%- capture docs -%}{% include install/docs_url.html release=release_version client="dotnet" %}{%- endcapture -%}
+{%- else -%}
+{%- assign docs = "https://duckdb.net/" -%}
+{%- endif -%}
+{%- if v_csharp != "" %}
+
+<div data-release="{{ release_version }}" data-environment="csharp" data-label="{{ v_csharp }}" data-docs="{{ docs }}">
+
+{% highlight bash %}dotnet add package DuckDB.NET.Data.Full{% unless newest_csharp %} --version {{ v_csharp }}{% endunless %}{% endhighlight %}
+
+</div>
+{%- assign newest_csharp = false -%}
+{%- elsif v_csharp_preview and v_csharp_preview != "" %}
+
+<div data-release="{{ release_version }}" data-environment="csharp" data-label="{{ v_csharp_preview }}" data-docs="{{ docs }}">
+
+<blockquote><p>Warning The DuckDB C# client for DuckDB {{ v_core }} is a pre-release (<a href="https://www.nuget.org/packages/DuckDB.NET.Data.Full/{{ v_csharp_preview }}">version {{ v_csharp_preview }}</a>).</p></blockquote>
+
+{% highlight bash %}dotnet add package DuckDB.NET.Data.Full --prerelease{% endhighlight %}
+
+</div>
 {%- endif -%}
 
 {%- comment -%} Claude: the plugin is not tied to a DuckDB release, so it is only offered for the newest one {%- endcomment -%}
