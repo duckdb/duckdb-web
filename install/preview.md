@@ -68,18 +68,18 @@ To download the v1.5-dev command line client, use the following links:
 
 #### v2.0-dev macOS and Linux Install Script
 
-To install the preview build on Linux and macOS, run:
+To install the latest v2.0-dev alpha build on Linux and macOS, run:
 
 ```bash
-curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
+curl https://install.duckdb.org | DUCKDB_VERSION=2.0-alpha sh
 ```
 
 #### v2.0-dev Windows PowerShell Script
 
-To install the preview build on Windows, run:
+To install the latest v2.0-dev alpha build on Windows, run:
 
 ```powershell
-$env:DUCKDB_VERSION = "alpha"; irm https://install.duckdb.org/install.ps1 | iex
+$env:DUCKDB_VERSION = "2.0-alpha"; irm https://install.duckdb.org/install.ps1 | iex
 ```
 
 #### v2.0-dev CLI Packages
@@ -95,6 +95,24 @@ To download the v2.0-dev command line client, use the following links:
 | Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz) |
 
 ### CLI v2.1-dev
+
+#### v2.1-dev macOS and Linux Install Script
+
+To install the latest v2.1-dev alpha build on Linux and macOS, run:
+
+```bash
+curl https://install.duckdb.org | DUCKDB_VERSION=2.1-alpha sh
+```
+
+#### v2.1-dev Windows PowerShell Script
+
+To install the latest v2.1-dev alpha build on Windows, run:
+
+```powershell
+$env:DUCKDB_VERSION = "2.1-alpha"; irm https://install.duckdb.org/install.ps1 | iex
+```
+
+#### v2.1-dev CLI Packages
 
 To download the v2.1-dev command line client, use the following links:
 
@@ -220,7 +238,7 @@ dependencies {
 
 ## C/C++ Libraries
 
-### v1.5-dev C/C++ Libraries
+### C/C++ Libraries v1.5-dev
 
 To download the C/C++ libraries, use the following links:
 
@@ -231,7 +249,7 @@ To download the C/C++ libraries, use the following links:
 | macOS    | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-osx.zip)         |
 | Windows  | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-windows.zip)     |
 
-### v2.0-dev C/C++ Libraries
+### C/C++ Libraries v2.0-dev
 
 To download the v2.0-dev C/C++ libraries, use the following links:
 
@@ -243,7 +261,7 @@ To download the v2.0-dev C/C++ libraries, use the following links:
 | Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-windows-arm64.tar.gz) |
 | Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-windows-amd64.tar.gz) |
 
-### v2.1-dev C/C++ Libraries
+### C/C++ Libraries v2.1-dev
 
 To download the v2.1-dev C/C++ libraries, use the following links:
 
@@ -257,18 +275,33 @@ To download the v2.1-dev C/C++ libraries, use the following links:
 
 ## ODBC
 
-### v2.0-dev
+For ODBC, the preview builds are based on the [`duckdb/duckdb-odbc` repository](https://github.com/duckdb/duckdb-odbc/).
 
-For ODBC, the preview builds are based on the `main` branch of the [`duckdb/duckdb-odbc` repository](https://github.com/duckdb/duckdb-odbc/).
+### ODBC v2.0-dev
 
-| Platform | Architecture | ODBC client                                                                 |
-| -------- | ------------ | --------------------------------------------------------------------------- |
-| Linux    | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-arm64.zip)   |
-| Linux    | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip)   |
-| macOS    | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-arm64.zip)   |
-| macOS    | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-amd64.zip)   |
-| Windows  | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-arm64.zip) |
-| Windows  | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip) |
+To download the v2.0-dev ODBC driver (`v{{ site.latest_duckdb_odbc_dev_version }}`), use the following links:
+
+| Platform | Architecture | ODBC client |
+| -------- | ------------ | ----------- |
+| Linux | `arm64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.latest_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-arm64.zip) |
+| Linux | `x86_64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.latest_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-amd64.zip) |
+| macOS | `arm64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.latest_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-macos-arm64.zip) |
+| macOS | `x86_64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.latest_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-macos-amd64.zip) |
+| Windows | `arm64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.latest_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-arm64.zip) |
+| Windows | `x86_64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.latest_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-amd64.zip) |
+
+### ODBC v2.1-dev
+
+To download the v2.1-dev ODBC driver (`v{{ site.next_duckdb_odbc_dev_version }}`), use the following links:
+
+| Platform | Architecture | ODBC client |
+| -------- | ------------ | ----------- |
+| Linux | `arm64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.next_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-arm64.zip) |
+| Linux | `x86_64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.next_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-amd64.zip) |
+| macOS | `arm64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.next_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-macos-arm64.zip) |
+| macOS | `x86_64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.next_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-macos-amd64.zip) |
+| Windows | `arm64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.next_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-arm64.zip) |
+| Windows | `x86_64` | [zip](https://duckdb-staging.duckdb.org/v{{ site.next_duckdb_odbc_dev_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-amd64.zip) |
 
 ## R
 
@@ -282,3 +315,11 @@ pak::pak("duckdb/duckdb-r")
 ## Node.js (Neo)
 
 For the DuckDB Node Neo driver, the nightly release is currently not available.
+
+## C# (.NET)
+
+For the [DuckDB C# client]({% link docs/2.0/clients/dotnet.md %}), version `{{ site.latest_duckdb_csharp_preview_version }}` is available as a [pre-release NuGet package](https://www.nuget.org/packages/DuckDB.NET.Data.Full/{{ site.latest_duckdb_csharp_preview_version }}). To install it, run:
+
+```batch
+dotnet add package DuckDB.NET.Data.Full --prerelease
+```

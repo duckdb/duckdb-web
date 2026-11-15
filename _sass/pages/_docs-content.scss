@@ -14,21 +14,11 @@ body.documentation {
             color: var(--main-text-secondary-color, #333333);
         }
 
-        #main_content_wrap :is(h1, h2, h3, h4, h5, h6):where(:not(.title)) {
-            margin-block: 2.5rem 0;
-        }
+        @include content-flow('#main_content_wrap');
 
         #main_content_wrap .installationselection :is(.selection-head > h3, .installation-heading > h2),
         #main_content_wrap .qa-wrap > h3 {
             margin-block: 0;
-        }
-
-        #main_content_wrap :is(blockquote, table, .monospace_table, .highlighter-rouge, .highlight) + :is(h1, h2, h3, h4, h5, h6) {
-            margin-top: 2rem;
-        }
-
-        #main_content_wrap :is(h1, h2, h3, h4, h5, h6, .headlinebar) + :is(h1, h2, h3, h4, h5, h6) {
-            margin-top: 1rem;
         }
 
         // Headings
@@ -81,50 +71,12 @@ body.documentation {
             @include headline-5;
         }
 
-        p {
-            margin-top: 1rem;
-            margin-bottom: 0;
-        }
-
         // The following content owns the gap below the page title.
         #main_content_wrap .headlinebar:has(
             + :is(p, h1, h2, h3, h4, h5, h6, table),
             + div:empty:not(.nostroke_table) + table
         ) {
             margin-bottom: 0;
-        }
-
-        #main_content_wrap :is(h1, h2, h3, h4, h5, h6, .headlinebar) + p {
-            margin-top: 0.75rem;
-        }
-
-        #main_content_wrap {
-            :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) {
-                margin-bottom: 0;
-            }
-
-            :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) + :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) {
-                margin-top: 1rem;
-            }
-
-            :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) + p {
-                margin-top: 1.5rem;
-            }
-        }
-
-        :is(h1, h2, h3, h4, h5, h6) + :is(.highlighter-rouge, .download-btn) {
-            margin-top: 1rem;
-        }
-
-        p+.highlighter-rouge {
-            margin-top: 1rem;
-        }
-
-        #main_content_wrap {
-            :is(p, blockquote, div.highlighter-rouge, div.highlight, .headlinebar, h1, h2, h3, h4, h5, h6) + table,
-            :is(p, blockquote, div.highlighter-rouge, div.highlight, .headlinebar, h1, h2, h3, h4, h5, h6) + div:empty:not(.nostroke_table) + table {
-                margin-top: 1rem;
-            }
         }
 
         .limit-width {
@@ -136,15 +88,12 @@ body.documentation {
             img {
                 width: 100%;
                 height: auto;
-                margin: 20px 0;
             }
 
             table {
                 img {
                     width: auto;
                     height: auto;
-                    margin: 0;
-                    margin-bottom: -4px;
                 }
             }
 
@@ -248,53 +197,7 @@ body.documentation {
 
         }
         
-        // Lists
-        dl,
-        ol,
-        ul {
-            margin-bottom: 1.3em;
-        }
-
-        li {
-            line-height: 1.65;
-            font-weight: 400;
-        }
-        
-        ol {
-            list-style-position: inside;
-            list-style: decimal;
-            padding-left: 20px;
-            font-size: var(--type-body-docs, 15px);
-        }
-        
-        dl {
-            dt {
-                font-weight: bold;
-            }
-        
-            dd,
-            p {
-                padding-left: 20px;
-                font-style: italic;
-            }
-        }
-        
-        hr {
-            margin: 20px 0 10px 0;
-            border: 0.5px solid var(--border-color);
-        }
-        
-        ul {
-            list-style-position: outside;
-            list-style-type: '\2022 \00a0\00a0';
-            padding: 0 0 0 20px;
-            font-size: var(--type-body-docs, 15px);
-            
-            ul {
-                padding-left: 20px;
-                margin: 0;
-            }
-        }
+        @include content-blocks;
 
         table.bench {
             a {
@@ -409,6 +312,10 @@ body.layout_default.blog_typography {
 
         thead th {
             text-align: left !important;
+        }
+
+        :not(pre) > code {
+            font-size: var(--type-code-small, 12px);
         }
     }
 
