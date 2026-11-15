@@ -44,6 +44,10 @@ See [what's new in the 2.0 documentation]({% link docs/2.0/whats_new_in_the_docs
         <span class="symbol"><img src="{% link images/icons/quack.svg %}"></span>
         <span>Quack remote protocol</span>
     </a>
+    <a class="box-link third-width" href="{% link overview/index.html %}">
+        <span class="symbol"><svg class="icon"><use href="#layers-three-02"></use></svg></span>
+        <span>Ways to run DuckDB</span>
+    </a>
 </div>
 
 ## Client APIs
