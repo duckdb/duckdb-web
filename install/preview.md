@@ -315,3 +315,11 @@ pak::pak("duckdb/duckdb-r")
 ## Node.js (Neo)
 
 For the DuckDB Node Neo driver, the nightly release is currently not available.
+
+## C# (.NET)
+
+For the [DuckDB C# client]({% link docs/2.0/clients/dotnet.md %}), version `{{ site.latest_duckdb_csharp_preview_version }}` is available as a [pre-release NuGet package](https://www.nuget.org/packages/DuckDB.NET.Data.Full/{{ site.latest_duckdb_csharp_preview_version }}). To install it, run:
+
+```batch
+dotnet add package DuckDB.NET.Data.Full --prerelease
+```
