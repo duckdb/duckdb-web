@@ -19,6 +19,7 @@ venue: "The New Stack"
 |-------|-------|
 | **Podcast** | [The New Stack](https://thenewstack.io/) |
 | **Guest** | Guillermo Sanchez (DuckLabs) |
+| **Article** | [DuckDB has an answer to “bloated” database messages](https://thenewstack.io/duckdb-quack-database-protocol/) by Jennifer Riggins |
 | **YouTube** | [Watch](https://www.youtube.com/watch?v=qLPUsdsFjJs) |
 
 ## Description
