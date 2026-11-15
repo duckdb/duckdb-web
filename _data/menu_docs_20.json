@@ -1111,6 +1111,19 @@
               "path": "/docs/2.0/clients/c/api"
             },
             {
+              "page": "C API v2",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "path": "/docs/2.0/clients/c/v2/overview"
+                },
+                {
+                  "page": "API Reference",
+                  "path": "/docs/2.0/clients/c/v2/api"
+                }
+              ]
+            },
+            {
               "page": "C++",
               "path": "/docs/2.0/clients/cpp"
             }
@@ -1309,7 +1322,32 @@
             },
             {
               "page": "Iceberg",
-              "path": "/docs/2.0/core_extensions/iceberg/overview"
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "path": "/docs/2.0/core_extensions/iceberg/overview"
+                },
+                {
+                  "page": "Writing to Iceberg",
+                  "path": "/docs/2.0/core_extensions/iceberg/writing_to_iceberg"
+                },
+                {
+                  "page": "Iceberg Functions",
+                  "path": "/docs/2.0/core_extensions/iceberg/iceberg_functions"
+                },
+                {
+                  "page": "Iceberg Options",
+                  "path": "/docs/2.0/core_extensions/iceberg/iceberg_options"
+                },
+                {
+                  "page": "Iceberg REST Catalogs",
+                  "path": "/docs/2.0/core_extensions/iceberg/catalogs"
+                },
+                {
+                  "page": "Troubleshooting",
+                  "path": "/docs/2.0/core_extensions/iceberg/troubleshooting"
+                }
+              ]
             },
             {
               "page": "ICU",
@@ -1337,7 +1375,16 @@
             },
             {
               "page": "ODBC",
-              "path": "/docs/2.0/core_extensions/odbc/overview"
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "path": "/docs/2.0/core_extensions/odbc/overview"
+                },
+                {
+                  "page": "ODBC Functions",
+                  "path": "/docs/2.0/core_extensions/odbc/functions"
+                }
+              ]
             },
             {
               "page": "Quack",
@@ -1345,7 +1392,24 @@
             },
             {
               "page": "PostgreSQL",
-              "path": "/docs/2.0/core_extensions/postgres/overview"
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "path": "/docs/2.0/core_extensions/postgres/overview"
+                },
+                {
+                  "page": "Secrets",
+                  "path": "/docs/2.0/core_extensions/postgres/secrets"
+                },
+                {
+                  "page": "Connection Pool",
+                  "path": "/docs/2.0/core_extensions/postgres/connection_pool"
+                },
+                {
+                  "page": "Functions",
+                  "path": "/docs/2.0/core_extensions/postgres/functions"
+                }
+              ]
             },
             {
               "page": "Sirius",
@@ -1353,7 +1417,24 @@
             },
             {
               "page": "Spatial",
-              "path": "/docs/2.0/core_extensions/spatial/overview"
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "path": "/docs/2.0/core_extensions/spatial/overview"
+                },
+                {
+                  "page": "Function Reference",
+                  "path": "/docs/2.0/core_extensions/spatial/functions"
+                },
+                {
+                  "page": "R-Tree Indexes",
+                  "path": "/docs/2.0/core_extensions/spatial/r-tree_indexes"
+                },
+                {
+                  "page": "GDAL Integration",
+                  "path": "/docs/2.0/core_extensions/spatial/gdal"
+                }
+              ]
             },
             {
               "page": "SQLite",
@@ -1403,6 +1484,10 @@
             {
               "page": "Extension Repositories",
               "path": "/docs/2.0/extensions/extension_repositories"
+            },
+            {
+              "page": "Window Function Extensions",
+              "path": "/docs/2.0/extensions/window_function_extensions"
             }
           ]
         }

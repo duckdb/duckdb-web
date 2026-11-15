@@ -4,8 +4,8 @@
 
 footer{
 	.sitefooter{
-		color: var(--main-text-primary-color, #F2F2F2);
-		background: var(--main-body-background-color, #FAFAFA);
+		color: var(--main-text-primary-color, #0D0D0D);
+		background: var(--main-body-background-color, #FCFCFC);
 		position: relative;
 		z-index: 100;
 		.footercontent{
@@ -39,7 +39,7 @@ footer{
 				gap: 20px;
 				.footertagline{
 					@include body-small;
-					color: var(--main-text-tertiary-color, #B2B2B2);
+					color: var(--main-text-tertiary-color, #666666);
 					margin: 0;
 					max-width: 213px;
 					a{
@@ -90,7 +90,7 @@ footer{
 				overflow: visible;
 				position: relative;
 				a{
-					color: var(--main-text-secondary-color, #B2B2B2);
+					color: var(--main-text-secondary-color, #333333);
 					text-decoration: none;
 					-webkit-transition: color .3s;
 					-o-transition: color .3s;
@@ -100,7 +100,7 @@ footer{
 					}
 				}
 				span{
-					color: var(--main-text-secondary-color, #B2B2B2);
+					color: var(--main-text-secondary-color, #333333);
 					line-height: 2;
 				}
 			}
@@ -147,7 +147,7 @@ footer{
 			.tmhints{
 				a{
 					font-size: 11px;
-					color: var(--main-text-secondary-color, #B2B2B2);
+					color: var(--main-text-secondary-color, #333333);
 					text-decoration: none;
 				}
 			}

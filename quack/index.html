@@ -48,22 +48,20 @@ max_page_width: large
 					<a class="bento-link" href="{% link docs/2.0/quack/reference.md %}">Protocol reference<svg class="icon"><use href="#arrow-right"></use></svg></a>
 				</div>
 			</div>
-			<div class="bento-box wide">
+			<a class="bento-box wide" href="{% link docs/2.0/quack/setup/overview.md %}">
 				<div class="bento-title">
 					<svg class="icon"><use href="#server-05"></use></svg>
 					<span>Client-server setup</span>
 				</div>
 				<p>Quack allows two DuckDB processes to talk to each other over the network, enabling a client-server setup (and more). The Quack protocol supports the full DuckDB feature set.</p>
-				<a class="bento-link" href="{% link docs/2.0/quack/setup/overview.md %}">Set up Quack<svg class="icon"><use href="#arrow-right"></use></svg></a>
-			</div>
-			<div class="bento-box wide">
+			</a>
+			<a class="bento-box wide" href="{% post_url 2026-05-12-quack-remote-protocol %}#benchmarks">
 				<div class="bento-title">
 					<svg class="icon"><use href="#zap"></use></svg>
 					<span>Optimized for performance</span>
 				</div>
 				<p>We designed the Quack protocol for performance. We minimized the number of round trips, and ensured that the protocol can handle both small updates and large batches of changes.</p>
-				<a class="bento-link" href="{% post_url 2026-05-12-quack-remote-protocol %}#benchmarks">See the benchmarks<svg class="icon"><use href="#arrow-right"></use></svg></a>
-			</div>
+			</a>
 		</div>
 	</div>
 </section>
@@ -415,30 +413,27 @@ aws cloudformation create-stack \
 	<div class="wrap">
 		<h2 class="section-title">Quack in the DuckDB ecosystem</h2>
 		<div class="bento-grid">
-			<div class="bento-box">
+			<a class="bento-box" href="{% link docs/2.0/quack/overview.md %}">
 				<div class="bento-title">
 					<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--main-highlight-yellow-background-color)" d="M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19"/><path fill="var(--main-highlight-yellow-text-color)" d="M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795M7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.534 7.875-7.875s-3.534-7.875-7.875-7.875S7.172 14.659 7.172 19"/></svg>
 					<span>Client-server DuckDB</span>
 				</div>
 				<p>Quack turns DuckDB into a client-server database for multi-writer and remote access.</p>
-				<a class="bento-link" href="{% link docs/2.0/quack/overview.md %}">Read the docs<svg class="icon"><use href="#arrow-right"></use></svg></a>
-			</div>
-			<div class="bento-box">
+			</a>
+			<a class="bento-box" href="https://ducklake.select/" target="_blank" rel="noopener">
 				<div class="bento-title">
 					<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--lake-highlight-blue-text-color)" d="M19 1.004c9.939 0 17.996 8.058 17.996 17.996S28.939 36.996 19 36.996 1.005 28.938 1.005 19C1.004 9.061 9.062 1.004 19 1.004"/><path fill="var(--lake-highlight-blue-background-color)" fill-rule="evenodd" d="M17.32 9.973a8.82 8.82 0 0 1 7.648 4.377h1.636c2.25 0 4.13 1.8 4.13 4.09 0 2.249-1.84 4.13-4.13 4.13h-1.186a8.83 8.83 0 0 1-7.73 5.195h-.818c-4.704-.246-8.426-4.131-8.426-8.876 0-4.907 3.968-8.916 8.876-8.916m0 2.7c-3.395 0-6.176 2.78-6.176 6.176a6.17 6.17 0 0 0 6.176 6.175c2.74 0 5.071-1.8 5.89-4.253l.285-.94h3.109c.736 0 1.39-.655 1.39-1.392s-.613-1.39-1.39-1.39H23.29l-.368-.777c-.982-2.127-3.108-3.6-5.603-3.6" clip-rule="evenodd"/></svg>
 					<span>DuckLake server</span>
 				</div>
 				<p>Quack supports querying DuckLake and other data lake formats.</p>
-				<a class="bento-link" href="https://ducklake.select/" target="_blank" rel="noopener">Explore DuckLake<svg class="icon"><use href="#arrow-right"></use></svg></a>
-			</div>
-			<div class="bento-box">
+			</a>
+			<a class="bento-box" href="/community_extensions/">
 				<div class="bento-title">
 					<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--main-highlight-purple-background, #1A1A1A)" d="M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19"/><path fill="var(--main-highlight-purple-text-color)" d="M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795M7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.534 7.875-7.875s-3.534-7.875-7.875-7.875S7.172 14.659 7.172 19"/></svg>
 					<span>Community extensions</span>
 				</div>
 				<p>Quack works with all DuckDB extensions, including the Community Extension ecosystem.</p>
-				<a class="bento-link" href="/community_extensions/">Browse extensions<svg class="icon"><use href="#arrow-right"></use></svg></a>
-			</div>
+			</a>
 		</div>
 	</div>
 </section>

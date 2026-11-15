@@ -1,6 +1,7 @@
 ---
 layout: community_extension_doc
 title: Documentation
+description: How to submit a DuckDB Community Extension and the structure of its description.yml descriptor.
 ---
 
 ## Submit a Community Extension
