@@ -87,7 +87,7 @@ The newest release offering a client gets unversioned install commands, older on
 <div class="hidden instruction-collection" hidden aria-hidden="true">
 
 {%- assign platforms = "linux,macos,windows" | split: "," -%}
-{%- assign newest_r = true -%}{%- assign newest_rust = true -%}{%- assign newest_go = true -%}{%- assign newest_csharp = true -%}{%- assign newest_nodejs = true -%}{%- assign newest_wasm = true -%}
+{%- assign newest_r = true -%}{%- assign newest_rust = true -%}{%- assign newest_go = true -%}{%- assign newest_csharp = true -%}{%- assign newest_nodejs = true -%}
 {%- for r in site.data.releases -%}
 {%- include install/versions.html release=r -%}
 {%- assign release_version = r.version -%}
@@ -277,20 +277,16 @@ dependencies {
 {%- assign newest_nodejs = false -%}
 {%- endif -%}
 
-{%- comment -%} Wasm: npm package if a tag is set in _config.yml, otherwise a link to the repository {%- endcomment -%}
+{%- comment -%} Wasm: npm package, pinned to the tag set in _config.yml.
+The version is always pinned because the npm `latest` tag of @duckdb/duckdb-wasm lags behind DuckDB releases. {%- endcomment -%}
 {%- if v_wasm != "" -%}
 {%- capture docs -%}{% include install/docs_url.html release=release_version client="wasm" %}{%- endcapture %}
 
 <div data-release="{{ release_version }}" data-environment="wasm" data-label="{{ v_wasm }}" data-docs="{{ docs }}">
 
-{% if v_wasm_tag and v_wasm_tag != "" -%}
-{% highlight bash %}npm install @duckdb/duckdb-wasm{% unless newest_wasm %}@{{ v_wasm_tag }}{% endunless %}{% endhighlight %}
-{%- else -%}
-<p>See the <a href="https://github.com/duckdb/duckdb-wasm">GitHub repository</a>.</p>
-{%- endif %}
+{% highlight bash %}npm install @duckdb/duckdb-wasm{% if v_wasm_tag and v_wasm_tag != "" %}@{{ v_wasm_tag }}{% endif %}{% endhighlight %}
 
 </div>
-{%- assign newest_wasm = false -%}
 {%- endif -%}
 
 {%- comment -%} Rust {%- endcomment -%}
