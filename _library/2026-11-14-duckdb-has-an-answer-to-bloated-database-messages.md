@@ -7,7 +7,7 @@ thumb: "/images/library/thumbs/the-new-stack-guillermo.png"
 image: "/images/library/thumbs/the-new-stack-guillermo.png"
 tag: podcast
 category: core
-length: "24 min"
+length: "25 min"
 excerpt: ""
 venue: "The New Stack"
 ---
