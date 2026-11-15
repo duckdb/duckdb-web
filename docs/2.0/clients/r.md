@@ -49,7 +49,7 @@ duckdf("SELECT id, value FROM df WHERE value >= 20")
 # 2  3    30
 ```
 
-The approach dates from 2020, when registering an R data frame as a virtual table with [`duckdb_register()`]({% link docs/2.0/clients/r.md %}#efficient-transfer) was introduced in duckdb-r. Version 0.2.1 is a rebuild of the package for `duckdb` 1.5.6 and later.
+The approach dates from 2020, when [issue #459](https://github.com/duckdb/duckdb/issues/459) proposed registering an R data frame as a virtual table with [`duckdb_register()`]({% link docs/2.0/clients/r.md %}#efficient-transfer) in duckdb-r. Version 0.2.1 is a rebuild of the package for `duckdb` 1.5.6 and later.
 
 ## Reference Manual
 
