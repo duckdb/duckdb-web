@@ -86,10 +86,10 @@ docs:
     Full documentation, supported types and limits:
     https://github.com/krokozyab/quack-oracle
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 1994
-extension_download_count_pretty: 2.0k
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 1848
+extension_download_count_pretty: 1.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc
 ---

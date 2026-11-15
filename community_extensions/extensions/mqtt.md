@@ -84,10 +84,10 @@ docs:
 
     →  [GitHub](https://github.com/alitrack/duckdb_mqtt)
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 62
-extension_download_count_pretty: 62
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 158
+extension_download_count_pretty: 158
 image: '/images/community_extensions/social_preview/preview_community_extension_mqtt.png'
 layout: community_extension_doc
 ---
