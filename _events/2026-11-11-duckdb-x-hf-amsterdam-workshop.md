@@ -12,6 +12,8 @@ category: community
 location: "Mr. Treublaan 7, Amsterdam"
 ---
 
+> Update The workshop took place on November 11, 2026. Read the recap in the [blog post]({% link _posts/2026-11-17-duckdb-user-group-workshop-ai-powered-review-analysis.md %}).
+
 Topic: **AI-Powered Review Analysis with DuckDB and Hugging Face: Build an Automated Customer Feedback Pipeline**
 
 > Warning Hands-on workshop — Bring your laptop!

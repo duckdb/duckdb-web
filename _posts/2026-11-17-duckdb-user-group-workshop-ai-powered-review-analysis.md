@@ -3,8 +3,8 @@ layout: post
 title: "DuckDB User Group Workshop on AI-Powered Review Analysis with Hugging Face"
 authors:
   - Geertjan Wielenga
-thumb: /images/blog/thumbs/duckdb-user-group-workshop.svg
-image: /images/blog/thumbs/duckdb-user-group-workshop.png
+thumb: /images/blog/thumbs/duckdb-hugging-face-workshop.svg
+image: /images/blog/thumbs/duckdb-hugging-face-workshop.png
 excerpt: "On 11 November 2026, the DuckDB User Group held its first workshop in Amsterdam, together with Hugging Face. Pratik Patel from Hugging Face led the session."
 tag: using-duckdb
 ---
