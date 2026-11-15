@@ -31,6 +31,26 @@ Please see the [installation page]({% link docs/2.0/installation.html %}?environ
 
 DuckDB offers a [dplyr](https://dplyr.tidyverse.org/)-compatible API via the `duckplyr` package. It can be installed using `install.packages("duckplyr")`. For details, see the [`duckplyr` documentation](https://tidyverse.github.io/duckplyr/).
 
+### `duckdf`: SQL Client
+
+[`duckdf`](https://github.com/phillc73/duckdf) is an SQL interface for R data frames, built on the DuckDB R client. Data frames are registered directly with an in-process DuckDB instance as zero-copy views, queried with standard SQL, and returned as data frame results, without copying data to an external database server. The package is available on [CRAN](https://cran.r-project.org/web/packages/duckdf/index.html) and requires `duckdb` 1.5.6 or later:
+
+```r
+install.packages("duckdf")
+```
+
+```r
+library("duckdf")
+
+df <- data.frame(id = 1:3, value = c(10, 20, 30))
+duckdf("SELECT id, value FROM df WHERE value >= 20")
+#   id value
+# 1  2    20
+# 2  3    30
+```
+
+The approach dates from 2020, when registering an R data frame as a virtual table with [`duckdb_register()`]({% link docs/2.0/clients/r.md %}#efficient-transfer) was introduced in duckdb-r. Version 0.2.1 is a rebuild of the package for `duckdb` 1.5.6 and later.
+
 ## Reference Manual
 
 The reference manual for the DuckDB R client is available at [r.duckdb.org](https://r.duckdb.org).
