@@ -4,6 +4,8 @@ title: "Efficient SQL on Pandas with DuckDB"
 authors:
   - Mark Raasveldt
   - Hannes Mühleisen
+thumb: "/images/blog/thumbs/sql-on-pandas.svg"
+image: "/images/blog/thumbs/sql-on-pandas.png"
 excerpt: DuckDB, a free and open source analytical data management system, can efficiently run SQL queries directly on Pandas DataFrames.
 tag: using-duckdb
 ---

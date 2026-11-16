@@ -3,6 +3,8 @@ layout: post
 title: "Windowing in DuckDB"
 authors:
   - Richard Wesley
+thumb: "/images/blog/thumbs/windowing.svg"
+image: "/images/blog/thumbs/windowing.png"
 excerpt: DuckDB, a free and open-source analytical data management system, has a state-of-the-art windowing engine that can compute complex moving aggregates like inter-quartile ranges as well as simpler moving averages.
 tag: using-duckdb
 ---
