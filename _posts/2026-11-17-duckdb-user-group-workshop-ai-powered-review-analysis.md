@@ -9,11 +9,11 @@ excerpt: "On 11 November 2026, the DuckDB User Group held its first workshop in 
 tag: using-duckdb
 ---
 
-![Workshop room with attendees at laptops](/images/blog/thumbs/duckdb-user-group-workshop.png)
+![Workshop room with attendees at laptops]({% link images/blog/duckdb-user-group-workshop-amsterdam.png %})
 
 In one afternoon, attendees built a pipeline that finds the products with falling ratings in 2.1 million Amazon reviews and explains why. DuckDB did the filtering and an LLM summarized the complaints. At the end, each attendee had a Hugging Face Space that they can call as an API.
 
-## What we built
+## What We Built
 
 The data was the appliances part of the Amazon Reviews 2023 dataset. That is 2.1 million reviews and about 1.2 GB of raw JSON lines. Nobody downloaded it over the venue Wi-Fi. Attendees built and tested everything on their laptops with a 22 MB sample. Then the same two files ran on Hugging Face against the full data.
 
@@ -56,13 +56,13 @@ LIMIT 10;
 
 A product needs at least 20 recent and 50 earlier verified reviews to be ranked. Attendees changed these two thresholds to see how the list changed.
 
-## SQL first, then the LLM
+## SQL First, Then the LLM
 
 DuckDB selects the product with the largest drop in rating and the 40 most helpful recent complaints about it. Only those 40 reviews go to the LLM, which groups them into themes with counts and quotes and lists safety issues first. The Space runs the result, reads its data from a Storage Bucket and makes every step available as an API.
 
 The model does not have to decide which reviews are relevant, because the SQL already did that. This keeps the number of LLM calls small. The pipeline uses six columns: `parent_asin`, `rating`, `text`, `reviewed_at`, `helpful_vote` and `verified_purchase`. If you load other customer feedback into these columns, the SQL and the workflow run without changes.
 
-## Who attended
+## Who Attended
 
 Attendees came from 25 organizations.
 
@@ -79,13 +79,13 @@ The workshop did not require ML experience. Attendees needed to know SQL and be 
 
 26 attendees completed the survey. The average rating was 4.65 out of 5, and 25 of the 26 rated the workshop 4 or 5. Attendees liked the exercises with real data, the DuckDB and Hugging Face content, the preparation of the speaker and host, the organization and the food.
 
-## Next steps
+## Next Steps
 
 You can continue with the workshop material at home. You can run the ingest script on another category of the dataset, for example with `--category All_Beauty`. You can load your own reviews into the six columns listed above. You can also schedule a job that calls the API of your Space every week and sends the report to your product team.
 
 For more information, see [DuckDB](https://duckdb.org/), [Hugging Face](https://huggingface.co/), [Hugging Face Jobs](https://huggingface.co/docs/hub/en/jobs), [Storage Buckets](https://huggingface.co/docs/hub/en/security-storage-buckets) and [Gradio](https://www.gradio.app/).
 
-## Thanks and where next?
+## Thanks and Where Next?
 
 Thank you to Pratik Patel for preparing and leading the workshop, and to everyone who attended.
 
