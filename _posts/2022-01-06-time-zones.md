@@ -4,6 +4,8 @@ title: "DuckDB Time Zones: Supporting Calendar Extensions"
 tested: true
 authors:
   - Richard Wesley
+thumb: "/images/blog/thumbs/time-zones.svg"
+image: "/images/blog/thumbs/time-zones.png"
 excerpt: The DuckDB ICU extension now provides time zone support.
 tag: extensions
 ---
