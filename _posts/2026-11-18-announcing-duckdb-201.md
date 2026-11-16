@@ -49,8 +49,7 @@ Sirius is available on Linux (x86-64 and arm64) and requires an NVIDIA GPU with 
 To use Sirius, first install and load the extension. Then, you can check its status as follows:
 
 ```sql
-INSTALL sirius;
-LOAD sirius;
+INSTALL AND LOAD sirius;
 FROM sirius_status();
 ```
 
