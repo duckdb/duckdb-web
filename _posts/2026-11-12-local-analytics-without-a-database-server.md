@@ -51,7 +51,7 @@ At Foursquare, Ilya’s team has been developing [Foursquare Spatial Desktop](ht
 
 Ilya explains: **“For this particular product, DuckDB embedded into the desktop app is just the perfect fit. It enables analysis workflows which users can execute locally.”** SQLite is embeddable too, he says, but it is not column-oriented and was not designed for analytics on larger datasets.
 
-![Foursquare Spatial Desktop](/images/blog/local-analytics/fsq-spatial-desktop-earthquakes.webp)
+![Foursquare Spatial Desktop]({% link images/blog/local-analytics/fsq-spatial-desktop-earthquakes.webp %})
 
 Modern laptops have substantial computing power and GPUs well suited to visualization, Ilya adds. **“I’m seeing renewed interest in applications that keep data and computation on the user’s own machine.”**
 
@@ -124,7 +124,7 @@ Users can ask questions in natural language. The assistant generates SQL queries
 
 In the Spatial Desktop example below, the assistant generates SQL to retrieve data from available sources and calculate a combined score for wine-growing suitability across Italy. The resulting map is accompanied by AI-generated regional analysis:
 
-![Foursquare Spatial Desktop showing a wine-growing suitability map of Italy alongside AI-generated regional analysis](/images/blog/local-analytics/italy-wine-suitability-with-sidebar.webp)
+![Foursquare Spatial Desktop showing a wine-growing suitability map of Italy alongside AI-generated regional analysis]({% link images/blog/local-analytics/italy-wine-suitability-with-sidebar.webp %})
 
 ## Where SQLRooms Goes Next
 

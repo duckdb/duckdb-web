@@ -133,7 +133,7 @@ SELECT 'quack' AS hello;
 
 The results then open in the default text file editor of the system, for example:
 
-<img src="/images/cli_docs_output_to_text_editor.jpg" alt="cli_docs_output_to_text_editor" title="Output to text editor" style="width:293px;"/>
+<img src="{% link images/cli_docs_output_to_text_editor.jpg %}" alt="cli_docs_output_to_text_editor" title="Output to text editor" style="width:293px;"/>
 
 ## Querying the Database Schema
 

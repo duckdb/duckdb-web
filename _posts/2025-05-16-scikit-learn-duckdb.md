@@ -46,7 +46,7 @@ duckdb_conn.sql(
 We can now plot the data and check for species specific clusters. For example, using a [scatter plot](https://plotly.com/python/line-and-scatter/) we identify clusters at the combination between bill depth and bill length:
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/scikit-learn-duckdb/penguins_species.png">
+    <a href="{% link images/blog/scikit-learn-duckdb/penguins_species.png %}">
         <img
           src="{% link images/blog/scikit-learn-duckdb/penguins_species.png %}"
           alt="Penguins observations, bill depth and length"
@@ -105,7 +105,7 @@ selection_query = (
 Our scope is to predict a penguin's specie based on its characteristics (features), such as bill length and depth, flipper length, body mass, and island. Such a model is called a classification model because it predicts the category to which the input data belongs.`scikit-learn` offers [multiple classification models](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html). For our dataset, we have chosen to implement a [random forest classifier](https://en.wikipedia.org/wiki/Random_forest), based on decision trees:
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/scikit-learn-duckdb/decision_tree.png">
+    <a href="{% link images/blog/scikit-learn-duckdb/decision_tree.png %}">
         <img
           src="{% link images/blog/scikit-learn-duckdb/decision_tree.png %}"
           alt="Model decision tree"

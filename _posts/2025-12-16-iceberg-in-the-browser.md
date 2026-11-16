@@ -17,8 +17,8 @@ It's browser-only, no extra setup required.
 
 ## Interaction Models for Iceberg Catalogs
 
-![Iceberg analytics today](/images/blog/iceberg-wasm/iceberg-analytics-today-dark.svg){: .darkmode-img }
-![Iceberg analytics today](/images/blog/iceberg-wasm/iceberg-analytics-today-light.svg){: .lightmode-img }
+![Iceberg analytics today]({% link images/blog/iceberg-wasm/iceberg-analytics-today-dark.svg %}){: .darkmode-img }
+![Iceberg analytics today]({% link images/blog/iceberg-wasm/iceberg-analytics-today-light.svg %}){: .lightmode-img }
 
 _Iceberg_ is an _open table format,_ which allows you to capture a mutable database table as a set of static files on object storage (such as AWS S3).
 _Iceberg catalogs_ allow you to track and organize Iceberg tables.
@@ -34,8 +34,8 @@ Let's see how things look with DuckDB in the mix!
 
 ## Iceberg with DuckDB
 
-![Iceberg with DuckDB](/images/blog/iceberg-wasm/iceberg-with-duckdb-dark.svg){: .darkmode-img }
-![Iceberg with DuckDB](/images/blog/iceberg-wasm/iceberg-with-duckdb-light.svg){: .lightmode-img }
+![Iceberg with DuckDB]({% link images/blog/iceberg-wasm/iceberg-with-duckdb-dark.svg %}){: .darkmode-img }
+![Iceberg with DuckDB]({% link images/blog/iceberg-wasm/iceberg-with-duckdb-light.svg %}){: .lightmode-img }
 
 DuckDB supports both Iceberg interaction models.
 In the *client–server model,* DuckDB runs on the server to read the Iceberg datasets.
@@ -72,8 +72,8 @@ While setting up a local DuckDB installation is quite simple, opening a browser 
 Therefore, we asked ourselves: could we support the *client-is-the-server* model directly from within a browser tab?
 This could provide a zero-setup, no-infrastructure, properly serverless option for interacting with Iceberg catalogs.
 
-![Iceberg with DuckDB-Wasm](/images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-dark.svg){: .darkmode-img }
-![Iceberg with DuckDB-Wasm](/images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-light.svg){: .lightmode-img }
+![Iceberg with DuckDB-Wasm]({% link images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-dark.svg %}){: .darkmode-img }
+![Iceberg with DuckDB-Wasm]({% link images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-light.svg %}){: .lightmode-img }
 
 Luckily, DuckDB has a client that can run in any browser!
 [DuckDB-Wasm]({% link docs/2.0/clients/wasm/overview.md %}) is a WebAssembly port of DuckDB, which [supports loading of extensions]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).

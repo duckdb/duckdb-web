@@ -214,7 +214,7 @@ using the partition's ordering value and a distance.
 The full syntax is shown in the diagram at the top of the page,
 and this diagram visually illustrates computation environment:
 
-<img src="/images/blog/windowing/framing.svg" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
+<img src="{% link images/blog/windowing/framing.svg %}" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
 
 ### Partition and Ordering
 
@@ -321,7 +321,7 @@ FROM results;
 
 This query computes the `sum` of each point and the points on either side of it:
 
-<img src="/images/blog/windowing/moving-sum.jpg" alt="Moving SUM of three values" title="Figure 2: A moving SUM of three values" style="max-width:90%;width:90%;height:auto"/>
+<img src="{% link images/blog/windowing/moving-sum.jpg %}" alt="Moving SUM of three values" title="Figure 2: A moving SUM of three values" style="max-width:90%;width:90%;height:auto"/>
 
 Notice that at the edge of the partition, there are only two values added together.
 This is because frames are cropped to the edge of the partition.
