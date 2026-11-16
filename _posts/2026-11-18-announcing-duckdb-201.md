@@ -57,6 +57,26 @@ FROM sirius_status();
 When you load Sirius for the first time, it detects your CUDA version and downloads the matching backend, which is about 1 GB.
 If a query uses features that Sirius does not support yet, DuckDB falls back to its CPU engine to run it.
 
+## Registering Extension Repositories by Host
+
+DuckDB 2.0.0 introduced [custom extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}), which serve extensions signed with the publisher's own keys.
+In DuckDB 2.0.1, you can register such a repository by naming the publisher's host ([`#28719`](https://github.com/duckdb/duckdb/pull/28719)):
+
+```sql
+CREATE EXTENSION REPOSITORY extensions.example.org;
+INSTALL AND LOAD my_ext FROM extensions.example.org;
+```
+
+DuckDB reads the repository's URL from `https://extensions.example.org/.well-known/duckdb-extension-repo.json` over verified HTTPS, then fetches the repository's signing keys and pins them.
+The statement returns the SHA-256 fingerprint of each pinned key, so you can compare them against a value published through another channel.
+If you would like to publish your own repository, see the new [“Publishing an Extension Repository” page]({% link docs/2.0/extensions/publishing_extension_repositories.md %}).
+
+Unlike adding a repository by its prefix, adding one by its host does not require an opt-in.
+To support this, the `allow_extension_repositories` setting has new values: `hosts` (the new default) allows adding repositories by host, `allowed` also allows adding them by prefix, `hosts_only` only adds and trusts repositories resolved from their host, and `forbidden` disables custom repositories.
+The previous default value, `undecided`, is no longer accepted.
+If only extensions signed by the DuckDB team should be loaded in your environment, set `allow_extension_repositories` to `forbidden`.
+For details, see the [“Securing Extensions” page]({% link docs/2.0/operations_manual/securing_duckdb/securing_extensions.md %}#custom-extension-repositories).
+
 ## Other Fixes
 
 Here are some other important fixes from the DuckDB 2.0.1 release, organized by category:
