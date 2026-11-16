@@ -1490,6 +1490,10 @@
               "path": "/docs/2.0/extensions/extension_repositories"
             },
             {
+              "page": "Publishing an Extension Repository",
+              "path": "/docs/2.0/extensions/publishing_extension_repositories"
+            },
+            {
               "page": "Window Function Extensions",
               "path": "/docs/2.0/extensions/window_function_extensions"
             }
