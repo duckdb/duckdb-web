@@ -8,7 +8,7 @@ redirect_from:
 title: Extension Repositories
 ---
 
-> New Support for custom extension repositories was introduced in DuckDB 2.0. This feature is currently work-in-progress and the syntax may still change.
+> New Support for custom extension repositories was introduced in DuckDB 2.0.0. This page describes the state as of DuckDB 2.0.1: registering a repository by its host, the `hosts` and `hosts_only` values of `allow_extension_repositories`, and the `host` column of `duckdb_extension_repositories()` require 2.0.1. In 2.0.0, repositories are added `WITH PREFIX` only, and the setting has the values `undecided` (the default), `allowed`, and `forbidden`. This feature is currently work-in-progress and the syntax may still change.
 
 By default, DuckDB installs extensions from its built-in repositories (`core`, `core_nightly`, `community`, …). In addition, you can register repositories run by others, so that extensions an organization publishes and signs itself install and load just like the built-in ones.
 

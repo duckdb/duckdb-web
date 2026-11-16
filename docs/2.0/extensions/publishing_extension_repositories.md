@@ -3,7 +3,7 @@ layout: docu
 title: Publishing an Extension Repository
 ---
 
-> New Support for custom extension repositories was introduced in DuckDB 2.0. This feature is currently work-in-progress and the file format may still change.
+> New Support for custom extension repositories was introduced in DuckDB 2.0.0. This page describes the state as of DuckDB 2.0.1: registering a repository by its host, and with it the `version` and `repository_url` fields of the metadata file, require 2.0.1. DuckDB 2.0.0 reads only `signature_keys`, from a repository added `WITH PREFIX`. This feature is currently work-in-progress and the file format may still change.
 
 This page describes how to publish a repository of DuckDB extensions that users can register with [`CREATE EXTENSION REPOSITORY`]({% link docs/2.0/extensions/extension_repositories.md %}) and then install and load from as they do from the built-in repositories. A repository consists of three things:
 
