@@ -99,6 +99,8 @@ SELECT count(*)
 FROM 'abfss://⟨my_filesystem⟩@⟨my_storage_account⟩.dfs.core.windows.net/⟨path⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
 ```
 
+Since v2.0.1, a glob returns its paths in the form of the pattern: a pattern in the `⟨my_filesystem⟩@⟨my_storage_account⟩`{:.language-sql .highlight} form returns paths in that form, e.g., in the `filename` column of a read.
+
 ## Writing to Azure Blob Storage
 
 You can write data directly to Azure Blob or ADLSv2 Storage using the [`COPY` statement]({% link docs/2.0/sql/statements/copy.md %}).
@@ -158,11 +160,12 @@ Use the following [configuration options]({% link docs/2.0/configuration/overvie
 
 Since v1.5.4, `azure_read_transfer_chunk_size` and `azure_read_buffer_size` default to 8 MiB (previously 1 MiB).
 
-> Tip Setting `azure_transport_option_type` to `curl` has the following effects:
+> Tip On Linux, since v2.0.1, both values of `azure_transport_option_type` use *curl*, and the extension looks for the system's CA bundle in the usual paths (e.g., `/etc/ssl/certs/ca-certificates.crt`), which the bundled *curl* may not find on its own. Before v2.0.1, only `curl` did this: on some distributions, `default` failed with certificate errors such as `Problem with the SSL CA cert (path? access rights?)`, and setting `curl` fixed them.
 >
-> * On Linux, it may fix certificate errors such as `Problem with the SSL CA cert (path? access rights?)`: the extension then looks for the CA bundle in the usual paths, which *curl* does not do by default and which static linking may get wrong.
+> Setting `azure_transport_option_type` to `curl` also has the following effects:
+>
 > * On Windows, it replaces the default adapter (*WinHTTP*), so you can use all *curl* features, e.g., SOCKS proxies.
-> * On all operating systems, it honors these environment variables:
+> * On all operating systems, it honors these environment variables (on Linux, since v2.0.1, so does `default`):
 >     * `CURL_CA_INFO`: path to a PEM encoded file with the certificate authorities for libcurl. It is known to work only on Linux and may fail on other platforms.
 >     * `CURL_CA_PATH`: path to a directory of PEM encoded files with the certificate authorities for libcurl.
 
