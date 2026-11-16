@@ -16,6 +16,8 @@ TODO: Podcast teaser. Fill in the episode titles, dates, and links.
 In this blog post, we highlight a few important fixes in DuckDB 2.0.1, the first patch release in [DuckDB's 2.0 LTS (Cyanoptera) line]({% post_url 2026-10-21-announcing-duckdb-200 %}).
 You can find the full [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.1).
 
+We are shipping this release on schedule, four weeks after DuckDB 2.0.0, as originally planned. This shows that we did not find any major issues in DuckDB 2.0.0 that would have required an emergency release: DuckDB 2.0.1 is a regular patch release, not a firefighting one.
+
 To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}).
 
 ## Important Fixes
