@@ -39,11 +39,15 @@ DuckDB's own repository is published this way: `duckdb.org` names `https://exten
 CREATE EXTENSION REPOSITORY duckdb.org;
 ```
 
+<!-- markdownlint-disable MD034 -->
+
 <div class="monospace_table"></div>
 
 | repository_name | prefix                        | key_fingerprints                                                                  |
 |-----------------|-------------------------------|-----------------------------------------------------------------------------------|
 | duckdb.org      | https://extensions.duckdb.org | [sha256:a319de1f13bc85a0af0c51d5ca47e3aff9680d8333e895a3a35e5ff97a69dc12, …]      |
+
+<!-- markdownlint-enable MD034 -->
 
 The first fingerprint is that of the key currently signing DuckDB's extensions; the list continues with the keys held in reserve. The same keys are built into DuckDB, so they can be compared against the ones in `duckdb_extensions()` for a loaded `core` extension. From here on the repository is used like any other:
 
