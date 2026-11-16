@@ -67,7 +67,7 @@ and using the Tableau-provided PostgreSQL dialect.
 2. Launch Tableau.
 3. Under Connect > To a Server > More…, click on “Other Databases (JDBC)”. This brings up the connection dialog box. For the URL, enter `jdbc:duckdb:/User/username/path/to/database.db`. For the Dialect, choose PostgreSQL. The rest of the fields can be ignored:
 
-![Tableau PostgreSQL](/images/guides/tableau/tableau-osx-jdbc.png)
+![Tableau PostgreSQL]({% link images/guides/tableau/tableau-osx-jdbc.png %})
 
 However, functionality will be missing such as `median` and `percentile` aggregate functions.
 To make the data source connection more compatible with the PostgreSQL dialect,
@@ -123,7 +123,7 @@ Create this file with the [Script Editor](https://support.apple.com/guide/script
 (located in `/Applications/Utilities`)
 and [save it as a packaged application](https://support.apple.com/guide/script-editor/save-a-script-as-an-app-scpedt1072/mac):
 
-![tableau-applescript](/images/guides/tableau/applescript.png)
+![tableau-applescript]({% link images/guides/tableau/applescript.png %})
 
 You can then double-click it to launch Tableau.
 You will need to change the application name in the script when you get upgrades.
@@ -139,4 +139,4 @@ to disable signature validation.
 Once loaded, you can run queries against your data!
 Here is the result of the first H2O.ai benchmark query from the Parquet test file:
 
-![tableau-parquet](/images/guides/tableau/h2oai-group-by-1.png)
+![tableau-parquet]({% link images/guides/tableau/h2oai-group-by-1.png %})

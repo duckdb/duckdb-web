@@ -17,8 +17,8 @@ The simplest definition: streaming analytics is the _act of updating an analytic
 
 Now that we have a definition, let's take a look at three common architectural patterns in streaming analytics. The names given to these patterns are of my own making, but I think they help differentiating them from one another.
 
-![Streaming patterns](/images/blog/streaming_patterns/streaming_patterns-light.svg){: .lightmode-img }
-![Streaming patterns](/images/blog/streaming_patterns/streaming_patterns-dark.svg){: .darkmode-img }
+![Streaming patterns]({% link images/blog/streaming_patterns/streaming_patterns-light.svg %}){: .lightmode-img }
+![Streaming patterns]({% link images/blog/streaming_patterns/streaming_patterns-dark.svg %}){: .darkmode-img }
 
 
 - In the **Materialized View Pattern**, it is very common to use a cloud data warehouse with support for materialized views (such as BigQuery or Snowflake). The stream of events is usually sunk to a raw table and a materialized view is created on top. This pattern is generally conceived as having a higher latency than the next two. However, there is not that much benchmarking around to conclude anything.
@@ -39,8 +39,8 @@ We know that DuckDB is very fast at aggregating data on the fly and also perform
 
 ### Querying Deltas with DuckDB
 
-![pattern_1_1](/images/blog/streaming_patterns/streaming_pattern_1_1-light.svg){: .lightmode-img }
-![pattern_1_1](/images/blog/streaming_patterns/streaming_pattern_1_1-dark.svg){: .darkmode-img }
+![pattern_1_1]({% link images/blog/streaming_patterns/streaming_pattern_1_1-light.svg %}){: .lightmode-img }
+![pattern_1_1]({% link images/blog/streaming_patterns/streaming_pattern_1_1-dark.svg %}){: .darkmode-img }
 
 The key component in this diagram is what I call “Delta Processor”. This component is basically a function that loops periodically and runs a query to aggregate new data inserted in the `raw_events` table and to update the analytical view, in this case a persisted table called `user_clicks`. This is the query that runs periodically to update `user_clicks` with the new delta:
 
@@ -72,8 +72,8 @@ You can check the full pipeline in [this repository](https://github.com/guillesd
 
 ### Using DuckLake's Change Data Feed
 
-![pattern_1_2](/images/blog/streaming_patterns/streaming_pattern_1_2-light.svg){: .lightmode-img }
-![pattern_1_2](/images/blog/streaming_patterns/streaming_pattern_1_2-dark.svg){: .darkmode-img }
+![pattern_1_2]({% link images/blog/streaming_patterns/streaming_pattern_1_2-light.svg %}){: .lightmode-img }
+![pattern_1_2]({% link images/blog/streaming_patterns/streaming_pattern_1_2-dark.svg %}){: .darkmode-img }
 
 
 This pattern is very similar to 1.1 but with some specifics to DuckLake:
@@ -92,8 +92,8 @@ Most established streaming engines (Spark Streaming, Flink, Kafka Streams) are J
 
 ### Using Spark Streaming and Sink to DuckDB
 
-![pattern_2](/images/blog/streaming_patterns/streaming_pattern_2-light.svg){: .lightmode-img }
-![pattern_2](/images/blog/streaming_patterns/streaming_pattern_2-dark.svg){: .darkmode-img }
+![pattern_2]({% link images/blog/streaming_patterns/streaming_pattern_2-light.svg %}){: .lightmode-img }
+![pattern_2]({% link images/blog/streaming_patterns/streaming_pattern_2-dark.svg %}){: .darkmode-img }
 
 In this diagram we can see that most of the components are managed by the Spark Streaming runtime. In Spark Streaming, all of this is contained in a streaming query. When the micro batching mode is being used (like it is the case in this example) you can pass a custom function to the writer that allows you to write each batch in the way you desire. In our case, we just use a JDBC connection and overwrite the destination table (`user_clicks`).
 
@@ -103,8 +103,8 @@ You can check the full pipeline in [this repository](https://github.com/guillesd
 
 ## Bonus: Using DuckDB Tributary Extension to Directory Query Kafka
 
-![pattern_bonus](/images/blog/streaming_patterns/streaming_pattern_bonus-light.svg){: .lightmode-img }
-![pattern_bonus](/images/blog/streaming_patterns/streaming_pattern_bonus-dark.svg){: .darkmode-img }
+![pattern_bonus]({% link images/blog/streaming_patterns/streaming_pattern_bonus-light.svg %}){: .lightmode-img }
+![pattern_bonus]({% link images/blog/streaming_patterns/streaming_pattern_bonus-dark.svg %}){: .darkmode-img }
 
 This setup is the most similar thing to the Streaming Databases Pattern that you can do right now with DuckDB. Powered by the [`tributary` DuckDB community extension](/community_extensions/extensions/tributary), you can create a view or a table that reads directly from a Kafka topic. To simulate materialized views, we are using views for this specific example. The following query showcases how simple this process is:
 

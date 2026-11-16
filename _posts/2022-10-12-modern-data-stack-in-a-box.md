@@ -3,6 +3,8 @@ layout: post
 title: "Modern Data Stack in a Box with DuckDB"
 authors:
   - Jacob Matson
+thumb: "/images/blog/thumbs/modern-data-stack-in-a-box.svg"
+image: "/images/blog/thumbs/modern-data-stack-in-a-box.png"
 excerpt: A fast, free, and open-source Modern Data Stack (MDS) can now be fully deployed on your laptop or to a single machine using the combination of DuckDB, [Meltano](https://meltano.com/), [dbt](https://www.getdbt.com/), and [Apache Superset](https://superset.apache.org/).
 tag: using-duckdb
 ---

@@ -9,7 +9,7 @@ redirect_from:
 title: C# (.NET) Client
 ---
 
-> Warning Version 2.0.0 of the DuckDB C# client is currently available in [preview](https://www.nuget.org/packages/DuckDB.NET.Data.Full/2.0.0-preview.1).
+> Warning Version 2.0.0 of the DuckDB C# client is currently available in [preview](https://www.nuget.org/packages/DuckDB.NET.Data.Full/2.0.0-preview.1). The stable 2.0.0 release is planned for the end of November 2026.
 > To install it, run `dotnet add package DuckDB.NET.Data.Full --prerelease`.
 
 > Installation To use the DuckDB C# client, install the [`DuckDB.NET.Data.Full` NuGet package](https://www.nuget.org/packages/DuckDB.NET.Data.Full).

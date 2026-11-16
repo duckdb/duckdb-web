@@ -7,7 +7,7 @@ title: Syntax Highlighting
 
 SQL queries that are written in the shell are automatically highlighted using syntax highlighting.
 
-![Image showing syntax highlighting in the shell](/images/syntax_highlighting_screenshot.png)
+![Image showing syntax highlighting in the shell]({% link images/syntax_highlighting_screenshot.png %})
 
 There are several components of a query that are highlighted in different colors. The colors can be configured using [dot commands]({% link docs/1.1/api/cli/dot_commands.md %}).
 Syntax highlighting can also be disabled entirely using the `.highlight off` command.

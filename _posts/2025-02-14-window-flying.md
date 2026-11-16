@@ -38,7 +38,7 @@ The performance gains here were about a factor of four (from “Baseline” to �
 The chart below shows the speedups achieved by the vectorization improvements:
 
 <div align="center">
-<a href="/images/blog/windowing/vectorization-improvements.png">
+<a href="{% link images/blog/windowing/vectorization-improvements.png %}">
 <img src="{% link images/blog/windowing/vectorization-improvements.png %}" alt="Vectorization Improvements" title="Vectorization Improvements" style="width: 950px" />
 </a>
 </div>
@@ -141,7 +141,7 @@ The chart below shows the performance improvements.
 Note that the _x_ axis shows the speedups compared to the baseline (1×) and the absolute runtimes (in seconds) are shown as labels.
 
 <div align="center">
-<a href="/images/blog/windowing/streaming-lead.png">
+<a href="{% link images/blog/windowing/streaming-lead.png %}">
 <img src="{% link images/blog/windowing/streaming-lead.png %}" alt="Streaming Lead Performance" title="Streaming Lead Performance" style="width: 800px" />
 </a>
 </div>
@@ -159,7 +159,7 @@ but if the partition sizes are skewed or if there is only one partition (a commo
 then most of the cores will be idle, reducing throughput.
 
 <div align="center">
-<a href="/images/blog/windowing/parallel-partitions.png">
+<a href="{% link images/blog/windowing/parallel-partitions.png %}">
 <img src="{% link images/blog/windowing/parallel-partitions.png %}" alt="Thread Partition Evaluation" title="Thread Partition Evaluation" style="width: 400px;" />
 </a>
 </div>
@@ -173,7 +173,7 @@ But we now have much better core utilization, especially for unpartitioned data.
 As a side benefit, we were able to reduce the memory footprint because fewer partitions were in memory at a time.
 
 <div align="center">
-<a href="/images/blog/windowing/partition-major.png">
+<a href="{% link images/blog/windowing/partition-major.png %}">
 <img src="{% link images/blog/windowing/partition-major.png %}" alt="Partition Major Evaluation" title="Partition Major Evaluation" style="width: 400px;" />
 </a>
 </div>

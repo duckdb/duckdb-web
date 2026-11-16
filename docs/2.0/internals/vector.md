@@ -30,13 +30,13 @@ Vectors logically represent arrays that contain data of a single type. DuckDB su
 Flat vectors are physically stored as a contiguous array, this is the standard uncompressed vector format.
 For flat vectors the logical and physical representations are identical.
 
-<img src="/images/internals/flat.png" alt="Flat Vector example" style="max-width:40%;width:40%;height:auto;margin:auto"/>
+<img src="{% link images/internals/flat.png %}" alt="Flat Vector example" style="max-width:40%;width:40%;height:auto;margin:auto"/>
 
 ### Constant Vectors
 
 Constant vectors are physically stored as a single constant value.
 
-<img src="/images/internals/constant.png" alt="Constant Vector example" style="max-width:40%;width:40%;height:auto;margin:auto"/>
+<img src="{% link images/internals/constant.png %}" alt="Constant Vector example" style="max-width:40%;width:40%;height:auto;margin:auto"/>
 
 Constant vectors are useful when data elements are repeated – for example, when representing the result of a constant expression in a function call, the constant vector allows us to only store the value once.
 
@@ -53,7 +53,7 @@ Constant vectors are also emitted by the storage when decompressing from constan
 
 Dictionary vectors are physically stored as a child vector, and a selection vector that contains indexes into the child vector.
 
-<img src="/images/internals/dictionary.png" alt="Dictionary Vector example" style="max-width:40%;width:40%;height:auto;margin:auto"/>
+<img src="{% link images/internals/dictionary.png %}" alt="Dictionary Vector example" style="max-width:40%;width:40%;height:auto;margin:auto"/>
 
 Dictionary vectors are emitted by the storage when decompressing from dictionary compression.
 
@@ -64,7 +64,7 @@ When deserializing a dictionary compressed column segment, we store this in a di
 
 Sequence vectors are physically stored as an offset and an increment value.
 
-<img src="/images/internals/sequence.png" alt="Sequence Vector example" style="max-width:40%;width:40%;height:auto;margin:auto"/>
+<img src="{% link images/internals/sequence.png %}" alt="Sequence Vector example" style="max-width:40%;width:40%;height:auto;margin:auto"/>
 
 Sequence vectors are useful for efficiently storing incremental sequences. They are generally emitted for row identifiers.
 

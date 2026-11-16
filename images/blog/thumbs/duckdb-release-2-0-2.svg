@@ -1,4 +1,5 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style id="thin-strokes">@media (min-width: 500px) { [stroke-width="3.2"] { stroke-width: 2; } }</style>
 <g clip-path="url(#clip0_20672_61410)">
 <rect width="1200" height="630" fill="url(#paint0_linear_20672_61410)"/>
 <path d="M759.297 -47.5434L759.297 20.293C759.297 47.9072 781.683 70.293 809.297 70.293L1082.12 70.293C1109.74 70.293 1132.12 47.9072 1132.12 20.293L1132.12 -47.5437" stroke-width="3.2" stroke-linejoin="round" stroke="#EDDD0C"/>
