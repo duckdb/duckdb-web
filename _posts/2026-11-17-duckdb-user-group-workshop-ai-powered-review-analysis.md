@@ -87,6 +87,6 @@ For more information, see [DuckDB](https://duckdb.org/), [Hugging Face](https://
 
 ## Thanks and Where Next?
 
-Thank you to Pratik Patel for preparing and leading the workshop, and to everyone who attended.
+Thank you to [Pratik Patel](https://www.linkedin.com/in/prpatel/) for preparing and leading the workshop, and to everyone who attended.
 
 This was the first DuckDB User Group Workshop, and we want to run more of them. If your company or community wants to co-organize a DuckDB User Group workshop or meetup, send us a request at [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com). Tell us where you are, what topic you have in mind and what you can offer, such as a venue, a speaker or catering.
