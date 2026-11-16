@@ -135,6 +135,32 @@ For the forms and options that `CREATE TABLE` does not support, see [Limitations
 
 > Warning Unity Catalog registers the table while `CREATE TABLE` runs, so a `ROLLBACK` of the surrounding transaction does not remove the table.
 
+If this session has listed a table with the same name, `CREATE TABLE` fails with “already exists”, even if the table has since been dropped by another client. To create it again, `DETACH` and `ATTACH` the catalog.
+
+#### Creating Tables from a Query
+
+> New This feature was introduced in DuckDB 2.0.1.
+
+`CREATE TABLE ... AS SELECT` creates a table with the query's columns and rows. As with `CREATE TABLE`, a table without a location is a managed table, and one with the `location` option is an external table. Both can be partitioned:
+
+```sql
+CREATE TABLE my_catalog.my_schema.my_ctas_table AS
+    SELECT * FROM other_table;
+
+CREATE TABLE my_catalog.my_schema.my_external_ctas_table PARTITIONED BY (part)
+WITH (location = 's3://⟨my_bucket⟩/⟨other_path⟩') AS
+    SELECT * FROM other_table;
+```
+
+The [`delta` extension]({% link docs/2.0/core_extensions/delta.md %}#creating-tables-from-a-query) writes the rows and the table's schema as version 0 of the new table, in one commit at the end of the statement. Then Unity Catalog registers the table.
+
+* Unity Catalog checks the name before the query runs. If it has a table with this name, the statement fails, and with `IF NOT EXISTS` the query does not run.
+* For a new name, an external table needs a location without files under `_delta_log`, even with `IF NOT EXISTS`. The same holds for an external `CREATE TABLE`.
+* If the query fails, the statement removes the files it wrote and registers nothing.
+* If the registration fails or its reply is lost, the written files may stay behind; DuckDB then logs a warning with their location. An interruption between the commit and the registration leaves an unregistered table that blocks a retry at that location: remove its files, or register the table with Unity Catalog by other means.
+* As with `CREATE TABLE`, a `ROLLBACK` does not remove the table.
+* For a managed table, Unity Catalog prepares the table when the statement is planned. `EXPLAIN`, a prepared statement that is never executed, and a statement refused after planning leave a prepared, unregistered table in Unity Catalog.
+
 ### Checkpointing
 
 Since v1.5.1, `unity_catalog_checkpoint_table` compacts the Delta log of a table into a checkpoint file, which speeds up reads of tables with long logs. Pass the table name as a string, either fully qualified or relative to the catalog and schema set with `USE`:
@@ -179,7 +205,7 @@ This extension supports:
 * Interacting with tables using standard SQL: `SELECT * FROM ⟨catalog⟩.⟨schema⟩.⟨table⟩;`{:.language-sql .highlight}
 * [Time travel](#time-travel): `SELECT * FROM ... AT (VERSION => ...);`{:.language-sql .highlight} and `SELECT * FROM ... AT (TIMESTAMP => ...);`{:.language-sql .highlight}
 * Inserts: `INSERT INTO ... VALUES (...);`{:.language-sql .highlight}
-* Creating managed and external tables: `CREATE TABLE ... (...);`{:.language-sql .highlight}
+* Creating managed and external tables: `CREATE TABLE ... (...);`{:.language-sql .highlight} and, since v2.0.1, [`CREATE TABLE ... AS SELECT ...;`{:.language-sql .highlight}](#creating-tables-from-a-query)
 * [Checkpointing](#checkpointing) individual tables (since v1.5.1): `CALL unity_catalog_checkpoint_table('my_catalog.my_schema.my_table');`{:.language-sql .highlight}
 
 ## Limitations
@@ -189,7 +215,8 @@ This extension supports:
 * Inserts into a table with column `DEFAULT` values or generated columns fail with an error, as DuckDB cannot compute these columns yet.
 * Reading a table with an `INTERVAL` column fails with an error, as Delta intervals and DuckDB's `INTERVAL` differ in meaning.
 * The following `CREATE TABLE` forms and options are not supported and fail with an error:
-    * `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT`
+    * `CREATE OR REPLACE TABLE`, with or without `AS SELECT`
+    * before v2.0.1, `CREATE TABLE ... AS SELECT`
     * constraints, including `NOT NULL` and `PRIMARY KEY`
     * column `DEFAULT` values and generated columns
     * columns of a type that Delta cannot store, e.g., `TIME`
