@@ -192,7 +192,7 @@ ROLLBACK;
 The following are not supported:
 
 * Columns whose type Delta cannot store, such as `UHUGEINT`, `TIME`, intervals, or an untyped `NULL`: the statement fails before anything is written, naming the column. Cast the column in the query, e.g., `SELECT x::BIGINT AS x`, `SELECT x::VARCHAR AS x` for `UHUGEINT` values beyond the 38 digits of `DECIMAL(38, 0)`, or `SELECT NULL::INTEGER AS n`.
-* Writing to a path that already holds a Delta table: `COPY` does not append or overwrite, and `CREATE TABLE ... AS SELECT` fails as `CREATE TABLE` does. With `IF NOT EXISTS`, an existing table is left as it is and the query does not run.
+* Writing to a path that already holds a Delta table: `COPY` does not append or overwrite, and `CREATE TABLE ... AS SELECT` fails as `CREATE TABLE` does. With `IF NOT EXISTS`, an existing table is left as it is and the query does not run, unless a column or partition column is refused (see [Limitations](#limitations)): that fails first.
 * `CREATE OR REPLACE TABLE ... AS SELECT`.
 * `COPY` options for files, such as `OVERWRITE` or `PER_THREAD_OUTPUT`, and options outside `delta.` given on their own: put the latter in `WITH_PROPERTIES`. Both fail with an error that names the option.
 
@@ -284,6 +284,8 @@ ATTACH 's3://⟨my_bucket⟩/⟨path⟩' AS my_table (
 );
 ```
 
+Since v2.0.1, an option that the `delta` extension does not know, e.g., a misspelled one, fails with `Unrecognized option for Delta attach`. Before, it was ignored.
+
 ### Inspecting Scanned Files
 
 `delta_list_files` returns the data files a scan would read for a table, together with their cardinality, partition values, and whether they carry deletion vectors. This is useful for understanding the effect of [data skipping](#features):
@@ -339,7 +341,7 @@ Delta `variant` columns are read as DuckDB [`VARIANT`]({% link docs/2.0/sql/data
 > New The following were introduced in DuckDB 2.0.
 
 * A query that reads one field of a `VARIANT` or `STRUCT` column, such as `SELECT v.a`, reads only that field from the Parquet files, so on a shredded table it skips the columns of the other fields. This does not apply to a column with a `TIMESTAMP WITH TIME ZONE` field at any depth: DuckDB reads all of it.
-* `CREATE TABLE` accepts `VARIANT` columns.
+* `CREATE TABLE` accepts top-level `VARIANT` columns. Since v2.0.1, it refuses a `VARIANT` inside a struct, list, or map, which DuckDB cannot write.
 * When writing, DuckDB shreds `VARIANT` values only if the table sets `'delta.enableVariantShredding'` to `'true'`, as the Delta protocol requires; otherwise it writes them unshredded. Because `CREATE TABLE` cannot set this property, a table created by DuckDB holds unshredded files.
 
 ### Catalog-Managed Tables
@@ -392,6 +394,12 @@ The `delta` extension supports:
     * `SORTED BY`
     * column types without a Delta equivalent, such as `TIME` or unsigned integers
     * a table whose columns are all partition columns
+    * since v2.0.1, a `VARIANT` inside a struct, list, or map; before, `CREATE TABLE` accepted it and the first `INSERT` failed
+    * a `MAP` with a `LIST` key, at any depth
+    * since v2.0.1, a `VARCHAR` column with a collation (`COLLATE`), at any depth: Delta has no collations. A cast or a string function keeps the collation, so write the column from an uncollated source.
+    * a partition column of a struct, list, map, array, or `VARIANT` type, and since v2.0.1 of type `BLOB`: a Delta partition column must have a primitive type
+* `CREATE TABLE ... AS SELECT` and `COPY ... TO ... (FORMAT delta)` refuse the same columns and partition columns, before anything is written.
+* Since v2.0.1, the column and partition-column checks above (types, `VARIANT`, `MAP`, collations) run before `IF NOT EXISTS` is considered: `CREATE TABLE IF NOT EXISTS` with such a column fails even if the table exists, with or without `AS SELECT`.
 * Before v2.0.1, DuckDB cannot write to a table with [column mapping](#column-mapping) that has nested or partition columns, nor create one.
 * Writing to a column-mapped table with a struct field whose physical name is `__duckdb_field_id` (in any case) fails before anything is written.
 * Tables with an interval (`interval year to month` or `interval day to second`), `geometry`, or `geography` column cannot be read.
