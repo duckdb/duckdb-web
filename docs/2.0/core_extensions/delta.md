@@ -98,7 +98,9 @@ FROM delta_scan('az://⟨my_container⟩/⟨path⟩');
 
 ### Reading from Google Cloud Storage
 
-To scan a Delta table in a GCS bucket through its [S3 API compatibility]({% link docs/2.0/core_extensions/httpfs/s3api.md %}), use [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability) and create a secret:
+To scan a Delta table in a GCS bucket (`gs://` or `gcs://`), create a GCS [secret]({% link docs/2.0/configuration/secrets_manager.md %}). Two kinds of credentials work.
+
+With [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability), DuckDB reads the table through GCS's [S3 API compatibility]({% link docs/2.0/core_extensions/httpfs/s3api.md %}):
 
 ```sql
 CREATE SECRET (
@@ -109,6 +111,22 @@ CREATE SECRET (
 SELECT *
 FROM delta_scan('gs://⟨my_bucket⟩/⟨path⟩');
 ```
+
+Since v2.0.1, an OAuth bearer token also works, such as one that Unity Catalog vends for a table on GCS. DuckDB then reads the table through the native GCS API:
+
+```sql
+CREATE SECRET (
+    TYPE gcs,
+    BEARER_TOKEN '⟨oauth_token⟩'
+);
+SELECT *
+FROM delta_scan('gs://⟨my_bucket⟩/⟨path⟩');
+```
+
+* If the GCS secret that matches the path has a `BEARER_TOKEN`, the token is used and `KEY_ID` and `SECRET` are ignored.
+* With a bearer token, `ENDPOINT` sets the base URL of the GCS API, e.g., for an emulator. Without a scheme, it uses HTTPS, or HTTP if `USE_SSL` is `false`. `REGION` and `URL_STYLE` are ignored.
+* DuckDB does not refresh the token. When it expires, replace the secret.
+* Without a secret, the scan fails.
 
 ### Creating Tables
 
