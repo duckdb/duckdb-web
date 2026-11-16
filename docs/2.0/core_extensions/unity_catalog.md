@@ -90,6 +90,8 @@ INSERT INTO my_catalog.my_schema.my_table VALUES (1, 'hello');
 INSERT INTO my_catalog.my_schema.my_table SELECT * FROM other_table;
 ```
 
+Since v2.0.1, `INSERT` also writes to tables with [column mapping](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#column-mapping) (`name` or `id` mode) that are partitioned or have struct, list, or map columns, managed and external alike. Before v2.0.1, the partition columns of such tables read as `NULL`.
+
 ### Data Types
 
 Unity Catalog column types map to DuckDB types as follows. Since v1.5.6, DuckDB reads them from the table's Delta log.
@@ -121,6 +123,8 @@ With the `location` option, the table is an external table at that location. The
 CREATE TABLE my_catalog.my_schema.my_external_table (id INTEGER, name VARCHAR)
 WITH (location = 's3://⟨my_bucket⟩/⟨path⟩');
 ```
+
+Since v2.0.1, a managed table takes the Delta table properties that Unity Catalog suggests for it, e.g., column mapping in `name` mode, as Spark does. So a managed table that DuckDB creates may be column-mapped.
 
 Both managed and external tables can be partitioned:
 
@@ -189,6 +193,7 @@ ATTACH '⟨catalog_name⟩' AS my_catalog (
 
 * If the server cannot plan a scan, e.g., because it does not offer the API or refuses the table, DuckDB reads the table through its Delta log instead, and does not try scan planning again on this attached catalog for 15 minutes.
 * Time travel queries (`AT (...)`) always read through the Delta log.
+* Since v2.0.1, a partitioned or column-mapped Delta table always reads through its Delta log, without asking the server for a scan plan.
 * Positional delete files and deletion vectors are applied. A table with equality delete files fails with an error; to read it, attach the catalog without `USE_IRC_SCAN_PLAN`.
 
 ### Catalog-Managed Commits
