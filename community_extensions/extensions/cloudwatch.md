@@ -58,8 +58,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 699
-extension_download_count_pretty: 699
+extension_download_count: 717
+extension_download_count_pretty: 717
 image: '/images/community_extensions/social_preview/preview_community_extension_cloudwatch.png'
 layout: community_extension_doc
 ---
