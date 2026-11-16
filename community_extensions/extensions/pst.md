@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: pst
   description: Read and edit in place Microsoft PST files with rich schemas for common MAPI types (emails, contacts, appointments, tasks)
-  version: 0.2.1
+  version: 0.3.0
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: intellekthq/duckdb-pst
-  ref: d0a69a498c7726b7b75ed32616c7feac3271ff55
+  ref: 96aaad1a04c2a11282637e363f2883a824fe78f2
 
 docs:
   hello_world: |
@@ -116,11 +116,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ✅ | ❌ | ❌ | ❌ | ❌ |
 
@@ -144,20 +144,20 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name        | function_type | description | comment | examples |
-|-----------------------------|---------------|-------------|---------|----------|
-| delete_pst_attachments      | table         | NULL        | NULL    |          |
-| delete_pst_folders          | table         | NULL        | NULL    |          |
-| delete_pst_messages         | table         | NULL        | NULL    |          |
-| read_pst_appointments       | table         | NULL        | NULL    |          |
-| read_pst_contacts           | table         | NULL        | NULL    |          |
-| read_pst_distribution_lists | table         | NULL        | NULL    |          |
-| read_pst_folders            | table         | NULL        | NULL    |          |
-| read_pst_messages           | table         | NULL        | NULL    |          |
-| read_pst_notes              | table         | NULL        | NULL    |          |
-| read_pst_sticky_notes       | table         | NULL        | NULL    |          |
-| read_pst_tasks              | table         | NULL        | NULL    |          |
-| wipe_pst_free_space         | table         | NULL        | NULL    |          |
+|        function_name        | function_type |                                                       description                                                        | comment |                                                                               examples                                                                               |
+|-----------------------------|---------------|--------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| delete_pst_attachments      | table         | Preview or delete PST attachments using (pst_path, message_node_id, attachment_node_id) rows while keeping the messages. | NULL    | [SELECT * FROM delete_pst_attachments((SELECT m.pst_path, m.node_id, a.node_id FROM read_pst_messages('test/unittest.pst') m, UNNEST(m.attachments) t(a) LIMIT 1));] |
+| delete_pst_folders          | table         | Preview or delete PST folders and their contents using (pst_path, node_id) rows.                                         | NULL    | [SELECT * FROM delete_pst_folders((SELECT pst_path, node_id FROM read_pst_folders('test/unittest.pst') WHERE display_name = 'Notes'));]                              |
+| delete_pst_messages         | table         | Preview or delete PST messages and their attachments using (pst_path, node_id) rows.                                     | NULL    | [SELECT * FROM delete_pst_messages((SELECT pst_path, node_id FROM read_pst_messages('test/unittest.pst') LIMIT 1));]                                                 |
+| read_pst_appointments       | table         | Read appointments from PST files with calendar fields.                                                                   | NULL    | [SELECT * FROM read_pst_appointments('test/unittest.pst');]                                                                                                          |
+| read_pst_contacts           | table         | Read contacts from PST files with contact fields.                                                                        | NULL    | [SELECT * FROM read_pst_contacts('test/unittest.pst');]                                                                                                              |
+| read_pst_distribution_lists | table         | Read distribution lists from PST files with member fields.                                                               | NULL    | [SELECT * FROM read_pst_distribution_lists('test/unittest.pst');]                                                                                                    |
+| read_pst_folders            | table         | Read folders and their message counts from PST files.                                                                    | NULL    | [SELECT * FROM read_pst_folders('test/unittest.pst');]                                                                                                               |
+| read_pst_messages           | table         | Read all messages from PST files with the base email fields.                                                             | NULL    | [SELECT * FROM read_pst_messages('test/unittest.pst');]                                                                                                              |
+| read_pst_notes              | table         | Read messages classified as notes from PST files.                                                                        | NULL    | [SELECT * FROM read_pst_notes('test/unittest.pst');]                                                                                                                 |
+| read_pst_sticky_notes       | table         | Read sticky notes from PST files.                                                                                        | NULL    | [SELECT * FROM read_pst_sticky_notes('test/unittest.pst');]                                                                                                          |
+| read_pst_tasks              | table         | Read tasks from PST files with task fields.                                                                              | NULL    | [SELECT * FROM read_pst_tasks('test/unittest.pst');]                                                                                                                 |
+| wipe_pst_free_space         | table         | Preview or wipe unused space in PST files matched by a path or pattern.                                                  | NULL    | [SELECT * FROM wipe_pst_free_space('test/unittest.pst');]                                                                                                            |
 
 ### Overloaded Functions
 
@@ -175,8 +175,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|       name       |                                            description                                            | input_type | scope  | aliases |
-|------------------|---------------------------------------------------------------------------------------------------|------------|--------|---------|
-| pst_allow_delete | Allow delete_pst_* and wipe_pst_free_space to edit PST files in place. Deletion cannot be undone. | BOOLEAN    | GLOBAL | []      |
+|       name       |                                            description                                            | input_type | scope  | aliases | typed_value |
+|------------------|---------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| pst_allow_delete | Allow delete_pst_* and wipe_pst_free_space to edit PST files in place. Deletion cannot be undone. | BOOLEAN    | GLOBAL | []      | false       |
+| temp_directory   | Set the directory to which temporary files are written.                                           | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

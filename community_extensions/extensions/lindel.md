@@ -23,8 +23,8 @@ repo:
   ref: 6ad9ea3efcbec63ed313ab0f0d6273975b34fe68
   variegata: 4982971cea696b5b53dd92df355513f352b64793
 
-extension_star_count: 67
-extension_star_count_pretty: 67
+extension_star_count: 68
+extension_star_count_pretty: 68
 extension_download_count: 3343
 extension_download_count_pretty: 3.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'

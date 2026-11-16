@@ -27,8 +27,8 @@ repo:
   ref: d6aed16bf9a1787c26602f146dd92debd939f33e
   variegata: dc4208dc3c544169def364f179771e8ef9e7d444
 
-extension_star_count: 351
-extension_star_count_pretty: 351
+extension_star_count: 352
+extension_star_count_pretty: 352
 extension_download_count: 1358
 extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_airport.png'

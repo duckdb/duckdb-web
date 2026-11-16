@@ -31,8 +31,10 @@ docs:
   extended_description: |
     This extension is a tiny utility to choose a file interactively.
 
-extension_star_count: 18
-extension_star_count_pretty: 18
+extension_star_count: {
+  "message": "Server Error"
+}
+extension_star_count_pretty: n/a
 extension_download_count: 935
 extension_download_count_pretty: 935
 image: '/images/community_extensions/social_preview/preview_community_extension_file_dialog.png'

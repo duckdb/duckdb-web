@@ -24,8 +24,8 @@ repo:
   ref: 9dda8c730b6f32f781e17f7b3cf527da115382a3
   variegata: f8d93c04377284389e38937d9309c05ac71a123c
 
-extension_star_count: 43
-extension_star_count_pretty: 43
+extension_star_count: 44
+extension_star_count_pretty: 44
 extension_download_count: 851
 extension_download_count_pretty: 851
 image: '/images/community_extensions/social_preview/preview_community_extension_radio.png'
