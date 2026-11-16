@@ -3,6 +3,8 @@ layout: post
 title: "Fastest Table Sort in the West – Redesigning DuckDB’s Sort"
 authors:
   - Laurens Kuiper
+thumb: "/images/blog/thumbs/fastest-table-sort.svg"
+image: "/images/blog/thumbs/fastest-table-sort.png"
 excerpt: DuckDB, a free and open-source analytical data management system, has a new highly efficient parallel sorting implementation that can sort much more data than fits in main memory.
 tag: deep-dive
 ---

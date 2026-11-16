@@ -4,6 +4,8 @@ title: "Friendlier SQL with DuckDB"
 tested: true
 authors:
   - Alex Monahan
+thumb: "/images/blog/thumbs/friendlier-sql.svg"
+image: "/images/blog/thumbs/friendlier-sql.png"
 excerpt: "DuckDB offers several extensions to the SQL syntax. For a full list of these features, see the [Friendly SQL documentation page](/docs/guides/sql_features/friendly_sql)."
 tag: using-duckdb
 ---
