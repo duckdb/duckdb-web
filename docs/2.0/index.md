@@ -81,7 +81,7 @@ See [what's new in the 2.0 documentation]({% link docs/2.0/whats_new_in_the_docs
         <span class="symbol"><img src="{% link images/icons/python.svg %}"></span>
         <span>Python</span>
     </a>
-    <a class="box-link third-width" href="{% link docs/2.0/clients/r.md %}">
+    <a class="box-link third-width" href="{% link docs/2.0/clients/r/overview.md %}">
         <span class="symbol"><img src="{% link images/icons/r.svg %}"></span>
         <span>R</span>
     </a>

@@ -4,10 +4,16 @@ layout: docu
 redirect_from:
 - /docs/api/r
 - /docs/clients/r
+- /docs/clients/r/overview
 - /docs/stable/clients/r
+- /docs/stable/clients/r/overview
 - /docs/current/clients/r
+- /docs/current/clients/r/overview
 - /docs/lts/clients/r
+- /docs/lts/clients/r/overview
 - /docs/preview/clients/r
+- /docs/preview/clients/r/overview
+- /docs/2.0/clients/r
 title: R Client
 ---
 
@@ -17,39 +23,23 @@ title: R Client
 
 ## Installation
 
-### `duckdb`: R Client
-
-The DuckDB R client can be installed using the following command:
+The DuckDB R client can be installed from [CRAN](https://cran.r-project.org/web/packages/duckdb/index.html) using the following command:
 
 ```r
 install.packages("duckdb")
 ```
 
-Please see the [installation page]({% link docs/2.0/installation.html %}?environment=r) and [CRAN](https://cran.r-project.org/web/packages/duckdb/index.html) for details.
+Please see the [installation page]({% link docs/2.0/installation.html %}?environment=r) for details.
 
-### `duckplyr`: dplyr Client
+## Libraries
 
-DuckDB offers a [dplyr](https://dplyr.tidyverse.org/)-compatible API via the `duckplyr` package. It can be installed using `install.packages("duckplyr")`. For details, see the [`duckplyr` documentation](https://tidyverse.github.io/duckplyr/).
+Several R packages build on the DuckDB R client and offer different interfaces to DuckDB:
 
-### `duckdf`: SQL Client
-
-[`duckdf`](https://github.com/phillc73/duckdf) is an SQL interface for R data frames, built on the DuckDB R client. Data frames are registered directly with an in-process DuckDB instance as zero-copy views, queried with standard SQL, and returned as data frame results, without copying data to an external database server. The package is available on [CRAN](https://cran.r-project.org/web/packages/duckdf/index.html) and requires `duckdb` 1.5.6 or later:
-
-```r
-install.packages("duckdf")
-```
-
-```r
-library("duckdf")
-
-df <- data.frame(id = 1:3, value = c(10, 20, 30))
-duckdf("SELECT id, value FROM df WHERE value >= 20")
-#   id value
-# 1  2    20
-# 2  3    30
-```
-
-The approach dates from 2020, when [issue #459](https://github.com/duckdb/duckdb/issues/459) proposed registering an R data frame as a virtual table with [`duckdb_register()`]({% link docs/2.0/clients/r.md %}#efficient-transfer) in duckdb-r. Version 0.2.1 is a rebuild of the package for `duckdb` 1.5.6 and later.
+| Package | Interface | Description |
+|---------|-----------|-------------|
+| [`duckplyr`]({% link docs/2.0/clients/r/duckplyr.md %}) | dplyr | A drop-in replacement for dplyr, powered by DuckDB |
+| [`duckdf`]({% link docs/2.0/clients/r/duckdf.md %}) | SQL | Run SQL queries directly on R data frames |
+| [`dbplyr`]({% link docs/2.0/clients/r/dbplyr.md %}) | dplyr | Translate dplyr pipelines to SQL and run them on a DuckDB connection |
 
 ## Reference Manual
 
@@ -140,47 +130,7 @@ print(res)
 
 > DuckDB keeps a reference to the R data frame after registration. This prevents the data frame from being garbage-collected. The reference is cleared when the connection is closed, but can also be cleared manually using the `duckdb_unregister()` method.
 
-Also refer to the [data import documentation]({% link docs/2.0/data/overview.md %}) for more options of efficiently importing data.
-
-## dbplyr
-
-DuckDB also plays well with the [dbplyr](https://CRAN.R-project.org/package=dbplyr) / [dplyr](https://dplyr.tidyverse.org) packages for programmatic query construction from R. Here is an example:
-
-```r
-library("duckdb")
-library("dplyr")
-con <- dbConnect(duckdb())
-duckdb_register(con, "flights", nycflights13::flights)
-
-tbl(con, "flights") |>
-  group_by(dest) |>
-  summarise(delay = mean(dep_time, na.rm = TRUE)) |>
-  collect()
-```
-
-When using dbplyr, CSV and Parquet files can be read using the `dplyr::tbl` function.
-
-```r
-# Establish a CSV for the sake of this example
-write.csv(mtcars, "mtcars.csv")
-
-# Summarize the dataset in DuckDB to avoid reading the entire CSV into R's memory
-tbl(con, "mtcars.csv") |>
-  group_by(cyl) |>
-  summarise(across(disp:wt, .fns = mean)) |>
-  collect()
-```
-
-```r
-# Establish a set of Parquet files
-dbExecute(con, "COPY flights TO 'dataset' (FORMAT parquet, PARTITION_BY (year, month))")
-
-# Summarize the dataset in DuckDB to avoid reading 12 Parquet files into R's memory
-tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning = true)") |>
-  filter(month == "3") |>
-  summarise(delay = mean(dep_time, na.rm = TRUE)) |>
-  collect()
-```
+Also refer to the [data import documentation]({% link docs/2.0/data/overview.md %}) for more options of efficiently importing data. To query data frames with dplyr instead of SQL, see the [`duckplyr`]({% link docs/2.0/clients/r/duckplyr.md %}) and [`dbplyr`]({% link docs/2.0/clients/r/dbplyr.md %}) pages.
 
 ## Memory Limit
 
