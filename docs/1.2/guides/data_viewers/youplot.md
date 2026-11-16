@@ -60,7 +60,7 @@ duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_a
 
 This tells `uplot` to draw a bar plot, use a comma-seperated delimiter (`-d,`), that the data has a header (`-H`), and give the plot a title (`-t`).
 
-![youplot-top-10](/images/guides/youplot/top-10-plot.png)
+![youplot-top-10]({% link images/guides/youplot/top-10-plot.png %})
 
 ## Bonus Round! stdin + stdout
 
@@ -74,4 +74,4 @@ curl -sL "https://api.github.com/users/dacort/events?per_page=100" \
      | uplot bar -d, -H -t "GitHub Events for @dacort"
 ```
 
-![github-events](/images/guides/youplot/github-events.png)
+![github-events]({% link images/guides/youplot/github-events.png %})

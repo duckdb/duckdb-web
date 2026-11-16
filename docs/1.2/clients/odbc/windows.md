@@ -38,19 +38,19 @@ After the installation, it is possible to change the default DSN configuration o
 
 It also can be launched thought the Windows start:
 
-<img src="/images/blog/odbc/launch_odbcad.png" style="width: 60%; height: 60%"/>
+<img src="{% link images/blog/odbc/launch_odbcad.png %}" style="width: 60%; height: 60%"/>
 
 ### Default DuckDB DSN
 
 The newly installed DSN is visible on the ***System DSN*** in the Windows ODBC Data Source Administrator tool:
 
-![Windows ODBC Config Tool](/images/blog/odbc/odbcad32_exe.png)
+![Windows ODBC Config Tool]({% link images/blog/odbc/odbcad32_exe.png %})
 
 ### Changing DuckDB DSN
 
 When selecting the default DSN (i.e., `DuckDB`) or adding a new configuration, the following setup window will display:
 
-![DuckDB Windows DSN Setup](/images/blog/odbc/duckdb_DSN_setup.png)
+![DuckDB Windows DSN Setup]({% link images/blog/odbc/duckdb_DSN_setup.png %})
 
 This window allows you to set the DSN and the database file path associated with that DSN.
 
@@ -80,7 +80,7 @@ The `ODBC.INI` is where users usually insert DSN registry entries for the driver
 
 For example, the DSN registry for DuckDB would look like this:
 
-![`HKLM->SOFTWARE->ODBC->ODBC.INI->DuckDB`](/images/blog/odbc/odbc_ini-registry-entry.png)
+![`HKLM->SOFTWARE->ODBC->ODBC.INI->DuckDB`]({% link images/blog/odbc/odbc_ini-registry-entry.png %})
 
 The `ODBCINST.INI` contains one entry for each ODBC driver and other keys predefined for [Windows ODBC configuration](https://docs.microsoft.com/en-us/sql/odbc/reference/install/registry-entries-for-odbc-components?view=sql-server-ver15).
 

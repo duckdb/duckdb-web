@@ -59,7 +59,7 @@ text_emotions_rel = conn.table("text_emotions").join(
 
 We plot on a bar chart the emotion distribution to have an initial understanding of our data:
 <div align="center" style="margin:10px">
-    <a href="/images/blog/text-analytics/emotions_in_dataset.png">
+    <a href="{% link images/blog/text-analytics/emotions_in_dataset.png %}">
         <img
           src="{% link images/blog/text-analytics/emotions_in_dataset.png %}"
           alt="Emotion distribution in the data"
@@ -170,7 +170,7 @@ text_token_rel.order("3 desc").limit(10)
 We can also visualize the data to gain insights. One simple and effective approach is to plot the most frequently used words. By counting token occurrences across the dataset and displaying them in bubble plots, we can quickly identify dominant themes, repeated keywords, or unusual patterns in the text. For example, we plot the data by using a [scatter facet plot](https://plotly.com/python/facet-plots/) per emotion:
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/text-analytics/most_used_word.png">
+    <a href="{% link images/blog/text-analytics/most_used_word.png %}">
         <img
           src="{% link images/blog/text-analytics/most_used_word.png %}"
           alt="Most used word"
@@ -189,7 +189,7 @@ The [Full-Text Search (FTS) DuckDB extension]({% link docs/2.0/core_extensions/f
 
 By applying `stem` to the token column, we can now visualize the most frequently used word stem in our data:
 <div align="center" style="margin:10px">
-    <a href="/images/blog/text-analytics/most_used_stem.png">
+    <a href="{% link images/blog/text-analytics/most_used_stem.png %}">
         <img
           src="{% link images/blog/text-analytics/most_used_stem.png %}"
           alt="Most used stem"
@@ -239,7 +239,7 @@ text_emotions_rel
 ```
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/text-analytics/fts.png">
+    <a href="{% link images/blog/text-analytics/fts.png %}">
         <img
           src="{% link images/blog/text-analytics/fts.png %}"
           alt="FTS results"
@@ -339,7 +339,7 @@ text_emotions_rel
 ```
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/text-analytics/vss.png">
+    <a href="{% link images/blog/text-analytics/vss.png %}">
         <img
           src="{% link images/blog/text-analytics/vss.png %}"
           alt="VSS results"
@@ -357,7 +357,7 @@ Vector embeddings are most known for their usability in search engines, but they
 For example, we show in the below [heatmap chart](https://plotly.com/python/heatmaps/) the number of texts for each combination of emotion labels, where the x-axis corresponds to the semantic matching between the text and the emotion, the y-axis to the classified emotion, and the color indicates the count of texts assigned to each pair:
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/text-analytics/best_matched_emotion.png">
+    <a href="{% link images/blog/text-analytics/best_matched_emotion.png %}">
         <img
           src="{% link images/blog/text-analytics/best_matched_emotion.png %}"
           alt="Best matched emotion versus classified emotion"
@@ -423,7 +423,7 @@ if(
 
 And here are the results! Much better, don't you think?
 <div align="center" style="margin:10px">
-    <a href="/images/blog/text-analytics/hybrid.png">
+    <a href="{% link images/blog/text-analytics/hybrid.png %}">
         <img
           src="{% link images/blog/text-analytics/hybrid.png %}"
           alt="Hybrid search results"

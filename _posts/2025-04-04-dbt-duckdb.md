@@ -33,7 +33,7 @@ After doing an initial exploration of the above data, we can observe that a prov
 - a fact table, `fact_services`, to hold information about the train services, linked to `dim_nl_train_stations`.
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/dbt-duckdb/data_model.svg">
+    <a href="{% link images/blog/dbt-duckdb/data_model.svg %}">
         <img
           src="{% link images/blog/dbt-duckdb/data_model.svg %}"
           alt="Transformation Layer Data Model"

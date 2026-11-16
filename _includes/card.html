@@ -57,7 +57,7 @@
 		{% if coll == "library" and known_type_icons contains item.tag %}
 			<span class="type-icon" aria-hidden="true"><img src="/images/library/type-icons/{{ item.tag }}_{{ type_icon_source }}.png" alt="" loading="lazy"></span>
 		{% elsif coll == "everywhere" %}
-			<span class="type-icon" aria-hidden="true"><img src="/images/library/type-icons/everywhere.png" alt="" loading="lazy"></span>
+			<span class="type-icon" aria-hidden="true"><img src="{% link images/library/type-icons/everywhere.png %}" alt="" loading="lazy"></span>
 		{% endif %}
 	</div>
 

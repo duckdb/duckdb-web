@@ -13,12 +13,12 @@ tag: release
 
 On October 9, 2025, DuckDB's in-memory variant hit #1 on the popular [ClickBench database benchmark](https://benchmark.clickhouse.com/):
 
-<img src="/images/blog/clickbench-top1-light.png"
+<img src="{% link images/blog/clickbench-top1-light.png %}"
      alt="ClickBench results as of October 9, 2025"
      width="800"
      class="lightmode-img"
      />
-<img src="/images/blog/clickbench-top1-dark.png"
+<img src="{% link images/blog/clickbench-top1-dark.png %}"
      alt="ClickBench results as of October 9, 2025"
      width="800"
      class="darkmode-img"

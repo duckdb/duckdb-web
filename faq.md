@@ -41,7 +41,7 @@ In 2026, [DuckLabs joined Amazon Web Services]({% post_url 2026-08-26-ducklabs-t
 
 <div class="answer" markdown="1">
 
-Ducks are amazing animals. They can fly, walk, and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck's song will bring people back from the dead and [inspires database research](/images/wilbur.jpg). They are thus the perfect mascot for a versatile and resilient data management system.
+Ducks are amazing animals. They can fly, walk, and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck's song will bring people back from the dead and [inspires database research]({% link images/wilbur.jpg %}). They are thus the perfect mascot for a versatile and resilient data management system.
 
 </div>
 
