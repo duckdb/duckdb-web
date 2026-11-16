@@ -1,0 +1,50 @@
+name: Thin SVG strokes
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'images/blog/thumbs/*.svg'
+
+# If several pushes happen in quick succession, only the latest run is needed (the script processes all files)
+concurrency:
+  group: thin-svg-strokes
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  thin_svg_strokes:
+    if: ${{ github.repository == 'duckdb/duckdb-web' }}
+    runs-on: ubuntu-26.04
+    env:
+      GH_TOKEN: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        path: '.'
+        token: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
+
+    - name: Thin SVG strokes
+      run: python3 scripts/thin_svg_strokes.py
+
+    - name: Send PR
+      run: |
+        git add images/blog/thumbs
+        if git diff --cached --quiet; then
+          echo "No changes, skipping PR"
+          exit 0
+        fi
+        git checkout -B auto_thin_svg_strokes
+        git config user.email "quack.docs@somedomain.org"
+        git config user.name "Quack Mc Docs"
+        git commit -m "chore: thin SVG strokes"
+        git push -f origin auto_thin_svg_strokes
+        gh pr create \
+          --body "Automated run of \`scripts/thin_svg_strokes.py\` after SVG thumbnails changed on \`main\`." \
+          --title "chore: thin SVG strokes" \
+          --head "auto_thin_svg_strokes" \
+          --base "main" \
+        || echo "PR already open, branch updated"
