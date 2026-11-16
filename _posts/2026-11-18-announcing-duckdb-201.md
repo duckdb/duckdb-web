@@ -115,10 +115,11 @@ Here are some other important fixes from the DuckDB 2.0.1 release, organized by 
 
 ## Extensions and Clients
 
-Several extensions and clients also received a number of patches:
+As is customary for DuckDB releases, while DuckDB 2.0.1 itself is a patch release, extensions and clients ship new features along with their fixes. Here are some highlights:
 
 * The [`azure` extension]({% link docs/2.0/core_extensions/azure.md %}) no longer deletes live data files stored at `abfss://⟨container⟩@⟨account⟩` paths when running `CHECKPOINT` on DuckLake ([`duckdb-azure#211`](https://github.com/duckdb/duckdb-azure/pull/211)).
 * The [`iceberg` extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}) ships many correctness and performance fixes. For example, TLS now stays enabled when using vended path-style S3 credentials ([`duckdb-iceberg#1527`](https://github.com/duckdb/duckdb-iceberg/pull/1527)). Note that `iceberg_rewrite_data_files` now returns Spark's output column names ([`duckdb-iceberg#1597`](https://github.com/duckdb/duckdb-iceberg/pull/1597)).
+* [`pg_duckdb`](https://github.com/duckdb/pg_duckdb), the PostgreSQL extension that embeds DuckDB, now publishes binaries for all supported PostgreSQL versions on its [GitHub releases page](https://github.com/duckdb/pg_duckdb/releases). It also ships a number of bugfixes and improves compatibility with other popular PostgreSQL extensions such as Citus and pgvector.
 * In the [`postgres` extension]({% link docs/2.0/core_extensions/postgres/overview.md %}), queries that only touch a single attached PostgreSQL database are now executed entirely in PostgreSQL. If you would like to disable this, run `SET pg_enable_remote_pushdown = false` before attaching the database ([`duckdb-postgres#643`](https://github.com/duckdb/duckdb-postgres/pull/643)).
 * The [Python client]({% link docs/2.0/clients/python/overview.md %}) received fixes for several hangs and crashes at exit, including on Python 3.14 ([`duckdb-python#709`](https://github.com/duckdb/duckdb-python/pull/709), [`duckdb-python#719`](https://github.com/duckdb/duckdb-python/pull/719)). Fetching `TIMESTAMPTZ` values also no longer requires the `pytz` package ([`duckdb-python#710`](https://github.com/duckdb/duckdb-python/pull/710)).
 * The [`spatial` extension]({% link docs/2.0/core_extensions/spatial/overview.md %}) is now available in DuckDB-Wasm, and the [`vortex` extension]({% link docs/2.0/core_extensions/vortex.md %}) is now available on Windows.
