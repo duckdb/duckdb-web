@@ -49,15 +49,23 @@ Cannot change allow_community_extensions setting while database is running
 
 ## Custom Extension Repositories
 
-DuckDB 2.0 introduced trusted [custom extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}), which can serve extensions signed with user-provided keys. Two settings control them:
+DuckDB 2.0 introduced trusted [custom extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}), which serve extensions signed with the publisher's own keys. DuckDB checks that an extension from such a repository is signed with one of the keys it pinned when the repository was created, and nothing else: it does not review what the repository publishes. Registering a repository is a decision to trust its publisher.
 
-* `allow_extension_repositories`: whether custom trusted extension repositories are `'allowed'`, `'forbidden'` (which also distrusts existing repositories), or `'undecided'` (the default: blocks adding new repositories, but keeps trusting existing ones). While the database is running, the setting can only move from `'undecided'` to `'allowed'` or `'forbidden'`, or from `'allowed'` to `'forbidden'`. Installing extensions from an existing repository also requires `'allowed'`.
+By default, DuckDB does not restrict host-based repositories: any user can register one with `CREATE EXTENSION REPOSITORY ⟨host⟩`{:.language-sql .highlight}, and extensions from every registered repository can be installed and loaded. Restricting this is an opt-in, through two settings:
+
+* `allow_extension_repositories`: which custom trusted extension repositories can be added, and which are trusted. `'hosts'` (the default) lets a repository be added by naming its host and keeps trusting existing repositories, `'allowed'` also permits adding a repository by prefix, `'hosts_only'` only adds and trusts repositories resolved from their host, and `'forbidden'` adds nothing and distrusts all custom repositories. While the database is running, the setting can only be tightened, in that order: once set, no later statement can loosen it.
 * `extension_repository_directory`: the directory in which trusted extension repositories are stored. This is the trust anchor for user-provided repositories, so while signature checking is enabled (`allow_unsigned_extensions = false`), it can only be set at startup, not while the database is running.
 
-If you run DuckDB in an environment where only extensions signed by the DuckDB team should be loaded, disable custom repositories:
+If only extensions signed by the DuckDB team should be loaded, forbid custom repositories:
 
 ```sql
 SET allow_extension_repositories = 'forbidden';
+```
+
+If the repositories registered so far should stay usable but no repository may be added or dropped, lock the configuration instead. This freezes the trust store, along with every other setting:
+
+```sql
+SET lock_configuration = true;
 ```
 
 ## Community Extensions

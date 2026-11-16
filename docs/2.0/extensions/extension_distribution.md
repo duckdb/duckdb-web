@@ -94,34 +94,7 @@ LOAD './some/local/ext.duckdb_extension';
 
 ## Creating a Custom Repository
 
-You can create a custom DuckDB extension repository.
-To have DuckDB trust signed extensions from such a repository without enabling `allow_unsigned_extensions`, register it with its public keys using [`CREATE EXTENSION REPOSITORY`]({% link docs/2.0/extensions/extension_repositories.md %}).
-A DuckDB repository is an HTTP, HTTPS, S3, or local file based directory that serves the extensions files in a specific structure.
-This structure is described in the [“Downloading Extensions Directly from S3” section]({% link docs/2.0/extensions/advanced_installation_methods.md %}#downloading-extensions-directly-from-s3), and is the same
-for local paths and remote servers, for example:
-
-```text
-base_repository_path_or_url
-└── v1.0.0
-    └── osx_arm64
-        ├── autocomplete.duckdb_extension
-        ├── httpfs.duckdb_extension
-        ├── icu.duckdb_extension
-        ├── inet.duckdb_extension
-        ├── json.duckdb_extension
-        ├── parquet.duckdb_extension
-        ├── tpcds.duckdb_extension
-        └── tpch.duckdb_extension
-```
-
-See the [`extension-template` repository](https://github.com/duckdb/extension-template/) for all necessary code and scripts
-to set up a repository.
-
-To support [installing a specific version]({% link docs/2.0/extensions/versioning_of_extensions.md %}#installing-a-specific-extension-version) of an extension, also serve it at the following path:
-
-```text
-base_repository_path_or_url/⟨extension_name⟩/⟨extension_version⟩/v⟨duckdb_version⟩/⟨platform_name⟩/⟨extension_name⟩.duckdb_extension.gz
-```
+You can create a custom DuckDB extension repository: an HTTP, HTTPS, S3, or local file based directory that serves the extension files in the same structure as DuckDB's own repositories, described in the [“Downloading Extensions Directly from S3” section]({% link docs/2.0/extensions/advanced_installation_methods.md %}#downloading-extensions-directly-from-s3). To have DuckDB trust the extensions it serves without enabling `allow_unsigned_extensions`, sign them with your own key and publish the key as described on the [“Publishing an Extension Repository” page]({% link docs/2.0/extensions/publishing_extension_repositories.md %}); users then register the repository with [`CREATE EXTENSION REPOSITORY`]({% link docs/2.0/extensions/extension_repositories.md %}).
 
 When installing an extension from a custom repository, DuckDB will search for both a gzipped and non-gzipped version. For example:
 
