@@ -44,9 +44,23 @@ ATTACH '⟨catalog_name⟩' AS my_catalog (TYPE unity_catalog, DEFAULT_SCHEMA 'm
 * `TOKEN` is a credential. For Databricks, it can be a [personal access token](https://docs.databricks.com/aws/en/dev-tools/auth/pat) with `unity-catalog` scope; see [Access Control in Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog/access-control/) for the other options. For Unity Catalog OSS, see the [OSS Unity Catalog documentation](https://docs.unitycatalog.io/).
 * `AWS_REGION` is the region of the storage that holds the tables. It is required.
 
-To read and write the table files, DuckDB also needs a [secret]({% link docs/2.0/configuration/secrets_manager.md %}) for that storage, e.g., an [S3 secret]({% link docs/2.0/core_extensions/httpfs/s3api.md %}) or an [Azure secret]({% link docs/2.0/core_extensions/azure.md %}#authentication-with-secret).
+To read and write the table files, DuckDB uses the storage credentials that Unity Catalog vends for each table; see [Storage Credentials](#storage-credentials).
 
-> Note Only Databricks reports a default namespace. When you attach a Unity Catalog OSS catalog, always set `DEFAULT_SCHEMA`: without it, queries against the catalog fail, even with fully qualified table names.
+> Note Only Databricks reports a default namespace. When you attach a Unity Catalog OSS catalog, set `DEFAULT_SCHEMA` to use table names without a schema. Since v2.0.1, fully qualified table names work without it; before, queries could fail even with fully qualified names. `ATTACH` does not check that the schema exists.
+
+### Storage Credentials
+
+For each table that DuckDB reads or writes, it asks Unity Catalog for temporary credentials and creates a [secret]({% link docs/2.0/configuration/secrets_manager.md %}) from them, scoped to the table's location. Since v2.0.1, this works for all three clouds; before, only AWS credentials were used:
+
+* `s3://`: an S3 secret with the vended key, secret, and session token.
+* `gs://` and `gcs://`: a GCS secret with the vended OAuth bearer token, which the [`delta` extension]({% link docs/2.0/core_extensions/delta.md %}#reading-from-google-cloud-storage) reads with since v2.0.1.
+* `abfss://`, `abfs://`, `az://`, and `azure://`: an [Azure secret]({% link docs/2.0/core_extensions/azure.md %}#authentication-with-secret) with the vended SAS token. This needs the `azure` extension.
+
+Since v2.0.1, a vended secret exists only for the current transaction, so it does not show up in `duckdb_secrets()` after the transaction ends, and transactions that read the same table at the same time no longer conflict.
+
+DuckDB uses the secret with the longest scope that matches a path. The vended secret is scoped to the table's location, so it takes precedence over a secret of yours for the bucket, the container, or the storage account.
+
+A secret of your own for the storage, e.g., an [S3 secret]({% link docs/2.0/core_extensions/httpfs/s3api.md %}), a GCS secret with HMAC keys, or an [Azure secret]({% link docs/2.0/core_extensions/azure.md %}#authentication-with-secret), is still needed when Unity Catalog vends no credentials for the table's cloud, e.g., on a server without credential vending. Since v2.0.1, DuckDB then creates no secret, logs a warning, and uses yours. Tables on local storage (`file://`) need no secret.
 
 ### Attach Options
 
