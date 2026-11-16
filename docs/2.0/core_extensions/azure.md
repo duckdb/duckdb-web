@@ -35,7 +35,7 @@ SELECT count(*)
 FROM 'az://⟨my_container⟩/⟨path⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
 ```
 
-Globs are also supported:
+Globs are also supported (see [Glob Patterns](#glob-patterns)):
 
 ```sql
 SELECT *
@@ -68,7 +68,7 @@ SELECT count(*)
 FROM 'abfss://⟨my_filesystem⟩/⟨path⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
 ```
 
-Globs are also supported:
+Globs are also supported (see [Glob Patterns](#glob-patterns)):
 
 ```sql
 SELECT *
@@ -186,7 +186,7 @@ Authenticate with a [secret](#authentication-with-secret). The `SET` variables i
 
 Several [Secret Providers]({% link docs/2.0/configuration/secrets_manager.md %}#secret-providers) are available, described below. These rules apply to every provider:
 
-* If you need to define different secrets for different storage accounts, use the [`SCOPE` configuration]({% link docs/2.0/configuration/secrets_manager.md %}#creating-multiple-secrets-for-the-same-service-type). Note that the `SCOPE` requires a trailing slash (`SCOPE 'az://⟨my_storage_account⟩.blob.core.windows.net/'`{:.language-sql .highlight}).
+* If you need to define different secrets for different storage accounts, containers, or directories, use the [`SCOPE` configuration]({% link docs/2.0/configuration/secrets_manager.md %}#creating-multiple-secrets-for-the-same-service-type). A scope matches paths by prefix, so end it with a slash (`SCOPE 'az://⟨my_storage_account⟩.blob.core.windows.net/'`{:.language-sql .highlight}) to keep it from matching names that only start the same way. Since v2.0.1, a secret scoped to `⟨directory⟩/` also applies to operations on the directory `⟨directory⟩` itself, e.g., a `COPY ... TO '⟨directory⟩'` with `PER_THREAD_OUTPUT` or `PARTITION_BY`. Before, these operations ran without the secret and failed with `NoAuthenticationInformation`.
 * With fully qualified paths, `ACCOUNT_NAME` is optional.
 * For paths that are not fully qualified, the `ENDPOINT` attribute overrides the default endpoint (`blob.core.windows.net` for `az://` and `azure://`, `dfs.core.windows.net` for `abfss://` and `abfs://`).
 
@@ -382,6 +382,26 @@ CREATE SECRET myaccount (
 );
 SELECT count(*) FROM 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨path⟩/⟨my_file⟩.parquet';
 ```
+
+### Glob Patterns
+
+> New The following rules apply to ADLS since DuckDB 2.0.1.
+
+Blob Storage and ADLS match a glob one path component at a time, as the [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/s3api.md %}) does for S3:
+
+* The pattern is split at each `/`. `*` matches any part of one name, never a `/`. `[abc]` and `[a-z]` match one character of the set, and `[!abc]` one character outside it. `\` makes the next character literal. A path is a glob only if it contains `*`, `[`, or `\`: `?` alone does not make it one, so `⟨path⟩/?.csv` names a file. To match any one character, use a set such as `[a-z0-9]`.
+* `**` as a whole component matches zero or more directories, anywhere in the pattern and any number of times: `⟨path⟩/**` matches every file below `⟨path⟩`, and `⟨path⟩/**/*.csv` every CSV file below it, including those directly in `⟨path⟩`. Within a component, `**` is the same as `*`: `⟨path⟩/**.csv` matches only the CSV files directly in `⟨path⟩`.
+* A glob returns files, never directories. Names that start with a `.` match like any other name.
+* A trailing `/` is ignored: `⟨path⟩/*/` is the same as `⟨path⟩/*`.
+* A glob over a directory that does not exist matches nothing. A path without wildcards matches if it is a file.
+* Matching is case-sensitive, and the result is sorted by path.
+* Repeated slashes count as one on ADLS: `⟨path⟩//*.csv` is the same as `⟨path⟩/*.csv`. On Blob Storage, repeated slashes before the first wildcard, as in `⟨path⟩//*.csv`, make the pattern match nothing.
+
+Reading a directory, e.g., `read_csv('abfss://⟨my_filesystem⟩/⟨path⟩')`{:.language-sql .highlight}, reads the CSV files below it at any depth, as with `⟨path⟩/**/*.csv`.
+
+These rules differ from those of [local globs]({% link docs/2.0/sql/functions/pattern_matching.md %}#globbing): there, `?` alone makes a glob, a trailing `/` returns directories, `.` and `..` are resolved, and a pattern can contain only one `**`.
+
+Before v2.0.1, ADLS globs worked differently: `*` also matched `/`, so `⟨path⟩/**.csv` returned the CSV files at any depth; a `**` followed by more components, such as `⟨path⟩/**/*.csv`, failed with an error, and so did reading a directory; a glob over a missing directory failed with `404 Not Found`; and a pattern ending in `/` matched nothing.
 
 ### Difference between ADLS and Blob Storage
 
