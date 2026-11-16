@@ -92,6 +92,10 @@ LOAD './some/local/ext.duckdb_extension';
 
 > Warning Loading an extension built for a different DuckDB version or platform may crash DuckDB or cause undefined behavior.
 
+## Distributing an Extension as a Python Package
+
+An extension binary can be packaged as a Python wheel that installs it where the `duckdb` command from the `duckdb-cli` package looks for extensions, with the `duckdb-extension-wheel` tool. See [Extensions as Python Packages]({% link docs/2.0/extensions/python_packages.md %}#packaging-your-own-extension).
+
 ## Creating a Custom Repository
 
 You can create a custom DuckDB extension repository.
