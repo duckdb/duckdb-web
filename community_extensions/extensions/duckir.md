@@ -63,8 +63,8 @@ docs:
     > **Status: Alpha. Indexes might need to be recreated after an extension update.**
 
     See our [documentation](https://github.com/cwida/DuckIR) for maintenance, persistence, out-of-core search, and the known limitations.
-extension_star_count: 20
-extension_star_count_pretty: 20
+extension_star_count: 22
+extension_star_count_pretty: 22
 extension_download_count: 226
 extension_download_count_pretty: 226
 image: '/images/community_extensions/social_preview/preview_community_extension_duckir.png'

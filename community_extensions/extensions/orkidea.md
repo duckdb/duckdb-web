@@ -8,19 +8,20 @@ excerpt: |
 extension:
   name: orkidea
   description: Read, write, upsert, and alter Oracle Database tables through a Rust ADBC driver, with no Oracle client
-  version: '0.2.0'
+  version: '0.4.1'
   language: C++
   build: cmake
   license: Apache-2.0
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;linux_amd64_musl;linux_arm64_musl"
+  opt_in_platforms: "osx_amd64;windows_arm64"
   requires_toolchains: "rust"
   maintainers:
     - hc12r
 
 repo:
   github: Tnsor-Labs/duckdb-orkidea
-  # The commit tagged v0.2.0, built for DuckDB v2.0.0.
-  ref: ff9d35c86d30a2843fa1b504425d0d3dcff40273
+  # The commit tagged v0.4.1, built for DuckDB v2.0.0.
+  ref: 9991acda12c087ce933c0cea941f95abe4d43680
 
 docs:
   hello_world: |
@@ -90,10 +91,10 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ❌ | ❌ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
@@ -142,6 +143,7 @@ This extension does not add any types.
 |              name              |                                                                          description                                                                           | input_type | scope  | aliases | typed_value |
 |--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
 | orkidea_aggregate_pushdown     | Whether GROUP BY and aggregates (COUNT, SUM, MIN, MAX, AVG) directly over an attached Oracle table run in Oracle                                               | BOOLEAN    | GLOBAL | []      | true        |
+| orkidea_join_pushdown          | Whether joins of tables of one attached Oracle database run in Oracle                                                                                          | BOOLEAN    | GLOBAL | []      | true        |
 | orkidea_parallel_scan          | How many Oracle sessions one scan of an attached table may read through at once: -1 chooses (DuckDB's thread count, up to 8), 0 or 1 reads through one session | BIGINT     | GLOBAL | []      | -1          |
 | orkidea_parallel_scan_min_rows | Oracle tables with fewer rows than this (by their optimizer statistics) are read through one session                                                           | UBIGINT    | GLOBAL | []      | 500000      |
 | temp_directory                 | Set the directory to which temporary files are written.                                                                                                        | VARCHAR    | GLOBAL | []      | post.db.tmp |

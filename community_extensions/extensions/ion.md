@@ -8,17 +8,20 @@ excerpt: |
 extension:
   name: ion
   description: Read AWS Ion data and write Ion text or binary with typed mappings
-  version: 0.2.0
+  version: 0.4.0
   language: C++
   build: cmake
   license: MIT
   maintainers:
     - kestra-io
-    - proddata
+    - jymaire
+    - Malaydewangan09
+    - fdelbrayelle
 
 repo:
   github: kestra-io/duckdb-ion
-  ref: a144356501ec0432b5025c6b8d19f643761d6f65
+  ref: 1454a5ba5fd7a317b6b981786c30b8c564efcc7b
+  variegata: 15ba5105eff0d8676ad666f593159c5ffa1203ee
   andium: 75c52435dcf48e96afd79b3b9bc1dce1a5547b04
 
 docs:
@@ -54,13 +57,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -82,10 +85,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| read_ion      | table         | NULL        | NULL    |          |
-| to_ion        | scalar        | NULL        | NULL    |          |
+| function_name | function_type |                                              description                                               | comment |                    examples                     |
+|---------------|---------------|--------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------|
+| read_ion      | table         | Read Ion text or binary files into DuckDB rows, inferring column types unless a schema is provided.    | NULL    | [SELECT * FROM read_ion('test/ion/sample.ion')] |
+| to_ion        | scalar        | Serialize a DuckDB value as Ion text and return it as VARCHAR; nested lists and structs are supported. | NULL    | [to_ion(struct_pack(a := 1, b := ['x', 'y']))]  |
 
 ### Overloaded Functions
 
@@ -103,6 +106,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

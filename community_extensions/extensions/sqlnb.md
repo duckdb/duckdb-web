@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: sidequery/sqlnb-extension
-  ref: f9adda39f49b01af8d2454f426ddf6396cb029c2
+  ref: 3993b871d6f2b1d563096cef4340a8203fa4e6b8
 
 docs:
   hello_world: |
@@ -98,6 +98,11 @@ LOAD {{ page.extension.name }};
 | sqlnb_duckdb_ui_save      | scalar        | NULL        | NULL    |          |
 | sqlnb_is_read_only        | scalar        | NULL        | NULL    |          |
 | sqlnb_read_query          | table         | NULL        | NULL    |          |
+| sqlnb_result              | table         | NULL        | NULL    |          |
+| sqlnb_result_drop         | scalar        | NULL        | NULL    |          |
+| sqlnb_result_tee          | table         | NULL        | NULL    |          |
+| sqlnb_results             | table         | NULL        | NULL    |          |
+| sqlnb_sample_plan         | scalar        | NULL        | NULL    |          |
 | sqlnb_start               | scalar        | NULL        | NULL    |          |
 | sqlnb_status              | scalar        | NULL        | NULL    |          |
 | sqlnb_stop                | scalar        | NULL        | NULL    |          |
