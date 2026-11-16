@@ -9,9 +9,7 @@ excerpt: "We are releasing DuckDB 2.0.1, the first patch release of the 2.0 LTS 
 tag: release
 ---
 
-TODO: Podcast teaser. Fill in the episode titles, dates, and links.
-
-> New We have new DuckDB podcast episodes coming up soon. Stay tuned!
+> New Two new episodes of The New Stack Podcast feature DuckLabs developers: Guillermo Sanchez on [Quack, DuckDB's client-server protocol]({% link _library/2026-11-14-duckdb-has-an-answer-to-bloated-database-messages.md %}), and Pedro Holanda on [DuckLake 1.1]({% link _library/2026-11-14-ducklake-11-solves-the-absurd-complexity-of-data-lakes-at-ai-scale.md %}).
 
 In this blog post, we highlight a few important fixes in DuckDB 2.0.1, the first patch release in [DuckDB's 2.0 LTS (Cyanoptera) line]({% post_url 2026-10-21-announcing-duckdb-200 %}).
 You can find the full [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.1).
