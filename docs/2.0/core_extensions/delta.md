@@ -328,6 +328,10 @@ The protocol requires every data file of an `id`-mode table to carry Parquet fie
 
 > Warning The default changed from `lenient` in DuckDB 1.5 to `strict` in v2.0. To read such files as v1.5 did, run `SET delta_column_mapping_policy = 'lenient';`{:.language-sql .highlight}.
 
+Since v2.0.1, DuckDB writes to column-mapped tables with partition columns or nested (struct, list, and map) columns, in both modes: `INSERT` into such a table works, whoever created it, and `CREATE TABLE` and `CREATE TABLE ... AS SELECT` can create one. Spark reads and appends to the files that DuckDB writes. Each partition of a column-mapped table goes to a directory named `part-` followed by a hash of the partition values, not to a Hive-style `⟨column⟩=⟨value⟩` directory: readers take the partition values from the Delta log.
+
+> Warning Before v2.0.1, the partition columns of a column-mapped table read as `NULL` in every row, without an error.
+
 ### VARIANT Columns
 
 Delta `variant` columns are read as DuckDB [`VARIANT`]({% link docs/2.0/sql/data_types/variant.md %}), whether their files are shredded or not, and top-level `VARIANT` columns can be appended to.
@@ -388,7 +392,8 @@ The `delta` extension supports:
     * `SORTED BY`
     * column types without a Delta equivalent, such as `TIME` or unsigned integers
     * a table whose columns are all partition columns
-* A table created with [column mapping](#column-mapping) cannot have nested or partition columns, because DuckDB cannot write to such tables yet.
+* Before v2.0.1, DuckDB cannot write to a table with [column mapping](#column-mapping) that has nested or partition columns, nor create one.
+* Writing to a column-mapped table with a struct field whose physical name is `__duckdb_field_id` (in any case) fails before anything is written.
 * Tables with an interval (`interval year to month` or `interval day to second`), `geometry`, or `geography` column cannot be read.
 * Writing to a table with the `allowColumnDefaults` writer feature fails, even if no column has a default yet: DuckDB cannot fill in Delta defaults and does not write `NULL` instead. Reading works.
 * Writing to a table that declares a `CHAR(n)` or `VARCHAR(n)` width on a nested field, such as `ARRAY<VARCHAR(5)>`, is not supported.
