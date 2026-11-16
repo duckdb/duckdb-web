@@ -41,21 +41,6 @@ Additionally, this release pulls in a fix for the Brotli decoder (CVE-2026-11149
 >
 > Secret scopes that end at a host or bucket name now require an exact match or a `/` boundary ([`#28684`](https://github.com/duckdb/duckdb/pull/28684)). For example, the scope `s3://bucket-` no longer matches `s3://bucket-1/`. If a URL contains an explicit port, the scope also needs to include the port.
 
-## New Core Extension: Sirius
-
-DuckDB 2.0.1 adds [Sirius]({% link docs/2.0/core_extensions/sirius.md %}), a GPU-native SQL engine that runs DuckDB queries on NVIDIA GPUs, as a core extension ([`#28022`](https://github.com/duckdb/duckdb/pull/28022)).
-Sirius is available on Linux (x86-64 and arm64) and requires an NVIDIA GPU with a CUDA 12 or 13 driver.
-
-To use Sirius, first install and load the extension. Then, you can check its status as follows:
-
-```sql
-INSTALL AND LOAD sirius;
-FROM sirius_status();
-```
-
-When you load Sirius for the first time, it detects your CUDA version and downloads the matching backend, which is about 1 GB.
-If a query uses features that Sirius does not support yet, DuckDB falls back to its CPU engine to run it.
-
 ## Registering Extension Repositories by Host
 
 DuckDB 2.0.0 introduced [custom extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}), which serve extensions signed with the publisher's own keys.
@@ -75,6 +60,21 @@ To support this, the `allow_extension_repositories` setting has new values: `hos
 The previous default value, `undecided`, is no longer accepted.
 If only extensions signed by the DuckDB team should be loaded in your environment, set `allow_extension_repositories` to `forbidden`.
 For details, see the [“Securing Extensions” page]({% link docs/2.0/operations_manual/securing_duckdb/securing_extensions.md %}#custom-extension-repositories).
+
+## New Core Extension: Sirius
+
+DuckDB 2.0.1 adds [Sirius]({% link docs/2.0/core_extensions/sirius.md %}), a GPU-native SQL engine that runs DuckDB queries on NVIDIA GPUs, as a core extension ([`#28022`](https://github.com/duckdb/duckdb/pull/28022)).
+Sirius is available on Linux (x86-64 and arm64) and requires an NVIDIA GPU with a CUDA 12 or 13 driver.
+
+To use Sirius, first install and load the extension. Then, you can check its status as follows:
+
+```sql
+INSTALL AND LOAD sirius;
+FROM sirius_status();
+```
+
+When you load Sirius for the first time, it detects your CUDA version and downloads the matching backend, which is about 1 GB.
+If a query uses features that Sirius does not support yet, DuckDB falls back to its CPU engine to run it.
 
 ## Other Fixes
 
