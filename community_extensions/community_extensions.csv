@@ -207,6 +207,7 @@ lpts,cwida/lpts,6845654b3ce21922f83f226937abd3aa9a790a70,"Optimized-plan inspect
 lua,isaacbrodsky/duckdb-lua,f630ad32898fd1c67a155dc3b061f7d83a57f3b2,"Evaluate Lua scripts within queries"
 luajit,alitrack/duckdb-luajit,c95b9a1985b98b9ace4f299a97f77429f8cbb5c7,"In-process LuaJIT UDFs for DuckDB — JIT-compiled, parallel (per-thread states), trusted sandbox, GROUP BY aggregates, LIST/STRUCT/MAP bridges, embedded Fennel compiler"
 magic,carlopi/duckdb-magic,00bf2b30a6e3ea1cac2cd86d8be8636bba93cf89,"libmagic/file utilities ported to DuckDB"
+malloy,lloydtabb/malloy-duckdb,01c8a266840c0c10af3349b613706d1df3ab7f1f,"A semantic layer an AI agent builds itself, and a query surface, inside DuckDB"
 marc21,mgbilby/duckdb-marc21,d4a821d289fb0ee33c2bcf2fdbed8874a64169fa,"Read, write, validate and edit MARC 21 bibliographic data (ISO 2709, MARCXML, MARC-in-JSON, breaker, Aleph; UTF-8 and MARC-8)"
 marisa,query-farm/marisa,3235fe43770ee93df1ff8d7f39d075da91dc76cf,"Adds MARISA (Matching Algorithm with Recursively Implemented StorAge) trie functionality for DuckDB. MARISA is a static and space-efficient trie data structure that enables fast string lookups, prefix searches, and predictive text operations."
 markdown,teaguesterling/duckdb_markdown,f0d469432cbf9f8128d8087969a18fb8aa26c391,"Read, analyze, and write Markdown files with block-level document representation and inline element support"
