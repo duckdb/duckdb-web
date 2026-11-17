@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckir
   description: A DuckDB extension for Information Retrieval. Fast vector search fully integrated with DuckDB, with filtered search on any predicate, indexes larger than memory, and an index that updates alongside your table.
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -21,7 +21,7 @@ extension:
 
 repo:
   github: cwida/DuckIR
-  ref: c597c50c375ac8e8576c19c655b523e391202b8e
+  ref: 807e7f3d55be2014797bd7404ec02a7be9494d6a
 
 docs:
   hello_world: |
@@ -63,6 +63,7 @@ docs:
     > **Status: Alpha. Indexes might need to be recreated after an extension update.**
 
     See our [documentation](https://github.com/cwida/DuckIR) for maintenance, persistence, out-of-core search, and the known limitations.
+
 extension_star_count: 23
 extension_star_count_pretty: 23
 extension_download_count: 310
