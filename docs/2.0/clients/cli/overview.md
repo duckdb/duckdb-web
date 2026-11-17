@@ -35,6 +35,8 @@ pip install duckdb-cli
 duckdb
 ```
 
+The package also installs the same command as `duckdb-cli`, so `uvx duckdb-cli` runs it without installing anything first.
+
 Extensions come as packages too, as extras of `duckdb-cli`: `pip install "duckdb-cli[httpfs]"` installs the `httpfs` extension into the environment, and `LOAD httpfs` finds it there without a download. See [Extensions as Python Packages]({% link docs/2.0/extensions/python_packages.md %}).
 
 ## Getting Started
