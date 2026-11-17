@@ -6,7 +6,7 @@ how_to_topic: network-cloud-storage
 
 Schema changes in operational databases — added columns, widened types, and dropped fields — typically force manual pipeline updates. Apache Iceberg's metadata-only schema evolution removes that burden: a CDC tool propagates the change, and DuckDB reads the new schema on the next query with no manual step.
 
-This guide walks the complete path using [OLake Go](https://olake.io/olake-go/) — an [open-source EL platform](https://olake.io/docs/) for CDC and incremental replication to Apache Iceberg — with DuckDB querying the results through [Apache Polaris](https://polaris.apache.org), an open-source Iceberg REST Catalog.
+This guide walks the complete path using [OLake Go](https://olake.io/olake-go/) — an [open-source EL platform](https://olake.io/docs/) for CDC and incremental replication to Apache Iceberg — with DuckDB querying the results through an [Iceberg REST Catalog]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}).
 
 > Note This example uses PostgreSQL. OLake Go supports the same replication workflow for [MySQL, MongoDB, Oracle, MSSQL, DB2, Kafka, and S3](https://olake.io/docs/category/sources) — only `source.json` changes.
 
@@ -14,7 +14,7 @@ This guide walks the complete path using [OLake Go](https://olake.io/olake-go/) 
 
 * DuckDB with the [`iceberg`]({% link docs/2.0/core_extensions/iceberg/overview.md %}) extension
 * [Docker](https://docs.docker.com/get-started/get-docker/)
-* A running [Apache Polaris](https://polaris.apache.org) catalog and an S3-compatible object store
+* An Iceberg REST Catalog service and an S3-compatible object store
 * PostgreSQL with logical replication enabled (`wal_level = logical`)
 
 ## Configure OLake Go
@@ -55,29 +55,25 @@ CREATE PUBLICATION olake_pub FOR ALL TABLES;
 
 ### Destination Configuration
 
-Create `~/olake-config/destination.json` with Apache Polaris as the Iceberg catalog and S3 as storage. See the [OLake Iceberg REST catalog reference](https://olake.io/docs/writers/iceberg/catalog/rest/) for all available fields:
+Create `~/olake-config/destination.json` with the Iceberg REST Catalog and S3 as storage. See the [OLake Iceberg REST catalog reference](https://olake.io/docs/writers/iceberg/catalog/rest/) for all available fields:
 
 ```json
 {
   "type": "ICEBERG",
   "writer": {
-    "catalog_type": "polaris",
-    "rest_catalog_url": "http://⟨polaris_host⟩:8181/api/catalog",
-    "rest_auth_type": "oauth2",
-    "oauth2_uri": "http://⟨polaris_host⟩:8181/api/catalog/v1/oauth/tokens",
-    "credential": "⟨client_id⟩:⟨client_secret⟩",
-    "scope": "PRINCIPAL_ROLE:ALL",
-    "iceberg_s3_path": "⟨catalog_name⟩",
+    "catalog_type": "rest",
+    "rest_catalog_url": "http://⟨rest_endpoint⟩:8181",
+    "iceberg_s3_path": "⟨s3_bucket_name⟩",
     "aws_access_key": "⟨s3_access_key⟩",
     "aws_secret_key": "⟨s3_secret_key⟩",
     "aws_region": "⟨s3_region⟩",
-    "s3_endpoint": "http://⟨minio_host⟩:9000",
+    "s3_endpoint": "http://⟨minio_host⟩:9090",
     "arrow_writes": false
   }
 }
 ```
 
-> Note Leave `s3_endpoint` empty when using AWS S3. It is required only for S3-compatible stores such as MinIO.
+> Note Omit `s3_endpoint` when using AWS S3. It is required only for S3-compatible stores such as MinIO.
 
 ## Discover Streams
 
@@ -111,7 +107,7 @@ Edit `selected_streams.json` to configure the `orders` table. The top-level key 
 
 ## Start the Sync
 
-Run `sync` to perform the initial full load and then continue in CDC mode:
+Run `sync` to perform the initial full load and then continue in CDC mode. The sync process runs until it reaches the end of the WAL and then exits:
 
 ```bash
 docker run --pull=always \
@@ -124,7 +120,19 @@ docker run --pull=always \
   --destination /mnt/config/destination.json
 ```
 
-OLake Go creates `state.json` after the first run. On subsequent runs, add `--state /mnt/config/state.json` to resume from the saved WAL position instead of performing a full reload.
+OLake Go creates `state.json` after the first run. On subsequent runs, add `--state /mnt/config/state.json` to resume from the saved WAL position instead of performing a full reload:
+
+```bash
+docker run --pull=always \
+  -v ~/olake-config:/mnt/config \
+  olakego/source-postgres:latest \
+  sync \
+  --config /mnt/config/source.json \
+  --selected-streams /mnt/config/selected_streams.json \
+  --available-streams /mnt/config/available_streams.json \
+  --destination /mnt/config/destination.json \
+  --state /mnt/config/state.json
+```
 
 ## Attach the Catalog in DuckDB
 
@@ -137,27 +145,22 @@ CREATE SECRET s3_secret (
     KEY_ID '⟨s3_access_key⟩',
     SECRET '⟨s3_secret_key⟩',
     REGION '⟨s3_region⟩',
-    ENDPOINT 'http://⟨minio_host⟩:9000',
+    ENDPOINT '⟨minio_host⟩:9090',
     URL_STYLE 'path',
     USE_SSL false
 );
 
-CREATE SECRET polaris_secret (
+ATTACH '⟨s3_bucket_name⟩' AS iceberg_catalog (
     TYPE iceberg,
-    CLIENT_ID '⟨client_id⟩',
-    CLIENT_SECRET '⟨client_secret⟩'
-);
-
-ATTACH '⟨catalog_name⟩' AS polaris_catalog (
-    TYPE iceberg,
-    URI 'http://⟨polaris_host⟩:8181/api/catalog',
-    ACCESS_DELEGATION_MODE 'vended_credentials'
+    URI 'http://⟨rest_endpoint⟩:8181',
+    AUTHORIZATION_TYPE 'none',
+    ACCESS_DELEGATION_MODE 'none'
 );
 ```
 
-> Note The `ENDPOINT`, `URL_STYLE`, and `USE_SSL` options in the S3 secret are needed only for S3-compatible stores such as MinIO. Omit them when using AWS S3.
+> Note The `ENDPOINT`, `URL_STYLE`, and `USE_SSL` options in the S3 secret are needed only for S3-compatible stores such as MinIO. Omit them when using AWS S3. For catalogs that require OAuth2 authentication, see [Attaching an Iceberg REST Catalog]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}#attaching-an-iceberg-rest-catalog).
 
-OLake Go maps each source table to an Iceberg namespace derived from the source database and schema — for example, a table in the PostgreSQL database `mydb`, schema `public` lands in the Iceberg namespace `mydb_public`. Tables are then accessible with the three-part name `polaris_catalog.⟨namespace⟩.orders`.
+OLake Go maps each source table to an Iceberg namespace derived from the source database and schema — for example, a table in the PostgreSQL database `mydb`, schema `public` lands in the Iceberg namespace `mydb_public`. Tables are then accessible with the three-part name `iceberg_catalog.⟨namespace⟩.orders`.
 
 ## Schema Change 1: Adding a Column
 
@@ -167,11 +170,11 @@ Add a `region` column to the source table:
 ALTER TABLE orders ADD COLUMN region VARCHAR(50);
 ```
 
-Rerun the sync command and then query from DuckDB. OLake Go adds the new field to the Iceberg schema with a new field ID:
+Rerun the sync command with `--state` and then query from DuckDB. OLake Go adds the new field to the Iceberg schema with a new field ID:
 
 ```sql
 SELECT order_id, region
-FROM polaris_catalog.⟨namespace⟩.orders
+FROM iceberg_catalog.⟨namespace⟩.orders
 ORDER BY order_id
 LIMIT 5;
 ```
@@ -188,10 +191,10 @@ Promote `customer_id` from `INTEGER` to `BIGINT`:
 ALTER TABLE orders ALTER COLUMN customer_id TYPE BIGINT;
 ```
 
-Iceberg v2 supports these type widening promotions natively: `INT` to `BIGINT`, `FLOAT` to `DOUBLE`, `DATE` to `TIMESTAMP` or `TIMESTAMP_NS`, and `DECIMAL` precision increases. OLake Go propagates the type change to the Iceberg schema on the next sync. Iceberg records the new type in a fresh `metadata.json` without rewriting existing data files. DuckDB reflects the new type on the next query:
+Iceberg v2 supports widening type promotions natively: `INT` to `BIGINT`, `FLOAT` to `DOUBLE`, `DATE` to `TIMESTAMP` or `TIMESTAMP_NS`, and `DECIMAL` precision increases. OLake Go propagates the type change to the Iceberg schema on the next sync. Iceberg records the new type in a fresh `metadata.json` without rewriting existing data files. DuckDB reflects the new type on the next query:
 
 ```sql
-DESCRIBE polaris_catalog.⟨namespace⟩.orders;
+DESCRIBE iceberg_catalog.⟨namespace⟩.orders;
 ```
 
 The `customer_id` column now shows as `BIGINT`. Existing Parquet files that stored the column as 32-bit integers are still readable: DuckDB widens the values on read.
@@ -210,7 +213,7 @@ Use `iceberg_snapshots` to find the snapshot committed before the drop:
 
 ```sql
 SELECT snapshot_id, timestamp_ms
-FROM iceberg_snapshots(polaris_catalog.⟨namespace⟩.orders)
+FROM iceberg_snapshots(iceberg_catalog.⟨namespace⟩.orders)
 ORDER BY timestamp_ms;
 ```
 
@@ -218,7 +221,7 @@ Then query a historical snapshot directly with `AT (VERSION => ...)`:
 
 ```sql
 SELECT order_id, amount
-FROM polaris_catalog.⟨namespace⟩.orders
+FROM iceberg_catalog.⟨namespace⟩.orders
 AT (VERSION => ⟨snapshot_id_before_drop⟩)
 LIMIT 5;
 ```
@@ -230,7 +233,7 @@ In each case, DuckDB resolves the schema from the catalog on every query — whe
 ## Further Reading
 
 * [Iceberg Catalogs Supported by DuckDB]({% link docs/2.0/core_extensions/iceberg/catalogs.md %})
-* [Apache Polaris in DuckDB]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}#apache-polaris)
+* [Attaching an Iceberg REST Catalog]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}#attaching-an-iceberg-rest-catalog)
 * [Writing to Iceberg with DuckDB — Schema Evolution]({% link docs/2.0/core_extensions/iceberg/writing_to_iceberg.md %}#alter-table-and-schema-evolution)
 * [What Is Inside an Iceberg Table?]({% post_url 2026-10-13-inside-iceberg-table %})
 * [OLake Go documentation](https://olake.io/olake-go/)
