@@ -1,0 +1,5 @@
+{
+  "$comment": "Served at https://duckdb.org/.well-known/duckdb-extension-repo.json. Read by DuckDB for `CREATE EXTENSION REPOSITORY duckdb.org`: it says that this host's extension repository is at https://extensions.duckdb.org, whose own .well-known file names the signing keys. Only 'version' and 'repository_url' are read; this comment is not. Format: https://duckdb.org/docs/stable/extensions/extension_repositories",
+  "version": 1,
+  "repository_url": "https://extensions.duckdb.org"
+}
