@@ -105,6 +105,7 @@ The newest release offering a client gets unversioned install commands, older on
 {%- capture pip_section -%}{% if r.pip_cli %}
 <h4>Python Package Manager</h4>
 {% highlight bash %}{{ pip_cmd }}{% endhighlight %}
+<p>Extensions can also be installed with pip, as extras of the <code>duckdb-cli</code> package. See <a href="{% link docs/2.0/clients/cli/overview.md %}#installing-with-pip">Installing with pip</a>.</p>
 <p>With <a href="https://docs.astral.sh/uv/">uv</a>, <code>uvx duckdb-cli{% unless newest_release %}@{{ v_core }}{% endunless %}</code> runs the CLI without installing it.</p>
 {% endif %}{%- endcapture %}
 

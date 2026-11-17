@@ -1260,6 +1260,10 @@
               "path": "/docs/2.0/extensions/advanced_installation_methods"
             },
             {
+              "page": "Extensions as Python Packages",
+              "path": "/docs/2.0/extensions/python_packages"
+            },
+            {
               "page": "Versioning of Extensions",
               "path": "/docs/2.0/extensions/versioning_of_extensions"
             },
