@@ -64,29 +64,12 @@ The model does not have to decide which reviews are relevant, because the SQL al
 
 ## Who Attended
 
-Attendees came from 25 organizations.
+The workshop brought together software engineers, data engineers, platform engineers, researchers, and product managers from various organizations across Europe. The workshop did not require ML experience — attendees needed to know SQL and be able to read basic Python.
 
-* 14 software engineers from Spotify, Booking, Bol, ServiceNow, Kuehne+Nagel, Lunatech, Serokell, ThreadFirst Software and the Sociale Verzekeringsbank
-* 7 data engineers and analysts from Booking, Fourthline, Beerwulf, Samba TV, Stedin, Weber Solutions and PwC Nederland
-* 3 platform, DevOps and AI engineers from Kaiko AI, Swisscom and Dyflexis
-* 4 researchers from IMEC, Cassini Technologies, Leiden University and the University of Amsterdam
-* 4 leaders and product managers from Nike, Energie Partners and Digitalica
-* 4 independent consultants in software engineering, DevOps and AI
-
-The workshop did not require ML experience. Attendees needed to know SQL and be able to read basic Python.
-
-## Feedback
-
-26 attendees completed the survey. The average rating was 4.65 out of 5, and 25 of the 26 rated the workshop 4 or 5. Attendees liked the exercises with real data, the DuckDB and Hugging Face content, the preparation of the speaker and host, the organization and the food.
-
-## Next Steps
-
-You can continue with the workshop material at home. You can run the ingest script on another category of the dataset, for example with `--category All_Beauty`. You can load your own reviews into the six columns listed above. You can also schedule a job that calls the API of your Space every week and sends the report to your product team.
-
-For more information, see [DuckDB](https://duckdb.org/), [Hugging Face](https://huggingface.co/), [Hugging Face Jobs](https://huggingface.co/docs/hub/en/jobs), [Storage Buckets](https://huggingface.co/docs/hub/en/security-storage-buckets) and [Gradio](https://www.gradio.app/).
+The workshop received an average rating of 4.65 out of 5. Attendees highlighted what worked well: the exercises with real data, the DuckDB and Hugging Face content, the preparation of the speaker and host, the organization and the food.
 
 ## Thanks and Where Next?
 
-Thank you to [Pratik Patel](https://www.linkedin.com/in/prpatel/) for preparing and leading the workshop, and to everyone who attended.
+Thank you to [Pratik Patel](https://www.linkedin.com/in/prpatel/) and Hugging Face for preparing and leading the workshop, and to everyone who attended.
 
-This was the first DuckDB User Group Workshop, and we want to run more of them. If your company or community wants to co-organize a DuckDB User Group workshop or meetup, send us a request at [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com). Tell us where you are, what topic you have in mind and what you can offer, such as a venue, a speaker or catering.
+**This was the first workshop run by the DuckDB User Group, and we want to run more of them. Join the [DuckDB User Group on Meetup](https://www.meetup.com/duckdb/) to stay updated on future workshops and meetups. If your company or community wants to co-organize a DuckDB User Group workshop or meetup, send us a request at [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com). Tell us where you are, what topic you have in mind and what you can offer or need to make it happen, such as a venue, a speaker or catering.**
