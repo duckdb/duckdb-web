@@ -31,12 +31,10 @@ docs:
   extended_description: |
     This extension is a tiny utility to choose a file interactively.
 
-extension_star_count: {
-  "message": "Server Error"
-}
-extension_star_count_pretty: n/a
-extension_download_count: 935
-extension_download_count_pretty: 935
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 952
+extension_download_count_pretty: 952
 image: '/images/community_extensions/social_preview/preview_community_extension_file_dialog.png'
 layout: community_extension_doc
 ---
@@ -46,15 +44,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
