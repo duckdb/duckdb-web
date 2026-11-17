@@ -6,16 +6,20 @@
 #                The newest release that offers a client gets install commands without a version pin.
 # aliases:       legacy values of the installation page's `?version=` URL parameter
 # winget:        the CLI is published on winget
+# pypi:          the CLI is published on PyPI as duckdb-cli
 
 - version: "2.0"
   config_prefix: latest
   aliases: [preview]
+  pypi: true
 
 - version: "1.5"
   config_prefix: maintained
   aliases: [current]
   winget: true
+  pypi: true
 
 - version: "1.4"
   config_prefix: old_lts
   aliases: [lts]
+  pypi: true

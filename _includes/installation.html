@@ -111,6 +111,18 @@ The newest release offering a client gets unversioned install commands, older on
 <h4>Direct Download</h4>
 {% include install/downloads.html base=downloads_url artifacts=artifacts.cli.macos %}
 
+{%- if r.pypi %}
+
+<h4>Python Package</h4>
+{% if newest_release -%}
+{% highlight bash %}pip install duckdb-cli{% endhighlight %}
+<p>With <a href="https://docs.astral.sh/uv/">uv</a>, <code>uvx duckdb-cli</code> runs the CLI without installing it.</p>
+{%- else -%}
+{% highlight bash %}pip install duckdb-cli=={{ v_core }}{% endhighlight %}
+<p>With <a href="https://docs.astral.sh/uv/">uv</a>, <code>uvx duckdb-cli@{{ v_core }}</code> runs the CLI without installing it.</p>
+{%- endif %}
+{%- endif %}
+
 <h4>Docker Image</h4>
 {% highlight bash %}{{ docker_cmd }}{% endhighlight %}
 
@@ -131,6 +143,18 @@ The newest release offering a client gets unversioned install commands, older on
 {%- if artifacts.cli.linux_musl %}
 <p>musl libc builds (for Alpine Linux):</p>
 {% include install/downloads.html base=downloads_url artifacts=artifacts.cli.linux_musl %}
+{%- endif %}
+
+{%- if r.pypi %}
+
+<h4>Python Package</h4>
+{% if newest_release -%}
+{% highlight bash %}pip install duckdb-cli{% endhighlight %}
+<p>With <a href="https://docs.astral.sh/uv/">uv</a>, <code>uvx duckdb-cli</code> runs the CLI without installing it.</p>
+{%- else -%}
+{% highlight bash %}pip install duckdb-cli=={{ v_core }}{% endhighlight %}
+<p>With <a href="https://docs.astral.sh/uv/">uv</a>, <code>uvx duckdb-cli@{{ v_core }}</code> runs the CLI without installing it.</p>
+{%- endif %}
 {%- endif %}
 
 <h4>Docker Image</h4>
@@ -157,6 +181,17 @@ The newest release offering a client gets unversioned install commands, older on
 
 <h4>Package Manager</h4>
 {% highlight bash %}winget install DuckDB.cli --version {{ v_core }}{% endhighlight %}
+{%- endif %}
+{%- if r.pypi %}
+
+<h4>Python Package</h4>
+{% if newest_release -%}
+{% highlight bash %}pip install duckdb-cli{% endhighlight %}
+<p>With <a href="https://docs.astral.sh/uv/">uv</a>, <code>uvx duckdb-cli</code> runs the CLI without installing it.</p>
+{%- else -%}
+{% highlight bash %}pip install duckdb-cli=={{ v_core }}{% endhighlight %}
+<p>With <a href="https://docs.astral.sh/uv/">uv</a>, <code>uvx duckdb-cli@{{ v_core }}</code> runs the CLI without installing it.</p>
+{%- endif %}
 {%- endif %}
 
 <h4>Docker Image (for WSL2)</h4>
