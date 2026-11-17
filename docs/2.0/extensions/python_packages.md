@@ -13,14 +13,14 @@ The DuckDB command line client and every core extension are available as Python 
 
 The package `duckdb-cli` installs the `duckdb` command. Each core extension is a package `duckdb-core-ext-⟨name⟩`{:.language-sql .highlight}, and `duckdb-cli` declares one extra per extension, so an extension is one more name in the install command:
 
-```batch
+```bash
 pip install "duckdb-cli[httpfs,spatial]==2.0.0"
 duckdb -c "LOAD httpfs; LOAD spatial;"
 ```
 
 The extension packages carry the DuckDB version they are built for, and the extras pin them to the same version as the CLI. An extension built for one DuckDB version does not load in another, so keep the versions equal when you install packages one by one:
 
-```batch
+```bash
 pip install "duckdb-cli==2.0.0" "duckdb-core-ext-httpfs==2.0.0"
 ```
 
@@ -63,7 +63,7 @@ A wheel changes nothing about DuckDB's signature check: DuckDB loads an extensio
 
 The tool that builds the core extension packages is published as [`duckdb-extension-wheel`](https://pypi.org/project/duckdb-extension-wheel/) for any extension author. It reads the platform, the DuckDB version and the ABI type from the extension binary's metadata footer and takes from you what the binary cannot say: the project name, the wheel version, and the dependencies.
 
-```batch
+```bash
 pip install duckdb-extension-wheel
 duckdb-extension-wheel build --name acme-duckdb-geo --version 0.3.1 \
     --requires "duckdb-cli==2.0.0" \
