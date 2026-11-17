@@ -7,7 +7,7 @@ thumb: "/images/events/thumbs/jfall-2026.svg"
 image: "/images/events/thumbs/jfall-2026.png"
 excerpt: ""
 tag: talk
-category: community
+category: core
 venue: "J-Fall 2026"
 redirect_from:
 - /events/2026/11/12/analytical-java-with-duckdb/
