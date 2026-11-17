@@ -15,7 +15,7 @@ Beyond the standard JDBC `ResultSet`, the DuckDB driver can hand results to [Apa
 
 ## Arrow Methods
 
-The DuckDB result set integrates with [Apache Arrow](https://arrow.apache.org/) through the [Java Arrow bindings](https://arrow.apache.org/docs/java/). A `DuckDBResultSet` can export its rows as an Arrow stream for consumption by Arrow-based tools, and an Arrow stream produced elsewhere can be registered on a connection and queried as a DuckDB table. Refer to the [API Reference](https://javadoc.io/doc/org.duckdb/duckdb_jdbc/latest/org/duckdb/DuckDBResultSet.html#arrowExportStream(java.lang.Object,long)) for the type signatures.
+The DuckDB result set integrates with [Apache Arrow](https://arrow.apache.org/) through the [Java Arrow bindings](https://arrow.apache.org/java/current/). A `DuckDBResultSet` can export its rows as an Arrow stream for consumption by Arrow-based tools, and an Arrow stream produced elsewhere can be registered on a connection and queried as a DuckDB table. Refer to the [API Reference](https://javadoc.io/doc/org.duckdb/duckdb_jdbc/latest/org/duckdb/DuckDBResultSet.html#arrowExportStream(java.lang.Object,long)) for the type signatures.
 
 ### Arrow Export
 
