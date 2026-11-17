@@ -30,7 +30,7 @@ The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific
 
 The CLI is also a Python package, for environments that get their software through pip:
 
-```bash
+```batch
 pip install duckdb-cli
 duckdb
 ```
