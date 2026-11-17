@@ -22,4 +22,3 @@
 - version: "1.4"
   config_prefix: old_lts
   aliases: [lts]
-  pypi: true
