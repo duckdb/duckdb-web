@@ -100,7 +100,12 @@ The newest release offering a client gets unversioned install commands, older on
 {%- comment -%} CLI {%- endcomment -%}
 {%- capture docs -%}{% include install/docs_url.html release=release_version client="cli" %}{%- endcapture -%}
 {%- capture curl_cmd -%}curl https://install.duckdb.org | {% unless newest_release %}DUCKDB_VERSION={{ v_core }} {% endunless %}bash{%- endcapture -%}
-{%- capture powershell_cmd -%}powershell -NoExit -ExecutionPolicy Bypass -Command "{% unless newest_release %}$env:DUCKDB_VERSION = '{{ v_core }}'; {% endunless %}irm https://install.duckdb.org/install.ps1 | iex"{%- endcapture %}
+{%- capture powershell_cmd -%}powershell -NoExit -ExecutionPolicy Bypass -Command "{% unless newest_release %}$env:DUCKDB_VERSION = '{{ v_core }}'; {% endunless %}irm https://install.duckdb.org/install.ps1 | iex"{%- endcapture -%}
+{%- capture pip_cmd -%}pip install duckdb-cli{% unless newest_release %}=={{ v_core }}{% endunless %}{%- endcapture -%}
+{%- capture pip_section -%}{% if r.pip_cli %}
+<h4>Python Package Manager</h4>
+{% highlight bash %}{{ pip_cmd }}{% endhighlight %}
+{% endif %}{%- endcapture %}
 
 <div data-release="{{ release_version }}" data-platform="macos" data-environment="cli" data-label="{{ v_core }}" data-docs="{{ docs }}">
 
@@ -110,6 +115,7 @@ The newest release offering a client gets unversioned install commands, older on
 
 <h4>Direct Download</h4>
 {% include install/downloads.html base=downloads_url artifacts=artifacts.cli.macos %}
+{{ pip_section }}
 
 <h4>Docker Image</h4>
 {% highlight bash %}{{ docker_cmd }}{% endhighlight %}
@@ -132,6 +138,7 @@ The newest release offering a client gets unversioned install commands, older on
 <p>musl libc builds (for Alpine Linux):</p>
 {% include install/downloads.html base=downloads_url artifacts=artifacts.cli.linux_musl %}
 {%- endif %}
+{{ pip_section }}
 
 <h4>Docker Image</h4>
 {% highlight bash %}{{ docker_cmd }}{% endhighlight %}
@@ -158,6 +165,7 @@ The newest release offering a client gets unversioned install commands, older on
 <h4>Package Manager</h4>
 {% highlight bash %}winget install DuckDB.cli --version {{ v_core }}{% endhighlight %}
 {%- endif %}
+{{ pip_section }}
 
 <h4>Docker Image (for WSL2)</h4>
 {% highlight bash %}{{ docker_cmd }}{% endhighlight %}
