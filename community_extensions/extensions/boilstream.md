@@ -73,8 +73,8 @@ docs:
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 868
-extension_download_count_pretty: 868
+extension_download_count: 882
+extension_download_count_pretty: 882
 image: '/images/community_extensions/social_preview/preview_community_extension_boilstream.png'
 layout: community_extension_doc
 ---
@@ -84,15 +84,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -239,11 +239,11 @@ This extension does not add any types.
 | quack_debug_emit_delay_ms                | DEBUG SETTING: max random delay in ms before the fetch collector publishes a batch, stressing out-of-order emission                                                                                                                                                                                                                                                                                                                                                                                                                                          | UBIGINT    | GLOBAL | []      | 0                                    |
 | quack_debug_fetch_delay_ms               | DEBUG SETTING: max random delay in ms before a FETCH response is published, stressing out-of-order batch arrival                                                                                                                                                                                                                                                                                                                                                                                                                                             | UBIGINT    | GLOBAL | []      | 0                                    |
 | quack_debug_send_delay_ms                | DEBUG SETTING: max random delay in ms before a SEND_DATA request goes out, stressing out-of-order batch arrival on the server                                                                                                                                                                                                                                                                                                                                                                                                                                | UBIGINT    | GLOBAL | []      | 0                                    |
-| quack_default_client_id                  | client_id used when ATTACH / quack_query omit one; precomputed at load from $QUACK_CLIENT_ID (empty opts out) or a random per-instance id. Set to '' to opt out.                                                                                                                                                                                                                                                                                                                                                                                             | VARCHAR    | GLOBAL | []      | 47761d47-326b-45ef-bc9b-8a21cf10db50 |
+| quack_default_client_id                  | client_id used when ATTACH / quack_query omit one; precomputed at load from $QUACK_CLIENT_ID (empty opts out) or a random per-instance id. Set to '' to opt out.                                                                                                                                                                                                                                                                                                                                                                                             | VARCHAR    | GLOBAL | []      | f14393e5-a130-4d7d-b45a-33ee004248eb |
 | quack_default_heartbeat_timeout          | Heartbeat lease timeout in seconds requested by clients when ATTACH / quack_query omit heartbeat_timeout                                                                                                                                                                                                                                                                                                                                                                                                                                                     | UBIGINT    | GLOBAL | []      | 60                                   |
 | quack_enable_reconnects                  | Enable reconnect support (clients acknowledge results, the server caches the last result until acknowledged)                                                                                                                                                                                                                                                                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      | false                                |
 | quack_fetch_read_ahead                   | FETCH requests kept in flight ahead of the scan (0 = number of async threads)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | UBIGINT    | GLOBAL | []      | 0                                    |
-| quack_loaded_at_us                       | Epoch microseconds at extension load                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | BIGINT     | GLOBAL | []      | 1794853110398208                     |
+| quack_loaded_at_us                       | Epoch microseconds at extension load                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | BIGINT     | GLOBAL | []      | 1794903544130651                     |
 | quack_prepare_inline_rows                | Rows returned inline in the PREPARE response before the remainder is left to FETCH; drains whole batches, so it may overshoot to a batch boundary                                                                                                                                                                                                                                                                                                                                                                                                            | UBIGINT    | GLOBAL | []      | 24576                                |
 | quack_rebalance_buffer_bytes             | Pending (unstamped) bytes the batch rebalancer buffers before gating non-minimum producers (0 = automatic, memory-manager governed)                                                                                                                                                                                                                                                                                                                                                                                                                          | UBIGINT    | GLOBAL | []      | 0                                    |
 | quack_result_ttl                         | Seconds an idle cached result is kept before it is dropped (0 = never)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | UBIGINT    | GLOBAL | []      | 3600                                 |
