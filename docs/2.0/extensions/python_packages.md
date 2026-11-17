@@ -55,6 +55,10 @@ Each package also installs a small Python module, `duckdb_core_ext_⟨name⟩`{:
 
 * Nothing in a wheel tells pip which DuckDB the user runs. A wheel installed for another DuckDB version than the one in use is not found by `LOAD`, or refused.
 
+## Signatures
+
+A wheel changes nothing about DuckDB's signature check: DuckDB loads an extension from the pip directory under the same rules as from anywhere else. An extension signed with a core key, which is every binary on extensions.duckdb.org, loads as is. A [community extension]({% link docs/2.0/extensions/community_extensions.md %}) loads when the install information file described below is beside it. An extension that nobody signed, for example one you built yourself and did not submit to the community repository, loads only when the user allows unsigned extensions, with `duckdb -unsigned` or `SET allow_unsigned_extensions = true`; the package installs either way, the engine refuses the load. See [Extension Signing]({% link docs/2.0/extensions/extension_distribution.md %}#extensions-signing).
+
 ## Packaging Your Own Extension
 
 The tool that builds the core extension packages is published as [`duckdb-extension-wheel`](https://pypi.org/project/duckdb-extension-wheel/) for any extension author. It reads the platform, the DuckDB version and the ABI type from the extension binary's metadata footer and takes from you what the binary cannot say: the project name, the wheel version, and the dependencies.
