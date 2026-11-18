@@ -233,8 +233,8 @@ docs:
 
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 849
-extension_download_count_pretty: 849
+extension_download_count: 830
+extension_download_count_pretty: 830
 image: '/images/community_extensions/social_preview/preview_community_extension_lpts.png'
 layout: community_extension_doc
 ---

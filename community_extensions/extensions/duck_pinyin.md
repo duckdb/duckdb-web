@@ -48,8 +48,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 605
-extension_download_count_pretty: 605
+extension_download_count: 592
+extension_download_count_pretty: 592
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_pinyin.png'
 layout: community_extension_doc
 ---
