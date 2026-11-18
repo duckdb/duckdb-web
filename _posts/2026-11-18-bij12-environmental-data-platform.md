@@ -4,6 +4,7 @@ title: "Preserving Nature Data for the Next Century With DuckDB and Open Formats
 authors:
   - Geertjan Wielenga
   - Tim Cox
+  - Bart Zwemmer
 thumb: /images/blog/thumbs/bij12-environmental-platform.svg
 image: /images/blog/thumbs/bij12-environmental-platform.png
 excerpt: "BIJ12 is building a long-lived environmental data platform in the Netherlands that uses DuckDB and GeoParquet to make fragmented nature-monitoring data discoverable and queryable across decades, without tying its preservation to any single database vendor."
