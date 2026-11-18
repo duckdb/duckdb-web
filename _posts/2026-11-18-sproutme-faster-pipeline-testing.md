@@ -36,7 +36,6 @@ When the local Dagster dev server starts, it points the pipeline at a DuckDB fil
 import os
 from pathlib import Path
 
-
 def use_local_duckdb(warehouse: Path) -> None:
     “””Point the local pipeline at a DuckDB file instead of BigQuery.”””
     warehouse.parent.mkdir(parents=True, exist_ok=True)
@@ -69,7 +68,6 @@ In CI, dbt build runs with the duckdb target over the whole project, seeded from
 import os
 import subprocess
 from pathlib import Path
-
 
 def build_test_warehouse(db_path: Path, project_dir: Path) -> None:
     """dbt build of the whole project on DuckDB, after the committed fixtures are loaded."""
