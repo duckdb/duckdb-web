@@ -21,7 +21,7 @@ repo:
 
 extension_star_count: 20
 extension_star_count_pretty: 20
-extension_download_count: 3863
+extension_download_count: 3932
 extension_download_count_pretty: 3.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_statistics.png'
 layout: community_extension_doc
