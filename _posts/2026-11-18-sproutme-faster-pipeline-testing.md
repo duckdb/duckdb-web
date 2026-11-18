@@ -53,7 +53,9 @@ For Archit, the main gain is faster debugging. Instead of spending hours reprodu
 
 ## What Comes Next
 
-SproutMe has used DuckDB for only a month or two, but the results have made the team curious about going further. Archit is open to using DuckDB in production if more testing and benchmarking support it. He also points out that moving a production workload that serves live customers needs its own evaluation. For now, the change is limited to development, and the production warehouse stays the same.
+SproutMe has used DuckDB for only a month or two, but the results have made the team curious about going further. Archit is open to using DuckDB in production if more testing and benchmarking support it. 
+
+He also points out that moving a production workload that serves live customers needs its own evaluation. For now, the change is limited to development, and the production warehouse stays the same.
 
 ## The Takeaway
 
