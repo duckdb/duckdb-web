@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: oracle
   description: Connect DuckDB directly to Oracle databases for reading and writing tables, with catalog integration, pushdown, spatial geometry, and vector support
-  version: 0.3.1
+  version: 0.3.2
   language: C++
   build: cmake
   license: MIT
@@ -18,8 +18,8 @@ extension:
 
 repo:
   github: cofin/duckdb-oracle
-  ref: fa61951bdd3edf18bb6bf8e7169255d5ca6de635
-  variegata: 79a0fe896398d0e12533241bf101d66e5650e6b6
+  ref: d872f52f0a46c38c5f17b29b6e06f4a01eef0426
+  variegata: 30e2c0e4588f7dbff54804666d773e2012ee2c90
 
 docs:
   hello_world: |
@@ -67,8 +67,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 736
-extension_download_count_pretty: 736
+extension_download_count: 751
+extension_download_count_pretty: 751
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle.png'
 layout: community_extension_doc
 ---
@@ -78,15 +78,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -135,22 +135,23 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name             |                              description                              | input_type | scope  | aliases |             typed_value              |
-|------------------------------|-----------------------------------------------------------------------|------------|--------|---------|--------------------------------------|
-| oracle_array_size            | Rows fetched per OCI iteration (used for tuning)                      | UBIGINT    | GLOBAL | []      | 256                                  |
-| oracle_call_timeout_ms       | OCI call timeout in milliseconds (0=disabled)                         | UBIGINT    | GLOBAL | []      | 30000                                |
-| oracle_connection_cache      | Reuse Oracle connections when possible                                | BOOLEAN    | GLOBAL | []      | true                                 |
-| oracle_connection_limit      | Maximum cached Oracle connections                                     | UBIGINT    | GLOBAL | []      | 8                                    |
-| oracle_debug_show_queries    | Log generated Oracle SQL for debugging                                | BOOLEAN    | GLOBAL | []      | false                                |
-| oracle_enable_pushdown       | Enable Oracle filter/projection pushdown                              | BOOLEAN    | GLOBAL | []      | true                                 |
-| oracle_enable_spatial_types  | Map SDO_GEOMETRY to GEOMETRY type (requires spatial extension)        | BOOLEAN    | GLOBAL | []      | true                                 |
-| oracle_lazy_schema_loading   | Load only current schema by default                                   | BOOLEAN    | GLOBAL | []      | true                                 |
-| oracle_metadata_object_types | Object types to enumerate (TABLE,VIEW,SYNONYM,MATERIALIZED VIEW)      | VARCHAR    | GLOBAL | []      | TABLE,VIEW,SYNONYM,MATERIALIZED VIEW |
-| oracle_metadata_result_limit | Maximum rows returned from metadata queries (0=default bounded limit) | UBIGINT    | GLOBAL | []      | 10000                                |
-| oracle_prefetch_memory       | OCI prefetch memory (bytes, 0=auto)                                   | UBIGINT    | GLOBAL | []      | 0                                    |
-| oracle_prefetch_rows         | OCI prefetch row count                                                | UBIGINT    | GLOBAL | []      | 1024                                 |
-| oracle_stmt_cache_size       | OCI statement cache size per connection (0=disabled)                  | UBIGINT    | GLOBAL | []      | 20                                   |
-| oracle_use_current_schema    | Resolve unqualified table names to current schema first               | BOOLEAN    | GLOBAL | []      | true                                 |
-| temp_directory               | Set the directory to which temporary files are written.               | VARCHAR    | GLOBAL | []      | post.db.tmp                          |
+|             name             |                                             description                                             | input_type | scope  | aliases |             typed_value              |
+|------------------------------|-----------------------------------------------------------------------------------------------------|------------|--------|---------|--------------------------------------|
+| oracle_array_size            | Rows fetched per OCI iteration (used for tuning)                                                    | UBIGINT    | GLOBAL | []      | 256                                  |
+| oracle_call_timeout_ms       | OCI call timeout in milliseconds (0=disabled)                                                       | UBIGINT    | GLOBAL | []      | 30000                                |
+| oracle_connection_cache      | Reuse Oracle connections when possible                                                              | BOOLEAN    | GLOBAL | []      | true                                 |
+| oracle_connection_limit      | Maximum cached Oracle connections                                                                   | UBIGINT    | GLOBAL | []      | 8                                    |
+| oracle_debug_show_queries    | Log generated Oracle SQL for debugging                                                              | BOOLEAN    | GLOBAL | []      | false                                |
+| oracle_enable_pushdown       | Enable Oracle filter/projection pushdown                                                            | BOOLEAN    | GLOBAL | []      | true                                 |
+| oracle_enable_spatial_types  | Map SDO_GEOMETRY to GEOMETRY type (requires spatial extension)                                      | BOOLEAN    | GLOBAL | []      | true                                 |
+| oracle_lazy_schema_loading   | Load only current schema by default                                                                 | BOOLEAN    | GLOBAL | []      | true                                 |
+| oracle_metadata_object_types | Object types to enumerate (TABLE,VIEW,SYNONYM,MATERIALIZED VIEW)                                    | VARCHAR    | GLOBAL | []      | TABLE,VIEW,SYNONYM,MATERIALIZED VIEW |
+| oracle_metadata_result_limit | Maximum rows returned from metadata queries (0=default bounded limit)                               | UBIGINT    | GLOBAL | []      | 10000                                |
+| oracle_number_as             | DuckDB target type for unconstrained Oracle NUMBER columns ('DOUBLE', 'VARCHAR', or 'DECIMAL(p,s)') | VARCHAR    | GLOBAL | []      | DOUBLE                               |
+| oracle_prefetch_memory       | OCI prefetch memory (bytes, 0=auto)                                                                 | UBIGINT    | GLOBAL | []      | 0                                    |
+| oracle_prefetch_rows         | OCI prefetch row count                                                                              | UBIGINT    | GLOBAL | []      | 1024                                 |
+| oracle_stmt_cache_size       | OCI statement cache size per connection (0=disabled)                                                | UBIGINT    | GLOBAL | []      | 20                                   |
+| oracle_use_current_schema    | Resolve unqualified table names to current schema first                                             | BOOLEAN    | GLOBAL | []      | true                                 |
+| temp_directory               | Set the directory to which temporary files are written.                                             | VARCHAR    | GLOBAL | []      | post.db.tmp                          |
 
 

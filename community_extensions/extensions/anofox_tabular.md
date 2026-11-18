@@ -7,7 +7,7 @@ excerpt: |
 
 extension:
   name: anofox_tabular
-  version: 2026.11.02
+  version: 2026.11.13
   description: A DuckDB extension for data quality, validation and anomaly detection in SQL - 17 data quality checks (volume, nulls, freshness, schema drift, regex and value-set compliance, duplicates, referential integrity, time-aware baselines) with a table-driven check-suite runner, column profiling and correlations including nested types, hash- and join-based table diffing, anomaly detection with Isolation Forest (categorical, Extended IF, SCiForest), DBSCAN and explainable OutlierTree, PII detection and masking (22 types including IBAN, credit cards, API keys and NER-based names, organizations and locations), email validation with DNS/SMTP checks, international address parsing (libpostal), phone number validation (libphonenumber), EU VAT validation (28 countries), and currency-aware money arithmetic.
   language: C++
   build: cmake
@@ -17,8 +17,8 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/anofox-tabular
-  ref: 280cca399195c54a68eb6c6a917c15998c34107e
-  variegata: 280cca399195c54a68eb6c6a917c15998c34107e
+  ref: f61f4f6d4f5f50bbf6f20b8a433b8d4acdda42b1
+  variegata: f61f4f6d4f5f50bbf6f20b8a433b8d4acdda42b1
 docs:
   hello_world: |
     -- Validate contact data
@@ -49,9 +49,13 @@ docs:
     `anofox_tab_email_is_valid`). Documentation:
     https://github.com/DataZooDE/anofox-tabular/blob/main/docs/README.md
 
+    For Claude Code, the repository is also a plugin with skills for each module:
+    `/plugin marketplace add DataZooDE/anofox-tabular`, then
+    `/plugin install anofox-tabular@anofox-tabular`.
+
 extension_star_count: 22
 extension_star_count_pretty: 22
-extension_download_count: 1165
+extension_download_count: 1175
 extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabular.png'
 layout: community_extension_doc
@@ -62,15 +66,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

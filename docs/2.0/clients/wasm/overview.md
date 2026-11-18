@@ -94,7 +94,7 @@ Because DuckDB understands file formats such as Parquet, it reads only the bytes
 ## Limitations
 
 * By default, the WebAssembly client only uses a single thread. Multithreading is available but still experimental.
-* The WebAssembly client has a limited amount of memory available. [WebAssembly limits the amount of available memory to 4 GB](https://v8.dev/blog/4gb-wasm-memory) and browsers may impose even stricter limits.
+* The WebAssembly client has a limited amount of memory available. [WebAssembly limits the amount of available memory to 4 GB](https://v8.dev/blog/4gb-wasm-memory) and browsers may impose even stricter limits. To make larger-than-memory queries practical, DuckDB-Wasm now spills intermediate data that does not fit in memory to a temporary directory by default (see [Out of Memory]({% link docs/2.0/clients/wasm/troubleshoot.md %}#out-of-memory)).
 
 See [Troubleshoot]({% link docs/2.0/clients/wasm/troubleshoot.md %}) for workarounds when you run into these limits.
 

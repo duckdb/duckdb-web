@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: firebird
   description: The first Firebird extension in the DuckDB Community Extensions registry. Federated read-only access to Firebird (3.0/4.0/5.0) databases from DuckDB, with projection + filter pushdown, INT128 / DECIMAL(38) / TIMESTAMP_TZ support, native ATTACH, and CHARACTER SET NONE handling (default win1252; strict / iso8859_1 / blob also available) with filter-pushdown correctness on transcoded columns.
-  version: 1.3.1
+  version: 1.4.0
   language: C++
   build: cmake
   license: MIT
@@ -28,8 +28,8 @@ extension:
 
 repo:
   github: flozer/duckdb-firebird
-  # v1.3.1 (immutable commit pin)
-  ref: 46d034ff7d377d257476f00ea846fdaf3333b57b
+  # v1.4.0 (immutable commit pin)
+  ref: 5657faea6b74ba9ff19db7d6fbc822e46e41ecc2
 
 docs:
   hello_world: |
@@ -125,6 +125,14 @@ docs:
       normalized `NOT IN` expression, restoring pushdown, residual-filter
       telemetry, and `firebird_unpushed_mode` guards without changing
       default behavior.
+    - Correctness and platform fixes (v1.4.0): partitioned scans read one
+      shared Firebird snapshot (Firebird 4+) instead of per-partition
+      read-committed transactions, with a new `snapshot_mode` column in
+      `firebird_last_query()` / `firebird_query_log()`; partitioned scans
+      no longer skip rows outside the cached PK range; `INT128`, `DECFLOAT`,
+      time-zone types and `BOOLEAN` read correctly from servers with
+      `DataTypeCompatibility` set; and the Windows client library loads its
+      dependent DLLs from its own folder.
     - Row estimate and scan advisories (v1.1.0): `firebird_profile_table`
       reports `estimated_rows` (cheap PK-range upper bound, or an opt-in
       exact `COUNT(*)` via `exact_row_count=true`) and structured
@@ -212,8 +220,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 2797
-extension_download_count_pretty: 2.8k
+extension_download_count: 3018
+extension_download_count_pretty: 3.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_firebird.png'
 layout: community_extension_doc
 ---
@@ -223,15 +231,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

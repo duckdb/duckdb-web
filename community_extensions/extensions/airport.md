@@ -27,10 +27,10 @@ repo:
   ref: d6aed16bf9a1787c26602f146dd92debd939f33e
   variegata: dc4208dc3c544169def364f179771e8ef9e7d444
 
-extension_star_count: 351
-extension_star_count_pretty: 351
-extension_download_count: 1358
-extension_download_count_pretty: 1.4k
+extension_star_count: 352
+extension_star_count_pretty: 352
+extension_download_count: 1348
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_airport.png'
 layout: community_extension_doc
 ---
@@ -40,15 +40,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

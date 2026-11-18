@@ -7,7 +7,7 @@ excerpt: |
 
 extension:
   name: gdrive
-  version: 2026.11.13
+  version: 2026.11.14
   description: Google Drive in SQL -- files and Sheets (gdrive://, browser links; read and write a Sheet by tab or range), Drive's metadata, locks, versions, change feeds and permissions
   language: C++
   build: cmake
@@ -27,12 +27,12 @@ extension:
 
 repo:
   github: DataZooDE/duckdb-gdrive
-  ref: eaa149e400b8a00849e5297e7f022426f4e0341f
+  ref: 11e3c6a4a11b8ad39e10a88d6bfb4167bc624093
   # ref builds against DuckDB 2.0 and variegata against v1.5.6
   # (community-extensions scripts/build.py); a missing key falls back to ref.
   # One commit serves both lines (duckdb-compat), so at release both are the
   # same tagged SHA. No andium key: DuckDB 1.4.x is not supported.
-  variegata: eaa149e400b8a00849e5297e7f022426f4e0341f
+  variegata: 11e3c6a4a11b8ad39e10a88d6bfb4167bc624093
 
 docs:
   hello_world: |
@@ -107,7 +107,8 @@ docs:
     Native Sheets read through the ordinary readers as CSV, and
     `read_sheet_range` reads any tab or A1 range with typed columns.
     `COPY ... (FORMAT sheet_range, RANGE 'Tab!A1')` writes into a tab in place
-    through the Sheets API (`OVERWRITE` / `APPEND`; a missing tab is created),
+    through the Sheets API (`OVERWRITE` / `APPEND`; a missing tab, or a missing
+    Sheet at a `gdrive://` path, is created),
     never replacing the spreadsheet. Every write is retry-safe: a lost reply
     never leaves a duplicate file or folder behind.
 
@@ -148,8 +149,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 851
-extension_download_count_pretty: 851
+extension_download_count: 862
+extension_download_count_pretty: 862
 image: '/images/community_extensions/social_preview/preview_community_extension_gdrive.png'
 layout: community_extension_doc
 ---
@@ -159,15 +160,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

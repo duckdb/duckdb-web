@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: tessera
   description: Fast join-aggregates (pair counts and sums of self-joins and two-relation joins) over skewed sparse relations, with a sparse product and a CPU matrix accelerator
-  version: 1.4.1
+  version: 1.4.4
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: GyuyeongKim/Tessera-public
-  ref: fc8259cdeebd91b5f4c9647ecb0a55819bebf4ef
+  ref: 2557a25a7088416eb6faeaa06d133ef9581a7c96
 
 docs:
   hello_world: |
@@ -48,8 +48,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 565
-extension_download_count_pretty: 565
+extension_download_count: 582
+extension_download_count_pretty: 582
 image: '/images/community_extensions/social_preview/preview_community_extension_tessera.png'
 layout: community_extension_doc
 ---
@@ -59,15 +59,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: markdown
   description: Read, analyze, and write Markdown files with block-level document representation and inline element support
-  version: 1.9.9
+  version: 1.10.0
   language: C++
   build: cmake
   license: MIT
@@ -18,33 +18,40 @@ extension:
 repo:
   github: teaguesterling/duckdb_markdown
   # andium (DuckDB v1.4.5 track) intentionally left at its prior commit. As of
-  # v1.9.9, ref is a DuckDB v2.0.0 tree (submodule d54cbbe3df).
+  # v1.9.9, ref is a DuckDB v2.0.0 tree; 1.10.0 keeps that submodule (d54cbbe3df).
   andium: c9e1a4d3b98a814c86295ecb2ed760be286242ba
-  ref: 2faa04ab53709cd4dba19bcecc51879c904594de
+  ref: f0d469432cbf9f8128d8087969a18fb8aa26c391
   # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
   # present and to `ref` otherwise, and unlike ref_next it has no skip branch -- so
   # once `ref` is 2.0-only a v1.5.6 build would fail rather than be skipped. Advance
   # only to a commit v1.5.6 can still build.
   #
-  # HELD AT 1.9.8 FOR 1.9.9, deliberately. markdown retired its v1.5.6 CI leg in
-  # v1.9.9 (duckdb_markdown#106), so no v1.5.6 build of `ref` has been measured.
-  # v1.5.6 users stay on 1.9.8.
+  # HELD AT 1.9.8 THROUGH 1.10.0, deliberately. markdown retired its v1.5.6 CI leg
+  # in v1.9.9 (duckdb_markdown#106), so no v1.5.6 build of `ref` has been measured
+  # since. v1.5.6 users stay on 1.9.8.
   variegata: 6fc7013de640191ea5248897df3b60a7bc07db67
-  # ref_next is what makes the PRERELEASE leg actually build against DuckDB
-  # v2.0. Without it build_next.yml prints "Skipping prerelease validation" and
-  # the PR passes green having verified nothing on that line. A STALE ref_next is
-  # worse than an absent one: it validates the PREVIOUS release against the next
-  # line while reporting green, so it moves with ref on every release.
+  # ref_next used to drive the PRERELEASE leg (build_next.yml) against the line ahead
+  # of the release one. THAT LEG IS NOW DISABLED UPSTREAM: test_against_latest carries
+  # `if: false` (community-extensions 2413d2b8, "disable build_next"), and build.yml
+  # defaults DUCKDB_VERSION to v2.0.0 -- the release line IS the 2.0 line, so there is
+  # nothing ahead of it to validate. Measured on this PR: no next-line job ran and
+  # test_against_latest reported `skipping`.
   #
-  # Same commit as ref. MEASURED for 1.9.9 on this exact commit, in markdown's
-  # post-merge run 43061357283 against the v2.0 line: all eight next-line legs build.
-  # Tests: linux_amd64 and osx_arm64 61 passed, 0 skipped; windows_amd64 and mingw
-  # 59 passed, 2 skipped (require notwindows). linux_arm64 and the three wasm legs
-  # build only and print no test line. The run is red for two reasons outside
-  # markdown: Format Check never ran (apt could not resolve the Ubuntu mirror; the
-  # changed sources pass clang-format 11.0.1 locally), and the DuckDB-main canary's
-  # windows_amd64 fails compiling DuckDB's own src/common/types.cpp.
-  ref_next: 2faa04ab53709cd4dba19bcecc51879c904594de
+  # Kept equal to `ref` regardless, because a stale ref_next is worse than an absent
+  # one: were the leg re-enabled, it would validate the PREVIOUS release while
+  # reporting green.
+  #
+  # markdown's own CI covers that ground in the meantime. MEASURED for 1.10.0 on this
+  # exact commit, in post-merge run 44013019970: the v2.0 next line and the release
+  # line each build all eight arches, with linux_amd64 and osx_arm64 at 65 test files
+  # passed, 0 skipped, and windows_amd64 and mingw at 63 passed, 2 skipped (require
+  # notwindows); linux_arm64 and the three wasm legs build only and print no test line.
+  #
+  # That run's own conclusion is `cancelled`, for one reason on neither of those two
+  # lines: the DuckDB-main canary's matrix job was cancelled 18s in, after emitting
+  # its matrices, so its four build legs never ran. DuckDB main is therefore not
+  # exercised for 1.10.0, as it was not for 1.9.9.
+  ref_next: f0d469432cbf9f8128d8087969a18fb8aa26c391
 docs:
   hello_world: |
     -- Load the extension
@@ -135,12 +142,12 @@ docs:
 
     Real-world benchmark: Processing 287 Markdown files (2,699 sections, 1,137 code blocks, 1,174 links) in 603ms.
 
-    Full test suite with 2058 passing assertions across 60 test files.
+    Full test suite: 65 test files, all passing on both the DuckDB v2.0 release line and the v2.0 next line (CI run 44013019970).
 
 extension_star_count: 33
 extension_star_count_pretty: 33
-extension_download_count: 2387
-extension_download_count_pretty: 2.4k
+extension_download_count: 1887
+extension_download_count_pretty: 1.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc
 ---
@@ -150,15 +157,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
