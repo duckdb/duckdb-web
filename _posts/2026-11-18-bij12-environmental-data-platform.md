@@ -3,11 +3,19 @@ layout: post
 title: "Preserving Nature Data for the Next Century With DuckDB and Open Formats"
 authors:
   - Geertjan Wielenga
+  - Tim Cox
 thumb: /images/blog/thumbs/bij12-environmental-platform.svg
 image: /images/blog/thumbs/bij12-environmental-platform.png
 excerpt: "BIJ12 is building a long-lived environmental data platform in the Netherlands that uses DuckDB and GeoParquet to make fragmented nature-monitoring data discoverable and queryable across decades, without tying its preservation to any single database vendor."
-tag: using-duckdb
+tag: case-study
 ---
+
+> Quote
+>
+> We can store data as Parquet files on S3 but still allow SQL access to the data
+>
+> — Bart Zwemmer, data engineer, BIJ12
+{: .quote-large}
 
 In the Netherlands, nature-monitoring data comes from many organizations: the twelve provinces, the Ministry of Defense, [Rijkswaterstaat](https://www.rijkswaterstaat.nl/) (the national water agency), research institutions and conservation groups. Each contributes observations in different formats. Researchers who need to understand ecological changes across years or decades often spend roughly three-quarters of their time just finding and assembling the data they need.
 
@@ -88,7 +96,5 @@ The BIJ12 effort addresses a challenge that extends beyond the Netherlands: **ho
 
 The choice to standardize around DuckDB (and SQL broadly) isn't about loyalty to any product. It's about operational simplicity, future maintainability and the principle that scientific data should outlast the technologies used to collect or process it. That's a strong lesson for any organization stewarding long-lived archives.
 
-Thanks to Bart Zwemmer and [BIJ12](https://www.bij12.nl/) for discussing their work and architecture. If you're building data infrastructure for environmental science, public records or long-term archives, DuckDB's SQL interface and ability to query open file formats can help you design for durability and independence. Learn more about [DuckDB Spatial](https://duckdb.org/docs/extensions/spatial/overview.html) and [GeoParquet](https://duckdb.org/docs/extensions/spatial/overview.html) in the documentation. 
-
-And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com).
+Thanks to Bart Zwemmer and [BIJ12](https://www.bij12.nl/) for discussing their work and architecture. If you're building data infrastructure for environmental science, public records or long-term archives, DuckDB's SQL interface and ability to query open file formats can help you design for durability and independence. Learn more about [DuckDB Spatial](https://duckdb.org/docs/extensions/spatial/overview.html) and [GeoParquet](https://duckdb.org/docs/extensions/spatial/overview.html) in the documentation.
 
