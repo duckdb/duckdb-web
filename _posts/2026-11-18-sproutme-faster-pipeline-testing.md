@@ -30,7 +30,23 @@ The pipeline looks like this:
 3. [dbt](https://www.getdbt.com/) runs the transformations on DuckDB, following a medallion architecture: bronze for raw data, silver for cleaned and standardized data, and gold for the user-facing models.
 4. The same logic runs locally and in CI before any change is deployed.
 
-The transformation stage is where DuckDB saves the most time. **“This is where we are saving a lot of time, the transformation part,”** Archit says. Extraction benefits as well, because Dagster writes directly into DuckDB. The scope matters, though: **“It is part of the local development pipeline.”** Production still runs on BigQuery.
+When the local Dagster dev server starts, it points the pipeline at a DuckDB file through environment variables, and dbt builds into it with the duckdb target. Production stays on BigQuery.
+
+```python
+import os
+from pathlib import Path
+
+
+def use_local_duckdb(warehouse: Path) -> None:
+    “””Point the local pipeline at a DuckDB file instead of BigQuery.”””
+    warehouse.parent.mkdir(parents=True, exist_ok=True)
+    os.environ[“WAREHOUSE”] = “duckdb”
+    os.environ[“DBT_DUCKDB_PATH”] = str(warehouse)
+    # BigQuery compares timestamps in UTC; DuckDB uses the machine’s zone unless told otherwise.
+    os.environ[“TZ”] = “UTC”
+```
+
+The transformation stage is where DuckDB saves the most time. **”This is where we are saving a lot of time, the transformation part,”** Archit says. Extraction benefits as well, because Dagster writes directly into DuckDB. The scope matters, though: **”It is part of the local development pipeline.”** Production still runs on BigQuery.
 
 ## The Numbers
 
@@ -46,6 +62,25 @@ Running the same pipeline on DuckDB shortens the wait between changes. In Sprout
 | Full dbt backfill | 180.2 s | 104.6 s | 42.0% |
 | Daily incremental dbt build | 300.3 s | 120.7 s | 59.8% |
 | Backfill and daily build together | 480.5 s | 225.3 s | 53.1% |
+
+In CI, dbt build runs with the duckdb target over the whole project, seeded from committed fixtures. The integration tests then compare selected models’ output with committed golden files, so a regression fails the build before it reaches main.
+
+```python
+import os
+import subprocess
+from pathlib import Path
+
+
+def build_test_warehouse(db_path: Path, project_dir: Path) -> None:
+    """dbt build of the whole project on DuckDB, after the committed fixtures are loaded."""
+    env = {**os.environ, "DBT_DUCKDB_PATH": str(db_path)}
+    subprocess.run(
+        ["dbt", "build", "--target", "duckdb",
+         "--project-dir", str(project_dir), "--profiles-dir", str(project_dir)],
+        env=env,
+        check=True,
+    )
+```
 
 These results apply to SproutMe’s development and testing workflow. They do not show that one engine is faster in general.
 
