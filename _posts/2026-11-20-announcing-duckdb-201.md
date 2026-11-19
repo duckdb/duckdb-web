@@ -145,9 +145,10 @@ For details, see the [release calendar]({% link release_calendar.md %}#lts-relea
 This post was a short summary of the changes in v2.0.1. As usual, you can find the [full release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.1).
 We would like to thank our contributors for providing detailed issue reports and patches.
 
-We are also grateful to the following people whose reports helped us make DuckDB more robust when reading malformed or corrupted data:
+We are also grateful to the following people whose reports helped us make DuckDB and its extensions more robust and secure:
 
 * [@TristanInSec](https://github.com/TristanInSec) for reporting out-of-bounds reads and a string-length buffer sizing overflow in `DICT_FSST` decompression, and for reporting missing validation of Arrow string offsets.
 * [@zerovulnlabs](https://github.com/zerovulnlabs) for reporting missing page-size validation when reading uncompressed Parquet V2 pages.
+* zz lin for reporting that a malicious server could use `LOAD DATA LOCAL INFILE` requests to read local files through the MySQL extension.
 
 Stay tuned for [future DuckDB releases]({% link release_calendar.md %}), including v2.1.0 in the first half of 2027!
