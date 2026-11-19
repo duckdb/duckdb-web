@@ -186,7 +186,7 @@ Authenticate with a [secret](#authentication-with-secret). The `SET` variables i
 
 Several [Secret Providers]({% link docs/2.0/configuration/secrets_manager.md %}#secret-providers) are available, described below. These rules apply to every provider:
 
-* If you need to define different secrets for different storage accounts, containers, or directories, use the [`SCOPE` configuration]({% link docs/2.0/configuration/secrets_manager.md %}#creating-multiple-secrets-for-the-same-service-type). A scope matches paths by prefix, so end it with a slash (`SCOPE 'az://⟨my_storage_account⟩.blob.core.windows.net/'`{:.language-sql .highlight}) to keep it from matching names that only start the same way. Since v2.0.1, a secret scoped to `⟨directory⟩/` also applies to operations on the directory `⟨directory⟩` itself, e.g., a `COPY ... TO '⟨directory⟩'` with `PER_THREAD_OUTPUT` or `PARTITION_BY`. Before, these operations ran without the secret and failed with `NoAuthenticationInformation`.
+* If you need to define different secrets for different storage accounts, containers, or directories, use the [`SCOPE` configuration]({% link docs/2.0/configuration/secrets_manager.md %}#creating-multiple-secrets-for-the-same-service-type). A scope matches paths by prefix, so end it with a slash (`SCOPE 'az://⟨my_storage_account⟩.blob.core.windows.net/'`{:.language-sql .highlight}) to keep it from matching names that only start the same way.
 * With fully qualified paths, `ACCOUNT_NAME` is optional.
 * For paths that are not fully qualified, the `ENDPOINT` attribute overrides the default endpoint (`blob.core.windows.net` for `az://` and `azure://`, `dfs.core.windows.net` for `abfss://` and `abfs://`).
 
