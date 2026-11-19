@@ -24,7 +24,7 @@ INSTALL AND LOAD azure;
 
 ## Usage
 
-Queries need a [secret](#authentication-with-secret); for a public container, a secret with the storage account name is enough (see the [`CONFIG` provider](#config-provider)). Then you can query Azure storage as follows:
+Queries on private storage need a [secret](#authentication-with-secret). For a public container, a secret with the storage account name is enough (see the [`CONFIG` provider](#config-provider)), and a fully qualified path needs no secret at all. Then you can query Azure storage as follows:
 
 ### Azure Blob Storage
 
@@ -160,7 +160,7 @@ Use the following [configuration options]({% link docs/2.0/configuration/overvie
 
 Since v1.5.4, `azure_read_transfer_chunk_size` and `azure_read_buffer_size` default to 8 MiB (previously 1 MiB).
 
-> Tip On Linux, since v2.0.1, both values of `azure_transport_option_type` use *curl*, and the extension looks for the system's CA bundle in the usual paths (e.g., `/etc/ssl/certs/ca-certificates.crt`), which the bundled *curl* may not find on its own. Before v2.0.1, only `curl` did this: on some distributions, `default` failed with certificate errors such as `Problem with the SSL CA cert (path? access rights?)`, and setting `curl` fixed them.
+> Tip On Linux, since v2.0.1, the `default` value of `azure_transport_option_type` also makes the extension look for the system's CA bundle in the usual paths (e.g., `/etc/ssl/certs/ca-certificates.crt`), which the bundled *curl* may not find on its own. Before v2.0.1, only the `curl` value did this: on some distributions, `default` failed with certificate errors such as `Problem with the SSL CA cert (path? access rights?)`, and setting `curl` fixed them.
 >
 > Setting `azure_transport_option_type` to `curl` also has the following effects:
 >
@@ -256,7 +256,7 @@ CREATE SECRET azure_mi (
 );
 ```
 
-Without an ID, the provider works like `credential_chain`. With several identities and no ID, the Azure SDK decides which one is used, so set an ID.
+Give at most one of the three IDs. Without an ID, the provider uses the machine's default managed identity; unlike `credential_chain`, it does not try other credentials, such as the Azure CLI. With several identities and no ID, the Azure SDK decides which one is used, so set an ID.
 
 #### `SERVICE_PRINCIPAL` Provider
 
@@ -387,21 +387,21 @@ SELECT count(*) FROM 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_
 
 > New The following rules apply to ADLS since DuckDB 2.0.1.
 
-Blob Storage and ADLS match a glob one path component at a time, as the [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/s3api.md %}) does for S3:
+Blob Storage and ADLS match a glob one path component at a time, as the [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/s3api.md %}#globbing) does for S3:
 
-* The pattern is split at each `/`. `*` matches any part of one name, never a `/`. `[abc]` and `[a-z]` match one character of the set, and `[!abc]` one character outside it. `\` makes the next character literal. A path is a glob only if it contains `*`, `[`, or `\`: `?` alone does not make it one, so `⟨path⟩/?.csv` names a file. To match any one character, use a set such as `[a-z0-9]`.
+* The pattern is split at each `/`. `*` matches any part of one name, never a `/`. `[abc]` and `[a-z]` match one character of the set, and `[!abc]` one character outside it. `\` makes the next character literal. A path is a glob only if it contains `*`, `[`, or `\`: `?` alone does not make it one, so `⟨path⟩/?.csv` names a file. In a glob, `?` matches any one character after the first wildcard, but may be taken literally before it; a set such as `[a-z0-9]` matches one character anywhere.
 * `**` as a whole component matches zero or more directories, anywhere in the pattern and any number of times: `⟨path⟩/**` matches every file below `⟨path⟩`, and `⟨path⟩/**/*.csv` every CSV file below it, including those directly in `⟨path⟩`. Within a component, `**` is the same as `*`: `⟨path⟩/**.csv` matches only the CSV files directly in `⟨path⟩`.
-* A glob returns files, never directories. Names that start with a `.` match like any other name.
+* On ADLS, a glob returns files, never directories. On Blob Storage, it returns every blob whose name matches, including zero-byte blobs that tools create as directory markers (names ending in `/`). Names that start with a `.` match like any other name.
 * A trailing `/` is ignored: `⟨path⟩/*/` is the same as `⟨path⟩/*`.
-* A glob over a directory that does not exist matches nothing. A path without wildcards matches if it is a file.
+* A glob over a directory that does not exist matches nothing, but a container or filesystem that does not exist is an error. A path without wildcards matches if it is a file.
 * Matching is case-sensitive, and the result is sorted by path.
-* Repeated slashes count as one on ADLS: `⟨path⟩//*.csv` is the same as `⟨path⟩/*.csv`. On Blob Storage, repeated slashes before the first wildcard, as in `⟨path⟩//*.csv`, make the pattern match nothing.
+* Repeated slashes count as one on ADLS: `⟨path⟩//*.csv` is the same as `⟨path⟩/*.csv`. On Blob Storage, the part of the pattern before the first wildcard is a literal name prefix, so `⟨path⟩//*.csv` matches only blobs whose names start with `⟨path⟩//`; after the first wildcard, repeated slashes count as one.
 
 Reading a directory, e.g., `read_csv('abfss://⟨my_filesystem⟩/⟨path⟩')`{:.language-sql .highlight}, reads the CSV files below it at any depth, as with `⟨path⟩/**/*.csv`.
 
 These rules differ from those of [local globs]({% link docs/2.0/sql/functions/pattern_matching.md %}#globbing): there, `?` alone makes a glob, a trailing `/` returns directories, `.` and `..` are resolved, and a pattern can contain only one `**`.
 
-Before v2.0.1, ADLS globs worked differently: `*` also matched `/`, so `⟨path⟩/**.csv` returned the CSV files at any depth; a `**` followed by more components, such as `⟨path⟩/**/*.csv`, failed with an error, and so did reading a directory; a glob over a missing directory failed with `404 Not Found`; and a pattern ending in `/` matched nothing.
+Before v2.0.1, ADLS globs worked differently: `*` also matched `/`, so `⟨path⟩/**.csv` returned the CSV files at any depth; a `**` followed by more components, such as `⟨path⟩/**/*.csv`, failed with an error, and so did reading a directory; a glob over a missing directory failed with an HTTP 404 (`PathNotFound`) error; and a pattern ending in `/` matched nothing.
 
 ### Difference between ADLS and Blob Storage
 
