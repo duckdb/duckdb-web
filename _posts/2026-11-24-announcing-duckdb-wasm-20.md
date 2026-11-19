@@ -55,9 +55,11 @@ The result is a smaller download and a simpler build, with no change to the data
 
 ## Larger-than-Memory Queries
 
-WebAssembly [limits a module to 4 GB of memory](https://v8.dev/blog/4gb-wasm-memory), and browsers may impose stricter limits, so queries that native DuckDB handles comfortably could run out of memory in the browser. DuckDB-Wasm 2.0 spills intermediate data that does not fit in memory to a temporary directory, so many larger-than-memory queries that previously failed now complete.
+Wasm modules can use at most 4 GB of working memory, and Wasm runtimes such as browsers may impose an even lower limit. Native DuckDB working memory is only limited by its configuration, which typically exceeds 4 GB. So a query that runs fine natively can run out of memory in DuckDB-Wasm.
 
-Spilling is on by default and writes to `js_buffer://tmp`, buffers the runtime holds outside the Wasm heap. You can turn it off with `spill: false`, or redirect it into the browser’s [Origin Private File System](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API/Origin_private_file_system) by pointing `temporaryDirectory` at an `opfs://` path:
+Before version 2.0, DuckDB-Wasm failed with an out-of-memory error whenever intermediate results grew beyond its working memory. DuckDB-Wasm 2.0 spills that data to disk instead. This makes it more robust across a wider range of queries and lets it handle larger datasets.
+
+Spilling is on by default and writes to `js_buffer://tmp`, buffers the runtime holds outside the Wasm heap. You can turn it off by setting `spill: false` when opening the database, or redirect it into the browser’s [Origin Private File System](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API/Origin_private_file_system) by pointing `temporaryDirectory` at an `opfs://` path:
 
 ```ts
 await db.open({
@@ -70,7 +72,7 @@ See [Out of Memory]({% link docs/2.0/clients/wasm/troubleshoot.md %}#out-of-memo
 
 ## Multithreading with Loadable Extensions
 
-Multithreading in the browser remains experimental and off by default, but the threaded build can now load extensions, which it could not before. The `threads` bundle uses the `wasm_threads` extension platform, and the `base` bundle uses `wasm_base`, so each loads the extension build that matches it.
+The threaded build can now load extensions, which it could not before. The `threads` bundle uses the `wasm_threads` extension platform, and the `base` bundle uses `wasm_base`, so each loads the extension build that matches it.
 
 To opt into threading, add the `threads` bundle explicitly (because `getJsDelivrBundles()` returns only `base`), serve the page as cross-origin isolated, and set `maximumThreads`:
 
@@ -89,7 +91,9 @@ const bundle = await duckdb.selectBundle(bundles);
 await db.open({ maximumThreads: 4 });
 ```
 
-On a page that is not cross-origin isolated, `selectBundle` falls back to `base` and the same code runs single-threaded. See [Threading]({% link docs/2.0/clients/wasm/instantiation.md %}#threading).
+On a page that is not cross-origin isolated, `selectBundle` falls back to `base` and the same code runs single-threaded. See [Threading]({% link docs/2.0/clients/wasm/instantiation.md %}#threading) for guidance on setting up cross-origin isolation and testing whether you're running the threaded or fallback build.
+
+Multithreading itself remains experimental.
 
 ## Better HTTP: Authentication Headers and Real Errors
 
@@ -103,6 +107,8 @@ CORS rules still apply, since the browser issues the request. See [Troubleshoot]
 ## Persistence and Secrets in OPFS
 
 DuckDB-Wasm can open a database at an `opfs://` path so it survives reloads and browser restarts, as we covered in [“Persistent Databases in the Browser with DuckDB-Wasm and OPFS”]({% post_url 2026-09-18-opfs-wasm %}). The 2.0 OPFS layer adds directory support, synchronous file creation, and automatic registration of `opfs://` files referenced in SQL. Setting `homeDirectory` to `opfs://home` lets DuckDB keep the data it stores next to the user, such as persistent secrets, across sessions.
+
+When using OPFS with DuckDB secrets, be aware that secrets stored on disk have similar security concerns as documented in the [Secrets Manager]({% link docs/2.0/configuration/secrets_manager.md %}) guide.
 
 ## New Configuration Options
 
@@ -124,7 +130,7 @@ Most applications only need to touch their bundle definitions. The breaking chan
 * The `mvp`, `eh`, and `coi` bundles are gone. Use `base` in their place, and `threads` where you used `coi`. If you call `getJsDelivrBundles()` and `selectBundle()` without naming bundles yourself, no change is required.
 * The distribution filenames follow the new names: `duckdb-base.wasm`, `duckdb-browser-base.worker.js`, `duckdb-threads.wasm`, `duckdb-browser-threads.worker.js`, and `duckdb-browser-threads.pthread.worker.js`. Update any hardcoded paths.
 * Extension platforms are now `wasm_base` and `wasm_threads`. The `wasm_mvp` and `wasm_eh` platforms no longer exist.
-* Exception handling is required. A browser too old to support it can no longer run DuckDB-Wasm, and `selectBundle` throws rather than falling back to an MVP build.
+* Exception handling is required. A browser too old to [support it](https://caniuse.com/wf-wasm-exception-handling) can no longer run DuckDB-Wasm, and `selectBundle` throws rather than falling back to an MVP build.
 
 ## Conclusion
 
