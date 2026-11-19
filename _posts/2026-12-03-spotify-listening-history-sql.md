@@ -32,7 +32,7 @@ But this model assumes the questions are known in advance. Agentic features—li
 
 Instead of building a separate analytical backend, Spotify considered embedded databases. [Kian Mehrabani](https://www.linkedin.com/in/kian-mehrabani/), a data engineer on the personalization team, explains the decision-making process:
 
-**"We needed SQL or some kind of flexible query language for the agent. And we did think about SQLite, but I had been reading about DuckDB and had used it a little personally. I thought the ergonomics of DuckDB would work well for an early prototype, and I saw integrations with Java and compatibility with Arrow."**
+> We needed SQL or some kind of flexible query language for the agent. And we did think about SQLite, but I had been reading about DuckDB and had used it a little personally. I thought the ergonomics of DuckDB would work well for an early prototype, and I saw integrations with Java and compatibility with Arrow.
 
 DuckDB was chosen because:
 
@@ -84,8 +84,8 @@ What is clear is that DuckDB filled a specific need: flexible, in-process analyt
 
 ## Learn More
 
-* [DuckDB's Java API documentation](https://duckdb.org/docs/api/java.html)
-* [Apache Arrow format](https://arrow.apache.org/)
-* [Kian's DuckCon #7 presentation](https://www.youtube.com/watch?v=-9GY1CCJG5o) (June 2026)
+- [DuckDB's Java API documentation](https://duckdb.org/docs/api/java.html)
+- [Apache Arrow format](https://arrow.apache.org/)
+- [Kian's DuckCon #7 presentation](https://www.youtube.com/watch?v=-9GY1CCJG5o) (June 2026)
 
 We would like to thank Kian and John for the conversation. If you are using DuckDB and would like to share your story, reach out to us at [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com).
