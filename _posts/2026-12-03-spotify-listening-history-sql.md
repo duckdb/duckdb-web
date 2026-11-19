@@ -16,7 +16,7 @@ Spotify's personalization platform is built around a fundamental insight: **unde
 
 That architecture works well for known, precomputed questions. But when Spotify began investing in agentic features—where users can ask flexible, open-ended questions about their listening history—the old model broke down. An AI agent cannot predict every possible question a listener might ask. It needs flexible, ad-hoc SQL access to individual user histories.
 
-The solution was unexpected: instead of building a centralized query backend, Spotify embedded [DuckDB]({% link docs/2.0/api/c/overview.md %}) directly into their personalization service to run analytical queries in-process. This shifts the computational burden from a server to the user's request handler, and it works because—despite the aggregate scale being petabytes—a single listener's data is small enough to fit in memory.
+The solution was unexpected: instead of building a centralized query backend, Spotify embedded DuckDB directly into their personalization service to run analytical queries in-process. This shifts the computational burden from a server to the user's request handler, and it works because—despite the aggregate scale being petabytes—a single listener's data is small enough to fit in memory.
 
 ## The Problem: Flexible Queries, Massive Scale
 
@@ -84,7 +84,7 @@ What is clear is that DuckDB filled a specific need: flexible, in-process analyt
 
 ## Learn More
 
-* [DuckDB's Java/JDBC integration]({% link docs/2.0/api/java.md %})
+* [DuckDB's Java API documentation](https://duckdb.org/docs/api/java.html)
 * [Apache Arrow format](https://arrow.apache.org/)
 * [Kian's DuckCon #7 presentation](https://www.youtube.com/watch?v=-9GY1CCJG5o) (June 2026)
 
