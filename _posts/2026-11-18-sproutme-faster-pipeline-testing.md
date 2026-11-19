@@ -62,6 +62,14 @@ Running the same pipeline on DuckDB shortens the wait between changes. In Sprout
 | Daily incremental dbt build | 300.3 s | 120.7 s | 59.8% |
 | Backfill and daily build together | 480.5 s | 225.3 s | 53.1% |
 
+SproutMe’s platform uses AI agents to generate recommendations like those shown in the dashboard below, which displays performance metrics, trends, and recommended actions across multiple channels.
+
+![SproutMe dashboard showing campaign performance and recommendations](/images/blog/sproutme_dashboard.png)
+
+SproutMe’s AI companion can also run analysis tasks like competitor research, producing structured reports with executive summaries and actionable insights, as shown below.
+
+![SproutMe AI companion generating a competitor analysis report](/images/blog/sproutme_companion.png)
+
 In CI, dbt build runs with the duckdb target over the whole project, seeded from committed fixtures. The integration tests then compare selected models’ output with committed golden files, so a regression fails the build before it reaches main.
 
 ```python
