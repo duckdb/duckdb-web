@@ -141,7 +141,7 @@ PARTITIONED BY (region);
 INSERT INTO events VALUES (1, 'eu');
 ```
 
-A partition key matches its column in any case, and the column's own spelling is recorded; this also holds for `CREATE TABLE ... AS SELECT` and for `COPY`'s `PARTITION_BY`.
+Since v2.0.1, a partition key matches its column in any case, and the column's own spelling is recorded; this also holds for `CREATE TABLE ... AS SELECT` and for `COPY`'s `PARTITION_BY`.
 
 Only `CREATE TABLE` needs the full `events.events` name: without the database name, it creates the table in the default database.
 
@@ -201,22 +201,30 @@ Both statements write the new table in a single commit: version 0 holds the tabl
 The table is created when the statement ends, not when the transaction commits, as for `CREATE TABLE`. A `ROLLBACK` does not remove it:
 
 ```sql
+ATTACH 's3://⟨my_bucket⟩/⟨new_path⟩' AS scratch (TYPE delta);
 BEGIN;
-CREATE TABLE sales.sales AS SELECT 1 AS id;
+CREATE TABLE scratch.scratch AS SELECT 1 AS id;
 ROLLBACK;
--- sales.sales exists, with its row
+-- scratch.scratch exists, with its row
 ```
 
 The following are not supported:
 
-* Columns whose type Delta cannot store, such as `UHUGEINT`, `TIME`, intervals, or an untyped `NULL`: the statement fails before anything is written, naming the column. Cast the column in the query, e.g., `SELECT x::BIGINT AS x`, `SELECT x::VARCHAR AS x` for `UHUGEINT` values beyond the 38 digits of `DECIMAL(38, 0)`, or `SELECT NULL::INTEGER AS n`.
+* Columns whose type Delta cannot store: the statement fails before anything is written, naming the column. Common cases are `HUGEINT` (e.g., from `sum()` of integers), unsigned integers, `UUID`, `ENUM`, and `TIMESTAMP_NS`, `TIMESTAMP_MS`, or `TIMESTAMP_S` (e.g., from Parquet files); also `TIME`, intervals, and an untyped `NULL`. Cast the column in the query:
+    * `HUGEINT` and `UHUGEINT`: `::DECIMAL(38, 0)`, or `::VARCHAR` for values beyond 38 digits
+    * `UTINYINT`, `USMALLINT`, and `UINTEGER`: `::BIGINT`; `UBIGINT`: `::DECIMAL(20, 0)`
+    * `TIMESTAMP_NS`, `TIMESTAMP_MS`, and `TIMESTAMP_S`: `::TIMESTAMP`
+    * `UUID` and `ENUM`: `::VARCHAR`
+    * an untyped `NULL`: e.g., `NULL::INTEGER`
 * Writing to a path that already holds a Delta table: `COPY` does not append or overwrite, and `CREATE TABLE ... AS SELECT` fails as `CREATE TABLE` does. With `IF NOT EXISTS`, an existing table is left as it is and the query does not run, unless a column or partition column is refused (see [Limitations](#limitations)): that fails first.
 * `CREATE OR REPLACE TABLE ... AS SELECT`.
 * `COPY` options for files, such as `OVERWRITE` or `PER_THREAD_OUTPUT`, and options outside `delta.` given on their own: put the latter in `WITH_PROPERTIES`.
 
-In a [Unity Catalog]({% link docs/2.0/core_extensions/unity_catalog.md %}#creating-tables) catalog, `CREATE TABLE ... AS SELECT` goes through the `unity_catalog` extension, which also registers the table.
+In a [Unity Catalog]({% link docs/2.0/core_extensions/unity_catalog.md %}#creating-tables-from-a-query) catalog, `CREATE TABLE ... AS SELECT` goes through the `unity_catalog` extension, which also registers the table.
 
-Readers see two differences from a table Spark creates. Its history records the operation as `CREATE TABLE`, not `CREATE TABLE AS SELECT`. And in a column-mapped, partitioned table, the data files of the create leave the partition columns out (their values are in the log, as the Delta protocol allows); files that later `INSERT`s write include them. A table whose features require the partition columns in its files (`materializePartitionColumns`, `icebergCompatV2`, or `icebergCompatV3`) gets them in every file.
+Unlike Spark, DuckDB records the operation in the table's history as `CREATE TABLE`, not `CREATE TABLE AS SELECT`.
+
+In a column-mapped, partitioned table, the data files that the statement writes leave the partition columns out, as Spark's do: readers take their values from the Delta log. The files that a later `INSERT` writes include them. A table whose features require the partition columns in its files (`materializePartitionColumns`, `icebergCompatV2`, or `icebergCompatV3`) gets them in every file.
 
 ### Appending Data
 
@@ -348,7 +356,7 @@ The protocol requires every data file of an `id`-mode table to carry Parquet fie
 
 > Warning The default changed from `lenient` in DuckDB 1.5 to `strict` in v2.0. To read such files as v1.5 did, run `SET delta_column_mapping_policy = 'lenient';`{:.language-sql .highlight}.
 
-Since v2.0.1, DuckDB writes to column-mapped tables with partition columns or nested (struct, list, and map) columns, in both modes: `INSERT` into such a table works, whoever created it, and `CREATE TABLE` and `CREATE TABLE ... AS SELECT` can create one. Spark reads and appends to the files that DuckDB writes. Each partition of a column-mapped table goes to a directory named `part-` followed by a hash of the partition values, not to a Hive-style `⟨column⟩=⟨value⟩` directory: readers take the partition values from the Delta log.
+Since v2.0.1, DuckDB writes to column-mapped tables with partition columns or nested (struct, list, and map) columns, in both modes: `INSERT` into such a table works, whoever created it (except as listed under [Limitations](#limitations)), and `CREATE TABLE` and `CREATE TABLE ... AS SELECT` can create one. Spark reads and appends to the files that DuckDB writes. Each partition of a column-mapped table goes to a directory named `part-` followed by a hash of the partition values, not to a Hive-style `⟨column⟩=⟨value⟩` directory: readers take the partition values from the Delta log.
 
 > Warning Before v2.0.1, the partition columns of a column-mapped table read as `NULL` in every row, without an error.
 
@@ -397,14 +405,14 @@ The `delta` extension supports:
 * all primitive types except intervals
 * nested types (structs, lists, and maps)
 * creating tables (`CREATE TABLE`, and since v2.0.1 [`CREATE TABLE ... AS SELECT` and `COPY ... TO ... (FORMAT delta)`](#creating-tables-from-a-query))
-* blind appends (`INSERT INTO`), with file statistics for data skipping
+* blind appends (`INSERT INTO`), with file statistics for data skipping; for concurrent writers, see [Limitations](#limitations)
 * [idempotent appends](#idempotent-appends)
 * [checkpoints](#checkpointing) (`CHECKPOINT`)
 * cloud storage (AWS S3, Azure, GCS) with secrets
 
 ## Limitations
 
-* `CREATE OR REPLACE TABLE` is not supported. Before v2.0.1, `CREATE TABLE ... AS SELECT` is not supported either: create the table, then `INSERT` into it.
+* `CREATE OR REPLACE TABLE` is not supported. Before v2.0.1, `CREATE TABLE ... AS SELECT` was not supported either.
 * `UPDATE`, `DELETE`, [`MERGE INTO`]({% link docs/2.0/sql/statements/merge_into.md %}), `ALTER TABLE`, and `DROP TABLE` are not supported, nor are `RETURNING` and `ON CONFLICT` clauses on `INSERT`.
 * `CREATE TABLE` does not support:
     * constraints, including `NOT NULL`
@@ -413,17 +421,21 @@ The `delta` extension supports:
     * column types without a Delta equivalent, such as `TIME` or unsigned integers
     * a table whose columns are all partition columns
     * since v2.0.1, a `VARIANT` inside a struct, list, or map; before, `CREATE TABLE` accepted it and the first `INSERT` failed
-    * a `MAP` with a `LIST` key, at any depth
-    * since v2.0.1, a `VARCHAR` column with a collation (`COLLATE`), at any depth: Delta has no collations. A cast or a string function keeps the collation, so write the column from an uncollated source.
-    * a partition column of a struct, list, map, array, or `VARIANT` type, and since v2.0.1 of type `BLOB`: a Delta partition column must have a primitive type
+    * since v2.0.1, a `MAP` with a `LIST` key, at any depth; before, `CREATE TABLE` accepted it and the first `INSERT` failed
+    * since v2.0.1, a `VARCHAR` column with a collation (`COLLATE`), at any depth: DuckDB does not write Delta collations. A cast to `VARCHAR` and most string functions keep the collation; `decode(encode(⟨column⟩))`{:.language-sql .highlight} removes it.
+    * a partition column of a struct, list, map, array, or `VARIANT` type: a Delta partition column must have a primitive type
+    * since v2.0.1, a partition column of type `BLOB`: Delta stores partition values as text, which cannot hold arbitrary bytes. Partition on a text form instead, e.g., `hex(⟨column⟩)`{:.language-sql .highlight}.
 * `CREATE TABLE ... AS SELECT` and `COPY ... TO ... (FORMAT delta)` refuse the same columns and partition columns, before anything is written.
 * Since v2.0.1, the column and partition-column checks above (types, `VARIANT`, `MAP`, collations) run before `IF NOT EXISTS` is considered: `CREATE TABLE IF NOT EXISTS` with such a column fails even if the table exists, with or without `AS SELECT`.
-* Before v2.0.1, DuckDB cannot write to a table with [column mapping](#column-mapping) that has nested or partition columns, nor create one.
+* Before v2.0.1, DuckDB could not write to a table with [column mapping](#column-mapping) that has nested or partition columns, nor create one.
 * Writing to a column-mapped table with a struct field whose physical name is `__duckdb_field_id` (in any case) fails before anything is written.
 * Tables with an interval (`interval year to month` or `interval day to second`), `geometry`, or `geography` column cannot be read.
 * Writing to a table with the `allowColumnDefaults` writer feature fails, even if no column has a default yet: DuckDB cannot fill in Delta defaults and does not write `NULL` instead. Reading works.
 * Writing to a table that declares a `CHAR(n)` or `VARCHAR(n)` width on a nested field, such as `ARRAY<VARCHAR(5)>`, is not supported.
 * Writing to a table with a `VARIANT` inside a struct, list, or map is not supported.
+* Writing to a table whose schema declares a list or array column or field as not nullable, at any depth, is not supported.
+* Since v2.0.1, writes refuse partition values that Delta readers cannot read back: a `DATE`, `TIMESTAMP`, or `TIMESTAMP WITH TIME ZONE` partition value that is infinite or outside the years 0001 to 9999 (in UTC for `TIMESTAMP WITH TIME ZONE`) fails the statement. An `INSERT` into a table partitioned on a `BLOB` column fails too, whoever created the table.
+* Since v2.0.1, a transaction that writes to a table fails at `COMMIT` with `commit conflict at version ⟨n⟩` if another writer committed to the table after the transaction read it. DuckDB does not retry; the transaction's changes are lost, so run it again.
 
 ## Supported Platforms
 
