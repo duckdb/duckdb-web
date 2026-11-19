@@ -90,7 +90,7 @@ def build_test_warehouse(db_path: Path, project_dir: Path) -> None:
 
 These results apply to SproutMe’s development and testing workflow. They do not show that one engine is faster in general.
 
-For Archit, the main gain is faster debugging. Instead of spending hours reproducing an issue, he can find a bug in minutes. **“First one is the development speed. It is super fast,”** he says, calling it the first of DuckDB’s advantages. The second is how easily it runs on local machines, including with the AI coding assistants the team uses, which can inspect errors and help debug them directly. The third is compatibility: the same setup runs locally and in CI without changes.
+For Archit, the main gain is faster debugging. Instead of spending hours reproducing an issue, he can find a bug in minutes. **”Development speed is super fast,”** he says, pointing to three advantages: rapid iteration locally, how easily DuckDB runs on local machines with AI coding assistants like Claude (which can inspect errors and help debug directly), and compatibility—the same setup works in both local development and CI without changes.
 
 ## What Comes Next
 
