@@ -11,7 +11,7 @@ excerpt: "Felix Haba, an independent developer passionate about healthcare econo
 tag: case-study
 ---
 
-> I'm using DuckDB to make the access much easier. The key advantage is that it makes me able to serve 10 terabytes of data in the browser almost instantly and at no marginal cost.
+> I'm using DuckDB to make the access much easier. The key advantage of this approach is that I can serve 10 terabytes of data in the browser almost instantly and at no marginal cost.
 >
 > — Felix Haba, creator of AccessMRF
 {: .quote-large}
