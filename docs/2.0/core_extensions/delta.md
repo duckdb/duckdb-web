@@ -212,7 +212,7 @@ The following are not supported:
 * Columns whose type Delta cannot store, such as `UHUGEINT`, `TIME`, intervals, or an untyped `NULL`: the statement fails before anything is written, naming the column. Cast the column in the query, e.g., `SELECT x::BIGINT AS x`, `SELECT x::VARCHAR AS x` for `UHUGEINT` values beyond the 38 digits of `DECIMAL(38, 0)`, or `SELECT NULL::INTEGER AS n`.
 * Writing to a path that already holds a Delta table: `COPY` does not append or overwrite, and `CREATE TABLE ... AS SELECT` fails as `CREATE TABLE` does. With `IF NOT EXISTS`, an existing table is left as it is and the query does not run, unless a column or partition column is refused (see [Limitations](#limitations)): that fails first.
 * `CREATE OR REPLACE TABLE ... AS SELECT`.
-* `COPY` options for files, such as `OVERWRITE` or `PER_THREAD_OUTPUT`, and options outside `delta.` given on their own: put the latter in `WITH_PROPERTIES`. Both fail with an error that names the option.
+* `COPY` options for files, such as `OVERWRITE` or `PER_THREAD_OUTPUT`, and options outside `delta.` given on their own: put the latter in `WITH_PROPERTIES`.
 
 In a [Unity Catalog]({% link docs/2.0/core_extensions/unity_catalog.md %}#creating-tables) catalog, `CREATE TABLE ... AS SELECT` goes through the `unity_catalog` extension, which also registers the table.
 
