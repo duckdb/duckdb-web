@@ -165,3 +165,5 @@ include:
   - docs/1.4/clients/python/reference/objects.inv
   - docs/1.5/clients/python/reference/objects.inv
   - docs/2.0/clients/python/reference/objects.inv
+  - docs/current/clients/python/reference/objects.inv
+  - docs/lts/clients/python/reference/objects.inv
