@@ -56,8 +56,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 149
-extension_download_count_pretty: 149
+extension_download_count: 227
+extension_download_count_pretty: 227
 image: '/images/community_extensions/social_preview/preview_community_extension_yara.png'
 layout: community_extension_doc
 ---

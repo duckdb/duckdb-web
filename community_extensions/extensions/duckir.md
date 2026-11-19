@@ -64,10 +64,10 @@ docs:
 
     See our [documentation](https://github.com/cwida/DuckIR) for maintenance, persistence, out-of-core search, and the known limitations.
 
-extension_star_count: 24
-extension_star_count_pretty: 24
-extension_download_count: 389
-extension_download_count_pretty: 389
+extension_star_count: 25
+extension_star_count_pretty: 25
+extension_download_count: 473
+extension_download_count_pretty: 473
 image: '/images/community_extensions/social_preview/preview_community_extension_duckir.png'
 layout: community_extension_doc
 ---

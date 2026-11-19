@@ -26,7 +26,7 @@ repo:
 
 extension_star_count: 34
 extension_star_count_pretty: 34
-extension_download_count: 2607
+extension_download_count: 2634
 extension_download_count_pretty: 2.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_fuzzycomplete.png'
 layout: community_extension_doc

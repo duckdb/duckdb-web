@@ -29,10 +29,10 @@ repo:
   # serves both (and v1.4.5 via the ref fallback).
   variegata: 470fa6499b689c50fc323f589fcf73c6a86518ef
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 820
-extension_download_count_pretty: 820
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 801
+extension_download_count_pretty: 801
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_tunnel.png'
 layout: community_extension_doc
 ---

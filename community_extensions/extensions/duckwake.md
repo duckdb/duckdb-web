@@ -46,8 +46,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 41
-extension_download_count_pretty: 41
+extension_download_count: 115
+extension_download_count_pretty: 115
 image: '/images/community_extensions/social_preview/preview_community_extension_duckwake.png'
 layout: community_extension_doc
 ---
