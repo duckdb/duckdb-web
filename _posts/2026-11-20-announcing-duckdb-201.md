@@ -36,16 +36,34 @@ We expect a fix that keeps both correctness and performance in DuckDB 2.1.
 ## Improvement: Registering Extension Repositories by Host
 
 DuckDB 2.0.0 introduced [custom extension repositories]({% link docs/2.0/extensions/installing_extensions.md %}#extension-repositories), which host extensions signed with the publisher's own keys.
-In DuckDB 2.0.1, you can register such a repository by naming the publisher's host ([`#28719`](https://github.com/duckdb/duckdb/pull/28719)):
+In DuckDB 2.0.1, you can register such a repository by naming the publisher's host ([`#28719`](https://github.com/duckdb/duckdb/pull/28719)).
+For example, you can register `duckdb.org` as a repository:
 
 ```sql
-CREATE EXTENSION REPOSITORY extensions.example.org;
-INSTALL AND LOAD my_ext FROM extensions.example.org;
+CREATE EXTENSION REPOSITORY duckdb.org;
 ```
 
-DuckDB reads the repository's URL from `https://extensions.example.org/.well-known/duckdb-extension-repo.json` over verified HTTPS, then fetches the repository's signing keys and pins them.
-The statement returns the SHA-256 fingerprint of each pinned key, so you can compare them against values published through another channel.
-If you would like to publish your own repository, see the new [“Publishing an Extension Repository” page]({% link docs/2.0/extensions/publishing_extension_repositories.md %}).
+Then, core extensions are reachable through it:
+
+```sql
+INSTALL AND LOAD spatial FROM duckdb.org;
+```
+
+Under the hood, the host acts as an extra redirect.
+DuckDB first reads `https://duckdb.org/.well-known/duckdb-extension-repo.json` over verified HTTPS.
+This file contains no keys or extensions: it only states where the host's repository lives, in this case, `https://extensions.duckdb.org`.
+DuckDB then follows this pointer, reads the repository's own `.well-known/duckdb-extension-repo.json` file, and pins the signing keys listed there.
+Only the owner of a host can publish files under its `.well-known` path, so serving this file is proof of control over the host, and no central registry is involved.
+The redirect also decouples the repository's name from its location: the name can be your organization's domain, while the extensions are served from a CDN, an S3 bucket, or GitHub Pages.
+The `CREATE EXTENSION REPOSITORY` statement returns the SHA-256 fingerprint of each pinned key, so you can compare them against values published through another channel.
+
+The power of this feature lies in the fact that your organization can do the same: publish a `.well-known/duckdb-extension-repo.json` file on your own domain, and your users can install your extensions with the same succinct syntax:
+
+```sql
+INSTALL AND LOAD ⟨extension⟩ FROM ⟨your_domain⟩;
+```
+
+To get started, see the new [“Publishing an Extension Repository” page]({% link docs/2.0/extensions/publishing_extension_repositories.md %}).
 
 Unlike adding a repository by its prefix, adding one by its host does not require an opt-in.
 To support this, the `allow_extension_repositories` setting has new values: `hosts` (the new default) allows adding repositories by host, `allowed` also allows adding them by prefix, `hosts_only` only adds and trusts repositories resolved from their host, and `forbidden` disables custom repositories.
@@ -132,7 +150,7 @@ As is customary for DuckDB releases, while DuckDB 2.0.1 itself is a patch releas
 * [`pg_duckdb`](https://github.com/duckdb/pg_duckdb), the PostgreSQL extension that embeds DuckDB, now publishes binaries for all supported PostgreSQL versions on its [GitHub releases page](https://github.com/duckdb/pg_duckdb/releases). It also ships a number of bugfixes and improves compatibility with other popular PostgreSQL extensions such as Citus and pgvector.
 * In the [`postgres` extension]({% link docs/2.0/core_extensions/postgres/overview.md %}), queries that only touch a single attached PostgreSQL database are now executed entirely in PostgreSQL. If you would like to disable this, run `SET pg_enable_remote_pushdown = false` before attaching the database ([`duckdb-postgres#643`](https://github.com/duckdb/duckdb-postgres/pull/643)).
 * The [Python client]({% link docs/2.0/clients/python/overview.md %}) received fixes for several hangs and crashes at exit, including on Python 3.14 ([`duckdb-python#709`](https://github.com/duckdb/duckdb-python/pull/709), [`duckdb-python#719`](https://github.com/duckdb/duckdb-python/pull/719)). Fetching `TIMESTAMPTZ` values no longer requires the `pytz` package ([`duckdb-python#710`](https://github.com/duckdb/duckdb-python/pull/710)).
-* The [`spatial` extension]({% link docs/2.0/core_extensions/spatial/overview.md %}) is now available in DuckDB-Wasm, and the [`vortex` extension]({% link docs/2.0/core_extensions/vortex.md %}) is now available on Windows.
+* The [`aws`]({% link docs/2.0/core_extensions/aws.md %}), [`glue`](https://github.com/duckdb/duckdb-aws-glue), and [`spatial`]({% link docs/2.0/core_extensions/spatial/overview.md %}) extensions are now available in DuckDB-Wasm, and the [`vortex` extension]({% link docs/2.0/core_extensions/vortex.md %}) is now available on Windows.
 
 ## End of Life for DuckDB 1.4 LTS
 
