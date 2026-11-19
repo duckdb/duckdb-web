@@ -18,12 +18,14 @@ tag: case-study
 
 [Felix Haba](https://www.felixhaba.com/) is an engineer based in San Francisco with a long-standing passion for healthcare economics. He started [AccessMRF](https://www.accessmrf.com/) as a metadata catalog to help researchers, consultants, and employers locate and access the US government's [Transparency in Coverage](https://www.cms.gov/newsroom/fact-sheets-transparency-coverage-final-rules-cms-9882-f) (TiC) healthcare pricing data. Recently, he evolved the project by adding [DuckDB-Wasm]({% link docs/2.0/clients/wasm/overview.md %}) and [Frozen DuckLake](https://duckdb.org/2025/10/24/frozen-ducklake) to enable browser-based queries over 10 TB of healthcare pricing data—without requiring expensive server-side analytical infrastructure.
 
-<div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+The homepage shows the scope of data now accessible in one searchable catalog.
+
+<div style="border: 1px solid #000; padding: 8px; display: inline-block; margin-top: 20px;">
   <a href="https://www.accessmrf.com" target="_blank">
     <img src="/images/blog/accessmrf/accessmrf-01.png" alt="AccessMRF homepage: A catalog of all insurer price transparency data" style="display: block; max-width: 100%;">
   </a>
-  <p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com" target="_blank" style="text-decoration: none;">AccessMRF homepage: A catalog of all insurer price transparency data</a></p>
 </div>
+<p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com" target="_blank" style="text-decoration: none;">AccessMRF homepage: A catalog of all insurer price transparency data</a></p>
 
 ## The Problem: Mandated But Inaccessible Data
 
@@ -37,14 +39,16 @@ Felix explains: **"The biggest problem is finding the data and the websites wher
 
 Felix's initial approach was straightforward: create a metadata catalog where interested researchers could find which insurers publish TiC data and where to retrieve it. This helped his primary audience—**benefits consultants, self-funded employers, healthcare economics researchers, and providers**—discover the source files.
 
-But discovery alone was not enough. Downloading and processing the raw files still required significant infrastructure. Felix wanted to take the next step: make the data query-friendly and accessible directly in a browser.
+But discovery alone was not enough. Downloading and processing the raw files still required significant infrastructure. He wanted to take the next step: make the data query-friendly and accessible directly in a browser.
 
-<div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+The Universal Search interface enables exploring over 1.4 million individual pricing plans across all insurers.
+
+<div style="border: 1px solid #000; padding: 8px; display: inline-block; margin-top: 20px;">
   <a href="https://www.accessmrf.com?category=Universal%20Search" target="_blank">
     <img src="/images/blog/accessmrf/accessmrf-02.png" alt="AccessMRF Universal Search showing 1.4M+ indexed plans and files" style="display: block; max-width: 100%;">
   </a>
-  <p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com?category=Universal%20Search" target="_blank" style="text-decoration: none;">AccessMRF Universal Search showing 1.4M+ indexed plans and files</a></p>
 </div>
+<p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com?category=Universal%20Search" target="_blank" style="text-decoration: none;">AccessMRF Universal Search showing 1.4M+ indexed plans and files</a></p>
 
 He encountered [Mark Harrison's](https://duckdb.org/2025/10/24/frozen-ducklake) work on Frozen DuckLake at the Data Outpost conference, which introduced him to Gábor Szárnyas. Together, they explored how a Frozen DuckLake could serve as a solution.
 
@@ -118,7 +122,7 @@ The barriers to entry for researchers, consultants, and innovators are no longer
 
 ## Try It
 
-You can explore AccessMRF's data at [accessmrf.com](https://www.accessmrf.com). If you are a healthcare consultant, researcher, analyst, or policy maker, try running a query over the pricing dataset. The data is public; the barrier to access is gone.
+You can explore AccessMRF's data at [accessmrf.com](https://www.accessmrf.com). If you are a healthcare consultant, researcher, analyst, or policy maker, try running a query over the pricing dataset. The data is public, and the barrier to access is gone.
 
 ## Further Reading
 
