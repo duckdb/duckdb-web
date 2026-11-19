@@ -37,12 +37,12 @@ import os
 from pathlib import Path
 
 def use_local_duckdb(warehouse: Path) -> None:
-    “””Point the local pipeline at a DuckDB file instead of BigQuery.”””
+    """Point the local pipeline at a DuckDB file instead of BigQuery."""
     warehouse.parent.mkdir(parents=True, exist_ok=True)
-    os.environ[“WAREHOUSE”] = “duckdb”
-    os.environ[“DBT_DUCKDB_PATH”] = str(warehouse)
+    os.environ["WAREHOUSE"] = "duckdb"
+    os.environ["DBT_DUCKDB_PATH"] = str(warehouse)
     # BigQuery compares timestamps in UTC; DuckDB uses the machine’s zone unless told otherwise.
-    os.environ[“TZ”] = “UTC”
+    os.environ["TZ"] = "UTC"
 ```
 
 The transformation stage is where DuckDB saves the most time. **”This is where we are saving a lot of time, the transformation part,”** Archit says. Extraction benefits as well, because Dagster writes directly into DuckDB. The scope matters, though: **”It is part of the local development pipeline.”** Production still runs on BigQuery.
