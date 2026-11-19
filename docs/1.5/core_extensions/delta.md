@@ -228,7 +228,7 @@ Support for the [other DuckDB platforms]({% link docs/1.5/extensions/extension_d
 
 ## Using delta-rs with DuckDB
 
-In this example, we create a Delta table with the `delta-rs` Python binding, then we use the `delta` extension of DuckDB to read it. We also showcase how to do other read operations with DuckDB, like reading the change data feed using the Arrow zero-copy integration. This operation can also be lazy if reading bigger data by using [Arrow Datasets](https://delta-io.github.io/delta-rs/integrations/delta-lake-arrow/).
+In this example, we create a Delta table with the `delta-rs` Python binding, then we use the `delta` extension of DuckDB to read it. We also showcase how to do other read operations with DuckDB, like reading the change data feed using the Arrow zero-copy integration. This operation can also be lazy if reading bigger data by using [Arrow Datasets](https://delta-io.github.io/delta-rs/latest/integrations/delta-lake-arrow/).
 
 <!-- markdownlint-disable MD040 MD046 -->
 

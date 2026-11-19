@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: laterite_ags4
   description: Read AGS4 geotechnical data files as typed, UUID-keyed tables directly from SQL — born-typed columns, deterministic content-addressed keys that join across groups by construction, and an embedded AGS dictionary. A read-only SQL surface. Local, http(s):// and s3:// (with httpfs).
-  version: 0.16.0
+  version: 0.17.0
   language: Rust
   build: cargo
   license: MIT
@@ -43,12 +43,14 @@ repo:
   github: niko86/laterite-duckdb
   # Pin to the release commit SHA once the repo is pushed + tagged (community-
   # extensions pins a SHA, not a branch). Placeholder until then:
-  ref: 56e6634a22e66ba0d8bd546f8412e7ae7042076b
+  ref: ecab9642256f72d583f47b1e9aade27d1e1ff908
   # The DuckDB 1.5 build of the same release. `ref` builds for DuckDB 2.0, and
   # its duckdb-rs 2.0 needs a newer rustc than the v1.5 pipeline's wasm image
   # carries, so 1.5 builds from the `duckdb-1.5` branch: the same laterite engine
-  # on duckdb-rs 1.5. Move it with every release that ships to both.
-  variegata: 310118ba75bb8fc3df67e5ca5c51a9df6961afca
+  # on duckdb-rs 1.5. Move it with every release that ships to both. Since
+  # 0.17.0 the engine needs rustc 1.89, so the v1.5 build is requested with
+  # extension-ci-tools v2.0-cyanoptera (rustc 1.97.1), as 0.16.0's was.
+  variegata: d3624b7b2c6f67033b70cd7400aeac864d068ace
 
 docs:
   hello_world: |
@@ -118,8 +120,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 817
-extension_download_count_pretty: 817
+extension_download_count: 861
+extension_download_count_pretty: 861
 image: '/images/community_extensions/social_preview/preview_community_extension_laterite_ags4.png'
 layout: community_extension_doc
 ---
@@ -129,15 +131,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

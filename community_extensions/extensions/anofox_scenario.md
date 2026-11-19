@@ -7,7 +7,7 @@ excerpt: |
 
 extension:
   name: anofox_scenario
-  version: 2026.10.21
+  version: 2026.11.13
   description: Git-like branching for analytical databases. Attach isolated what-if scenarios as catalogs, edit them with ordinary SQL on copy-on-write delta storage, branch, diff, and merge them back.
   language: C++
   build: cmake
@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: DataZooDE/anofox-scenario
-  ref: 1813667992e470e4f775e2a5714ed6a23e213821
-  variegata: 1813667992e470e4f775e2a5714ed6a23e213821
+  ref: 2b25c9851831babc0d8512b7017a5f6c5b7c0731
+  variegata: 2b25c9851831babc0d8512b7017a5f6c5b7c0731
 
 docs:
   hello_world: |
@@ -59,15 +59,21 @@ docs:
     A streaming diff engine (`scenario_diff`, `scenario_diff_summary`) audits any
     world against its origin or another world, and
     `scenario_merge(name, on_conflict := 'abort'|'ours'|'theirs')` promotes a
-    scenario into its base atomically — with true 3-way drift conflicts when a
-    creation snapshot exists. Views rebind inside scenarios, all base schemas
-    are mirrored, and tables without a primary key work either via
+    scenario into its base atomically. Base rows edited after the scenario
+    touched them are reported as conflicts (pre-images for live overlays, 3-way
+    against the snapshot otherwise), and `scenario_merge_preview` shows the plan
+    first. Base `ALTER TABLE ... ADD COLUMN` carries into open scenarios. Views
+    rebind inside scenarios, all base schemas are mirrored, and tables without a primary key work either via
     `key_columns :=` declared identity or bag semantics with multiplicity
     tracking.
 
     Scenario worlds compose with table-name-driven extensions: for example
     `ts_forecast_by('s.demand', ...)` (anofox_forecast) forecasts a what-if
     world directly, no copies needed.
+
+    A Claude Code plugin with usage-pattern skills (what-if, safe change,
+    snapshot/audit, reference) ships in the repository:
+    `/plugin marketplace add DataZooDE/anofox-scenario`.
 
     The extension collects anonymous usage telemetry (an envelope-only
     `extension_loaded` event; never table names, keys, or SQL). Disable with
@@ -76,8 +82,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 821
-extension_download_count_pretty: 821
+extension_download_count: 842
+extension_download_count_pretty: 842
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_scenario.png'
 layout: community_extension_doc
 ---
@@ -87,15 +93,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -149,11 +155,12 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                  name                  |                                                                           description                                                                            | input_type | scope  | aliases | typed_value |
-|----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
-| anofox_scenario_suppression_hash_limit | Maximum number of updated/deleted scenario keys per table for which scans suppress base rows through an in-memory hash set instead of per-row delta index probes | UBIGINT    | GLOBAL | []      | 4194304     |
-| anofox_scenario_telemetry_enabled      | Enable or disable anonymous usage telemetry for anofox_scenario                                                                                                  | BOOLEAN    | GLOBAL | []      | true        |
-| datazoo_banner                         | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension).                                      | BOOLEAN    | GLOBAL | []      | true        |
-| temp_directory                         | Set the directory to which temporary files are written.                                                                                                          | VARCHAR    | GLOBAL | []      | post.db.tmp |
+|                  name                  |                                                                                                        description                                                                                                        | input_type | scope  | aliases | typed_value |
+|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| anofox_scenario_allow_internal_writes  | Allow SQL statements to write to and change the schema of the internal __anofox_scenario schema (backup/restore, manual repair). Off by default: only the scenario functions and attached scenarios change scenario state | BOOLEAN    | GLOBAL | []      | false       |
+| anofox_scenario_suppression_hash_limit | Maximum number of updated/deleted scenario keys per table for which scans suppress base rows through an in-memory hash set instead of per-row delta index probes                                                          | UBIGINT    | GLOBAL | []      | 4194304     |
+| anofox_scenario_telemetry_enabled      | Enable or disable anonymous usage telemetry for anofox_scenario                                                                                                                                                           | BOOLEAN    | GLOBAL | []      | true        |
+| datazoo_banner                         | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension).                                                                                               | BOOLEAN    | GLOBAL | []      | true        |
+| temp_directory                         | Set the directory to which temporary files are written.                                                                                                                                                                   | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

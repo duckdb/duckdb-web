@@ -979,7 +979,24 @@
         },
         {
           "page": "R",
-          "path": "/docs/2.0/clients/r"
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/clients/r/overview"
+            },
+            {
+              "page": "duckplyr",
+              "path": "/docs/2.0/clients/r/duckplyr"
+            },
+            {
+              "page": "duckdf",
+              "path": "/docs/2.0/clients/r/duckdf"
+            },
+            {
+              "page": "dbplyr",
+              "path": "/docs/2.0/clients/r/dbplyr"
+            }
+          ]
         },
         {
           "page": "Go",
@@ -1241,6 +1258,10 @@
             {
               "page": "Advanced Installation Methods",
               "path": "/docs/2.0/extensions/advanced_installation_methods"
+            },
+            {
+              "page": "Extensions as Python Packages",
+              "path": "/docs/2.0/extensions/python_packages"
             },
             {
               "page": "Versioning of Extensions",
