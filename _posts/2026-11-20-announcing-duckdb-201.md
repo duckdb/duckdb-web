@@ -9,11 +9,11 @@ excerpt: "Today we are releasing DuckDB 2.0.1, the first patch release of our 2.
 tag: release
 ---
 
-Today we're releasing DuckDB 2.0.1, the first patch release in the [2.0 LTS (Cyanoptera) line]({% post_url 2026-10-21-announcing-duckdb-200 %}). This planned release arrives 1 month after 2.0.0 and contains bugfixes, performance improvements and security patches. In addition, it provides a more convenient way of registering custom extension repositories and it ships Sirius, a new core extension for running DuckDB queries natively on NVIDIA GPUs. 
+Today we're releasing DuckDB 2.0.1, the first patch release in the [2.0 LTS (Cyanoptera) line]({% post_url 2026-10-21-announcing-duckdb-200 %}). This planned release arrives one month after 2.0.0 and contains bugfixes, performance improvements, and security patches. In addition, it provides a more convenient way of registering custom extension repositories and it ships Sirius, a new core extension for running DuckDB queries natively on NVIDIA GPUs.
 
 You can obtain a copy from the [installation page]({% link docs/2.0/installation.html %}). For a detailed overview of the changes, see the [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.1). Read on for some highlights.
 
-## Changes that may require action
+## Changes That May Require Action
 
 A few fixes in this release change existing behavior. In each case, the previous behavior was incorrect or a security risk, so we chose to fix it in 2.0.1 rather than wait for the next major release. If you rely on any of the behaviors below, review them before upgrading.
 
@@ -25,7 +25,7 @@ A secret scoped to a host or bucket could also match other hosts or buckets with
 
 ### `UPDATE ... FROM` and `MERGE` Again Apply Every Match
 
-In DuckDB 2.0.0, if several source rows matched the same target row, `MERGE` raised an error and `UPDATE ... FROM` updated the target row once, using one of the matches. Enforcing this serialized large updates causing significant performance regression.
+In DuckDB 2.0.0, if several source rows matched the same target row, `MERGE` raised an error and `UPDATE ... FROM` updated the target row once, using one of the matches. Enforcing this behavior serialized large updates, causing a significant performance regression.
 
 DuckDB 2.0.1 restores the 1.x behavior for both statements ([`#28701`](https://github.com/duckdb/duckdb/pull/28701)): the target row is updated once per match, so the final value can be non-deterministic, and the row is counted and returned (with `RETURNING`) once per match.
 
@@ -35,7 +35,7 @@ We expect a fix that keeps both correctness and performance in DuckDB 2.1.
 
 ## Improvement: Registering Extension Repositories by Host
 
-DuckDB 2.0.0 introduced [custom extension repositories]({% link docs/2.0/extensions/installing_extensions.md %}#extension-repositories) which hosts extensions signed with the publisher's own keys.
+DuckDB 2.0.0 introduced [custom extension repositories]({% link docs/2.0/extensions/installing_extensions.md %}#extension-repositories), which host extensions signed with the publisher's own keys.
 In DuckDB 2.0.1, you can register such a repository by naming the publisher's host ([`#28719`](https://github.com/duckdb/duckdb/pull/28719)):
 
 ```sql
@@ -44,7 +44,7 @@ INSTALL AND LOAD my_ext FROM extensions.example.org;
 ```
 
 DuckDB reads the repository's URL from `https://extensions.example.org/.well-known/duckdb-extension-repo.json` over verified HTTPS, then fetches the repository's signing keys and pins them.
-The statement returns the SHA-256 fingerprint of each pinned key, so you can compare them against a value published through another channel.
+The statement returns the SHA-256 fingerprint of each pinned key, so you can compare them against values published through another channel.
 If you would like to publish your own repository, see the new [“Publishing an Extension Repository” page]({% link docs/2.0/extensions/publishing_extension_repositories.md %}).
 
 Unlike adding a repository by its prefix, adding one by its host does not require an opt-in.
@@ -74,7 +74,7 @@ If a query uses features that Sirius does not support yet, DuckDB falls back to 
 
 Some Linux kernel versions have a bug ([CVE-2026-97945](https://app.opencve.io/cve/CVE-2026-97945)) that can cause memory freed lazily with `MADV_FREE` to be silently zeroed after it has been reused.
 DuckDB 2.0.1 avoids this issue: its bundled allocator no longer frees memory this way ([`#28267`](https://github.com/duckdb/duckdb/pull/28267)).
-The patch works by configuring the bundled jemalloc's `muzzy_decay_ms` to `0`. If you cannot upgrade right away, you should set the `DUCKDB_JE_MALLOC_CONF` environment variable to `muzzy_decay_ms:0` which achieves the same effect.
+The patch works by setting the bundled jemalloc's `muzzy_decay_ms` to `0`. If you cannot upgrade right away, you should set the `DUCKDB_JE_MALLOC_CONF` environment variable to `muzzy_decay_ms:0`, which achieves the same effect.
 
 ### Reading Databases Written by DuckDB 1.x
 
@@ -83,8 +83,8 @@ DuckDB 2.0.1 fixes this, along with several issues affecting views, macros, and 
 
 ### Security Fixes
 
-We fixed a remote path traversal issue ([`28684`](https://github.com/duckdb/duckdb/pull/28684)) that occurred when when DuckDB is configured with `enable_external_access=false`.
-Additionally, this release pulls in a fix ([`#27660`](https://github.com/duckdb/duckdb/issues/27660)) for the Brotli decoder ([CVE-2026-111497](https://vercel.com/kb/bulletin/node-js-security-advisory)).
+We fixed a remote path traversal issue ([`#28684`](https://github.com/duckdb/duckdb/pull/28684)) that occurred when DuckDB was configured with `enable_external_access=false`.
+Additionally, this release pulls in a fix ([`#27791`](https://github.com/duckdb/duckdb/pull/27791)) for the Brotli decoder ([CVE-2026-111497](https://app.opencve.io/cve/CVE-2026-111497)).
 
 ## Other Fixes
 
@@ -113,7 +113,7 @@ Here are some other important fixes from the DuckDB 2.0.1 release, organized by 
 ### Performance
 
 * [`#28646`](https://github.com/duckdb/duckdb/pull/28646) – Fix aggregates such as `quantile_cont` and `arg_max` running out of memory on large `GROUP BY` queries
-* [`#27760`](https://github.com/duckdb/duckdb/pull/27760) – Push-down filters to `VIEW`s used in subqueries, which can make queries orders of magnitude faster
+* [`#27760`](https://github.com/duckdb/duckdb/pull/27760) – Push down filters to `VIEW`s used in subqueries, which can make queries orders of magnitude faster
 * [`#27326`](https://github.com/duckdb/duckdb/pull/27326) – Use the [Parquet page index](https://parquet.apache.org/docs/file-format/pageindex/) to skip pages, e.g., in files written by Spark
 * [`#28193`](https://github.com/duckdb/duckdb/pull/28193) – Improve join ordering for range joins
 
