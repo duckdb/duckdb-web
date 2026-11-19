@@ -116,8 +116,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 848
-extension_download_count_pretty: 848
+extension_download_count: 847
+extension_download_count_pretty: 847
 image: '/images/community_extensions/social_preview/preview_community_extension_pfc.png'
 layout: community_extension_doc
 ---
