@@ -159,4 +159,4 @@ We are also grateful to the following people whose reports helped us make DuckDB
 * [@zerovulnlabs](https://github.com/zerovulnlabs) for reporting missing page-size validation when reading uncompressed Parquet V2 pages.
 * zz lin for reporting a problem in the MySQL extension.
 
-Stay tuned for [future DuckDB releases]({% link release_calendar.md %}), including v2.1.0 in the first half of 2027!
+Stay tuned for [future DuckDB releases]({% link release_calendar.md %}), including DuckDB 2.1.0 in the first half of 2027!
