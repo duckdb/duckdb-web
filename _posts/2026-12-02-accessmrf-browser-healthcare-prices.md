@@ -62,12 +62,12 @@ The pipeline Felix built operates like this:
 4. **Publish:** Once built, the DuckLake's root path is repointed to HTTPS, making the catalog publicly accessible. Because the Frozen DuckLake uses relative paths, this transition is seamless; the data remains in object storage but is now served over HTTPS.
 5. **Query:** [DuckDB-Wasm]({% link docs/2.0/clients/wasm/overview.md %}) runs entirely in the user's browser, executing SQL directly against the published Frozen DuckLake. Only the data necessary to answer each query is fetched from storage.
 
-<div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+<div style="border: 1px solid #000; padding: 8px; display: inline-block; margin-top: 20px;">
   <a href="https://www.accessmrf.com?category=Rate%20Search" target="_blank">
     <img src="/images/blog/accessmrf/accessmrf-03.png" alt="AccessMRF Rate Search: Querying negotiated rates by billing code" style="display: block; max-width: 100%;">
   </a>
-  <p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com?category=Rate%20Search" target="_blank" style="text-decoration: none;">AccessMRF Rate Search: Querying negotiated rates by billing code</a></p>
 </div>
+<p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com?category=Rate%20Search" target="_blank" style="text-decoration: none;">AccessMRF Rate Search: Querying negotiated rates by billing code</a></p>
 
 This architecture eliminates the need for a managed analytical database, which would require login credentials, a paywall, or per-query charges that would be prohibitively expensive at the scale of public access.
 
@@ -89,30 +89,30 @@ The Frozen DuckLake model introduces one significant trade-off: **data staleness
 
 AccessMRF's users today include researchers who use the metadata index to locate source files. A real-world example is a startup analyzing claims for self-funded employers; they discovered AccessMRF and used it to identify relevant insurer URLs. Felix is aware of researchers preparing to publish analysis using the data in *Health Affairs Forefront*.
 
-<div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+<div style="border: 1px solid #000; padding: 8px; display: inline-block; margin-top: 40px;">
   <a href="https://www.accessmrf.com?category=Payers" target="_blank">
     <img src="/images/blog/accessmrf/accessmrf-04.png" alt="AccessMRF Payers: 213 health insurers indexed with their pricing plans" style="display: block; max-width: 100%;">
   </a>
-  <p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com?category=Payers" target="_blank" style="text-decoration: none;">AccessMRF Payers: 213 health insurers indexed with their pricing plans</a></p>
 </div>
+<p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com?category=Payers" target="_blank" style="text-decoration: none;">AccessMRF Payers: 213 health insurers indexed with their pricing plans</a></p>
 
-<div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+<div style="border: 1px solid #000; padding: 8px; display: inline-block; margin-top: 40px;">
   <a href="https://www.accessmrf.com?category=Purchasers" target="_blank">
     <img src="/images/blog/accessmrf/accessmrf-05.png" alt="AccessMRF Purchasers: Self-insured employers like Walmart and Amazon with their healthcare plans" style="display: block; max-width: 100%;">
   </a>
-  <p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com?category=Purchasers" target="_blank" style="text-decoration: none;">AccessMRF Purchasers: Self-insured employers like Walmart and Amazon with their healthcare plans</a></p>
 </div>
+<p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com?category=Purchasers" target="_blank" style="text-decoration: none;">AccessMRF Purchasers: Self-insured employers like Walmart and Amazon with their healthcare plans</a></p>
 
 Felix sees the DuckDB-Wasm component as still early. **"I don't think they've used the DuckDB component yet because I've released that really recently."** But the foundation is in place for script-savvy experts to perform complex analysis without building a data engineering pipeline.
 
 His longer-term vision extends beyond current use cases: **"I hope that this will improve the quality of the data in the long term, and we'll be able to build a healthcare marketplace using this data or make other cool technologies derived from this price transparency data."** He also points to the human impact: **"Price uncertainty makes people afraid of going to the doctor. If you add financial uncertainty to that, it's a barrier for patients to get healthcare soon and early. By making price data available, I hope that people will be less worried about going to the doctor."**
 
-<div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+<div style="border: 1px solid #000; padding: 8px; display: inline-block; margin-top: 40px;">
   <a href="https://www.accessmrf.com?category=Hospitals" target="_blank">
     <img src="/images/blog/accessmrf/accessmrf-06.png" alt="AccessMRF Hospitals: 5,419 CMS-regulated hospitals with their published charges" style="display: block; max-width: 100%;">
   </a>
-  <p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com?category=Hospitals" target="_blank" style="text-decoration: none;">AccessMRF Hospitals: 5,419 CMS-regulated hospitals with their published charges</a></p>
 </div>
+<p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com?category=Hospitals" target="_blank" style="text-decoration: none;">AccessMRF Hospitals: 5,419 CMS-regulated hospitals with their published charges</a></p>
 
 ## Bringing It Together
 
