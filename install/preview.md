@@ -85,7 +85,7 @@ curl https://install.duckdb.org | DUCKDB_VERSION=2.0-alpha sh
 To install the latest v2.0-dev alpha build on Windows, run:
 
 ```powershell
-$env:DUCKDB_VERSION = "2.0-alpha"; irm https://install.duckdb.org/install.ps1 | iex
+$env:DUCKDB_VERSION="2.0-alpha"; irm https://install.duckdb.org/install.ps1 | iex
 ```
 
 #### v2.0-dev CLI Packages
@@ -115,7 +115,7 @@ curl https://install.duckdb.org | DUCKDB_VERSION=2.1-alpha sh
 To install the latest v2.1-dev alpha build on Windows, run:
 
 ```powershell
-$env:DUCKDB_VERSION = "2.1-alpha"; irm https://install.duckdb.org/install.ps1 | iex
+$env:DUCKDB_VERSION="2.1-alpha"; irm https://install.duckdb.org/install.ps1 | iex
 ```
 
 #### v2.1-dev CLI Packages
