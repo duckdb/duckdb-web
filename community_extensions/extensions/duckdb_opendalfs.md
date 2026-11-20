@@ -40,10 +40,10 @@ docs:
     `duckdb_opendalfs` is an extension which supports many backends (S3, GCS, Azure Blob, Hugging Face, etc)
     and secret management via `opendal_<backend>` secret types.
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 819
-extension_download_count_pretty: 819
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 818
+extension_download_count_pretty: 818
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_opendalfs.png'
 layout: community_extension_doc
 ---
