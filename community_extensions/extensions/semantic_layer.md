@@ -132,8 +132,8 @@ docs:
 
 extension_star_count: 24
 extension_star_count_pretty: 24
-extension_download_count: 631
-extension_download_count_pretty: 631
+extension_download_count: 636
+extension_download_count_pretty: 636
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_layer.png'
 layout: community_extension_doc
 ---

@@ -86,8 +86,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 484
-extension_download_count_pretty: 484
+extension_download_count: 585
+extension_download_count_pretty: 585
 image: '/images/community_extensions/social_preview/preview_community_extension_mqtt.png'
 layout: community_extension_doc
 ---

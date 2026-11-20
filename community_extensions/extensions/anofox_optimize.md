@@ -131,8 +131,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 861
-extension_download_count_pretty: 861
+extension_download_count: 867
+extension_download_count_pretty: 867
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_optimize.png'
 layout: community_extension_doc
 ---
