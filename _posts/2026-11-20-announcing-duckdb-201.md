@@ -17,9 +17,9 @@ You can obtain a copy from the [installation page]({% link docs/2.0/installation
 
 A few fixes in this release change existing behavior. In each case, the previous behavior was incorrect or a security risk, so we chose to fix it in 2.0.1 rather than wait for the next major release. If you rely on any of the behaviors below, review them before upgrading.
 
-### Stricter Secret Scope Matching
+### Stricter `SECRET` Scope Matching
 
-A secret scoped to a host or bucket could also match other hosts or buckets with the same prefix, so it could be sent somewhere it wasn't meant for ([`#28684`](https://github.com/duckdb/duckdb/pull/28684)). A URL now matches such a scope only if it is identical to the scope or continues with a `/`. For example, the scope `s3://bucket-` no longer matches `s3://bucket-1/`.
+A `SECRET` scoped to a host or bucket could also match other hosts or buckets with the same prefix, so it could be sent somewhere it wasn't meant for ([`#28684`](https://github.com/duckdb/duckdb/pull/28684)). A URL now matches such a scope only if it is identical to the scope or continues with a `/`. For example, the scope `s3://bucket-` no longer matches `s3://bucket-1/`.
 
 **Action:** check your host- and bucket-scoped `SECRET`s and make sure each scope uses the full host or bucket name. If a URL has an explicit port, the scope must include it too.
 
@@ -101,7 +101,10 @@ DuckDB 2.0.1 fixes this, along with several issues affecting views, macros, and 
 
 ### Security Fixes
 
-We fixed a remote path traversal issue ([`#28684`](https://github.com/duckdb/duckdb/pull/28684)) that occurred when DuckDB was configured with `enable_external_access=false`.
+Configuring `enable_external_access=false` should prevent access to external state but would still allow `CREATE SECRET`, which can result in accessing external state. This is now fixed ([`28637`](https://github.com/duckdb/duckdb/pull/28637)) by refusing `CREATE SECRET` with a `Permission Error` and an error message indicating `Creating secrets is disabled when enable_external_access is false`.
+
+We also fixed a remote path traversal issue ([`#28684`](https://github.com/duckdb/duckdb/pull/28684)) that occurred when DuckDB was configured with `enable_external_access=false`.
+
 Additionally, this release pulls in a fix ([`#27791`](https://github.com/duckdb/duckdb/pull/27791)) for the Brotli decoder ([CVE-2026-111497](https://app.opencve.io/cve/CVE-2026-111497)).
 
 ## Other Fixes
