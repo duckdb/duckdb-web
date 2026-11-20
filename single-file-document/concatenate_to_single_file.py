@@ -591,7 +591,7 @@ def add_blog_posts(blog_post_files, config, internal_labels, of):
 
 # get the full DuckDB version number for the documentation version, e.g., 2.0 -> 2.0.0
 def get_duckdb_version(config, docs_version):
-    for prefix in ["maintained", "latest", "old_lts"]:
+    for prefix in ["maintained", "latest"]:
         if config.get(f"{prefix}_short_duckdb_version") == docs_version:
             return config[f"{prefix}_duckdb_version"]
     return docs_version
