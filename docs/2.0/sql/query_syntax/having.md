@@ -23,7 +23,7 @@ GROUP BY city
 HAVING count(*) >= 50;
 ```
 
-Compute the average income per city per `street_name`, filtering out cities with an average `income` bigger than twice the median `income`:
+For each `city` and `street_name`, show the average `income` if it exceeds twice the median `income` for that group:
 
 ```sql
 SELECT city, street_name, avg(income)
