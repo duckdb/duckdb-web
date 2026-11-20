@@ -35,17 +35,23 @@ For Python, we distribute different nightly builds. Note that not all of them ar
 
 ### Python v1.5-dev
 
+To install the DuckDB 1.5-dev client in Python, use the Pip syntax `duckdb<1.6.0`:
+
 ```batch
 pip install "duckdb<1.6.0" --pre --upgrade
 ```
 
 ### Python v2.0-dev
 
+To install the DuckDB 2.0-dev client in Python, use the Pip syntax `duckdb<2.1.0`:
+
 ```batch
 pip install "duckdb<2.1.0" --pre --upgrade
 ```
 
 ### Python v2.1-dev
+
+To install the DuckDB 2.1-dev client in Python, run:
 
 ```batch
 pip install duckdb --pre --upgrade
