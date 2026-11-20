@@ -50,11 +50,11 @@ body.documentation {
         }
 
         h2 {
-            @include headline-3;
+            @include headline-2;
         }
 
         h3 {
-            @include headline-4;
+            @include headline-3;
 
             code {
                 font-family: $fontMonoXBold;
@@ -64,7 +64,7 @@ body.documentation {
         }
 
         h4 {
-            @include headline-5;
+            @include headline-4;
         }
 
         h5 {
