@@ -76,9 +76,10 @@ For details, see the [“Securing Extensions” page]({% link docs/2.0/operation
 DuckDB 2.0.1 adds [Sirius]({% link docs/2.0/core_extensions/sirius.md %}), a GPU-native SQL engine that runs DuckDB queries on NVIDIA GPUs, as a core extension ([`#28022`](https://github.com/duckdb/duckdb/pull/28022)).
 Sirius is available on Linux (x86-64 and arm64) and requires an NVIDIA GPU with a CUDA 12 or 13 driver.
 
-To use Sirius, first install and load the extension. Then, you can check its status as follows:
+To use Sirius, first install and load the extension, and check its status as follows:
 
 ```sql
+INSTALL AND LOAD httpfs;
 INSTALL AND LOAD sirius;
 FROM sirius_status();
 ```
