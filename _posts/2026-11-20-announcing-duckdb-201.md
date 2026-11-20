@@ -7,6 +7,7 @@ thumb: "/images/blog/thumbs/duckdb-release-2-0-1.svg"
 image: "/images/blog/thumbs/duckdb-release-2-0-1.png"
 redirect_from:
 - /201
+- /2.0.1
 excerpt: "Today we are releasing DuckDB 2.0.1, the first patch release of our 2.0 LTS line. This release ships bugfixes, performance improvements, and security patches. In addition, a capability is added to define custom extension repositories with only their hostname."
 tag: release
 ---
