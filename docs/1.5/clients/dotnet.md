@@ -6,7 +6,7 @@ title: C# (.NET) Client
 
 > Installation To use the DuckDB C# client, install the [`DuckDB.NET.Data.Full` NuGet package](https://www.nuget.org/packages/DuckDB.NET.Data.Full).
 >
-> The latest stable version of the DuckDB C# client is {% if site.maintained_duckdb_csharp_version != "" %}{{ site.maintained_duckdb_csharp_version }}{% else %}{{ site.old_lts_duckdb_csharp_version }}{% endif %}.
+> The latest stable version of the DuckDB C# client is {% if site.maintained_duckdb_csharp_version != "" %}{{ site.maintained_duckdb_csharp_version }}{% else %}1.4.4{% endif %}.
 
 [DuckDB.NET](https://duckdb.net/) is an open-source [ADO.NET](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/) provider for DuckDB. It also includes a low-level .NET wrapper around the [DuckDB C API]({% link docs/1.5/clients/c/overview.md %}). The client is maintained by [Giorgi Dalakishvili](https://github.com/Giorgi). For the full documentation, see the [DuckDB.NET website](https://duckdb.net/docs/introduction.html).
 

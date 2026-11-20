@@ -4,7 +4,7 @@ layout: docu
 title: Go Client
 ---
 
-> The latest stable release of the DuckDB Go client bundles DuckDB {% if site.maintained_duckdb_go_version != "" %}{{ site.maintained_duckdb_go_version }}{% else %}{{ site.old_lts_duckdb_go_version }}{% endif %}. Its own version tag encodes that DuckDB version; see [Versioning](#versioning) below.
+> The latest stable release of the DuckDB Go client bundles DuckDB {% if site.maintained_duckdb_go_version != "" %}{{ site.maintained_duckdb_go_version }}{% else %}1.4.5{% endif %}. Its own version tag encodes that DuckDB version; see [Versioning](#versioning) below.
 
 The DuckDB Go client, [`duckdb-go`](https://github.com/duckdb/duckdb-go), is a SQL driver that conforms to Go's built-in [`database/sql`](https://pkg.go.dev/database/sql) interface, so DuckDB is used through the same API as any other Go SQL database. On top of `database/sql`, the client adds DuckDB-specific interfaces for the [Appender]({% link docs/1.5/clients/go/data_import.md %}#appender), [Apache Arrow]({% link docs/1.5/clients/go/result_handling.md %}), [user-defined functions]({% link docs/1.5/clients/go/functions.md %}), and [profiling]({% link docs/1.5/clients/go/profiling.md %}). This page focuses on installation. The other pages in this section cover connecting and each feature in detail.
 

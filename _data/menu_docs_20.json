@@ -1317,6 +1317,10 @@
               "path": "/docs/2.0/core_extensions/full_text_search"
             },
             {
+              "page": "Glue",
+              "path": "/docs/2.0/core_extensions/glue"
+            },
+            {
               "page": "httpfs (HTTP and S3)",
               "subsubfolderitems": [
                 {
@@ -1509,6 +1513,10 @@
             {
               "page": "Extension Repositories",
               "path": "/docs/2.0/extensions/extension_repositories"
+            },
+            {
+              "page": "Publishing an Extension Repository",
+              "path": "/docs/2.0/extensions/publishing_extension_repositories"
             },
             {
               "page": "Window Function Extensions",
