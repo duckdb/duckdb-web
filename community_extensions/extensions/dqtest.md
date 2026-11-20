@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: dqtest
   description: Define and run data-quality tests inside DuckDB
-  version: 0.1.1
+  version: 1.0.3
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
     
 repo:
   github: vhe74/duckdb-dataquality-extension
-  ref: 72640ababe51c90daa5383467a8e14e12db85d6c
+  ref: 007e72f997e37dc1a435b61fba51fb47c3d79da5
 
 docs:
   hello_world: |
@@ -138,8 +138,8 @@ extended_description: |
   - Catch data anomalies and schema changes early
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 640
-extension_download_count_pretty: 640
+extension_download_count: 538
+extension_download_count_pretty: 538
 image: '/images/community_extensions/social_preview/preview_community_extension_dqtest.png'
 layout: community_extension_doc
 ---
@@ -149,15 +149,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ❌ | ❌ | ❌ |
-| macOS AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -200,6 +200,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

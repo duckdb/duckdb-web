@@ -19,6 +19,7 @@ extension:
 repo:
   github: yoogoc/duckdb-table-guard
   ref: 0ba95aa9e8b793c1470cc005d63b47bb3006c8de
+  variegata: abc838d7cddce1b7d00fe4189ade8a0aa0d3ee34
 
 docs:
   hello_world: |
@@ -75,8 +76,8 @@ docs:
     | Wildcard `*` | `mydb.*.patients` | Match any value for that component |
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 893
-extension_download_count_pretty: 893
+extension_download_count: 859
+extension_download_count_pretty: 859
 image: '/images/community_extensions/social_preview/preview_community_extension_table_guard.png'
 layout: community_extension_doc
 ---

@@ -20,9 +20,9 @@ repo:
   ref: e7cc326bd2e126189561c9469fa9aabbc33134bd
   variegata: e7cc326bd2e126189561c9469fa9aabbc33134bd
 
-extension_star_count: 33
-extension_star_count_pretty: 33
-extension_download_count: 1291
+extension_star_count: 34
+extension_star_count_pretty: 34
+extension_download_count: 1278
 extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_odata.png'
 layout: community_extension_doc

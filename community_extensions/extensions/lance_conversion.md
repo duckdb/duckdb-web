@@ -145,10 +145,10 @@ docs:
     endpoint, region, TLS, and URL style are resolved from DuckDB secrets and
     passed to the OpenDAL-backed Lance object store.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 1276
-extension_download_count_pretty: 1.3k
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 3174
+extension_download_count_pretty: 3.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_lance_conversion.png'
 layout: community_extension_doc
 ---

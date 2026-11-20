@@ -69,8 +69,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 72
-extension_download_count_pretty: 72
+extension_download_count: 220
+extension_download_count_pretty: 220
 image: '/images/community_extensions/social_preview/preview_community_extension_llm_prices.png'
 layout: community_extension_doc
 ---

@@ -61,8 +61,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 599
-extension_download_count_pretty: 599
+extension_download_count: 607
+extension_download_count_pretty: 607
 image: '/images/community_extensions/social_preview/preview_community_extension_timestral.png'
 layout: community_extension_doc
 ---

@@ -34,8 +34,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 605
-extension_download_count_pretty: 605
+extension_download_count: 599
+extension_download_count_pretty: 599
 image: '/images/community_extensions/social_preview/preview_community_extension_slack_msg.png'
 layout: community_extension_doc
 ---

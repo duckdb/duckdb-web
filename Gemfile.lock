@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 69bb7caa2704f856ffe46179318a2f22a0bffec5
+  revision: 8fa37663015f86a02707fbfb7a89c73572a836f1
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -189,7 +189,7 @@ GEM
     jekyll-watch (2.2.1)
       listen (~> 3.0)
     json (2.21.2)
-    kramdown (2.5.2)
+    kramdown (2.6.1)
       rexml (>= 3.4.4)
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
@@ -316,7 +316,7 @@ DEPENDENCIES
   jekyll-theme-time-machine (= 0.2.0)
   jekyll-titles-from-headings (= 0.6.0)
   jekyll-toc (~> 0.19.0)
-  kramdown (= 2.5.2)
+  kramdown (= 2.6.1)
   kramdown-parser-gfm (= 1.1.0)
   liquid (= 4.0.4)
   minima!
