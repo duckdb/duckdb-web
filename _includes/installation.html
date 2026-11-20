@@ -133,11 +133,11 @@ The newest release offering a client gets unversioned install commands, older on
 
 <h4>Direct Downloads</h4>
 {%- if artifacts.cli.linux_musl %}
-<p>glibc builds (recommended):</p>
+<h5>glibc Builds (Recommended)</h5>
 {%- endif %}
 {% include install/downloads.html base=downloads_url artifacts=artifacts.cli.linux %}
 {%- if artifacts.cli.linux_musl %}
-<p>musl libc builds (for Alpine Linux):</p>
+<h5>musl libc Builds (for Alpine Linux)</h5>
 {% include install/downloads.html base=downloads_url artifacts=artifacts.cli.linux_musl %}
 {%- endif %}
 {{ pip_section }}

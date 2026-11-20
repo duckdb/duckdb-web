@@ -16,6 +16,15 @@ artifacts:
         filename: "duckdb-cli-linux-arm64.tar.gz"
         hashes:
           sha256: "84e37891fcc45c887e30220f51a4914995cd8174139e87f8efd311ac83c956a7"
+    linux_musl:
+      x86_64:
+        filename: "duckdb-cli-linux-amd64-musl.tar.gz"
+        hashes:
+          sha256: "a4b71ca703c143b1ee198a1d2d4c49778fc6660157098782acb94973a3ebcea1"
+      arm64:
+        filename: "duckdb-cli-linux-arm64-musl.tar.gz"
+        hashes:
+          sha256: "70b9c629688ba8a76e15021b4b9e2ee5687e04d835d2d2f14367ea698bcca913"
     windows:
       x86_64:
         filename: "duckdb-cli-windows-amd64.tar.gz"
