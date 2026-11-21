@@ -9,6 +9,7 @@ redirect_from:
 - /docs/lts/guides/offline-copy
 - /docs/preview/guides/offline-copy
 title: Browsing Offline
+how_to_topic: tools-meta
 ---
 
 You can browse the DuckDB documentation and blog offline.
