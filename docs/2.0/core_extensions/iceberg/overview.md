@@ -86,6 +86,8 @@ SELECT count(*)
 FROM iceberg_scan('s3://bucketname/lineitem_iceberg/metadata/v1.metadata.json');
 ```
 
+As discussed in the [“From Spreadsheets to DuckLake” blog post]({% post_url 2026-10-29-from-spreadsheets-to-ducklake %}), Iceberg tables can be joined with CSV and Parquet files in a single query.
+
 ### Metadata and Snapshots
 
 To inspect the manifest entries and snapshots of a table, use the [`iceberg_metadata`]({% link docs/2.0/core_extensions/iceberg/iceberg_functions.md %}#iceberg_metadata) and [`iceberg_snapshots`]({% link docs/2.0/core_extensions/iceberg/iceberg_functions.md %}#iceberg_snapshots) functions.

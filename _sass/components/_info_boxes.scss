@@ -111,9 +111,10 @@ body.layout_default.blog_typography #main_content_wrap,
 		&.quote {
 			--quote-size: var(--type-body-normal, 15px);
 			margin-block: 2rem;
-			padding: 0;
-			border: 0;
-			background: transparent;
+			padding: 1.25rem 1.5rem;
+			border: 1px solid var(--doc-box-quote-border, #d3deec);
+			border-radius: var(--page-radius-m, 12px);
+			background: var(--doc-box-quote, #eef3f9);
 
 			&.quote-large {
 				--quote-size: var(--type-body-large, 22.5px);
