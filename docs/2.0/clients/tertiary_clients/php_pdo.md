@@ -44,7 +44,7 @@ Packagist: [pdo-duckdb-php](https://packagist.org/packages/thomas-0816/pdo-duckd
 # DuckDB 1.x
 pie install thomas-0816/pdo-duckdb-php:^1
 # DuckDB 2.x
-pie install thomas-0816/pdo-duckdb-php:^2-beta
+pie install thomas-0816/pdo-duckdb-php:^2
 ```
 
 Testing:
@@ -65,7 +65,7 @@ php -r 'print_r((new PDO("duckdb::memory:"))->query("SELECT 42 as n")->fetch(PDO
 # DuckDB 1.x
 pie install --skip-enable-extension thomas-0816/pdo-duckdb-php:^1
 # DuckDB 2.x
-pie install --skip-enable-extension thomas-0816/pdo-duckdb-php:^2-beta
+pie install --skip-enable-extension thomas-0816/pdo-duckdb-php:^2
 ```
 
 Testing:

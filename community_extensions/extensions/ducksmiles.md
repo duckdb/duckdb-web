@@ -174,8 +174,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 841
-extension_download_count_pretty: 841
+extension_download_count: 840
+extension_download_count_pretty: 840
 image: '/images/community_extensions/social_preview/preview_community_extension_ducksmiles.png'
 layout: community_extension_doc
 ---
@@ -185,15 +185,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ✅ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

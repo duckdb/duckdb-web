@@ -7,4 +7,7 @@ redirect_from:
 - /docs/lts/guides/database_integration/overview
 - /docs/preview/guides/database_integration/overview
 title: Database Integration
+how_to_topic: database-integration
 ---
+
+These guides show how to use DuckDB with other database systems.

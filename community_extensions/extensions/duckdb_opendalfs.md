@@ -40,10 +40,10 @@ docs:
     `duckdb_opendalfs` is an extension which supports many backends (S3, GCS, Azure Blob, Hugging Face, etc)
     and secret management via `opendal_<backend>` secret types.
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 819
-extension_download_count_pretty: 819
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 817
+extension_download_count_pretty: 817
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_opendalfs.png'
 layout: community_extension_doc
 ---
@@ -53,15 +53,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

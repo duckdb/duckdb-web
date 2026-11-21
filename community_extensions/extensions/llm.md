@@ -96,8 +96,8 @@ repo:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 850
-extension_download_count_pretty: 850
+extension_download_count: 853
+extension_download_count_pretty: 853
 image: '/images/community_extensions/social_preview/preview_community_extension_llm.png'
 layout: community_extension_doc
 ---
@@ -107,15 +107,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -139,24 +139,6 @@ LOAD {{ page.extension.name }};
 
 |    function_name    | function_type | description | comment | examples |
 |---------------------|---------------|-------------|---------|----------|
-| byte_range          | scalar        | NULL        | NULL    |          |
-| http_delete         | scalar        | NULL        | NULL    |          |
-| http_delete         | table         | NULL        | NULL    |          |
-| http_get            | scalar        | NULL        | NULL    |          |
-| http_get            | table         | NULL        | NULL    |          |
-| http_head           | scalar        | NULL        | NULL    |          |
-| http_head           | table         | NULL        | NULL    |          |
-| http_patch          | scalar        | NULL        | NULL    |          |
-| http_patch          | table         | NULL        | NULL    |          |
-| http_post           | scalar        | NULL        | NULL    |          |
-| http_post           | table         | NULL        | NULL    |          |
-| http_post_form      | scalar        | NULL        | NULL    |          |
-| http_post_form      | table         | NULL        | NULL    |          |
-| http_post_multipart | scalar        | NULL        | NULL    |          |
-| http_post_multipart | table         | NULL        | NULL    |          |
-| http_put            | scalar        | NULL        | NULL    |          |
-| http_put            | table         | NULL        | NULL    |          |
-| http_range_header   | scalar        | NULL        | NULL    |          |
 | llm                 | table         | NULL        | NULL    |          |
 | llm_and_cache       | scalar        | NULL        | NULL    |          |
 | llm_batch_and_cache | scalar        | NULL        | NULL    |          |
@@ -167,38 +149,30 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type |                                                                                              description                                                                                               | comment |                     examples                      |
-|-------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------|
-| map_extract_value | scalar        | Returns the value for a given key or NULL if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map’s keys else an error is returned | NULL    | [map_extract_value(map(['key'], ['val']), 'key')] |
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-|  type_name   | type_size | logical_type | type_category | internal |
-|--------------|----------:|--------------|---------------|----------|
-| HTTP_HEADERS | 16        | MAP          | COMPOSITE     | true     |
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|           name            |                                    description                                    | input_type | scope  | aliases |      typed_value       |
-|---------------------------|-----------------------------------------------------------------------------------|------------|--------|---------|------------------------|
-| http_follow_redirects     | Automatically follow HTTP redirects (default: true)                               | BOOLEAN    | GLOBAL | []      | true                   |
-| http_max_concurrency      | Maximum number of concurrent HTTP requests per scalar function call (default: 32) | UBIGINT    | GLOBAL | []      | 32                     |
-| http_request_cache        | Cache HTTP responses within query to prevent duplicate requests (default: true)   | BOOLEAN    | GLOBAL | []      | true                   |
-| http_user_agent           | Custom User-Agent header for all HTTP requests (default: DuckDB)                  | VARCHAR    | GLOBAL | []      |                        |
-| llm_base_url              | Base URL for local LLM provider                                                   | VARCHAR    | GLOBAL | []      | http://localhost:1234  |
-| llm_cloudflare_account_id | Cloudflare account ID                                                             | VARCHAR    | GLOBAL | []      | NULL                   |
-| llm_cloudflare_api_key    | Cloudflare API token                                                              | VARCHAR    | GLOBAL | []      | NULL                   |
-| llm_default_max_tokens    | Default max tokens                                                                | INTEGER    | GLOBAL | []      | 1024                   |
-| llm_default_model         | Default model name                                                                | VARCHAR    | GLOBAL | []      | NULL                   |
-| llm_default_provider      | Default LLM provider (local, openai, gemini, cloudflare)                          | VARCHAR    | GLOBAL | []      | local                  |
-| llm_default_temperature   | Default temperature (0.0-1.0)                                                     | DOUBLE     | GLOBAL | []      | 0.0                    |
-| llm_gemini_api_key        | Gemini API key                                                                    | VARCHAR    | GLOBAL | []      | NULL                   |
-| llm_openai_api_key        | OpenAI API key                                                                    | VARCHAR    | GLOBAL | []      | NULL                   |
-| llm_openai_base_url       | OpenAI API base URL                                                               | VARCHAR    | GLOBAL | []      | https://api.openai.com |
-| temp_directory            | Set the directory to which temporary files are written.                           | VARCHAR    | GLOBAL | []      | post.db.tmp            |
+|           name            |                       description                        | input_type | scope  | aliases |      typed_value       |
+|---------------------------|----------------------------------------------------------|------------|--------|---------|------------------------|
+| llm_base_url              | Base URL for local LLM provider                          | VARCHAR    | GLOBAL | []      | http://localhost:1234  |
+| llm_cloudflare_account_id | Cloudflare account ID                                    | VARCHAR    | GLOBAL | []      | NULL                   |
+| llm_cloudflare_api_key    | Cloudflare API token                                     | VARCHAR    | GLOBAL | []      | NULL                   |
+| llm_default_max_tokens    | Default max tokens                                       | INTEGER    | GLOBAL | []      | 1024                   |
+| llm_default_model         | Default model name                                       | VARCHAR    | GLOBAL | []      | NULL                   |
+| llm_default_provider      | Default LLM provider (local, openai, gemini, cloudflare) | VARCHAR    | GLOBAL | []      | local                  |
+| llm_default_temperature   | Default temperature (0.0-1.0)                            | DOUBLE     | GLOBAL | []      | 0.0                    |
+| llm_gemini_api_key        | Gemini API key                                           | VARCHAR    | GLOBAL | []      | NULL                   |
+| llm_openai_api_key        | OpenAI API key                                           | VARCHAR    | GLOBAL | []      | NULL                   |
+| llm_openai_base_url       | OpenAI API base URL                                      | VARCHAR    | GLOBAL | []      | https://api.openai.com |
+| temp_directory            | Set the directory to which temporary files are written.  | VARCHAR    | GLOBAL | []      | post.db.tmp            |
 
 
