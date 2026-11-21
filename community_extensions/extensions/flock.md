@@ -64,8 +64,8 @@ docs:
 
 extension_star_count: 366
 extension_star_count_pretty: 366
-extension_download_count: 886
-extension_download_count_pretty: 886
+extension_download_count: 946
+extension_download_count_pretty: 946
 image: '/images/community_extensions/social_preview/preview_community_extension_flock.png'
 layout: community_extension_doc
 ---
