@@ -93,6 +93,6 @@ SHOW VARIABLES;
 | int_var | 42    | INTEGER |
 | txt_var | Hello | VARCHAR |  
 
-> Note: SQL-level variables that were unset by a `RESET VARIABLE`-statement cease to exist and are therefore not listed.
+> SQL-level variables that were unset by a `RESET VARIABLE`-statement cease to exist and are therefore not listed.
 
 The list of existing SQL-level variables is also available as [`duckdb_variables()`-metadata query]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_variables).
