@@ -21,6 +21,21 @@
       "url": "/docs/2.0/guides/"
     },
     {
+      "page": "What's New in the Docs",
+      "slug": "",
+      "url": "/docs/2.0/whats_new_in_the_docs"
+    },
+    {
+      "page": "Glossary of Terms",
+      "slug": "",
+      "url": "/docs/2.0/guides/glossary"
+    },
+    {
+      "page": "Browsing Offline",
+      "slug": "",
+      "url": "/docs/2.0/guides/offline-copy"
+    },
+    {
       "page": "Import & Export",
       "group_start": true,
       "overview": "/docs/2.0/data/overview",
@@ -1217,6 +1232,39 @@
             {
               "page": "Swift",
               "path": "/docs/2.0/clients/tertiary_clients/swift"
+            }
+          ]
+        },
+        {
+          "page": "SQL Editors",
+          "subfolderitems": [
+            {
+              "page": "Beekeeper Studio",
+              "path": "/docs/2.0/guides/sql_editors/beekeeper_studio"
+            },
+            {
+              "page": "DataGrip",
+              "path": "/docs/2.0/guides/sql_editors/datagrip"
+            },
+            {
+              "page": "DBeaver",
+              "path": "/docs/2.0/guides/sql_editors/dbeaver"
+            },
+            {
+              "page": "DBine",
+              "path": "/docs/2.0/guides/sql_editors/dbine"
+            },
+            {
+              "page": "LibreDB Studio",
+              "path": "/docs/2.0/guides/sql_editors/libredb_studio"
+            },
+            {
+              "page": "OrcaQ",
+              "path": "/docs/2.0/guides/sql_editors/orcaq"
+            },
+            {
+              "page": "VisuaLeaf",
+              "path": "/docs/2.0/guides/sql_editors/visualeaf"
             }
           ]
         }
