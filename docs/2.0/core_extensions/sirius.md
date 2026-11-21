@@ -27,9 +27,13 @@ The `sirius` extension is available from DuckDB v2.0.1 on the `linux_amd64` and 
 To install and load the extension, run:
 
 ```sql
-INSTALL sirius;
-LOAD sirius;
+INSTALL AND LOAD httpfs;
+SET http_timeout = 900;
+INSTALL AND LOAD sirius;
 ```
+
+> Tip The default timeout is 30 seconds, which can incur timeouts when downloading the extension on a slow network connection.
+> The `http_timeout` option allows you to adjust the timeout to accommodate this.
 
 The `sirius` extension is a small loader without a CUDA dependency.
 `LOAD sirius` asks the NVIDIA driver which CUDA version it supports and loads the matching Sirius backend:

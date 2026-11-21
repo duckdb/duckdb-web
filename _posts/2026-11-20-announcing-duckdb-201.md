@@ -83,6 +83,7 @@ To use Sirius, first install and load the extension, and check its status as fol
 
 ```sql
 INSTALL AND LOAD httpfs;
+SET http_timeout = 900;
 INSTALL AND LOAD sirius;
 FROM sirius_status();
 ```
