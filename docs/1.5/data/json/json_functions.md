@@ -522,10 +522,10 @@ Failed to cast value: "anatidae"
 
 DuckDB implements two JSON table functions that take a JSON value and produce a table from it.
 
-| Function                 | Description                                                                                  |
-| :----------------------- | :------------------------------------------------------------------------------------------- |
-| `json_each(json[ ,path]` | Traverse `json` and return one row for each element in the top-level array or object.        |
-| `json_tree(json[ ,path]` | Traverse `json` in depth-first fashion and return one row for each element in the structure. |
+| Function                  | Description                                                                                  |
+| :------------------------ | :------------------------------------------------------------------------------------------- |
+| `json_each(json[, path])` | Traverse `json` and return one row for each element in the top-level array or object.        |
+| `json_tree(json[, path])` | Traverse `json` in depth-first fashion and return one row for each element in the structure. |
 
 If the element is not an array or object, the element itself is returned.
 If the optional `path` argument is supplied, traversal starts from the element at the given path instead of the root element.
