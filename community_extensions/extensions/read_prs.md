@@ -68,8 +68,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 148
-extension_download_count_pretty: 148
+extension_download_count: 233
+extension_download_count_pretty: 233
 image: '/images/community_extensions/social_preview/preview_community_extension_read_prs.png'
 layout: community_extension_doc
 ---
