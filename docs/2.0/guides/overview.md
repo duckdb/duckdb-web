@@ -15,24 +15,6 @@ redirect_from:
 - /docs/current/guides/overview
 - /docs/lts/guides/overview
 - /docs/preview/guides/overview
-- /docs/2.0/guides/file_formats/overview
-- /docs/guides/file_formats/overview
-- /docs/stable/guides/file_formats/overview
-- /docs/current/guides/file_formats/overview
-- /docs/lts/guides/file_formats/overview
-- /docs/preview/guides/file_formats/overview
-- /docs/2.0/guides/network_cloud_storage/overview
-- /docs/guides/network_cloud_storage/overview
-- /docs/stable/guides/network_cloud_storage/overview
-- /docs/current/guides/network_cloud_storage/overview
-- /docs/lts/guides/network_cloud_storage/overview
-- /docs/preview/guides/network_cloud_storage/overview
-- /docs/2.0/guides/database_integration/overview
-- /docs/guides/database_integration/overview
-- /docs/stable/guides/database_integration/overview
-- /docs/current/guides/database_integration/overview
-- /docs/lts/guides/database_integration/overview
-- /docs/preview/guides/database_integration/overview
 title: How-to Guides
 ---
 

@@ -1,0 +1,13 @@
+---
+layout: docu
+redirect_from:
+- /docs/guides/database_integration/overview
+- /docs/stable/guides/database_integration/overview
+- /docs/current/guides/database_integration/overview
+- /docs/lts/guides/database_integration/overview
+- /docs/preview/guides/database_integration/overview
+title: Database Integration
+how_to_topic: database-integration
+---
+
+These guides show how to use DuckDB with other database systems.
