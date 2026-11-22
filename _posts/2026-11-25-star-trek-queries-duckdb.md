@@ -18,24 +18,24 @@ Recently, the [great Patrick Stewart](https://www.theguardian.com/culture/2026/o
 
 In [“The Battle”](https://www.st-minutiae.com/resources/scripts/110.txt), Picard’s old ship, the [Stargazer](https://memory-alpha.fandom.com/wiki/USS_Stargazer_(NCC-2893)), is handed back to him with a personal log aboard in which he appears to confess to an unprovoked attack on the [Ferengi](https://memory-alpha.fandom.com/wiki/Ferengi). [Data](https://memory-alpha.fandom.com/wiki/Data) (the TNG character, not the bits of information) compares the personal log with the ship’s main computer log and reports to the first officer, commander [William T. Riker](https://memory-alpha.fandom.com/wiki/William_T._Riker).
 
-![Data reports to Riker, with La Forge between them.]({% link images/blog/star-trek/enterprise-computer/the_battle.jpg %}){: width="480" }
-*Data reports to Riker, with La Forge between them. <em>Star Trek: The Next Generation</em>, “The Battle” (1987). © CBS Studios Inc.*{: .caption .caption-left }
+![Data reports to Riker, with La Forge between them.]({% link images/blog/star-trek/enterprise-computer/the_battle.jpg %}){: .center width="480" }
+*Data reports to Riker, with La Forge between them. <em>Star Trek: The Next Generation</em>, “The Battle” (1987). © CBS Studios Inc.*{: .caption }
 
-<table class="script-split" markdown="1">
-<tr markdown="1"><th>On the bridge</th><th>What the computer ran</th></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**On the bridge**
 
-**DATA:** By comparing the main Stargazer computer log with Captain Picard’s personal log, I have found “checksum” discrepancies, sir.
+> ShowQuote
+>
+> **DATA:** By comparing the main Stargazer computer log with Captain Picard’s personal log, I have found “checksum” discrepancies, sir.
+>
+> **RIKER:** What does that mean?
+>
+> **DATA:** All information is time-coded by entry, and the bits when totaled produce an aggregate amount which...
+>
+> **RIKER:** I don’t want a lesson in computer science! Bottom line?
+>
+> **DATA:** One of these two logs is a forgery.
 
-**RIKER:** What does that mean?
-
-**DATA:** All information is time-coded by entry, and the bits when totaled produce an aggregate amount which...
-
-**RIKER:** I don’t want a lesson in computer science! Bottom line?
-
-**DATA:** One of these two logs is a forgery.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT log_type,
@@ -59,9 +59,6 @@ ORDER BY log_type
 <tr><td>main computer log</td><td>7</td><td>7</td><td>0</td><td>NULL</td></tr>
 </table>
 
-</td></tr>
-</table>
-
 Despite his shocking disregard for Computer Science, Riker gets his bottom line. If we were to express this request for information as a SQL query, it is a `GROUP BY`: recompute the checksum of every log entry, compare it with the one stored when the entry was recorded, and count the mismatches per log. Three of the five entries in the captain’s personal log fail. The main computer log is clean. A smoking gun.
 
 ## Do We Have the Enterprise Computer Now?
@@ -80,18 +77,18 @@ Results have been amazing: not only did the “Enterprise computer” answer all
 
 In [“Darmok”](https://www.st-minutiae.com/resources/scripts/202.txt), the Enterprise meets a people who speak only in references to their own stories. It is a strong contender for my favorite episode of TNG. Counselor [Troi](https://memory-alpha.fandom.com/wiki/Deanna_Troi) and Data have two words to go on, “Darmok” and “Tanagra”. They start talking to the computer.
 
-![Counselor Troi, waiting for the computer.]({% link images/blog/star-trek/enterprise-computer/darmok.jpg %}){: width="480" }
-*Counselor Troi, waiting for the computer. <em>Star Trek: The Next Generation</em>, “Darmok” (1991). © CBS Studios Inc.*{: .caption .caption-left }
+![Counselor Troi, waiting for the computer.]({% link images/blog/star-trek/enterprise-computer/darmok.jpg %}){: .center width="480" }
+*Counselor Troi, waiting for the computer. <em>Star Trek: The Next Generation</em>, “Darmok” (1991). © CBS Studios Inc.*{: .caption }
 
-<table class="script-split" markdown="1">
-<tr markdown="1"><th>On the bridge</th><th>What the computer ran</th></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**On the bridge**
 
-**TROI:** Computer, search for the term “Darmok” in all linguistic databases compiled for this sector.
+> ShowQuote
+>
+> **TROI:** Computer, search for the term “Darmok” in all linguistic databases compiled for this sector.
+>
+> **COMPUTER:** Searching... “Darmok” is the name of a seventh dynasty emperor on Kanda Four... A mytho-historical hunter on Shantil Three... A colony on Malindi Seven... A frozen dessert on Razna Five... A --
 
-**COMPUTER:** Searching... “Darmok” is the name of a seventh dynasty emperor on Kanda Four... A mytho-historical hunter on Shantil Three... A colony on Malindi Seven... A frozen dessert on Razna Five... A --
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT l.entry_id, l.term, l.description,
@@ -115,14 +112,15 @@ ORDER BY l.database_name, l.planet, l.entry_id
 </table>
 <p class="result-note">First 5 of 47 rows.</p>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**On the bridge**
 
-**TROI:** -- Stop search. Computer, how many entries for “Darmok”?
+> ShowQuote
+>
+> **TROI:** -- Stop search. Computer, how many entries for “Darmok”?
+>
+> **COMPUTER:** Forty-seven.
 
-**COMPUTER:** Forty-seven.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT count(*) AS darmok_entries
@@ -139,16 +137,17 @@ WHERE l.category = 'linguistic'
 <tr><td>47</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**On the bridge**
 
-**DATA:** Computer, search for the term “Tanagra.” All databases.
+> ShowQuote
+>
+> **DATA:** Computer, search for the term “Tanagra.” All databases.
+>
+> **COMPUTER:** Searching... Tanagra is the name of the ruling family on Gallos Two... A ceremonial drink on Lerishi Four... An island-continent on Shantil Three --
+>
+> **DATA:** -- Stop.
 
-**COMPUTER:** Searching... Tanagra is the name of the ruling family on Gallos Two... A ceremonial drink on Lerishi Four... An island-continent on Shantil Three --
-
-**DATA:** -- Stop.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT entry_id, term, description, planet,
@@ -167,14 +166,15 @@ ORDER BY database_name, planet, entry_id
 </table>
 <p class="result-note">First 5 of 11 rows.</p>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**On the bridge**
 
-**TROI:** Shantil Three? Computer, cross-reference the last entry with the previous search index.
+> ShowQuote
+>
+> **TROI:** Shantil Three? Computer, cross-reference the last entry with the previous search index.
+>
+> **COMPUTER:** “Darmok” is the name of a mytho-historical hunter on Shantil Three.
 
-**COMPUTER:** “Darmok” is the name of a mytho-historical hunter on Shantil Three.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT t.planet, t.sector,
@@ -196,25 +196,22 @@ WHERE t.term ILIKE '%Tanagra%'
 <tr><td>Shantil III</td><td>El-Adrel</td><td>Darmok</td><td>mytho-historical hunter</td><td>Starfleet Xenolinguistics Archive</td><td>Tanagra</td><td>island-continent</td><td>Stellar Cartography Gazetteer</td></tr>
 </table>
 
-</td></tr>
-</table>
-
 A search with too many hits, a count, a second search, and a join (a join!) that takes 47 rows down to one. Nobody on the bridge wrote any of the right-hand column. They asked, the computer answered, and they asked a sharper question.
 
 In [“Hollow Pursuits”](https://www.st-minutiae.com/resources/scripts/169.txt) the ship is about to tear itself apart and Geordi narrows the cause one sentence at a time.
 
-![The five remaining substances on the Engineering console.]({% link images/blog/star-trek/enterprise-computer/hollow_pursuits.jpg %}){: width="480" }
-*The five remaining substances on the Engineering console. <em>Star Trek: The Next Generation</em>, “Hollow Pursuits” (1990). © CBS Studios Inc.*{: .caption .caption-left }
+![The five remaining substances on the Engineering console.]({% link images/blog/star-trek/enterprise-computer/hollow_pursuits.jpg %}){: .center width="480" }
+*The five remaining substances on the Engineering console. <em>Star Trek: The Next Generation</em>, “Hollow Pursuits” (1990). © CBS Studios Inc.*{: .caption }
 
-<table class="script-split" markdown="1">
-<tr markdown="1"><th>In Engineering</th><th>What the computer ran</th></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In Engineering**
 
-**GEORDI:** Computer, list all physical substances that wouldn’t normally be picked up by internal scans.
+> ShowQuote
+>
+> **GEORDI:** Computer, list all physical substances that wouldn’t normally be picked up by internal scans.
+>
+> **COMPUTER:** There are fifteen thousand five hundred twenty-five known substances that cannot be detected by standard scans.
 
-**COMPUTER:** There are fifteen thousand five hundred twenty-five known substances that cannot be detected by standard scans.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT name, stable_in_oxygen, alters_materials,
@@ -234,14 +231,15 @@ ORDER BY name
 </table>
 <p class="result-note">First 5 of 15,525 rows.</p>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In Engineering**
 
-**GEORDI:** Great. How many of those can exist in an oxygen atmosphere?
+> ShowQuote
+>
+> **GEORDI:** Great. How many of those can exist in an oxygen atmosphere?
+>
+> **COMPUTER:** Five hundred thirty-two.
 
-**COMPUTER:** Five hundred thirty-two.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT count(*) AS undetectable_and_stable_in_oxygen
@@ -255,14 +253,15 @@ WHERE NOT detectable_by_internal_scan
 <tr><td>532</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In Engineering**
 
-**GEORDI:** And could alter molecular structure when it comes in contact with... with glass.
+> ShowQuote
+>
+> **GEORDI:** And could alter molecular structure when it comes in contact with... with glass.
+>
+> **COMPUTER:** Five.
 
-**COMPUTER:** Five.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT name, alters_materials, half_life_s,
@@ -283,16 +282,17 @@ ORDER BY name
 <tr><td>Selgninaem</td><td>[glass]</td><td>inf</td><td>extreme</td><td>NULL</td><td>MSG-16900002</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In Engineering**
 
-**BARCLAY:** Jakmanite has a half life of about fifteen seconds. There wouldn’t be enough time to spread it around the ship.
+> ShowQuote
+>
+> **BARCLAY:** Jakmanite has a half life of about fifteen seconds. There wouldn’t be enough time to spread it around the ship.
+>
+> **WESLEY:** Selgninaem and Lucrovexitrin are extremely toxic.
+>
+> **GEORDI:** We’d all be dead by now. That leaves Saltzgadum and Invidium.
 
-**WESLEY:** Selgninaem and Lucrovexitrin are extremely toxic.
-
-**GEORDI:** We’d all be dead by now. That leaves Saltzgadum and Invidium.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT name, half_life_s, toxicity, last_used_year,
@@ -315,9 +315,6 @@ ORDER BY status DESC, name
 <tr><td>Jakmanite</td><td>15.0</td><td>moderate</td><td>NULL</td><td>eliminated: half-life too short</td></tr>
 <tr><td>Lucrovexitrin</td><td>inf</td><td>extreme</td><td>NULL</td><td>eliminated: extremely toxic</td></tr>
 <tr><td>Selgninaem</td><td>inf</td><td>extreme</td><td>NULL</td><td>eliminated: extremely toxic</td></tr>
-</table>
-
-</td></tr>
 </table>
 
 Every sentence is one more predicate: 15,525, then 532, then 5, then 2.
@@ -343,18 +340,18 @@ The rest of the scenes we picked, run the same way. On the left is the script. O
 
 [Script](https://www.st-minutiae.com/resources/scripts/125.txt). Season 1. Picard suspects Starfleet Command has been infiltrated and sets Data to reading its orders.
 
-![The “Starbase Ops Status” display, with the posts Data flagged marked in red.]({% link images/blog/star-trek/enterprise-computer/conspiracy.jpg %}){: width="480" }
-*The “Starbase Ops Status” display, with the posts Data flagged marked in red. <em>Star Trek: The Next Generation</em>, “Conspiracy” (1988). © CBS Studios Inc.*{: .caption .caption-left }
+![The “Starbase Ops Status” display, with the posts Data flagged marked in red.]({% link images/blog/star-trek/enterprise-computer/conspiracy.jpg %}){: .center width="480" }
+*The “Starbase Ops Status” display, with the posts Data flagged marked in red. <em>Star Trek: The Next Generation</em>, “Conspiracy” (1988). © CBS Studios Inc.*{: .caption }
 
-<table class="script-split" markdown="1">
-<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**DATA:** Computer -- this is Lieutenant Commander Data. Access all Starfleet Command orders to starships, starbases and colonies, for the past six months.
+> ShowQuote
+>
+> **DATA:** Computer -- this is Lieutenant Commander Data. Access all Starfleet Command orders to starships, starbases and colonies, for the past six months.
+>
+> **COMPUTER:** Working.
 
-**COMPUTER:** Working.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT o.id, o.issued_at, o.issued_by, o.recipient_type, o.recipient,
@@ -380,14 +377,15 @@ ORDER BY o.issued_at, o.id
 
 *Not what the script says: Reports 1,207 orders, not 1,214: it used a strict ‘>’ on the six-month boundary, so the seven orders dated exactly six months back (2368-04-10) are left out.*
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**DATA:** My orders were to search for abnormal patterns in Starfleet’s directives. I believe I have found just that.
+> ShowQuote
+>
+> **DATA:** My orders were to search for abnormal patterns in Starfleet’s directives. I believe I have found just that.
+>
+> **DATA:** These are various outposts and starbases where I have detected unusual activity over the past few months.
 
-**DATA:** These are various outposts and starbases where I have detected unusual activity over the past few months.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT recipient, recipient_type,
@@ -430,14 +428,15 @@ ORDER BY ALL
 
 *Not what the script says: Finds the same five installations, but by a different signal: reassignments issued by offices other than Personnel (45 orders). It does not report the command reassignment counts 13, 11, 10, 9, 8.*
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**PICARD:** What sort of activity?
+> ShowQuote
+>
+> **PICARD:** What sort of activity?
+>
+> **DATA:** An uncustomary reshuffling of personnel, usually in the command areas. The new officers have had abnormally frequent contact with the highest levels of Starfleet Command.
 
-**DATA:** An uncustomary reshuffling of personnel, usually in the command areas. The new officers have had abnormally frequent contact with the highest levels of Starfleet Command.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT order_type, division, count(*) AS orders,
@@ -460,27 +459,24 @@ GROUP BY order_type, division ORDER BY orders DESC
 
 *Not what the script says: Describes the reshuffling, mainly in command areas, but does not look at communications, so the ‘abnormally frequent contact with Starfleet Command’ part is missing.*
 
-</td></tr>
-</table>
-
 ### The Neutral Zone
 
 [Script](https://www.st-minutiae.com/resources/scripts/126.txt). Season 1. Clare Raymond, revived after 370 years in cryonic sleep, asks what became of her sons. Even has a recursive subquery!
 
-![The record the search ends on: Thomas Raymond, with residence, employment, spouse and offspring.]({% link images/blog/star-trek/enterprise-computer/neutral_zone.jpg %}){: width="480" }
-*The record the search ends on: Thomas Raymond, with residence, employment, spouse and offspring. <em>Star Trek: The Next Generation</em>, “The Neutral Zone” (1988). © CBS Studios Inc.*{: .caption .caption-left }
+![The record the search ends on: Thomas Raymond, with residence, employment, spouse and offspring.]({% link images/blog/star-trek/enterprise-computer/neutral_zone.jpg %}){: .center width="480" }
+*The record the search ends on: Thomas Raymond, with residence, employment, spouse and offspring. <em>Star Trek: The Next Generation</em>, “The Neutral Zone” (1988). © CBS Studios Inc.*{: .caption }
 
-<table class="script-split" markdown="1">
-<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**TROI:** Computer - this is Counselor Troi. Request personal history on... What are their names?
+> ShowQuote
+>
+> **TROI:** Computer - this is Counselor Troi. Request personal history on... What are their names?
+>
+> **CLARE:** Tommy -- he’s eight, and Eddie’s five.
+>
+> **COMPUTER:** Full names -- Date and place of birth.
 
-**CLARE:** Tommy -- he’s eight, and Eddie’s five.
-
-**COMPUTER:** Full names -- Date and place of birth.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT p.full_name, p.birth_date, p.birth_place, p.occupation,
@@ -510,14 +506,15 @@ ORDER BY p.id, src.record_date
 
 *Not what the script says: The script’s computer asks for full names, date and place of birth. Claude found both sons under Clare Raymond straight away.*
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**CLARE:** They were born in Secaucus - that’s in Jersey.
+> ShowQuote
+>
+> **CLARE:** They were born in Secaucus - that’s in Jersey.
+>
+> **CLARE:** Date of birth. Tommy was born February seventeenth...
 
-**CLARE:** Date of birth. Tommy was born February seventeenth...
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT p.id, p.full_name, p.birth_date, p.birth_place,
@@ -535,18 +532,19 @@ ORDER BY p.birth_date, p.id
 <tr><td>22</td><td>Thomas Ramirez</td><td>1986-02-17</td><td>Secaucus, New Jersey</td><td>NULL</td><td>NULL</td><td>false</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**CLARE:** I’m in a world of strangers. I wish I knew what happened to my children. Did they get married, did they have kids...
+> ShowQuote
+>
+> **CLARE:** I’m in a world of strangers. I wish I knew what happened to my children. Did they get married, did they have kids...
+>
+> **TROI:** Let’s see if we can find out.
+>
+> **TROI:** I have found something.
+>
+> **TROI:** I have been able to locate a family living outside of Indianapolis. The man’s name is Thomas Raymond.
 
-**TROI:** Let’s see if we can find out.
-
-**TROI:** I have found something.
-
-**TROI:** I have been able to locate a family living outside of Indianapolis. The man’s name is Thomas Raymond.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 WITH RECURSIVE tree AS (
@@ -579,16 +577,17 @@ ORDER BY t.generation, t.birth_date
 </table>
 <p class="result-note">First 5 of 14 rows.</p>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**TROI:** Computer -- let us see Thomas Raymond.
+> ShowQuote
+>
+> **TROI:** Computer -- let us see Thomas Raymond.
+>
+> **CLARE:** Oh, my God... It’s Donald... that’s my husband.
+>
+> **TROI:** Actually, it’s your great, great, great, great, great grandson.
 
-**CLARE:** Oh, my God... It’s Donald... that’s my husband.
-
-**TROI:** Actually, it’s your great, great, great, great, great grandson.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT p.id, p.full_name, p.birth_date, p.birth_place,
@@ -607,27 +606,24 @@ ORDER BY p.portrait IS NULL, p.birth_date DESC
 <tr><td>21</td><td>Thomas Raymond</td><td>1947-02-07</td><td>Secaucus, New Jersey</td><td>NULL</td><td>NULL</td><td>false</td><td>NULL</td></tr>
 </table>
 
-</td></tr>
-</table>
-
 ### The Vengeance Factor
 
 [Script](https://www.st-minutiae.com/resources/scripts/157.txt). Season 3. Two people have died of the same engineered virus, decades apart. The Acamarian databases say what they had in common.
 
-![Volnoth’s entry in the Acamarian planetary database, with the clan affiliation that links the two deaths.]({% link images/blog/star-trek/enterprise-computer/vengeance_factor.jpg %}){: width="480" }
-*Volnoth’s entry in the Acamarian planetary database, with the clan affiliation that links the two deaths. <em>Star Trek: The Next Generation</em>, “The Vengeance Factor” (1989). © CBS Studios Inc.*{: .caption .caption-left }
+![Volnoth’s entry in the Acamarian planetary database, with the clan affiliation that links the two deaths.]({% link images/blog/star-trek/enterprise-computer/vengeance_factor.jpg %}){: .center width="480" }
+*Volnoth’s entry in the Acamarian planetary database, with the clan affiliation that links the two deaths. <em>Star Trek: The Next Generation</em>, “The Vengeance Factor” (1989). © CBS Studios Inc.*{: .caption }
 
-<table class="script-split" markdown="1">
-<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**DATA:** Commander, I’m afraid the only entry on Volnoth in the Acamarian database is a birth record.
-
-**RIKER:** Probably one of the last of the Gatherers to be born on their planet.
+> ShowQuote
+>
+> **DATA:** Commander, I’m afraid the only entry on Volnoth in the Acamarian database is a birth record.
+>
+> **RIKER:** Probably one of the last of the Gatherers to be born on their planet.
 
 *Nobody speaks this request in the script. Claude was asked: “Data -- got anything in the Acamarian database on Volnoth?”*
 
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT p.name, p.affiliation, p.clan, p.born, p.died,
@@ -646,16 +642,17 @@ FROM persons p WHERE p.name ILIKE '%Volnoth%'
 
 *Not what the script says: Gives the birth date and clan Lornack, plus the death and clan history; the dialogue’s point is that the Acamarian database holds only the birth record.*
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**BEVERLY:** I’ve been digging through the medical database from Acamar Three for hours and I’ve found another victim of the microvirus that killed Volnoth. But just one.
-
-**BEVERLY:** Fifty-three years ago. A Gatherer named Penthor-Mul.
+> ShowQuote
+>
+> **BEVERLY:** I’ve been digging through the medical database from Acamar Three for hours and I’ve found another victim of the microvirus that killed Volnoth. But just one.
+>
+> **BEVERLY:** Fifty-three years ago. A Gatherer named Penthor-Mul.
 
 *Nobody speaks this request in the script. Claude was asked: “Computer, search the medical database from Acamar Three for any other victims of the microvirus that killed Volnoth.”*
 
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT m.id, p.name, p.affiliation, p.clan, p.born, p.died,
@@ -672,14 +669,15 @@ ORDER BY m.record_date
 <tr><td>157202</td><td>Volnoth</td><td>Gatherer</td><td>Lornack</td><td>2264-03-14</td><td>2366-07-24</td><td>2366-07-24</td><td>cardiac arrest</td><td>Acamarian microvirus</td><td>USS Enterprise sickbay</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**RIKER:** Data -- got anything in your files on this Penthor-Mul?
+> ShowQuote
+>
+> **RIKER:** Data -- got anything in your files on this Penthor-Mul?
+>
+> **DATA:** Yes. He was captured while leading a Gatherer raid on an Acamarian outpost. He died of a heart attack before his trial ended. Commander, he was a member of the Lornack Clan.
 
-**DATA:** Yes. He was captured while leading a Gatherer raid on an Acamarian outpost. He died of a heart attack before his trial ended. Commander, he was a member of the Lornack Clan.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT 'person' AS src, p.id, p.name AS item, p.born::VARCHAR AS date1,
@@ -723,18 +721,19 @@ ORDER BY src, date1
 </table>
 <p class="result-note">First 5 of 7 rows.</p>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**RIKER:** Display Volnoth’s birth record again.
+> ShowQuote
+>
+> **RIKER:** Display Volnoth’s birth record again.
+>
+> **BEVERLY:** Lornack... the same clan....
+>
+> **RIKER:** The only two recorded deaths from this microvirus... members of the same clan... what does that tell us, Doctor?
+>
+> **BEVERLY:** If these microbes were engineered for murder, I’d say somebody’s going after the whole family.
 
-**BEVERLY:** Lornack... the same clan....
-
-**RIKER:** The only two recorded deaths from this microvirus... members of the same clan... what does that tell us, Doctor?
-
-**BEVERLY:** If these microbes were engineered for murder, I’d say somebody’s going after the whole family.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT p.name, p.affiliation, p.clan, p.born, c.record_type,
@@ -750,14 +749,15 @@ WHERE p.name = 'Volnoth'
 <tr><td>Volnoth</td><td>Gatherer</td><td>Lornack</td><td>2264-03-14</td><td>birth</td><td>2264-03-14</td><td>Acamar III</td><td>Born to the clan Lornack</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**DATA:** Commander, Chorgan, the present leader of the Gatherers, is also from the Lornack clan.
+> ShowQuote
+>
+> **DATA:** Commander, Chorgan, the present leader of the Gatherers, is also from the Lornack clan.
 
 *Nobody speaks this request in the script. Claude was asked: “Data, is anyone else from the Lornack clan still alive?”*
 
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT p.id, p.name, p.affiliation, p.clan, p.born, p.died
@@ -775,18 +775,19 @@ ORDER BY p.born
 <tr><td>157003</td><td>Chorgan</td><td>Gatherer</td><td>Lornack</td><td>NULL</td><td>NULL</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**RIKER:** I want to know just how this clan was involved in the Acamarian blood feuds... any clues to their enemies you can find...
+> ShowQuote
+>
+> **RIKER:** I want to know just how this clan was involved in the Acamarian blood feuds... any clues to their enemies you can find...
+>
+> **DATA:** Sir, eighty years ago, the Lornacks massacred a rival clan, the Tralestas. It ended a feud that had lasted for two hundred years.
+>
+> **RIKER:** Ended it?
+>
+> **DATA:** According to these records, there were no survivors. The Tralesta clan was annihilated.
 
-**DATA:** Sir, eighty years ago, the Lornacks massacred a rival clan, the Tralestas. It ended a feud that had lasted for two hundred years.
-
-**RIKER:** Ended it?
-
-**DATA:** According to these records, there were no survivors. The Tralesta clan was annihilated.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT f.id, f.planet, f.clan_a, f.clan_b, f.started, f.ended,
@@ -817,14 +818,15 @@ WHERE description ILIKE '%Lornack%' OR term ILIKE '%Lornack%' OR description ILI
 </table>
 <p class="result-note">No rows.</p>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**BEVERLY:** Computer, any members of the Acamarian delegation in the Tralesta clan?
+> ShowQuote
+>
+> **BEVERLY:** Computer, any members of the Acamarian delegation in the Tralesta clan?
+>
+> **COMPUTER:** Clan affiliation is not within provided records.
 
-**COMPUTER:** Clan affiliation is not within provided records.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT pa.name, pa.role, count(p.id) AS person_records,
@@ -846,16 +848,17 @@ GROUP BY pa.id, pa.name, pa.role ORDER BY pa.id
 <tr><td>NULL</td><td>servant</td><td>0</td><td>0</td><td>NULL</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**RIKER:** There’s got to be a missing link here...
+> ShowQuote
+>
+> **RIKER:** There’s got to be a missing link here...
+>
+> **DATA:** Commander, I believe I have found a correlation between the two deaths... your “missing link” ...
+>
+> **DATA:** That is Penthor-Mul being led from his trial.
 
-**DATA:** Commander, I believe I have found a correlation between the two deaths... your “missing link” ...
-
-**DATA:** That is Penthor-Mul being led from his trial.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT i.id, i.planet, i.taken, i.caption, i.people_tagged,
@@ -880,27 +883,24 @@ ORDER BY i.taken
 
 *Not what the script says: Reports that no image tags a delegation member and concludes ‘no link found’; it does not offer the image of Penthor-Mul being led from his trial.*
 
-</td></tr>
-</table>
-
 ### Sins of the Father
 
 [Script](https://www.st-minutiae.com/resources/scripts/165.txt). Season 3. Captured Romulan logs say Worf’s father betrayed the Khitomer outpost. Data and Geordi check them against a second source.
 
-![Data, La Forge and Riker compare the Klingon data file with the Intrepid’s sensor log.]({% link images/blog/star-trek/enterprise-computer/sins_of_the_father.jpg %}){: width="480" }
-*Data, La Forge and Riker compare the Klingon data file with the Intrepid’s sensor log. <em>Star Trek: The Next Generation</em>, “Sins of the Father” (1990). © CBS Studios Inc.*{: .caption .caption-left }
+![Data, La Forge and Riker compare the Klingon data file with the Intrepid’s sensor log.]({% link images/blog/star-trek/enterprise-computer/sins_of_the_father.jpg %}){: .center width="480" }
+*Data, La Forge and Riker compare the Klingon data file with the Intrepid’s sensor log. <em>Star Trek: The Next Generation</em>, “Sins of the Father” (1990). © CBS Studios Inc.*{: .caption }
 
-<table class="script-split" markdown="1">
-<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**PICARD:** Mister Data... I want you to find out everything you can about the destruction of the Khitomer outpost. Cross reference with Romulan tactics and strategic information on the region. Request access to the Klingon central information net.
+> ShowQuote
+>
+> **PICARD:** Mister Data... I want you to find out everything you can about the destruction of the Khitomer outpost. Cross reference with Romulan tactics and strategic information on the region. Request access to the Klingon central information net.
+>
+> **DATA:** Commander, I have discovered the basis of the charges against Worf’s father.
+>
+> **DATA:** Apparently the Klingons recently captured a Romulan ship with logs that provided new information on the Khitomer attack. They clearly indicate a transmission from the outpost to the Romulans moments before the shields dropped.
 
-**DATA:** Commander, I have discovered the basis of the charges against Worf’s father.
-
-**DATA:** Apparently the Klingons recently captured a Romulan ship with logs that provided new information on the Khitomer attack. They clearly indicate a transmission from the outpost to the Romulans moments before the shields dropped.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 WITH r AS (SELECT seq, ts, row_number() OVER (ORDER BY ts) AS n
@@ -944,14 +944,15 @@ WHERE l.signal_type <> 'distress signal' ORDER BY l.seq
 </table>
 <p class="result-note">First 5 of 10 rows.</p>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** From Worf’s father?
+> ShowQuote
+>
+> **GEORDI:** From Worf’s father?
+>
+> **DATA:** It does correspond to Mogh’s personal security code.
 
-**DATA:** It does correspond to Mogh’s personal security code.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT l.seq, l.ts, l.signal_type, l.source, l.security_code,
@@ -973,20 +974,21 @@ ORDER BY l.seq
 <tr><td>15</td><td>2346-08-19 03:14:24</td><td>transmission</td><td>Romulan patrol ship</td><td>KDF-7-2291-TAJ</td><td>Mogh</td><td>Klingon</td><td>Khitomer outpost</td><td>false</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**RIKER:** How can we be sure these records haven’t been falsified?
+> ShowQuote
+>
+> **RIKER:** How can we be sure these records haven’t been falsified?
+>
+> **GEORDI:** We can cross check them against the Intrepid’s sensor logs...
+>
+> **DATA:** Both the Intrepid and Romulan logs show a series of distress signals from Khitomer...
+>
+> **GEORDI:** Gaps in the Intrepid logs, missing information because of the range...
+>
+> **DATA:** This is where Mogh’s alleged transmission should be.
 
-**GEORDI:** We can cross check them against the Intrepid’s sensor logs...
-
-**DATA:** Both the Intrepid and Romulan logs show a series of distress signals from Khitomer...
-
-**GEORDI:** Gaps in the Intrepid logs, missing information because of the range...
-
-**DATA:** This is where Mogh’s alleged transmission should be.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 WITH r AS (SELECT seq, ts, row_number() OVER (ORDER BY ts) AS n
@@ -1019,18 +1021,19 @@ FROM x GROUP BY offset_s ORDER BY first_signal
 <tr><td>2.5</td><td>6</td><td>9</td><td>14</td><td>2346-08-19 03:14:41</td><td>2346-08-19 03:15:51</td><td>19</td><td>24</td><td>3</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** Wait a second, Data. Back up.
+> ShowQuote
+>
+> **GEORDI:** Wait a second, Data. Back up.
+>
+> **GEORDI:** Look at this... just before the Intrepid gap begins, the timebase of both files are in perfect sync... but look at the signals just after the shields dropped.
+>
+> **DATA:** They are no longer synchronous.
+>
+> **GEORDI:** Commander, somebody’s been rewriting history.
 
-**GEORDI:** Look at this... just before the Intrepid gap begins, the timebase of both files are in perfect sync... but look at the signals just after the shields dropped.
-
-**DATA:** They are no longer synchronous.
-
-**GEORDI:** Commander, somebody’s been rewriting history.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 WITH drop_t AS (SELECT ts FROM romulan_logs
@@ -1062,24 +1065,21 @@ FROM i FULL JOIN r USING (n) ORDER BY n
 </table>
 <p class="result-note">First 5 of 8 rows.</p>
 
-</td></tr>
-</table>
-
 ### Violations
 
 [Script](https://www.st-minutiae.com/resources/scripts/212.txt). Season 5. Crew members are falling into unexplained comas while a delegation of telepaths is aboard. One investigation in three scenes.
 
 **In Engineering: every possible cause**
 
-<table class="script-split" markdown="1">
-<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** Computer, locate the electropathic pattern described in medical database four-delta-one.
+> ShowQuote
+>
+> **GEORDI:** Computer, locate the electropathic pattern described in medical database four-delta-one.
+>
+> **COMPUTER:** Electropathic pattern located.
 
-**COMPUTER:** Electropathic pattern located.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT pattern_id, name, database_ref FROM medical_patterns
@@ -1091,14 +1091,15 @@ WHERE database_ref = '4-delta-1' AND name = 'electropathic pattern'
 <tr><td>41</td><td>electropathic pattern</td><td>4-delta-1</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** Okay, we’re gonna track down any possible cause of that brain pattern. First, what are the medical conditions that might account for it?
+> ShowQuote
+>
+> **GEORDI:** Okay, we’re gonna track down any possible cause of that brain pattern. First, what are the medical conditions that might account for it?
+>
+> **COMPUTER:** Iresine Syndrome is a cause of the electropathic pattern.
 
-**COMPUTER:** Iresine Syndrome is a cause of the electropathic pattern.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT c.cause_id, c.agent, c.agent_type, c.agent_class
@@ -1113,14 +1114,15 @@ ORDER BY c.agent
 <tr><td>1</td><td>Iresine Syndrome</td><td>medical</td><td>condition</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** Right. And Doctor Crusher’s already eliminated that. How many nonmedical forces or substances might cause the pattern?
+> ShowQuote
+>
+> **GEORDI:** Right. And Doctor Crusher’s already eliminated that. How many nonmedical forces or substances might cause the pattern?
+>
+> **COMPUTER:** There are twenty-two nonmedical agents.
 
-**COMPUTER:** There are twenty-two nonmedical agents.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT count(*) AS nonmedical_causes
@@ -1134,14 +1136,15 @@ WHERE p.name = 'electropathic pattern' AND p.database_ref = '4-delta-1'
 <tr><td>22</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** Okay. And how many of those are present on the Enterprise?
+> ShowQuote
+>
+> **GEORDI:** Okay. And how many of those are present on the Enterprise?
+>
+> **COMPUTER:** None is present on the Enterprise.
 
-**COMPUTER:** None is present on the Enterprise.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT c.agent, c.agent_class,
@@ -1166,14 +1169,15 @@ ORDER BY c.agent_class, c.agent
 </table>
 <p class="result-note">First 5 of 22 rows.</p>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** Are the ship’s sensors calibrated to detect all those agents?
+> ShowQuote
+>
+> **GEORDI:** Are the ship’s sensors calibrated to detect all those agents?
+>
+> **COMPUTER:** All agents are scanned by the sensors.
 
-**COMPUTER:** All agents are scanned by the sensors.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT count(*) AS nonmedical_agents,
@@ -1192,14 +1196,15 @@ WHERE p.name = 'electropathic pattern' AND p.database_ref = '4-delta-1'
 <tr><td>22</td><td>22</td><td>0</td><td>NULL</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** Okay. Let’s start with the chemical substances. Name them.
+> ShowQuote
+>
+> **GEORDI:** Okay. Let’s start with the chemical substances. Name them.
+>
+> **COMPUTER:** Ferrazene, hylanatine, dardilion, chrysimite, and manzene.
 
-**COMPUTER:** Ferrazene, hylanatine, dardilion, chrysimite, and manzene.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT c.agent
@@ -1220,14 +1225,15 @@ ORDER BY c.agent
 
 *Not what the script says: The right five chemicals, but in alphabetical order rather than the script’s read-out order.*
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** Ferrazene has a complex molecular structure... it breaks down into bilenium and tarrisite. Do the sensors scan for those?
+> ShowQuote
+>
+> **GEORDI:** Ferrazene has a complex molecular structure... it breaks down into bilenium and tarrisite. Do the sensors scan for those?
+>
+> **COMPUTER:** Ship’s sensors scan for both compounds.
 
-**COMPUTER:** Ship’s sensors scan for both compounds.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT b.compound, b.byproduct, s.routinely_scanned,
@@ -1246,14 +1252,15 @@ ORDER BY b.byproduct
 <tr><td>ferrazene</td><td>tarrisite</td><td>true</td><td>false</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** And are they present on the Enterprise?
+> ShowQuote
+>
+> **GEORDI:** And are they present on the Enterprise?
+>
+> **COMPUTER:** Bilenium and tarrisite are not present.
 
-**COMPUTER:** Bilenium and tarrisite are not present.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT b.byproduct, count(l.log_id) AS detections_on_enterprise
@@ -1269,14 +1276,15 @@ GROUP BY b.byproduct ORDER BY b.byproduct
 <tr><td>tarrisite</td><td>0</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** Do any of the substances break down into by-products that are not scanned for?
+> ShowQuote
+>
+> **GEORDI:** Do any of the substances break down into by-products that are not scanned for?
+>
+> **COMPUTER:** Dardilion contains the byproduct nilizene. Sensors do not routinely scan for that substance.
 
-**COMPUTER:** Dardilion contains the byproduct nilizene. Sensors do not routinely scan for that substance.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT c.agent AS substance, b.byproduct, s.routinely_scanned
@@ -1294,14 +1302,15 @@ ORDER BY c.agent, b.byproduct
 <tr><td>dardilion</td><td>nilizene</td><td>false</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** Well, this isn’t a routine situation. Scan for nilizene.
+> ShowQuote
+>
+> **GEORDI:** Well, this isn’t a routine situation. Scan for nilizene.
+>
+> **COMPUTER:** There is no nilizene on the Enterprise.
 
-**COMPUTER:** There is no nilizene on the Enterprise.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT log_id, ship, location, substance, stardate
@@ -1316,27 +1325,24 @@ ORDER BY stardate, log_id
 
 *Not what the script says: Says it cannot start a scan from records; the logs hold no nilizene reading aboard, but since nilizene is not routinely scanned that does not show the ship is clear. The script’s computer answers ‘There is no nilizene on the Enterprise.’*
 
-</td></tr>
-</table>
-
 **On the bridge: the right query with the wrong filter**
 
-![The search as the episode shows it: “Search parameters: instances of unexplained coma or medical cases diagnosed as Iresine Syndrome during periods when Ullian telepathic historians were present on the planet.”]({% link images/blog/star-trek/enterprise-computer/violations_bridge.jpg %}){: width="480" }
-*The search as the episode shows it: “Search parameters: instances of unexplained coma or medical cases diagnosed as Iresine Syndrome during periods when Ullian telepathic historians were present on the planet.” <em>Star Trek: The Next Generation</em>, “Violations” (1992). © CBS Studios Inc.*{: .caption .caption-left }
+![The search as the episode shows it: “Search parameters: instances of unexplained coma or medical cases diagnosed as Iresine Syndrome during periods when Ullian telepathic historians were present on the planet.”]({% link images/blog/star-trek/enterprise-computer/violations_bridge.jpg %}){: .center width="480" }
+*The search as the episode shows it: “Search parameters: instances of unexplained coma or medical cases diagnosed as Iresine Syndrome during periods when Ullian telepathic historians were present on the planet.” <em>Star Trek: The Next Generation</em>, “Violations” (1992). © CBS Studios Inc.*{: .caption }
 
-<table class="script-split" markdown="1">
-<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**PICARD:** Mister Data, I want you to investigate those eleven planets the Ullians have visited. See if there have been any reports of unexplained comas.
+> ShowQuote
+>
+> **PICARD:** Mister Data, I want you to investigate those eleven planets the Ullians have visited. See if there have been any reports of unexplained comas.
+>
+> **DATA:** Yes, Captain.
+>
+> **GEORDI:** Well, that’s it for Melina Two. No unexplained comas during the time the Ullians were working there. We’re striking out everywhere.
+>
+> **DATA:** We have yet to receive transmissions from the two planets of the Nel system. Perhaps they will show different results.
 
-**DATA:** Yes, Captain.
-
-**GEORDI:** Well, that’s it for Melina Two. No unexplained comas during the time the Ullians were working there. We’re striking out everywhere.
-
-**DATA:** We have yet to receive transmissions from the two planets of the Nel system. Perhaps they will show different results.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 WITH ullian AS (SELECT DISTINCT planet FROM missions
@@ -1369,18 +1375,19 @@ ORDER BY r.planet, r.stardate, r.source
 </table>
 <p class="result-note">First 5 of 20 rows.</p>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** We didn’t look into the comas that were explained.
+> ShowQuote
+>
+> **GEORDI:** We didn’t look into the comas that were explained.
+>
+> **DATA:** You are checking for instances of Iresine Syndrome...
+>
+> **GEORDI:** Right... and correlating them with visits by the Ullians -- and there we are.
+>
+> **DATA:** Two cases of Iresine Syndrome on Hurada Three -- right at the time Tarmin and his group was there.
 
-**DATA:** You are checking for instances of Iresine Syndrome...
-
-**GEORDI:** Right... and correlating them with visits by the Ullians -- and there we are.
-
-**DATA:** Two cases of Iresine Syndrome on Hurada Three -- right at the time Tarmin and his group was there.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT r.case_id, r.planet, r.patient, r.stardate,
@@ -1411,16 +1418,17 @@ ORDER BY r.stardate
 </table>
 <p class="result-note">First 5 of 7 rows.</p>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** Let’s try the other planets. I think we may have something.
+> ShowQuote
+>
+> **GEORDI:** Let’s try the other planets. I think we may have something.
+>
+> **PICARD:** How’s your search coming?
+>
+> **DATA:** We have uncovered several cases, sir, but we have not yet completed our search.
 
-**PICARD:** How’s your search coming?
-
-**DATA:** We have uncovered several cases, sir, but we have not yet completed our search.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 WITH comas AS (
@@ -1484,29 +1492,26 @@ GROUP BY l.member ORDER BY comas_present_for DESC, l.member
 
 *Not what the script says: The three planets were already given on the previous line; here it adds the two Nel III comas, which the dialogue has not received yet at this point.*
 
-</td></tr>
-</table>
-
 **The alibi, and the one who was always there**
 
-![The follow-up search of the Nel system records, correlated with the Ullians’ mission logs.]({% link images/blog/star-trek/enterprise-computer/violations_alibi.jpg %}){: width="480" }
-*The follow-up search of the Nel system records, correlated with the Ullians’ mission logs. <em>Star Trek: The Next Generation</em>, “Violations” (1992). © CBS Studios Inc.*{: .caption .caption-left }
+![The follow-up search of the Nel system records, correlated with the Ullians’ mission logs.]({% link images/blog/star-trek/enterprise-computer/violations_alibi.jpg %}){: .center width="480" }
+*The follow-up search of the Nel system records, correlated with the Ullians’ mission logs. <em>Star Trek: The Next Generation</em>, “Violations” (1992). © CBS Studios Inc.*{: .caption }
 
-<table class="script-split" markdown="1">
-<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**GEORDI:** We just got the transmission from the Nel system. No mention of Iresine Syndrome... but there are two unexplained comas on one planet... none on the other.
+> ShowQuote
+>
+> **GEORDI:** We just got the transmission from the Nel system. No mention of Iresine Syndrome... but there are two unexplained comas on one planet... none on the other.
+>
+> **DATA:** And were the Ullians present?
+>
+> **GEORDI:** Checking their mission logs... That’s funny...
+>
+> **DATA:** What is it?
+>
+> **GEORDI:** On stardates 45321 and 45323, when the comas occurred... Tarmin was on his home planet. He wasn’t anywhere near the Nel system.
 
-**DATA:** And were the Ullians present?
-
-**GEORDI:** Checking their mission logs... That’s funny...
-
-**DATA:** What is it?
-
-**GEORDI:** On stardates 45321 and 45323, when the comas occurred... Tarmin was on his home planet. He wasn’t anywhere near the Nel system.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT m.planet, m.arrived_stardate, m.departed_stardate, c.incident_id,
@@ -1533,14 +1538,15 @@ ORDER BY m.arrived_stardate, c.stardate
 <tr><td>Nel III</td><td>45273</td><td>45383</td><td>6</td><td>45323</td><td>Inad, Jev</td><td>Tarmin on Ullian homeworld</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**DATA:** We discovered two instances of unexplained comas on Nel Three while the Ullians were there... but Tarmin was not part of the group. A closer examination revealed that only one Ullian was present at all incidents of coma -- Jev.
+> ShowQuote
+>
+> **DATA:** We discovered two instances of unexplained comas on Nel Three while the Ullians were there... but Tarmin was not part of the group. A closer examination revealed that only one Ullian was present at all incidents of coma -- Jev.
 
 *Nobody speaks this request in the script. Claude was asked: “Were any of the Ullians present at all incidents of coma?”*
 
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT l.member, count(DISTINCT c.incident_id) AS incidents_present,
@@ -1559,22 +1565,19 @@ ORDER BY l.member
 <tr><td>Jev</td><td>6</td><td>6</td></tr>
 </table>
 
-</td></tr>
-</table>
-
 ### Realm of Fear
 
 [Script](https://www.st-minutiae.com/resources/scripts/228.txt). Season 6. Barclay, who is afraid of the transporter, looks up what it might be doing to him.
 
-<table class="script-split" markdown="1">
-<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**BARCLAY:** Computer... access Starfleet Medical Data Base. Tell me about... describe the disorder known as... Transporter Psychosis.
+> ShowQuote
+>
+> **BARCLAY:** Computer... access Starfleet Medical Data Base. Tell me about... describe the disorder known as... Transporter Psychosis.
+>
+> **COMPUTER:** Transporter Psychosis was diagnosed in the year twenty-two-oh-nine by researchers on Delinia Two --
 
-**COMPUTER:** Transporter Psychosis was diagnosed in the year twenty-two-oh-nine by researchers on Delinia Two --
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT disorder, summary, year_diagnosed, diagnosed_by, diagnosed_at,
@@ -1587,14 +1590,15 @@ FROM medical_database WHERE disorder ILIKE 'Transporter Psychosis'
 <tr><td>Transporter Psychosis</td><td>Transporter Psychosis was diagnosed in the year twenty-two-oh-nine …</td><td>2209</td><td>researchers</td><td>Delinia II</td><td>It is caused by a breakdown of neuro-chemical molecules during tran…</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**BARCLAY:** No, no... stop. All I need is the... what causes it?
+> ShowQuote
+>
+> **BARCLAY:** No, no... stop. All I need is the... what causes it?
+>
+> **COMPUTER:** It is caused by a breakdown of neuro-chemical molecules during transport, affecting the body’s motor functions, autonomic systems, and the brain’s higher reasoning centers.
 
-**COMPUTER:** It is caused by a breakdown of neuro-chemical molecules during transport, affecting the body’s motor functions, autonomic systems, and the brain’s higher reasoning centers.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT cause
@@ -1607,14 +1611,15 @@ WHERE disorder ILIKE 'Transporter Psychosis'
 <tr><td>It is caused by a breakdown of neuro-chemical molecules during tran…</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**BARCLAY:** What are the symptoms?
+> ShowQuote
+>
+> **BARCLAY:** What are the symptoms?
+>
+> **COMPUTER:** Victims suffer from paranoid delusions... multi-infarct dementia... hallucinations...
 
-**COMPUTER:** Victims suffer from paranoid delusions... multi-infarct dementia... hallucinations...
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT symptom_id, symptom, category, detail, is_peripheral
@@ -1632,14 +1637,15 @@ ORDER BY symptom_id
 </table>
 <p class="result-note">First 5 of 8 rows.</p>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**BARCLAY:** Hallucinations? What kind of hallucinations?
+> ShowQuote
+>
+> **BARCLAY:** Hallucinations? What kind of hallucinations?
+>
+> **COMPUTER:** Victims experience somatic, tactile and visual hallucinations, accompanied by psychogenic hysteria.
 
-**COMPUTER:** Victims experience somatic, tactile and visual hallucinations, accompanied by psychogenic hysteria.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT symptom, detail FROM disorder_symptoms
@@ -1652,14 +1658,15 @@ WHERE disorder ILIKE 'Transporter Psychosis'
 <tr><td>hallucinations</td><td>Victims experience somatic, tactile and visual hallucinations, acco…</td></tr>
 </table>
 
-</td></tr>
-<tr valign="top" markdown="1"><td markdown="1">
+**In the script**
 
-**BARCLAY:** Computer... what is the treatment for Transporter Psychosis?
+> ShowQuote
+>
+> **BARCLAY:** Computer... what is the treatment for Transporter Psychosis?
+>
+> **COMPUTER:** There is no known treatment.
 
-**COMPUTER:** There is no known treatment.
-
-</td><td markdown="1">
+**What the computer ran**
 
 ```sql
 SELECT m.disorder, count(t.treatment_id) AS treatments_on_file,
@@ -1673,9 +1680,6 @@ WHERE m.disorder ILIKE 'Transporter Psychosis' GROUP BY m.disorder
 <table class="result">
 <tr><th>disorder</th><th>treatments_on_file</th><th>treatments_in_database</th></tr>
 <tr><td>Transporter Psychosis</td><td>0</td><td>6</td></tr>
-</table>
-
-</td></tr>
 </table>
 
 *Stills from* Star Trek: The Next Generation *are © CBS Studios Inc. STAR TREK and related marks are trademarks of CBS Studios Inc. They are reproduced here in reduced size for the purpose of commentary on the scenes discussed. This post is not affiliated with or endorsed by CBS Studios or Paramount.*

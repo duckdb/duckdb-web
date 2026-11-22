@@ -8,6 +8,7 @@
 		deprecated: "alert-circle",
 		update: "refresh-cw-02",
 		installation: "settings-02",
+		showquote: "quotation_mark",
 		new: "stars-01"
 	};
 
@@ -20,6 +21,7 @@
 		Update: "update",
 		Installation: "installation",
 		Quote: "quote",
+		ShowQuote: "showquote",
 		New: "new"
 	};
 
@@ -70,7 +72,7 @@
 			}
 			content.insertAdjacentHTML('afterbegin', '<span class="sr-only">Quote</span>');
 		} else {
-			var label = (className === 'bestpractice') ? 'Best practice' : (hasKeyword ? firstWord : 'Note');
+			var label = (className === 'bestpractice') ? 'Best practice' : (className === 'showquote') ? 'Quote' : (hasKeyword ? firstWord : 'Note');
 			content.insertAdjacentHTML('afterbegin', '<span class="sr-only">' + label + '</span>');
 			blockquote.insertAdjacentHTML('afterbegin', '<div class="symbol" title="' + label + '"><svg class="icon"><use href="#' + icons[className] + '"></use></svg></div>');
 		}

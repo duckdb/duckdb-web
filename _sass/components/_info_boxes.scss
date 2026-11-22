@@ -140,6 +140,23 @@ body.layout_default.blog_typography #main_content_wrap,
 				content: "”";
 			}
 		}
+
+		// Grey box with a quotation mark icon on the left (the pre-November 2026 quote style)
+		&.showquote {
+			padding: 18px 20px;
+			border-radius: var(--page-radius-m, 10px);
+			background: var(--doc-codebox-background-color, #F2F2F2);
+			border-color: var(--border-color);
+
+			.symbol {
+				margin-top: 4px;
+			}
+
+			p {
+				font-size: var(--type-body-normal, 15px);
+				line-height: 1.5;
+			}
+		}
 	}
 
 	figure.quote {
