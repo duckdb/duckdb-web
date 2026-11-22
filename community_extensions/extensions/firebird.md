@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: firebird
   description: The first Firebird extension in the DuckDB Community Extensions registry. Federated read-only access to Firebird (3.0/4.0/5.0) databases from DuckDB, with projection + filter pushdown, INT128 / DECIMAL(38) / TIMESTAMP_TZ support, native ATTACH, and CHARACTER SET NONE handling (default win1252; strict / iso8859_1 / blob also available) with filter-pushdown correctness on transcoded columns.
-  version: 1.3.1
+  version: 1.4.1
   language: C++
   build: cmake
   license: MIT
@@ -28,8 +28,8 @@ extension:
 
 repo:
   github: flozer/duckdb-firebird
-  # v1.3.1 (immutable commit pin)
-  ref: 46d034ff7d377d257476f00ea846fdaf3333b57b
+  # v1.4.1 (immutable commit pin)
+  ref: 33d66af2a247b1ac7e611733f231dafd7c8d81eb
 
 docs:
   hello_world: |
@@ -125,6 +125,14 @@ docs:
       normalized `NOT IN` expression, restoring pushdown, residual-filter
       telemetry, and `firebird_unpushed_mode` guards without changing
       default behavior.
+    - Correctness and platform fixes (v1.4.0): partitioned scans read one
+      shared Firebird snapshot (Firebird 4+) instead of per-partition
+      read-committed transactions, with a new `snapshot_mode` column in
+      `firebird_last_query()` / `firebird_query_log()`; partitioned scans
+      no longer skip rows outside the cached PK range; `INT128`, `DECFLOAT`,
+      time-zone types and `BOOLEAN` read correctly from servers with
+      `DataTypeCompatibility` set; and the Windows client library loads its
+      dependent DLLs from its own folder.
     - Row estimate and scan advisories (v1.1.0): `firebird_profile_table`
       reports `estimated_rows` (cheap PK-range upper bound, or an opt-in
       exact `COUNT(*)` via `exact_row_count=true`) and structured
@@ -212,8 +220,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 2424
-extension_download_count_pretty: 2.4k
+extension_download_count: 2485
+extension_download_count_pretty: 2.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_firebird.png'
 layout: community_extension_doc
 ---
@@ -223,15 +231,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -264,14 +272,14 @@ LOAD {{ page.extension.name }};
 | firebird_foreign_keys         | table         | Lists foreign-key constraints column by column with the real Firebird update and delete referential rules.                                                                                                                                                                                                   | NULL    | [SELECT * FROM firebird_foreign_keys('fb');]                                                                  |
 | firebird_generate_dbt_sources | table         | Generates dbt sources.yml content for every Firebird table exposed by an attached catalog; the YAML is a starting point to review.                                                                                                                                                                           | NULL    | [SELECT yaml FROM firebird_generate_dbt_sources('fb');]                                                       |
 | firebird_generators           | table         | Lists user generators/sequences with their initial value and current value (read per generator via GEN_ID(name, 0)).                                                                                                                                                                                         | NULL    | [SELECT * FROM firebird_generators('fb');]                                                                    |
-| firebird_health               | table         | Returns a single-row database and server health diagnostic (engine and ODS version, dialect, charset, page size, transaction counters OIT/OAT/OST, attachments, warning codes) read from MON$ tables.                                                                                                        | NULL    | [SELECT * FROM firebird_health('fb');]                                                                        |
+| firebird_health               | table         | Returns a single-row database and server health diagnostic (engine and ODS version, dialect, charset, page size, transaction counters OIT/OAT/OST, attachments, warning codes) read from MON$ tables, plus the client library version and the effective inline-blob limit.                                   | NULL    | [SELECT * FROM firebird_health('fb');]                                                                        |
 | firebird_index_profile        | table         | Returns one row per index of a Firebird table (columns, uniqueness, activity, PK/FK backing, raw selectivity, structured alerts) plus unindexed filter candidates; a table with no indexes emits one synthetic row.                                                                                          | NULL    | [SELECT * FROM firebird_index_profile('fb.main.CUSTOMER');]                                                   |
 | firebird_indexes              | table         | Lists all user indexes with per-segment columns, uniqueness, activity, and expression source for expression indexes.                                                                                                                                                                                         | NULL    | [SELECT * FROM firebird_indexes('fb');]                                                                       |
 | firebird_last_query           | table         | Returns telemetry for the most recent Firebird scan in the current session: remote SQL, pushed and residual filters with reasons, pushed paging, timing, rows read, and parallel scan and connection-reuse details.                                                                                          | NULL    | [SELECT * FROM firebird_last_query();]                                                                        |
 | firebird_pool_stats           | table         | Returns config, idle-queue size, active-lease count, lifetime counters, and the sanitized last connection error for the connection pool of one attached Firebird catalog, by explicit alias; it never leases a connection.                                                                                   | NULL    | [SELECT * FROM firebird_pool_stats('fb');]                                                                    |
 | firebird_profile_table        | table         | Returns a single-row factual diagnostic for one table or view behind an attached catalog: primary key, indexes, watermark and filter candidates, full-scan risk, advisory recommended_partitions, structured alerts, and a row estimate (PK-range upper bound, or exact COUNT(*) when exact_row_count=true). | NULL    | [SELECT * FROM firebird_profile_table('fb.main.CUSTOMER');]                                                   |
 | firebird_query_log            | table         | Returns the bounded per-session log of Firebird scans (opt-in via SET firebird_query_log_size = N), with the same telemetry columns as firebird_last_query().                                                                                                                                                | NULL    | [SELECT * FROM firebird_query_log();]                                                                         |
-| firebird_scan                 | table         | Reads a Firebird table into DuckDB with projection and predicate pushdown, optional parallel PK-range partitioning (partitions=N), ROWS paging, and CHARACTER SET NONE decoding.                                                                                                                             | NULL    | [SELECT * FROM firebird_scan('database=C:/data/erp.fdb user=APP_READONLY password=secret', 'CUSTOMER');]      |
+| firebird_scan                 | table         | Reads a Firebird table into DuckDB with projection and predicate pushdown, optional parallel partitioning (partitions=N, by PK or RDB$DB_KEY ranges via partition_by), ROWS paging, and CHARACTER SET NONE decoding.                                                                                         | NULL    | [SELECT * FROM firebird_scan('database=C:/data/erp.fdb user=APP_READONLY password=secret', 'CUSTOMER');]      |
 | firebird_tables               | table         | Lists the Firebird tables visible to a connection, without attaching the database.                                                                                                                                                                                                                           | NULL    | [SELECT * FROM firebird_tables('database=C:/data/erp.fdb user=APP_READONLY password=secret');]                |
 | firebird_type_audit           | table         | Reports per-column type and charset fidelity findings (NONE charset, DECFLOAT as VARCHAR, widenable int64 NUMERIC/DECIMAL, INT128, timezone types, text BLOBs) for an attached catalog; only columns with a caveat are emitted.                                                                              | NULL    | [SELECT * FROM firebird_type_audit('fb');]                                                                    |
 
@@ -291,14 +299,17 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|              name              |                                                                                                                                                                                                description                                                                                                                                                                                                | input_type | scope  | aliases | typed_value |
-|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
-| firebird_dummy_packet_interval | Keepalive interval, in SECONDS, sent to Firebird as isc_dpb_dummy_packet_interval on every connection (0 = disabled, default). Helps when NAT/firewall idle timeouts drop long fetches (-504 cursor lost / -902 connection shutdown). Effectiveness depends on the server honoring the per-attachment DPB value; on some server versions the server-side DummyPacketInterval setting is required instead. | BIGINT     | GLOBAL | []      | 0           |
-| firebird_pool_enabled          | Enable the per-ATTACH FirebirdConnectionPool. When false, every Acquire opens a fresh connection and Release destroys it.                                                                                                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      | true        |
-| firebird_pool_idle_timeout_ms  | How long (in milliseconds) a released connection may sit in the idle queue before it is discarded on the next Acquire. 0 = no expiry (default). Clock starts at Release().                                                                                                                                                                                                                                | BIGINT     | GLOBAL | []      | 0           |
-| firebird_pool_max_size         | Maximum number of idle connections kept in the pool. 0 = unlimited (default). Caps the idle queue, not active leases.                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      | 0           |
-| firebird_query_log_size        | Maximum entries kept by firebird_query_log() per session. 0 disables the log (default).                                                                                                                                                                                                                                                                                                                   | BIGINT     | GLOBAL | []      | 0           |
-| firebird_unpushed_mode         | What to do when a Firebird scan keeps filters in DuckDB that were not pushed down to Firebird (see not_pushed_reasons in firebird_last_query()). 'silent' (default) does nothing, 'warn' emits a warning, 'error' fails the query with an actionable message.                                                                                                                                             | VARCHAR    | GLOBAL | []      | silent      |
-| temp_directory                 | Set the directory to which temporary files are written.                                                                                                                                                                                                                                                                                                                                                   | VARCHAR    | GLOBAL | []      | post.db.tmp |
+|                    name                    |                                                                                                                                                                                                description                                                                                                                                                                                                | input_type | scope  | aliases | typed_value |
+|--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| firebird_dummy_packet_interval             | Keepalive interval, in SECONDS, sent to Firebird as isc_dpb_dummy_packet_interval on every connection (0 = disabled, default). Helps when NAT/firewall idle timeouts drop long fetches (-504 cursor lost / -902 connection shutdown). Effectiveness depends on the server honoring the per-attachment DPB value; on some server versions the server-side DummyPacketInterval setting is required instead. | BIGINT     | GLOBAL | []      | 0           |
+| firebird_max_inline_blob_size              | Maximum size, in BYTES, of blobs Firebird sends inline with their row (isc_dpb_max_inline_blob_size). -1 (default) = client default (65535 with a 5.0.3+ client), 0 = disable, max 65535. Needs a Firebird 5.0.3+ client library and server; older ones ignore it. See firebird_health().inline_blob_size.                                                                                                | BIGINT     | GLOBAL | []      | -1          |
+| firebird_pool_enabled                      | Enable the per-ATTACH FirebirdConnectionPool. When false, every Acquire opens a fresh connection and Release destroys it.                                                                                                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      | true        |
+| firebird_pool_idle_timeout_ms              | How long (in milliseconds) a released connection may sit in the idle queue before it is discarded on the next Acquire. 0 = no expiry (default). Clock starts at Release().                                                                                                                                                                                                                                | BIGINT     | GLOBAL | []      | 0           |
+| firebird_pool_max_size                     | Maximum number of idle connections kept in the pool. 0 = unlimited (default). Caps the idle queue, not active leases.                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      | 0           |
+| firebird_query_log_size                    | Maximum entries kept by firebird_query_log() per session. 0 disables the log (default).                                                                                                                                                                                                                                                                                                                   | BIGINT     | GLOBAL | []      | 0           |
+| firebird_transaction_snapshot              | Every scan of a Firebird ATTACH in one DuckDB transaction reads one Firebird snapshot (Firebird 4+; off by default).                                                                                                                                                                                                                                                                                      | BOOLEAN    | GLOBAL | []      | false       |
+| firebird_transaction_snapshot_idle_timeout | Seconds from the end of a statement to the next scan of the ATTACH in the same DuckDB transaction after which the server releases the transaction's Firebird snapshot (that scan then fails). 0 = no limit.                                                                                                                                                                                               | BIGINT     | GLOBAL | []      | 60          |
+| firebird_unpushed_mode                     | What to do when a Firebird scan keeps filters in DuckDB that were not pushed down to Firebird (see not_pushed_reasons in firebird_last_query()). 'silent' (default) does nothing, 'warn' emits a warning, 'error' fails the query with an actionable message.                                                                                                                                             | VARCHAR    | GLOBAL | []      | silent      |
+| temp_directory                             | Set the directory to which temporary files are written.                                                                                                                                                                                                                                                                                                                                                   | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

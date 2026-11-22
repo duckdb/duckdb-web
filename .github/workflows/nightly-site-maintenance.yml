@@ -30,11 +30,6 @@ jobs:
       # make sure the duckdb-releases.csv file gets deployed
       run: cp _data/past_releases.csv data/duckdb-releases.csv
 
-    - name: Update release calendar
-      run: |
-        python3 -m pip install --break-system-packages duckdb icalendar requests
-        python3 scripts/get_calendar.py
-
     - name: Thin SVG strokes
       run: python3 scripts/thin_svg_strokes.py
 

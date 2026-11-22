@@ -4,6 +4,8 @@ title: "Parallel Grouped Aggregation in DuckDB"
 authors:
   - Hannes Mühleisen
   - Mark Raasveldt
+thumb: "/images/blog/thumbs/aggregate-hashtable.svg"
+image: "/images/blog/thumbs/aggregate-hashtable.png"
 excerpt: DuckDB has a fully parallelized aggregate hash table that can efficiently aggregate over millions of groups.
 tag: deep-dive
 ---

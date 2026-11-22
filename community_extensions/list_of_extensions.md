@@ -3,6 +3,8 @@ layout: community_extension_doc
 title: List of Extensions
 excerpt: |
   This page lists DuckDB's Community Extensions.
+redirect_from:
+  - /cel
 ---
 
 This page lists the Community Extensions available for the latest stable DuckDB release (v{{ site.latest_duckdb_version }}).

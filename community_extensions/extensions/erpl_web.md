@@ -20,10 +20,10 @@ repo:
   ref: e7cc326bd2e126189561c9469fa9aabbc33134bd
   variegata: e7cc326bd2e126189561c9469fa9aabbc33134bd
 
-extension_star_count: 32
-extension_star_count_pretty: 32
-extension_download_count: 1223
-extension_download_count_pretty: 1.2k
+extension_star_count: 34
+extension_star_count_pretty: 34
+extension_download_count: 1280
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_odata.png'
 layout: community_extension_doc
 ---
@@ -33,15 +33,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ❌ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

@@ -44,7 +44,7 @@
   var versionSlider = one(versionSwitch, '.version-switch-slider');
   var altPanels = [];
 
-  // Releases (e.g., '2.0', '1.5', '1.4'), newest first, as rendered from _data/releases.yml
+  // Releases (e.g., '2.0', '1.5'), newest first, as rendered from _data/releases.yml
   var VERSIONS = versionBtns.map(function (btn) { return btn.getAttribute('data-version'); });
   var ALIASES = {};
   var defaultLabels = new Map();

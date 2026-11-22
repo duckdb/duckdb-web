@@ -7,7 +7,7 @@ authors:
 #thumb: "/images/library/thumbs/2026-08-26-its-about-data-aws-acquires-ducklabs.jpg"
 #image: "/images/library/thumbs/2026-08-26-its-about-data-aws-acquires-ducklabs.jpg"
 tag: podcast
-length: "24 min"
+length: "25 min"
 category: community
 excerpt: ""
 venue: "It's About Data by dbInsight"

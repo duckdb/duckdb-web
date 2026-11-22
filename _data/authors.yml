@@ -14,6 +14,9 @@ DuckDB meetup organizers:
 DuckLabs:
   icon: source-ducklabs
 
+AWS:
+  icon: source-aws
+
 Alex Kasko:
   picture: /images/blog/authors/alex_kasko.jpg
 
@@ -91,3 +94,6 @@ Ilya Boyandin:
 
 Ryan Hamilton:
   picture: /images/blog/authors/ryan_hamilton.jpg
+
+Roland Bouman:
+  picture: /images/blog/authors/roland_bouman.jpg

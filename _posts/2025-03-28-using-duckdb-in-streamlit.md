@@ -170,7 +170,7 @@ The query will be executed when one of the following methods is encountered:
 - any other calculation method, such as `.sum`, `.row_number` etc. The relational methods can be found in the [DuckDB documentation]({% link docs/2.0/clients/python/reference/index.md %}).
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/duckdb-streamlit/top_5_busiest_stations.png">
+    <a href="{% link images/blog/duckdb-streamlit/top_5_busiest_stations.png %}">
         <img
           src="{% link images/blog/duckdb-streamlit/top_5_busiest_stations.png %}"
           alt="Top 5 Busiest Train Stations per Month"
@@ -218,7 +218,7 @@ The data about the train rides through the train stations of The Netherlands, at
 #### Railway Network Utilization across the Country
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/duckdb-streamlit/network_utilization_across_country.png">
+    <a href="{% link images/blog/duckdb-streamlit/network_utilization_across_country.png %}">
         <img
           src="{% link images/blog/duckdb-streamlit/network_utilization_across_country.png %}"
           alt="Railway Network Utilization across the Country"
@@ -249,7 +249,7 @@ In our case, we generate an animation with the railway network utilization at se
 #### Railway Network Utilization during the Year
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/duckdb-streamlit/number_train_rides.png">
+    <a href="{% link images/blog/duckdb-streamlit/number_train_rides.png %}">
         <img
           src="{% link images/blog/duckdb-streamlit/number_train_rides.png %}"
           alt="Railway Network Utilization during the Year"
@@ -307,7 +307,7 @@ The code of implementing interactive maps with Plotly in Streamlit is available 
 ## Finding the Closest 5 Stations with Folium
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/duckdb-streamlit/closest_train_stations.png">
+    <a href="{% link images/blog/duckdb-streamlit/closest_train_stations.png %}">
         <img
           src="{% link images/blog/duckdb-streamlit/closest_train_stations.png %}"
           alt="Closest 5 train stations from user selection"

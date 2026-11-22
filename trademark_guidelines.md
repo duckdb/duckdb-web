@@ -16,7 +16,7 @@ redirect_from:
 
 # DUCKDB™ Trademark Use Guidelines
 
-The DuckDB trademarks, service marks, and graphical marks (“DuckDB Marks”) are held by the DuckDB Foundation, a Dutch nonprofit entity that oversees the DuckDB project. To protect the community and ensure clarity about what is and isn’t official DuckDB software, we must set clear rules for how the DuckDB Marks are used.
+The DuckDB trademarks, service marks, and graphical marks (“DuckDB Marks”) are held by the [DuckDB Foundation](https://duckdb.foundation/), a Dutch nonprofit entity that oversees the DuckDB project. To protect the community and ensure clarity about what is and isn’t official DuckDB software, we must set clear rules for how the DuckDB Marks are used.
 
 If you plan to reference DuckDB in software, services, documentation, events, or any other materials, these guidelines explain what is allowed. When in doubt, please ask—we are always happy to help.
 

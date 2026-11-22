@@ -70,10 +70,10 @@ docs:
     The DuckDB GSheets Extension allows reading and writing of data in Google Sheets from DuckDB.
     For detailed setup and usage instructions, visit the docs at [duckdb-gsheets.com](https://duckdb-gsheets.com).
 
-extension_star_count: 359
-extension_star_count_pretty: 359
-extension_download_count: 200365
-extension_download_count_pretty: 200.4k
+extension_star_count: 360
+extension_star_count_pretty: 360
+extension_download_count: 212368
+extension_download_count_pretty: 212.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_gsheets.png'
 layout: community_extension_doc
 ---
@@ -83,15 +83,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ❌ |
-| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ❌ | ❌ |
+| Linux ARM64 | ✅ | ✅ | ❌ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ❌ | ❌ |
+| Windows AMD64 | ✅ | ✅ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

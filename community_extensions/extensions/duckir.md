@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckir
   description: A DuckDB extension for Information Retrieval. Fast vector search fully integrated with DuckDB, with filtered search on any predicate, indexes larger than memory, and an index that updates alongside your table.
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -21,7 +21,7 @@ extension:
 
 repo:
   github: cwida/DuckIR
-  ref: c597c50c375ac8e8576c19c655b523e391202b8e
+  ref: 807e7f3d55be2014797bd7404ec02a7be9494d6a
 
 docs:
   hello_world: |
@@ -63,10 +63,11 @@ docs:
     > **Status: Alpha. Indexes might need to be recreated after an extension update.**
 
     See our [documentation](https://github.com/cwida/DuckIR) for maintenance, persistence, out-of-core search, and the known limitations.
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: 52
-extension_download_count_pretty: 52
+
+extension_star_count: 25
+extension_star_count_pretty: 25
+extension_download_count: 598
+extension_download_count_pretty: 598
 image: '/images/community_extensions/social_preview/preview_community_extension_duckir.png'
 layout: community_extension_doc
 ---
@@ -76,15 +77,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ❌ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ❌ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ❌ |
 
 ### Installing and Loading
 ```sql

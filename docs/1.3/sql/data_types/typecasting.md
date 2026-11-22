@@ -32,7 +32,7 @@ Values of a particular data type cannot always be cast to any arbitrary target d
 The following matrix describes which conversions are supported.
 When implicit casting is allowed, it implies that explicit casting is also possible.
 
-![Typecasting matrix](/images/typecasting-matrix.png)
+![Typecasting matrix]({% link images/typecasting-matrix.png %})
 
 Even though a casting operation is supported based on the source and target data type, it does not necessarily mean the cast operation will succeed at runtime.
 

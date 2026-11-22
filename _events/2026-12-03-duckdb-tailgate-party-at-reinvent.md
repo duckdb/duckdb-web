@@ -2,7 +2,8 @@
 layout: post
 title: "DuckDB Tailgate Party at re:Invent with AWS and DuckLabs"
 authors:
-  - AWS and DuckLabs
+  - AWS
+  - DuckLabs
 thumb: "/images/events/thumbs/reinvent-2026.svg"
 image: "/images/events/thumbs/reinvent-2026.png"
 excerpt: ""

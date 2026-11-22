@@ -61,6 +61,14 @@ These limits can be adjusted with [dot commands]({% link docs/2.0/clients/cli/do
 | `.maxbytes ⟨count⟩`   | Maximum number of bytes of rows to render whole (`0` for all)  |
 | `.maxcellwidth ⟨count⟩` | Maximum number of characters per cell (`0` for all)          |
 
+## Running Without an Install
+
+The CLI is also [a Python package]({% link docs/2.0/clients/cli/overview.md %}#installing-with-pip). Where [uv](https://docs.astral.sh/uv/) is present, `uvx duckdb-cli` runs the current release with nothing installed, so an agent in a Python environment needs no setup:
+
+```batch
+uvx duckdb-cli -c "SELECT 42 AS answer;"
+```
+
 ## Tips for Agents
 
 The `.help agent` command prints a summary of agent mode. A few things that help when driving DuckDB programmatically:

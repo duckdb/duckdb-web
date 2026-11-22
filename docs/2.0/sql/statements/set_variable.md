@@ -10,16 +10,7 @@ redirect_from:
 title: SET VARIABLE and RESET VARIABLE Statements
 ---
 
-DuckDB supports the definition of SQL-level variables using the `SET VARIABLE` and `RESET VARIABLE` statements.
-
-## Variable Scopes
-
-DuckDB supports two levels of variable scopes:
-
-| Scope | Description |
-|---|---|
-| `SESSION` | Variables with a `SESSION` scope are local to you and only affect the current session. |
-| `GLOBAL` | Variables with a `GLOBAL` scope are specific [configuration option variables]({% link docs/2.0/configuration/overview.md %}#global-configuration-options) that affect the entire DuckDB instance and all sessions. For example, see [Set a Global Variable]({% link docs/2.0/sql/statements/set.md %}#set-a-global-variable). |
+DuckDB supports the definition of SQL-level variables using the `SET VARIABLE` and `RESET VARIABLE` statements. SQL-level variables are visible only in the current session and not persisted.
 
 ## `SET VARIABLE`
 
@@ -169,3 +160,22 @@ SELECT getvariable('my_var') AS my_var;
 ### Syntax
 
 <div id="rrdiagram2"></div>
+
+## `SHOW VARIABLES`
+
+The `SHOW VARIABLES`-statement lists the name, value (as `VARCHAR`) and data type of all SQL-level variables existing in the current session.
+
+```sql
+SET VARIABLE int_var = 42;
+SET VARIABLE txt_var = 'Hello';
+SHOW VARIABLES;
+```
+
+| name    | value | type    |
+|---------|-------|---------|
+| int_var | 42    | INTEGER |
+| txt_var | Hello | VARCHAR |  
+
+> SQL-level variables that were unset by a `RESET VARIABLE`-statement cease to exist and are therefore not listed.
+
+The list of existing SQL-level variables is also available as [`duckdb_variables()`-metadata query]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_variables).

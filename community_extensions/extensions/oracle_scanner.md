@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: oracle_scanner
   description: Read and write Oracle Database with no Oracle client
-  version: '0.6.2'
+  version: '0.8.0'
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,9 +19,9 @@ extension:
 
 repo:
   github: krokozyab/quack-oracle
-  # The commit tagged v0.6.2, built for DuckDB v2.0.0, pinned by SHA so what is
+  # The commit tagged v0.8.0, built for DuckDB v2.0.0, pinned by SHA so what is
   # built cannot move.
-  ref: aee367eaec18b338ea047dc7e534afe1cd7a4a0b
+  ref: e2989f8baf901e42fe1c45be577619041c60b52e
   # DuckDB 1.5.6 stays on v0.4.0, the last release built for that line.
   variegata: d4aa50f9bf23ca44b44f0df48fb0065ba751f5be
 
@@ -60,16 +60,19 @@ docs:
     always verifies the certificate and host name.
 
     **Read** with `oracle_query` (bind parameters supported) or `ATTACH` a
-    schema and query its tables and views by name. Filters, `ORDER BY ...
-    LIMIT`, aggregates, joins between two attached tables, and JSON path
-    filters are sent to Oracle when its answer is provably the same; large
-    tables are read through several sessions by ROWID ranges at one SCN;
-    heavy columns are fetched only for rows that pass the filter.
+    database and query the tables and views of any schema you can see by name
+    (`o.hr.employees`). Filters, `LIMIT` and `ORDER BY ... LIMIT`, aggregates
+    including `avg` and `count(DISTINCT ...)`, inner joins of attached tables,
+    and JSON path filters are sent to Oracle when its answer is provably the
+    same; large tables are read through several sessions by ROWID ranges at one
+    SCN; heavy columns are fetched only for rows that pass the filter.
     `EXPLAIN ANALYZE` shows the SQL Oracle ran and the bytes it moved.
 
-    **Write** with `INSERT`, `UPDATE`, `DELETE` (including `RETURNING`)
-    through the attached schema, in DuckDB transactions that commit or roll
-    back on Oracle, or with `oracle_execute` for batches.
+    **Write** with `INSERT`, `UPDATE`, `DELETE` (including `RETURNING`) and
+    upserts (`ON CONFLICT`, `INSERT OR REPLACE`, `MERGE INTO`, run as Oracle
+    `MERGE`) through the attached schema, in DuckDB transactions that commit or
+    roll back on Oracle, or with `oracle_execute` for batches. `CREATE TABLE`,
+    `CREATE TABLE AS`, `ALTER TABLE` and `DROP TABLE` run in Oracle too.
 
     **Call** procedures and functions (`oracle_call_auto`, `oracle_call_named`,
     `oracle_arguments`) and run anonymous PL/SQL blocks (`oracle_plsql`).
@@ -86,10 +89,10 @@ docs:
     Full documentation, supported types and limits:
     https://github.com/krokozyab/quack-oracle
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 1994
-extension_download_count_pretty: 2.0k
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 1799
+extension_download_count_pretty: 1.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc
 ---
@@ -99,15 +102,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -131,6 +134,7 @@ LOAD {{ page.extension.name }};
 
 |            function_name             | function_type |                                                                                                                                                description                                                                                                                                                | comment |                                                                                                          examples                                                                                                          |
 |--------------------------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| __oracle_scanner_default             | scalar        | NULL                                                                                                                                                                                                                                                                                                      | NULL    |                                                                                                                                                                                                                            |
 | oracle_arguments                     | table         | Lists the arguments of every overload of an Oracle procedure or function, with the reason for any argument type this client cannot bind.                                                                                                                                                                  | NULL    | [SELECT * FROM oracle_arguments('demo', 'QUACK_DEMO_ADD');]                                                                                                                                                                |
 | oracle_call                          | table         | Calls an Oracle procedure whose only argument is an OUT SYS_REFCURSOR, and returns a cursor handle rather than the cursor's rows.                                                                                                                                                                         | NULL    | [SELECT * FROM oracle_call('demo', 'QUACK_DEMO_LIST', 'P_ROWS');]                                                                                                                                                          |
 | oracle_call_auto                     | table         | Reads an Oracle procedure's or function's signature from the data dictionary and calls it with the given values in argument declaration order.                                                                                                                                                            | NULL    | [SELECT * FROM oracle_call_auto('demo', 'QUACK_DEMO_ADD', ['2', '3']);]                                                                                                                                                    |
@@ -185,13 +189,19 @@ This extension does not add any types.
 
 |             name             |                                                                                                                                                                                                                     description                                                                                                                                                                                                                     | input_type | scope  | aliases | typed_value |
 |------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
-| oracle_aggregate_pushdown    | Let Oracle compute COUNT, SUM, MIN, MAX and GROUP BY over an attached table (numbers, dates and timestamps) so the groups travel and not the rows.                                                                                                                                                                                                                                                                                                  | BOOLEAN    | GLOBAL | []      | true        |
+| oracle_aggregate_pushdown    | Let Oracle compute COUNT (including eligible DISTINCT), SUM, partial AVG, MIN, MAX and GROUP BY so the groups travel and not the rows.                                                                                                                                                                                                                                                                                                              | BOOLEAN    | GLOBAL | []      | true        |
 | oracle_consistent_read       | Read every attached table of one statement at one Oracle change number (AS OF SCN), taken when its first scan starts, so a join or a union of scans sees one moment. Needs flashback on the tables; a transaction that has written reads its own session instead.                                                                                                                                                                                   | BOOLEAN    | GLOBAL | []      | false       |
 | oracle_deferred_columns      | Read CLOB, BLOB, JSON, VECTOR and XMLTYPE columns only for the rows that pass a filter DuckDB applies itself, by ROWID at the same change number as the rows.                                                                                                                                                                                                                                                                                       | BOOLEAN    | GLOBAL | []      | true        |
+| oracle_direct_scan           | Decode supported attached scalar rows into typed vectors during fetch.                                                                                                                                                                                                                                                                                                                                                                              | BOOLEAN    | GLOBAL | []      | true        |
+| oracle_fetch_rows            | Maximum scalar attached-scan fetch rows (1..65536); output vectors remain 2048 rows.                                                                                                                                                                                                                                                                                                                                                                | BIGINT     | GLOBAL | []      | 16384       |
 | oracle_filter_pushdown       | Send WHERE predicates on an attached Oracle table to Oracle. Only filters whose Oracle meaning is provably identical are translated; the rest are applied by the scan to the rows Oracle returns.                                                                                                                                                                                                                                                   | BOOLEAN    | GLOBAL | []      | true        |
-| oracle_join_pushdown         | Let Oracle join two attached tables of the same database (inner joins on numbers, dates and timestamps) so the join's result travels and not both tables.                                                                                                                                                                                                                                                                                           | BOOLEAN    | GLOBAL | []      | true        |
+| oracle_join_pushdown         | Let Oracle join attached tables of the same database (inner joins on numbers, dates and timestamps) so the join's result travels and not both tables.                                                                                                                                                                                                                                                                                               | BOOLEAN    | GLOBAL | []      | true        |
+| oracle_parallel_count        | Count ROWID ranges at one SCN and sum their counts in DuckDB.                                                                                                                                                                                                                                                                                                                                                                                       | BOOLEAN    | GLOBAL | []      | false       |
 | oracle_parallel_scan         | How many Oracle sessions one scan of an attached table may read through at the same SCN, each taking ROWID ranges cut at extent boundaries. -1 (the default) chooses: as many as DuckDB has threads, up to 8, for a table whose statistics say 500,000 rows or more, else one. 0 or 1 reads with one session. A table under 2,048 blocks, a sample, a transaction that has written, and a database that will not give out an SCN are read with one. | BIGINT     | GLOBAL | []      | -1          |
+| oracle_parallel_top_n        | Choose ranked reads automatically, or force true/parallel or false/serial.                                                                                                                                                                                                                                                                                                                                                                          | VARCHAR    | GLOBAL | []      | auto        |
+| oracle_scan_plan_cache       | Cache checked ROWID boundaries and wire descriptions, never snapshots or rows.                                                                                                                                                                                                                                                                                                                                                                      | BOOLEAN    | GLOBAL | []      | true        |
 | oracle_session_pool_size     | How many authenticated Oracle sessions one DuckDB connection keeps for reuse, per secret. 0 opens a fresh session for every statement.                                                                                                                                                                                                                                                                                                              | BIGINT     | GLOBAL | []      | 4           |
+| oracle_statement_cache       | Reuse up to 20 parsed scalar queries per native Oracle session.                                                                                                                                                                                                                                                                                                                                                                                     | BOOLEAN    | GLOBAL | []      | true        |
 | oracle_top_n_pushdown        | Let Oracle rank and cut an ORDER BY ... LIMIT over an attached table (numbers, dates and timestamps) so only the first rows are read. DuckDB still sorts what comes back.                                                                                                                                                                                                                                                                           | BOOLEAN    | GLOBAL | []      | true        |
 | oracle_transaction_pool_size | How many idle Oracle sessions an attached catalog keeps between its transactions, so a transaction need not connect and authenticate again. Read at ATTACH; 0 disables reuse.                                                                                                                                                                                                                                                                       | BIGINT     | GLOBAL | []      | 2           |
 | oracle_unconstrained_number  | What a NUMBER with no declared precision (plain NUMBER, SUM(x), count(*)) becomes: 'varchar' (the default, exact), 'double', or 'decimal(precision, scale)'. Read when a query is bound or a table is first used; the lossy choices round what does not fit.                                                                                                                                                                                        | VARCHAR    | GLOBAL | []      | varchar     |

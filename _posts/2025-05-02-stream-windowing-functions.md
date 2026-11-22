@@ -69,7 +69,7 @@ ORDER BY 1;
 ```
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/time-based-analysis/hour_services.png">
+    <a href="{% link images/blog/time-based-analysis/hour_services.png %}">
         <img
           src="{% link images/blog/time-based-analysis/hour_services.png %}"
           alt="Hourly Number of Train Services, 2024"
@@ -120,7 +120,7 @@ ORDER BY 1;
 Given that tumbling windows are non-overlapping intervals, we can calculate summaries, such as the average number of services during a 15 minute interval. It is interesting to observe that the number of train services is quite stable during the day but it's much lower during the night – even in Amsterdam.
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/time-based-analysis/hour_quarter_services.png">
+    <a href="{% link images/blog/time-based-analysis/hour_quarter_services.png %}">
         <img
           src="{% link images/blog/time-based-analysis/hour_quarter_services.png %}"
           alt="Average Number of Train Services, per 15 minutes, 2024"
@@ -374,7 +374,7 @@ ORDER BY 2, 1;
 Something must have happened on 29 April 2024! We observe that, during the 18 hours of service, there were 12 session windows, which means that, for at least 10 times, no train arrived or departed during a period of 10 minutes. A reason for this could be that a regular train service was not running on that day. And indeed maintenance work started between [Amsterdam and Utrecht](https://www.rijdendetreinen.nl/werkzaamheden/13161-29-april-2024-werkzaamheden-amsterdam-utrecht-amsterdam-weesp).
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/time-based-analysis/timeline_gap.png">
+    <a href="{% link images/blog/time-based-analysis/timeline_gap.png %}">
         <img
           src="{% link images/blog/time-based-analysis/timeline_gap.png %}"
           alt="Train Service Windows on 29 April 2024"

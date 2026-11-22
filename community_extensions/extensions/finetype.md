@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: finetype
   description: Semantic type classification — detects 251 data types (emails, URLs, dates, UUIDs, currencies, etc.) from raw strings
-  version: 0.6.66
+  version: 0.6.68
   language: Rust
   build: cargo
   license: MIT
@@ -22,8 +22,8 @@ extension:
 
 repo:
   github: meridian-online/finetype
-  ref: 6b85e500659f44520ca7e6e70073e335cc3e3acb
-  ref_next: 6b85e500659f44520ca7e6e70073e335cc3e3acb
+  ref: 47f59e2bf6f1b6d05ce42d3ec8019832e368bb17
+  ref_next: 47f59e2bf6f1b6d05ce42d3ec8019832e368bb17
   variegata: a8ec8663862d28b1b9e0794f5026efbdb2ea3836
 
 docs:
@@ -244,8 +244,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 897
-extension_download_count_pretty: 897
+extension_download_count: 1191
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_finetype.png'
 layout: community_extension_doc
 ---
@@ -255,15 +255,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

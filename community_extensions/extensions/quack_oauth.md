@@ -23,10 +23,10 @@ repo:
   # serves both (and v1.4.5 via the ref fallback).
   variegata: 0714cb05413ac40161d1b9ec641b4fb6b974a4ea
 
-extension_star_count: 32
-extension_star_count_pretty: 32
-extension_download_count: 932
-extension_download_count_pretty: 932
+extension_star_count: 33
+extension_star_count_pretty: 33
+extension_download_count: 860
+extension_download_count_pretty: 860
 image: '/images/community_extensions/social_preview/preview_community_extension_quack_oauth.png'
 layout: community_extension_doc
 ---
@@ -36,15 +36,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

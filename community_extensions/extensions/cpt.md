@@ -9,7 +9,7 @@ extension:
   name: cpt
   description: Offline change point detection (PELT, binary segmentation, dynamic programming, CROPS)
   version: 0.1.0
-  language: C
+  language: C++
   build: cmake
   license: MIT
   requires_toolchains: "python3"
@@ -19,7 +19,9 @@ extension:
 
 repo:
   github: hugr-lab/duck-changepoint
-  ref: 482f0059c58f25a3bbef4d2c9c6c3392f9fe0cda
+  ref: a508a309a0cc85ef6579615e228bd94b5a37e3fe
+  # DuckDB 1.5.x: the v1.5.x branch, which keeps the build on the stable C API
+  variegata: 8f90cb72a72852908fbca042371618830d46a21b
 
 docs:
   hello_world: |
@@ -74,16 +76,18 @@ docs:
     a number, or 'bic' (default), 'mbic', 'aic' with the values of R's changepoint package. Results
     are checked against ruptures and R changepoint.
 
-    A running scalar function cannot be interrupted, so the work on one series is capped by the
+    A running call stops when its query is interrupted. The work on one series is also capped by the
     setting cpt_max_evaluations (default 1e9 evaluation units, 0 = no limit).
 
-    Written in C11 on the stable C API: one binary loads in DuckDB 1.5.6 and later.
+    For DuckDB 2.0 a C++ extension with a C11 core. The DuckDB 1.5.x builds come from the v1.5.x
+    branch, on the stable C API; there a running call cannot be interrupted, and only the work limit
+    bounds it.
     Documentation: https://github.com/hugr-lab/duck-changepoint
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 548
-extension_download_count_pretty: 548
+extension_download_count: 701
+extension_download_count_pretty: 701
 image: '/images/community_extensions/social_preview/preview_community_extension_cpt.png'
 layout: community_extension_doc
 ---
@@ -93,15 +97,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -128,6 +132,9 @@ LOAD {{ page.extension.name }};
 | cpt_binseg        | scalar        | NULL        | NULL    |          |
 | cpt_crops         | scalar        | NULL        | NULL    |          |
 | cpt_dynp          | scalar        | NULL        | NULL    |          |
+| cpt_online        | scalar        | NULL        | NULL    |          |
+| cpt_online_new    | scalar        | NULL        | NULL    |          |
+| cpt_online_update | scalar        | NULL        | NULL    |          |
 | cpt_pelt          | scalar        | NULL        | NULL    |          |
 | cpt_segment_stats | scalar        | NULL        | NULL    |          |
 
@@ -147,9 +154,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|        name         |                                                                                     description                                                                                      | input_type | scope  | aliases | typed_value |
-|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
-| cpt_max_evaluations | Maximum work per cpt_* call on one series, in segment cost evaluations (an l1 evaluation counts log2(n)); 0 = no limit. Bounds run time, since a running call cannot be interrupted. | BIGINT     | GLOBAL | []      | 1000000000  |
-| temp_directory      | Set the directory to which temporary files are written.                                                                                                                              | VARCHAR    | GLOBAL | []      | post.db.tmp |
+|        name         |                                                                                   description                                                                                    | input_type | scope  | aliases | typed_value |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| cpt_max_evaluations | Maximum work per cpt_* call on one series, in segment cost evaluations (an l1 evaluation counts log2(n)); 0 = no limit. A running call also stops when the query is interrupted. | BIGINT     | GLOBAL | []      | 1000000000  |
+| temp_directory      | Set the directory to which temporary files are written.                                                                                                                          | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

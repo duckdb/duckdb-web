@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: finance
   description: SQL-native quant finance functions for DuckDB
-  version: 0.3.2
+  version: 0.3.3
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
     - leonardovida
 repo:
   github: leonardovida/duckdb-finance
-  ref: 1ee24a015dba22bca719d8ecbd970e3059f9dceb
+  ref: 592dc151760fb3df03943834960f7622b837bb5d
 docs:
   hello_world: |
     INSTALL finance FROM community;
@@ -33,10 +33,10 @@ docs:
     The extension is deterministic and local: it does not call market-data
     vendors or remote pricing services.
 
-extension_star_count: 10
-extension_star_count_pretty: 10
-extension_download_count: 981
-extension_download_count_pretty: 981
+extension_star_count: 11
+extension_star_count_pretty: 11
+extension_download_count: 1078
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_finance.png'
 layout: community_extension_doc
 ---
@@ -46,15 +46,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

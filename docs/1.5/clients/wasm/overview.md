@@ -6,7 +6,7 @@ title: DuckDB Wasm Client
 
 > Installation To use the DuckDB Wasm client, visit the [`duckdb-wasm` GitHub repository](https://github.com/duckdb/duckdb-wasm#readme).
 >
-> The latest stable version of the DuckDB WebAssembly client is {% if site.maintained_duckdb_wasm_version != "" %}{{ site.maintained_duckdb_wasm_version }}{% else %}{{ site.old_lts_duckdb_wasm_version }}{% endif %}.
+> The latest stable version of the DuckDB WebAssembly client is {% if site.maintained_duckdb_wasm_version != "" %}{{ site.maintained_duckdb_wasm_version }}{% else %}1.4.3{% endif %}.
 
 DuckDB-Wasm is a version of DuckDB that has been compiled to [WebAssembly](https://webassembly.org/), the portable binary format that browsers can run at near-native speed. This lets a full DuckDB engine run entirely inside any browser on any device, with no server to send queries to and no data leaving the user's machine.
 
@@ -34,10 +34,10 @@ The shell below is a full DuckDB engine running in your browser — type a SQL q
 DuckDB-Wasm is published to npm as [`@duckdb/duckdb-wasm`](https://www.npmjs.com/package/@duckdb/duckdb-wasm). Install it with your package manager:
 
 ```bash
-npm install @duckdb/duckdb-wasm
+npm install @duckdb/duckdb-wasm@{{ site.maintained_duckdb_wasm_tag }}
 ```
 
-This installs the current stable release (the `latest` tag). To try the newest, unreleased build instead, install the `next` tag with `npm install @duckdb/duckdb-wasm@next`; it tracks the `main` branch and is intended for testing rather than production.
+This installs DuckDB-Wasm {{ site.maintained_duckdb_wasm_tag }}, which is based on DuckDB {{ site.maintained_duckdb_wasm_version }}. Pin the version as shown: the npm `latest` tag of the package can point to an older DuckDB release.
 
 Alternatively, load a prebuilt bundle directly from a CDN such as jsDelivr without installing anything; see [Instantiate]({% link docs/1.5/clients/wasm/instantiation.md %}) for the bundle-selection options. To try it interactively with no setup, use the [DuckDB-Wasm Web shell](https://shell.duckdb.org/).
 

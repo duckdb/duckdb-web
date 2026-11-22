@@ -3,6 +3,8 @@ layout: post
 title: "Testing Out DuckDB's Full Text Search Extension"
 authors:
   - Laurens Kuiper
+thumb: "/images/blog/thumbs/full-text-search.svg"
+image: "/images/blog/thumbs/full-text-search.png"
 excerpt: DuckDB now has full-text search functionality, similar to the FTS5 extension in SQLite. The main difference is that our FTS extension is fully formulated in SQL. We tested it out on TREC disks 4 and 5.
 tag: extensions
 ---

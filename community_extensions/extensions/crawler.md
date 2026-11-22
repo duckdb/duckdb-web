@@ -69,8 +69,8 @@ docs:
 
 extension_star_count: 19
 extension_star_count_pretty: 19
-extension_download_count: 737
-extension_download_count_pretty: 737
+extension_download_count: 754
+extension_download_count_pretty: 754
 image: '/images/community_extensions/social_preview/preview_community_extension_crawler.png'
 layout: community_extension_doc
 ---
@@ -80,15 +80,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ❌ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ❌ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ❌ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -137,12 +137,13 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|            name            |                     description                     | input_type | scope  | aliases |
-|----------------------------|-----------------------------------------------------|------------|--------|---------|
-| crawler_default_delay      | Default crawl delay in seconds if not in robots.txt | DOUBLE     | GLOBAL | []      |
-| crawler_max_response_bytes | Maximum response body size in bytes (0 = unlimited) | BIGINT     | GLOBAL | []      |
-| crawler_respect_robots     | Whether to respect robots.txt directives            | BOOLEAN    | GLOBAL | []      |
-| crawler_timeout_ms         | HTTP request timeout in milliseconds                | BIGINT     | GLOBAL | []      |
-| crawler_user_agent         | User agent string for crawler HTTP requests         | VARCHAR    | GLOBAL | []      |
+|            name            |                       description                       | input_type | scope  | aliases |    typed_value     |
+|----------------------------|---------------------------------------------------------|------------|--------|---------|--------------------|
+| crawler_default_delay      | Default crawl delay in seconds if not in robots.txt     | DOUBLE     | GLOBAL | []      | 1.0                |
+| crawler_max_response_bytes | Maximum response body size in bytes (0 = unlimited)     | BIGINT     | GLOBAL | []      | 10485760           |
+| crawler_respect_robots     | Whether to respect robots.txt directives                | BOOLEAN    | GLOBAL | []      | true               |
+| crawler_timeout_ms         | HTTP request timeout in milliseconds                    | BIGINT     | GLOBAL | []      | 30000              |
+| crawler_user_agent         | User agent string for crawler HTTP requests             | VARCHAR    | GLOBAL | []      | DuckDB-Crawler/1.0 |
+| temp_directory             | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp        |
 
 

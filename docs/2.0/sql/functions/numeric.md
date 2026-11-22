@@ -107,7 +107,7 @@ The table below shows the available mathematical functions.
 | [`random()`](#random) | Returns a random number `x` in the range `0.0 <= x < 1.0`. |
 | [`round_even(v NUMERIC, s INTEGER)`](#round_evenv-numeric-s-integer) | Alias of `roundbankers(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
 | [`roundbankers(v NUMERIC, s INTEGER)`](#round_evenv-numeric-s-integer) | Alias of `round_even(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
-| [`round(v NUMERIC, s INTEGER)`](#roundv-numeric-s-integer) | Round to `s` decimal places. Values `s < 0` are allowed. |
+| [`round(v NUMERIC, s INTEGER)`](#roundv-numeric-s-integer) | Round to `s` decimal places, rounding exact halfway cases away from zero. Values `s < 0` are allowed. Use `round_even` or `roundbankers` for half-to-even rounding. |
 | [`setseed(x)`](#setseedx) | Sets the seed to be used for the random function. |
 | [`sign(x)`](#signx) | Returns the sign of `x` as -1, 0, or 1. |
 | [`signbit(x)`](#signbitx) | Returns whether the signbit is set or not. |
@@ -538,7 +538,7 @@ The table below shows the available mathematical functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Round to `s` decimal places. Values `s < 0` are allowed. |
+| **Description** | Round to `s` decimal places. Exact halfway cases are rounded away from zero. Values `s < 0` are allowed. Use `round_even` or `roundbankers` for half-to-even rounding. |
 | **Example** | `round(42.4332, 2)` |
 | **Result** | `42.43` |
 
