@@ -64,10 +64,10 @@ The pipeline Felix built operates like this:
 
 <div style="border: 1px solid #000; padding: 8px; display: inline-block; margin-top: 20px;">
   <a href="https://www.accessmrf.com/price-viewer" target="_blank">
-    <img src="/images/blog/accessmrf/accessmrf-03.png" alt="AccessMRF Rate Search: Querying negotiated rates by billing code" style="display: block; max-width: 100%;">
+    <img src="/images/blog/accessmrf/accessmrf-03.png" alt="AccessMRF Price Viewer: Querying negotiated rates by billing code" style="display: block; max-width: 100%;">
   </a>
 </div>
-<p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com/price-viewer" target="_blank" style="text-decoration: none;">AccessMRF Rate Search: Querying negotiated rates by billing code</a></p>
+<p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;"><a href="https://www.accessmrf.com/price-viewer" target="_blank" style="text-decoration: none;">AccessMRF Price Viewer: Querying negotiated rates by billing code</a></p>
 
 This architecture eliminates the need for a managed analytical database, which would require login credentials, a paywall, or per-query charges that would be prohibitively expensive at the scale of public access.
 
