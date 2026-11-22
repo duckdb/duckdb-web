@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Amazon and DuckDB Built the Iceberg Integration Customers Were Missing"
+title: "Amazon and DuckDB on the Iceberg Integration and Single-Host Compute"
 authors:
   - Hannes Mühleisen
   - Andy Warfield
@@ -16,8 +16,10 @@ venue: "theCUBE"
 | **Show** | [theCUBE by SiliconANGLE](https://siliconangle.com/) |
 | **Host** | David Vellante |
 | **Guests** | [Andy Warfield (AWS)](https://www.linkedin.com/in/andywarfield), [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
-| **Teaser** | [Watch on LinkedIn](https://www.linkedin.com/posts/siliconangle_thecube-iceberg-s3-activity-7528926564990918656-9zy0) |
+| **Teasers** | [Part 1: Iceberg integration](https://www.linkedin.com/posts/siliconangle_thecube-iceberg-s3-activity-7528926564990918656-9zy0), [Part 2: Single-host compute](https://www.linkedin.com/feed/update/urn:li:activity:7529636406961516544/) |
 
 ## Description
 
-In this teaser for a theCUBE conversation, David Vellante talks with Andy Warfield and Hannes Mühleisen about how Amazon and DuckDB built the integration between DuckDB and Apache Iceberg. Andy explains that when AWS launched S3 Tables, Iceberg was largely “trapped under Spark,” while many customers were embedding DuckDB directly in their applications and building systems on data stored in S3. This led AWS to start working with the DuckDB team on Iceberg support in DuckDB.
+In the first teaser for a theCUBE conversation, David Vellante talks with Andy Warfield and Hannes Mühleisen about how Amazon and DuckDB built the integration between DuckDB and Apache Iceberg. Andy explains that when AWS launched S3 Tables, Iceberg was largely “trapped under Spark,” while many customers were embedding DuckDB directly in their applications and building systems on data stored in S3. This led AWS to start working with the DuckDB team on Iceberg support in DuckDB.
+
+In a second teaser, they discuss how DuckDB and Amazon make a single host do what used to require a distributed system.
