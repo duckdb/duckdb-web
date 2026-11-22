@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: panduck
   description: Read documents natively into the duck_block vocabulary -- DOCX, ODT, EPUB, RTF, LaTeX, Org, RST, ipynb, MediaWiki and Textile -- and write them back as Pandoc JSON, without linking Pandoc
-  version: 0.11.1
+  version: 0.12.0
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
   vcpkg_commit: 84bab45d415d22042bd0b9081aea57f362da3f35
 repo:
   github: teaguesterling/duckdb_panduck
-  ref: 5dfb58655e8c6708cae09fcc1b34b9e5df94c123
+  ref: 49bfd9e8e8d8c1816c81da1125c55321bbc36e12
   # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
   # present and to `ref` otherwise, and unlike ref_next it has no skip branch -- so
   # once `ref` is 2.0-only a v1.5.6 build would fail rather than be skipped. Advance
@@ -53,7 +53,7 @@ repo:
   # look". panduck v0.2.0 merged that way, and the job has since caught two real defects.
   # A STALE ref_next is worse than an absent one: it validates the PREVIOUS release
   # against the next line while reporting green, so it moves with ref every release.
-  ref_next: 5dfb58655e8c6708cae09fcc1b34b9e5df94c123
+  ref_next: 49bfd9e8e8d8c1816c81da1125c55321bbc36e12
 docs:
   hello_world: |
     LOAD panduck;
@@ -229,8 +229,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 856
-extension_download_count_pretty: 856
+extension_download_count: 862
+extension_download_count_pretty: 862
 image: '/images/community_extensions/social_preview/preview_community_extension_panduck.png'
 layout: community_extension_doc
 ---

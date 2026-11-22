@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: marc21
   description: Read, write, validate and edit MARC 21 bibliographic data (ISO 2709, MARCXML, MARC-in-JSON, breaker, Aleph; UTF-8 and MARC-8)
-  version: 2.0.0
+  version: 2.0.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: mgbilby/duckdb-marc21
-  ref: d4a821d289fb0ee33c2bcf2fdbed8874a64169fa
+  ref: 19e4b81f0aa57d66d484bc32c385757361b83351
   variegata: 9fcea0628f6c8853a5f8e96d4e789f08ba801f7f
 
 docs:
@@ -87,8 +87,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 813
-extension_download_count_pretty: 813
+extension_download_count: 794
+extension_download_count_pretty: 794
 image: '/images/community_extensions/social_preview/preview_community_extension_marc21.png'
 layout: community_extension_doc
 ---

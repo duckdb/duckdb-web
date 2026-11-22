@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: ducksmiles
   description: Cheminformatics and CPU numerical analytics for DuckDB - molecular formats, descriptors, fingerprints, similarity, regression, statistical inference, experimental design, time series, reliability and model evaluation from SQL
-  version: 0.7.0
+  version: 0.8.0
   language: C++
   build: cmake
   requires_toolchains: rust
@@ -20,13 +20,16 @@ extension:
 
 repo:
   github: nkwork9999/duckSMILES
-  ref: bc898ea130d08fc02136e226fb55e9887f6cd27c
+  ref: 15324f9f49108299d41267c03c4696aa8e09d11e
 
 docs:
   hello_world: |
     -- Parse SMILES and get molecular formula
     SELECT mol_formula('CCO');
     -- C2H6O
+
+    -- All 291 molecular descriptors in catalog order
+    SELECT mol_descriptor_catalog_json(), mol_descriptor_values_json('CCO');
 
     -- Calculate molecular weight
     SELECT round(mol_weight('c1ccccc1'), 2);
@@ -172,10 +175,21 @@ docs:
     **Architecture:** Rust (core logic, zero external chemistry crates) + C++ (DuckDB
     integration via FFI).
 
+    The native mol_descriptor_summary(smiles) function returns average molecular weight,
+    heavy-atom count and ring count in one STRUCT from a single parse. The source
+    repository also includes a Python typed mass-window join and a batched descriptor
+    reader.
+
+    Use sdf_projected_properties_json(sdf, names) to read selected tags with original SDF record numbers.
+    The source repository also includes typed molecular search, versioned fingerprint indexes,
+    descriptor caching, and scaffold-based dataset splitting.
+
+    [English project documentation](https://nkwork9999.github.io/duckSMILES/).
+
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 840
-extension_download_count_pretty: 840
+extension_download_count: 865
+extension_download_count_pretty: 865
 image: '/images/community_extensions/social_preview/preview_community_extension_ducksmiles.png'
 layout: community_extension_doc
 ---

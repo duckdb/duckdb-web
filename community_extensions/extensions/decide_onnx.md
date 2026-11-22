@@ -79,8 +79,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 614
-extension_download_count_pretty: 614
+extension_download_count: 610
+extension_download_count_pretty: 610
 image: '/images/community_extensions/social_preview/preview_community_extension_decide_onnx.png'
 layout: community_extension_doc
 ---

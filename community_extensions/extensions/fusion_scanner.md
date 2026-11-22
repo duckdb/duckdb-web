@@ -71,10 +71,10 @@ docs:
     serialised: each `runReport` opens a BI Publisher session that the server
     holds on to, and a handful of parallel scans leaves hundreds behind.
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 767
-extension_download_count_pretty: 767
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 760
+extension_download_count_pretty: 760
 image: '/images/community_extensions/social_preview/preview_community_extension_fusion_scanner.png'
 layout: community_extension_doc
 ---

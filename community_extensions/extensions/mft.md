@@ -51,8 +51,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 390
-extension_download_count_pretty: 390
+extension_download_count: 482
+extension_download_count_pretty: 482
 image: '/images/community_extensions/social_preview/preview_community_extension_mft.png'
 layout: community_extension_doc
 ---
