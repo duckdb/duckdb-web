@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckgl
   description: DuckDB geospatial visualization with deck.gl and MapLibre
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nkwork9999/duckgl
-  ref: 45ef59e814d2fa1dac3b383d40513ffd45f1beb9
+  ref: 3802d97a9e49276ff45a244bd60c2b923f165050
 
 docs:
   hello_world: |
@@ -50,10 +50,20 @@ docs:
     for map libraries and base-map tiles. SVG and PNG are north-up geometry overviews without tiles.
     Attached database selection and large integer identifiers retain their exact identity.
 
+    The host can publish a committed WGS84 view as a read-only GeoJSON snapshot with
+    duckgl_start_layer(0, view_name). It returns an ephemeral loopback port serving GET
+    /api/layer. Call duckgl_stop_layer() on the same connection to close it. The source
+    repository also includes a Python viewport and point-grid API.
+
+    The embedded Python API also exposes typed layer filters, viewport geometry, point vector tiles,
+    versioned detail lookup, and exact counts of points within registered polygons.
+
+    [English project documentation](https://nkwork9999.github.io/duckgl/).
+
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 891
-extension_download_count_pretty: 891
+extension_download_count: 910
+extension_download_count_pretty: 910
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgl.png'
 layout: community_extension_doc
 ---

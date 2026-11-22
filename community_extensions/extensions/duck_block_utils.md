@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_block_utils
   description: Build, transform, validate, and extract content from structured documents using the duck_block type
-  version: 4.1.0
+  version: 4.2.0
   language: C++
   build: cmake
   license: MIT
@@ -21,13 +21,13 @@ repo:
   # so advancing this pin would point a v1.4.5 build at a tree that cannot build for
   # it. v1.4.5 users should move to the v1.5.x track.
   andium: 125662df9e5450105dc9b7957ad955cb53d7beec
-  ref: d4d45cd5afaeb6335c589be9467b3e74cf751c1c
+  ref: c978e0769cc9d747d493fea7d5f122d51276716d
   # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
   # present and to `ref` otherwise, and unlike ref_next it has no skip branch -- so
   # once `ref` is 2.0-only a v1.5.6 build would fail rather than be skipped. Equal to
   # `ref` while both lines build; advance only to a commit v1.5.6 can still build.
   variegata: 65f03cb7f776549a68ae9efba0b5a6d6adc259d3
-  ref_next: d4d45cd5afaeb6335c589be9467b3e74cf751c1c
+  ref_next: c978e0769cc9d747d493fea7d5f122d51276716d
 docs:
   hello_world: |
     -- Build a document programmatically
@@ -230,8 +230,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 1562
-extension_download_count_pretty: 1.6k
+extension_download_count: 1477
+extension_download_count_pretty: 1.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
 ---

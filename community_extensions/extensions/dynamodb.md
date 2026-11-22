@@ -55,8 +55,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 729
-extension_download_count_pretty: 729
+extension_download_count: 718
+extension_download_count_pretty: 718
 image: '/images/community_extensions/social_preview/preview_community_extension_dynamodb.png'
 layout: community_extension_doc
 ---

@@ -55,8 +55,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 597
-extension_download_count_pretty: 597
+extension_download_count: 602
+extension_download_count_pretty: 602
 image: '/images/community_extensions/social_preview/preview_community_extension_nats_rw.png'
 layout: community_extension_doc
 ---

@@ -42,8 +42,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 723
-extension_download_count_pretty: 723
+extension_download_count: 724
+extension_download_count_pretty: 724
 image: '/images/community_extensions/social_preview/preview_community_extension_toml.png'
 layout: community_extension_doc
 ---

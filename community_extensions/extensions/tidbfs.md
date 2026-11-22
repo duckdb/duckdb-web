@@ -68,8 +68,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 567
-extension_download_count_pretty: 567
+extension_download_count: 561
+extension_download_count_pretty: 561
 image: '/images/community_extensions/social_preview/preview_community_extension_tidbfs.png'
 layout: community_extension_doc
 ---
