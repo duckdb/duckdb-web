@@ -1077,6 +1077,46 @@ h5 a {
 footer{
 	position: relative;
 }
+
+// Wide tables for individual posts: set `body_class: wide-post` in the front matter.
+// Text stays at the default 650px; top-level tables are 1.6 × that (1040px) and share the
+// text's left edge. The whole block is shifted left so that the 1040px tables are centered.
+// Widths are relative to .singleentry (a size container), so they shrink on narrow screens.
+body.wide-post .newswrap .postwrap .singleentry{
+	container-type: inline-size;
+	.content{
+		margin-left: max(0px, calc((100cqw - 1040px) / 2));
+		margin-right: auto;
+	}
+	.contentwidth > table{
+		width: min(1040px, 100cqw);
+		max-width: none;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+// Note below a truncated query result (e.g., “First 5 of 47 rows.”), 2pt smaller than body text
+.newswrap .postwrap .postcontent p.result-note{
+	font-size: calc(var(--type-body-normal, 15px) - 2pt);
+}
+
+// Two-column table with a fixed 35%–65% split (e.g., dialogue next to the query it maps to).
+// Blog tables are `display: block` by default (for horizontal scrolling), which ignores
+// column widths, so restore real table layout here; wide code in a cell scrolls instead.
+body.post table.script-split{
+	display: table;
+	table-layout: fixed;
+	overflow-x: visible;
+	> tbody > tr > :first-child,
+	> tr > :first-child{
+		width: 35%;
+	}
+	> tbody > tr > :last-child,
+	> tr > :last-child{
+		width: 65%;
+	}
+}
 @media only screen and (max-width: 1280px) {
 
 }

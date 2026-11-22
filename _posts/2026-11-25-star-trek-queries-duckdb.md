@@ -7,6 +7,7 @@ thumb: /images/blog/thumbs/star-trek.svg
 image: /images/blog/thumbs/star-trek.png
 excerpt: "For seven seasons, the crew of the Enterprise talked to the ship’s computer and solved hard data problems. We gave Claude a DuckDB database and the crew’s actual lines to see whether we have the Enterprise computer now."
 tags: ["using DuckDB"]
+toc: false
 body_class: wide-post
 ---
 

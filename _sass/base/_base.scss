@@ -85,6 +85,9 @@ em.caption{
 	margin-top: 0.35em;
 	margin-bottom: 2em;
 	color: var(--main-text-tertiary-color);
+	&.caption-left{
+		text-align: left;
+	}
 }
 
 .figure-title{
