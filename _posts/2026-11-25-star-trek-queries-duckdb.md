@@ -1,36 +1,37 @@
 ---
 layout: post
-title: "I Don't Want a Lesson in Computer Science!"
+title: "I Don’t Want a Lesson in Computer Science!"
 authors:
   - Hannes Mühleisen
-thumb: /images/blog/thumbs/star-trek-enterprise.svg
-image: /images/blog/thumbs/star-trek-enterprise.png
-excerpt: "For seven seasons, the crew of the Enterprise talked to the ship's computer and solved hard data problems. We gave Claude a DuckDB database and the crew's actual lines to see whether we have the Enterprise computer now."
+thumb: /images/blog/thumbs/star-trek.svg
+image: /images/blog/thumbs/star-trek.png
+excerpt: "For seven seasons, the crew of the Enterprise talked to the ship’s computer and solved hard data problems. We gave Claude a DuckDB database and the crew’s actual lines to see whether we have the Enterprise computer now."
 tags: ["using DuckDB"]
+body_class: wide-post
 ---
 
-I have been a "Trekkie" ever since I watched [Star Trek: The Next Generation](https://en.wikipedia.org/wiki/Star_Trek:_The_Next_Generation) (TNG) on weekday afternoons back in the 90s. We had grainy terrestrial TV reception because my parents refused to pay for cable. Also, I had to fight my younger sister because she wanted to watch [The Nanny](https://en.wikipedia.org/wiki/The_Nanny) instead, which was on at the same time. Oh, and it was all dubbed into German with a terrible translation. But the magic caught on regardless. Decades later, I am still a huge fan and re-watch episodes regularly.
+<!-- markdownlint-disable MD036 -->
 
-Recently, the [great Patrick Stewart](https://www.theguardian.com/culture/2026/oct/30/patrick-stewart-jean-luc-picard-star-trek) departed on his last voyage. He is the best captain there ever was. [Captain Picard](https://memory-alpha.fandom.com/wiki/Jean-Luc_Picard)'s style of leadership has always been an inspiration to me. In his honor, let's revisit some classic *Star Trek: The Next Generation* dialogues in which things happen with data. Let's start with a quick teaser:
+I have been a “Trekkie” ever since I watched [Star Trek: The Next Generation](https://en.wikipedia.org/wiki/Star_Trek:_The_Next_Generation) (TNG) on weekday afternoons back in the ’90s. We had grainy terrestrial TV reception because my parents refused to pay for cable. Also, I had to fight my younger sister because she wanted to watch [The Nanny](https://en.wikipedia.org/wiki/The_Nanny) instead, which was on at the same time. Oh, and it was all dubbed into German with a terrible translation. But the magic caught on regardless. Decades later, I am still a huge fan and re-watch episodes regularly.
 
-In ["The Battle"](https://www.st-minutiae.com/resources/scripts/110.txt), Picard's old ship, the [Stargazer](https://memory-alpha.fandom.com/wiki/USS_Stargazer_(NCC-2893)), is handed back to him with a personal log aboard in which he appears to confess to an unprovoked attack on the [Ferengi](https://memory-alpha.fandom.com/wiki/Ferengi). [Data](https://memory-alpha.fandom.com/wiki/Data) (the TNG character, not the bits of information) compares the personal log with the ship's main computer log and reports to the first officer, commander [William T. Riker](https://memory-alpha.fandom.com/wiki/William_T._Riker). 
+Recently, the [great Patrick Stewart](https://www.theguardian.com/culture/2026/oct/30/patrick-stewart-jean-luc-picard-star-trek) departed on his last voyage. He is the best captain there ever was. [Captain Picard](https://memory-alpha.fandom.com/wiki/Jean-Luc_Picard)’s style of leadership has always been an inspiration to me. In his honor, let’s revisit some classic *Star Trek: The Next Generation* dialogues in which things happen with data. Let’s start with a quick teaser:
 
-<figure class="still">
-<img src="./images/enterprise-computer/the_battle.jpg" width="480" alt="Data reports to Riker, with La Forge between them.">
-<figcaption>Data reports to Riker, with La Forge between them. <em>Star Trek: The Next Generation</em>, "The Battle" (1987). © CBS Studios Inc.</figcaption>
-</figure>
+In [“The Battle”](https://www.st-minutiae.com/resources/scripts/110.txt), Picard’s old ship, the [Stargazer](https://memory-alpha.fandom.com/wiki/USS_Stargazer_(NCC-2893)), is handed back to him with a personal log aboard in which he appears to confess to an unprovoked attack on the [Ferengi](https://memory-alpha.fandom.com/wiki/Ferengi). [Data](https://memory-alpha.fandom.com/wiki/Data) (the TNG character, not the bits of information) compares the personal log with the ship’s main computer log and reports to the first officer, commander [William T. Riker](https://memory-alpha.fandom.com/wiki/William_T._Riker).
 
-<table markdown="1">
-<tr markdown="1"><th width="42%">On the bridge</th><th>What the computer ran</th></tr>
+![Data reports to Riker, with La Forge between them.]({% link images/blog/star-trek/enterprise-computer/the_battle.jpg %}){: width="480" }
+*Data reports to Riker, with La Forge between them. <em>Star Trek: The Next Generation</em>, “The Battle” (1987). © CBS Studios Inc.*{: .caption .caption-left }
+
+<table class="script-split" markdown="1">
+<tr markdown="1"><th>On the bridge</th><th>What the computer ran</th></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**DATA:** By comparing the main Stargazer computer log with Captain Picard's personal log, I have found "checksum" discrepancies, sir.
+**DATA:** By comparing the main Stargazer computer log with Captain Picard’s personal log, I have found “checksum” discrepancies, sir.
 
 **RIKER:** What does that mean?
 
 **DATA:** All information is time-coded by entry, and the bits when totaled produce an aggregate amount which...
 
-**RIKER:** I don't want a lesson in computer science! Bottom line?
+**RIKER:** I don’t want a lesson in computer science! Bottom line?
 
 **DATA:** One of these two logs is a forgery.
 
@@ -61,35 +62,34 @@ ORDER BY log_type
 </td></tr>
 </table>
 
-Despite his shocking disregard for Computer Science, Riker gets his bottom line. If we were to express this request for information as a SQL query, it is a `GROUP BY`: recompute the checksum of every log entry, compare it with the one stored when the entry was recorded, and count the mismatches per log. Three of the five entries in the captain's personal log fail. The main computer log is clean. A smoking gun.
+Despite his shocking disregard for Computer Science, Riker gets his bottom line. If we were to express this request for information as a SQL query, it is a `GROUP BY`: recompute the checksum of every log entry, compare it with the one stored when the entry was recorded, and count the mismatches per log. Three of the five entries in the captain’s personal log fail. The main computer log is clean. A smoking gun.
 
-## Do we have the Enterprise computer now?
-Even as a wee lad, I noticed something very cool about the Enterprise [D](https://en.wikipedia.org/wiki/USS_Enterprise_(NCC-1701-D)): You could interact with its massive central computer by just talking to it. Very complex questions about all sorts of things would be answered (if Data did not already blurt out the answer immediately). Over many episodes, I watched the intrepid crew of the Enterprise to talk to the computer and solve hard data problems. Back then this was a wild idea. But now, we have things like Claude and we have DuckDB, one component being able to translate human language into more formal things like SQL queries, and the other component being able to process those queries at hard-to-believe speeds. 
+## Do We Have the Enterprise Computer Now?
+
+Even as a wee lad, I noticed something very cool about the Enterprise [D](https://en.wikipedia.org/wiki/USS_Enterprise_(NCC-1701-D)): You could interact with its massive central computer by just talking to it. Very complex questions about all sorts of things would be answered (if Data did not already blurt out the answer immediately). Over many episodes, I watched the intrepid crew of the Enterprise to talk to the computer and solve hard data problems. Back then this was a wild idea. But now, we have things like Claude and we have DuckDB, one component being able to translate human language into more formal things like SQL queries, and the other component being able to process those queries at hard-to-believe speeds.
 
 For Science, we took the actual [shooting scripts](https://www.st-minutiae.com/resources/scripts/) of TNG and had Claude find some of the interactions with the computer that looked like data analysis. I picked eleven scenes.
 
-We then generated a DuckDB database ([`enterprise_computer.duckdb`](https://blobs.duckdb.org/data/enterprise_computer.duckdb)) to stand in for the ship's records. The data is made up, but it is built so the results are the same as in the dialogue, given correct queries. For example, if the computer says there are 15,525 undetectable substances, the table has 15,525 of them. It also holds believable rows that each condition has to filter out: "Darmok" entries in other sectors and in non-linguistic databases, substances that alter glass but show up on scans, log entries from another ship. The ship's own date and position sit in a one-row `ship_status` table, which is how "this sector" and "the past six months" get resolved.
+We then generated a DuckDB database ([`enterprise_computer.duckdb`](https://blobs.duckdb.org/data/enterprise_computer.duckdb)) to stand in for the ship’s records. The data is made up, but it is built so the results are the same as in the dialogue, given correct queries. For example, if the computer says there are 15,525 undetectable substances, the table has 15,525 of them. It also holds believable rows that each condition has to filter out: “Darmok” entries in other sectors and in non-linguistic databases, substances that alter glass but show up on scans, log entries from another ship. The ship’s own date and position sit in a one-row `ship_status` table, which is how “this sector” and “the past six months” get resolved.
 
-Then, we gave a fresh Claude Code session that database and *fed it the actual dialog lines from the Enterprise crew*, translated their data requests to SQL and had them run on DuckDB. Claude was simply told that it is the main computer of the USS Enterprise, the ship's records are in that database, and it should answer each crew member's line from it.
+Then, we gave a fresh Claude Code session that database and *fed it the actual dialog lines from the Enterprise crew*, translated their data requests to SQL and had them run on DuckDB. Claude was simply told that it is the main computer of the USS Enterprise, the ship’s records are in that database, and it should answer each crew member’s line from it.
 
-Results have been amazing: not only did the "Enterprise computer" answer all the questions, by our reading 40 out of 49 answers matched what the dialogue says. Below are some particularly nice examples:
+Results have been amazing: not only did the “Enterprise computer” answer all the questions, by our reading 40 out of 49 answers matched what the dialogue says. Below are some particularly nice examples:
 
-## More from the ship's records
+## More from the Ship’s Records
 
-In ["Darmok"](https://www.st-minutiae.com/resources/scripts/202.txt), the Enterprise meets a people who speak only in references to their own stories. It is a strong contender for my favorite episode of TNG. Counselor [Troi](https://memory-alpha.fandom.com/wiki/Deanna_Troi) and Data have two words to go on, "Darmok" and "Tanagra". They start talking to the computer.
+In [“Darmok”](https://www.st-minutiae.com/resources/scripts/202.txt), the Enterprise meets a people who speak only in references to their own stories. It is a strong contender for my favorite episode of TNG. Counselor [Troi](https://memory-alpha.fandom.com/wiki/Deanna_Troi) and Data have two words to go on, “Darmok” and “Tanagra”. They start talking to the computer.
 
-<figure class="still">
-<img src="./images/enterprise-computer/darmok.jpg" width="480" alt="Counselor Troi, waiting for the computer.">
-<figcaption>Counselor Troi, waiting for the computer. <em>Star Trek: The Next Generation</em>, "Darmok" (1991). © CBS Studios Inc.</figcaption>
-</figure>
+![Counselor Troi, waiting for the computer.]({% link images/blog/star-trek/enterprise-computer/darmok.jpg %}){: width="480" }
+*Counselor Troi, waiting for the computer. <em>Star Trek: The Next Generation</em>, “Darmok” (1991). © CBS Studios Inc.*{: .caption .caption-left }
 
-<table markdown="1">
-<tr markdown="1"><th width="42%">On the bridge</th><th>What the computer ran</th></tr>
+<table class="script-split" markdown="1">
+<tr markdown="1"><th>On the bridge</th><th>What the computer ran</th></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**TROI:** Computer, search for the term "Darmok" in all linguistic databases compiled for this sector.
+**TROI:** Computer, search for the term “Darmok” in all linguistic databases compiled for this sector.
 
-**COMPUTER:** Searching... "Darmok" is the name of a seventh dynasty emperor on Kanda Four... A mytho-historical hunter on Shantil Three... A colony on Malindi Seven... A frozen dessert on Razna Five... A --
+**COMPUTER:** Searching... “Darmok” is the name of a seventh dynasty emperor on Kanda Four... A mytho-historical hunter on Shantil Three... A colony on Malindi Seven... A frozen dessert on Razna Five... A --
 
 </td><td markdown="1">
 
@@ -118,7 +118,7 @@ ORDER BY l.database_name, l.planet, l.entry_id
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**TROI:** -- Stop search. Computer, how many entries for "Darmok"?
+**TROI:** -- Stop search. Computer, how many entries for “Darmok”?
 
 **COMPUTER:** Forty-seven.
 
@@ -142,7 +142,7 @@ WHERE l.category = 'linguistic'
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**DATA:** Computer, search for the term "Tanagra." All databases.
+**DATA:** Computer, search for the term “Tanagra.” All databases.
 
 **COMPUTER:** Searching... Tanagra is the name of the ruling family on Gallos Two... A ceremonial drink on Lerishi Four... An island-continent on Shantil Three --
 
@@ -172,7 +172,7 @@ ORDER BY database_name, planet, entry_id
 
 **TROI:** Shantil Three? Computer, cross-reference the last entry with the previous search index.
 
-**COMPUTER:** "Darmok" is the name of a mytho-historical hunter on Shantil Three.
+**COMPUTER:** “Darmok” is the name of a mytho-historical hunter on Shantil Three.
 
 </td><td markdown="1">
 
@@ -201,18 +201,16 @@ WHERE t.term ILIKE '%Tanagra%'
 
 A search with too many hits, a count, a second search, and a join (a join!) that takes 47 rows down to one. Nobody on the bridge wrote any of the right-hand column. They asked, the computer answered, and they asked a sharper question.
 
-In ["Hollow Pursuits"](https://www.st-minutiae.com/resources/scripts/169.txt) the ship is about to tear itself apart and Geordi narrows the cause one sentence at a time.
+In [“Hollow Pursuits”](https://www.st-minutiae.com/resources/scripts/169.txt) the ship is about to tear itself apart and Geordi narrows the cause one sentence at a time.
 
-<figure class="still">
-<img src="./images/enterprise-computer/hollow_pursuits.jpg" width="480" alt="The five remaining substances on the Engineering console.">
-<figcaption>The five remaining substances on the Engineering console. <em>Star Trek: The Next Generation</em>, "Hollow Pursuits" (1990). © CBS Studios Inc.</figcaption>
-</figure>
+![The five remaining substances on the Engineering console.]({% link images/blog/star-trek/enterprise-computer/hollow_pursuits.jpg %}){: width="480" }
+*The five remaining substances on the Engineering console. <em>Star Trek: The Next Generation</em>, “Hollow Pursuits” (1990). © CBS Studios Inc.*{: .caption .caption-left }
 
-<table markdown="1">
-<tr markdown="1"><th width="42%">In Engineering</th><th>What the computer ran</th></tr>
+<table class="script-split" markdown="1">
+<tr markdown="1"><th>In Engineering</th><th>What the computer ran</th></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**GEORDI:** Computer, list all physical substances that wouldn't normally be picked up by internal scans.
+**GEORDI:** Computer, list all physical substances that wouldn’t normally be picked up by internal scans.
 
 **COMPUTER:** There are fifteen thousand five hundred twenty-five known substances that cannot be detected by standard scans.
 
@@ -288,11 +286,11 @@ ORDER BY name
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**BARCLAY:** Jakmanite has a half life of about fifteen seconds. There wouldn't be enough time to spread it around the ship.
+**BARCLAY:** Jakmanite has a half life of about fifteen seconds. There wouldn’t be enough time to spread it around the ship.
 
 **WESLEY:** Selgninaem and Lucrovexitrin are extremely toxic.
 
-**GEORDI:** We'd all be dead by now. That leaves Saltzgadum and Invidium.
+**GEORDI:** We’d all be dead by now. That leaves Saltzgadum and Invidium.
 
 </td><td markdown="1">
 
@@ -324,34 +322,32 @@ ORDER BY status DESC, name
 
 Every sentence is one more predicate: 15,525, then 532, then 5, then 2.
 
-## Try it yourself
+## Try It Yourself
 
 The database is one single DuckDB database, and DuckDB can attach it straight from the web:
 
-```
+```sql
 ATTACH 'https://blobs.duckdb.org/data/enterprise_computer.duckdb';
 USE enterprise_computer;
 ```
 
-Run any of the queries above, or hand the file to your assistant, tell it that it is the main computer of the USS Enterprise, and start with: *Computer, search for the term "Darmok" in all linguistic databases compiled for this sector.* No lesson in computer science required, I promise. If you want, you can even [install our Claude plugin](https://duckdb.org/docs/2.0/installation?platform=macos&environment=claude) to make it even smoother. 
+Run any of the queries above, or hand the file to your assistant, tell it that it is the main computer of the USS Enterprise, and start with: *Computer, search for the term “Darmok” in all linguistic databases compiled for this sector.* No lesson in computer science required, I promise. If you want, you can even [install our Claude plugin](https://duckdb.org/docs/2.0/installation?platform=macos&environment=claude) to make it even smoother.
 
 **To boldly go where no-one has gone before.** I think we can claim that at least that part of the Enterprise computer is now a reality, at least given enough data.
 
-## Appendix: the other scenes
+## Appendix: The Other Scenes
 
-The rest of the scenes we picked, run the same way. On the left is the script. On the right is the query Claude ran for that step, with the first rows of its actual result. Where Claude's answer departed from the dialogue, a note says how.
+The rest of the scenes we picked, run the same way. On the left is the script. On the right is the query Claude ran for that step, with the first rows of its actual result. Where Claude’s answer departed from the dialogue, a note says how.
 
 ### Conspiracy
 
 [Script](https://www.st-minutiae.com/resources/scripts/125.txt). Season 1. Picard suspects Starfleet Command has been infiltrated and sets Data to reading its orders.
 
-<figure class="still">
-<img src="./images/enterprise-computer/conspiracy.jpg" width="480" alt="The &quot;Starbase Ops Status&quot; display, with the posts Data flagged marked in red.">
-<figcaption>The "Starbase Ops Status" display, with the posts Data flagged marked in red. <em>Star Trek: The Next Generation</em>, "Conspiracy" (1988). © CBS Studios Inc.</figcaption>
-</figure>
+![The “Starbase Ops Status” display, with the posts Data flagged marked in red.]({% link images/blog/star-trek/enterprise-computer/conspiracy.jpg %}){: width="480" }
+*The “Starbase Ops Status” display, with the posts Data flagged marked in red. <em>Star Trek: The Next Generation</em>, “Conspiracy” (1988). © CBS Studios Inc.*{: .caption .caption-left }
 
-<table markdown="1">
-<tr markdown="1"><th width="40%">In the script</th><th>What the computer ran</th></tr>
+<table class="script-split" markdown="1">
+<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
 **DATA:** Computer -- this is Lieutenant Commander Data. Access all Starfleet Command orders to starships, starbases and colonies, for the past six months.
@@ -382,12 +378,12 @@ ORDER BY o.issued_at, o.id
 </table>
 <p class="result-note">First 5 of 1,207 rows.</p>
 
-*Not what the script says: Reports 1,207 orders, not 1,214: it used a strict '>' on the six-month boundary, so the seven orders dated exactly six months back (2368-04-10) are left out.*
+*Not what the script says: Reports 1,207 orders, not 1,214: it used a strict ‘>’ on the six-month boundary, so the seven orders dated exactly six months back (2368-04-10) are left out.*
 
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**DATA:** My orders were to search for abnormal patterns in Starfleet's directives. I believe I have found just that.
+**DATA:** My orders were to search for abnormal patterns in Starfleet’s directives. I believe I have found just that.
 
 **DATA:** These are various outposts and starbases where I have detected unusual activity over the past few months.
 
@@ -462,7 +458,7 @@ GROUP BY order_type, division ORDER BY orders DESC
 <tr><td>personnel reassignment</td><td>operations</td><td>5</td><td>5</td><td>5</td><td>1</td><td>2368-08-01</td><td>2368-09-22</td></tr>
 </table>
 
-*Not what the script says: Describes the reshuffling, mainly in command areas, but does not look at communications, so the 'abnormally frequent contact with Starfleet Command' part is missing.*
+*Not what the script says: Describes the reshuffling, mainly in command areas, but does not look at communications, so the ‘abnormally frequent contact with Starfleet Command’ part is missing.*
 
 </td></tr>
 </table>
@@ -471,18 +467,16 @@ GROUP BY order_type, division ORDER BY orders DESC
 
 [Script](https://www.st-minutiae.com/resources/scripts/126.txt). Season 1. Clare Raymond, revived after 370 years in cryonic sleep, asks what became of her sons. Even has a recursive subquery!
 
-<figure class="still">
-<img src="./images/enterprise-computer/neutral_zone.jpg" width="480" alt="The record the search ends on: Thomas Raymond, with residence, employment, spouse and offspring.">
-<figcaption>The record the search ends on: Thomas Raymond, with residence, employment, spouse and offspring. <em>Star Trek: The Next Generation</em>, "The Neutral Zone" (1988). © CBS Studios Inc.</figcaption>
-</figure>
+![The record the search ends on: Thomas Raymond, with residence, employment, spouse and offspring.]({% link images/blog/star-trek/enterprise-computer/neutral_zone.jpg %}){: width="480" }
+*The record the search ends on: Thomas Raymond, with residence, employment, spouse and offspring. <em>Star Trek: The Next Generation</em>, “The Neutral Zone” (1988). © CBS Studios Inc.*{: .caption .caption-left }
 
-<table markdown="1">
-<tr markdown="1"><th width="40%">In the script</th><th>What the computer ran</th></tr>
+<table class="script-split" markdown="1">
+<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
 **TROI:** Computer - this is Counselor Troi. Request personal history on... What are their names?
 
-**CLARE:** Tommy -- he's eight, and Eddie's five.
+**CLARE:** Tommy -- he’s eight, and Eddie’s five.
 
 **COMPUTER:** Full names -- Date and place of birth.
 
@@ -514,12 +508,12 @@ ORDER BY p.id, src.record_date
 <tr><td>Edward Raymond</td><td>NULL</td><td>Secaucus, New Jersey</td><td>NULL</td><td>NULL</td><td>false</td><td>NULL</td><td>NULL</td><td>NULL</td><td>NULL</td></tr>
 </table>
 
-*Not what the script says: The script's computer asks for full names, date and place of birth. Claude found both sons under Clare Raymond straight away.*
+*Not what the script says: The script’s computer asks for full names, date and place of birth. Claude found both sons under Clare Raymond straight away.*
 
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**CLARE:** They were born in Secaucus - that's in Jersey.
+**CLARE:** They were born in Secaucus - that’s in Jersey.
 
 **CLARE:** Date of birth. Tommy was born February seventeenth...
 
@@ -544,13 +538,13 @@ ORDER BY p.birth_date, p.id
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**CLARE:** I'm in a world of strangers. I wish I knew what happened to my children. Did they get married, did they have kids...
+**CLARE:** I’m in a world of strangers. I wish I knew what happened to my children. Did they get married, did they have kids...
 
-**TROI:** Let's see if we can find out.
+**TROI:** Let’s see if we can find out.
 
 **TROI:** I have found something.
 
-**TROI:** I have been able to locate a family living outside of Indianapolis. The man's name is Thomas Raymond.
+**TROI:** I have been able to locate a family living outside of Indianapolis. The man’s name is Thomas Raymond.
 
 </td><td markdown="1">
 
@@ -590,9 +584,9 @@ ORDER BY t.generation, t.birth_date
 
 **TROI:** Computer -- let us see Thomas Raymond.
 
-**CLARE:** Oh, my God... It's Donald... that's my husband.
+**CLARE:** Oh, my God... It’s Donald... that’s my husband.
 
-**TROI:** Actually, it's your great, great, great, great, great grandson.
+**TROI:** Actually, it’s your great, great, great, great, great grandson.
 
 </td><td markdown="1">
 
@@ -620,20 +614,18 @@ ORDER BY p.portrait IS NULL, p.birth_date DESC
 
 [Script](https://www.st-minutiae.com/resources/scripts/157.txt). Season 3. Two people have died of the same engineered virus, decades apart. The Acamarian databases say what they had in common.
 
-<figure class="still">
-<img src="./images/enterprise-computer/vengeance_factor.jpg" width="480" alt="Volnoth's entry in the Acamarian planetary database, with the clan affiliation that links the two deaths.">
-<figcaption>Volnoth's entry in the Acamarian planetary database, with the clan affiliation that links the two deaths. <em>Star Trek: The Next Generation</em>, "The Vengeance Factor" (1989). © CBS Studios Inc.</figcaption>
-</figure>
+![Volnoth’s entry in the Acamarian planetary database, with the clan affiliation that links the two deaths.]({% link images/blog/star-trek/enterprise-computer/vengeance_factor.jpg %}){: width="480" }
+*Volnoth’s entry in the Acamarian planetary database, with the clan affiliation that links the two deaths. <em>Star Trek: The Next Generation</em>, “The Vengeance Factor” (1989). © CBS Studios Inc.*{: .caption .caption-left }
 
-<table markdown="1">
-<tr markdown="1"><th width="40%">In the script</th><th>What the computer ran</th></tr>
+<table class="script-split" markdown="1">
+<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**DATA:** Commander, I'm afraid the only entry on Volnoth in the Acamarian database is a birth record.
+**DATA:** Commander, I’m afraid the only entry on Volnoth in the Acamarian database is a birth record.
 
 **RIKER:** Probably one of the last of the Gatherers to be born on their planet.
 
-*Nobody speaks this request in the script. Claude was asked: "Data -- got anything in the Acamarian database on Volnoth?"*
+*Nobody speaks this request in the script. Claude was asked: “Data -- got anything in the Acamarian database on Volnoth?”*
 
 </td><td markdown="1">
 
@@ -652,16 +644,16 @@ FROM persons p WHERE p.name ILIKE '%Volnoth%'
 <tr><td>Volnoth</td><td>Gatherer</td><td>Lornack</td><td>2264-03-14</td><td>2366-07-24</td><td>102</td><td>0</td><td>Tralesta vs Lornack (2086-2286): Tralesta clan massacred by the Lor…</td></tr>
 </table>
 
-*Not what the script says: Gives the birth date and clan Lornack, plus the death and clan history; the dialogue's point is that the Acamarian database holds only the birth record.*
+*Not what the script says: Gives the birth date and clan Lornack, plus the death and clan history; the dialogue’s point is that the Acamarian database holds only the birth record.*
 
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**BEVERLY:** I've been digging through the medical database from Acamar Three for hours and I've found another victim of the microvirus that killed Volnoth. But just one.
+**BEVERLY:** I’ve been digging through the medical database from Acamar Three for hours and I’ve found another victim of the microvirus that killed Volnoth. But just one.
 
 **BEVERLY:** Fifty-three years ago. A Gatherer named Penthor-Mul.
 
-*Nobody speaks this request in the script. Claude was asked: "Computer, search the medical database from Acamar Three for any other victims of the microvirus that killed Volnoth."*
+*Nobody speaks this request in the script. Claude was asked: “Computer, search the medical database from Acamar Three for any other victims of the microvirus that killed Volnoth.”*
 
 </td><td markdown="1">
 
@@ -734,13 +726,13 @@ ORDER BY src, date1
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**RIKER:** Display Volnoth's birth record again.
+**RIKER:** Display Volnoth’s birth record again.
 
 **BEVERLY:** Lornack... the same clan....
 
 **RIKER:** The only two recorded deaths from this microvirus... members of the same clan... what does that tell us, Doctor?
 
-**BEVERLY:** If these microbes were engineered for murder, I'd say somebody's going after the whole family.
+**BEVERLY:** If these microbes were engineered for murder, I’d say somebody’s going after the whole family.
 
 </td><td markdown="1">
 
@@ -763,7 +755,7 @@ WHERE p.name = 'Volnoth'
 
 **DATA:** Commander, Chorgan, the present leader of the Gatherers, is also from the Lornack clan.
 
-*Nobody speaks this request in the script. Claude was asked: "Data, is anyone else from the Lornack clan still alive?"*
+*Nobody speaks this request in the script. Claude was asked: “Data, is anyone else from the Lornack clan still alive?”*
 
 </td><td markdown="1">
 
@@ -857,9 +849,9 @@ GROUP BY pa.id, pa.name, pa.role ORDER BY pa.id
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**RIKER:** There's got to be a missing link here...
+**RIKER:** There’s got to be a missing link here...
 
-**DATA:** Commander, I believe I have found a correlation between the two deaths... your "missing link" ...
+**DATA:** Commander, I believe I have found a correlation between the two deaths... your “missing link” ...
 
 **DATA:** That is Penthor-Mul being led from his trial.
 
@@ -886,27 +878,25 @@ ORDER BY i.taken
 <tr><td>157403</td><td>Acamar III</td><td>2349-03-02</td><td>Opening day of the trial of the Gatherer Tavik-Dar</td><td>[Tavik-Dar]</td><td>NULL</td><td>Tavik-Dar [Ramsar, died 2349-04-21]</td></tr>
 </table>
 
-*Not what the script says: Reports that no image tags a delegation member and concludes 'no link found'; it does not offer the image of Penthor-Mul being led from his trial.*
+*Not what the script says: Reports that no image tags a delegation member and concludes ‘no link found’; it does not offer the image of Penthor-Mul being led from his trial.*
 
 </td></tr>
 </table>
 
 ### Sins of the Father
 
-[Script](https://www.st-minutiae.com/resources/scripts/165.txt). Season 3. Captured Romulan logs say Worf's father betrayed the Khitomer outpost. Data and Geordi check them against a second source.
+[Script](https://www.st-minutiae.com/resources/scripts/165.txt). Season 3. Captured Romulan logs say Worf’s father betrayed the Khitomer outpost. Data and Geordi check them against a second source.
 
-<figure class="still">
-<img src="./images/enterprise-computer/sins_of_the_father.jpg" width="480" alt="Data, La Forge and Riker compare the Klingon data file with the Intrepid's sensor log.">
-<figcaption>Data, La Forge and Riker compare the Klingon data file with the Intrepid's sensor log. <em>Star Trek: The Next Generation</em>, "Sins of the Father" (1990). © CBS Studios Inc.</figcaption>
-</figure>
+![Data, La Forge and Riker compare the Klingon data file with the Intrepid’s sensor log.]({% link images/blog/star-trek/enterprise-computer/sins_of_the_father.jpg %}){: width="480" }
+*Data, La Forge and Riker compare the Klingon data file with the Intrepid’s sensor log. <em>Star Trek: The Next Generation</em>, “Sins of the Father” (1990). © CBS Studios Inc.*{: .caption .caption-left }
 
-<table markdown="1">
-<tr markdown="1"><th width="40%">In the script</th><th>What the computer ran</th></tr>
+<table class="script-split" markdown="1">
+<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
 **PICARD:** Mister Data... I want you to find out everything you can about the destruction of the Khitomer outpost. Cross reference with Romulan tactics and strategic information on the region. Request access to the Klingon central information net.
 
-**DATA:** Commander, I have discovered the basis of the charges against Worf's father.
+**DATA:** Commander, I have discovered the basis of the charges against Worf’s father.
 
 **DATA:** Apparently the Klingons recently captured a Romulan ship with logs that provided new information on the Khitomer attack. They clearly indicate a transmission from the outpost to the Romulans moments before the shields dropped.
 
@@ -957,9 +947,9 @@ WHERE l.signal_type <> 'distress signal' ORDER BY l.seq
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**GEORDI:** From Worf's father?
+**GEORDI:** From Worf’s father?
 
-**DATA:** It does correspond to Mogh's personal security code.
+**DATA:** It does correspond to Mogh’s personal security code.
 
 </td><td markdown="1">
 
@@ -986,15 +976,15 @@ ORDER BY l.seq
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**RIKER:** How can we be sure these records haven't been falsified?
+**RIKER:** How can we be sure these records haven’t been falsified?
 
-**GEORDI:** We can cross check them against the Intrepid's sensor logs...
+**GEORDI:** We can cross check them against the Intrepid’s sensor logs...
 
 **DATA:** Both the Intrepid and Romulan logs show a series of distress signals from Khitomer...
 
 **GEORDI:** Gaps in the Intrepid logs, missing information because of the range...
 
-**DATA:** This is where Mogh's alleged transmission should be.
+**DATA:** This is where Mogh’s alleged transmission should be.
 
 </td><td markdown="1">
 
@@ -1038,7 +1028,7 @@ FROM x GROUP BY offset_s ORDER BY first_signal
 
 **DATA:** They are no longer synchronous.
 
-**GEORDI:** Commander, somebody's been rewriting history.
+**GEORDI:** Commander, somebody’s been rewriting history.
 
 </td><td markdown="1">
 
@@ -1081,8 +1071,8 @@ FROM i FULL JOIN r USING (n) ORDER BY n
 
 **In Engineering: every possible cause**
 
-<table markdown="1">
-<tr markdown="1"><th width="40%">In the script</th><th>What the computer ran</th></tr>
+<table class="script-split" markdown="1">
+<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
 **GEORDI:** Computer, locate the electropathic pattern described in medical database four-delta-one.
@@ -1104,7 +1094,7 @@ WHERE database_ref = '4-delta-1' AND name = 'electropathic pattern'
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**GEORDI:** Okay, we're gonna track down any possible cause of that brain pattern. First, what are the medical conditions that might account for it?
+**GEORDI:** Okay, we’re gonna track down any possible cause of that brain pattern. First, what are the medical conditions that might account for it?
 
 **COMPUTER:** Iresine Syndrome is a cause of the electropathic pattern.
 
@@ -1126,7 +1116,7 @@ ORDER BY c.agent
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**GEORDI:** Right. And Doctor Crusher's already eliminated that. How many nonmedical forces or substances might cause the pattern?
+**GEORDI:** Right. And Doctor Crusher’s already eliminated that. How many nonmedical forces or substances might cause the pattern?
 
 **COMPUTER:** There are twenty-two nonmedical agents.
 
@@ -1179,7 +1169,7 @@ ORDER BY c.agent_class, c.agent
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**GEORDI:** Are the ship's sensors calibrated to detect all those agents?
+**GEORDI:** Are the ship’s sensors calibrated to detect all those agents?
 
 **COMPUTER:** All agents are scanned by the sensors.
 
@@ -1205,7 +1195,7 @@ WHERE p.name = 'electropathic pattern' AND p.database_ref = '4-delta-1'
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**GEORDI:** Okay. Let's start with the chemical substances. Name them.
+**GEORDI:** Okay. Let’s start with the chemical substances. Name them.
 
 **COMPUTER:** Ferrazene, hylanatine, dardilion, chrysimite, and manzene.
 
@@ -1228,14 +1218,14 @@ ORDER BY c.agent
 <tr><td>manzene</td></tr>
 </table>
 
-*Not what the script says: The right five chemicals, but in alphabetical order rather than the script's read-out order.*
+*Not what the script says: The right five chemicals, but in alphabetical order rather than the script’s read-out order.*
 
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
 **GEORDI:** Ferrazene has a complex molecular structure... it breaks down into bilenium and tarrisite. Do the sensors scan for those?
 
-**COMPUTER:** Ship's sensors scan for both compounds.
+**COMPUTER:** Ship’s sensors scan for both compounds.
 
 </td><td markdown="1">
 
@@ -1307,7 +1297,7 @@ ORDER BY c.agent, b.byproduct
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**GEORDI:** Well, this isn't a routine situation. Scan for nilizene.
+**GEORDI:** Well, this isn’t a routine situation. Scan for nilizene.
 
 **COMPUTER:** There is no nilizene on the Enterprise.
 
@@ -1324,27 +1314,25 @@ ORDER BY stardate, log_id
 <tr><td>212210</td><td>SS Kallisto</td><td>Cargo Hold 1</td><td>nilizene</td><td>45427.4</td></tr>
 </table>
 
-*Not what the script says: Says it cannot start a scan from records; the logs hold no nilizene reading aboard, but since nilizene is not routinely scanned that does not show the ship is clear. The script's computer answers 'There is no nilizene on the Enterprise.'*
+*Not what the script says: Says it cannot start a scan from records; the logs hold no nilizene reading aboard, but since nilizene is not routinely scanned that does not show the ship is clear. The script’s computer answers ‘There is no nilizene on the Enterprise.’*
 
 </td></tr>
 </table>
 
 **On the bridge: the right query with the wrong filter**
 
-<figure class="still">
-<img src="./images/enterprise-computer/violations_bridge.jpg" width="480" alt="The search as the episode shows it: &quot;Search parameters: instances of unexplained coma or medical cases diagnosed as Iresine Syndrome during periods when Ullian telepathic historians were present on the planet.&quot;">
-<figcaption>The search as the episode shows it: "Search parameters: instances of unexplained coma or medical cases diagnosed as Iresine Syndrome during periods when Ullian telepathic historians were present on the planet." <em>Star Trek: The Next Generation</em>, "Violations" (1992). © CBS Studios Inc.</figcaption>
-</figure>
+![The search as the episode shows it: “Search parameters: instances of unexplained coma or medical cases diagnosed as Iresine Syndrome during periods when Ullian telepathic historians were present on the planet.”]({% link images/blog/star-trek/enterprise-computer/violations_bridge.jpg %}){: width="480" }
+*The search as the episode shows it: “Search parameters: instances of unexplained coma or medical cases diagnosed as Iresine Syndrome during periods when Ullian telepathic historians were present on the planet.” <em>Star Trek: The Next Generation</em>, “Violations” (1992). © CBS Studios Inc.*{: .caption .caption-left }
 
-<table markdown="1">
-<tr markdown="1"><th width="40%">In the script</th><th>What the computer ran</th></tr>
+<table class="script-split" markdown="1">
+<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
 **PICARD:** Mister Data, I want you to investigate those eleven planets the Ullians have visited. See if there have been any reports of unexplained comas.
 
 **DATA:** Yes, Captain.
 
-**GEORDI:** Well, that's it for Melina Two. No unexplained comas during the time the Ullians were working there. We're striking out everywhere.
+**GEORDI:** Well, that’s it for Melina Two. No unexplained comas during the time the Ullians were working there. We’re striking out everywhere.
 
 **DATA:** We have yet to receive transmissions from the two planets of the Nel system. Perhaps they will show different results.
 
@@ -1384,7 +1372,7 @@ ORDER BY r.planet, r.stardate, r.source
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**GEORDI:** We didn't look into the comas that were explained.
+**GEORDI:** We didn’t look into the comas that were explained.
 
 **DATA:** You are checking for instances of Iresine Syndrome...
 
@@ -1426,9 +1414,9 @@ ORDER BY r.stardate
 </td></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
-**GEORDI:** Let's try the other planets. I think we may have something.
+**GEORDI:** Let’s try the other planets. I think we may have something.
 
-**PICARD:** How's your search coming?
+**PICARD:** How’s your search coming?
 
 **DATA:** We have uncovered several cases, sir, but we have not yet completed our search.
 
@@ -1501,24 +1489,22 @@ GROUP BY l.member ORDER BY comas_present_for DESC, l.member
 
 **The alibi, and the one who was always there**
 
-<figure class="still">
-<img src="./images/enterprise-computer/violations_alibi.jpg" width="480" alt="The follow-up search of the Nel system records, correlated with the Ullians' mission logs.">
-<figcaption>The follow-up search of the Nel system records, correlated with the Ullians' mission logs. <em>Star Trek: The Next Generation</em>, "Violations" (1992). © CBS Studios Inc.</figcaption>
-</figure>
+![The follow-up search of the Nel system records, correlated with the Ullians’ mission logs.]({% link images/blog/star-trek/enterprise-computer/violations_alibi.jpg %}){: width="480" }
+*The follow-up search of the Nel system records, correlated with the Ullians’ mission logs. <em>Star Trek: The Next Generation</em>, “Violations” (1992). © CBS Studios Inc.*{: .caption .caption-left }
 
-<table markdown="1">
-<tr markdown="1"><th width="40%">In the script</th><th>What the computer ran</th></tr>
+<table class="script-split" markdown="1">
+<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
 **GEORDI:** We just got the transmission from the Nel system. No mention of Iresine Syndrome... but there are two unexplained comas on one planet... none on the other.
 
 **DATA:** And were the Ullians present?
 
-**GEORDI:** Checking their mission logs... That's funny...
+**GEORDI:** Checking their mission logs... That’s funny...
 
 **DATA:** What is it?
 
-**GEORDI:** On stardates 45321 and 45323, when the comas occurred... Tarmin was on his home planet. He wasn't anywhere near the Nel system.
+**GEORDI:** On stardates 45321 and 45323, when the comas occurred... Tarmin was on his home planet. He wasn’t anywhere near the Nel system.
 
 </td><td markdown="1">
 
@@ -1552,7 +1538,7 @@ ORDER BY m.arrived_stardate, c.stardate
 
 **DATA:** We discovered two instances of unexplained comas on Nel Three while the Ullians were there... but Tarmin was not part of the group. A closer examination revealed that only one Ullian was present at all incidents of coma -- Jev.
 
-*Nobody speaks this request in the script. Claude was asked: "Were any of the Ullians present at all incidents of coma?"*
+*Nobody speaks this request in the script. Claude was asked: “Were any of the Ullians present at all incidents of coma?”*
 
 </td><td markdown="1">
 
@@ -1580,8 +1566,8 @@ ORDER BY l.member
 
 [Script](https://www.st-minutiae.com/resources/scripts/228.txt). Season 6. Barclay, who is afraid of the transporter, looks up what it might be doing to him.
 
-<table markdown="1">
-<tr markdown="1"><th width="40%">In the script</th><th>What the computer ran</th></tr>
+<table class="script-split" markdown="1">
+<tr markdown="1"><th>In the script</th><th>What the computer ran</th></tr>
 <tr valign="top" markdown="1"><td markdown="1">
 
 **BARCLAY:** Computer... access Starfleet Medical Data Base. Tell me about... describe the disorder known as... Transporter Psychosis.
@@ -1606,7 +1592,7 @@ FROM medical_database WHERE disorder ILIKE 'Transporter Psychosis'
 
 **BARCLAY:** No, no... stop. All I need is the... what causes it?
 
-**COMPUTER:** It is caused by a breakdown of neuro-chemical molecules during transport, affecting the body's motor functions, autonomic systems, and the brain's higher reasoning centers.
+**COMPUTER:** It is caused by a breakdown of neuro-chemical molecules during transport, affecting the body’s motor functions, autonomic systems, and the brain’s higher reasoning centers.
 
 </td><td markdown="1">
 
