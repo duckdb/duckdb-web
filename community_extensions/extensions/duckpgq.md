@@ -20,7 +20,7 @@ repo:
   github: cwida/duckpgq-extension
   andium: 42eea114b22fad93f04cb7edf50d2b0077e464fa
   variegata: 61f5d08270bef2c81fc4e5d9af32739e67adc2be
-  ref: 9c11bc192a071c9e44cef16cced90a22d7d7db2c
+  ref: 7e300af593519e7fa673680f588ae1a03b41c7f8
 
 docs:
   hello_world: |
@@ -81,13 +81,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ✅ | ✅ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ✅ | ❌ |
-| WebAssembly | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ✅ | ✅ |
+| WebAssembly | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -132,12 +132,14 @@ LOAD {{ page.extension.name }};
 | iterativelength              | scalar        | NULL        | NULL    |          |
 | iterativelength2             | scalar        | NULL        | NULL    |          |
 | iterativelengthbidirectional | scalar        | NULL        | NULL    |          |
+| iterativelengthbounded       | scalar        | NULL        | NULL    |          |
 | local_clustering_coefficient | scalar        | NULL        | NULL    |          |
 | local_clustering_coefficient | table         | NULL        | NULL    |          |
 | pagerank                     | scalar        | NULL        | NULL    |          |
 | pagerank                     | table         | NULL        | NULL    |          |
 | reachability                 | scalar        | NULL        | NULL    |          |
 | shortestpath                 | scalar        | NULL        | NULL    |          |
+| shortestpathbounded          | scalar        | NULL        | NULL    |          |
 | show_property_graphs         | pragma        | NULL        | NULL    |          |
 | summarize_property_graph     | table         | NULL        | NULL    |          |
 | weakly_connected_component   | scalar        | NULL        | NULL    |          |
