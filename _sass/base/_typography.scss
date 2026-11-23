@@ -17,7 +17,7 @@
 #main_content_wrap a.podcastlink,
 .singleentry .content a.podcastlink{
 	display: inline;
-	overflow-wrap: break-word;
+	overflow-wrap: anywhere;
 
 	.linkicon-wrap{
 		white-space: nowrap;

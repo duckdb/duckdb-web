@@ -391,10 +391,6 @@
 		margin-block: 2.5rem 0;
 	}
 
-	#{$scope} :is(blockquote, figure.quote, table, .monospace_table, .highlighter-rouge, .highlight) + :is(h1, h2, h3, h4, h5, h6) {
-		margin-top: 2rem;
-	}
-
 	#{$scope} :is(h1, h2, h3, h4, h5, h6, .headlinebar) + :is(h1, h2, h3, h4, h5, h6) {
 		margin-top: 1rem;
 	}
@@ -470,6 +466,10 @@
 	li {
 		line-height: 1.65;
 		font-weight: 400;
+	}
+
+	li :is(table, .highlighter-rouge) {
+		line-height: 1.5;
 	}
 
 	ol {

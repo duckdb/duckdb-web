@@ -614,10 +614,12 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 	var last = a.lastChild;
 	var match = (last && last.nodeType === 3) ? last.nodeValue.match(/(\S+)(\s*)$/) : null;
 	if (match) {
-		last.nodeValue = last.nodeValue.slice(0, match.index);
+		var word = match[1];
+		var glued = word.length > 16 ? word.slice(-6) : word;
+		last.nodeValue = last.nodeValue.slice(0, match.index) + word.slice(0, word.length - glued.length);
 		var wrap = document.createElement('span');
 		wrap.className = 'linkicon-wrap';
-		wrap.textContent = match[1];
+		wrap.textContent = glued;
 		wrap.insertAdjacentHTML('beforeend', svgMarkup);
 		a.appendChild(wrap);
 	} else {
