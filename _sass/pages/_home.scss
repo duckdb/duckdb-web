@@ -882,6 +882,10 @@ body.landing{
 			.intro{
 				flex: 1;
 				text-align: left;
+				h2{
+					margin: 0;
+					letter-spacing: inherit;
+				}
 				p{
 					color: var(--main-text-secondary-color, #333333);
 					max-width: 456px;

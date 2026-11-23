@@ -29,6 +29,7 @@
 		{% comment %}
 		<!-- skip description tags for the main blog page -->
 		{% endcomment %}
+		{% if page.description %}<meta name="description" content="{{ page.description | escape }}" />{% endif %}
 	{% else %}
 		{% seo title=false %}
 	{% endif %}
