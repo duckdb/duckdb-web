@@ -52,8 +52,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 607
-extension_download_count_pretty: 607
+extension_download_count: 597
+extension_download_count_pretty: 597
 image: '/images/community_extensions/social_preview/preview_community_extension_biosignals.png'
 layout: community_extension_doc
 ---

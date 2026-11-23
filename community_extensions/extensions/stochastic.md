@@ -26,8 +26,8 @@ repo:
 
 extension_star_count: 32
 extension_star_count_pretty: 32
-extension_download_count: 150067
-extension_download_count_pretty: 150.1k
+extension_download_count: 126895
+extension_download_count_pretty: 126.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_stochastic.png'
 layout: community_extension_doc
 ---

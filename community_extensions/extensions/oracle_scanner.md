@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: oracle_scanner
   description: Read and write Oracle Database with no Oracle client
-  version: '0.8.1'
+  version: '0.8.3'
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,9 +19,9 @@ extension:
 
 repo:
   github: krokozyab/quack-oracle
-  # The commit tagged v0.8.1, built for DuckDB v2.0.0, pinned by SHA so what is
+  # The commit tagged v0.8.3, built for DuckDB v2.0.0 and v2.0.1, pinned by SHA so what is
   # built cannot move.
-  ref: dced632060e8dbe48a3b39f838130510460cd493
+  ref: fcf53d04c65b4e223fdb19fd66643be6386ba76a
   # DuckDB 1.5.6 stays on v0.4.0, the last release built for that line.
   variegata: d4aa50f9bf23ca44b44f0df48fb0065ba751f5be
 
@@ -91,8 +91,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 1771
-extension_download_count_pretty: 1.8k
+extension_download_count: 1634
+extension_download_count_pretty: 1.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc
 ---

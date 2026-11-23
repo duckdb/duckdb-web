@@ -29,8 +29,8 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 621
-extension_download_count_pretty: 621
+extension_download_count: 610
+extension_download_count_pretty: 610
 image: '/images/community_extensions/social_preview/preview_community_extension_vgi.png'
 layout: community_extension_doc
 ---

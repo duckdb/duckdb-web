@@ -24,8 +24,8 @@ repo:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 63927
-extension_download_count_pretty: 63.9k
+extension_download_count: 87172
+extension_download_count_pretty: 87.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_hashfuncs.png'
 layout: community_extension_doc
 ---
