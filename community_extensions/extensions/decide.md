@@ -127,14 +127,16 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name    | function_type | description | comment | examples |
-|--------------------|---------------|-------------|---------|----------|
-| decision           | scalar        | NULL        | NULL    |          |
-| decision_answers   | scalar        | NULL        | NULL    |          |
-| decision_choice    | scalar        | NULL        | NULL    |          |
-| decision_prob      | scalar        | NULL        | NULL    |          |
-| decision_providers | table         | NULL        | NULL    |          |
-| decision_score     | scalar        | NULL        | NULL    |          |
+|     function_name      | function_type | description | comment | examples |
+|------------------------|---------------|-------------|---------|----------|
+| decision               | scalar        | NULL        | NULL    |          |
+| decision_answers       | scalar        | NULL        | NULL    |          |
+| decision_choice        | scalar        | NULL        | NULL    |          |
+| decision_choice_detail | scalar        | NULL        | NULL    |          |
+| decision_prob          | scalar        | NULL        | NULL    |          |
+| decision_providers     | table         | NULL        | NULL    |          |
+| decision_score         | scalar        | NULL        | NULL    |          |
+| decision_score_detail  | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -152,12 +154,13 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|         name         |                                 description                                  | input_type | scope  | aliases | typed_value |
-|----------------------|------------------------------------------------------------------------------|------------|--------|---------|-------------|
-| decisions_batch_size | Rows per request for typed functions (1 to 128)                              | UBIGINT    | GLOBAL | []      | 20          |
-| decisions_endpoint   | Empty for the provider's URL; a loopback http://127.0.0.1 URL for mock tests | VARCHAR    | GLOBAL | []      |             |
-| decisions_model      | Model id; empty for the provider's default_model                             | VARCHAR    | GLOBAL | []      |             |
-| decisions_provider   | Decision provider: cloudflare, jev, openai; see decision_providers()         | VARCHAR    | GLOBAL | []      | openai      |
-| temp_directory       | Set the directory to which temporary files are written.                      | VARCHAR    | GLOBAL | []      | post.db.tmp |
+|         name          |                                 description                                  | input_type | scope  | aliases | typed_value |
+|-----------------------|------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| decisions_batch_size  | Rows per request for typed functions (1 to 128)                              | UBIGINT    | GLOBAL | []      | 20          |
+| decisions_concurrency | Requests in flight at once per chunk (1 to 32); 1 sends them one at a time   | UBIGINT    | GLOBAL | []      | 4           |
+| decisions_endpoint    | Empty for the provider's URL; a loopback http://127.0.0.1 URL for mock tests | VARCHAR    | GLOBAL | []      |             |
+| decisions_model       | Model id; empty for the provider's default_model                             | VARCHAR    | GLOBAL | []      |             |
+| decisions_provider    | Decision provider: cloudflare, jev, openai; see decision_providers()         | VARCHAR    | GLOBAL | []      | openai      |
+| temp_directory        | Set the directory to which temporary files are written.                      | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -88,11 +88,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
@@ -150,6 +150,7 @@ This extension does not add any types.
 | bq_auth_timeout_s                    | Timeout for BigQuery authentication token fetches in seconds                                                                                                                                                                                                                  | BIGINT     | GLOBAL | []      | 10          |
 | bq_bignumeric_as_varchar             | Read BigQuery BIGNUMERIC data type as VARCHAR                                                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      | true        |
 | bq_curl_ca_bundle_path               | Path to the CA bundle for curl                                                                                                                                                                                                                                                | VARCHAR    | GLOBAL | []      |             |
+| bq_curl_ssl_revocation_mode          | Certificate revocation mode for cURL with Schannel: default, best_effort, or disabled. Certificate chains and hostnames are still verified                                                                                                                                    | VARCHAR    | GLOBAL | []      | default     |
 | bq_debug_show_queries                | DEBUG SETTING: print all queries sent to BigQuery to stdout                                                                                                                                                                                                                   | BOOLEAN    | GLOBAL | []      | false       |
 | bq_default_location                  | Default location for BigQuery queries                                                                                                                                                                                                                                         | VARCHAR    | GLOBAL | []      | US          |
 | bq_enable_aggregate_pushdown         | EXPERIMENTAL: rewrite supported BigQuery aggregate queries to query jobs. Unsupported shapes fall back before a remote query is started. Runtime errors from started BigQuery jobs are not retried locally, and GoogleSQL cast/string/float semantics may differ from DuckDB. | BOOLEAN    | GLOBAL | []      | false       |

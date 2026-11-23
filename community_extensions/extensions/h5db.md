@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: h5db
   description: Read HDF5 datasets and attributes
-  version: 1.4.1
+  version: 1.4.2
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
     - jokasimr
 repo:
   github: jokasimr/h5db
-  ref: b4dea494155fc8c4cb20edda27f1f01dc4c8ff46
+  ref: f9539705a25f4da2b3c3e413cf78361b3f89e26f
   variegata: 7de598959594ef86ccc838e64bf0e45fef315857
   andium: e185e91cca551ef31d2c19b84866cc0f462d2363
 
@@ -60,11 +60,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
-| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
