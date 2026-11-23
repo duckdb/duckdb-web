@@ -426,11 +426,12 @@ body.documentation {
             color: inherit;
             text-decoration: none;
         }
-        a + a{
-            margin-left: 15px;
-        }
         >div{
             white-space: nowrap;
+        }
+        >div:last-child{
+            display: flex;
+            column-gap: 15px;
         }
     }
 

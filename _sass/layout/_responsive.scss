@@ -663,8 +663,7 @@
 		}
 	}
 
-	body.landing footer .sitefooter .footercontent .footernavigation,
-	.sitefooter .footercontent .footernavigation {
+	footer .sitefooter .footercontent .footernavigation {
 		column-gap: 30px;
 		row-gap: 40px;
 		flex-wrap: wrap;
@@ -811,6 +810,11 @@
 	body.documentation .bottomline {
 		flex-direction: column-reverse;
 		gap: 16px;
+
+		>div:last-child {
+			justify-content: space-between;
+			column-gap: 8px;
+		}
 	}
 
 	body.documentation{
