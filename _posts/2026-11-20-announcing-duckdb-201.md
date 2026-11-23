@@ -106,9 +106,7 @@ DuckDB 2.0.1 fixes this, along with several issues affecting views, macros, and 
 
 ### Security Fixes
 
-Configuring `enable_external_access=false` should prevent access to external state but would still allow `CREATE SECRET`, which can result in accessing external state. This is now fixed ([`28637`](https://github.com/duckdb/duckdb/pull/28637)) by refusing `CREATE SECRET` with a `Permission Error` and an error message indicating `Creating secrets is disabled when enable_external_access is false`.
-
-We also fixed a remote path traversal issue ([`#28684`](https://github.com/duckdb/duckdb/pull/28684)) that occurred when DuckDB was configured with `enable_external_access=false`.
+We fixed a remote path traversal issue ([`#28684`](https://github.com/duckdb/duckdb/pull/28684)) that occurred when DuckDB was configured with `enable_external_access=false`.
 
 Additionally, this release pulls in a fix ([`#27791`](https://github.com/duckdb/duckdb/pull/27791)) for the Brotli decoder ([CVE-2026-111497](https://app.opencve.io/cve/CVE-2026-111497)).
 
