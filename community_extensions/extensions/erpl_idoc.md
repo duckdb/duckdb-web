@@ -7,7 +7,7 @@ excerpt: |
 
 extension:
   name: erpl_idoc
-  version: 2026.11.22
+  version: 2026.11.23
   description: Read & write SAP IDoc files (flat + IDoc-XML) as SQL in DuckDB — a community extension in the erpl family.
   language: C++
   build: cmake
@@ -18,8 +18,8 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/erpl-idoc
-  ref: d8a0b21da40e52b4fa3b7247ded4bbddf3db8a06
-  variegata: d8a0b21da40e52b4fa3b7247ded4bbddf3db8a06
+  ref: 1fd56e6550981c639b18b406ae723cb368417dd4
+  variegata: 1fd56e6550981c639b18b406ae723cb368417dd4
 
 extension_star_count: 3
 extension_star_count_pretty: 3
@@ -36,11 +36,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
