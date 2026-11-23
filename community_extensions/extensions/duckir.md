@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckir
   description: A DuckDB extension for Information Retrieval. Fast vector search fully integrated with DuckDB, with filtered search on any predicate, indexes larger than memory, and an index that updates alongside your table.
-  version: 0.2.0
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -21,7 +21,7 @@ extension:
 
 repo:
   github: cwida/DuckIR
-  ref: 807e7f3d55be2014797bd7404ec02a7be9494d6a
+  ref: 0d0417acde48fbe50a35a3378d6053a20144fd76
 
 docs:
   hello_world: |
@@ -79,13 +79,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
