@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: quack_oauth
   description: Extensions providing OAuth and OpenID primitives for authentication and authorization for the DuckDB quack server.
-  version: 2026.10.21
+  version: 2026.11.22
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads;"
@@ -18,15 +18,13 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/quack-oauth
-  ref: 0714cb05413ac40161d1b9ec641b4fb6b974a4ea
-  # ref builds against DuckDB 2.0, variegata against v1.5.6; one commit
-  # serves both (and v1.4.5 via the ref fallback).
-  variegata: 0714cb05413ac40161d1b9ec641b4fb6b974a4ea
+  ref: 52a8a225ae7b2c8ce40b7b75cb8ca6e4135ad808
+  variegata: 52a8a225ae7b2c8ce40b7b75cb8ca6e4135ad808
 
 extension_star_count: 33
 extension_star_count_pretty: 33
-extension_download_count: 832
-extension_download_count_pretty: 832
+extension_download_count: 838
+extension_download_count_pretty: 838
 image: '/images/community_extensions/social_preview/preview_community_extension_quack_oauth.png'
 layout: community_extension_doc
 ---

@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 883
-extension_download_count_pretty: 883
+extension_download_count: 4032
+extension_download_count_pretty: 4.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_hedged_request_fs.png'
 layout: community_extension_doc
 ---

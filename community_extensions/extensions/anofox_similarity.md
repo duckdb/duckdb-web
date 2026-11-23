@@ -7,7 +7,7 @@ excerpt: |
 
 extension:
   name: anofox_similarity
-  version: 2026.11.21
+  version: 2026.11.22
   description: "Multi-modal product similarity search for manufacturing supply chain planning. Find similar materials by BOM component overlap (Jaccard), graph-structural similarity (Weisfeiler-Lehman kernel), text embeddings, and transactional patterns, with predecessor detection and cold-start analog matching for demand forecasting. Requirements coverage matching: direction-aware value checks with units (EN/DE), property trees from JSON, a traced coverage kernel with gap lists, catalogue classification with your own vectors, vocabulary review, evaluation, and MinHash/LSH recall. Asset Administration Shell (AAS v3): read JSON/XML/AASX, match on ECLASS / IEC CDD ids, check data quality, and write results back as AAS."
   language: C++
   build: cmake
@@ -18,8 +18,8 @@ extension:
 
 repo:
   github: DataZooDE/anofox-similarity
-  ref: d7ef1ea867b172a63391c271b1465e4eabdab4e0
-  variegata: d7ef1ea867b172a63391c271b1465e4eabdab4e0
+  ref: d7f8e29ce54c8f3984e5c325ccba0cacba48dfaa
+  variegata: d7f8e29ce54c8f3984e5c325ccba0cacba48dfaa
 
 docs:
   hello_world: |
@@ -87,8 +87,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 814
-extension_download_count_pretty: 814
+extension_download_count: 826
+extension_download_count_pretty: 826
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_similarity.png'
 layout: community_extension_doc
 ---

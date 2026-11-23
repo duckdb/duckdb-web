@@ -71,8 +71,8 @@ docs:
 
 extension_star_count: 47
 extension_star_count_pretty: 47
-extension_download_count: 811
-extension_download_count_pretty: 811
+extension_download_count: 795
+extension_download_count_pretty: 795
 image: '/images/community_extensions/social_preview/preview_community_extension_duckflight.png'
 layout: community_extension_doc
 ---

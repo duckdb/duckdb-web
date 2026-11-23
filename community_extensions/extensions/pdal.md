@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-pdal
-  ref: 35365e7086d6a875fb0498159e8675f34c6e324e
+  ref: fa8516a632c1f373937b30e297ba32b6d7f68c65
 
 docs:
   hello_world: |
@@ -164,8 +164,8 @@ docs:
 
 extension_star_count: 32
 extension_star_count_pretty: 32
-extension_download_count: 899
-extension_download_count_pretty: 899
+extension_download_count: 877
+extension_download_count_pretty: 877
 image: '/images/community_extensions/social_preview/preview_community_extension_pdal.png'
 layout: community_extension_doc
 ---
