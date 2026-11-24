@@ -54,11 +54,12 @@
 		}
 		blockquote.appendChild(content);
 
+		var first = childParagraphs(content)[0];
+		if (first && !first.textContent.trim() && !first.querySelector('img')) {
+			first.remove();
+		}
+
 		if (className === 'quote') {
-			var first = childParagraphs(content)[0];
-			if (first && !first.textContent.trim() && !first.querySelector('img')) {
-				first.remove();
-			}
 			var quoteText = childParagraphs(content);
 			if (quoteText.length) {
 				quoteText[0].classList.add('quote-open');

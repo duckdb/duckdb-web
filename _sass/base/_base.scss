@@ -87,6 +87,31 @@ em.caption{
 	color: var(--main-text-tertiary-color);
 }
 
+figure.image{
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	max-width: 100%;
+	margin: 20px 0 2em;
+
+	&:has(> img.center){
+		margin-inline: auto;
+	}
+
+	img{
+		max-width: 100%;
+	}
+
+	figcaption{
+		contain: inline-size;
+		@include body-small();
+		line-height: 1.3;
+		text-align: center;
+		margin-top: 0.5rem;
+		color: var(--main-text-tertiary-color);
+	}
+}
+
 .figure-title{
 	@include headline-4();
 }

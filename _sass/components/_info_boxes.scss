@@ -40,10 +40,8 @@ body.layout_default.blog_typography #main_content_wrap,
 			font-size: var(--type-code-small, 12px);
 		}
 
-		.sr-only + p,
-		.sr-only + ul,
-		.content > p:first-child,
-		.content > ul:first-child {
+		.sr-only + *,
+		.content > :first-child {
 			margin-top: 0!important;
 		}
 
