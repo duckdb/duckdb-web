@@ -15,7 +15,7 @@ tag: using-duckdb
 
 [SproutMe](https://sproutme.ai/) is an AI workspace that gives marketers and agencies the playbooks large advertisers run in-house: competitive analysis, account audits, cross-channel optimization and more. AI agents do most of the work, leaving marketers free to focus on long-term strategy. SproutMe was founded by [Pulkit Khurana](https://pulkitkhurana.com/), who spent 13 years at Google, most recently as Engineering Director for Google Ads.
 
-Archit built SproutMe’s data platform from scratch. For a company moving this fast, development speed directly affects the business. **”Because we are a startup, we have to work very fast,”** he says. In practice, that means shipping two to three pull requests a day without breaking anything for the businesses already using the product. **“We don’t want the businesses to face problems when we push it,”** Archit explains, so every change runs end to end, both locally and in CI, before it reaches the main branch.
+Archit built SproutMe’s data platform from scratch. For a company moving this fast, development speed directly affects the business. **“Because we are a startup, we have to work very fast,”** he says. In practice, that means shipping two to three pull requests a day without breaking anything for the businesses already using the product. **“We don’t want the businesses to face problems when we push it,”** Archit explains, so every change runs end to end, both locally and in CI, before it reaches the main branch.
 
 Local and CI runs were slow. The pipeline handles a lot of data. When a new customer joins, SproutMe pulls about 365 days of history across its ad and analytics sources, which means millions of rows to load and transform. On BigQuery, testing a change at that scale took long enough to disrupt the team’s daily rhythm.
 
@@ -45,7 +45,7 @@ def use_local_duckdb(warehouse: Path) -> None:
     os.environ["TZ"] = "UTC"
 ```
 
-The transformation stage is where DuckDB saves the most time. **”This is where we are saving a lot of time, the transformation part,”** Archit says. Extraction benefits as well, because Dagster writes directly into DuckDB. The scope matters, though: **”It is part of the local development pipeline.”** Production still runs on BigQuery.
+The transformation stage is where DuckDB saves the most time. **“This is where we are saving a lot of time, the transformation part,”** Archit says. Extraction benefits as well, because Dagster writes directly into DuckDB. The scope matters, though: **“It is part of the local development pipeline.”** Production still runs on BigQuery.
 
 ## The Numbers
 
@@ -90,7 +90,7 @@ def build_test_warehouse(db_path: Path, project_dir: Path) -> None:
 
 These results apply to SproutMe’s development and testing workflow. They do not show that one engine is faster in general.
 
-For Archit, the main gain is faster debugging. Instead of spending hours reproducing an issue, he can find a bug in minutes. **”Development speed is super fast,”** he says, pointing to three advantages: rapid iteration locally, how easily DuckDB runs on local machines with AI coding assistants like Claude (which can inspect errors and help debug directly), and compatibility—the same setup works in both local development and CI without changes.
+For Archit, the main gain is faster debugging. Instead of spending hours reproducing an issue, he can find a bug in minutes. **“Development speed is super fast,”** he says, pointing to three advantages: rapid iteration locally, how easily DuckDB runs on local machines with AI coding assistants like Claude (which can inspect errors and help debug directly), and compatibility—the same setup works in both local development and CI without changes.
 
 ## What Comes Next
 
