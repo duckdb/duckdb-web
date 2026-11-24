@@ -16,6 +16,10 @@ extension:
   # Windows included since v2.4.0: DuckDB v1.5.4's vendored fmt no longer uses the removed
   # MSVC STL API (the old compile blocker), and the extension builds and passes tests on the
   # windows_amd64 MSVC runner in CI.
+  # windows_amd64_mingw excluded: test/sql/github_issue_220_review_findings.test:284
+  # (a KOI8-R page) fails there, so the registry skipped deploy on every platform.
+  # A later webbed release fixes the mingw decode and removes this exclusion.
+  excluded_platforms: "windows_amd64_mingw"
   maintainers:
     - teaguesterling
 repo:
@@ -116,8 +120,8 @@ docs:
 
 extension_star_count: 78
 extension_star_count_pretty: 78
-extension_download_count: 23372
-extension_download_count_pretty: 23.4k
+extension_download_count: 23538
+extension_download_count_pretty: 23.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---

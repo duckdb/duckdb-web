@@ -7,6 +7,7 @@ excerpt: |
 
 extension:
   name: erpl_odata
+  version: 2026.11.24
   description: (Formerly erpl_web.) ERPL is a DuckDB extension to connect to API based ecosystems via standard interfaces like OData, GraphQL and REST. This works e.g. for SAP ERP, SAP Ariba, SAP C4C, Microsoft Dynamics and many more.
   language: C++
   build: cmake
@@ -17,12 +18,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/erpl-odata
-  ref: e7cc326bd2e126189561c9469fa9aabbc33134bd
-  variegata: e7cc326bd2e126189561c9469fa9aabbc33134bd
+  ref: c2bd3b04a46ccecd9d86c173d334d3dc022d7c91
+  variegata: c2bd3b04a46ccecd9d86c173d334d3dc022d7c91
 
 extension_star_count: 34
 extension_star_count_pretty: 34
-extension_download_count: 1131
+extension_download_count: 1061
 extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_odata.png'
 layout: community_extension_doc
