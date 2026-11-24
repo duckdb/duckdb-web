@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: observefs
   description: Provides IO observability to filesystem
-  version: 0.6.0
+  version: 0.6.1
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 repo:
   github: dentiny/duckdb-filesystem-observability
   andium: cb6a1a7d88eba7f02a9690e1df4c6bf4e166a9f3
-  ref: 7ce82e737b047cdb03e9ad8e854ea73d43896844
+  ref: 109db654af3ff2ebd866293c0c581da35b6a6227
 
 docs:
   hello_world: |
@@ -36,7 +36,7 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 6266
+extension_download_count: 6329
 extension_download_count_pretty: 6.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
@@ -49,11 +49,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ |
 

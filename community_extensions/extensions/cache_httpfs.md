@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cache_httpfs
   description: Read cached filesystem for httpfs
-  version: 0.15.0
+  version: 0.15.1
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duck-read-cache-fs
-  ref: 62191f711413bb3cf50257b60dd4b44b2de0e3a0
+  ref: 47969142bf3487df15e55b589849c8d599ea28ff
   variegata: 57ad2686b50c7338477dbb63bb6880631b8e66b2
 
 docs:
@@ -37,10 +37,10 @@ docs:
     - Exposes function to get cache size and cleanup cache
     - Provides an option to disable / enable cache, which could act as a drop-in replacement for httpfs
 
-extension_star_count: 159
-extension_star_count_pretty: 159
-extension_download_count: 104633
-extension_download_count_pretty: 104.6k
+extension_star_count: 160
+extension_star_count_pretty: 160
+extension_download_count: 124227
+extension_download_count_pretty: 124.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---
@@ -52,11 +52,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ |
 

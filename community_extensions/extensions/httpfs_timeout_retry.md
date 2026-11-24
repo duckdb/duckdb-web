@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: httpfs_timeout_retry
   description: Add per-operation timeout and retry for httpfs extension
-  version: 0.2.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 repo:
   github: dentiny/duckdb-httpfs-timeout-retry
   andium: d4b8b9dee28a6b36fe5eea8be3dddb8470ccd613
-  ref: 39408501afde61b6257b9f610fbf2f523e90e6e1
+  ref: 78953a2bf66a5ec9dfee5ae25ae4fb8608755bbf
 
 docs:
   hello_world: |
@@ -45,8 +45,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 869
-extension_download_count_pretty: 869
+extension_download_count: 870
+extension_download_count_pretty: 870
 image: '/images/community_extensions/social_preview/preview_community_extension_httpfs_timeout_retry.png'
 layout: community_extension_doc
 ---
@@ -58,10 +58,10 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ |

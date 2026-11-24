@@ -27,8 +27,8 @@ docs:
 
 extension_star_count: 73
 extension_star_count_pretty: 73
-extension_download_count: 19308
-extension_download_count_pretty: 19.3k
+extension_download_count: 20103
+extension_download_count_pretty: 20.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_zipfs.png'
 layout: community_extension_doc
 ---

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lance_conversion
   description: Stream any DuckDB query into Lance datasets with Blob v2 storage and scalar, vector, text, and Bloom filter indexes
-  version: 0.2.2
+  version: 0.2.3
   language: C++ & Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb_lance_conversion
-  ref: ba481d653f64875d5825d1b5409ed281206a74d1
+  ref: 4406cf44b3dfa24d130f3747e57f19f8189ed1d0
 
 docs:
   hello_world: |
@@ -147,8 +147,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 5174
-extension_download_count_pretty: 5.2k
+extension_download_count: 5538
+extension_download_count_pretty: 5.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_lance_conversion.png'
 layout: community_extension_doc
 ---
@@ -160,10 +160,10 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ |

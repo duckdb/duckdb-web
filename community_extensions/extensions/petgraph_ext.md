@@ -74,10 +74,10 @@ docs:
     - Edge weights are f64 only
     - Node IDs are i32
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 1007
-extension_download_count_pretty: 1.0k
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 995
+extension_download_count_pretty: 995
 image: '/images/community_extensions/social_preview/preview_community_extension_petgraph_ext.png'
 layout: community_extension_doc
 ---
