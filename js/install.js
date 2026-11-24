@@ -263,6 +263,7 @@
       btn.disabled = !isAvailable;
       btn.setAttribute('aria-disabled', String(!isAvailable));
     });
+    if (versionSwitch) versionSwitch.hidden = VERSIONS.filter(hasVersion).length < 2;
 
     positionSlider();
   }
