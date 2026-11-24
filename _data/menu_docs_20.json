@@ -267,6 +267,10 @@
               "path": "/docs/2.0/sql/statements/create_index"
             },
             {
+              "page": "CREATE EXTERNAL RESOURCE",
+              "path": "/docs/2.0/sql/statements/create_external_resource"
+            },
+            {
               "page": "CREATE MACRO",
               "path": "/docs/2.0/sql/statements/create_macro"
             },
@@ -307,6 +311,10 @@
               "path": "/docs/2.0/sql/statements/describe"
             },
             {
+              "page": "DESTROY EXTERNAL RESOURCE",
+              "path": "/docs/2.0/sql/statements/destroy_external_resource"
+            },
+            {
               "page": "DROP",
               "path": "/docs/2.0/sql/statements/drop"
             },
@@ -337,6 +345,10 @@
             {
               "page": "PREPARE, EXECUTE, and DEALLOCATE",
               "path": "/docs/2.0/sql/statements/prepare"
+            },
+            {
+              "page": "REGISTER EXTERNAL RESOURCE",
+              "path": "/docs/2.0/sql/statements/register_external_resource"
             },
             {
               "page": "SELECT",
