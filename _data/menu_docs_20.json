@@ -1232,6 +1232,10 @@
               "path": "/docs/2.0/clients/tertiary_clients/php_pdo"
             },
             {
+              "page": "PHP (Quack)",
+              "path": "/docs/2.0/clients/tertiary_clients/php_quack"
+            },
+            {
               "page": "Swift",
               "path": "/docs/2.0/clients/tertiary_clients/swift"
             }
