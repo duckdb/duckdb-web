@@ -68,6 +68,34 @@ Drop type `typ`:
 DROP TYPE typ;
 ```
 
+## Dropping a Single Overload
+
+> New This feature is introduced in DuckDB 2.1 and is currently available in nightly builds.
+
+A parameter type list after the macro or function name drops that overload and leaves the others in place. `DROP MACRO` and `DROP FUNCTION` without a type list still drop the whole macro.
+
+```sql
+CREATE MACRO f(a INTEGER) AS a + 1, (a VARCHAR) AS a || '!', (a) AS 0;
+DROP MACRO f(VARCHAR);
+DROP MACRO f(ANY);
+SELECT f(1) AS f;
+```
+
+| f   |
+| --- |
+| 2   |
+
+* Matching is exact. Each type must equal the declared parameter type, and `ANY` names a parameter declared without a type. `DROP MACRO f(BIGINT)` does not match an `INTEGER` parameter.
+* Empty parentheses name the zero-parameter overload, as in `DROP MACRO h();`.
+* Dropping the last remaining overload is an error (`Cannot drop the last overload of "f": drop the macro itself instead`). Drop the macro itself with `DROP MACRO f;`.
+* `IF EXISTS` applies per overload. A signature that names no overload succeeds and leaves the others in place. An unknown type name is still an error under `IF EXISTS`.
+* `DROP FUNCTION` and `DROP MACRO TABLE` accept the same parameter type list. When a scalar macro and a table macro share a name, `DROP MACRO TABLE` names the table macro.
+* On a database file with a storage version below v2.1.0, the statement errors (`Dropping a single overload is only supported for storage versions v2.1.0 and higher`). It works in memory, for temporary macros, and when the file is attached with storage version v2.1.0:
+
+```sql
+ATTACH 'file.db' (STORAGE_VERSION 'v2.1.0');
+```
+
 ## Syntax
 
 <div id="rrdiagram"></div>
