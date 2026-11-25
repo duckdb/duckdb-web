@@ -40,8 +40,8 @@ docs:
     ordered indexes maintained in the same commit as the rows.
     Documentation: https://morainedb.com/
 
-extension_star_count: 99
-extension_star_count_pretty: 99
+extension_star_count: 101
+extension_star_count_pretty: 101
 extension_download_count: 286
 extension_download_count_pretty: 286
 image: '/images/community_extensions/social_preview/preview_community_extension_moraine.png'
