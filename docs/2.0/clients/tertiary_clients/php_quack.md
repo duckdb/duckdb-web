@@ -11,7 +11,7 @@ title: PHP Client (Quack Remote Protocol)
 
 > The PHP client for DuckDB Quack Remote Protocol is a tertiary client and is maintained by a third-party.
 >
-> To use the PHP client, follow the [instructions below](#installation-and-setup).
+> To use the PHP client, follow the [instructions below](#installation-and-setup-client).
 >
 > The latest version of the client supports DuckDB {{ site.maintained_duckdb_php_quack_version }}.
 
