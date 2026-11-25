@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Adoption Metrics and Benchmark Results for DuckDB v1.4 LTS"
+title: "Adoption Metrics and Benchmark Results for DuckDB 1.4 LTS"
 authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/benchmark-results-1-4-lts.svg"
