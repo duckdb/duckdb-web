@@ -134,6 +134,7 @@ COMMIT;
 ```
 
 - **Community Contributors:** [@themisvaltinos](https://github.com/themisvaltinos), [@xiaoxuandev](https://github.com/xiaoxuandev), [@The-Alchemist](https://github.com/The-Alchemist), [@Richard-Durkee](https://github.com/Richard-Durkee)
+- **References:** [#1771](https://github.com/duckdb/duckdb-iceberg/pull/1771), [#1773](https://github.com/duckdb/duckdb-iceberg/pull/1773), [#1596](https://github.com/duckdb/duckdb-iceberg/pull/1596), [#1678](https://github.com/duckdb/duckdb-iceberg/pull/1678)
 
 ### Performance Optimizations
 
