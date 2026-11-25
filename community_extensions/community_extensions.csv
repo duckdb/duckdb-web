@@ -287,7 +287,7 @@ px,toppyy/duckdb-px,8656c63225234d78e854a3ec8d66f9defe4ed120,"Extension for quer
 python_udf,alitrack/duckdb-python,901a7bdbc3a1b7f760882eeb91b6716e4b136cc2,"Embedded CPython UDFs for DuckDB — py_eval, py_agg, py_scan, py_register, py_call, py_map"
 quack_flamegraph,kevintruong/quack-flamegraph,253fab90fe4dcddc70f519ea79bd42dd74ce0d3d,"Query Brendan Gregg folded CPU/allocation profiles as DuckDB tables"
 quack_oauth,DataZooDE/quack-oauth,070fe6b9825bce5be0542603c79255023cb0c0db,"Extensions providing OAuth and OpenID primitives for authentication and authorization for the DuckDB quack server."
-quackapi,asubbarao/quackapi,d5c0e6784fda79930f952052302be89c16d6739c,"FastAPI-class HTTP framework inside DuckDB — CREATE ROUTE turns SQL into typed, validated endpoints; one process is DB + HTTP (+ PDF/renderer via companion extensions)."
+quackapi,asubbarao/quackapi,01a72e2a44f8155bfde0a30a01405b288c795ced,"FastAPI-class HTTP framework inside DuckDB — CREATE ROUTE turns SQL into typed, validated endpoints; one process is DB + HTTP (+ PDF/renderer via companion extensions)."
 quackformers,martin-conur/quackformers,11d58564c794c0ae884339207f294c1ad4756e4b,"Bert-based embedding extension."
 quackhole,smithclay/quackhole,25afe8a902798774ca3e03f4c0b2ce9887342e1c,"Query a DuckDB behind NAT from anywhere, over an encrypted peer-to-peer connection"
 quackiso,tempoloss/quackiso,686d46679c923f6c8895ddcc7e8e50dbb45f8dba,"Query ISO 20022 (camt, pacs, pain) and SWIFT MT financial messages as SQL"
