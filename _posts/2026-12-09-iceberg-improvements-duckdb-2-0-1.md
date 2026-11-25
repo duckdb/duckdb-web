@@ -17,7 +17,8 @@ DuckDB 2.0 established critical security and correctness foundations for Iceberg
 
 Cloud environments use temporary credentials (vended by IAM services) for S3 access, often paired with specific S3 endpoint configurations. DuckDB 2.0 ensures TLS remains enabled when using path-style S3 credentials, regardless of credential type or endpoint configuration. A silently disabled TLS connection doesn't fail the query. It silently exposes data in transit.
 
-**Reference:** [duckdb-iceberg#1527](https://github.com/duckdb/duckdb-iceberg/pull/1527)
+- **Community Contributor:** [@rutb327](https://github.com/rutb327)
+- **Reference:** [duckdb-iceberg#1527](https://github.com/duckdb/duckdb-iceberg/pull/1527)
 
 ### Iceberg Data Rewrite Compatibility
 
@@ -28,7 +29,8 @@ The `iceberg_rewrite_data_files` function now returns column names matching Spar
 SELECT * FROM iceberg_rewrite_data_files('my_table');
 ```
 
-**Reference:** [duckdb-iceberg#1597](https://github.com/duckdb/duckdb-iceberg/pull/1597)
+- **Community Contributor:** [@The-Alchemist](https://github.com/The-Alchemist)
+- **Reference:** [duckdb-iceberg#1597](https://github.com/duckdb/duckdb-iceberg/pull/1597)
 
 ## DuckDB 2.0.1: Enhanced Operations and Performance
 
