@@ -416,6 +416,10 @@
 		:is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) + p {
 			margin-top: 1.5rem;
 		}
+
+		p + blockquote:not(.quote) {
+			margin-top: 1rem;
+		}
 	}
 
 	:is(h1, h2, h3, h4, h5, h6) + :is(.highlighter-rouge, .download-btn) {
