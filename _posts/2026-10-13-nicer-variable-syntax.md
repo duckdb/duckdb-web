@@ -9,9 +9,9 @@ excerpt: "DuckDB 2.0 lets you read a session variable with a `$name` reference i
 tag: using-duckdb
 ---
 
-DuckDB has long supported session variables through the [`SET VARIABLE` statement]({% link docs/2.0/sql/statements/set_variable.md %}). You set a value once and read it back wherever you need it, which keeps a magic constant in a single place instead of scattering it across a script. Until now, reading a variable meant calling `getvariable`, and the call was more verbose than the idea behind it.
+Since v1.1, DuckDB lets you define variables with the [`SET VARIABLE` statement]({% link docs/2.0/sql/statements/set_variable.md %}), use them with the `getvariable` function, and read them through the [`duckdb_variables()` function]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_variables); they stay available for the rest of the session. This gives a value that is used in many places a single point of definition, so changing it takes one edit.
 
-DuckDB 2.0 adds a shorthand. You can read a session variable with a `$name` reference, and [prepared statements]({% link docs/2.0/sql/query_syntax/prepared_statements.md %}) can fall back to a session variable when a named parameter is left out. This post walks through both halves of the feature and shows how they work together.
+DuckDB 2.0 adds a shorthand syntax for referencing variables. You can read a variable with a `$name` reference instead of `getvariable`, and [prepared statements]({% link docs/2.0/sql/query_syntax/prepared_statements.md %}#session-variables-as-default-values) can automatically assign the value of an identically named session variable to named parameters when they are not explicitly supplied. This post walks through both halves of the feature and shows how they work together.
 
 ## Reading a Variable with `$name`
 
@@ -81,7 +81,7 @@ EXECUTE double_value(x := 1);
 | -: |
 | 2 |
 
-Leave the parameter out and DuckDB 2.0 falls back to the session variable of the same name. Here `x` is still `5`, so the statement computes `5 * 2`.
+When executing a prepared statement, a named parameter for which no value is explicitly passed automatically receives the value of an identically named variable previously assigned by `SET VARIABLE`. Here `x` is still `5`, so the statement computes `5 * 2`.
 
 ```sql
 EXECUTE double_value;
@@ -136,10 +136,10 @@ If a positional parameter is not supplied, the statement still raises the missin
 
 ## Summary
 
-DuckDB 2.0 makes session variables easier to read and easier to combine with prepared statements:
+DuckDB 2.0 makes variables easier to reference and easier to combine with prepared statements:
 
-* `$name` is a shorthand for `getvariable('name')`, and referencing an unset variable raises an error.
-* A named prepared statement parameter falls back to the session variable of the same name when you do not supply it, and an explicit argument always wins.
+* `$name` is a shorthand for `getvariable(‘name’)`, and referencing an unset variable raises an error.
+* When executing a prepared statement, a named parameter automatically receives the value of a session variable of the same name if no value is explicitly supplied; an explicit argument always takes precedence.
 * Positional parameters are matched by position only and do not fall back to variables.
 
 For the full reference, see the [`SET VARIABLE` statement]({% link docs/2.0/sql/statements/set_variable.md %}) and [prepared statements]({% link docs/2.0/sql/query_syntax/prepared_statements.md %}) pages, both listed among DuckDB’s [friendly SQL features]({% link docs/2.0/sql/dialect/friendly_sql.md %}).
