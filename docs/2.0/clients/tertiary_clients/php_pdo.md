@@ -265,6 +265,6 @@ print_r($statement->fetch(PDO::FETCH_ASSOC));
 
 More examples can be found in the [readme](https://github.com/thomas-0816/pdo-duckdb-php).
 
-## License
+### License
 
 MIT License

@@ -123,7 +123,7 @@ print_r($db->fetchOne('SELECT :id as a, :amount as b, $foo as c', ['id' => 1, 'a
 unset($db); // Disconnect
 ```
 
-More examples can be found in the [readme](https://github.com/thomas-0816/pdo-duckdb-php).
+More examples can be found in the [readme](https://github.com/thomas-0816/duckdb-quack-protocol-php).
 
 ## Timeout Configuration
 
@@ -150,7 +150,7 @@ $db = QuackClient::connect('https://localhost:9495', 'secret', 3, 10, [], $pemFi
 echo $db->fetchValue('SELECT 42'), PHP_EOL;
 ```
 
-Read more about [Quack Security](https://duckdb.org/docs/2.0/quack/security).
+Read more about [Quack Security](/docs/2.0/quack/security).
 
 ## Monitoring
 
@@ -172,6 +172,6 @@ print_r($db->fetchAll('SELECT * FROM quack_active_connections()'));
 #         [query_started_at] => 2026-11-17 02:22:16.402055
 ```
 
-## License
+### License
 
 MIT License
