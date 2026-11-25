@@ -104,6 +104,7 @@ ORDER BY l.database_name, l.planet, l.entry_id
 ```
 
 <table class="result">
+<caption>First 5 of 47 rows.</caption>
 <tr><th>entry_id</th><th>term</th><th>description</th><th>planet</th><th>sector</th><th>database_name</th></tr>
 <tr><td>202010</td><td>Darmok</td><td>river</td><td>Beludan II</td><td>El-Adrel</td><td>Federation Linguistic Survey</td></tr>
 <tr><td>202127</td><td>Darmok</td><td>clan title</td><td>Belugath V</td><td>El-Adrel</td><td>Federation Linguistic Survey</td></tr>
@@ -111,7 +112,6 @@ ORDER BY l.database_name, l.planet, l.entry_id
 <tr><td>202055</td><td>Darmok</td><td>spice</td><td>Drensel V</td><td>El-Adrel</td><td>Federation Linguistic Survey</td></tr>
 <tr><td>202019</td><td>Darmok</td><td>unit of weight</td><td>Ethamar IX</td><td>El-Adrel</td><td>Federation Linguistic Survey</td></tr>
 </table>
-<p class="result-note">First 5 of 47 rows.</p>
 
 **On the bridge**
 
@@ -158,6 +158,7 @@ ORDER BY database_name, planet, entry_id
 ```
 
 <table class="result">
+<caption>First 5 of 11 rows.</caption>
 <tr><th>entry_id</th><th>term</th><th>description</th><th>planet</th><th>sector</th><th>database_name</th><th>category</th></tr>
 <tr><td>202205</td><td>Tanagra</td><td>wedding dance</td><td>Ethadan V</td><td>El-Adrel</td><td>Federation Cultural Survey</td><td>cultural</td></tr>
 <tr><td>202209</td><td>Tanagra</td><td>winter solstice feast</td><td>Ivomar IV</td><td>Ostrel</td><td>Federation Cultural Survey</td><td>cultural</td></tr>
@@ -165,7 +166,6 @@ ORDER BY database_name, planet, entry_id
 <tr><td>202201</td><td>Tanagra</td><td>ruling family</td><td>Gallos II</td><td>El-Adrel</td><td>Federation Historical Archive</td><td>historical</td></tr>
 <tr><td>202208</td><td>Tanagra</td><td>guild of weavers</td><td>Halithos VII</td><td>Mendar</td><td>Federation Linguistic Survey</td><td>linguistic</td></tr>
 </table>
-<p class="result-note">First 5 of 11 rows.</p>
 
 **On the bridge**
 
@@ -223,6 +223,7 @@ ORDER BY name
 ```
 
 <table class="result">
+<caption>First 5 of 15,525 rows.</caption>
 <tr><th>name</th><th>stable_in_oxygen</th><th>alters_materials</th><th>half_life_s</th><th>toxicity</th><th>last_used_year</th></tr>
 <tr><td>Bryakbenate</td><td>false</td><td>[polymer]</td><td>309.0</td><td>high</td><td>NULL</td></tr>
 <tr><td>Bryakbenide</td><td>false</td><td>[duranium, polymer]</td><td>inf</td><td>low</td><td>2187</td></tr>
@@ -230,7 +231,6 @@ ORDER BY name
 <tr><td>Bryakboride</td><td>false</td><td>[tritanium, ceramic]</td><td>186208.7</td><td>moderate</td><td>2239</td></tr>
 <tr><td>Bryakborite</td><td>false</td><td>[]</td><td>inf</td><td>moderate</td><td>2222</td></tr>
 </table>
-<p class="result-note">First 5 of 15,525 rows.</p>
 
 **In Engineering**
 
@@ -367,6 +367,7 @@ ORDER BY o.issued_at, o.id
 ```
 
 <table class="result">
+<caption>First 5 of 1,207 rows.</caption>
 <tr><th>id</th><th>issued_at</th><th>issued_by</th><th>recipient_type</th><th>recipient</th><th>order_type</th><th>personnel_id</th><th>new_post</th><th>division</th></tr>
 <tr><td>185</td><td>2368-04-11</td><td>Starfleet Command, Personnel</td><td>starbase</td><td>Starbase 69</td><td>survey directive</td><td>NULL</td><td>NULL</td><td>medical</td></tr>
 <tr><td>549</td><td>2368-04-11</td><td>Starfleet Command, Security</td><td>starbase</td><td>Starbase 162</td><td>maintenance schedule</td><td>NULL</td><td>NULL</td><td>engineering</td></tr>
@@ -374,7 +375,6 @@ ORDER BY o.issued_at, o.id
 <tr><td>1277</td><td>2368-04-11</td><td>Starfleet Command, Logistics</td><td>colony</td><td>Corlan VII outpost</td><td>escort duty</td><td>NULL</td><td>NULL</td><td>operations</td></tr>
 <tr><td>1641</td><td>2368-04-11</td><td>Starfleet Command, Tactical</td><td>starship</td><td>USS Castellan</td><td>patrol assignment</td><td>NULL</td><td>NULL</td><td>command</td></tr>
 </table>
-<p class="result-note">First 5 of 1,207 rows.</p>
 
 *Not what the script says: Reports 1,207 orders, not 1,214: it used a strict ‘>’ on the six-month boundary, so the seven orders dated exactly six months back (2368-04-10) are left out.*
 
@@ -569,6 +569,7 @@ ORDER BY t.generation, t.birth_date
 ```
 
 <table class="result">
+<caption>First 5 of 14 rows.</caption>
 <tr><th>generation</th><th>full_name</th><th>birth_date</th><th>birth_place</th><th>occupation</th><th>residence</th><th>living</th><th>parent</th><th>children</th><th>civil_records</th></tr>
 <tr><td>1</td><td>Thomas Raymond</td><td>1986-02-17</td><td>Secaucus, New Jersey</td><td>NULL</td><td>NULL</td><td>false</td><td>Clare Raymond</td><td>2</td><td>NULL</td></tr>
 <tr><td>1</td><td>Edward Raymond</td><td>NULL</td><td>Secaucus, New Jersey</td><td>NULL</td><td>NULL</td><td>false</td><td>Clare Raymond</td><td>0</td><td>NULL</td></tr>
@@ -576,7 +577,6 @@ ORDER BY t.generation, t.birth_date
 <tr><td>2</td><td>Paul Raymond</td><td>2046-06-02</td><td>Newark, New Jersey</td><td>musician</td><td>NULL</td><td>false</td><td>Thomas Raymond</td><td>0</td><td>NULL</td></tr>
 <tr><td>3</td><td>Marcus Raymond</td><td>2099-04-12</td><td>Chicago, Illinois</td><td>engineer</td><td>NULL</td><td>false</td><td>Helen Raymond</td><td>2</td><td>NULL</td></tr>
 </table>
-<p class="result-note">First 5 of 14 rows.</p>
 
 **In the script**
 
@@ -713,6 +713,7 @@ ORDER BY src, date1
 ```
 
 <table class="result">
+<caption>First 5 of 7 rows.</caption>
 <tr><th>src</th><th>id</th><th>item</th><th>date1</th><th>date2</th><th>detail</th></tr>
 <tr><td>civil</td><td>157103</td><td>arrest</td><td>2313-03-11</td><td>NULL</td><td>Acamar III: Captured while leading a Gatherer raid on an Acamarian …</td></tr>
 <tr><td>civil</td><td>157104</td><td>trial</td><td>2313-04-20</td><td>NULL</td><td>Acamar III: Trial opened</td></tr>
@@ -720,7 +721,6 @@ ORDER BY src, date1
 <tr><td>image</td><td>157402</td><td>Gatherer raid leader Penthor-Mul in custody at the outpost</td><td>2313-03-11</td><td>NULL</td><td>Acamar III; tagged: Penthor-Mul</td></tr>
 <tr><td>image</td><td>157401</td><td>Penthor-Mul being led from his trial</td><td>2313-04-27</td><td>NULL</td><td>Acamar III; tagged: Penthor-Mul</td></tr>
 </table>
-<p class="result-note">First 5 of 7 rows.</p>
 
 **In the script**
 
@@ -815,9 +815,9 @@ WHERE description ILIKE '%Lornack%' OR term ILIKE '%Lornack%' OR description ILI
 ```
 
 <table class="result">
+<caption>No rows.</caption>
 <tr><th>entry_id</th><th>term</th><th>category</th><th>database_name</th><th>description</th></tr>
 </table>
-<p class="result-note">No rows.</p>
 
 **In the script**
 
@@ -918,6 +918,7 @@ FROM i FULL JOIN r USING (n) ORDER BY n
 ```
 
 <table class="result">
+<caption>First 5 of 14 rows.</caption>
 <tr><th>signal_no</th><th>intrepid_seq</th><th>intrepid_ts</th><th>romulan_seq</th><th>romulan_ts</th><th>romulan_offset</th></tr>
 <tr><td>1</td><td>1</td><td>2346-08-19 03:12:04</td><td>3</td><td>2346-08-19 03:12:04</td><td>00:00:00</td></tr>
 <tr><td>2</td><td>2</td><td>2346-08-19 03:12:19</td><td>4</td><td>2346-08-19 03:12:19</td><td>00:00:00</td></tr>
@@ -925,7 +926,6 @@ FROM i FULL JOIN r USING (n) ORDER BY n
 <tr><td>4</td><td>4</td><td>2346-08-19 03:12:47</td><td>6</td><td>2346-08-19 03:12:47</td><td>00:00:00</td></tr>
 <tr><td>5</td><td>5</td><td>2346-08-19 03:13:02</td><td>7</td><td>2346-08-19 03:13:02</td><td>00:00:00</td></tr>
 </table>
-<p class="result-note">First 5 of 14 rows.</p>
 
 ```sql
 SELECT l.seq, l.ts, l.signal_type, l.source, l.security_code,
@@ -936,6 +936,7 @@ WHERE l.signal_type <> 'distress signal' ORDER BY l.seq
 ```
 
 <table class="result">
+<caption>First 5 of 10 rows.</caption>
 <tr><th>seq</th><th>ts</th><th>signal_type</th><th>source</th><th>security_code</th><th>code_holder</th><th>post</th></tr>
 <tr><td>1</td><td>2346-08-19 02:40:00</td><td>transmission</td><td>Khitomer outpost</td><td>KDF-1-0012-QOR</td><td>NULL</td><td>Khitomer outpost commander</td></tr>
 <tr><td>2</td><td>2346-08-19 03:11:52</td><td>transmission</td><td>Romulan patrol ship</td><td>NULL</td><td>NULL</td><td>NULL</td></tr>
@@ -943,7 +944,6 @@ WHERE l.signal_type <> 'distress signal' ORDER BY l.seq
 <tr><td>12</td><td>2346-08-19 03:14:11</td><td>sensor sweep</td><td>Khitomer outpost</td><td>NULL</td><td>NULL</td><td>NULL</td></tr>
 <tr><td>13</td><td>2346-08-19 03:14:19</td><td>subspace handshake</td><td>Khitomer outpost</td><td>KDF-7-2291-TAJ</td><td>Mogh</td><td>Khitomer outpost</td></tr>
 </table>
-<p class="result-note">First 5 of 10 rows.</p>
 
 **In the script**
 
@@ -1057,6 +1057,7 @@ FROM i FULL JOIN r USING (n) ORDER BY n
 ```
 
 <table class="result">
+<caption>First 5 of 8 rows.</caption>
 <tr><th>n</th><th>intrepid_seq</th><th>intrepid_ts</th><th>intrepid_signal</th><th>intrepid_source</th><th>romulan_seq</th><th>romulan_ts</th><th>romulan_signal</th><th>romulan_offset_s</th><th>intrepid_interval_s</th><th>romulan_interval_s</th></tr>
 <tr><td>1</td><td>9</td><td>2346-08-19 03:14:41</td><td>distress signal</td><td>Khitomer outpost</td><td>19</td><td>2346-08-19 03:14:43.5</td><td>distress signal</td><td>2.5</td><td>NULL</td><td>NULL</td></tr>
 <tr><td>2</td><td>10</td><td>2346-08-19 03:14:55</td><td>distress signal</td><td>Khitomer outpost</td><td>20</td><td>2346-08-19 03:14:57.5</td><td>distress signal</td><td>2.5</td><td>14.0</td><td>14.0</td></tr>
@@ -1064,7 +1065,6 @@ FROM i FULL JOIN r USING (n) ORDER BY n
 <tr><td>4</td><td>12</td><td>2346-08-19 03:15:22</td><td>distress signal</td><td>Khitomer outpost</td><td>22</td><td>2346-08-19 03:15:24.5</td><td>distress signal</td><td>2.5</td><td>13.0</td><td>13.0</td></tr>
 <tr><td>5</td><td>13</td><td>2346-08-19 03:15:38</td><td>distress signal</td><td>Khitomer outpost</td><td>23</td><td>2346-08-19 03:15:40.5</td><td>distress signal</td><td>2.5</td><td>16.0</td><td>16.0</td></tr>
 </table>
-<p class="result-note">First 5 of 8 rows.</p>
 
 ### Violations
 
@@ -1161,6 +1161,7 @@ ORDER BY c.agent_class, c.agent
 ```
 
 <table class="result">
+<caption>First 5 of 22 rows.</caption>
 <tr><th>agent</th><th>agent_class</th><th>detected_on_enterprise</th><th>routinely_scanned</th></tr>
 <tr><td>chrysimite</td><td>chemical</td><td>false</td><td>true</td></tr>
 <tr><td>dardilion</td><td>chemical</td><td>false</td><td>true</td></tr>
@@ -1168,7 +1169,6 @@ ORDER BY c.agent_class, c.agent
 <tr><td>hylanatine</td><td>chemical</td><td>false</td><td>true</td></tr>
 <tr><td>manzene</td><td>chemical</td><td>false</td><td>true</td></tr>
 </table>
-<p class="result-note">First 5 of 22 rows.</p>
 
 **In the script**
 
@@ -1367,6 +1367,7 @@ ORDER BY r.planet, r.stardate, r.source
 ```
 
 <table class="result">
+<caption>First 5 of 20 rows.</caption>
 <tr><th>planet</th><th>stardate</th><th>source</th><th>patient</th><th>diagnosis</th><th>during_ullian_visit</th></tr>
 <tr><td>Hurada III</td><td>41194</td><td>planetary medical record</td><td>HUR-1310</td><td>Iresine Syndrome</td><td>false</td></tr>
 <tr><td>Hurada III</td><td>43531</td><td>coma incident report</td><td>NULL</td><td>NULL</td><td>true</td></tr>
@@ -1374,7 +1375,6 @@ ORDER BY r.planet, r.stardate, r.source
 <tr><td>Hurada III</td><td>43580</td><td>planetary medical record</td><td>HUR-2215</td><td>cranial trauma</td><td>true</td></tr>
 <tr><td>Hurada III</td><td>43657</td><td>coma incident report</td><td>NULL</td><td>NULL</td><td>true</td></tr>
 </table>
-<p class="result-note">First 5 of 20 rows.</p>
 
 **In the script**
 
@@ -1410,6 +1410,7 @@ ORDER BY r.stardate
 ```
 
 <table class="result">
+<caption>First 5 of 7 rows.</caption>
 <tr><th>case_id</th><th>planet</th><th>patient</th><th>stardate</th><th>ullian_visit</th><th>ullians_present</th><th>other_delegations_present</th></tr>
 <tr><td>212105</td><td>Hurada III</td><td>HUR-1310</td><td>41194</td><td>NULL</td><td>NULL</td><td>Vulcan Science Academy</td></tr>
 <tr><td>212107</td><td>Varnis VI</td><td>VAR-0802</td><td>42603</td><td>NULL</td><td>NULL</td><td>NULL</td></tr>
@@ -1417,7 +1418,6 @@ ORDER BY r.stardate
 <tr><td>212102</td><td>Hurada III</td><td>HUR-2207</td><td>43531</td><td>43424-43712</td><td>Inad, Jev, Tarmin</td><td>NULL</td></tr>
 <tr><td>212106</td><td>Brevin V</td><td>BRV-0551</td><td>43547</td><td>NULL</td><td>NULL</td><td>Vulcan Science Academy</td></tr>
 </table>
-<p class="result-note">First 5 of 7 rows.</p>
 
 **In the script**
 
@@ -1456,6 +1456,7 @@ ORDER BY m.arrived_stardate, c.stardate
 ```
 
 <table class="result">
+<caption>First 5 of 14 rows.</caption>
 <tr><th>planet</th><th>arrived_stardate</th><th>departed_stardate</th><th>coma_stardate</th><th>recorded_diagnosis</th><th>ullians_present</th></tr>
 <tr><td>Jessen I</td><td>42186</td><td>42465</td><td>NULL</td><td>NULL</td><td>NULL</td></tr>
 <tr><td>Jessen IV</td><td>42498</td><td>42786</td><td>NULL</td><td>NULL</td><td>NULL</td></tr>
@@ -1463,7 +1464,6 @@ ORDER BY m.arrived_stardate, c.stardate
 <tr><td>Teloria II</td><td>43030</td><td>43172</td><td>NULL</td><td>NULL</td><td>NULL</td></tr>
 <tr><td>Teloria III</td><td>43186</td><td>43380</td><td>43304</td><td>Iresine Syndrome</td><td>Inad, Jev, Tarmin</td></tr>
 </table>
-<p class="result-note">First 5 of 14 rows.</p>
 
 ```sql
 WITH comas AS (
@@ -1629,6 +1629,7 @@ ORDER BY symptom_id
 ```
 
 <table class="result">
+<caption>First 5 of 8 rows.</caption>
 <tr><th>symptom_id</th><th>symptom</th><th>category</th><th>detail</th><th>is_peripheral</th></tr>
 <tr><td>22801</td><td>paranoid delusions</td><td>delusion</td><td>NULL</td><td>false</td></tr>
 <tr><td>22802</td><td>multi-infarct dementia</td><td>dementia</td><td>NULL</td><td>false</td></tr>
@@ -1636,7 +1637,6 @@ ORDER BY symptom_id
 <tr><td>22804</td><td>sleeplessness</td><td>sleep</td><td>NULL</td><td>true</td></tr>
 <tr><td>22805</td><td>accelerated heart-rate</td><td>cardiac</td><td>NULL</td><td>true</td></tr>
 </table>
-<p class="result-note">First 5 of 8 rows.</p>
 
 **In the script**
 
