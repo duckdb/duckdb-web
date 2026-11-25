@@ -208,7 +208,7 @@ An extension that is installed from more than one repository has one row per rep
 
 > New The `duckdb_external_resource_types()` function was introduced in DuckDB 2.0.0.
 
-The `duckdb_external_resource_types()` function lists the registered [external resource types]({% link docs/2.0/sql/statements/create_external_resource.md %}#resource-types). [`SHOW EXTERNAL RESOURCE TYPES`]({% link docs/2.0/sql/statements/show.md %}#show-external-resource-types-statement) returns the same rows.
+The `duckdb_external_resource_types()` function lists the registered [external resource types]({% link docs/2.0/resources/overview.md %}#resource-types). [`SHOW EXTERNAL RESOURCE TYPES`]({% link docs/2.0/sql/statements/show.md %}#show-external-resource-types-statement) returns the same rows.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -222,13 +222,20 @@ The `duckdb_external_resource_types()` function lists the registered [external r
 | `origin` | The origin of the type, e.g., `user` for a type registered with `register_external_resource_type`. | `VARCHAR` |
 
 ```sql
-CALL register_external_resource_type('scratch_bucket', kind := 'storage', create_function := 's3_bucket_create', destroy_function := 's3_bucket_destroy');
+CREATE MACRO bucket_create(p) AS TABLE SELECT MAP {'bucket': 'scratch'} AS handle;
+CREATE MACRO bucket_destroy(h) AS TABLE SELECT 'gone' AS status;
+CALL register_external_resource_type(
+    'scratch_bucket',
+    kind := 'storage',
+    create_function := 'bucket_create',
+    destroy_function := 'bucket_destroy'
+);
 SELECT name, kind, create_function, destroy_function, origin FROM duckdb_external_resource_types();
 ```
 
-| name           | kind    | create_function  | destroy_function  | origin |
-|----------------|---------|------------------|-------------------|--------|
-| scratch_bucket | storage | s3_bucket_create | s3_bucket_destroy | user   |
+| name           | kind    | create_function | destroy_function | origin |
+|----------------|---------|-----------------|------------------|--------|
+| scratch_bucket | storage | bucket_create   | bucket_destroy   | user   |
 
 ## `duckdb_external_resources`
 
@@ -236,13 +243,13 @@ SELECT name, kind, create_function, destroy_function, origin FROM duckdb_externa
 
 > New The `duckdb_external_resources()` function was introduced in DuckDB 2.0.0.
 
-The `duckdb_external_resources()` function lists the registered [external resources]({% link docs/2.0/sql/statements/create_external_resource.md %}). With `discover := true`, it also lists the resources that the list functions of the types report. Since DuckDB 2.0.1, `type := ⟨type⟩` limits the listing to one type. [`SHOW [ALL] EXTERNAL RESOURCES`]({% link docs/2.0/sql/statements/show.md %}#show-external-resources-statement) is a query over this function.
+The `duckdb_external_resources()` function lists the recorded [external resources]({% link docs/2.0/resources/overview.md %}#resources). With `discover := true`, it also lists the resources that the list functions of the types report. Since DuckDB 2.0.1, `type := ⟨type⟩` limits the listing to one type. [`SHOW [ALL] EXTERNAL RESOURCES`]({% link docs/2.0/sql/statements/show.md %}#show-external-resources-statement) is a query over this function.
 
 | Column | Description | Type |
 |:-|:---|:-|
 | `name` | The name of the resource. | `VARCHAR` |
 | `type` | The type of the resource. | `VARCHAR` |
-| `managed` | `true` for a registered resource, `false` for one reported by a list function. | `BOOLEAN` |
+| `managed` | `true` for a recorded resource, `false` for one reported by a list function. | `BOOLEAN` |
 | `state` | The state reported by a list function. | `VARCHAR` |
 | `reference` | The reference reported by a list function. | `VARCHAR` |
 | `uri` | The endpoint of the resource. | `VARCHAR` |
@@ -250,7 +257,13 @@ The `duckdb_external_resources()` function lists the registered [external resour
 | `handle` | The handle of the resource. | `MAP(VARCHAR, VARCHAR)` |
 
 ```sql
-CALL register_external_resource('mock@local', 'r1', MAP {'id': 'abc'}, uri := 'quack:localhost:9494', attached_db_type := 'quack');
+CALL register_external_resource(
+    'mock@local',
+    'r1',
+    MAP {'id': 'abc'},
+    uri := 'quack:localhost:9494',
+    attached_db_type := 'quack'
+);
 SELECT name, type, managed, uri, attached_db_type, handle FROM duckdb_external_resources();
 ```
 

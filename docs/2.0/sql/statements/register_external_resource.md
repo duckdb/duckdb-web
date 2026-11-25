@@ -12,7 +12,7 @@ title: REGISTER EXTERNAL RESOURCE Statement
 
 > New The `REGISTER EXTERNAL RESOURCE` statement was introduced in DuckDB 2.0.0.
 
-The `REGISTER EXTERNAL RESOURCE` statement records an [external resource]({% link docs/2.0/sql/statements/create_external_resource.md %}) that already exists under a name, from its handle: the `MAP` that the create function of its type would return. The create function is not called; the endpoint of the resource comes from the status function of its type. A registered resource is attached and destroyed like one created with [`CREATE EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/create_external_resource.md %}).
+The `REGISTER EXTERNAL RESOURCE` statement records an [external resource]({% link docs/2.0/resources/overview.md %}) that already exists under a name, from its [handle]({% link docs/2.0/resources/overview.md %}#resources): the `MAP` that the create function of its type would return. The create function is not called; the endpoint of the resource comes from the [status function]({% link docs/2.0/resources/overview.md %}#type-functions) of its type. A resource recorded with `REGISTER EXTERNAL RESOURCE` is attached and destroyed like one created with [`CREATE EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/create_external_resource.md %}): [`DESTROY EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/destroy_external_resource.md %}) calls the destroy function of its type.
 
 ## Syntax
 
@@ -20,15 +20,21 @@ The `REGISTER EXTERNAL RESOURCE` statement records an [external resource]({% lin
 REGISTER EXTERNAL RESOURCE ⟨type⟩ AS ⟨name⟩ FROM ⟨handle⟩;
 ```
 
-The handle is an expression. The type is written as for [`CREATE EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/create_external_resource.md %}#writing-a-type-name).
+The handle is an expression. The type is written as described in [Writing a Type Name]({% link docs/2.0/resources/overview.md %}#writing-a-type-name).
 
 ## Examples
 
 Register an existing resource. The type's create function, `r_create`, does not exist; it is not called:
 
 ```sql
-CREATE MACRO r_status(h) AS TABLE SELECT 'ready' AS state, MAP {'uri': ':memory:', 'attached_db_type': 'duckdb'} AS result;
-CALL register_external_resource_type('mem@local', kind := 'catalog', create_function := 'r_create', status_function := 'r_status');
+CREATE MACRO r_status(h) AS TABLE
+    SELECT 'ready' AS state, MAP {'uri': ':memory:', 'attached_db_type': 'duckdb'} AS result;
+CALL register_external_resource_type(
+    'mem@local',
+    kind := 'catalog',
+    create_function := 'r_create',
+    status_function := 'r_status'
+);
 REGISTER EXTERNAL RESOURCE 'mem@local' AS existing FROM MAP {'id': 'm1'};
 SELECT name, type, managed FROM (SHOW EXTERNAL RESOURCES);
 ```

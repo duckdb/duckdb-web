@@ -244,22 +244,29 @@ Both views are defined as `SELECT * FROM '⟨path⟩'`, so the data is read from
 
 > New Attaching external resources was introduced in DuckDB 2.0.0.
 
-`ATTACH TO` attaches the database of an [external resource]({% link docs/2.0/sql/statements/create_external_resource.md %}). It has two forms:
+`ATTACH TO` attaches the database of an [external resource]({% link docs/2.0/resources/overview.md %}). It has two forms:
 
 ```sql
 ATTACH TO NEW TEMPORARY EXTERNAL RESOURCE ⟨type⟩ [(⟨create_option⟩ [⟨value⟩], ...)] AS ⟨alias⟩ [(⟨attach_option⟩ [⟨value⟩], ...)];
 ATTACH TO EXTERNAL RESOURCE ⟨name⟩ AS ⟨alias⟩ [(⟨attach_option⟩ [⟨value⟩], ...)];
 ```
 
-The alias is required. Options before `AS` are passed to the create function of the resource's type; options after it apply to the attached database. An option that the resource's endpoint already sets, such as `READ_ONLY` or `TYPE`, cannot also be given.
+The alias is required. Options before `AS` are passed to the [create function]({% link docs/2.0/resources/overview.md %}#type-functions) of the resource's type; options after it apply to the attached database. An option that the resource's endpoint already sets, such as `READ_ONLY` or `TYPE`, cannot also be given.
 
 `ATTACH TO NEW TEMPORARY EXTERNAL RESOURCE` creates a resource for this attachment, and [`DETACH`](#detach) destroys it again:
 
 ```sql
 CREATE MACRO m_create(p) AS TABLE SELECT MAP {'id': 'm1'} AS handle;
-CREATE MACRO m_status(h) AS TABLE SELECT 'ready' AS state, MAP {'uri': ':memory:', 'attached_db_type': 'duckdb'} AS result;
+CREATE MACRO m_status(h) AS TABLE
+    SELECT 'ready' AS state, MAP {'uri': ':memory:', 'attached_db_type': 'duckdb'} AS result;
 CREATE MACRO m_destroy(h) AS TABLE SELECT 'gone' AS status;
-CALL register_external_resource_type('mem@local', kind := 'catalog', create_function := 'm_create', status_function := 'm_status', destroy_function := 'm_destroy');
+CALL register_external_resource_type(
+    'mem@local',
+    kind := 'catalog',
+    create_function := 'm_create',
+    status_function := 'm_status',
+    destroy_function := 'm_destroy'
+);
 ATTACH TO NEW TEMPORARY EXTERNAL RESOURCE 'mem@local' AS db;
 SELECT database_name FROM duckdb_databases() WHERE database_name = 'db';
 ```
@@ -268,13 +275,20 @@ SELECT database_name FROM duckdb_databases() WHERE database_name = 'db';
 |---------------|
 | db            |
 
-`ATTACH TO EXTERNAL RESOURCE` attaches a resource registered with [`CREATE EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/create_external_resource.md %}) or [`REGISTER EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/register_external_resource.md %}). It does not take the resource over: `DETACH` leaves it registered, and [`DESTROY EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/destroy_external_resource.md %}) removes it, which also detaches it:
+`ATTACH TO EXTERNAL RESOURCE` attaches a resource recorded with [`CREATE EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/create_external_resource.md %}) or [`REGISTER EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/register_external_resource.md %}). It does not take the resource over: `DETACH` leaves it recorded, and [`DESTROY EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/destroy_external_resource.md %}) removes it, which also detaches it:
 
 ```sql
 CREATE MACRO b_create(p) AS TABLE SELECT MAP {'id': 'b1'} AS handle;
-CREATE MACRO b_status(h) AS TABLE SELECT 'ready' AS state, MAP {'uri': ':memory:', 'attached_db_type': 'duckdb'} AS result;
+CREATE MACRO b_status(h) AS TABLE
+    SELECT 'ready' AS state, MAP {'uri': ':memory:', 'attached_db_type': 'duckdb'} AS result;
 CREATE MACRO b_destroy(h) AS TABLE SELECT 'gone' AS status;
-CALL register_external_resource_type('mem@local', kind := 'catalog', create_function := 'b_create', status_function := 'b_status', destroy_function := 'b_destroy');
+CALL register_external_resource_type(
+    'mem@local',
+    kind := 'catalog',
+    create_function := 'b_create',
+    status_function := 'b_status',
+    destroy_function := 'b_destroy'
+);
 CREATE EXTERNAL RESOURCE 'mem@local' AS shared;
 ATTACH TO EXTERNAL RESOURCE shared AS db;
 DETACH db;

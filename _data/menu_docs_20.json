@@ -1611,18 +1611,6 @@
         {
           "page": "Overview",
           "path": "/docs/2.0/resources/overview"
-        },
-        {
-          "page": "Catalog",
-          "path": "/docs/2.0/resources/catalog"
-        },
-        {
-          "page": "Storage",
-          "path": "/docs/2.0/resources/storage"
-        },
-        {
-          "page": "Compute",
-          "path": "/docs/2.0/resources/compute"
         }
       ]
     },
