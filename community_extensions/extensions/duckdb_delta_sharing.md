@@ -81,8 +81,8 @@ docs:
     (automatically mapping folder structures to columns), deletion vectors (row-level deletes without
     rewriting files), and schema evolution (safely mapping Delta types to DuckDB's native types).
 
-extension_star_count: 5
-extension_star_count_pretty: 5
+extension_star_count: 6
+extension_star_count_pretty: 6
 extension_download_count: 5410
 extension_download_count_pretty: 5.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_delta_sharing.png'
