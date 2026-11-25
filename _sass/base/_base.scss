@@ -104,12 +104,20 @@ figure.image{
 
 	figcaption{
 		contain: inline-size;
-		@include body-small();
-		line-height: 1.3;
-		text-align: center;
-		margin-top: 0.5rem;
-		color: var(--main-text-tertiary-color);
 	}
+}
+
+figure.image figcaption,
+table > caption{
+	@include body-small();
+	line-height: 1.3;
+	text-align: center;
+	margin-top: 0.5rem;
+	color: var(--main-text-tertiary-color);
+}
+
+table > caption{
+	caption-side: bottom;
 }
 
 .figure-title{
