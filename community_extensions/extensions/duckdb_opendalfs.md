@@ -42,8 +42,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 793
-extension_download_count_pretty: 793
+extension_download_count: 794
+extension_download_count_pretty: 794
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_opendalfs.png'
 layout: community_extension_doc
 ---

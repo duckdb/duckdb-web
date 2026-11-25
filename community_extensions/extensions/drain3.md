@@ -56,8 +56,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 813
-extension_download_count_pretty: 813
+extension_download_count: 886
+extension_download_count_pretty: 886
 image: '/images/community_extensions/social_preview/preview_community_extension_drain3.png'
 layout: community_extension_doc
 ---

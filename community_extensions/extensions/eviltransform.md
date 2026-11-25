@@ -53,8 +53,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 584
-extension_download_count_pretty: 584
+extension_download_count: 589
+extension_download_count_pretty: 589
 image: '/images/community_extensions/social_preview/preview_community_extension_eviltransform.png'
 layout: community_extension_doc
 ---
