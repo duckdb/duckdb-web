@@ -58,6 +58,20 @@ In this architecture, DuckDB handles several layers of work:
 
 Bart emphasizes this consistency: "Always a DuckDB query in our case." This approach uses DuckDB as the standard processing layer rather than scattered scripting languages.
 
+The catalog interface provides researchers with a discoverable view of available datasets, organized by topic and source, with filtering and access control baked in:
+
+<div style="border: 1px solid #000; padding: 8px; display: inline-block;">
+  <img src="/images/blog/bij12/catalog-interface.png" alt="BIJ12 catalog interface showing NDWH Habitat datasets" style="display: block; max-width: 100%;">
+</div>
+<p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;">BIJ12 catalog interface showing NDWH Habitat datasets</p>
+
+Queries run directly against archived Parquet files, allowing analysts to join and aggregate across decades of nature-monitoring data:
+
+<div style="border: 1px solid #000; padding: 8px; display: inline-block; margin-top: 20px;">
+  <img src="/images/blog/bij12/query-interface.png" alt="BIJ12 query interface showing SQL execution and results" style="display: block; max-width: 100%;">
+</div>
+<p style="margin: 8px 0 0 0; font-size: 0.9em; text-align: center;">BIJ12 query interface showing SQL execution and results</p>
+
 ## PostgreSQL's Role in the Architecture
 
 A compelling aspect of this story is that **BIJ12 deliberately chose to use both DuckDB and PostgreSQL**. This isn't a DuckDB-only success story; it's a credible, practical tale of choosing the right tool for each job.
