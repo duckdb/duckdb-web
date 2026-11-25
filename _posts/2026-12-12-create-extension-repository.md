@@ -3,6 +3,8 @@ layout: post
 title: "Publishing Custom Extension Repositories for DuckDB"
 authors:
   - Geertjan Wielenga
+thumb: "/images/blog/thumbs/custom-extension-repositories.svg"
+image: "/images/blog/thumbs/custom-extension-repositories.png"
 excerpt: "DuckDB 2.0 lets developers publish custom extension repositories and users register them with CREATE EXTENSION REPOSITORY. Extensions are signed to verify authenticity, and repositories can be served from HTTPS, HTTP, S3, or local paths."
 tag: release
 ---
