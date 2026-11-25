@@ -81,8 +81,10 @@ Page URL: <https://duckdb.org{{ page.url }}>
 		<div class="headerline">
 			<div class="headercontent">
 				<div class="duckdbhome">
-					<a href="/docs/{{ version_viewed }}/" aria-label="DuckDB documentation overview"><img src="{% link images/designmanual/DuckDB_inline-lightmode.svg %}" alt="DuckDB" class="downloadlogo"></a>
-					<div id="duckdb_logo"></div>
+					<div id="duckdb_logo">
+						<a href="{{ site.url }}/" aria-label="DuckDB homepage"><img src="{% link images/designmanual/DuckDB_inline-lightmode.svg %}" alt="DuckDB" class="downloadlogo"></a>
+						<a href="/docs/{{ version_viewed }}/" class="docshome" aria-label="DuckDB documentation overview"></a>
+					</div>
 				</div>
 				<div class="landingmenu">
 					<nav class="mobile">
