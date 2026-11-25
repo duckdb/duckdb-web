@@ -144,10 +144,10 @@ docs:
 
     Full test suite: 65 test files, all passing on both the DuckDB v2.0 release line and the v2.0 next line (CI run 44013019970).
 
-extension_star_count: 33
-extension_star_count_pretty: 33
-extension_download_count: 1268
-extension_download_count_pretty: 1.3k
+extension_star_count: 34
+extension_star_count_pretty: 34
+extension_download_count: 1395
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc
 ---
