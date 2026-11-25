@@ -80,7 +80,7 @@ The public key goes into the metadata file. Publish its fingerprint (the SHA-256
 
 Serve your extensions in the same structure as DuckDB's repositories:
 
-```
+```text
 repository/
 ├── .well-known/
 │   └── duckdb-extension-repo.json
@@ -94,7 +94,7 @@ repository/
 
 To support [installing specific versions]({% link docs/2.0/extensions/versioning_of_extensions.md %}#installing-a-specific-extension-version), also serve extensions at:
 
-```
+```text
 repository/⟨extension_name⟩/⟨extension_version⟩/v⟨duckdb_version⟩/⟨platform⟩/⟨extension_name⟩.duckdb_extension.gz
 ```
 
