@@ -13,6 +13,22 @@ body.documentation {
         width: calc(var(--duckdb-wordmark-height) * 152 / 30);
     }
 
+    .headerline .headercontent .duckdbhome #duckdb_logo {
+        position: relative;
+
+        a {
+            pointer-events: auto;
+            right: auto;
+            width: var(--duckdb-wordmark-height);
+        }
+
+        a.docshome {
+            left: var(--duckdb-wordmark-height);
+            right: 0;
+            width: auto;
+        }
+    }
+
     // Header and navigation elements
     .headerline .headercontent .landingmenu nav.mobile {
         display: none;
