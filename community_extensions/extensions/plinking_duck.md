@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: plinking_duck
   description: Read and write PLINK 2 genomics file formats and run common genetic analyses directly in SQL
-  version: 0.17.0
+  version: 0.18.0
   language: C++
   build: cmake
   license: MIT
@@ -18,31 +18,23 @@ extension:
 
 repo:
   github: teaguesterling/plinking_duck
-  # Post-#3079 keys: ref = the default build (the DuckDB 2.0 line, v2.0.0); variegata
+  # Post-#3079 keys: ref = the default build (the DuckDB 2.0 line, v2.0.1); variegata
   # = the DuckDB v1.5.6 build (explicit, not left to fall back to ref); ref_next = the
   # dormant prerelease slot (build_next test_against_latest is if:false).
   #
-  # v0.17.0 is a FEATURE release and is v2.0.0-ONLY. A catalog read now opens only the
-  # cells a query can reach, on BOTH axes: a WHERE on CHROM/POS drops variant blocks and a
-  # WHERE on IID drops sample blocks, before those cells are read (P13-006). read_pfile also
-  # DISCOVERS <p>.pfile.json from a plain prefix, and catalog := reads version-1 catalogs
-  # (a sharded cohort or single fileset) as well as version-2 matrices. TWO BREAKING
-  # CHANGES: (1) COPY ... (FORMAT pvar|pgen|psam|pfile) errors if its output exists — add
-  # force to replace it; (2) ATTACH c.genotypes on a v2 matrix is now one row per variant
-  # (a fixed ARRAY over all samples), not one row per variant per sample block. The DuckDB
-  # v1.5.6 variant build stays RETIRED.
+  # v0.18.0 is a FEATURE release for the DuckDB v2.0.1 line. ONE BREAKING CHANGE (#139):
+  # ATTACH c.genotypes is now one row per variant x sample; the old shapes are
+  # c.genotypes_by_variant_list and c.genotypes_by_sample_list. A WHERE on ID, CPRA,
+  # genotype or IID now narrows the read, the .pgen header is decoded once and shared,
+  # and the .psam.parquet path is fast at 8M samples. macOS builds again (#151).
   #
-  # So ref / ref_next advance to the v0.17.0 commit (b808cfe) while variegata stays
-  # PINNED at the v0.14.2 commit (7a34f3ab) — the last commit that builds on v1.5.6.
-  # variegata cannot advance (v0.17.0 uses v2.0-only APIs) and must not be dropped
-  # (absent -> v1.5.6 falls back to ref -> builds the v2.0-only tree on v1.5.6 and
-  # fails). Net: v1.5.6 users keep v0.14.2; the 2.0 line gets v0.17.0. ref_next == ref.
-  # b808cfe (= v0.16.0's 493bf5a + the #112 doc fix + the #110 test) is green on both
-  # release legs of its push-to-main run (43158384720): ref (v2.0.0) and ref_next
-  # (cyanoptera, v2.0), each on linux amd64/arm64 + osx arm64.
-  ref: b808cfe4809be72c1951add834dbe85b3f992aa9
+  # ref / ref_next advance to the v0.18.0 commit (de9161c). variegata stays PINNED at the
+  # v0.14.2 commit (7a34f3ab), the last commit that builds on v1.5.6. de9161c is green on
+  # its push-to-main run (45330456492) on DuckDB v2.0.1: ran tests: 155 passed on
+  # linux_amd64 and osx_arm64; linux_arm64 is compiled, not tested.
+  ref: de9161c25d8d068da12d876160806a4583912bce
   variegata: 7a34f3ab8d76534aaebed0aaa88e8ef27099f4e6
-  ref_next: b808cfe4809be72c1951add834dbe85b3f992aa9
+  ref_next: de9161c25d8d068da12d876160806a4583912bce
 
 docs:
   hello_world: |
@@ -121,8 +113,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 893
-extension_download_count_pretty: 893
+extension_download_count: 818
+extension_download_count_pretty: 818
 image: '/images/community_extensions/social_preview/preview_community_extension_plinking_duck.png'
 layout: community_extension_doc
 ---
@@ -132,15 +124,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -162,25 +154,37 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name        | function_type |                                                                                                    description                                                                                                    | comment |                                                                                    examples                                                                                    |
-|-----------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| pfile_partitions            | table         | Compute the ordinal-range partitions of a pfile along the variants dimension (half-open [lo, hi)).                                                                                                                | NULL    | [SELECT * FROM pfile_partitions('data/cohort')]                                                                                                                                |
-| plink_freq                  | table         | Compute allele frequencies and counts from PLINK files.                                                                                                                                                           | NULL    | [SELECT * FROM plink_freq('data/cohort.pgen')]                                                                                                                                 |
-| plink_glm                   | table         | Fit generalized linear models (linear/logistic regression) across variants.                                                                                                                                       | NULL    | [SELECT * FROM plink_glm('data/cohort.pgen', phenotype := 'trait')]                                                                                                            |
-| plink_hardy                 | table         | Compute Hardy-Weinberg equilibrium exact test statistics.                                                                                                                                                         | NULL    | [SELECT * FROM plink_hardy('data/cohort.pgen')]                                                                                                                                |
-| plink_ld                    | table         | Compute pairwise linkage disequilibrium metrics.                                                                                                                                                                  | NULL    | [SELECT * FROM plink_ld('data/cohort.pgen', window_kb := 500, r2_threshold := 0.2)]                                                                                            |
-| plink_missing               | table         | Compute missingness rates per variant or per sample.                                                                                                                                                              | NULL    | [SELECT * FROM plink_missing('data/cohort.pgen', mode := 'variant')]                                                                                                           |
-| plink_pca                   | table         | Compute principal components analysis from PLINK files.                                                                                                                                                           | NULL    | [SELECT * FROM plink_pca('data/cohort.pgen', n_pcs := 10)]                                                                                                                     |
-| plink_score                 | table         | Compute polygenic risk scores from variant weights.                                                                                                                                                               | NULL    | [SELECT * FROM plink_score('data/cohort.pgen', weights := 'weights.tsv')]                                                                                                      |
-| plinking_duck_capabilities  | scalar        | List the capability tokens this plinking_duck build supports (for SQL feature detection).                                                                                                                         | NULL    | [SELECT list_contains(plinking_duck_capabilities(), 'variant_range')]                                                                                                          |
-| read_pfile                  | table         | Read PLINK dataset files into tabular format.                                                                                                                                                                     | NULL    | [SELECT * FROM read_pfile('data/cohort.pgen')]                                                                                                                                 |
-| read_pfile_catalog          | table         | Parse, verify, and prune a .pfile.json shard catalog, returning one row per surviving shard. The parse+verify+prune surface plinking_duck owns for pfile_catalog reading (write side = the sharded pfile writer). | NULL    | [SELECT * FROM read_pfile_catalog('cohort.pfile.json'), SELECT prefix FROM read_pfile_catalog('cohort.pfile.json', region := '2:1-5000000')]                                   |
-| read_pfile_catalog_layout   | table         | Interpreted chunk map of a .pfile.json catalog: one row per grid cell INCLUDING declared holes (present=false), with ordinal spans and template-resolved paths. Structural only; opens no data file.              | NULL    | [SELECT * FROM read_pfile_catalog_layout('cohort.pfile.json'), SELECT keys, variant_start, sample_start FROM read_pfile_catalog_layout('cohort.pfile.json') WHERE NOT present] |
-| read_pfile_catalog_metadata | table         | Read a .pfile.json catalog LITERALLY: one row per declared partition key (axis, key, type, over, position). The declared schema only; no tiling, no pruning, no data-file I/O.                                    | NULL    | [SELECT * FROM read_pfile_catalog_metadata('cohort.pfile.json'), SELECT axis, key, type FROM read_pfile_catalog_metadata('cohort.pfile.json') WHERE type <> 'enum']            |
-| read_pgen                   | table         | Read PLINK .pgen or .bed genotype files into tabular format.                                                                                                                                                      | NULL    | [SELECT * FROM read_pgen('data/cohort.pgen')]                                                                                                                                  |
-| read_plink_vcf              | table         | Read VCF files using PLINK engine into tabular format.                                                                                                                                                            | NULL    | [SELECT * FROM read_plink_vcf('data/cohort.vcf.gz')]                                                                                                                           |
-| read_psam                   | table         | Read PLINK .psam or .fam sample files into tabular format.                                                                                                                                                        | NULL    | [SELECT * FROM read_psam('data/cohort.psam')]                                                                                                                                  |
-| read_pvar                   | table         | Read PLINK .pvar or .bim variant files into tabular format.                                                                                                                                                       | NULL    | [SELECT * FROM read_pvar('data/cohort.pvar')]                                                                                                                                  |
+|               function_name                | function_type |                                                                                                    description                                                                                                    | comment |                                                                                    examples                                                                                    |
+|--------------------------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pfile_partitions                           | table         | Compute the ordinal-range partitions of a pfile along the variants dimension (half-open [lo, hi)).                                                                                                                | NULL    | [SELECT * FROM pfile_partitions('data/cohort')]                                                                                                                                |
+| plink_freq                                 | table         | Compute allele frequencies and counts from PLINK files.                                                                                                                                                           | NULL    | [SELECT * FROM plink_freq('data/cohort.pgen')]                                                                                                                                 |
+| plink_glm                                  | table         | Fit generalized linear models (linear/logistic regression) across variants.                                                                                                                                       | NULL    | [SELECT * FROM plink_glm('data/cohort.pgen', phenotype := 'trait')]                                                                                                            |
+| plink_hardy                                | table         | Compute Hardy-Weinberg equilibrium exact test statistics.                                                                                                                                                         | NULL    | [SELECT * FROM plink_hardy('data/cohort.pgen')]                                                                                                                                |
+| plink_ld                                   | table         | Compute pairwise linkage disequilibrium metrics.                                                                                                                                                                  | NULL    | [SELECT * FROM plink_ld('data/cohort.pgen', window_kb := 500, r2_threshold := 0.2)]                                                                                            |
+| plink_missing                              | table         | Compute missingness rates per variant or per sample.                                                                                                                                                              | NULL    | [SELECT * FROM plink_missing('data/cohort.pgen', mode := 'variant')]                                                                                                           |
+| plink_pca                                  | table         | Compute principal components analysis from PLINK files.                                                                                                                                                           | NULL    | [SELECT * FROM plink_pca('data/cohort.pgen', n_pcs := 10)]                                                                                                                     |
+| plink_score                                | table         | Compute polygenic risk scores from variant weights.                                                                                                                                                               | NULL    | [SELECT * FROM plink_score('data/cohort.pgen', weights := 'weights.tsv')]                                                                                                      |
+| plinking_debug_genotype_where_pushed       | scalar        | Test-only: reads whose WHERE on genotype compiled into the scan's genotype filter since the last reset (views PR 2a).                                                                                             | NULL    | [SELECT plinking_debug_genotype_where_pushed()]                                                                                                                                |
+| plinking_debug_genotype_where_pushed_reset | scalar        | Test-only: reset plinking_debug_genotype_where_pushed to 0.                                                                                                                                                       | NULL    | [SELECT plinking_debug_genotype_where_pushed_reset()]                                                                                                                          |
+| plinking_debug_iid_where_pushed            | scalar        | Test-only: reads whose WHERE on IID narrowed the sample set since the last reset.                                                                                                                                 | NULL    | [SELECT plinking_debug_iid_where_pushed()]                                                                                                                                     |
+| plinking_debug_iid_where_pushed_reset      | scalar        | Test-only: reset plinking_debug_iid_where_pushed to 0.                                                                                                                                                            | NULL    | [SELECT plinking_debug_iid_where_pushed_reset()]                                                                                                                               |
+| plinking_debug_pgen_header_decodes         | scalar        | Test-only: .pgen header decodes (PgfiInitPhase2 runs) by read_pfile since the last reset (cache tier 1).                                                                                                          | NULL    | [SELECT plinking_debug_pgen_header_decodes()]                                                                                                                                  |
+| plinking_debug_pgen_header_decodes_reset   | scalar        | Test-only: reset plinking_debug_pgen_header_decodes to 0.                                                                                                                                                         | NULL    | [SELECT plinking_debug_pgen_header_decodes_reset()]                                                                                                                            |
+| plinking_debug_psam_iid_loads              | scalar        | Test-only: full IID loads of a .psam.parquet since the last reset.                                                                                                                                                | NULL    | [SELECT plinking_debug_psam_iid_loads()]                                                                                                                                       |
+| plinking_debug_psam_iid_loads_reset        | scalar        | Test-only: reset plinking_debug_psam_iid_loads to 0.                                                                                                                                                              | NULL    | [SELECT plinking_debug_psam_iid_loads_reset()]                                                                                                                                 |
+| plinking_debug_sparse_concat_altmajor      | scalar        | Test-only: per-shard ALT/missing-major difflist fallbacks taken by the concat sparse path since the last reset (P13-011 Task 2 branch proof).                                                                     | NULL    | [SELECT plinking_debug_sparse_concat_altmajor()]                                                                                                                               |
+| plinking_debug_sparse_concat_dense         | scalar        | Test-only: per-shard dense-genovec fallbacks taken by the concat sparse path since the last reset (P13-011 Task 2 branch proof).                                                                                  | NULL    | [SELECT plinking_debug_sparse_concat_dense()]                                                                                                                                  |
+| plinking_debug_sparse_variants             | scalar        | Test-only: number of variants decoded via the sparse (pgen difflist) path since the last reset (P13-011 proof-ran control).                                                                                       | NULL    | [SELECT plinking_debug_sparse_variants()]                                                                                                                                      |
+| plinking_debug_sparse_variants_reset       | scalar        | Test-only: reset the sparse-difflist proof-ran counter to 0, returns 0 (P13-011).                                                                                                                                 | NULL    | [SELECT plinking_debug_sparse_variants_reset()]                                                                                                                                |
+| plinking_duck_capabilities                 | scalar        | List the capability tokens this plinking_duck build supports (for SQL feature detection).                                                                                                                         | NULL    | [SELECT list_contains(plinking_duck_capabilities(), 'variant_range')]                                                                                                          |
+| read_pfile                                 | table         | Read PLINK dataset files into tabular format.                                                                                                                                                                     | NULL    | [SELECT * FROM read_pfile('data/cohort.pgen')]                                                                                                                                 |
+| read_pfile_catalog                         | table         | Parse, verify, and prune a .pfile.json shard catalog, returning one row per surviving shard. The parse+verify+prune surface plinking_duck owns for pfile_catalog reading (write side = the sharded pfile writer). | NULL    | [SELECT * FROM read_pfile_catalog('cohort.pfile.json'), SELECT prefix FROM read_pfile_catalog('cohort.pfile.json', region := '2:1-5000000')]                                   |
+| read_pfile_catalog_layout                  | table         | Interpreted chunk map of a .pfile.json catalog: one row per grid cell INCLUDING declared holes (present=false), with ordinal spans and template-resolved paths. Structural only; opens no data file.              | NULL    | [SELECT * FROM read_pfile_catalog_layout('cohort.pfile.json'), SELECT keys, variant_start, sample_start FROM read_pfile_catalog_layout('cohort.pfile.json') WHERE NOT present] |
+| read_pfile_catalog_metadata                | table         | Read a .pfile.json catalog LITERALLY: one row per declared partition key (axis, key, type, over, position). The declared schema only; no tiling, no pruning, no data-file I/O.                                    | NULL    | [SELECT * FROM read_pfile_catalog_metadata('cohort.pfile.json'), SELECT axis, key, type FROM read_pfile_catalog_metadata('cohort.pfile.json') WHERE type <> 'enum']            |
+| read_pgen                                  | table         | Read PLINK .pgen or .bed genotype files into tabular format.                                                                                                                                                      | NULL    | [SELECT * FROM read_pgen('data/cohort.pgen')]                                                                                                                                  |
+| read_plink_vcf                             | table         | Read VCF files using PLINK engine into tabular format.                                                                                                                                                            | NULL    | [SELECT * FROM read_plink_vcf('data/cohort.vcf.gz')]                                                                                                                           |
+| read_psam                                  | table         | Read PLINK .psam or .fam sample files into tabular format.                                                                                                                                                        | NULL    | [SELECT * FROM read_psam('data/cohort.psam')]                                                                                                                                  |
+| read_pvar                                  | table         | Read PLINK .pvar or .bim variant files into tabular format.                                                                                                                                                       | NULL    | [SELECT * FROM read_pvar('data/cohort.pvar')]                                                                                                                                  |
 
 ### Overloaded Functions
 
@@ -203,6 +207,7 @@ This extension does not add any types.
 | plinking_localize_dir           | Directory (local) for temp copies made by plinking_pgen_io := 'localize'. Empty (default) uses DuckDB's temporary_directory, else the current directory. Created if absent (one level only — parent dirs must already exist). Temps are per-query and removed when the query's bind data is destroyed.                                    | VARCHAR    | GLOBAL | []      |             |
 | plinking_max_matrix_elements    | Maximum genotype matrix elements for orient := 'sample' pre-read (variants x samples). Default 16 billion (~16 GB of int8).                                                                                                                                                                                                               | BIGINT     | GLOBAL | []      | 17179869184 |
 | plinking_max_threads            | Maximum threads for parallel scan operations. 0 = default (hardcoded cap of 16), >0 = cap at this value.                                                                                                                                                                                                                                  | BIGINT     | GLOBAL | []      | 0           |
+| plinking_pgen_header_cache      | Cache each decoded .pgen header (its per-variant index, 9 bytes per variant) once per database, shared by every thread and query of read_pfile. Bounded by DuckDB's object cache, which counts against memory_limit. false = decode per thread.                                                                                           | BOOLEAN    | GLOBAL | []      | true        |
 | plinking_pgen_io                | How .pgen bytes are read: 'auto' (default — remote/VFS paths via DuckDB's VFS, local via native fopen), 'native' (always native fopen; errors on remote), 'vfs' (always via DuckDB's VFS, even local), 'localize' (materialize a local temp copy then read natively — best for remote full scans; always copies, even a local source).    | VARCHAR    | GLOBAL | []      | auto        |
 | plinking_sample_counts_sparse   | orient := 'sample' + genotypes := 'counts'\|'stats': when true, use the sparse (pgen difflist) accumulation path — reads only the non-hom_ref carriers of rare variants (auto-falls-back to the dense full-decode path per variant). When false, always use the dense path. Toggle to A/B time both; both paths produce identical counts. | BOOLEAN    | GLOBAL | []      | false       |
 | plinking_use_parquet_companions | Auto-discover .pvar.parquet and .psam.parquet companion files. When true, parquet companions are preferred over text formats.                                                                                                                                                                                                             | BOOLEAN    | GLOBAL | []      | true        |

@@ -4,7 +4,7 @@ railroad: statements/setvariable.js
 title: SET VARIABLE and RESET VARIABLE Statements
 ---
 
-DuckDB supports the definition of SQL-level variables using the `SET VARIABLE` and `RESET VARIABLE` statements.
+DuckDB supports the definition of SQL-level variables using the `SET VARIABLE` and `RESET VARIABLE` statements. SQL-level variables are visible only in the current session and not persisted.
 
 ## `SET VARIABLE`
 
@@ -105,3 +105,22 @@ SELECT getvariable('my_var') AS my_var;
 ### Syntax
 
 <div id="rrdiagram2"></div>
+
+## `SHOW VARIABLES`
+
+The `SHOW VARIABLES`-statement lists the name, value (as `VARCHAR`) and data type of all SQL-level variables existing in the current session.
+
+```sql
+SET VARIABLE int_var = 42;
+SET VARIABLE txt_var = 'Hello';
+SHOW VARIABLES;
+```
+
+| name    | value | type    |
+|---------|-------|---------|
+| int_var | 42    | INTEGER |
+| txt_var | Hello | VARCHAR |  
+
+> SQL-level variables that were unset by a `RESET VARIABLE`-statement cease to exist and are therefore not listed.
+
+The list of existing SQL-level variables is also available as [`duckdb_variables()`-metadata query]({% link docs/1.1/sql/meta/duckdb_table_functions.md %}#duckdb_variables).

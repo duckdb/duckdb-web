@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: improv
   description: Improv's spreadsheet formula language (681 functions) and multidimensional models (categories, measures, formulas over them) on DuckDB tables
-  version: 0.14.0
+  version: 0.15.0
   language: Rust
   build: cargo
   license: MIT OR Apache-2.0
@@ -23,7 +23,7 @@ repo:
   github: gburd/improv
   # A commit SHA, filled in once that commit is qualified on every platform
   # (.github/workflows/duckdb.yml).
-  ref: de14c773daf81080650485581d229e1f4108feb1
+  ref: 585cb5ca7bdb160d45af5dba24fdac076bd17ce3
 docs:
   hello_world: |
     LOAD improv;
@@ -70,8 +70,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 607
-extension_download_count_pretty: 607
+extension_download_count: 586
+extension_download_count_pretty: 586
 image: '/images/community_extensions/social_preview/preview_community_extension_improv.png'
 layout: community_extension_doc
 ---
@@ -81,15 +81,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

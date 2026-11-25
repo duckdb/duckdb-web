@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: compression_fs
   description: Adds LZ4, Snappy, Brotli, Bzip2, and XZ file compression support
-  version: 0.2.1
+  version: 0.2.2
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-compression-filesystem
-  ref: 32834aff1214d1b65947928dc83c7d339c9045d7
+  ref: 57bd4786508ddae9913ea97cf29b23d39f4c3b97
 
 docs:
   hello_world: |
@@ -36,8 +36,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 581
-extension_download_count_pretty: 581
+extension_download_count: 598
+extension_download_count_pretty: 598
 image: '/images/community_extensions/social_preview/preview_community_extension_compression_fs.png'
 layout: community_extension_doc
 ---
@@ -47,15 +47,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

@@ -18,7 +18,3 @@
   aliases: [current]
   winget: true
   pip_cli: true
-
-- version: "1.4"
-  config_prefix: old_lts
-  aliases: [lts]

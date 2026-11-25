@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) with SAX streaming for large files, intelligent schema inference, XPath-based data extraction, and HTML table parsing.
-  version: 2.15.0
+  version: 2.16.0
   language: C++
   build: cmake
   license: MIT
@@ -16,11 +16,15 @@ extension:
   # Windows included since v2.4.0: DuckDB v1.5.4's vendored fmt no longer uses the removed
   # MSVC STL API (the old compile blocker), and the extension builds and passes tests on the
   # windows_amd64 MSVC runner in CI.
+  # windows_amd64_mingw excluded: test/sql/github_issue_220_review_findings.test:284
+  # (a KOI8-R page) fails there, so the registry skipped deploy on every platform.
+  # A later webbed release fixes the mingw decode and removes this exclusion.
+  excluded_platforms: "windows_amd64_mingw"
   maintainers:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_webbed
-  ref: 3a2f99baa1a8f58f1a1d2c3a5d0ad679a00d8df3
+  ref: 8ee389b53b2e32d16c51c86d9ee9a63ace7d904e
   # variegata: the v1.5.6 track. scripts/build.py:46-48 routes duckdb_version
   # v1.5.6 here. Held at v2.14.0, the last release tested on v1.5.6. webbed no
   # longer supports v1.5.6, and v2.15.0 fails 3 of its 171 test cases there.
@@ -33,7 +37,7 @@ repo:
   # restores prerelease validation if that job is re-enabled. A STALE ref_next is
   # worse than an absent one: it validates the PREVIOUS release while reporting
   # green, so it must never lag ref.
-  ref_next: 3a2f99baa1a8f58f1a1d2c3a5d0ad679a00d8df3
+  ref_next: 8ee389b53b2e32d16c51c86d9ee9a63ace7d904e
 docs:
   docs_url: https://duckdb-webbed.readthedocs.io
   hello_world: |
@@ -116,8 +120,8 @@ docs:
 
 extension_star_count: 78
 extension_star_count_pretty: 78
-extension_download_count: 30477
-extension_download_count_pretty: 30.5k
+extension_download_count: 23541
+extension_download_count_pretty: 23.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
@@ -127,15 +131,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ✅ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ❌ |
 
 ### Installing and Loading
 ```sql

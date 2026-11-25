@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: decide
   description: Filter, classify, and score text with OpenAI Decisions, TypeSafe Jev, or Cloudflare Clef
-  version: 0.2.1
+  version: 0.2.2
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,8 @@ extension:
     - gzheng92
 repo:
   github: gzheng92/duckdb-decide
-  # Validated DuckDB 2.0.0 source revision: the v0.2.1 release commit.
-  ref: a520e4b0a4aa9e7a1ed20e8fd825108f7e6ecd3a
+  # Validated DuckDB 2.0.0 source revision: the v0.2.2 release commit.
+  ref: 03e8fe1da3153f9eb3cac2eb692fc876d2bdf08e
 docs:
   hello_world: |
     -- OpenAI example; use your own API key.
@@ -34,7 +34,20 @@ docs:
     explicit multi-question JSON answers. `SELECT * FROM decision_providers()`
     lists the providers, models, and credential names.
     Typed functions batch 20 rows per request by default; set
-    `decisions_batch_size = 1` for independent row evaluation.
+    `decisions_batch_size = 1` for independent row evaluation. Identical rows
+    in a chunk are sent once, and requests run 4 at a time by default
+    (`decisions_concurrency`, 1 to 32); Ctrl-C cancels requests in flight.
+
+    `decision_choice_detail` and `decision_score_detail` also return the
+    provider's confidence, a probability for each label, and the model version
+    that answered, for routing uncertain rows to review:
+
+    ```sql
+    SELECT d.choice, d.confidence, d.probabilities['billing'] AS billing, d.model
+    FROM (SELECT decision_choice_detail('I was charged twice.', 'Which team?',
+                                        ['support', 'billing', 'shipping']) AS d);
+    ```
+
     Non-NULL inputs and instructions are sent to the selected provider and can
     incur API charges.
 
@@ -63,10 +76,9 @@ docs:
                          'Does this report physical damage?') AS probability;
     ```
 
-    Clef caps requests at 64 questions. Neither Jev nor Clef returns refusal
-    answers. All providers accept text only.
+    Requests respect provider-specific limits; Clef caps requests at 64 questions.
+    Neither Jev nor Clef returns refusal answers. All providers accept text only.
 
-    No API key is required to build or run the offline tests.
     This is an independent integration, not an official extension of OpenAI,
     TypeSafe, or Cloudflare.
     See the [README](https://github.com/gzheng92/duckdb-decide#readme)
@@ -74,8 +86,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 582
-extension_download_count_pretty: 582
+extension_download_count: 578
+extension_download_count_pretty: 578
 image: '/images/community_extensions/social_preview/preview_community_extension_decide.png'
 layout: community_extension_doc
 ---
@@ -85,15 +97,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -115,14 +127,16 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name    | function_type | description | comment | examples |
-|--------------------|---------------|-------------|---------|----------|
-| decision           | scalar        | NULL        | NULL    |          |
-| decision_answers   | scalar        | NULL        | NULL    |          |
-| decision_choice    | scalar        | NULL        | NULL    |          |
-| decision_prob      | scalar        | NULL        | NULL    |          |
-| decision_providers | table         | NULL        | NULL    |          |
-| decision_score     | scalar        | NULL        | NULL    |          |
+|     function_name      | function_type | description | comment | examples |
+|------------------------|---------------|-------------|---------|----------|
+| decision               | scalar        | NULL        | NULL    |          |
+| decision_answers       | scalar        | NULL        | NULL    |          |
+| decision_choice        | scalar        | NULL        | NULL    |          |
+| decision_choice_detail | scalar        | NULL        | NULL    |          |
+| decision_prob          | scalar        | NULL        | NULL    |          |
+| decision_providers     | table         | NULL        | NULL    |          |
+| decision_score         | scalar        | NULL        | NULL    |          |
+| decision_score_detail  | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -140,12 +154,13 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|         name         |                                 description                                  | input_type | scope  | aliases | typed_value |
-|----------------------|------------------------------------------------------------------------------|------------|--------|---------|-------------|
-| decisions_batch_size | Rows per request for typed functions (1 to 128)                              | UBIGINT    | GLOBAL | []      | 20          |
-| decisions_endpoint   | Empty for the provider's URL; a loopback http://127.0.0.1 URL for mock tests | VARCHAR    | GLOBAL | []      |             |
-| decisions_model      | Model id; empty for the provider's default_model                             | VARCHAR    | GLOBAL | []      |             |
-| decisions_provider   | Decision provider: cloudflare, jev, openai; see decision_providers()         | VARCHAR    | GLOBAL | []      | openai      |
-| temp_directory       | Set the directory to which temporary files are written.                      | VARCHAR    | GLOBAL | []      | post.db.tmp |
+|         name          |                                 description                                  | input_type | scope  | aliases | typed_value |
+|-----------------------|------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| decisions_batch_size  | Rows per request for typed functions (1 to 128)                              | UBIGINT    | GLOBAL | []      | 20          |
+| decisions_concurrency | Requests in flight at once per chunk (1 to 32); 1 sends them one at a time   | UBIGINT    | GLOBAL | []      | 4           |
+| decisions_endpoint    | Empty for the provider's URL; a loopback http://127.0.0.1 URL for mock tests | VARCHAR    | GLOBAL | []      |             |
+| decisions_model       | Model id; empty for the provider's default_model                             | VARCHAR    | GLOBAL | []      |             |
+| decisions_provider    | Decision provider: cloudflare, jev, openai; see decision_providers()         | VARCHAR    | GLOBAL | []      | openai      |
+| temp_directory        | Set the directory to which temporary files are written.                      | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

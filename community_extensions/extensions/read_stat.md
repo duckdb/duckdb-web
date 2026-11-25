@@ -57,10 +57,10 @@ docs:
     | `format` | The format of the input file, when its extension does not indicate it, either `'sas7bdat'`, `'xpt'`, `'sav'`, `'por'`, or `'dta'` | `VARCHAR` | `NULL` |
     | `encoding` | The character encoding of the input file, as defined by `iconv`, see https://www.gnu.org/software/libiconv/ | `VARCHAR` | `NULL` |
 
-extension_star_count: 35
-extension_star_count_pretty: 35
-extension_download_count: 2164
-extension_download_count_pretty: 2.2k
+extension_star_count: 36
+extension_star_count_pretty: 36
+extension_download_count: 2759
+extension_download_count_pretty: 2.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_read_stat.png'
 layout: community_extension_doc
 ---
@@ -70,15 +70,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ❌ |
-| macOS AMD64 | ✅ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ❌ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ❌ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ❌ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql

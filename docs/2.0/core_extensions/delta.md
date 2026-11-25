@@ -98,7 +98,9 @@ FROM delta_scan('az://⟨my_container⟩/⟨path⟩');
 
 ### Reading from Google Cloud Storage
 
-To scan a Delta table in a GCS bucket through its [S3 API compatibility]({% link docs/2.0/core_extensions/httpfs/s3api.md %}), use [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability) and create a secret:
+To scan a Delta table in a GCS bucket (`gs://` or `gcs://`), create a GCS [secret]({% link docs/2.0/configuration/secrets_manager.md %}). Two kinds of credentials work.
+
+With [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability), DuckDB reads the table through GCS's [S3 API compatibility]({% link docs/2.0/core_extensions/httpfs/s3api.md %}):
 
 ```sql
 CREATE SECRET (
@@ -109,6 +111,22 @@ CREATE SECRET (
 SELECT *
 FROM delta_scan('gs://⟨my_bucket⟩/⟨path⟩');
 ```
+
+Since v2.0.1, an OAuth bearer token also works, such as one that Unity Catalog vends for a table on GCS. DuckDB then reads the table through the native GCS API:
+
+```sql
+CREATE SECRET (
+    TYPE gcs,
+    BEARER_TOKEN '⟨oauth_token⟩'
+);
+SELECT *
+FROM delta_scan('gs://⟨my_bucket⟩/⟨path⟩');
+```
+
+* If the GCS secret that matches the path has a `BEARER_TOKEN`, the token is used and `KEY_ID` and `SECRET` are ignored.
+* With a bearer token, `ENDPOINT` sets the base URL of the GCS API, e.g., for an emulator. Without a scheme, it uses HTTPS, or HTTP if `USE_SSL` is `false`. `REGION` and `URL_STYLE` are ignored.
+* DuckDB does not refresh the token. When it expires, replace the secret.
+* Without a secret, the scan fails.
 
 ### Creating Tables
 
@@ -122,6 +140,8 @@ CREATE TABLE events.events (id BIGINT, region VARCHAR)
 PARTITIONED BY (region);
 INSERT INTO events VALUES (1, 'eu');
 ```
+
+Since v2.0.1, a partition key matches its column in any case, and the column's own spelling is recorded; this also holds for `CREATE TABLE ... AS SELECT` and for `COPY`'s `PARTITION_BY`.
 
 Only `CREATE TABLE` needs the full `events.events` name: without the database name, it creates the table in the default database.
 
@@ -142,6 +162,69 @@ WITH ('delta.enableDeletionVectors' = 'true', 'delta.appendOnly' = 'true');
 Properties that enable a Delta feature, such as deletion vectors, also upgrade the table's protocol as needed. Values can be any constant expression except `NULL`. Some properties cannot be set at creation, such as `'delta.enableVariantShredding'`.
 
 To create a table with [column mapping](#column-mapping), set `'delta.columnMapping.mode'` to `'name'` or `'id'`.
+
+### Creating Tables from a Query
+
+> New This feature was introduced in DuckDB 2.0.1.
+
+To create a Delta table from a query, attach its location and use `CREATE TABLE ... AS SELECT`:
+
+```sql
+ATTACH 's3://⟨my_bucket⟩/⟨path⟩' AS sales (TYPE delta);
+CREATE TABLE sales.sales PARTITIONED BY (region)
+WITH ('delta.columnMapping.mode' = 'name') AS
+    SELECT * FROM read_parquet('sales/*.parquet');
+```
+
+The column names and types are the query's. `PARTITIONED BY` and `WITH` work as for [`CREATE TABLE`](#creating-tables), column mapping in `name` and `id` mode included, with nested columns too.
+
+To write a query's result as a new Delta table without attaching it, use `COPY` with `FORMAT delta`, then read the table with `delta_scan` or `ATTACH`:
+
+```sql
+COPY (SELECT * FROM read_parquet('sales/*.parquet'))
+TO 's3://⟨my_bucket⟩/⟨other_path⟩' (FORMAT delta, PARTITION_BY (region));
+SELECT count(*) FROM delta_scan('s3://⟨my_bucket⟩/⟨other_path⟩');
+```
+
+`COPY` takes table properties in `WITH_PROPERTIES`, a struct or a map whose keys keep their case. A known `delta.` property can also be given as an option of its own, in double quotes:
+
+```sql
+COPY (SELECT 1 AS id, 'x' AS name) TO 'audit_copy' (FORMAT delta,
+    WITH_PROPERTIES {'delta.appendOnly': 'true', 'owner': 'data-team'});
+COPY (SELECT 1 AS id) TO 'mapped_copy' (FORMAT delta, "delta.columnMapping.mode" 'id');
+```
+
+A `delta.` key must name a known Delta property. In `WITH` and in `WITH_PROPERTIES`, it must be spelled with its exact case: `'delta.columnmapping.mode'` fails and suggests `'delta.columnMapping.mode'`. As a `COPY` option of its own, its case does not matter, since DuckDB lowercases option names: it is stored under the property's own spelling. A key outside `delta.` is stored as given. A property can be given only once, either as an option or in `WITH_PROPERTIES`. In `WITH_PROPERTIES`, `'location'` must name the `COPY` target and `'path'` is refused, as in `CREATE TABLE`.
+
+Both statements write the new table in a single commit: version 0 holds the table's protocol and metadata together with every data file, with file statistics, as Spark writes it. If the statement fails before it commits, for example because the query fails partway through, it creates no table and removes the files it wrote, on a best-effort basis. An empty query result creates an empty table.
+
+The table is created when the statement ends, not when the transaction commits, as for `CREATE TABLE`. A `ROLLBACK` does not remove it:
+
+```sql
+ATTACH 's3://⟨my_bucket⟩/⟨new_path⟩' AS scratch (TYPE delta);
+BEGIN;
+CREATE TABLE scratch.scratch AS SELECT 1 AS id;
+ROLLBACK;
+-- scratch.scratch exists, with its row
+```
+
+The following are not supported:
+
+* Columns whose type Delta cannot store: the statement fails before anything is written, naming the column. Common cases are `HUGEINT` (e.g., from `sum()` of integers), unsigned integers, `UUID`, `ENUM`, and `TIMESTAMP_NS`, `TIMESTAMP_MS`, or `TIMESTAMP_S` (e.g., from Parquet files); also `TIME`, intervals, and an untyped `NULL`. Cast the column in the query:
+    * `HUGEINT` and `UHUGEINT`: `::DECIMAL(38, 0)`, or `::VARCHAR` for values beyond 38 digits
+    * `UTINYINT`, `USMALLINT`, and `UINTEGER`: `::BIGINT`; `UBIGINT`: `::DECIMAL(20, 0)`
+    * `TIMESTAMP_NS`, `TIMESTAMP_MS`, and `TIMESTAMP_S`: `::TIMESTAMP`
+    * `UUID` and `ENUM`: `::VARCHAR`
+    * an untyped `NULL`: e.g., `NULL::INTEGER`
+* Writing to a path that already holds a Delta table: `COPY` does not append or overwrite, and `CREATE TABLE ... AS SELECT` fails as `CREATE TABLE` does. With `IF NOT EXISTS`, an existing table is left as it is and the query does not run, unless a column or partition column is refused (see [Limitations](#limitations)): that fails first.
+* `CREATE OR REPLACE TABLE ... AS SELECT`.
+* `COPY` options for files, such as `OVERWRITE` or `PER_THREAD_OUTPUT`, and options outside `delta.` given on their own: put the latter in `WITH_PROPERTIES`.
+
+In a [Unity Catalog]({% link docs/2.0/core_extensions/unity_catalog.md %}#creating-tables-from-a-query) catalog, `CREATE TABLE ... AS SELECT` goes through the `unity_catalog` extension, which also registers the table.
+
+Unlike Spark, DuckDB records the operation in the table's history as `CREATE TABLE`, not `CREATE TABLE AS SELECT`.
+
+In a column-mapped, partitioned table, the data files that the statement writes leave the partition columns out, as Spark's do: readers take their values from the Delta log. The files that a later `INSERT` writes include them. A table whose features require the partition columns in its files (`materializePartitionColumns`, `icebergCompatV2`, or `icebergCompatV3`) gets them in every file.
 
 ### Appending Data
 
@@ -227,6 +310,8 @@ ATTACH 's3://⟨my_bucket⟩/⟨path⟩' AS my_table (
 );
 ```
 
+Since v2.0.1, an option that the `delta` extension does not know, e.g., a misspelled one, fails with `Unrecognized option for Delta attach`. Before, it was ignored.
+
 ### Inspecting Scanned Files
 
 `delta_list_files` returns the data files a scan would read for a table, together with their cardinality, partition values, and whether they carry deletion vectors. This is useful for understanding the effect of [data skipping](#features):
@@ -271,6 +356,10 @@ The protocol requires every data file of an `id`-mode table to carry Parquet fie
 
 > Warning The default changed from `lenient` in DuckDB 1.5 to `strict` in v2.0. To read such files as v1.5 did, run `SET delta_column_mapping_policy = 'lenient';`{:.language-sql .highlight}.
 
+Since v2.0.1, DuckDB writes to column-mapped tables with partition columns or nested (struct, list, and map) columns, in both modes: `INSERT` into such a table works, whoever created it (except as listed under [Limitations](#limitations)), and `CREATE TABLE` and `CREATE TABLE ... AS SELECT` can create one. Spark reads and appends to the files that DuckDB writes. Each partition of a column-mapped table goes to a directory named `part-` followed by a hash of the partition values, not to a Hive-style `⟨column⟩=⟨value⟩` directory: readers take the partition values from the Delta log.
+
+> Warning Before v2.0.1, the partition columns of a column-mapped table read as `NULL` in every row, without an error.
+
 ### VARIANT Columns
 
 Delta `variant` columns are read as DuckDB [`VARIANT`]({% link docs/2.0/sql/data_types/variant.md %}), whether their files are shredded or not, and top-level `VARIANT` columns can be appended to.
@@ -278,7 +367,7 @@ Delta `variant` columns are read as DuckDB [`VARIANT`]({% link docs/2.0/sql/data
 > New The following were introduced in DuckDB 2.0.
 
 * A query that reads one field of a `VARIANT` or `STRUCT` column, such as `SELECT v.a`, reads only that field from the Parquet files, so on a shredded table it skips the columns of the other fields. This does not apply to a column with a `TIMESTAMP WITH TIME ZONE` field at any depth: DuckDB reads all of it.
-* `CREATE TABLE` accepts `VARIANT` columns.
+* `CREATE TABLE` accepts top-level `VARIANT` columns. Since v2.0.1, it refuses a `VARIANT` inside a struct, list, or map, which DuckDB cannot write.
 * When writing, DuckDB shreds `VARIANT` values only if the table sets `'delta.enableVariantShredding'` to `'true'`, as the Delta protocol requires; otherwise it writes them unshredded. Because `CREATE TABLE` cannot set this property, a table created by DuckDB holds unshredded files.
 
 ### Catalog-Managed Tables
@@ -315,15 +404,15 @@ The `delta` extension supports:
 * [time travel](#time-travel) by version or timestamp
 * all primitive types except intervals
 * nested types (structs, lists, and maps)
-* creating tables (`CREATE TABLE`)
-* blind appends (`INSERT INTO`), with file statistics for data skipping
+* creating tables (`CREATE TABLE`, and since v2.0.1 [`CREATE TABLE ... AS SELECT` and `COPY ... TO ... (FORMAT delta)`](#creating-tables-from-a-query))
+* blind appends (`INSERT INTO`), with file statistics for data skipping; for concurrent writers, see [Limitations](#limitations)
 * [idempotent appends](#idempotent-appends)
 * [checkpoints](#checkpointing) (`CHECKPOINT`)
 * cloud storage (AWS S3, Azure, GCS) with secrets
 
 ## Limitations
 
-* `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT` are not supported. Create the table, then `INSERT` into it.
+* `CREATE OR REPLACE TABLE` is not supported. Before v2.0.1, `CREATE TABLE ... AS SELECT` was not supported either.
 * `UPDATE`, `DELETE`, [`MERGE INTO`]({% link docs/2.0/sql/statements/merge_into.md %}), `ALTER TABLE`, and `DROP TABLE` are not supported, nor are `RETURNING` and `ON CONFLICT` clauses on `INSERT`.
 * `CREATE TABLE` does not support:
     * constraints, including `NOT NULL`
@@ -331,11 +420,22 @@ The `delta` extension supports:
     * `SORTED BY`
     * column types without a Delta equivalent, such as `TIME` or unsigned integers
     * a table whose columns are all partition columns
-* A table created with [column mapping](#column-mapping) cannot have nested or partition columns, because DuckDB cannot write to such tables yet.
+    * since v2.0.1, a `VARIANT` inside a struct, list, or map; before, `CREATE TABLE` accepted it and the first `INSERT` failed
+    * since v2.0.1, a `MAP` with a `LIST` key, at any depth; before, `CREATE TABLE` accepted it and the first `INSERT` failed
+    * since v2.0.1, a `VARCHAR` column with a collation (`COLLATE`), at any depth: DuckDB does not write Delta collations. A cast to `VARCHAR` and most string functions keep the collation; `decode(encode(⟨column⟩))`{:.language-sql .highlight} removes it.
+    * a partition column of a struct, list, map, array, or `VARIANT` type: a Delta partition column must have a primitive type
+    * since v2.0.1, a partition column of type `BLOB`: Delta stores partition values as text, which cannot hold arbitrary bytes. Partition on a text form instead, e.g., `hex(⟨column⟩)`{:.language-sql .highlight}.
+* `CREATE TABLE ... AS SELECT` and `COPY ... TO ... (FORMAT delta)` refuse the same columns and partition columns, before anything is written.
+* Since v2.0.1, the column and partition-column checks above (types, `VARIANT`, `MAP`, collations) run before `IF NOT EXISTS` is considered: `CREATE TABLE IF NOT EXISTS` with such a column fails even if the table exists, with or without `AS SELECT`.
+* Before v2.0.1, DuckDB could not write to a table with [column mapping](#column-mapping) that has nested or partition columns, nor create one.
+* Writing to a column-mapped table with a struct field whose physical name is `__duckdb_field_id` (in any case) fails before anything is written.
 * Tables with an interval (`interval year to month` or `interval day to second`), `geometry`, or `geography` column cannot be read.
 * Writing to a table with the `allowColumnDefaults` writer feature fails, even if no column has a default yet: DuckDB cannot fill in Delta defaults and does not write `NULL` instead. Reading works.
 * Writing to a table that declares a `CHAR(n)` or `VARCHAR(n)` width on a nested field, such as `ARRAY<VARCHAR(5)>`, is not supported.
 * Writing to a table with a `VARIANT` inside a struct, list, or map is not supported.
+* Writing to a table whose schema declares a list or array column or field as not nullable, at any depth, is not supported.
+* Since v2.0.1, writes refuse partition values that Delta readers cannot read back: a `DATE`, `TIMESTAMP`, or `TIMESTAMP WITH TIME ZONE` partition value that is infinite or outside the years 0001 to 9999 (in UTC for `TIMESTAMP WITH TIME ZONE`) fails the statement. An `INSERT` into a table partitioned on a `BLOB` column fails too, whoever created the table.
+* Since v2.0.1, a transaction that writes to a table fails at `COMMIT` with `commit conflict at version ⟨n⟩` if another writer committed to the table after the transaction read it. DuckDB does not retry; the transaction's changes are lost, so run it again.
 
 ## Supported Platforms
 

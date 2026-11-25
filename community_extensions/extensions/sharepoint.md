@@ -7,7 +7,7 @@ excerpt: |
 
 extension:
   name: sharepoint
-  version: 2026.11.13
+  version: 2026.11.22
   description: SharePoint and OneDrive in SQL -- files (sharepoint://), Excel workbooks, SharePoint lists, search and change feeds
   language: C++
   build: cmake
@@ -26,12 +26,13 @@ extension:
 
 repo:
   github: DataZooDE/duckdb-sharepoint
-  ref: a4426c0f600408465e2f13b30a1bee72e00d78e0
-  # ref builds against DuckDB 2.0 and variegata against v1.5.6
+  ref: 1a83d51252f26eed5070751c347f744568bb6ce5
+  # ref builds against DuckDB 2.0 (v2.0.0 by default, v2.0.1 on dispatch) and
+  # variegata against v1.5.6
   # (community-extensions scripts/build.py); a missing key falls back to ref.
   # One commit serves both lines (duckdb-compat), so at release both are the
   # same tagged SHA. No andium key: DuckDB 1.4.x is not supported.
-  variegata: a4426c0f600408465e2f13b30a1bee72e00d78e0
+  variegata: 1a83d51252f26eed5070751c347f744568bb6ce5
 
 docs:
   hello_world: |
@@ -97,8 +98,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 752
-extension_download_count_pretty: 752
+extension_download_count: 700
+extension_download_count_pretty: 700
 image: '/images/community_extensions/social_preview/preview_community_extension_sharepoint.png'
 layout: community_extension_doc
 ---
@@ -108,15 +109,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ |
-| macOS ARM64 | ❌ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

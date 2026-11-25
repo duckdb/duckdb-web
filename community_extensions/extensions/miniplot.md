@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: miniplot
   description: SQL-driven interactive charts, narrative HTML reports, and optional native PNG/PDF export
-  version: 0.0.5
+  version: 0.0.6
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nkwork9999/miniplot
-  ref: 01eb3f812f1503edf79a99cd29cfded3892ae85e
+  ref: 484d907e2f7654966c6319ae6c05d1b52d0cfce3
 
 docs:
   hello_world: |
@@ -69,10 +69,19 @@ docs:
     report JSON schema, source-build instructions and export setup are in the
     repository README and docs directory.
 
+    The source repository includes host-side Python classes for time-bin reduction,
+    gap-separated time series and fixed-boundary histogram counts. The Python module is
+    distributed as source and works with a host-provisioned DuckDB connection.
+
+    The embedded Python API also includes grouped statistics, sparse heatmaps, market bars,
+    treemaps, revision comparison, and 3D point aggregation.
+
+    [English project documentation](https://nkwork9999.github.io/miniplot/).
+
 extension_star_count: 26
 extension_star_count_pretty: 26
-extension_download_count: 929
-extension_download_count_pretty: 929
+extension_download_count: 855
+extension_download_count_pretty: 855
 image: '/images/community_extensions/social_preview/preview_community_extension_miniplot.png'
 layout: community_extension_doc
 ---
@@ -82,15 +91,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ✅ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

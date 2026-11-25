@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_lineage
   description: DuckLineage automatically captures data lineage from every DuckDB query and emits OpenLineage events.
-  version: 0.2.2
+  version: 0.4.0
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,8 @@ extension:
 
 repo:
   github: ilum-cloud/duck_lineage
-  ref: 33cb810b8025bca52e5a7ba5571a7400e53f6852
+  ref: 471136ef5109b364d1c4d3638263960abe26d801
+  variegata: d5ec5f21c72b755b3b0e3d6a7bfb634325d9c9b6
   andium: 98045876ee9f77b31dca907a5d481691661962af
 
 docs:
@@ -54,7 +55,7 @@ docs:
     The extension hooks into the DuckDB optimizer pipeline, analyzes each logical query plan,
     extracts input and output datasets together with their schemas, and asynchronously delivers
     structured OpenLineage events over HTTP — so query performance is not impacted by the
-    lineage backend's latency.
+    lineage backend's latency — or appends them to a local JSON Lines file when no backend is running.
 
     Features:
     - Automatic lineage capture — runs as a DuckDB optimizer extension, no query rewriting needed
@@ -72,6 +73,7 @@ docs:
     - DuckLake catalog support with namespace automatically resolved from the catalog DATA_PATH
     - processing_engine, dataSource and catalog facets for richer backend visualization
     - Asynchronous event delivery via a background worker thread
+    - File transport that appends events to a local JSON Lines file, for setups without a lineage server
     - Exponential-backoff retry with configurable max retries
     - Bounded in-memory event queue with overflow protection
     - API-key (bearer) authentication for OpenLineage backends
@@ -81,14 +83,16 @@ docs:
     - Debug logging mode that prints emitted JSON events to the console
 
     Tracked operations:
-    - INSERT, UPDATE, DELETE, MERGE
+    - INSERT, UPDATE, DELETE, MERGE (including INSERT ... ON CONFLICT and INSERT OR REPLACE)
     - CREATE TABLE, CREATE TABLE AS, CREATE VIEW, CREATE INDEX
     - DROP, ALTER
-    - COPY TO
+    - COPY TO, COPY FROM
     - SELECT (read-only lineage)
 
     Configuration (via DuckDB SET statements):
-    - duck_lineage_url: OpenLineage backend endpoint (required)
+    - duck_lineage_url: OpenLineage backend endpoint (required for the http transport)
+    - duck_lineage_transport: how events are delivered, 'http' (default) or 'file'
+    - duck_lineage_file_path: file the 'file' transport appends events to, one JSON event per line
     - duck_lineage_namespace: default dataset namespace (default: duckdb)
     - duck_lineage_api_key: bearer token for the backend (optional)
     - duck_lineage_debug: enable debug logging (default: false)
@@ -104,8 +108,8 @@ docs:
 
 extension_star_count: 82
 extension_star_count_pretty: 82
-extension_download_count: 3216
-extension_download_count_pretty: 3.2k
+extension_download_count: 2240
+extension_download_count_pretty: 2.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_lineage.png'
 layout: community_extension_doc
 ---
@@ -115,15 +119,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ❌ |
-| macOS AMD64 | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -163,19 +167,22 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                 name                  |                                                                       description                                                                        | input_type | scope  | aliases |
-|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| duck_lineage_api_key                  | API Key for OpenLineage backend                                                                                                                          | VARCHAR    | GLOBAL | []      |
-| duck_lineage_ca_cert_dir              | Path to a directory of CA certificates used to verify the OpenLineage backend's TLS certificate                                                          | VARCHAR    | GLOBAL | []      |
-| duck_lineage_ca_cert_file             | Path to a CA certificate bundle used to verify the OpenLineage backend's TLS certificate (falls back to the global ca_cert_file setting and CA env vars) | VARCHAR    | GLOBAL | []      |
-| duck_lineage_debug                    | Enable debug logging for OpenLineage events                                                                                                              | BOOLEAN    | GLOBAL | []      |
-| duck_lineage_exclude_dataset_prefixes | Comma-separated prefixes of dataset names to exclude from lineage events                                                                                 | VARCHAR    | GLOBAL | []      |
-| duck_lineage_max_queue_size           | Maximum number of events to queue before dropping                                                                                                        | BIGINT     | GLOBAL | []      |
-| duck_lineage_max_retries              | Maximum retry attempts for failed HTTP requests                                                                                                          | BIGINT     | GLOBAL | []      |
-| duck_lineage_namespace                | Namespace for OpenLineage events                                                                                                                         | VARCHAR    | GLOBAL | []      |
-| duck_lineage_proxy                    | Proxy URL to route OpenLineage requests through (empty honors proxy env vars)                                                                            | VARCHAR    | GLOBAL | []      |
-| duck_lineage_ssl_verify               | Verify the OpenLineage backend's TLS certificate (disable only for development/testing)                                                                  | BOOLEAN    | GLOBAL | []      |
-| duck_lineage_timeout                  | HTTP request timeout in seconds                                                                                                                          | BIGINT     | GLOBAL | []      |
-| duck_lineage_url                      | URL of the OpenLineage backend                                                                                                                           | VARCHAR    | GLOBAL | []      |
+|                 name                  |                                                                       description                                                                        | input_type | scope  | aliases |     typed_value      |
+|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|----------------------|
+| duck_lineage_api_key                  | API Key for OpenLineage backend                                                                                                                          | VARCHAR    | GLOBAL | []      |                      |
+| duck_lineage_ca_cert_dir              | Path to a directory of CA certificates used to verify the OpenLineage backend's TLS certificate                                                          | VARCHAR    | GLOBAL | []      |                      |
+| duck_lineage_ca_cert_file             | Path to a CA certificate bundle used to verify the OpenLineage backend's TLS certificate (falls back to the global ca_cert_file setting and CA env vars) | VARCHAR    | GLOBAL | []      |                      |
+| duck_lineage_debug                    | Enable debug logging for OpenLineage events                                                                                                              | BOOLEAN    | GLOBAL | []      | false                |
+| duck_lineage_exclude_dataset_prefixes | Comma-separated prefixes of dataset names to exclude from lineage events                                                                                 | VARCHAR    | GLOBAL | []      | __ducklake_metadata_ |
+| duck_lineage_file_path                | File the 'file' transport appends OpenLineage events to, one JSON document per line                                                                      | VARCHAR    | GLOBAL | []      |                      |
+| duck_lineage_max_queue_size           | Maximum number of events to queue before dropping                                                                                                        | BIGINT     | GLOBAL | []      | 10000                |
+| duck_lineage_max_retries              | Maximum retry attempts for failed HTTP requests                                                                                                          | BIGINT     | GLOBAL | []      | 3                    |
+| duck_lineage_namespace                | Namespace for OpenLineage events                                                                                                                         | VARCHAR    | GLOBAL | []      | duckdb               |
+| duck_lineage_proxy                    | Proxy URL to route OpenLineage requests through (empty honors proxy env vars)                                                                            | VARCHAR    | GLOBAL | []      |                      |
+| duck_lineage_ssl_verify               | Verify the OpenLineage backend's TLS certificate (disable only for development/testing)                                                                  | BOOLEAN    | GLOBAL | []      | true                 |
+| duck_lineage_timeout                  | HTTP request timeout in seconds                                                                                                                          | BIGINT     | GLOBAL | []      | 10                   |
+| duck_lineage_transport                | How OpenLineage events are delivered: 'http' (POST to duck_lineage_url) or 'file' (append to duck_lineage_file_path)                                     | VARCHAR    | GLOBAL | []      | http                 |
+| duck_lineage_url                      | URL of the OpenLineage backend                                                                                                                           | VARCHAR    | GLOBAL | []      |                      |
+| temp_directory                        | Set the directory to which temporary files are written.                                                                                                  | VARCHAR    | GLOBAL | []      | post.db.tmp          |
 
 

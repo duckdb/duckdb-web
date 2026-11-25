@@ -10,7 +10,7 @@ extension:
   name: biosignals
   description: |
     Reader utilities to import medical time series data into DuckDB as EDF(+)/BDF(+) files.
-  version: 0.0.2
+  version: 0.1.0
   language: C++
   build: cmake
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: nmontesg/biosignals
-  ref: 13e1e4c141a0e861f47009d3926956b41845a57a
+  ref: 894927d36d704159892a0e9b2229c6a5a77c5723
 
 docs:
   hello_world: |
@@ -52,8 +52,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 643
-extension_download_count_pretty: 643
+extension_download_count: 605
+extension_download_count_pretty: 605
 image: '/images/community_extensions/social_preview/preview_community_extension_biosignals.png'
 layout: community_extension_doc
 ---
@@ -63,15 +63,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

@@ -11,14 +11,12 @@ excerpt: |
 #   extensions/duckboost/docs/function_descriptions.csv
 # so the community “Added Functions” table is populated.
 #
-# DuckDB community CI builds `repo.ref` against DuckDB 2.0.0 LTS
-# (duckdb_version=v2.0.0, duckdb_commit=d54cbbe…). duckboost is 2.0-only:
-# do not set `variegata` or `ref_next`.
+# duckboost 0.1.0 targets DuckDB 2.0.1 LTS. The catalog selects its own engine.
 
 extension:
   name: duckboost
   description: SQL-native histogram GBDT in DuckDB with vendor dump import and plain-SQL export
-  version: 0.0.5
+  version: 0.1.0
   language: C++
   build: cmake
   license: MIT
@@ -29,8 +27,8 @@ extension:
 
 repo:
   github: JavOrraca/duckboost
-  # v0.0.5 release commit (tag v0.0.5). Raw SHA only — not a movable tag.
-  ref: 0c9dc402641c7c6a25faee93e8aeb5bb70123a27
+  # Peeled commit of the annotated v0.1.0 release tag.
+  ref: 0ef5c3ef8fd058b4e56f518ad12ced3c2437a2e3
 
 docs:
   # Mirrors the Getting Started penguins first-model loop. Uses a public raw URL so the
@@ -72,6 +70,10 @@ docs:
     imports XGBoost / LightGBM / CatBoost dumps, and exports orbital-style SQL
     (`duckboost_to_sql`) for inference without the extension.
 
+    Save fitted categorical dictionaries and numeric imputation with named-column models.
+    Calibrate quantile models on a held-out set and export lower, median and upper
+    predictions as SQL.
+
     The [Getting Started](https://javorraca.github.io/duckboost/getting-started.html) page
     walks through the same Palmer penguins first model using the package CSV over HTTPS.
 
@@ -79,10 +81,10 @@ docs:
     Optional in-process XGBoost / LightGBM training requires rebuilding with
     `DUCKBOOST_WITH_XGBOOST` / `DUCKBOOST_WITH_LIGHTGBM`. CatBoost is import-only.
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 587
-extension_download_count_pretty: 587
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 602
+extension_download_count_pretty: 602
 image: '/images/community_extensions/social_preview/preview_community_extension_duckboost.png'
 layout: community_extension_doc
 ---
@@ -92,15 +94,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

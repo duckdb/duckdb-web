@@ -8,11 +8,11 @@ excerpt: |
 extension:
   name: secret_vault
   description: "Encrypted local storage for persistent secrets: a drop-in SecretStorage (local_encrypted) that writes AES-256-GCM ciphertext instead of plaintext, with keyring/passphrase/env key providers, migration, rotation, and one-time-envelope export/import"
-  version: 0.2.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: BSL 1.1
-  excluded_platforms: "linux_amd64_musl;osx_amd64;osx_arm64;wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;windows_amd64_rtools"
+  excluded_platforms: "linux_amd64_musl;osx_amd64;osx_arm64;wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw"
   requires_toolchains: rust
   maintainers:
     - robert-guangzhou
@@ -20,22 +20,24 @@ extension:
 
 repo:
   github: robert-guangzhou/duckdb-secret-vault
-  ref: 6a625a54cfb6b634e953e316391295f3225711ca
+  ref: 05711e360231f0149a700d664bbfba3a2de50f63
 
 docs:
   hello_world: |
     INSTALL secret_vault FROM community;
     LOAD secret_vault;
 
-    -- choose where the encryption key lives (keyring | passphrase | env)
-    SET secret_vault_provider = 'env';        -- e.g. SECRET_VAULT_KEY injected by your scheduler
-
-    -- persistent secrets are now written encrypted (DSVLT + AES-256-GCM)
+    -- Persistent secrets are now written encrypted (DSVLT + AES-256-GCM).
+    -- The default key provider is 'keyring' (OS keychain).
     CREATE PERSISTENT SECRET my_s3 IN local_encrypted (
         TYPE s3, KEY_ID 'AKIA...', SECRET 'shhh', REGION 'us-east-1');
 
     SELECT name, storage, secret_string FROM duckdb_secrets();
     -- my_s3 | local_encrypted | ... secret=redacted ...
+
+    -- On servers and in CI, use the 'env' provider instead.
+    -- It requires SECRET_VAULT_KEY (base64, 32 bytes) to be set before DuckDB starts:
+    -- SET secret_vault_provider = 'env';
 
   extended_description: |
     DuckDB stores persistent secrets on disk in **unencrypted** binary form
@@ -52,21 +54,22 @@ docs:
 
     Also ships `secret_vault_status()`, `secret_vault_migrate()` (plaintext
     local_file secrets -> encrypted, conflict-safe), `secret_vault_rotate()`
-    (re-encrypt everything under a new provider/key), and one-time encrypted
-    **envelopes** (`secret_vault_export`/`import`) to move secrets between
-    instances without ever putting a key in the environment: the envelope is
-    sealed under a single-use 256-bit transport code (base32, entered via stdin),
-    and the importing instance re-encrypts with its own local key. Works with any
-    secret type (s3, mysql, postgres, nats_rw, ...) because it encrypts DuckDB's
-    own serialization blob.
+    (re-encrypt everything under a new provider/key), `secret_vault_reload()`
+    (pick up secrets added, changed or removed on disk by another instance),
+    and one-time encrypted **envelopes** (`secret_vault_export`/`import`) to
+    move secrets between instances without ever putting a key in the
+    environment: the envelope is sealed under a single-use 256-bit transport
+    code (base32, entered via stdin), and the importing instance re-encrypts
+    with its own local key. Works with any secret type (s3, mysql, postgres,
+    nats_rw, ...) because it encrypts DuckDB's own serialization blob.
 
-    Threat model, key-generation guide and dev/repin docs live in the repo's
-    `docs/` directory.
+    A key-generation guide is in the README; the threat model and the
+    development / repin docs are in the repo's `docs/` directory.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 76
-extension_download_count_pretty: 76
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 583
+extension_download_count_pretty: 583
 image: '/images/community_extensions/social_preview/preview_community_extension_secret_vault.png'
 layout: community_extension_doc
 ---
@@ -76,15 +79,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ❌ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -132,10 +135,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|          name          |                                     description                                     | input_type | scope  | aliases |                typed_value                |
-|------------------------|-------------------------------------------------------------------------------------|------------|--------|---------|-------------------------------------------|
-| secret_vault_directory | Directory for local_encrypted secret files (changeable only while storage is empty) | VARCHAR    | GLOBAL | []      | /home/runner/.duckdb/stored_secrets_vault |
-| secret_vault_provider  | Key provider for the local_encrypted secret storage: keyring \| passphrase \| env   | VARCHAR    | GLOBAL | []      | keyring                                   |
-| temp_directory         | Set the directory to which temporary files are written.                             | VARCHAR    | GLOBAL | []      | post.db.tmp                               |
+|          name          |                                                                     description                                                                      | input_type | scope  | aliases |                typed_value                |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------------------------------------|
+| secret_vault_directory | Directory for local_encrypted secret files (changeable only while storage is empty)                                                                  | VARCHAR    | GLOBAL | []      | /home/runner/.duckdb/stored_secrets_vault |
+| secret_vault_provider  | Key provider for the local_encrypted secret storage: keyring \| passphrase \| env (process-global: affects the whole process, not just this session) | VARCHAR    | GLOBAL | []      | keyring                                   |
+| temp_directory         | Set the directory to which temporary files are written.                                                                                              | VARCHAR    | GLOBAL | []      | post.db.tmp                               |
 
 

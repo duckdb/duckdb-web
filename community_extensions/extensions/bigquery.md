@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: bigquery
   description: Integrates DuckDB with Google BigQuery, allowing direct querying and management of BigQuery datasets
-  version: 0.13.0
+  version: 0.14.0
   language: C++
   build: cmake
   license: MIT
@@ -22,7 +22,7 @@ extension:
 repo:
   github: hafenkran/duckdb-bigquery
   andium: ec5cf7b0342e7a46f7505c1176d8e46d963d7815
-  ref: 5439a6a58439af4c05064f80a28b159c5a1424e7
+  ref: 440b30ba22396d0110662ee3a657de9cfeb8e6f3
 
 docs:
   hello_world: |
@@ -75,8 +75,8 @@ docs:
 
 extension_star_count: 173
 extension_star_count_pretty: 173
-extension_download_count: 85481
-extension_download_count_pretty: 85.5k
+extension_download_count: 107293
+extension_download_count_pretty: 107.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---
@@ -86,15 +86,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -150,6 +150,7 @@ This extension does not add any types.
 | bq_auth_timeout_s                    | Timeout for BigQuery authentication token fetches in seconds                                                                                                                                                                                                                  | BIGINT     | GLOBAL | []      | 10          |
 | bq_bignumeric_as_varchar             | Read BigQuery BIGNUMERIC data type as VARCHAR                                                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      | true        |
 | bq_curl_ca_bundle_path               | Path to the CA bundle for curl                                                                                                                                                                                                                                                | VARCHAR    | GLOBAL | []      |             |
+| bq_curl_ssl_revocation_mode          | Certificate revocation mode for cURL with Schannel: default, best_effort, or disabled. Certificate chains and hostnames are still verified                                                                                                                                    | VARCHAR    | GLOBAL | []      | default     |
 | bq_debug_show_queries                | DEBUG SETTING: print all queries sent to BigQuery to stdout                                                                                                                                                                                                                   | BOOLEAN    | GLOBAL | []      | false       |
 | bq_default_location                  | Default location for BigQuery queries                                                                                                                                                                                                                                         | VARCHAR    | GLOBAL | []      | US          |
 | bq_enable_aggregate_pushdown         | EXPERIMENTAL: rewrite supported BigQuery aggregate queries to query jobs. Unsupported shapes fall back before a remote query is started. Runtime errors from started BigQuery jobs are not retried locally, and GoogleSQL cast/string/float semantics may differ from DuckDB. | BOOLEAN    | GLOBAL | []      | false       |

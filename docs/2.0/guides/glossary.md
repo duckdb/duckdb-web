@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/glossary
 - /docs/preview/guides/glossary
 title: Glossary of Terms
+how_to_topic: tools-meta
 ---
 
 This page contains a glossary of a few common terms used in DuckDB.

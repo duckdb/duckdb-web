@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_opendalfs
   description: Remote storage filesystem for DuckDB via Apache OpenDAL — S3, GCS, Azure, Hugging Face, WebDAV, SFTP, and more, with DuckDB secret-based auth.
-  version: 0.3.0
+  version: 0.3.1
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-opendal-filesystem
-  ref: 84b00dc969aacf2f87d3a73f4532b6aa507e54b4
+  ref: d8a266e28f19ae64b229766ac187b44f367b986c
 
 docs:
   hello_world: |
@@ -40,10 +40,10 @@ docs:
     `duckdb_opendalfs` is an extension which supports many backends (S3, GCS, Azure Blob, Hugging Face, etc)
     and secret management via `opendal_<backend>` secret types.
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 823
-extension_download_count_pretty: 823
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 794
+extension_download_count_pretty: 794
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_opendalfs.png'
 layout: community_extension_doc
 ---
@@ -53,15 +53,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

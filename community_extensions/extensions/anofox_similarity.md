@@ -7,7 +7,7 @@ excerpt: |
 
 extension:
   name: anofox_similarity
-  version: 2026.11.14
+  version: 2026.11.22
   description: "Multi-modal product similarity search for manufacturing supply chain planning. Find similar materials by BOM component overlap (Jaccard), graph-structural similarity (Weisfeiler-Lehman kernel), text embeddings, and transactional patterns, with predecessor detection and cold-start analog matching for demand forecasting. Requirements coverage matching: direction-aware value checks with units (EN/DE), property trees from JSON, a traced coverage kernel with gap lists, catalogue classification with your own vectors, vocabulary review, evaluation, and MinHash/LSH recall. Asset Administration Shell (AAS v3): read JSON/XML/AASX, match on ECLASS / IEC CDD ids, check data quality, and write results back as AAS."
   language: C++
   build: cmake
@@ -18,8 +18,8 @@ extension:
 
 repo:
   github: DataZooDE/anofox-similarity
-  ref: 4b5e49f79bf210a800ca5e8e7bce26c179a3a548
-  variegata: 4b5e49f79bf210a800ca5e8e7bce26c179a3a548
+  ref: d7f8e29ce54c8f3984e5c325ccba0cacba48dfaa
+  variegata: d7f8e29ce54c8f3984e5c325ccba0cacba48dfaa
 
 docs:
   hello_world: |
@@ -87,8 +87,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 856
-extension_download_count_pretty: 856
+extension_download_count: 811
+extension_download_count_pretty: 811
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_similarity.png'
 layout: community_extension_doc
 ---
@@ -98,15 +98,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ✅ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

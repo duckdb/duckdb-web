@@ -116,6 +116,29 @@ FROM read_parquet(
 
 `hive_types` will be auto-detected for the following types: `DATE`, `TIMESTAMP`, and `BIGINT`. To switch off the auto-detection, the flag `hive_types_autocast = 0` can be set.
 
+### NULL Partition Values
+
+DuckDB writes a SQL `NULL` partition value as `__HIVE_DEFAULT_PARTITION__`
+in the directory name and reads that marker back as SQL `NULL`. A
+`VARCHAR` partition value containing the text `'NULL'` is distinct: it
+uses a directory named `bucket=NULL` in this example.
+
+```sql
+COPY (SELECT 1 AS id, NULL::VARCHAR AS bucket UNION ALL SELECT 2, 'NULL')
+TO 'hive_null_example' (FORMAT parquet, PARTITION_BY (bucket));
+
+SELECT id, bucket, bucket IS NULL AS is_sql_null
+FROM read_parquet(
+    'hive_null_example/*/*.parquet',
+    hive_partitioning = true,
+    hive_types = {'bucket': 'VARCHAR'}
+)
+ORDER BY id;
+```
+
+The first row has `is_sql_null = true`. The second has
+`is_sql_null = false` even though the value is displayed as `NULL`.
+
 ### Writing Partitioned Files
 
 See the [Partitioned Writes]({% link docs/2.0/data/partitioning/partitioned_writes.md %}) section.

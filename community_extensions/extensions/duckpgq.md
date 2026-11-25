@@ -20,7 +20,7 @@ repo:
   github: cwida/duckpgq-extension
   andium: 42eea114b22fad93f04cb7edf50d2b0077e464fa
   variegata: 61f5d08270bef2c81fc4e5d9af32739e67adc2be
-  ref: 9c11bc192a071c9e44cef16cced90a22d7d7db2c
+  ref: 7e300af593519e7fa673680f588ae1a03b41c7f8
 
 docs:
   hello_world: |
@@ -66,10 +66,10 @@ docs:
 
     *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 515
-extension_star_count_pretty: 515
-extension_download_count: 23090
-extension_download_count_pretty: 23.1k
+extension_star_count: 516
+extension_star_count_pretty: 516
+extension_download_count: 26242
+extension_download_count_pretty: 26.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -79,15 +79,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ✅ | ✅ |
-| macOS ARM64 | ❌ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ✅ |
-| WebAssembly | ❌ | ✅ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ✅ | ✅ |
+| WebAssembly | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -132,12 +132,14 @@ LOAD {{ page.extension.name }};
 | iterativelength              | scalar        | NULL        | NULL    |          |
 | iterativelength2             | scalar        | NULL        | NULL    |          |
 | iterativelengthbidirectional | scalar        | NULL        | NULL    |          |
+| iterativelengthbounded       | scalar        | NULL        | NULL    |          |
 | local_clustering_coefficient | scalar        | NULL        | NULL    |          |
 | local_clustering_coefficient | table         | NULL        | NULL    |          |
 | pagerank                     | scalar        | NULL        | NULL    |          |
 | pagerank                     | table         | NULL        | NULL    |          |
 | reachability                 | scalar        | NULL        | NULL    |          |
 | shortestpath                 | scalar        | NULL        | NULL    |          |
+| shortestpathbounded          | scalar        | NULL        | NULL    |          |
 | show_property_graphs         | pragma        | NULL        | NULL    |          |
 | summarize_property_graph     | table         | NULL        | NULL    |          |
 | weakly_connected_component   | scalar        | NULL        | NULL    |          |

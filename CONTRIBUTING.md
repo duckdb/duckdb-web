@@ -80,7 +80,7 @@ To submit a blog post:
 * Fill in the front matter as described in the [next section](#frontmatters-for-blog--event--library-entries). The `excerpt` is a 1–3 sentence summary shown on the post's card and should make readers want to click.
 * Add each author to [`_data/authors.yml`](_data/authors.yml) with a `picture` pointing to a square photo (e.g., 256×256 pixels) in `images/blog/authors/`.
 * Put the post's images in a dedicated folder, `images/blog/⟨topic⟩/`.
-* **Do not create a thumbnail.** Instead, send us a brief description of what the thubmnail should contains and we'll add it into the post.
+* **Do not create a thumbnail.** Instead, send us a brief description of what the thumbnail should contain and we'll add it into the post.
 * Follow the [style guide](#style-guide) and make code examples self-contained so readers can reproduce them.
 
 ## Frontmatters for Blog / Event / Library Entries

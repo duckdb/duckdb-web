@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: anofox_decide
   description: Natural-language decisions on your data inside DuckDB — yes/no probabilities, one-of-N choices and ordinal scores with the answer sets written in the query, from hosted (TypeSafe Jev, Liquid AI D1, Cloudflare Clef, OpenAI Decisions, Gemini Decisions), local-server and in-process ONNX decision models, plus calibration metrics
-  version: '2026.11.13'
+  version: '2026.11.24'
   language: C++
   build: cmake
   license: MIT
@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: DataZooDE/anofox-decide
-  ref: 9dc6229ed59c035f2ad5cb5da218e48a47c0194f
-  variegata: 9dc6229ed59c035f2ad5cb5da218e48a47c0194f
+  ref: b3a4fa32ca03511ac1d8a77e88262569cefe02e3
+  variegata: b3a4fa32ca03511ac1d8a77e88262569cefe02e3
 
 docs:
   hello_world: |
@@ -125,8 +125,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 862
-extension_download_count_pretty: 862
+extension_download_count: 811
+extension_download_count_pretty: 811
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_decide.png'
 layout: community_extension_doc
 ---
@@ -136,15 +136,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

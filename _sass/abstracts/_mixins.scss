@@ -4,21 +4,22 @@
 @mixin display-1 {
 	font-size: var(--type-display-1, 44px);
 	font-weight: 600;
-	line-height: 1.2;
+	line-height: 1.05;
+	letter-spacing: -0.00375em;
 	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin display-2 {
 	font-size: var(--type-display-2, 34px);
 	font-weight: 600;
-	line-height: 1.2;
+	line-height: 1.1;
 	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin headline-1 {
 	font-size: var(--type-headline-1, 26px);
 	font-weight: 600;
-	line-height: 1.2;
+	line-height: 1.15;
 	font-family: "SuisseIntl", sans-serif;
 }
 
@@ -41,7 +42,7 @@
 @mixin headline-4 {
 	font-size: var(--type-headline-4, 15px);
 	font-weight: 600;
-	line-height: 1.2;
+	line-height: 1.3;
 	letter-spacing: 0.001em;
 	font-family: "SuisseIntl", sans-serif;
 }
@@ -390,10 +391,6 @@
 		margin-block: 2.5rem 0;
 	}
 
-	#{$scope} :is(blockquote, figure.quote, table, .monospace_table, .highlighter-rouge, .highlight) + :is(h1, h2, h3, h4, h5, h6) {
-		margin-top: 2rem;
-	}
-
 	#{$scope} :is(h1, h2, h3, h4, h5, h6, .headlinebar) + :is(h1, h2, h3, h4, h5, h6) {
 		margin-top: 1rem;
 	}
@@ -443,9 +440,8 @@
 		margin: 20px 0;
 	}
 
-	img.center {
-		display: block;
-		margin-inline: auto;
+	figure.image img {
+		margin: 0;
 	}
 
 	table img {
@@ -474,6 +470,10 @@
 	li {
 		line-height: 1.65;
 		font-weight: 400;
+	}
+
+	li :is(table, .highlighter-rouge) {
+		line-height: 1.5;
 	}
 
 	ol {
@@ -539,14 +539,18 @@
 	}
 
 	h2 {
-		@include headline-3();
+		@include headline-2();
 	}
 
 	h3 {
-		@include headline-4();
+		@include headline-3();
 	}
 
 	h4 {
+		@include headline-4();
+	}
+
+	h5 {
 		@include headline-5();
 	}
 

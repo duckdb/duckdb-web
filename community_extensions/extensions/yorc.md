@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: yorc
   description: "Cultivate your research identity and networks: read and convert ORCID v3.0 researcher records, XML and JSON (API documents and the ORCID Public Data File dumps), as tables. An independent open-source project, not affiliated with, endorsed by or sponsored by ORCID, Inc.; no access to the ORCID Sandbox or the ORCID Member API, and no requests to ORCID."
-  version: 0.2.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: mgbilby/yorc-duckdb
-  ref: bf20534dedcc291003d0b092077b87aa77a37853
-  variegata: bf20534dedcc291003d0b092077b87aa77a37853
+  ref: a1ab481c753918758465c4e3a355820425f262de
+  variegata: a1ab481c753918758465c4e3a355820425f262de
 
 docs:
   hello_world: |
@@ -136,8 +136,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 577
-extension_download_count_pretty: 577
+extension_download_count: 633
+extension_download_count_pretty: 633
 image: '/images/community_extensions/social_preview/preview_community_extension_yorc.png'
 layout: community_extension_doc
 ---
@@ -147,15 +147,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

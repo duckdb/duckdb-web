@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: oracle_scanner
   description: Read and write Oracle Database with no Oracle client
-  version: '0.8.0'
+  version: '0.8.3'
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,9 +19,9 @@ extension:
 
 repo:
   github: krokozyab/quack-oracle
-  # The commit tagged v0.8.0, built for DuckDB v2.0.0, pinned by SHA so what is
+  # The commit tagged v0.8.3, built for DuckDB v2.0.0 and v2.0.1, pinned by SHA so what is
   # built cannot move.
-  ref: e2989f8baf901e42fe1c45be577619041c60b52e
+  ref: fcf53d04c65b4e223fdb19fd66643be6386ba76a
   # DuckDB 1.5.6 stays on v0.4.0, the last release built for that line.
   variegata: d4aa50f9bf23ca44b44f0df48fb0065ba751f5be
 
@@ -89,10 +89,10 @@ docs:
     Full documentation, supported types and limits:
     https://github.com/krokozyab/quack-oracle
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 2155
-extension_download_count_pretty: 2.2k
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 1384
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc
 ---
@@ -102,15 +102,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

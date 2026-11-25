@@ -133,11 +133,11 @@ The newest release offering a client gets unversioned install commands, older on
 
 <h4>Direct Downloads</h4>
 {%- if artifacts.cli.linux_musl %}
-<p>glibc builds (recommended):</p>
+<h5>glibc Builds (Recommended)</h5>
 {%- endif %}
 {% include install/downloads.html base=downloads_url artifacts=artifacts.cli.linux %}
 {%- if artifacts.cli.linux_musl %}
-<p>musl libc builds (for Alpine Linux):</p>
+<h5>musl libc Builds (for Alpine Linux)</h5>
 {% include install/downloads.html base=downloads_url artifacts=artifacts.cli.linux_musl %}
 {%- endif %}
 {{ pip_section }}
@@ -345,9 +345,9 @@ Releases without a docs page for the client link to the DuckDB.NET website. {%- 
 
 <div data-release="{{ release_version }}" data-environment="csharp" data-label="{{ v_csharp_preview }}" data-docs="{{ docs }}">
 
-<blockquote><p>Warning The DuckDB C# client for DuckDB {{ v_core }} is a pre-release (<a href="https://www.nuget.org/packages/DuckDB.NET.Data.Full/{{ v_csharp_preview }}">version {{ v_csharp_preview }}</a>).</p></blockquote>
-
 {% highlight bash %}dotnet add package DuckDB.NET.Data.Full --prerelease{% endhighlight %}
+
+<blockquote><p>Warning The DuckDB C# client for DuckDB {{ v_core }} is a pre-release (<a href="https://www.nuget.org/packages/DuckDB.NET.Data.Full/{{ v_csharp_preview }}">version {{ v_csharp_preview }}</a>).</p></blockquote>
 
 </div>
 {%- endif -%}
@@ -357,8 +357,10 @@ Releases without a docs page for the client link to the DuckDB.NET website. {%- 
 
 <div data-release="{{ release_version }}" data-environment="claude" data-docs="https://github.com/hannes/duckdb-claude-plugin">
 
-{% highlight text %}
+{% highlight postscript %}
 /plugin marketplace add duckdb/duckdb-claude-plugin
+{% endhighlight %}
+{% highlight postscript %}
 /plugin install duckdb-dialect@duckdb-dialect
 {% endhighlight %}
 

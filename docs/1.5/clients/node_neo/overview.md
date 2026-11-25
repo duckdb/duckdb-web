@@ -6,7 +6,7 @@ title: Node.js Client (Neo)
 
 > Installation To use the DuckDB Node.js client, visit the [Node.js installation page]({% link docs/2.0/installation.html %}?environment=nodejs).
 >
-> The latest stable version of the DuckDB Node.js (Neo) client is {% if site.maintained_duckdb_node_neo_version != "" %}{{ site.maintained_duckdb_node_neo_version }}{% else %}{{ site.old_lts_duckdb_node_neo_version }}{% endif %}.
+> The latest stable version of the DuckDB Node.js (Neo) client is {% if site.maintained_duckdb_node_neo_version != "" %}{{ site.maintained_duckdb_node_neo_version }}{% else %}1.4.5{% endif %}.
 
 An API for using [DuckDB]({% link index.html %}) in [Node.js](https://nodejs.org/).
 

@@ -526,7 +526,7 @@ The `duckdb_types()` function provides metadata about the data types available i
 
 ## `duckdb_variables`
 
-The `duckdb_variables()` function provides metadata about the variables available in the DuckDB instance.
+The `duckdb_variables()` function provides metadata about the [SQL-level variables]({% link docs/2.0/sql/statements/set_variable.md %}) available in the DuckDB instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
