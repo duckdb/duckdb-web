@@ -63,8 +63,9 @@ Spilling is on by default and writes to `js_buffer://tmp`, buffers the runtime h
 
 ```ts
 await db.open({
-    path: 'opfs://analytics.duckdb',
-    temporaryDirectory: 'opfs://tmp',
+    path: ‘opfs://analytics.duckdb’,
+    accessMode: duckdb.DuckDBAccessMode.READ_WRITE,
+    temporaryDirectory: ‘opfs://tmp’,
 });
 ```
 
@@ -72,9 +73,9 @@ See [Out of Memory]({% link docs/2.0/clients/wasm/troubleshoot.md %}#out-of-memo
 
 ## Multithreading with Loadable Extensions
 
-The threaded build can now load extensions, which it could not before. The `threads` bundle uses the `wasm_threads` extension platform, and the `base` bundle uses `wasm_base`, so each loads the extension build that matches it.
+The threaded build can now load extensions, which it could not before. The `threads` bundle uses the `wasm_threads` extension platform, and the `base` bundle uses `wasm_eh`, so each loads the extension build that matches it.
 
-To opt into threading, add the `threads` bundle explicitly (because `getJsDelivrBundles()` returns only `base`), serve the page as cross-origin isolated, and set `maximumThreads`:
+To opt into threading, add the `threads` bundle explicitly (because `getJsDelivrBundles()` returns only `base`) and serve the page as cross-origin isolated:
 
 ```ts
 const DIST = 'https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/';
@@ -88,7 +89,7 @@ const bundles: duckdb.DuckDBBundles = {
 };
 const bundle = await duckdb.selectBundle(bundles);
 // ... instantiate as usual, then:
-await db.open({ maximumThreads: 4 });
+await db.open(bundle.pthreadWorker ? { maximumThreads: 4 } : {});
 ```
 
 On a page that is not cross-origin isolated, `selectBundle` falls back to `base` and the same code runs single-threaded. See [Threading]({% link docs/2.0/clients/wasm/instantiation.md %}#threading) for guidance on setting up cross-origin isolation and testing whether you're running the threaded or fallback build.
@@ -129,7 +130,7 @@ Most applications only need to touch their bundle definitions. The breaking chan
 
 * The `mvp`, `eh`, and `coi` bundles are gone. Use `base` in their place, and `threads` where you used `coi`. If you call `getJsDelivrBundles()` and `selectBundle()` without naming bundles yourself, no change is required.
 * The distribution filenames follow the new names: `duckdb-base.wasm`, `duckdb-browser-base.worker.js`, `duckdb-threads.wasm`, `duckdb-browser-threads.worker.js`, and `duckdb-browser-threads.pthread.worker.js`. Update any hardcoded paths.
-* Extension platforms are now `wasm_base` and `wasm_threads`. The `wasm_mvp` and `wasm_eh` platforms no longer exist.
+* Extension platforms keep their names: `wasm_eh` for the `base` bundle and `wasm_threads` for the `threads` bundle. DuckDB-Wasm no longer uses `wasm_mvp`.
 * Exception handling is required. A browser too old to [support it](https://caniuse.com/wf-wasm-exception-handling) can no longer run DuckDB-Wasm, and `selectBundle` throws rather than falling back to an MVP build.
 
 ## Conclusion
