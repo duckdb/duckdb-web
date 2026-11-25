@@ -256,5 +256,5 @@ For production Iceberg workflows with cloud catalogs (Amazon S3 Tables, Nessie, 
 
 - [DuckDB Iceberg extension documentation]({% link docs/2.0/core_extensions/iceberg/overview.md %})
 - [Inside an Iceberg Table]({% post_url 2026-10-13-inside-iceberg-table %})
-- [DuckDB 2.0 Release Notes](https://github.com/duckdb/duckdb/releases/tag/v2.0.0)
-- [DuckDB 2.0.1 Release Notes](https://github.com/duckdb/duckdb/releases/tag/v2.0.1)
+- [Announcing DuckDB 2.0](https://duckdb.org/2026/11/15/announcing-duckdb-20)
+- [Announcing DuckDB 2.0.1](https://duckdb.org/2026/11/20/announcing-duckdb-201)
