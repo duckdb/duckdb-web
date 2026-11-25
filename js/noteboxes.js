@@ -8,7 +8,7 @@
 		deprecated: "alert-circle",
 		update: "refresh-cw-02",
 		installation: "settings-02",
-		showquote: "quotation_mark",
+		showquote: "message-text-square-02",
 		new: "stars-01"
 	};
 
