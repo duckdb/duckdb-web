@@ -26,6 +26,19 @@ The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific
 > DuckDB has a [tldr page](https://tldr.inbrowser.app/pages/common/duckdb), which summarizes the most common uses of the CLI client.
 > If you have [tldr](https://github.com/tldr-pages/tldr) installed, you can display it by running `tldr duckdb`.
 
+### Installing with pip
+
+The CLI is also a Python package, for environments that get their software through pip:
+
+```bash
+pip install duckdb-cli
+duckdb
+```
+
+The package also installs the same command as `duckdb-cli`, so `uvx duckdb-cli` runs it without installing anything first.
+
+Extensions come as packages too, as extras of `duckdb-cli`: `pip install "duckdb-cli[httpfs]"` installs the `httpfs` extension into the environment, and `LOAD httpfs` finds it there without a download. See [Extensions as Python Packages]({% link docs/2.0/extensions/python_packages.md %}).
+
 ## Getting Started
 
 Once the CLI executable has been downloaded, decompress it and save it to any directory.

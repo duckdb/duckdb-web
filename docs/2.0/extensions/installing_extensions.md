@@ -150,6 +150,10 @@ For many clients, using SQL to load and install extensions is the preferred meth
 API to install and load extensions. For example, the [Python client]({% link docs/2.0/clients/python/overview.md %}#loading-and-installing-extensions), has dedicated `install_extension(extension: str)` and `load_extension(extension: str)` methods. For more details on a specific client API, refer
 to the [Client API documentation]({% link docs/2.0/clients/overview.md %})
 
+## Installing Extensions with pip
+
+Every core extension is also a Python package, `duckdb-core-ext-⟨name⟩`{:.language-sql .highlight}, and an extra of the `duckdb-cli` package. `pip install "duckdb-cli[httpfs]"` places the extension binary in the Python environment, where the `duckdb` command finds it without a download. See [Extensions as Python Packages]({% link docs/2.0/extensions/python_packages.md %}).
+
 ## Installation Location
 
 By default, extensions are installed under the user's home directory:

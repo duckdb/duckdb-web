@@ -104,7 +104,7 @@ Click here to see a more detailed breakdown of the benchmark results.
 </summary>
 
 This figure shows the results per query, including the standard deviation error bar.
-![mean_per_query](/images/blog/duckdb-vortex/tpch_rowgram.png)
+![mean_per_query]({% link images/blog/duckdb-vortex/tpch_rowgram.png %})
 The following is the summary of the sizes of the datasets. Note that both Parquet v1 and v2 are using the default compression used by the DuckDB Parquet writer, which is Snappy. In this case, Vortex is not using any general-purpose compression but still keeps the data sizes competitive.
 
 | Table | parquet_v1 | parquet_v2 | vortex |

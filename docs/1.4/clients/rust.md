@@ -4,7 +4,7 @@ layout: docu
 title: Rust Client
 ---
 
-> The latest stable version of the DuckDB Rust client is {% if site.maintained_duckdb_rust_version != "" %}{{ site.maintained_duckdb_rust_version }}{% else %}{{ site.old_lts_duckdb_rust_version }}{% endif %}.
+> The latest stable version of the DuckDB Rust client is {% if site.maintained_duckdb_rust_version != "" %}{{ site.maintained_duckdb_rust_version }}{% else %}1.4.5{% endif %}.
 
 ## Installation
 

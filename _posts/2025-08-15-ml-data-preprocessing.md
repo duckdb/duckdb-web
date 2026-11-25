@@ -526,7 +526,7 @@ The figure below shows the execution times on a MacBook Pro with 16 GB,
 demonstrating that DuckDB offers a significant performance improvement over `scikit-learn` for the data preprocessing steps.
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/ml-data-preprocessing/ml_data_preprocessing.png">
+    <a href="{% link images/blog/ml-data-preprocessing/ml_data_preprocessing.png %}">
         <img
           src="{% link images/blog/ml-data-preprocessing/ml_data_preprocessing.png %}"
           alt="Data Preprocessing Benchmark, During Training"

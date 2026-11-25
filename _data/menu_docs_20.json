@@ -21,6 +21,21 @@
       "url": "/docs/2.0/guides/"
     },
     {
+      "page": "What's New in the Docs",
+      "slug": "",
+      "url": "/docs/2.0/whats_new_in_the_docs"
+    },
+    {
+      "page": "Glossary of Terms",
+      "slug": "",
+      "url": "/docs/2.0/guides/glossary"
+    },
+    {
+      "page": "Browsing Offline",
+      "slug": "",
+      "url": "/docs/2.0/guides/offline-copy"
+    },
+    {
       "page": "Import & Export",
       "group_start": true,
       "overview": "/docs/2.0/data/overview",
@@ -167,6 +182,23 @@
         {
           "page": "INSERT Statements",
           "path": "/docs/2.0/data/insert"
+        },
+        {
+          "page": "How-to Guides",
+          "subfolderitems": [
+            {
+              "page": "File Formats",
+              "path": "/docs/2.0/guides/file_formats/overview"
+            },
+            {
+              "page": "Network and Cloud Storage",
+              "path": "/docs/2.0/guides/network_cloud_storage/overview"
+            },
+            {
+              "page": "Database Integration",
+              "path": "/docs/2.0/guides/database_integration/overview"
+            }
+          ]
         }
       ]
     },
@@ -979,7 +1011,24 @@
         },
         {
           "page": "R",
-          "path": "/docs/2.0/clients/r"
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/clients/r/overview"
+            },
+            {
+              "page": "duckplyr",
+              "path": "/docs/2.0/clients/r/duckplyr"
+            },
+            {
+              "page": "duckdf",
+              "path": "/docs/2.0/clients/r/duckdf"
+            },
+            {
+              "page": "dbplyr",
+              "path": "/docs/2.0/clients/r/dbplyr"
+            }
+          ]
         },
         {
           "page": "Go",
@@ -1219,6 +1268,39 @@
               "path": "/docs/2.0/clients/tertiary_clients/swift"
             }
           ]
+        },
+        {
+          "page": "SQL Editors",
+          "subfolderitems": [
+            {
+              "page": "Beekeeper Studio",
+              "path": "/docs/2.0/guides/sql_editors/beekeeper_studio"
+            },
+            {
+              "page": "DataGrip",
+              "path": "/docs/2.0/guides/sql_editors/datagrip"
+            },
+            {
+              "page": "DBeaver",
+              "path": "/docs/2.0/guides/sql_editors/dbeaver"
+            },
+            {
+              "page": "DBine",
+              "path": "/docs/2.0/guides/sql_editors/dbine"
+            },
+            {
+              "page": "LibreDB Studio",
+              "path": "/docs/2.0/guides/sql_editors/libredb_studio"
+            },
+            {
+              "page": "OrcaQ",
+              "path": "/docs/2.0/guides/sql_editors/orcaq"
+            },
+            {
+              "page": "VisuaLeaf",
+              "path": "/docs/2.0/guides/sql_editors/visualeaf"
+            }
+          ]
         }
       ]
     },
@@ -1241,6 +1323,10 @@
             {
               "page": "Advanced Installation Methods",
               "path": "/docs/2.0/extensions/advanced_installation_methods"
+            },
+            {
+              "page": "Extensions as Python Packages",
+              "path": "/docs/2.0/extensions/python_packages"
             },
             {
               "page": "Versioning of Extensions",
@@ -1294,6 +1380,10 @@
             {
               "page": "Full Text Search",
               "path": "/docs/2.0/core_extensions/full_text_search"
+            },
+            {
+              "page": "Glue",
+              "path": "/docs/2.0/core_extensions/glue"
             },
             {
               "page": "httpfs (HTTP and S3)",
@@ -1488,6 +1578,10 @@
             {
               "page": "Extension Repositories",
               "path": "/docs/2.0/extensions/extension_repositories"
+            },
+            {
+              "page": "Publishing an Extension Repository",
+              "path": "/docs/2.0/extensions/publishing_extension_repositories"
             },
             {
               "page": "Window Function Extensions",

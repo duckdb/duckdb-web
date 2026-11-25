@@ -155,10 +155,10 @@ docs:
       `MERGE`, `INSERT ... RETURN`, and label changes on referenced graphs are
       not yet supported.
 
-extension_star_count: 56
-extension_star_count_pretty: 56
-extension_download_count: 808
-extension_download_count_pretty: 808
+extension_star_count: 57
+extension_star_count_pretty: 57
+extension_download_count: 740
+extension_download_count_pretty: 740
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgql.png'
 layout: community_extension_doc
 ---
@@ -168,15 +168,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ❌ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ❌ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ❌ |
 
 ### Installing and Loading
 ```sql

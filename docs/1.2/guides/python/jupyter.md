@@ -174,7 +174,7 @@ In this case, the name of the table is the URL of the remotely stored Parquet fi
 %sqlplot boxplot --table https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet --column trip_distance
 ```
 
-![Boxplot of the trip_distance column](/images/trip-distance-boxplot.png)
+![Boxplot of the trip_distance column]({% link images/trip-distance-boxplot.png %})
 
 Now, create a query that filters by the 90th percentile.
 Note the use of the `--save`, and `--no-execute` functions.
@@ -194,7 +194,7 @@ This uses `--with short-trips` so JupySQL uses the query defined previously and 
 %sqlplot histogram --table short_trips --column trip_distance --bins 10 --with short_trips
 ```
 
-![Histogram of the trip_distance column](/images/trip-distance-histogram.png)
+![Histogram of the trip_distance column]({% link images/trip-distance-histogram.png %})
 
 ## Summary
 

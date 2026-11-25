@@ -73,8 +73,8 @@ docs:
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 868
-extension_download_count_pretty: 868
+extension_download_count: 839
+extension_download_count_pretty: 839
 image: '/images/community_extensions/social_preview/preview_community_extension_boilstream.png'
 layout: community_extension_doc
 ---
@@ -84,15 +84,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -114,68 +114,69 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|          function_name           | function_type | description | comment | examples |
-|----------------------------------|---------------|-------------|---------|----------|
-| boilstream_attach_ducklake       | pragma        | NULL        | NULL    |          |
-| boilstream_auth_result           | table         | NULL        | NULL    |          |
-| boilstream_bootstrap_session     | pragma        | NULL        | NULL    |          |
-| boilstream_buckets               | table         | NULL        | NULL    |          |
-| boilstream_create_ducklake       | pragma        | NULL        | NULL    |          |
-| boilstream_ducklakes             | table         | NULL        | NULL    |          |
-| boilstream_help                  | pragma        | NULL        | NULL    |          |
-| boilstream_login                 | pragma        | NULL        | NULL    |          |
-| boilstream_register_user         | pragma        | NULL        | NULL    |          |
-| boilstream_resume_session        | pragma        | NULL        | NULL    |          |
-| boilstream_secrets               | table         | NULL        | NULL    |          |
-| boilstream_server_key            | pragma        | NULL        | NULL    |          |
-| boilstream_verify_mfa            | pragma        | NULL        | NULL    |          |
-| ducklake_add_data_files          | table         | NULL        | NULL    |          |
-| ducklake_cleanup_old_files       | table         | NULL        | NULL    |          |
-| ducklake_commit                  | table         | NULL        | NULL    |          |
-| ducklake_current_snapshot        | table         | NULL        | NULL    |          |
-| ducklake_delete_orphaned_files   | table         | NULL        | NULL    |          |
-| ducklake_expire_snapshots        | table         | NULL        | NULL    |          |
-| ducklake_flush_inlined_data      | table         | NULL        | NULL    |          |
-| ducklake_last_committed_snapshot | table         | NULL        | NULL    |          |
-| ducklake_list_files              | table         | NULL        | NULL    |          |
-| ducklake_merge_adjacent_files    | table         | NULL        | NULL    |          |
-| ducklake_options                 | table         | NULL        | NULL    |          |
-| ducklake_rewrite_data_files      | table         | NULL        | NULL    |          |
-| ducklake_scan                    | table         | NULL        | NULL    |          |
-| ducklake_set_commit_message      | table         | NULL        | NULL    |          |
-| ducklake_set_option              | table         | NULL        | NULL    |          |
-| ducklake_settings                | table         | NULL        | NULL    |          |
-| ducklake_snapshots               | table         | NULL        | NULL    |          |
-| ducklake_table_changes           | table_macro   | NULL        | NULL    |          |
-| ducklake_table_deletions         | table         | NULL        | NULL    |          |
-| ducklake_table_info              | table         | NULL        | NULL    |          |
-| ducklake_table_insertions        | table         | NULL        | NULL    |          |
-| murmur3_32                       | scalar        | NULL        | NULL    |          |
-| postgres_clear_cache             | table         | NULL        | NULL    |          |
-| postgres_close_pinned_connection | scalar        | NULL        | NULL    |          |
-| postgres_configure_pool          | table         | NULL        | NULL    |          |
-| postgres_execute                 | table         | NULL        | NULL    |          |
-| postgres_hstore_get              | scalar        | NULL        | NULL    |          |
-| postgres_hstore_to_json          | scalar        | NULL        | NULL    |          |
-| postgres_pin_connection          | scalar        | NULL        | NULL    |          |
-| postgres_query                   | table         | NULL        | NULL    |          |
-| quack_active_connections         | table         | NULL        | NULL    |          |
-| quack_cancel                     | table         | NULL        | NULL    |          |
-| quack_check_token                | scalar        | NULL        | NULL    |          |
-| quack_clear_cache                | table         | NULL        | NULL    |          |
-| quack_connection_id              | scalar        | NULL        | NULL    |          |
-| quack_generate_keys              | table         | NULL        | NULL    |          |
-| quack_identify                   | table         | NULL        | NULL    |          |
-| quack_nop_authorization          | scalar        | NULL        | NULL    |          |
-| quack_query                      | table         | NULL        | NULL    |          |
-| quack_query_by_name              | table         | NULL        | NULL    |          |
-| quack_serve                      | table         | NULL        | NULL    |          |
-| quack_server_list                | table         | NULL        | NULL    |          |
-| quack_stop                       | table         | NULL        | NULL    |          |
-| quack_uri_parser                 | scalar        | NULL        | NULL    |          |
-| read_postgres_binary             | table         | NULL        | NULL    |          |
-| scan_data_from_quack_client      | table         | NULL        | NULL    |          |
-| whoami                           | table_macro   | NULL        | NULL    |          |
+|           function_name           | function_type | description | comment | examples |
+|-----------------------------------|---------------|-------------|---------|----------|
+| boilstream_attach_ducklake        | pragma        | NULL        | NULL    |          |
+| boilstream_auth_result            | table         | NULL        | NULL    |          |
+| boilstream_bootstrap_session      | pragma        | NULL        | NULL    |          |
+| boilstream_buckets                | table         | NULL        | NULL    |          |
+| boilstream_create_ducklake        | pragma        | NULL        | NULL    |          |
+| boilstream_ducklakes              | table         | NULL        | NULL    |          |
+| boilstream_help                   | pragma        | NULL        | NULL    |          |
+| boilstream_login                  | pragma        | NULL        | NULL    |          |
+| boilstream_register_user          | pragma        | NULL        | NULL    |          |
+| boilstream_resume_session         | pragma        | NULL        | NULL    |          |
+| boilstream_secrets                | table         | NULL        | NULL    |          |
+| boilstream_server_key             | pragma        | NULL        | NULL    |          |
+| boilstream_verify_mfa             | pragma        | NULL        | NULL    |          |
+| ducklake_add_data_files           | table         | NULL        | NULL    |          |
+| ducklake_cleanup_old_files        | table         | NULL        | NULL    |          |
+| ducklake_commit                   | table         | NULL        | NULL    |          |
+| ducklake_current_snapshot         | table         | NULL        | NULL    |          |
+| ducklake_delete_orphaned_files    | table         | NULL        | NULL    |          |
+| ducklake_expire_snapshots         | table         | NULL        | NULL    |          |
+| ducklake_flush_inlined_data       | table         | NULL        | NULL    |          |
+| ducklake_last_committed_snapshot  | table         | NULL        | NULL    |          |
+| ducklake_list_files               | table         | NULL        | NULL    |          |
+| ducklake_merge_adjacent_files     | table         | NULL        | NULL    |          |
+| ducklake_options                  | table         | NULL        | NULL    |          |
+| ducklake_rewrite_data_files       | table         | NULL        | NULL    |          |
+| ducklake_scan                     | table         | NULL        | NULL    |          |
+| ducklake_set_commit_message       | table         | NULL        | NULL    |          |
+| ducklake_set_option               | table         | NULL        | NULL    |          |
+| ducklake_settings                 | table         | NULL        | NULL    |          |
+| ducklake_snapshots                | table         | NULL        | NULL    |          |
+| ducklake_table_changes            | table_macro   | NULL        | NULL    |          |
+| ducklake_table_deletions          | table         | NULL        | NULL    |          |
+| ducklake_table_info               | table         | NULL        | NULL    |          |
+| ducklake_table_insertions         | table         | NULL        | NULL    |          |
+| ducklake_unreadable_macro_default | scalar        | NULL        | NULL    |          |
+| murmur3_32                        | scalar        | NULL        | NULL    |          |
+| postgres_clear_cache              | table         | NULL        | NULL    |          |
+| postgres_close_pinned_connection  | scalar        | NULL        | NULL    |          |
+| postgres_configure_pool           | table         | NULL        | NULL    |          |
+| postgres_execute                  | table         | NULL        | NULL    |          |
+| postgres_hstore_get               | scalar        | NULL        | NULL    |          |
+| postgres_hstore_to_json           | scalar        | NULL        | NULL    |          |
+| postgres_pin_connection           | scalar        | NULL        | NULL    |          |
+| postgres_query                    | table         | NULL        | NULL    |          |
+| quack_active_connections          | table         | NULL        | NULL    |          |
+| quack_cancel                      | table         | NULL        | NULL    |          |
+| quack_check_token                 | scalar        | NULL        | NULL    |          |
+| quack_clear_cache                 | table         | NULL        | NULL    |          |
+| quack_connection_id               | scalar        | NULL        | NULL    |          |
+| quack_generate_keys               | table         | NULL        | NULL    |          |
+| quack_identify                    | table         | NULL        | NULL    |          |
+| quack_nop_authorization           | scalar        | NULL        | NULL    |          |
+| quack_query                       | table         | NULL        | NULL    |          |
+| quack_query_by_name               | table         | NULL        | NULL    |          |
+| quack_serve                       | table         | NULL        | NULL    |          |
+| quack_server_list                 | table         | NULL        | NULL    |          |
+| quack_stop                        | table         | NULL        | NULL    |          |
+| quack_uri_parser                  | scalar        | NULL        | NULL    |          |
+| read_postgres_binary              | table         | NULL        | NULL    |          |
+| scan_data_from_quack_client       | table         | NULL        | NULL    |          |
+| whoami                            | table_macro   | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -209,6 +210,7 @@ This extension does not add any types.
 | pg_connection_limit                      | The maximum amount of concurrent Postgres connections. This option is deprecated, instead use "SET pg_pool_max_connections = 42" for newly attached Postgres databases and "FROM postgres_configure_pool(catalog_name='my_attached_postgres_db', max_connections=42)" for already attached Postgres databases.                                                                                                                                                                                                                                               | UBIGINT    | GLOBAL | []      | 6                                    |
 | pg_debug_show_queries                    | DEBUG SETTING: print all queries sent to Postgres to stdout                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | BOOLEAN    | GLOBAL | []      | false                                |
 | pg_enable_filter_pushdown                | Whether or not to use filter pushdown                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | BOOLEAN    | GLOBAL | []      | true                                 |
+| pg_enable_remote_pushdown                | Whether or not to push down whole queries into Postgres for newly attached databases                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | BOOLEAN    | GLOBAL | []      | true                                 |
 | pg_idle_in_transaction_timeout_millis    | Postgres idle in transaction timeout in milliseconds to set on scan connections                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | UINTEGER   | GLOBAL | []      | NULL                                 |
 | pg_null_byte_replacement                 | When writing NULL bytes to Postgres, replace them with the given character                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | VARCHAR    | GLOBAL | []      | NULL                                 |
 | pg_numeric_as_varchar                    | Read Postgres numerics without precision and scale or precision > 38 as varchar instead of double                                                                                                                                                                                                                                                                                                                                                                                                                                                            | BOOLEAN    | GLOBAL | []      | false                                |
@@ -239,11 +241,11 @@ This extension does not add any types.
 | quack_debug_emit_delay_ms                | DEBUG SETTING: max random delay in ms before the fetch collector publishes a batch, stressing out-of-order emission                                                                                                                                                                                                                                                                                                                                                                                                                                          | UBIGINT    | GLOBAL | []      | 0                                    |
 | quack_debug_fetch_delay_ms               | DEBUG SETTING: max random delay in ms before a FETCH response is published, stressing out-of-order batch arrival                                                                                                                                                                                                                                                                                                                                                                                                                                             | UBIGINT    | GLOBAL | []      | 0                                    |
 | quack_debug_send_delay_ms                | DEBUG SETTING: max random delay in ms before a SEND_DATA request goes out, stressing out-of-order batch arrival on the server                                                                                                                                                                                                                                                                                                                                                                                                                                | UBIGINT    | GLOBAL | []      | 0                                    |
-| quack_default_client_id                  | client_id used when ATTACH / quack_query omit one; precomputed at load from $QUACK_CLIENT_ID (empty opts out) or a random per-instance id. Set to '' to opt out.                                                                                                                                                                                                                                                                                                                                                                                             | VARCHAR    | GLOBAL | []      | 816218a9-b9d4-488c-9db9-d9871cc61c31 |
+| quack_default_client_id                  | client_id used when ATTACH / quack_query omit one; precomputed at load from $QUACK_CLIENT_ID (empty opts out) or a random per-instance id. Set to '' to opt out.                                                                                                                                                                                                                                                                                                                                                                                             | VARCHAR    | GLOBAL | []      | 567d5848-7c9b-4ae8-a9b8-8c14e05ee58d |
 | quack_default_heartbeat_timeout          | Heartbeat lease timeout in seconds requested by clients when ATTACH / quack_query omit heartbeat_timeout                                                                                                                                                                                                                                                                                                                                                                                                                                                     | UBIGINT    | GLOBAL | []      | 60                                   |
 | quack_enable_reconnects                  | Enable reconnect support (clients acknowledge results, the server caches the last result until acknowledged)                                                                                                                                                                                                                                                                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      | false                                |
 | quack_fetch_read_ahead                   | FETCH requests kept in flight ahead of the scan (0 = number of async threads)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | UBIGINT    | GLOBAL | []      | 0                                    |
-| quack_loaded_at_us                       | Epoch microseconds at extension load                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | BIGINT     | GLOBAL | []      | 1794629792876526                     |
+| quack_loaded_at_us                       | Epoch microseconds at extension load                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | BIGINT     | GLOBAL | []      | 1795277943569512                     |
 | quack_prepare_inline_rows                | Rows returned inline in the PREPARE response before the remainder is left to FETCH; drains whole batches, so it may overshoot to a batch boundary                                                                                                                                                                                                                                                                                                                                                                                                            | UBIGINT    | GLOBAL | []      | 24576                                |
 | quack_rebalance_buffer_bytes             | Pending (unstamped) bytes the batch rebalancer buffers before gating non-minimum producers (0 = automatic, memory-manager governed)                                                                                                                                                                                                                                                                                                                                                                                                                          | UBIGINT    | GLOBAL | []      | 0                                    |
 | quack_result_ttl                         | Seconds an idle cached result is kept before it is dropped (0 = never)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | UBIGINT    | GLOBAL | []      | 3600                                 |

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fire_duck_ext
   description: Query Google Cloud Firestore directly from DuckDB using SQL
-  version: 0.4.2
+  version: 0.4.3
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: BorisBesky/fire_duck_ext
-  ref: c59ff962087da37c4630221f996fb6fd96f0e86a
+  ref: ed5dd1347a74484943dcd9cd5f578ccc8f3c0273
 
 docs:
   hello_world: |
@@ -57,6 +57,12 @@ docs:
     functions firestore_array_union(), firestore_array_remove(), and
     firestore_array_append(). Every function documents itself in
     duckdb_functions() with a description, parameter names, and an example.
+
+    The write functions also take a collection group ('~orders'), naming each
+    document by its full path, as the __document_id from
+    firestore_scan('~orders') gives it. A bare ID, or a path to a document in
+    another collection, is refused rather than written elsewhere; inserting into
+    a collection group needs document_id := with full paths.
 
     WHERE filters, SQL ORDER BY / LIMIT, the column projection, and a bare
     COUNT(*) are pushed down to Firestore where possible. A query then
@@ -101,8 +107,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 852
-extension_download_count_pretty: 852
+extension_download_count: 860
+extension_download_count_pretty: 860
 image: '/images/community_extensions/social_preview/preview_community_extension_fire_duck_ext.png'
 layout: community_extension_doc
 ---
@@ -112,15 +118,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ✅ | ✅ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -144,19 +150,19 @@ LOAD {{ page.extension.name }};
 
 |     function_name      | function_type |                                                                                                                                                                                                                                                          description                                                                                                                                                                                                                                                           | comment |                                                  examples                                                  |
 |------------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------|
-| firestore_array_append | table         | Append values to an array field of one Firestore document, keeping duplicates. The array is read and written back whole, so a concurrent write to the same field can be lost. Returns a one-row count.                                                                                                                                                                                                                                                                                                                         | NULL    | [CALL firestore_array_append('users', 'user123', 'events', ['login']);]                                    |
-| firestore_array_remove | table         | Remove every occurrence of the given values from an array field of one Firestore document (Firestore's arrayRemove transform). Returns a one-row count.                                                                                                                                                                                                                                                                                                                                                                        | NULL    | [CALL firestore_array_remove('users', 'user123', 'tags', ['inactive']);]                                   |
-| firestore_array_union  | table         | Add values to an array field of one Firestore document, skipping any the array already holds (Firestore's arrayUnion transform). Returns a one-row count.                                                                                                                                                                                                                                                                                                                                                                      | NULL    | [CALL firestore_array_union('users', 'user123', 'tags', ['vip', 'active']);]                               |
+| firestore_array_append | table         | Append values to an array field of one Firestore document, keeping duplicates. The array is read and written back whole, so a concurrent write to the same field can be lost. For a collection group ('~orders'), document_id is the document's full path. Returns a one-row count.                                                                                                                                                                                                                                            | NULL    | [CALL firestore_array_append('users', 'user123', 'events', ['login']);]                                    |
+| firestore_array_remove | table         | Remove every occurrence of the given values from an array field of one Firestore document (Firestore's arrayRemove transform). For a collection group ('~orders'), document_id is the document's full path. Returns a one-row count.                                                                                                                                                                                                                                                                                           | NULL    | [CALL firestore_array_remove('users', 'user123', 'tags', ['inactive']);]                                   |
+| firestore_array_union  | table         | Add values to an array field of one Firestore document, skipping any the array already holds (Firestore's arrayUnion transform). For a collection group ('~orders'), document_id is the document's full path. Returns a one-row count.                                                                                                                                                                                                                                                                                         | NULL    | [CALL firestore_array_union('users', 'user123', 'tags', ['vip', 'active']);]                               |
 | firestore_clear_cache  | table         | Forget every cached Firestore schema, so the next scan of each collection samples its documents again.                                                                                                                                                                                                                                                                                                                                                                                                                         | NULL    | [CALL firestore_clear_cache();]                                                                            |
 | firestore_clear_cache  | table         | Forget the cached schema of one collection path (e.g. 'users', '~orders' or 'users/u1/orders'), so its next scan samples its documents again.                                                                                                                                                                                                                                                                                                                                                                                  | NULL    | [CALL firestore_clear_cache('users');]                                                                     |
 | firestore_connect      | table         | Make a Firestore database ID the default for later calls in this session that pass no database := parameter. Fails if no firestore secret covers that database.                                                                                                                                                                                                                                                                                                                                                                | NULL    | [CALL firestore_connect('analytics-db');]                                                                  |
-| firestore_delete       | table         | Delete one Firestore document by ID. Returns a one-row count.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | NULL    | [CALL firestore_delete('users', 'user123');]                                                               |
-| firestore_delete_batch | table         | Delete every Firestore document in a list of IDs, sent through batchWrite in groups of up to 500. Batches are not atomic: each delete succeeds or fails on its own. Returns a one-row count.                                                                                                                                                                                                                                                                                                                                   | NULL    | [CALL firestore_delete_batch('users', ['user1', 'user2']);]                                                |
+| firestore_delete       | table         | Delete one Firestore document by ID. For a collection group ('~orders'), the ID is the document's full path, as __document_id from firestore_scan('~orders') gives it. Returns a one-row count.                                                                                                                                                                                                                                                                                                                                | NULL    | [CALL firestore_delete('users', 'user123');]                                                               |
+| firestore_delete_batch | table         | Delete every Firestore document in a list of IDs, sent through batchWrite in groups of up to 500. Batches are not atomic: each delete succeeds or fails on its own. For a collection group ('~orders'), each ID is a full document path, checked before anything is sent. Returns a one-row count.                                                                                                                                                                                                                             | NULL    | [CALL firestore_delete_batch('users', ['user1', 'user2']);]                                                |
 | firestore_disconnect   | table         | Clear the session's default database set by firestore_connect(), so later calls pick their database as they would without it.                                                                                                                                                                                                                                                                                                                                                                                                  | NULL    | [CALL firestore_disconnect();]                                                                             |
-| firestore_insert       | table         | Insert one Firestore document per row of a subquery, with one field per column. document_id := names the column that supplies document IDs, which is then left out of the fields; without it Firestore generates the IDs. Returns the number of documents inserted.                                                                                                                                                                                                                                                            | NULL    | [CALL firestore_insert('users', (SELECT 'alice' AS id, 'Alice' AS name, 30 AS age), document_id := 'id');] |
+| firestore_insert       | table         | Insert one Firestore document per row of a subquery, with one field per column. document_id := names the column that supplies document IDs, which is then left out of the fields; without it Firestore generates the IDs. A collection group ('~orders') needs document_id := naming a column of full document paths. Returns the number of documents inserted.                                                                                                                                                                | NULL    | [CALL firestore_insert('users', (SELECT 'alice' AS id, 'Alice' AS name, 30 AS age), document_id := 'id');] |
 | firestore_scan         | table         | Read a Firestore collection as a table: one row per document, with __document_id plus columns inferred from sampled documents. The path may name a nested collection ('users/u1/orders'), every collection with one name ('~orders', a collection-group query), or a document ('users/u1'), which lists that document's subcollection IDs instead. WHERE filters, ORDER BY ... LIMIT, the projection and COUNT(*) are pushed down to Firestore where possible. With API-key or Firebase-user auth, pass show_missing := false. | NULL    | [SELECT __document_id, name FROM firestore_scan('users', show_missing := false) WHERE status = 'active';]  |
-| firestore_update       | table         | Set fields on one Firestore document from the trailing field-name/value pairs, leaving its other fields as they are. Returns a one-row count.                                                                                                                                                                                                                                                                                                                                                                                  | NULL    | [CALL firestore_update('users', 'user123', 'status', 'verified', 'age', 31);]                              |
-| firestore_update_batch | table         | Set the same field-name/value pairs on every Firestore document in a list of IDs, sent through batchWrite in groups of up to 500. Batches are not atomic: each write succeeds or fails on its own. Returns a one-row count.                                                                                                                                                                                                                                                                                                    | NULL    | [CALL firestore_update_batch('users', ['user1', 'user2'], 'status', 'reviewed');]                          |
+| firestore_update       | table         | Set fields on one Firestore document from the trailing field-name/value pairs, leaving its other fields as they are. For a collection group ('~orders'), document_id is the document's full path, as __document_id from firestore_scan('~orders') gives it. Returns a one-row count.                                                                                                                                                                                                                                           | NULL    | [CALL firestore_update('users', 'user123', 'status', 'verified', 'age', 31);]                              |
+| firestore_update_batch | table         | Set the same field-name/value pairs on every Firestore document in a list of IDs, sent through batchWrite in groups of up to 500. Batches are not atomic: each write succeeds or fails on its own. For a collection group ('~orders'), each ID is a full document path, checked before anything is sent. Returns a one-row count.                                                                                                                                                                                              | NULL    | [CALL firestore_update_batch('users', ['user1', 'user2'], 'status', 'reviewed');]                          |
 
 ### Overloaded Functions
 

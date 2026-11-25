@@ -42,11 +42,30 @@ ATTACH '⟨catalog_name⟩' AS my_catalog (TYPE unity_catalog, DEFAULT_SCHEMA 'm
 
 * `ENDPOINT` is the Unity Catalog REST API endpoint. For Databricks, it is your [Workspace URL](https://docs.databricks.com/aws/en/workspace/workspace-details#workspace-instance-names-urls-and-ids), typically `https://⟨instance⟩.cloud.databricks.com/`{:.language-sql .highlight}.
 * `TOKEN` is a credential. For Databricks, it can be a [personal access token](https://docs.databricks.com/aws/en/dev-tools/auth/pat) with `unity-catalog` scope; see [Access Control in Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog/access-control/) for the other options. For Unity Catalog OSS, see the [OSS Unity Catalog documentation](https://docs.unitycatalog.io/).
-* `AWS_REGION` is the region of the storage that holds the tables. It is required.
+* `AWS_REGION` is the region of the S3 storage that holds the tables. DuckDB uses it for tables on S3 when the vended credentials name no region. Tables on GCS or Azure do not use it.
 
-To read and write the table files, DuckDB also needs a [secret]({% link docs/2.0/configuration/secrets_manager.md %}) for that storage, e.g., an [S3 secret]({% link docs/2.0/core_extensions/httpfs/s3api.md %}) or an [Azure secret]({% link docs/2.0/core_extensions/azure.md %}#authentication-with-secret).
+To read and write the table files, DuckDB uses the storage credentials that Unity Catalog vends for each table; see [Storage Credentials](#storage-credentials).
 
-> Note Only Databricks reports a default namespace. When you attach a Unity Catalog OSS catalog, always set `DEFAULT_SCHEMA`: without it, queries against the catalog fail, even with fully qualified table names.
+> Note Only Databricks reports a default namespace. When you attach a Unity Catalog OSS catalog, set `DEFAULT_SCHEMA` to use table names without a schema. Since v2.0.1, fully qualified table names work without it, except in a schema named `main`, which needs `DEFAULT_SCHEMA`; before, queries could fail even with fully qualified names. `ATTACH` does not check that the schema exists.
+
+### Storage Credentials
+
+For each table that DuckDB reads or writes, it asks Unity Catalog for temporary credentials and creates a [secret]({% link docs/2.0/configuration/secrets_manager.md %}) from them, scoped to the table's location. With [`USE_IRC_SCAN_PLAN`](#server-side-scan-planning), a planned scan's secrets are scoped to the prefixes that the server returns with them instead. Since v2.0.1, this works for all three clouds; before, only AWS credentials were used:
+
+* `s3://`: an S3 secret with the vended key, secret, and session token.
+* `gs://` and `gcs://`: a GCS secret with the vended OAuth bearer token, which the [`delta` extension]({% link docs/2.0/core_extensions/delta.md %}#reading-from-google-cloud-storage) can use since v2.0.1.
+* `abfss://`, `abfs://`, `az://`, and `azure://`: an [Azure secret]({% link docs/2.0/core_extensions/azure.md %}#authentication-with-secret) with the vended SAS token. This needs the `azure` extension.
+
+Since v2.0.1, a vended secret exists only for the current transaction, so it does not show up in `duckdb_secrets()` after the transaction ends, and transactions that read the same table at the same time no longer conflict. A later transaction that reads the table's files directly, e.g., with `read_parquet` or `glob`, does not have it; read the table through the catalog in the same transaction first.
+
+DuckDB uses the secret with the longest scope that matches a path. A vended secret scoped to the table's location therefore takes precedence over a secret of yours for the bucket, the container, or the storage account.
+
+A secret of your own for the storage, e.g., an [S3 secret]({% link docs/2.0/core_extensions/httpfs/s3api.md %}), a GCS secret with HMAC keys, or an [Azure secret]({% link docs/2.0/core_extensions/azure.md %}#authentication-with-secret), is still needed:
+
+* when Unity Catalog answers the credentials request without credentials for the table's cloud. Since v2.0.1, DuckDB then creates no secret, logs a warning (log type `unity_catalog`, see [Logging]({% link docs/2.0/operations_manual/logging/overview.md %})), and uses yours. If the credentials request itself fails, e.g., because the server does not offer it or refuses it, the query fails.
+* to create an external table, with `CREATE TABLE` or `CREATE TABLE ... AS SELECT`: DuckDB writes its first version before Unity Catalog knows the table, so nothing is vended for it. A managed table gets credentials for its staging location.
+
+Tables on local storage (`file://`) need no secret.
 
 ### Attach Options
 
@@ -67,6 +86,8 @@ Tables are named `⟨catalog⟩.⟨schema⟩.⟨table⟩`{:.language-sql .highli
 SHOW ALL TABLES;
 SELECT * FROM my_catalog.my_schema.my_table LIMIT 10;
 ```
+
+> Warning Before v2.0.1, the partition columns of a partitioned table with [column mapping](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#column-mapping) read as `NULL` in every row, without an error. Unity Catalog suggests column mapping for managed tables, so this affects many of them.
 
 ### Time Travel
 
@@ -89,6 +110,8 @@ To append rows, use `INSERT INTO`:
 INSERT INTO my_catalog.my_schema.my_table VALUES (1, 'hello');
 INSERT INTO my_catalog.my_schema.my_table SELECT * FROM other_table;
 ```
+
+Since v2.0.1, `INSERT` also writes to tables with [column mapping](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#column-mapping) (`name` or `id` mode) that are partitioned or have struct, list, or map columns, managed and external alike.
 
 ### Data Types
 
@@ -122,6 +145,8 @@ CREATE TABLE my_catalog.my_schema.my_external_table (id INTEGER, name VARCHAR)
 WITH (location = 's3://⟨my_bucket⟩/⟨path⟩');
 ```
 
+Since v2.0.1, a managed table takes the Delta table properties that Unity Catalog suggests for it, e.g., column mapping in `name` mode, as Spark does. So a managed table that DuckDB creates may be column-mapped; there is no option to turn this off. DuckDB before v2.0.1 reads the partition columns of such a table as `NULL` and cannot write to it if it is partitioned or has nested columns.
+
 Both managed and external tables can be partitioned:
 
 ```sql
@@ -134,6 +159,33 @@ PARTITIONED BY (part);
 For the forms and options that `CREATE TABLE` does not support, see [Limitations](#limitations).
 
 > Warning Unity Catalog registers the table while `CREATE TABLE` runs, so a `ROLLBACK` of the surrounding transaction does not remove the table.
+
+If this session has listed a table with the same name, `CREATE TABLE` fails with “already exists”, even if the table has since been dropped by another client. To create it again, `DETACH` and `ATTACH` the catalog.
+
+#### Creating Tables from a Query
+
+> New This feature was introduced in DuckDB 2.0.1.
+
+`CREATE TABLE ... AS SELECT` creates a table with the query's columns and rows. As with `CREATE TABLE`, a table without a location is a managed table, and one with the `location` option is an external table. Both can be partitioned:
+
+```sql
+CREATE TABLE my_catalog.my_schema.my_ctas_table AS
+    SELECT * FROM other_table;
+
+CREATE TABLE my_catalog.my_schema.my_external_ctas_table PARTITIONED BY (part)
+WITH (location = 's3://⟨my_bucket⟩/⟨other_path⟩') AS
+    SELECT * FROM other_table;
+```
+
+The [`delta` extension]({% link docs/2.0/core_extensions/delta.md %}#creating-tables-from-a-query) writes the rows and the table's schema as version 0 of the new table, in one commit at the end of the statement. Then Unity Catalog registers the table. For an external table, DuckDB needs a storage secret of your own for the location; see [Storage Credentials](#storage-credentials).
+
+* Unity Catalog checks the name before the query runs. If it has a table with this name, the statement fails, and with `IF NOT EXISTS` the query does not run.
+* For a new name, an external table needs a location without files under `_delta_log`, even with `IF NOT EXISTS`; on local storage, `CREATE TABLE ... AS SELECT` also refuses an empty `_delta_log` directory. The rule about files also holds for an external `CREATE TABLE`: since v2.0.1, `CREATE TABLE IF NOT EXISTS` with the location of an existing Delta table fails instead of registering that table.
+* If the query fails, the statement registers nothing and removes the files it wrote, on a best-effort basis.
+* If the registration fails or its reply is lost, the written files may stay behind; DuckDB then logs a warning with their location. For an external table, an interruption between the commit and the registration leaves an unregistered table that blocks a retry at that location: remove its files, or register the table with Unity Catalog by other means. A managed table is staged anew on each attempt, and its staging location belongs to Unity Catalog: do not remove files there.
+* As with `CREATE TABLE`, a `ROLLBACK` does not remove the table.
+* For a managed table, Unity Catalog stages the table while the statement is planned, before its columns are checked. A statement that registers no table, such as `EXPLAIN`, a prepared statement that is never executed, a statement with a column type that Delta cannot store, or a query that fails, leaves a staged, unregistered table in Unity Catalog.
+* The staging credentials of a managed table are not refreshed during the statement, so a long-running query can outlive them.
 
 ### Checkpointing
 
@@ -163,6 +215,7 @@ ATTACH '⟨catalog_name⟩' AS my_catalog (
 
 * If the server cannot plan a scan, e.g., because it does not offer the API or refuses the table, DuckDB reads the table through its Delta log instead, and does not try scan planning again on this attached catalog for 15 minutes.
 * Time travel queries (`AT (...)`) always read through the Delta log.
+* Since v2.0.1, a partitioned or column-mapped Delta table always reads through its Delta log, without asking the server for a scan plan.
 * Positional delete files and deletion vectors are applied. A table with equality delete files fails with an error; to read it, attach the catalog without `USE_IRC_SCAN_PLAN`.
 
 ### Catalog-Managed Commits
@@ -179,7 +232,7 @@ This extension supports:
 * Interacting with tables using standard SQL: `SELECT * FROM ⟨catalog⟩.⟨schema⟩.⟨table⟩;`{:.language-sql .highlight}
 * [Time travel](#time-travel): `SELECT * FROM ... AT (VERSION => ...);`{:.language-sql .highlight} and `SELECT * FROM ... AT (TIMESTAMP => ...);`{:.language-sql .highlight}
 * Inserts: `INSERT INTO ... VALUES (...);`{:.language-sql .highlight}
-* Creating managed and external tables: `CREATE TABLE ... (...);`{:.language-sql .highlight}
+* Creating managed and external tables: `CREATE TABLE ... (...);`{:.language-sql .highlight} and, since v2.0.1, [`CREATE TABLE ... AS SELECT ...;`{:.language-sql .highlight}](#creating-tables-from-a-query)
 * [Checkpointing](#checkpointing) individual tables (since v1.5.1): `CALL unity_catalog_checkpoint_table('my_catalog.my_schema.my_table');`{:.language-sql .highlight}
 
 ## Limitations
@@ -189,7 +242,8 @@ This extension supports:
 * Inserts into a table with column `DEFAULT` values or generated columns fail with an error, as DuckDB cannot compute these columns yet.
 * Reading a table with an `INTERVAL` column fails with an error, as Delta intervals and DuckDB's `INTERVAL` differ in meaning.
 * The following `CREATE TABLE` forms and options are not supported and fail with an error:
-    * `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT`
+    * `CREATE OR REPLACE TABLE`, with or without `AS SELECT`
+    * before v2.0.1, `CREATE TABLE ... AS SELECT`
     * constraints, including `NOT NULL` and `PRIMARY KEY`
     * column `DEFAULT` values and generated columns
     * columns of a type that Delta cannot store, e.g., `TIME`

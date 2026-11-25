@@ -23,8 +23,8 @@ In the past, we would automatically deprecate old DuckDB versions whenever the n
 Starting with this release, every _other_ DuckDB version is going to be a Long-Term Support (LTS) edition.
 For LTS DuckDB versions, [community support](https://ducklabs.com/community_support_policy/) will last a year after the release (for now).
 
-![DuckDB LTS support](/images/blog/lts-support-light.svg){: .lightmode-img }
-![DuckDB LTS support](/images/blog/lts-support-dark.svg){: .darkmode-img }
+![DuckDB LTS support]({% link images/blog/lts-support-light.svg %}){: .lightmode-img }
+![DuckDB LTS support]({% link images/blog/lts-support-dark.svg %}){: .darkmode-img }
 
 <details markdown='1'>
 <summary markdown='span'>

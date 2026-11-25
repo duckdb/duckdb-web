@@ -373,7 +373,7 @@ jobs:
 With [git-auto-commit-action](https://github.com/stefanzweifel/git-auto-commit-action) we delegate to GitHub the right to create a commit with the updated `README.md` file:
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/discovering-use-cases/git_commits.png">
+    <a href="{% link images/blog/discovering-use-cases/git_commits.png %}">
         <img
           src="{% link images/blog/discovering-use-cases/git_commits.png %}"
           alt="GitHub commits history"
@@ -403,7 +403,7 @@ In the above Makefile command we:
 The `git_log.md` contains now the entire history of appended records to the README file and it can be used to display a bubble chart with the repositories mentioning DuckDB:
 
 <div align="center" style="margin:10px">
-    <a href="/images/blog/discovering-use-cases/plot_repos.png">
+    <a href="{% link images/blog/discovering-use-cases/plot_repos.png %}">
         <img
           src="{% link images/blog/discovering-use-cases/plot_repos.png %}"
           alt="GitHub repositories mentioning DuckDB"

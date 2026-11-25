@@ -190,8 +190,8 @@ FROM
 
 `WITH RECURSIVE` can be used to traverse trees. For example, take a hierarchy of tags:
 
-<img src="/images/examples/with-recursive-tree-example-light.svg" alt="Example graph" style="width: 700px; text-align: center" class="lightmode-img">
-<img src="/images/examples/with-recursive-tree-example-dark.svg" alt="Example graph" style="width: 700px; text-align: center" class="darkmode-img">
+<img src="{% link images/examples/with-recursive-tree-example-light.svg %}" alt="Example graph" style="width: 700px; text-align: center" class="lightmode-img">
+<img src="{% link images/examples/with-recursive-tree-example-dark.svg %}" alt="Example graph" style="width: 700px; text-align: center" class="darkmode-img">
 
 ```sql
 CREATE TABLE tag (id INTEGER, name VARCHAR, subclassof INTEGER);
@@ -235,8 +235,8 @@ One way to achieve this is to store the path of a traversal in a [list]({% link 
 
 Take the following directed graph from the [LDBC Graphalytics benchmark](https://arxiv.org/pdf/2011.15028.pdf):
 
-<img src="/images/examples/with-recursive-graph-example-light.svg" alt="Example graph" style="width: 700px; text-align: center" class="lightmode-img">
-<img src="/images/examples/with-recursive-graph-example-dark.svg" alt="Example graph" style="width: 700px; text-align: center" class="darkmode-img">
+<img src="{% link images/examples/with-recursive-graph-example-light.svg %}" alt="Example graph" style="width: 700px; text-align: center" class="lightmode-img">
+<img src="{% link images/examples/with-recursive-graph-example-dark.svg %}" alt="Example graph" style="width: 700px; text-align: center" class="darkmode-img">
 
 ```sql
 CREATE TABLE edge (node1id INTEGER, node2id INTEGER);
@@ -538,8 +538,8 @@ As well as using the union table as a dictionary, we can now reference it in que
 
 One example is the connected components algorithm. For each node, the algorithm determines the node with the lowest ID to which it is connected. To achieve this, we use the entries in the union table to track the lowest ID found for a node. If a new incoming row contains a lower ID, we update this value.
 
-<img src="/images/examples/using-key-graph-example-light.svg" alt="Example graph" style="width: 700px; text-align: center" class="lightmode-img">
-<img src="/images/examples/using-key-graph-example-dark.svg" alt="Example graph" style="width: 700px; text-align: center" class="darkmode-img">
+<img src="{% link images/examples/using-key-graph-example-light.svg %}" alt="Example graph" style="width: 700px; text-align: center" class="lightmode-img">
+<img src="{% link images/examples/using-key-graph-example-dark.svg %}" alt="Example graph" style="width: 700px; text-align: center" class="darkmode-img">
 
 ```sql
 CREATE TABLE nodes (id INTEGER);

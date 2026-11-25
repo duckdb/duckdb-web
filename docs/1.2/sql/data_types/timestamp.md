@@ -135,7 +135,7 @@ An instant is a point in absolute time, usually given as a count of some time in
 
 Binning is a common practice with continuous data: A range of possible values is broken up into contiguous subsets and the binning operation maps actual values to the *bin* they fall into. *Temporal binning* is simply applying this practice to instants; for example, by binning instants into years, months, and days.
 
-<img src="/images/blog/timezones/tz-instants.svg"
+<img src="{% link images/blog/timezones/tz-instants.svg %}"
      alt="Time Zone Instants at the Epoch"
      width=600
      />
@@ -145,7 +145,7 @@ For most tasks, the calendar will just be the widely used Gregorian calendar,
 but time zones apply locale-specific rules and can vary widely.
 For example, here is what binning for the `'America/Los_Angeles'` time zone looks like near the epoch:
 
-<img src="/images/blog/timezones/tz-timezone.svg"
+<img src="{% link images/blog/timezones/tz-timezone.svg %}"
      alt="Two Time Zones at the Epoch"
      width=600
      />
@@ -154,7 +154,7 @@ The most common temporal binning problem occurs when daylight savings time chang
 The example below contains a daylight savings time change where the "hour" bin is two hours long.
 To distinguish the two hours, another range of bins containing the offset from UTC is needed:
 
-<img src="/images/blog/timezones/tz-daylight.svg"
+<img src="{% link images/blog/timezones/tz-daylight.svg %}"
      alt="Two Time Zones at a Daylight Savings Time transition"
      width=600
      />
