@@ -42,18 +42,16 @@ DuckDB 2.0.1 introduces two major new capabilities for Iceberg tables: column re
 
 DuckDB 2.0.1 adds `iceberg_move_column()`, allowing you to reorder columns or relocate struct fields within an Iceberg table. The operation respects Iceberg's field IDs for compatibility with other engines.
 
-**Reference:** [duckdb-iceberg#1801](https://github.com/duckdb/duckdb-iceberg/pull/1801)
-
 ```sql
 -- Reorder columns in an existing Iceberg table
 SELECT * FROM iceberg_move_column('my_table', 'column_name', 'after', 'reference_column');
 ```
 
+**Reference:** [duckdb-iceberg#1801](https://github.com/duckdb/duckdb-iceberg/pull/1801)
+
 #### Table Comments
 
 Iceberg table comments are exposed in DuckDB 2.0 and later, allowing you to document tables and retrieve that metadata through DuckDB queries. Use `COMMENT ON TABLE` to set documentation, then query the information schema to retrieve it.
-
-**Reference:** [duckdb-iceberg#1799](https://github.com/duckdb/duckdb-iceberg/pull/1799)
 
 ```sql
 -- Set a comment on an Iceberg table
@@ -64,11 +62,11 @@ SELECT table_name, table_comment FROM information_schema.tables
 WHERE table_schema = 'my_schema' AND table_name = 'my_iceberg_table';
 ```
 
+**Reference:** [duckdb-iceberg#1799](https://github.com/duckdb/duckdb-iceberg/pull/1799)
+
 #### Copy-on-Write UPDATE Support
 
 DuckDB 2.0.1 adds support for copy-on-write UPDATE operations on Iceberg V2 tables, enabling efficient updates without full table rewrites while maintaining transaction isolation. Instead of rewriting all affected files, only modified rows are written, leaving unchanged data files in place.
-
-**Reference:** [duckdb-iceberg#1662](https://github.com/duckdb/duckdb-iceberg/pull/1662)
 
 ```sql
 -- Update rows in an Iceberg V2 table efficiently
@@ -79,6 +77,8 @@ WHERE created_date < current_date - interval '30 days'
 
 -- Only changed rows are written; unchanged files remain in place
 ```
+
+**Reference:** [duckdb-iceberg#1662](https://github.com/duckdb/duckdb-iceberg/pull/1662)
 
 ### Correctness and Reliability
 
@@ -100,8 +100,6 @@ Instead of crashing when encountering invalid manifest content, DuckDB 2.0.1 now
 
 Iceberg tables support decimals up to 38 digits of precision. DuckDB 2.0.1 explicitly validates and rejects decimals wider than Iceberg's limit, preventing silent data loss or truncation. If you attempt to create a column with a decimal wider than 38 digits, the operation now fails with a clear error rather than silently truncating or corrupting data.
 
-**Reference:** [duckdb-iceberg#1817](https://github.com/duckdb/duckdb-iceberg/pull/1817)
-
 ```sql
 -- This now fails with a clear error instead of silent truncation
 CREATE TABLE my_iceberg_table (
@@ -114,15 +112,11 @@ CREATE TABLE my_iceberg_table (
 );
 ```
 
+**Reference:** [duckdb-iceberg#1817](https://github.com/duckdb/duckdb-iceberg/pull/1817)
+
 #### Transaction and Concurrency Improvements
 
 Data rewrite operations now support transactions, ensuring consistency in multi-statement workflows. Concurrent table updates are properly locked to prevent metadata corruption. This means you can safely nest data rewrites within larger transactions and rely on all-or-nothing semantics.
-
-**References:**
-- [duckdb-iceberg#1771](https://github.com/duckdb/duckdb-iceberg/pull/1771) — Transaction support for data rewrites
-- [duckdb-iceberg#1773](https://github.com/duckdb/duckdb-iceberg/pull/1773) — Concurrent update locking
-- [duckdb-iceberg#1596](https://github.com/duckdb/duckdb-iceberg/pull/1596) — Rewrite file-size validation
-- [duckdb-iceberg#1678](https://github.com/duckdb/duckdb-iceberg/pull/1678) — Rewrite transaction support
 
 ```sql
 -- Data rewrites now work safely within transactions
@@ -132,6 +126,12 @@ BEGIN TRANSACTION;
 COMMIT;
 -- Either both succeed or both roll back. No partial state.
 ```
+
+**References:**
+- [duckdb-iceberg#1771](https://github.com/duckdb/duckdb-iceberg/pull/1771) — Transaction support for data rewrites
+- [duckdb-iceberg#1773](https://github.com/duckdb/duckdb-iceberg/pull/1773) — Concurrent update locking
+- [duckdb-iceberg#1596](https://github.com/duckdb/duckdb-iceberg/pull/1596) — Rewrite file-size validation
+- [duckdb-iceberg#1678](https://github.com/duckdb/duckdb-iceberg/pull/1678) — Rewrite transaction support
 
 ### Performance Optimizations
 
@@ -171,8 +171,6 @@ Constant filenames in copy-on-write DELETE operations are now looked up once per
 
 Iceberg row lineage scans now support prepared statements, allowing efficient repeated scans with different parameters. This is useful for data lineage tracking and audit queries that need to run repeatedly with different input values.
 
-**Reference:** [duckdb-iceberg#1797](https://github.com/duckdb/duckdb-iceberg/pull/1797)
-
 ```sql
 -- Prepare a row lineage scan to reuse efficiently
 PREPARE get_lineage AS SELECT * FROM iceberg_lineage('my_table') WHERE row_id = ?;
@@ -181,6 +179,8 @@ PREPARE get_lineage AS SELECT * FROM iceberg_lineage('my_table') WHERE row_id = 
 EXECUTE get_lineage(12345);
 EXECUTE get_lineage(67890);
 ```
+
+**Reference:** [duckdb-iceberg#1797](https://github.com/duckdb/duckdb-iceberg/pull/1797)
 
 ## Infrastructure and Metadata Handling
 
