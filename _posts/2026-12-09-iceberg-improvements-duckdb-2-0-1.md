@@ -47,9 +47,8 @@ DuckDB 2.0.1 adds `iceberg_move_column()`, allowing you to reorder columns or re
 SELECT * FROM iceberg_move_column('my_table', 'column_name', 'after', 'reference_column');
 ```
 
-**Community Contributor:** [@xiaoxuandev](https://github.com/xiaoxuandev)
-
-**Reference:** [duckdb-iceberg#1801](https://github.com/duckdb/duckdb-iceberg/pull/1801)
+- **Community Contributor:** [@xiaoxuandev](https://github.com/xiaoxuandev)
+- **Reference:** [duckdb-iceberg#1801](https://github.com/duckdb/duckdb-iceberg/pull/1801)
 
 #### Table Comments
 
@@ -64,9 +63,8 @@ SELECT table_name, table_comment FROM information_schema.tables
 WHERE table_schema = 'my_schema' AND table_name = 'my_iceberg_table';
 ```
 
-**Community Contributor:** [@vitaliytv](https://github.com/vitaliytv)
-
-**Reference:** [duckdb-iceberg#1799](https://github.com/duckdb/duckdb-iceberg/pull/1799)
+- **Community Contributor:** [@vitaliytv](https://github.com/vitaliytv)
+- **Reference:** [duckdb-iceberg#1799](https://github.com/duckdb/duckdb-iceberg/pull/1799)
 
 #### Copy-on-Write UPDATE Support
 
@@ -82,9 +80,8 @@ WHERE created_date < current_date - interval '30 days'
 -- Only changed rows are written; unchanged files remain in place
 ```
 
-**Community Contributor:** [@dor-bernstein](https://github.com/dor-bernstein)
-
-**Reference:** [duckdb-iceberg#1662](https://github.com/duckdb/duckdb-iceberg/pull/1662)
+- **Community Contributor:** [@dor-bernstein](https://github.com/dor-bernstein)
+- **Reference:** [duckdb-iceberg#1662](https://github.com/duckdb/duckdb-iceberg/pull/1662)
 
 ### Correctness and Reliability
 
@@ -94,17 +91,15 @@ DuckDB 2.0.1 strengthens error handling and data safety with improved bounds che
 
 DuckDB 2.0.1 adds bounds checking for deletion vector blob reads to prevent out-of-bounds reads. The fix also improves error reporting to distinguish between actual bitmap read failures and deletion vector blobs that are too small, surfacing these as corruption errors rather than crashes. If a table's deletion vectors are corrupted, you'll now receive a clear error message instead of a silent crash.
 
-**Community Contributor:** [@lliangyu-lin](https://github.com/lliangyu-lin)
-
-**Reference:** [duckdb-iceberg#1775](https://github.com/duckdb/duckdb-iceberg/pull/1775)
+- **Community Contributor:** [@lliangyu-lin](https://github.com/lliangyu-lin)
+- **Reference:** [duckdb-iceberg#1775](https://github.com/duckdb/duckdb-iceberg/pull/1775)
 
 #### Manifest Content Error Reporting
 
 Instead of crashing when encountering invalid manifest content, DuckDB 2.0.1 now reports these issues as proper error messages. If a manifest file is malformed or incomplete, DuckDB surfaces this as a clear error so operations fail gracefully rather than with an internal crash, enabling you to identify and fix metadata issues.
 
-**Community Contributor:** [@lliangyu-lin](https://github.com/lliangyu-lin)
-
-**Reference:** [duckdb-iceberg#1781](https://github.com/duckdb/duckdb-iceberg/pull/1781)
+- **Community Contributor:** [@lliangyu-lin](https://github.com/lliangyu-lin)
+- **Reference:** [duckdb-iceberg#1781](https://github.com/duckdb/duckdb-iceberg/pull/1781)
 
 #### Decimal Width Validation
 
@@ -122,9 +117,8 @@ CREATE TABLE my_iceberg_table (
 );
 ```
 
-**Community Contributor:** [@h4nsmuller](https://github.com/h4nsmuller)
-
-**Reference:** [duckdb-iceberg#1817](https://github.com/duckdb/duckdb-iceberg/pull/1817)
+- **Community Contributor:** [@h4nsmuller](https://github.com/h4nsmuller)
+- **Reference:** [duckdb-iceberg#1817](https://github.com/duckdb/duckdb-iceberg/pull/1817)
 
 #### Transaction and Concurrency Improvements
 
@@ -139,11 +133,7 @@ COMMIT;
 -- Either both succeed or both roll back. No partial state.
 ```
 
-**Community Contributors:**
-- [@themisvaltinos](https://github.com/themisvaltinos) — [#1771](https://github.com/duckdb/duckdb-iceberg/pull/1771)
-- [@xiaoxuandev](https://github.com/xiaoxuandev) — [#1773](https://github.com/duckdb/duckdb-iceberg/pull/1773)
-- [@The-Alchemist](https://github.com/The-Alchemist) — [#1596](https://github.com/duckdb/duckdb-iceberg/pull/1596)
-- [@Richard-Durkee](https://github.com/Richard-Durkee) — [#1678](https://github.com/duckdb/duckdb-iceberg/pull/1678)
+- **Community Contributors:** [@themisvaltinos](https://github.com/themisvaltinos), [@xiaoxuandev](https://github.com/xiaoxuandev), [@The-Alchemist](https://github.com/The-Alchemist), [@Richard-Durkee](https://github.com/Richard-Durkee)
 
 ### Performance Optimizations
 
@@ -153,41 +143,36 @@ DuckDB 2.0.1 includes substantial optimizations for query planning and execution
 
 DuckDB 2.0.1 skips manifests without live files during planning, reducing unnecessary I/O and planning time for tables with many snapshots.
 
-**Community Contributor:** [@elpetrak](https://github.com/elpetrak)
-
-**Reference:** [duckdb-iceberg#1769](https://github.com/duckdb/duckdb-iceberg/pull/1769)
+- **Community Contributor:** [@elpetrak](https://github.com/elpetrak)
+- **Reference:** [duckdb-iceberg#1769](https://github.com/duckdb/duckdb-iceberg/pull/1769)
 
 #### Statistics-Driven Scan Planning
 
 Iceberg statistics are now used to populate distinct value counts in DuckDB's `iceberg_scan`, enabling the optimizer to make better decisions about query execution. When Iceberg tables store statistics about cardinality and distinct values, DuckDB now uses this information during planning, resulting in better join orders and aggregation strategies.
 
-**Community Contributor:** [@rutb327](https://github.com/rutb327)
-
-**Reference:** [duckdb-iceberg#1772](https://github.com/duckdb/duckdb-iceberg/pull/1772)
+- **Community Contributor:** [@rutb327](https://github.com/rutb327)
+- **Reference:** [duckdb-iceberg#1772](https://github.com/duckdb/duckdb-iceberg/pull/1772)
 
 #### ORDER BY LIMIT Optimization with NaN Handling
 
 The ORDER BY LIMIT scan optimization now correctly handles NaN values, preventing incorrect pruning when sorting over data files containing NaN.
 
-**Community Contributor:** [@mustafahasankhan](https://github.com/mustafahasankhan)
-
-**Reference:** [duckdb-iceberg#1779](https://github.com/duckdb/duckdb-iceberg/pull/1779)
+- **Community Contributor:** [@mustafahasankhan](https://github.com/mustafahasankhan)
+- **Reference:** [duckdb-iceberg#1779](https://github.com/duckdb/duckdb-iceberg/pull/1779)
 
 #### Parallel Deletion Vector Reads
 
 Deletion vector files are now read in parallel, reducing query latency when scanning tables with many deleted rows.
 
-**Community Contributor:** [@xiaoxuandev](https://github.com/xiaoxuandev)
-
-**Reference:** [duckdb-iceberg#1766](https://github.com/duckdb/duckdb-iceberg/pull/1766)
+- **Community Contributor:** [@xiaoxuandev](https://github.com/xiaoxuandev)
+- **Reference:** [duckdb-iceberg#1766](https://github.com/duckdb/duckdb-iceberg/pull/1766)
 
 #### Copy-on-Write DELETE Optimization
 
 Constant filenames in copy-on-write DELETE operations are now looked up once per chunk rather than per row, significantly reducing CPU overhead for large bulk deletes.
 
-**Community Contributor:** [@elpetrak](https://github.com/elpetrak)
-
-**Reference:** [duckdb-iceberg#1778](https://github.com/duckdb/duckdb-iceberg/pull/1778)
+- **Community Contributor:** [@elpetrak](https://github.com/elpetrak)
+- **Reference:** [duckdb-iceberg#1778](https://github.com/duckdb/duckdb-iceberg/pull/1778)
 
 #### Row Lineage Prepared Statements
 
@@ -202,9 +187,8 @@ EXECUTE get_lineage(12345);
 EXECUTE get_lineage(67890);
 ```
 
-**Community Contributor:** [@rutb327](https://github.com/rutb327)
-
-**Reference:** [duckdb-iceberg#1797](https://github.com/duckdb/duckdb-iceberg/pull/1797)
+- **Community Contributor:** [@rutb327](https://github.com/rutb327)
+- **Reference:** [duckdb-iceberg#1797](https://github.com/duckdb/duckdb-iceberg/pull/1797)
 
 ## Infrastructure and Metadata Handling
 
