@@ -618,7 +618,7 @@ body.documentation .docs-label {
 		height: auto;
 		max-height: none;
 		margin: 0;
-		padding: 16px 20px 40px;
+		padding: 16px 8px 40px;
 		border: 0;
 		border-radius: 0;
 		background: var(--main-body-background-color, #FCFCFC);
@@ -634,6 +634,14 @@ body.documentation .docs-label {
 		.sidenav {
 			height: auto;
 			overflow: visible;
+
+			&.is-drilled {
+				padding: 0 12px;
+			}
+		}
+
+		.sidenav-tools {
+			padding: 0 12px;
 		}
 
 		.opensearch {
