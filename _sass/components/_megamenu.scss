@@ -752,7 +752,7 @@ body.documentation .docs-label {
 	}
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+@media only screen and (max-width: 580px) {
 	body.documentation header .headerline .headercontent .duckdbhome #duckdb_logo a.docshome {
 		left: calc(var(--duckdb-wordmark-height) + 10px);
 		right: auto;
