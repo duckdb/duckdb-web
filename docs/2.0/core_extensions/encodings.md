@@ -11,7 +11,9 @@ redirect_from:
 title: Encodings Extension
 ---
 
-The `encodings` extension adds support for reading CSVs using more than 1,000 character encodings.
+The `encodings` extension adds support for reading CSVs using more than 1,000 character encodings. The same names work with [`encode`]({% link docs/2.0/sql/functions/blob.md %}#encodestring-encoding) and [`decode`]({% link docs/2.0/sql/functions/blob.md %}#decodeblob-encoding).
+
+> New Using these names with `encode` and `decode` was introduced in DuckDB 2.1 and is currently available in nightly builds. A constant encoding name autoloads this extension. `utf-8`, `utf-16`, and `latin-1` are built in.
 
 For a complete list of supported encodings, see [All Supported Encodings](#all-supported-encodings). For detailed information on character encoding, see the [ICU data repository](https://github.com/unicode-org/icu-data/tree/main/charset/data/ucm).
 
