@@ -20,21 +20,21 @@
       ],
       "columns": [
         [
-          { "label": "Import & Export", "url": "/docs/current/data/overview" },
+          { "label": "Guides", "url": "/docs/current/guides/overview" },
+          { "label": "Data Import", "url": "/docs/current/data/overview" },
           { "label": "SQL", "url": "/docs/current/sql/introduction" },
-          { "label": "Client APIs", "url": "/docs/current/clients/overview" },
-          { "label": "Extensions", "url": "/docs/current/extensions/overview" }
+          { "label": "Client APIs", "url": "/docs/current/clients/overview" }
         ],
         [
-          { "label": "Server & Remote", "url": "/docs/current/quack/overview" },
+          { "label": "Extensions", "url": "/docs/current/extensions/overview" },
+          { "label": "Quack Remote Protocol", "url": "/docs/current/quack/overview" },
           { "label": "Performance & Operations", "url": "/docs/current/operations_manual/overview" },
-          { "label": "Development & Internals", "url": "/docs/current/dev/overview" },
           { "label": "Troubleshooting", "url": "/docs/current/troubleshooting" }
         ]
       ],
       "footer": {
-        "label": "Contribute to the project",
-        "url": "https://github.com/duckdb/duckdb/blob/main/CONTRIBUTING.md"
+        "label": "Browse all documentation",
+        "url": "/docs/"
       }
     },
     {
@@ -57,17 +57,22 @@
       ],
       "columns": [
         [
+          { "label": "Why DuckDB", "url": "/why_duckdb" },
           { "label": "Events", "url": "/events" },
-          { "label": "Design", "url": "/design" },
-          { "label": "History", "url": "/history" },
-          { "label": "Extensions", "url": "/community_extensions/" }
+          { "label": "Community Extensions", "url": "/community_extensions/" },
+          { "label": "Roadmap", "url": "/roadmap" }
         ],
         [
           { "label": "FAQ", "url": "/faq" },
-          { "label": "Status Page", "url": "#" },
-          { "label": "RSS Feed", "url": "/feed.xml" }
+          { "label": "History", "url": "/history" },
+          { "label": "Design", "url": "/design" },
+          { "label": "Status Page", "url": "https://status.duckdb.org/" }
         ]
-      ]
+      ],
+      "footer": {
+        "label": "Contribute to the project",
+        "url": "https://github.com/duckdb/duckdb/blob/main/CONTRIBUTING.md"
+      }
     },
     {
       "label": "GitHub",
