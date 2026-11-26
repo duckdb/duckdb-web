@@ -1,5 +1,12 @@
 {% assign menu = include.data | default: site.data.megamenu %}
 <nav class="megamenu" aria-label="Main">
+	<div class="mm-tools">
+		<button type="button" class="mm-search search_icon"><svg class="icon"><use href="#search-md"></use></svg>Search</button>
+		<button type="button" class="mode" data-mode="dark" aria-label="Toggle dark mode">
+			<svg class="icon icon-sun"><use href="#sun"></use></svg>
+			<svg class="icon icon-moon"><use href="#moon-01"></use></svg>
+		</button>
+	</div>
 	<div class="search_icon" role="button" tabindex="0" aria-label="Search">
 		<svg class="icon"><use href="#search-sm"></use></svg>
 	</div>
@@ -7,7 +14,7 @@
 		{% for item in menu.items %}
 		{% if item.cards or item.columns %}
 		<li class="mm-item has-panel">
-			<button type="button" class="mm-trigger" aria-expanded="false" aria-controls="mm-{{ item.id }}">{{ item.label }}</button>
+			<button type="button" class="mm-trigger" aria-expanded="false" aria-controls="mm-{{ item.id }}"><span>{{ item.label }}</span></button>
 			<div class="mm-panel" id="mm-{{ item.id }}">
 				<div class="mm-box">
 					<div class="mm-body">
@@ -41,10 +48,10 @@
 		</li>
 		{% else %}
 		<li class="mm-item">
-			<a class="mm-trigger{% if item.github %} github{% endif %}" href="{{ item.url }}"{% if item.url contains '://' %} target="_blank"{% endif %}>{{ item.label }}{% if item.github and site.star_count %}<span class="starcount">{{ site.star_count }}</span>{% endif %}</a>
+			<a class="mm-trigger{% if item.github %} github{% endif %}" href="{{ item.url }}"{% if item.url contains '://' %} target="_blank"{% endif %}><span>{{ item.label }}{% if item.github and site.star_count %}<span class="starcount">{{ site.star_count }}</span>{% endif %}</span></a>
 		</li>
 		{% endif %}
 		{% endfor %}
 	</ul>
-	<div class="onlymobile external"><a href="{% link community_support.md %}" target="_blank">Support</a></div>
+	<div class="mm-support"><a href="{% link community_support.md %}" target="_blank">Support</a></div>
 </nav>

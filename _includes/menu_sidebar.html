@@ -12,11 +12,17 @@
 	{%- capture nav_items -%}{%- include menu_sidebar_tree.html fallback=true -%}{%- endcapture -%}
 {%- endunless -%}
 
-<nav class="sidenavigation sidenav-drill" aria-label="Documentation">
-	<button type="button" class="opensearch sidenav-search">
-		<span class="sidenav-search-label">Search docs</span>
-		<span class="sidenav-search-hint"><svg class="icon"><use href="#search-md"></use></svg><span class="mac shortcut">⌘K</span><span class="win shortcut">ctrl+k</span></span>
-	</button>
+<nav class="sidenavigation sidenav-drill sidenav-mobile" aria-label="Documentation">
+	<div class="sidenav-tools">
+		<button type="button" class="opensearch sidenav-search">
+			<span class="sidenav-search-label">Search docs</span>
+			<span class="sidenav-search-hint"><svg class="icon"><use href="#search-md"></use></svg><span class="mac shortcut">⌘K</span><span class="win shortcut">ctrl+k</span></span>
+		</button>
+		<button type="button" class="mode sidenav-mode" data-mode="dark" aria-label="Toggle dark mode">
+			<svg class="icon icon-sun"><use href="#sun"></use></svg>
+			<svg class="icon icon-moon"><use href="#moon-01"></use></svg>
+		</button>
+	</div>
 	<ul class="sidenav nav-list{% if nav_items contains 'is-open' %} is-drilled{% endif %}">
 		{% if nav_groups.size > 0 %}<li class="nav-label">Get started</li>{% endif %}
 		{{- nav_items -}}

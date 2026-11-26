@@ -65,7 +65,9 @@ Helpers.ready(function(){
 	function onModeClick() {
 		var isDark = this.getAttribute('data-mode') === 'dark';
 		document.documentElement.classList.toggle('darkmode', isDark);
-		this.setAttribute('data-mode', isDark ? 'light' : 'dark');
+		modeButtons.forEach(function (button) {
+			button.setAttribute('data-mode', isDark ? 'light' : 'dark');
+		});
 		localStorage.setItem('mode', isDark ? 'dark' : 'light');
 		if (isDark) {
 			document.documentElement.style.backgroundColor = '#0d0d0d';
