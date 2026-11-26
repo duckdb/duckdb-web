@@ -624,6 +624,42 @@ body.documentation .docs-label {
 		}
 	}
 
+	body.documentation.communityextensions:has(.sidenav-mobile) header .headerline .headercontent .options button.mode {
+		display: flex;
+		width: 36px;
+		height: 36px;
+	}
+
+	body.documentation.communityextensions main .sidenavigation.sidenav-mobile {
+		li {
+			margin: 0;
+			border-radius: var(--page-radius-m, 10px);
+
+			> a {
+				display: flex;
+				align-items: center;
+				min-height: 40px;
+				padding: 0 12px;
+				border-radius: var(--page-radius-m, 10px);
+			}
+		}
+
+		li.hasSub {
+			min-height: 40px;
+			padding: 0 12px;
+
+			> a {
+				min-height: 0;
+				padding: 0;
+			}
+		}
+
+		li:active,
+		li > a:active {
+			background: var(--surface-hover);
+		}
+	}
+
 	body.documentation main .sidenavigation.sidenav-mobile {
 		top: calc($site-header-height + var(--docbanner-height, 0px));
 		right: 0;
@@ -658,6 +694,9 @@ body.documentation .docs-label {
 		}
 
 		.sidenav-tools {
+			display: flex;
+			flex-shrink: 0;
+			gap: 8px;
 			padding: 0 12px;
 		}
 
@@ -666,10 +705,19 @@ body.documentation .docs-label {
 		}
 
 		.sidenav-search {
+			@include menu-item;
+			flex: 1 1 auto;
 			flex-direction: row-reverse;
+			align-items: center;
 			justify-content: flex-end;
 			gap: 8px;
+			height: 36px;
+			padding: 0 12px;
+			border: 1px solid var(--border-color);
 			border-radius: 8px;
+			background: none;
+			color: var(--menu-topmenu-searchbar-shortcut-text-color, #999999);
+			cursor: pointer;
 
 			.shortcut {
 				display: none !important;
