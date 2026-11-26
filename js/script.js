@@ -474,28 +474,6 @@ Helpers.ready(function(){
 				}
 			});
 		});
-
-		// Menu 1 Open Submenu
-		landingMenus.forEach(function (nav) {
-			nav.addEventListener('click', function (e) {
-				if (window.innerWidth > 900) return;
-				const item = e.target.closest('.hasSub');
-				if (!item || !nav.contains(item)) return;
-				e.preventDefault();
-				const submenu = item.nextElementSibling && item.nextElementSibling.classList.contains('submenuwrap') ? item.nextElementSibling : null;
-				if (item.classList.contains('open')) {
-					item.classList.remove('open');
-					if (submenu) Helpers.slideUp(submenu);
-				} else {
-					landingMenus.forEach(function (menu) {
-						menu.querySelectorAll('.hasSub').forEach(function (el) { el.classList.remove('open'); });
-						menu.querySelectorAll('.submenuwrap').forEach(function (el) { Helpers.slideUp(el); });
-					});
-					item.classList.add('open');
-					if (submenu) Helpers.slideDown(submenu);
-				}
-			});
-		});
 	}
 
     
