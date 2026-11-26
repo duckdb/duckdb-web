@@ -1,0 +1,50 @@
+{% assign menu = include.data | default: site.data.megamenu %}
+<nav class="megamenu" aria-label="Main">
+	<div class="search_icon" role="button" tabindex="0" aria-label="Search">
+		<svg class="icon"><use href="#search-sm"></use></svg>
+	</div>
+	<ul class="mm-items">
+		{% for item in menu.items %}
+		{% if item.cards or item.columns %}
+		<li class="mm-item has-panel">
+			<button type="button" class="mm-trigger" aria-expanded="false" aria-controls="mm-{{ item.id }}">{{ item.label }}</button>
+			<div class="mm-panel" id="mm-{{ item.id }}">
+				<div class="mm-box">
+					<div class="mm-body">
+						{% if item.cards %}
+						<ul class="mm-cards">
+							{% for card in item.cards %}
+							<li>
+								<a class="mm-card" href="{{ card.url }}">
+									<span class="mm-card-title">{% if card.icon %}<svg class="icon"><use href="#{{ card.icon }}"></use></svg>{% endif %}{{ card.label }}</span>
+									{% if card.description %}<span class="mm-card-text">{{ card.description }}</span>{% endif %}
+								</a>
+							</li>
+							{% endfor %}
+						</ul>
+						{% endif %}
+						{% for column in item.columns %}
+						<ul class="mm-col">
+							{% for link in column %}
+							<li><a class="mm-link" href="{{ link.url }}">{{ link.label }}</a></li>
+							{% endfor %}
+						</ul>
+						{% endfor %}
+					</div>
+					{% if item.footer %}
+					<div class="mm-footer">
+						<a class="mm-link" href="{{ item.footer.url }}">{{ item.footer.label }}<svg class="icon"><use href="#arrow-right"></use></svg></a>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</li>
+		{% else %}
+		<li class="mm-item">
+			<a class="mm-trigger{% if item.github %} github{% endif %}" href="{{ item.url }}"{% if item.url contains '://' %} target="_blank"{% endif %}>{{ item.label }}{% if item.github and site.star_count %}<span class="starcount">{{ site.star_count }}</span>{% endif %}</a>
+		</li>
+		{% endif %}
+		{% endfor %}
+	</ul>
+	<div class="onlymobile external"><a href="{% link community_support.md %}" target="_blank">Support</a></div>
+</nav>

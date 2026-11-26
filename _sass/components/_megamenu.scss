@@ -1,0 +1,243 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+header .headerline .headercontent .landingmenu nav.megamenu {
+	--mm-row-hover: var(--surface-row-hover, color-mix(in srgb, var(--menu-dropdown-item-background-hover) 60%, transparent));
+	gap: 32px;
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.mm-items {
+		display: flex;
+		align-items: center;
+		gap: 32px;
+		height: 100%;
+	}
+
+	.mm-item {
+		display: flex;
+		align-items: center;
+		height: 100%;
+	}
+
+	.mm-trigger {
+		@include label-1;
+		display: flex;
+		align-items: center;
+		height: 100%;
+		padding: 0;
+		border: 0;
+		background: none;
+		color: var(--menu-topmenu-text-color, #1A1A1A);
+		line-height: 1;
+		cursor: pointer;
+		transition: color .3s;
+
+		&:hover {
+			color: var(--main-link-hover, #665d00);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--main-text-primary-color, #0D0D0D);
+			outline-offset: 4px;
+			border-radius: 2px;
+		}
+	}
+
+	.mm-panel {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		width: 700px;
+		padding-top: 8px;
+		transform: translateX(-50%);
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity .15s, visibility .15s;
+		z-index: 30;
+	}
+
+	.mm-item:hover > .mm-panel,
+	.mm-item:focus-within > .mm-panel {
+		opacity: 1;
+		visibility: visible;
+
+		.mm-box {
+			transform: none;
+		}
+	}
+
+	.mm-box {
+		overflow: hidden;
+		border: 1px solid var(--border-color);
+		border-radius: var(--page-radius-l, 15px);
+		background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
+		backdrop-filter: blur(20px);
+		transform: scale(.98);
+		transform-origin: top center;
+		transition: transform .15s;
+	}
+
+	.mm-body {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--page-element-spacing-medium, 25px);
+		padding: 16px;
+	}
+
+	.mm-cards {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		flex: 0 0 232px;
+	}
+
+	.mm-col {
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 0;
+		min-width: 0;
+	}
+
+	.mm-card,
+	.mm-link {
+		border-radius: var(--page-radius-m, 10px);
+		text-decoration: none;
+		transition: background-color .2s;
+
+		&:hover {
+			background: var(--mm-row-hover);
+		}
+
+		&:focus-visible {
+			background: var(--mm-row-hover);
+			outline: 1px solid var(--main-text-primary-color, #0D0D0D);
+			outline-offset: -1px;
+		}
+	}
+
+	.mm-card {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		padding: 12px;
+		line-height: 1;
+	}
+
+	.mm-card-title {
+		@include label-1;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		min-height: 16px;
+		color: var(--main-text-primary-color, #0D0D0D);
+	}
+
+	.mm-card-text {
+		@include body-small;
+		line-height: 1.4;
+		color: var(--main-text-tertiary-color, #666666);
+	}
+
+	.mm-link {
+		@include label-1;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 40px;
+		padding: 0 12px;
+		color: var(--main-text-secondary-color, #333333);
+		white-space: nowrap;
+
+		&:hover {
+			color: var(--main-text-secondary-color, #333333);
+		}
+	}
+
+	.mm-card-title svg.icon,
+	.mm-link svg.icon {
+		flex-shrink: 0;
+		width: 13px;
+		height: 13px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2;
+	}
+
+	.mm-footer {
+		padding: 8px;
+		border-top: 1px solid var(--border-color);
+
+		.mm-link {
+			padding: 0 24px;
+		}
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	header .headerline .headercontent .landingmenu nav.megamenu {
+		.mm-items {
+			display: block;
+			height: auto;
+		}
+
+		.mm-item {
+			display: block;
+			height: auto;
+		}
+
+		button.mm-trigger {
+			height: auto;
+			padding: 16px 15px 8px;
+			color: var(--main-text-tertiary-color, #666666);
+			pointer-events: none;
+		}
+
+		a.mm-trigger {
+			height: 40px;
+			padding: 0 15px;
+		}
+
+		.mm-panel {
+			position: static;
+			width: auto;
+			padding: 0;
+			transform: none;
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.mm-box {
+			border: 0;
+			border-radius: 0;
+			background: none;
+			backdrop-filter: none;
+			transform: none;
+		}
+
+		.mm-body {
+			display: block;
+			padding: 0;
+		}
+
+		.mm-card {
+			flex-direction: row;
+			align-items: center;
+			height: 40px;
+			padding: 0 15px;
+		}
+
+		.mm-card-text,
+		.mm-footer {
+			display: none;
+		}
+
+		.mm-link {
+			padding: 0 15px;
+		}
+	}
+}

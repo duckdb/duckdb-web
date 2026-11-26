@@ -1,0 +1,78 @@
+{
+  "items": [
+    {
+      "id": "documentation",
+      "label": "Documentation",
+      "url": "/docs/",
+      "cards": [
+        {
+          "label": "Installation",
+          "icon": "download-01",
+          "description": "Set up DuckDB in your preferred environment.",
+          "url": "/docs/2.0/installation"
+        },
+        {
+          "label": "Quickstart",
+          "icon": "zap",
+          "description": "From zero to your first query in minutes.",
+          "url": "/docs/current/quickstart"
+        }
+      ],
+      "columns": [
+        [
+          { "label": "Import & Export", "url": "/docs/current/data/overview" },
+          { "label": "SQL", "url": "/docs/current/sql/introduction" },
+          { "label": "Client APIs", "url": "/docs/current/clients/overview" },
+          { "label": "Extensions", "url": "/docs/current/extensions/overview" }
+        ],
+        [
+          { "label": "Server & Remote", "url": "/docs/current/quack/overview" },
+          { "label": "Performance & Operations", "url": "/docs/current/operations_manual/overview" },
+          { "label": "Development & Internals", "url": "/docs/current/dev/overview" },
+          { "label": "Troubleshooting", "url": "/docs/current/troubleshooting" }
+        ]
+      ],
+      "footer": {
+        "label": "Contribute to the project",
+        "url": "https://github.com/duckdb/duckdb/blob/main/CONTRIBUTING.md"
+      }
+    },
+    {
+      "id": "resources",
+      "label": "Resources",
+      "url": "/news",
+      "cards": [
+        {
+          "label": "Engineering Blog",
+          "icon": "edit-03",
+          "description": "Deep dives and release notes from the team.",
+          "url": "/news"
+        },
+        {
+          "label": "Library",
+          "icon": "book-open-02",
+          "description": "Talks, papers and videos about DuckDB.",
+          "url": "/library"
+        }
+      ],
+      "columns": [
+        [
+          { "label": "Events", "url": "/events" },
+          { "label": "Design", "url": "/design" },
+          { "label": "History", "url": "/history" },
+          { "label": "Extensions", "url": "/community_extensions/" }
+        ],
+        [
+          { "label": "FAQ", "url": "/faq" },
+          { "label": "Status Page", "url": "#" },
+          { "label": "RSS Feed", "url": "/feed.xml" }
+        ]
+      ]
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/duckdb/duckdb",
+      "github": true
+    }
+  ]
+}

@@ -86,7 +86,7 @@
 					{% if page.body_class contains "duckcon" %}
 						{% include duckcon/menu.html %}
 					{% else %}
-						{% include menu_secondary.html %}
+						{% include megamenu.html %}
 					{% endif %}
 					
 					<div class="hamburger hamburger--squeeze">
@@ -99,11 +99,11 @@
 					{% if page.body_class contains "duckcon" and page.duckcon_register_url %}
 						<a class="button yellow" href="{{ page.duckcon_register_url }}" target="_blank">Register for free</a>
 					{% else %}
-						<a class="button yellow" href="{% link community_support.md %}" target="_blank">Support</a>
 						<button class="mode" data-mode="dark" aria-label="Toggle dark mode">
 							<svg class="icon icon-sun"><use href="#sun"></use></svg>
 							<svg class="icon icon-moon"><use href="#moon-01"></use></svg>
 						</button>
+						<a class="button yellow" href="{% link community_support.md %}" target="_blank">Support</a>
 					{% endif %}
 				</div>
 			</div>
