@@ -220,12 +220,8 @@ header .headerline .headercontent .landingmenu nav.megamenu {
 	}
 
 	.mm-footer {
-		padding: 8px;
+		padding: 8px 16px;
 		border-top: 1px solid var(--border-color);
-
-		.mm-link {
-			padding: 0 24px;
-		}
 	}
 
 	.mm-trigger[aria-expanded="true"] {
