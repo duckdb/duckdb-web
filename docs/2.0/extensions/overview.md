@@ -11,7 +11,14 @@ title: Extensions
 ---
 
 DuckDB has a flexible extension mechanism that allows for dynamically loading extensions.
-Extensions can enhance DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality.
+Extensions can enhance DuckDB's functionality by providing support for additional file formats, introducing new [data types]({% link docs/2.0/sql/data_types/overview.md %}), and domain-specific functionality.
+
+<!-- ref: duckdb/duckdb-web#7913 -->
+Typical examples of what extensions add are:
+
+* new functions and macros
+* new [secret types]({% link docs/2.0/configuration/secrets_manager.md %}#types-of-secrets)
+* new [external resource types]({% link docs/2.0/resources/resource_types.md %})
 
 > Extensions are loadable on all clients (e.g., Python and R).
 > Extensions distributed via the Core and Community repositories are built and tested on macOS, Windows, and Linux. All operating systems are supported for both the AMD64 and the ARM64 architectures, with the exception of macOS on Intel (`osx_amd64`), which is being phased out: in DuckDB 2.0, core extensions are still built for `osx_amd64` but community extensions are only built for it on a best-effort basis, and DuckDB 2.1 will drop support for the platform.
