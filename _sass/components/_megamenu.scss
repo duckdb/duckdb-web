@@ -30,7 +30,7 @@
 }
 
 header .headerline .headercontent .landingmenu nav.megamenu {
-	--mm-row-hover: var(--surface-row-hover, color-mix(in srgb, var(--menu-dropdown-item-background-hover) 60%, transparent));
+	--mm-row-hover: var(--surface-hover);
 	gap: 32px;
 
 	ul {
@@ -693,7 +693,7 @@ body.documentation .docs-label {
 			min-height: 40px;
 
 			&:active {
-				background: color-mix(in srgb, var(--menu-dropdown-item-background-hover) 60%, transparent);
+				background: var(--surface-hover);
 			}
 		}
 
