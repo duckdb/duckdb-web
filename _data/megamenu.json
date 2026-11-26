@@ -15,7 +15,7 @@
           "label": "Quickstart",
           "icon": "zap",
           "description": "From zero to your first query in minutes.",
-          "url": "/docs/2.0/quickstart"
+          "url": "/docs/current/quickstart"
         }
       ],
       "columns": [

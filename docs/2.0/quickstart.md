@@ -1,6 +1,11 @@
 ---
 layout: docu
 breadcrumbs: false
+redirect_from:
+- /docs/stable/quickstart
+- /docs/current/quickstart
+- /docs/lts/quickstart
+- /docs/preview/quickstart
 title: Quickstart
 ---
 

@@ -448,6 +448,7 @@ Helpers.ready(function(){
 		hamburgers.forEach(function (hamburger) {
 			hamburger.addEventListener('click', function () {
 				this.classList.toggle('is-active');
+				this.setAttribute('aria-expanded', this.classList.contains('is-active'));
 
 				if (landingMenus.length > 0) { // Menu 1: Landingmenu
 					landingMenus.forEach(function (nav) { nav.classList.toggle('slidein'); });
@@ -893,7 +894,10 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 			if (!allHamburgers.some(Helpers.isVisible)) return;
 			if (!allHamburgers.some(function (h) { return h.classList.contains('is-active'); })) return;
 			if (document.body.classList.contains('search')) {
-				allHamburgers.forEach(function (h) { h.classList.remove('is-active'); });
+				allHamburgers.forEach(function (h) {
+					h.classList.remove('is-active');
+					h.setAttribute('aria-expanded', 'false');
+				});
 				document.querySelectorAll('body.documentation main .wrap.inactive').forEach(function (el) { el.classList.remove('inactive'); });
 				document.querySelectorAll('.sidenavigation.slidein, nav.slidein').forEach(function (el) { el.classList.remove('slidein'); });
 			} else {
@@ -901,6 +905,13 @@ linksWithIcon(['externallink', 'downloadlink', 'videolink', 'podcastlink']).forE
 				document.querySelectorAll('body.documentation main .wrap').forEach(function (el) { el.classList.add('inactive'); });
 			}
 		});
+	});
+	window.addEventListener('keydown', function (e) {
+		if (e.key !== 'Escape' || document.body.classList.contains('search')) return;
+		var activeHamburger = Array.from(document.querySelectorAll('.hamburger.is-active')).find(Helpers.isVisible);
+		if (!activeHamburger) return;
+		activeHamburger.click();
+		activeHamburger.focus();
 	});
 	document.querySelectorAll('.hamburger').forEach(function (hamburger) {
 		hamburger.addEventListener('click', function () {

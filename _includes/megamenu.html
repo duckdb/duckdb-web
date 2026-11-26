@@ -7,9 +7,9 @@
 			<svg class="icon icon-moon"><use href="#moon-01"></use></svg>
 		</button>
 	</div>
-	<div class="search_icon" role="button" tabindex="0" aria-label="Search">
+	<button type="button" class="search_icon" aria-label="Search">
 		<svg class="icon"><use href="#search-sm"></use></svg>
-	</div>
+	</button>
 	<ul class="mm-items">
 		{% for item in menu.items %}
 		{% if item.cards or item.columns %}
@@ -22,7 +22,7 @@
 						<ul class="mm-cards">
 							{% for card in item.cards %}
 							<li>
-								<a class="mm-card" href="{{ card.url }}">
+								<a class="mm-card" href="{{ card.url }}"{% if card.url contains '://' %} target="_blank"{% endif %}>
 									<span class="mm-card-title">{% if card.icon %}<svg class="icon"><use href="#{{ card.icon }}"></use></svg>{% endif %}{{ card.label }}</span>
 									{% if card.description %}<span class="mm-card-text">{{ card.description }}</span>{% endif %}
 								</a>
@@ -33,14 +33,14 @@
 						{% for column in item.columns %}
 						<ul class="mm-col">
 							{% for link in column %}
-							<li><a class="mm-link" href="{{ link.url }}">{{ link.label }}</a></li>
+							<li><a class="mm-link" href="{{ link.url }}"{% if link.url contains '://' %} target="_blank"{% endif %}>{{ link.label }}</a></li>
 							{% endfor %}
 						</ul>
 						{% endfor %}
 					</div>
 					{% if item.footer %}
 					<div class="mm-footer">
-						<a class="mm-link" href="{{ item.footer.url }}">{{ item.footer.label }}<svg class="icon"><use href="#arrow-right"></use></svg></a>
+						<a class="mm-link" href="{{ item.footer.url }}"{% if item.footer.url contains '://' %} target="_blank"{% endif %}>{{ item.footer.label }}<svg class="icon"><use href="#arrow-right"></use></svg></a>
 					</div>
 					{% endif %}
 				</div>

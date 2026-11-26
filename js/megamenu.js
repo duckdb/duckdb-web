@@ -99,7 +99,7 @@
 			nav.classList.remove('mm-js');
 		}
 
-		entries.forEach(function (entry, index) {
+		entries.forEach(function (entry) {
 			entry.item.addEventListener('pointerenter', function (e) {
 				if (!desktop.matches || e.pointerType !== 'mouse') return;
 				clearTimers();

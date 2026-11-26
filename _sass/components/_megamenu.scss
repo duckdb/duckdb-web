@@ -44,6 +44,19 @@ header .headerline .headercontent .landingmenu nav.megamenu {
 		display: none;
 	}
 
+	> .search_icon {
+		padding: 0;
+		border: 0;
+		background: none;
+		color: inherit;
+
+		&:focus-visible {
+			outline: 2px solid var(--main-text-primary-color, #0D0D0D);
+			outline-offset: 4px;
+			border-radius: 2px;
+		}
+	}
+
 	.mm-items {
 		display: flex;
 		align-items: center;
@@ -419,9 +432,11 @@ body.documentation .docs-label {
 		border-radius: 0;
 		background: var(--main-body-background-color, #FCFCFC);
 		backdrop-filter: none;
+		visibility: hidden;
 
 		&.slidein {
 			max-height: none;
+			visibility: visible;
 		}
 
 		> div {
@@ -543,9 +558,17 @@ body.documentation .docs-label {
 			color: var(--main-text-secondary-color, #333333);
 		}
 
-		.mm-card-text,
-		.mm-footer {
+		.mm-card-text {
 			display: none;
+		}
+
+		.mm-footer {
+			padding: 0;
+			border-top: 0;
+
+			.mm-link {
+				padding: 0 12px;
+			}
 		}
 
 		.mm-link {
@@ -621,10 +644,12 @@ body.documentation .docs-label {
 		overflow-y: auto;
 		overscroll-behavior: contain;
 		z-index: 899;
+		visibility: hidden;
 
 		&.slidein {
 			max-height: none;
 			overflow-y: auto;
+			visibility: visible;
 		}
 
 		.sidenav {
