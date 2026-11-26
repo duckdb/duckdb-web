@@ -103,3 +103,10 @@ External resources move that responsibility into DuckDB. When you write `CREATE 
 The DuckDB 2.0 source includes test resources built with table macros as lifecycle callbacks, and the `quack` extension uses external resources to manage temporary Quack database servers. The `aws` extension registers resource types for CloudFormation stacks, S3 buckets, and S3 tables. More extensions will follow as the pattern proves useful.
 
 If you've built a resource type or used external resources in your application, let us know. Email [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com).
+
+## Further Reading
+
+- [External Resources Documentation]({% link docs/2.0/resources/overview.md %})
+- [External Resource Types Reference]({% link docs/2.0/resources/resource_types.md %})
+- [Resource Registrations]({% link docs/2.0/resources/resource_registrations.md %})
+- [Example: Scratch Databases for CI Runs]({% link docs/2.0/resources/resource_type_example.md %})
