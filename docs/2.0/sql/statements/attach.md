@@ -244,16 +244,18 @@ Both views are defined as `SELECT * FROM '⟨path⟩'`, so the data is read from
 
 > New Attaching external resources was introduced in DuckDB 2.0.0.
 
-`ATTACH TO` attaches the database of an [external resource]({% link docs/2.0/resources/overview.md %}). It has two forms:
+`ATTACH TO` attaches the endpoint of an [underlying resource]({% link docs/2.0/resources/overview.md %}#terms) as a database. It has two forms:
 
 ```sql
 ATTACH TO NEW TEMPORARY EXTERNAL RESOURCE ⟨type⟩ [(⟨create_option⟩ [⟨value⟩], ...)] AS ⟨alias⟩ [(⟨attach_option⟩ [⟨value⟩], ...)];
 ATTACH TO EXTERNAL RESOURCE ⟨name⟩ AS ⟨alias⟩ [(⟨attach_option⟩ [⟨value⟩], ...)];
 ```
 
-The alias is required. Options before `AS` are passed to the [create function]({% link docs/2.0/resources/overview.md %}#type-functions) of the resource's type; options after it apply to the attached database. An option that the resource's endpoint already sets, such as `READ_ONLY` or `TYPE`, cannot also be given.
+> Note `ATTACH TO … EXTERNAL RESOURCE` is refused when [`enable_external_access`]({% link docs/2.0/configuration/overview.md %}#configuration-reference) is `false`. See [Restrictions]({% link docs/2.0/resources/overview.md %}#restrictions).
 
-`ATTACH TO NEW TEMPORARY EXTERNAL RESOURCE` creates a resource for this attachment, and [`DETACH`](#detach) destroys it again:
+The alias is required. `⟨type⟩` is the name of a registered external resource type; `⟨name⟩` is the name of a resource registration. Options before `AS` are passed to the create callback of the external resource type; options after it apply to the attached database. An option that the endpoint already sets, such as `READ_ONLY` or `TYPE`, cannot also be given. See [Lifecycle Callbacks]({% link docs/2.0/resources/resource_types.md %}#lifecycle-callbacks).
+
+`ATTACH TO NEW TEMPORARY EXTERNAL RESOURCE` provisions an underlying resource for this attachment, without a resource registration, and [`DETACH`](#detach) tears it down again:
 
 ```sql
 CREATE MACRO m_create(p) AS TABLE SELECT MAP {'id': 'm1'} AS handle;
@@ -275,7 +277,7 @@ SELECT database_name FROM duckdb_databases() WHERE database_name = 'db';
 |---------------|
 | db            |
 
-`ATTACH TO EXTERNAL RESOURCE` attaches a resource recorded with [`CREATE EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/create_external_resource.md %}) or [`REGISTER EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/register_external_resource.md %}). It does not take the resource over: `DETACH` leaves it recorded, and [`DESTROY EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/destroy_external_resource.md %}) removes it, which also detaches it:
+`ATTACH TO EXTERNAL RESOURCE` attaches the underlying resource of a resource registration created with [`CREATE EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/create_external_resource.md %}) or [`REGISTER EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/register_external_resource.md %}). It calls the status callback with the handle of the resource registration, and attaches the endpoint the status callback reports then; when it reports `failed`, the attachment is refused. `DETACH` leaves the resource registration in place, and [`DESTROY EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/destroy_external_resource.md %}) tears the underlying resource down and detaches the database:
 
 ```sql
 CREATE MACRO b_create(p) AS TABLE SELECT MAP {'id': 'b1'} AS handle;

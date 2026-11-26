@@ -47,12 +47,14 @@ DISCONNECT;
 
 <!-- ref: duckdb/duckdb#23736 duckdb/duckdb-web#7004 -->
 
-`CONNECT` can also connect to an [external resource]({% link docs/2.0/resources/overview.md %}). Unlike [`ATTACH TO`]({% link docs/2.0/sql/statements/attach.md %}#attach-to-external-resource), it takes no alias:
+`CONNECT` can also connect to the endpoint of an [underlying resource]({% link docs/2.0/resources/overview.md %}#terms): `CONNECT TO NEW TEMPORARY EXTERNAL RESOURCE` provisions one for this connection, without a resource registration, and `DISCONNECT` tears it down; `CONNECT TO EXTERNAL RESOURCE` connects to the underlying resource of a [resource registration]({% link docs/2.0/resources/resource_registrations.md %}). Unlike [`ATTACH TO`]({% link docs/2.0/sql/statements/attach.md %}#attach-to-external-resource), it takes no alias:
 
 ```sql
 CONNECT TO NEW TEMPORARY EXTERNAL RESOURCE ⟨type⟩ [(⟨create_option⟩ [⟨value⟩], ...)];
 CONNECT TO EXTERNAL RESOURCE ⟨name⟩ [(⟨connect_option⟩ [⟨value⟩], ...)];
 ```
+
+> Note `CONNECT TO … EXTERNAL RESOURCE` is refused when [`enable_external_access`]({% link docs/2.0/configuration/overview.md %}#configuration-reference) is `false`. See [Restrictions]({% link docs/2.0/resources/overview.md %}#restrictions).
 
 ## Supported Databases
 

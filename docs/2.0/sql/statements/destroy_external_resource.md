@@ -12,7 +12,7 @@ title: DESTROY EXTERNAL RESOURCE Statement
 
 > New The `DESTROY EXTERNAL RESOURCE` statement was introduced in DuckDB 2.0.0.
 
-The `DESTROY EXTERNAL RESOURCE` statement destroys an [external resource]({% link docs/2.0/resources/overview.md %}): it calls the [destroy function]({% link docs/2.0/resources/overview.md %}#type-functions) of its type and removes the record of the resource. Databases attached to the resource with [`ATTACH TO EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/attach.md %}#attach-to-external-resource) are detached.
+The `DESTROY EXTERNAL RESOURCE` statement [tears down]({% link docs/2.0/resources/overview.md %}#terms) the [underlying resource]({% link docs/2.0/resources/overview.md %}#terms) of a [resource registration]({% link docs/2.0/resources/resource_registrations.md %}), and removes the resource registration. It runs the deleter binding of the resource registration, which calls the destroy callback of its external resource type with the handle. The resource registration is removed only when the destroy callback raises no error; with an empty deleter binding, no lifecycle callback is called, and the resource registration is removed. Afterwards, the databases attached with [`ATTACH TO EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/attach.md %}#attach-to-external-resource) are detached. See [Resource Registrations]({% link docs/2.0/resources/resource_registrations.md %}).
 
 ## Syntax
 
@@ -20,9 +20,13 @@ The `DESTROY EXTERNAL RESOURCE` statement destroys an [external resource]({% lin
 DESTROY EXTERNAL RESOURCE ⟨name⟩;
 ```
 
+`⟨name⟩` is the name of a resource registration.
+
+> Note `DESTROY EXTERNAL RESOURCE` is refused when [`enable_external_access`]({% link docs/2.0/configuration/overview.md %}#configuration-reference) is `false`. See [Restrictions]({% link docs/2.0/resources/overview.md %}#restrictions).
+
 ## Examples
 
-Create a resource and destroy it:
+Create a resource registration and tear it down:
 
 ```sql
 CREATE MACRO d_create(p) AS TABLE SELECT MAP {'id': 'd1'} AS handle;
@@ -45,7 +49,7 @@ SELECT count(*) AS resources FROM (SHOW EXTERNAL RESOURCES);
 |-----------|
 | 0         |
 
-Destroying a name that is not registered is an error:
+A name without a resource registration is an error:
 
 ```sql
 DESTROY EXTERNAL RESOURCE nope;

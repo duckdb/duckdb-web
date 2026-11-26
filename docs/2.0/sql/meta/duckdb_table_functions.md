@@ -208,18 +208,18 @@ An extension that is installed from more than one repository has one row per rep
 
 > New The `duckdb_external_resource_types()` function was introduced in DuckDB 2.0.0.
 
-The `duckdb_external_resource_types()` function lists the registered [external resource types]({% link docs/2.0/resources/overview.md %}#resource-types). [`SHOW EXTERNAL RESOURCE TYPES`]({% link docs/2.0/sql/statements/show.md %}#show-external-resource-types-statement) returns the same rows.
+The `duckdb_external_resource_types()` function lists the registered [external resource types]({% link docs/2.0/resources/resource_types.md %}). [`SHOW EXTERNAL RESOURCE TYPES`]({% link docs/2.0/sql/statements/show.md %}#show-external-resource-types-statement) returns the same rows.
 
 | Column | Description | Type |
 |:-|:---|:-|
-| `name` | The name of the type. | `VARCHAR` |
-| `kind` | The classification of the type, e.g., `catalog`. | `VARCHAR` |
-| `create_function` | The create function of the type. | `VARCHAR` |
-| `status_function` | The status function of the type, `NULL` if not set. | `VARCHAR` |
-| `destroy_function` | The destroy function of the type, `NULL` if not set. | `VARCHAR` |
-| `resolve_function` | The resolve function of the type, `NULL` if not set. | `VARCHAR` |
-| `list_function` | The list function of the type, `NULL` if not set. | `VARCHAR` |
-| `origin` | The origin of the type, e.g., `user` for a type registered with `register_external_resource_type`. | `VARCHAR` |
+| `name` | The name of the external resource type. | `VARCHAR` |
+| `kind` | The [kind]({% link docs/2.0/resources/resource_types.md %}#external-resource-type-kinds) of the external resource type, e.g., `catalog`. | `VARCHAR` |
+| `create_function` | The name of the create callback. | `VARCHAR` |
+| `status_function` | The name of the status callback, `NULL` if not set. | `VARCHAR` |
+| `destroy_function` | The name of the destroy callback, `NULL` if not set. | `VARCHAR` |
+| `resolve_function` | The name of the resolve callback, `NULL` if not set. | `VARCHAR` |
+| `list_function` | The name of the list callback, `NULL` if not set. | `VARCHAR` |
+| `origin` | `user` for an external resource type registered by calling [`register_external_resource_type`]({% link docs/2.0/resources/resource_types.md %}#register_external_resource_type), `extension` for one registered by an extension. | `VARCHAR` |
 
 ```sql
 CREATE MACRO bucket_create(p) AS TABLE SELECT MAP {'bucket': 'scratch'} AS handle;
@@ -243,18 +243,18 @@ SELECT name, kind, create_function, destroy_function, origin FROM duckdb_externa
 
 > New The `duckdb_external_resources()` function was introduced in DuckDB 2.0.0.
 
-The `duckdb_external_resources()` function lists the recorded [external resources]({% link docs/2.0/resources/overview.md %}#resources). With `discover := true`, it also lists the resources that the list functions of the types report. Since DuckDB 2.0.1, `type := ⟨type⟩` limits the listing to one type. [`SHOW [ALL] EXTERNAL RESOURCES`]({% link docs/2.0/sql/statements/show.md %}#show-external-resources-statement) is a query over this function.
+The `duckdb_external_resources()` function lists the [resource registrations]({% link docs/2.0/resources/resource_registrations.md %}) of the DuckDB instance. With `discover := true`, it also lists the underlying resources that the list callbacks of the external resource types report (see [Discovery]({% link docs/2.0/resources/resource_registrations.md %}#discovery)). Since DuckDB 2.0.1, `type := ⟨type⟩` limits the listing to one external resource type. [`SHOW [ALL] EXTERNAL RESOURCES`]({% link docs/2.0/sql/statements/show.md %}#show-external-resources-statement) is a query over this function.
 
 | Column | Description | Type |
 |:-|:---|:-|
-| `name` | The name of the resource. | `VARCHAR` |
-| `type` | The type of the resource. | `VARCHAR` |
-| `managed` | `true` for a recorded resource, `false` for one reported by a list function. | `BOOLEAN` |
-| `state` | The state reported by a list function. | `VARCHAR` |
-| `reference` | The reference reported by a list function. | `VARCHAR` |
-| `uri` | The endpoint of the resource. | `VARCHAR` |
-| `attached_db_type` | The database type of the endpoint. | `VARCHAR` |
-| `handle` | The handle of the resource. | `MAP(VARCHAR, VARCHAR)` |
+| `name` | For a resource registration, its name; for an underlying resource reported by a list callback, the provider's name for it. | `VARCHAR` |
+| `type` | The name of the external resource type. | `VARCHAR` |
+| `managed` | `true` for a resource registration, `false` for an underlying resource reported by a list callback. | `BOOLEAN` |
+| `state` | The state that the list callback reported; `NULL` for a resource registration. | `VARCHAR` |
+| `reference` | The reference that the list callback reported; `NULL` for a resource registration. | `VARCHAR` |
+| `uri` | The `uri` of the endpoint that the status callback reported when the resource registration was created. | `VARCHAR` |
+| `attached_db_type` | The `attached_db_type` of that endpoint. | `VARCHAR` |
+| `handle` | The handle of the underlying resource. | `MAP(VARCHAR, VARCHAR)` |
 
 ```sql
 CALL register_external_resource(
