@@ -3,6 +3,8 @@ layout: post
 title: "Managing External Resources in DuckDB"
 authors:
   - Geertjan Wielenga
+thumb: "/images/blog/thumbs/external-resources.svg"
+image: "/images/blog/thumbs/external-resources.png"
 excerpt: "DuckDB 2.0 introduces external resources: a framework for creating, tracking, and destroying resources outside DuckDB—like database servers or cloud storage—through SQL. Extensions can register new resource types, and applications can manage their lifecycle through simple SQL statements."
 tag: release
 ---
