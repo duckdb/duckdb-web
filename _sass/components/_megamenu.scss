@@ -129,7 +129,6 @@ header .headerline .headercontent .landingmenu nav.megamenu {
 	.mm-cards {
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
 		flex: 0 0 232px;
 	}
 
@@ -162,6 +161,7 @@ header .headerline .headercontent .landingmenu nav.megamenu {
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
+		height: 80px;
 		padding: 12px;
 		line-height: 1;
 	}
@@ -529,10 +529,6 @@ body.documentation .docs-label {
 		.mm-body {
 			display: block;
 			padding: 0;
-		}
-
-		.mm-cards {
-			gap: 0;
 		}
 
 		.mm-card {
