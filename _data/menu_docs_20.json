@@ -267,6 +267,10 @@
               "path": "/docs/2.0/sql/statements/create_index"
             },
             {
+              "page": "CREATE EXTERNAL RESOURCE",
+              "path": "/docs/2.0/sql/statements/create_external_resource"
+            },
+            {
               "page": "CREATE MACRO",
               "path": "/docs/2.0/sql/statements/create_macro"
             },
@@ -307,6 +311,10 @@
               "path": "/docs/2.0/sql/statements/describe"
             },
             {
+              "page": "DESTROY EXTERNAL RESOURCE",
+              "path": "/docs/2.0/sql/statements/destroy_external_resource"
+            },
+            {
               "page": "DROP",
               "path": "/docs/2.0/sql/statements/drop"
             },
@@ -337,6 +345,10 @@
             {
               "page": "PREPARE, EXECUTE, and DEALLOCATE",
               "path": "/docs/2.0/sql/statements/prepare"
+            },
+            {
+              "page": "REGISTER EXTERNAL RESOURCE",
+              "path": "/docs/2.0/sql/statements/register_external_resource"
             },
             {
               "page": "SELECT",
@@ -1592,46 +1604,25 @@
       ]
     },
     {
-      "page": "Server & Remote",
-      "overview": "/docs/2.0/quack/overview",
-      "slug": "quack",
+      "page": "External Resources",
+      "overview": "/docs/2.0/resources/overview",
+      "slug": "resources",
       "mainfolderitems": [
         {
           "page": "Overview",
-          "path": "/docs/2.0/quack/overview"
+          "path": "/docs/2.0/resources/overview"
         },
         {
-          "page": "Setup",
-          "subfolderitems": [
-            {
-              "page": "Overview",
-              "path": "/docs/2.0/quack/setup/overview"
-            },
-            {
-              "page": "Reverse Proxy",
-              "path": "/docs/2.0/quack/setup/reverse_proxy"
-            },
-            {
-              "page": "Deployment",
-              "path": "/docs/2.0/quack/setup/deployment"
-            },
-            {
-              "page": "Using from Wasm",
-              "path": "/docs/2.0/quack/setup/quack_wasm"
-            }
-          ]
+          "page": "External Resource Types",
+          "path": "/docs/2.0/resources/resource_types"
         },
         {
-          "page": "Security",
-          "path": "/docs/2.0/quack/security"
+          "page": "Resource Registrations",
+          "path": "/docs/2.0/resources/resource_registrations"
         },
         {
-          "page": "Reference",
-          "path": "/docs/2.0/quack/reference"
-        },
-        {
-          "page": "Troubleshooting",
-          "path": "/docs/2.0/quack/troubleshooting"
+          "page": "Example: Scratch Databases for CI Runs",
+          "path": "/docs/2.0/resources/resource_type_example"
         }
       ]
     },
@@ -1797,6 +1788,50 @@
         {
           "page": "Logging",
           "path": "/docs/2.0/operations_manual/logging/overview"
+        }
+      ]
+    },
+    {
+      "page": "Server & Remote",
+      "overview": "/docs/2.0/quack/overview",
+      "slug": "quack",
+      "mainfolderitems": [
+        {
+          "page": "Overview",
+          "path": "/docs/2.0/quack/overview"
+        },
+        {
+          "page": "Setup",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/quack/setup/overview"
+            },
+            {
+              "page": "Reverse Proxy",
+              "path": "/docs/2.0/quack/setup/reverse_proxy"
+            },
+            {
+              "page": "Deployment",
+              "path": "/docs/2.0/quack/setup/deployment"
+            },
+            {
+              "page": "Using from Wasm",
+              "path": "/docs/2.0/quack/setup/quack_wasm"
+            }
+          ]
+        },
+        {
+          "page": "Security",
+          "path": "/docs/2.0/quack/security"
+        },
+        {
+          "page": "Reference",
+          "path": "/docs/2.0/quack/reference"
+        },
+        {
+          "page": "Troubleshooting",
+          "path": "/docs/2.0/quack/troubleshooting"
         }
       ]
     },

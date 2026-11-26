@@ -96,3 +96,35 @@ SHOW VARIABLES;
 > SQL-level variables that were unset by a `RESET VARIABLE`-statement cease to exist and are therefore not listed.
 
 The list of existing SQL-level variables is also available as [`duckdb_variables()`-metadata query]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_variables).
+
+## `SHOW EXTERNAL RESOURCES` Statement
+
+<!-- ref: duckdb/duckdb#23736 duckdb/duckdb-web#7004 duckdb/duckdb#28398 duckdb/duckdb-web#7677 duckdb/duckdb#28383 -->
+
+The `SHOW EXTERNAL RESOURCES` statement lists the [resource registrations]({% link docs/2.0/resources/resource_registrations.md %}) of the DuckDB instance. With `ALL`, it also lists the underlying resources that the list callbacks of the external resource types report (see [Discovery]({% link docs/2.0/resources/resource_registrations.md %}#discovery)):
+
+```sql
+SHOW [ALL] EXTERNAL RESOURCES [WITH TYPE ⟨type⟩];
+```
+
+Since DuckDB 2.0.1, `WITH TYPE` limits the listing to one external resource type, written as described in [External Resource Type Names]({% link docs/2.0/resources/resource_types.md %}#external-resource-type-names). Without `ALL`, an external resource type without resource registrations gives an empty result; with `ALL`, an external resource type that is not registered is an error.
+
+Since DuckDB 2.0.1, `SHOW EXTERNAL RESOURCES` is a query, so it can be used as a subquery or in a CTE.
+
+## `SHOW EXTERNAL RESOURCE TYPES` Statement
+
+<!-- ref: duckdb/duckdb#28522 -->
+
+> New The `SHOW EXTERNAL RESOURCE TYPES` statement was introduced in DuckDB 2.0.1.
+
+The `SHOW EXTERNAL RESOURCE TYPES` statement lists the registered [external resource types]({% link docs/2.0/resources/resource_types.md %}), with the same columns as the `duckdb_external_resource_types()` function. It is a query, so it can be used as a subquery:
+
+```sql
+CREATE MACRO b_create(p) AS TABLE SELECT MAP {'id': 'b1'} AS handle;
+CALL register_external_resource_type('b@st', kind := 'storage', create_function := 'b_create');
+SELECT name, kind FROM (SHOW EXTERNAL RESOURCE TYPES);
+```
+
+| name | kind    |
+|------|---------|
+| b@st | storage |

@@ -202,6 +202,75 @@ An extension that is installed from more than one repository has one row per rep
 | `installed_from` | Name of the repository the extension was installed from, e.g., `community` or `core_nightly`. The empty string denotes the `core` repository. For extensions from a [custom extension repository]({% link docs/2.0/extensions/extension_repositories.md %}#using-a-repository), this is the name of the repository. | `VARCHAR` |
 | `signature_key_fingerprint` | The SHA-256 fingerprint of the public key that verified the extension when it was installed. `NULL` if no fingerprint is available, e.g., for built-in extensions. Available as of DuckDB 2.0. | `VARCHAR` |
 
+## `duckdb_external_resource_types`
+
+<!-- ref: duckdb/duckdb#23731 duckdb/duckdb-web#7003 -->
+
+> New The `duckdb_external_resource_types()` function was introduced in DuckDB 2.0.0.
+
+The `duckdb_external_resource_types()` function lists the registered [external resource types]({% link docs/2.0/resources/resource_types.md %}). [`SHOW EXTERNAL RESOURCE TYPES`]({% link docs/2.0/sql/statements/show.md %}#show-external-resource-types-statement) returns the same rows.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `name` | The name of the external resource type. | `VARCHAR` |
+| `kind` | The [kind]({% link docs/2.0/resources/resource_types.md %}#external-resource-type-kinds) of the external resource type, e.g., `catalog`. | `VARCHAR` |
+| `create_function` | The name of the create callback. | `VARCHAR` |
+| `status_function` | The name of the status callback, `NULL` if not set. | `VARCHAR` |
+| `destroy_function` | The name of the destroy callback, `NULL` if not set. | `VARCHAR` |
+| `resolve_function` | The name of the resolve callback, `NULL` if not set. | `VARCHAR` |
+| `list_function` | The name of the list callback, `NULL` if not set. | `VARCHAR` |
+| `origin` | `user` for an external resource type registered by calling [`register_external_resource_type`]({% link docs/2.0/resources/resource_types.md %}#register_external_resource_type), `extension` for one registered by an extension. | `VARCHAR` |
+
+```sql
+CREATE MACRO bucket_create(p) AS TABLE SELECT MAP {'bucket': 'scratch'} AS handle;
+CREATE MACRO bucket_destroy(h) AS TABLE SELECT 'gone' AS status;
+CALL register_external_resource_type(
+    'scratch_bucket',
+    kind := 'storage',
+    create_function := 'bucket_create',
+    destroy_function := 'bucket_destroy'
+);
+SELECT name, kind, create_function, destroy_function, origin FROM duckdb_external_resource_types();
+```
+
+| name           | kind    | create_function | destroy_function | origin |
+|----------------|---------|-----------------|------------------|--------|
+| scratch_bucket | storage | bucket_create   | bucket_destroy   | user   |
+
+## `duckdb_external_resources`
+
+<!-- ref: duckdb/duckdb#23731 duckdb/duckdb-web#7003 duckdb/duckdb#28398 duckdb/duckdb-web#7677 -->
+
+> New The `duckdb_external_resources()` function was introduced in DuckDB 2.0.0.
+
+The `duckdb_external_resources()` function lists the [resource registrations]({% link docs/2.0/resources/resource_registrations.md %}) of the DuckDB instance. With `discover := true`, it also lists the underlying resources that the list callbacks of the external resource types report (see [Discovery]({% link docs/2.0/resources/resource_registrations.md %}#discovery)). Since DuckDB 2.0.1, `type := ⟨type⟩` limits the listing to one external resource type. [`SHOW [ALL] EXTERNAL RESOURCES`]({% link docs/2.0/sql/statements/show.md %}#show-external-resources-statement) is a query over this function.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `name` | For a resource registration, its name; for an underlying resource reported by a list callback, the provider's name for it. | `VARCHAR` |
+| `type` | The name of the external resource type. | `VARCHAR` |
+| `managed` | `true` for a resource registration, `false` for an underlying resource reported by a list callback. | `BOOLEAN` |
+| `state` | The state that the list callback reported; `NULL` for a resource registration. | `VARCHAR` |
+| `reference` | The reference that the list callback reported; `NULL` for a resource registration. | `VARCHAR` |
+| `uri` | The `uri` of the endpoint that the status callback reported when the resource registration was created. | `VARCHAR` |
+| `attached_db_type` | The `attached_db_type` of that endpoint. | `VARCHAR` |
+| `handle` | The handle of the underlying resource. | `MAP(VARCHAR, VARCHAR)` |
+
+```sql
+CALL register_external_resource(
+    'mock@local',
+    'r1',
+    MAP {'id': 'abc'},
+    uri := 'quack:localhost:9494',
+    attached_db_type := 'quack'
+);
+SELECT name, type, managed, uri, attached_db_type, handle FROM duckdb_external_resources();
+```
+
+| name | type       | managed | uri                  | attached_db_type | handle   |
+|------|------------|---------|----------------------|------------------|----------|
+| r1   | mock@local | true    | quack:localhost:9494 | quack            | {id=abc} |
+
 ## `duckdb_functions`
 
 The `duckdb_functions()` function provides metadata about the functions (including macros) available in the DuckDB instance.

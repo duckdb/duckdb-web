@@ -525,13 +525,42 @@ A [table function]({% link docs/2.0/sql/query_syntax/from.md %}#table-functions)
 
 | Name | Description |
 |:--|:-------|
+| [`create_external_resource(type, ...)`](#create_external_resourcetype-) | Provisions an underlying resource of an external resource type, or adopts one by its handle, without creating a resource registration. See [External Resources]({% link docs/2.0/resources/resource_registrations.md %}#create_external_resource). |
+| [`deregister_external_resource(name)`](#deregister_external_resourcename) | Removes a resource registration, without tearing down its underlying resource. See [External Resources]({% link docs/2.0/resources/resource_registrations.md %}#deregister_external_resource). |
+| [`destroy_external_resource(deleter_function, payload)`](#destroy_external_resourcedeleter_function-payload) | Tears down an underlying resource by running a deleter binding. See [External Resources]({% link docs/2.0/resources/resource_registrations.md %}#destroy_external_resource). |
 | [`generate_series([start,] stop[, step])`](#generate_seriesstart-stop-step) | Returns a table of values between `start` and `stop` (inclusive), incrementing by `step`. |
 | [`glob(search_path)`](#globsearch_path) | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax]({% link docs/2.0/sql/functions/pattern_matching.md %}). |
 | [`range([start,] stop[, step])`](#rangestart-stop-step) | Returns a table of values between `start` and `stop` (exclusive), incrementing by `step`. |
+| [`register_external_resource(type, name, handle, ...)`](#register_external_resourcetype-name-handle-) | Creates a resource registration from the given values, without calling a lifecycle callback. See [External Resources]({% link docs/2.0/resources/resource_registrations.md %}#register_external_resource). |
+| [`register_external_resource_type(name, ...)`](#register_external_resource_typename-) | Registers an external resource type. See [External Resources]({% link docs/2.0/resources/resource_types.md %}#register_external_resource_type). |
 | [`repeat(value, count)`](#repeatvalue-count) | Returns a table with `count` rows, each containing `value`. |
 | [`repeat_row(varargs, num_rows)`](#repeat_rowvarargs-num_rows) | Returns a table with `num_rows` rows, each containing the fields defined in `varargs`. |
 | [`sql_tokenize(sql)`](#sql_tokenizesql) | Splits the `sql` string into tokens. Returns a table with the columns `start` (the byte offset of the token), `token_type` (e.g., `KEYWORD`, `IDENTIFIER`, `NUMBER_LITERAL`), and `word`. Provided by the `autocomplete` extension. |
 | [`unnest(list)`](#unnestlist) | Returns a table with one row per element of `list`. |
+
+#### `create_external_resource(type, ...)`
+
+<!-- ref: duckdb/duckdb#23731 duckdb/duckdb-web#7003 duckdb/duckdb#23736 duckdb/duckdb-web#7004 -->
+
+<div class="nostroke_table"></div>
+
+| **Description** | Provisions an underlying resource of an external resource type, or adopts one by its handle, without creating a resource registration. See [External Resources]({% link docs/2.0/resources/resource_registrations.md %}#create_external_resource). |
+
+#### `deregister_external_resource(name)`
+
+<!-- ref: duckdb/duckdb#23731 duckdb/duckdb-web#7003 duckdb/duckdb#23736 duckdb/duckdb-web#7004 -->
+
+<div class="nostroke_table"></div>
+
+| **Description** | Removes a resource registration, without tearing down its underlying resource. See [External Resources]({% link docs/2.0/resources/resource_registrations.md %}#deregister_external_resource). |
+
+#### `destroy_external_resource(deleter_function, payload)`
+
+<!-- ref: duckdb/duckdb#23731 duckdb/duckdb-web#7003 duckdb/duckdb#23736 duckdb/duckdb-web#7004 -->
+
+<div class="nostroke_table"></div>
+
+| **Description** | Tears down an underlying resource by running a deleter binding. See [External Resources]({% link docs/2.0/resources/resource_registrations.md %}#destroy_external_resource). |
 
 #### `generate_series([start,] stop[, step])`
 
@@ -556,6 +585,22 @@ A [table function]({% link docs/2.0/sql/query_syntax/from.md %}#table-functions)
 | **Description** | Returns a table of values between `start` and `stop`, incrementing by `step`. The `stop` parameter is exclusive, and the `start` and `step` arguments are optional. See the [list variant]({% link docs/2.0/sql/functions/list.md %}#range) for the available argument combinations. |
 | **Example** | `range(2, 5)` |
 | **Result** | 3 rows: `2, 3, 4` |
+
+#### `register_external_resource(type, name, handle, ...)`
+
+<!-- ref: duckdb/duckdb#23731 duckdb/duckdb-web#7003 duckdb/duckdb#23736 duckdb/duckdb-web#7004 -->
+
+<div class="nostroke_table"></div>
+
+| **Description** | Creates a resource registration from the given values, without calling a lifecycle callback. See [External Resources]({% link docs/2.0/resources/resource_registrations.md %}#register_external_resource). |
+
+#### `register_external_resource_type(name, ...)`
+
+<!-- ref: duckdb/duckdb#23731 duckdb/duckdb-web#7003 duckdb/duckdb#23736 duckdb/duckdb-web#7004 -->
+
+<div class="nostroke_table"></div>
+
+| **Description** | Registers an external resource type. See [External Resources]({% link docs/2.0/resources/resource_types.md %}#register_external_resource_type). |
 
 #### `repeat(value, count)`
 

@@ -45,6 +45,17 @@ DISCONNECT;
 
 `DISCONNECT` ends the active connection and returns the session to the local database. Issuing `DISCONNECT` without an active connection returns an error.
 
+<!-- ref: duckdb/duckdb#23736 duckdb/duckdb-web#7004 -->
+
+`CONNECT` can also connect to the endpoint of an [underlying resource]({% link docs/2.0/resources/overview.md %}#terms): `CONNECT TO NEW TEMPORARY EXTERNAL RESOURCE` provisions one for this connection, without a resource registration, and `DISCONNECT` tears it down; `CONNECT TO EXTERNAL RESOURCE` connects to the underlying resource of a [resource registration]({% link docs/2.0/resources/resource_registrations.md %}). Unlike [`ATTACH TO`]({% link docs/2.0/sql/statements/attach.md %}#attach-to-external-resource), it takes no alias:
+
+```sql
+CONNECT TO NEW TEMPORARY EXTERNAL RESOURCE ⟨type⟩ [(⟨create_option⟩ [⟨value⟩], ...)];
+CONNECT TO EXTERNAL RESOURCE ⟨name⟩ [(⟨connect_option⟩ [⟨value⟩], ...)];
+```
+
+> Note `CONNECT TO … EXTERNAL RESOURCE` is refused when [`enable_external_access`]({% link docs/2.0/configuration/overview.md %}#configuration-reference) is `false`. See [Restrictions]({% link docs/2.0/resources/overview.md %}#restrictions).
+
 ## Supported Databases
 
 `CONNECT` works with databases that support remote execution, including:

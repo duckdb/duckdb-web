@@ -238,6 +238,69 @@ SELECT * FROM people.people;
 
 Both views are defined as `SELECT * FROM '⟨path⟩'`, so the data is read from the file each time a view is queried. Because the views wrap the file rather than a stored table, they are read-only. To change the data, write a new file.
 
+### `ATTACH TO EXTERNAL RESOURCE`
+
+<!-- ref: duckdb/duckdb#23736 duckdb/duckdb-web#7004 -->
+
+> New Attaching external resources was introduced in DuckDB 2.0.0.
+
+`ATTACH TO` attaches the endpoint of an [underlying resource]({% link docs/2.0/resources/overview.md %}#terms) as a database. It has two forms:
+
+```sql
+ATTACH TO NEW TEMPORARY EXTERNAL RESOURCE ⟨type⟩ [(⟨create_option⟩ [⟨value⟩], ...)] AS ⟨alias⟩ [(⟨attach_option⟩ [⟨value⟩], ...)];
+ATTACH TO EXTERNAL RESOURCE ⟨name⟩ AS ⟨alias⟩ [(⟨attach_option⟩ [⟨value⟩], ...)];
+```
+
+> Note `ATTACH TO … EXTERNAL RESOURCE` is refused when [`enable_external_access`]({% link docs/2.0/configuration/overview.md %}#configuration-reference) is `false`. See [Restrictions]({% link docs/2.0/resources/overview.md %}#restrictions).
+
+The alias is required. `⟨type⟩` is the name of a registered external resource type; `⟨name⟩` is the name of a resource registration. Options before `AS` are passed to the create callback of the external resource type; options after it apply to the attached database. An option that the endpoint already sets, such as `READ_ONLY` or `TYPE`, cannot also be given. See [Lifecycle Callbacks]({% link docs/2.0/resources/resource_types.md %}#lifecycle-callbacks).
+
+`ATTACH TO NEW TEMPORARY EXTERNAL RESOURCE` provisions an underlying resource for this attachment, without a resource registration, and [`DETACH`](#detach) tears it down again:
+
+```sql
+CREATE MACRO m_create(p) AS TABLE SELECT MAP {'id': 'm1'} AS handle;
+CREATE MACRO m_status(h) AS TABLE
+    SELECT 'ready' AS state, MAP {'uri': ':memory:', 'attached_db_type': 'duckdb'} AS result;
+CREATE MACRO m_destroy(h) AS TABLE SELECT 'gone' AS status;
+CALL register_external_resource_type(
+    'mem@local',
+    kind := 'catalog',
+    create_function := 'm_create',
+    status_function := 'm_status',
+    destroy_function := 'm_destroy'
+);
+ATTACH TO NEW TEMPORARY EXTERNAL RESOURCE 'mem@local' AS db;
+SELECT database_name FROM duckdb_databases() WHERE database_name = 'db';
+```
+
+| database_name |
+|---------------|
+| db            |
+
+`ATTACH TO EXTERNAL RESOURCE` attaches the underlying resource of a resource registration created with [`CREATE EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/create_external_resource.md %}) or [`REGISTER EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/register_external_resource.md %}). It calls the status callback with the handle of the resource registration, and attaches the endpoint the status callback reports then; when it reports `failed`, the attachment is refused. `DETACH` leaves the resource registration in place, and [`DESTROY EXTERNAL RESOURCE`]({% link docs/2.0/sql/statements/destroy_external_resource.md %}) tears the underlying resource down and detaches the database:
+
+```sql
+CREATE MACRO b_create(p) AS TABLE SELECT MAP {'id': 'b1'} AS handle;
+CREATE MACRO b_status(h) AS TABLE
+    SELECT 'ready' AS state, MAP {'uri': ':memory:', 'attached_db_type': 'duckdb'} AS result;
+CREATE MACRO b_destroy(h) AS TABLE SELECT 'gone' AS status;
+CALL register_external_resource_type(
+    'mem@local',
+    kind := 'catalog',
+    create_function := 'b_create',
+    status_function := 'b_status',
+    destroy_function := 'b_destroy'
+);
+CREATE EXTERNAL RESOURCE 'mem@local' AS shared;
+ATTACH TO EXTERNAL RESOURCE shared AS db;
+DETACH db;
+SELECT name FROM (SHOW EXTERNAL RESOURCES);
+```
+
+| name   |
+|--------|
+| shared |
+
 ## `DETACH`
 
 The `DETACH` statement allows previously attached database files to be closed and detached, releasing any locks held on the database file.
