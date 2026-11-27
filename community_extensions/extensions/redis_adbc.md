@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: redis_adbc
   description: Stream Redis SQL results through an embedded Arrow ADBC driver
-  version: '0.1.0'
+  version: '0.0.31'
   language: C++ & Go
   build: cmake
   license: Apache-2.0
@@ -19,7 +19,7 @@ extension:
 repo:
   github: Redislabs-Solution-Architects/redis-adbc-duckdb
   # The community registry's ref field targets DuckDB 2.0.
-  ref: ca18955e51170c9f17d487f3107795ddc8ede34e
+  ref: 055dfaa73bfc1c7f746e158c45a8da496605c734
 
 docs:
   hello_world: |
@@ -34,7 +34,8 @@ docs:
     `redis_adbc_scan(uri, sql)` streams one SELECT from Redis into DuckDB using
     the Redis ADBC driver's SQL engine and Arrow batches. The driver and Go
     runtime are embedded: no separate driver library, manifest, driver manager,
-    or adbc_scanner installation is required.
+    or adbc_scanner installation is required. Extension versions match the
+    embedded driver release: 0.0.31 embeds Redis ADBC driver v0.0.31.
 
     Redis Search is required. Use `rediss://` for TLS. SQL over driver-managed
     tables can use Search predicate and aggregate pushdown; surrounding DuckDB
@@ -48,13 +49,13 @@ docs:
     separately registered redis command-client extension.
 
     Native Linux and macOS are supported build targets; macOS requires 15+.
-    See the [extension guide](https://github.com/Redislabs-Solution-Architects/redis-adbc-duckdb/blob/ca18955e51170c9f17d487f3107795ddc8ede34e/README.md)
+    See the [extension guide](https://github.com/Redislabs-Solution-Architects/redis-adbc-duckdb/blob/055dfaa73bfc1c7f746e158c45a8da496605c734/README.md)
     for build instructions, prerequisites, limitations and verification.
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 603
-extension_download_count_pretty: 603
+extension_download_count: 683
+extension_download_count_pretty: 683
 image: '/images/community_extensions/social_preview/preview_community_extension_redis_adbc.png'
 layout: community_extension_doc
 ---

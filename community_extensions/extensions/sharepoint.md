@@ -98,8 +98,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 707
-extension_download_count_pretty: 707
+extension_download_count: 850
+extension_download_count_pretty: 850
 image: '/images/community_extensions/social_preview/preview_community_extension_sharepoint.png'
 layout: community_extension_doc
 ---
