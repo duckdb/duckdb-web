@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: altertable-ai/duckdb-databricks
-  ref: f4251bf80648e6b8321e99b251fc4ab4457ab35b
+  ref: b099492c4381dddf32358f34bc1dcbbbd78de393
   variegata: 272162459a35364c0cb5639b2bc035bb8591d826
 
 docs:
@@ -55,8 +55,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 1249
-extension_download_count_pretty: 1.2k
+extension_download_count: 1265
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_databricks.png'
 layout: community_extension_doc
 ---
@@ -68,11 +68,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ |
 

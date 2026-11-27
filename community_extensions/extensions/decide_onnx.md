@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: decide_onnx
   description: Classify rows, route messages and answer yes/no questions in SQL in English, French, German, Spanish and Italian with the vela3-fast-multilingual decision model, on CPU via ONNX Runtime
-  version: '0.2.0'
+  version: '0.2.1'
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 repo:
   github: altertable-ai/duckdb-decide_onnx
   # DuckDB 2.0 only. There is no v1.5.6 port, so variegata is unset.
-  ref: 8b64fcf52bef0d737ddda7fbd8c4bc512d982732
+  ref: be1c19fee05a31fc084393e6322371aa9c48513c
 
 docs:
   hello_world: |
@@ -79,8 +79,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 606
-extension_download_count_pretty: 606
+extension_download_count: 609
+extension_download_count_pretty: 609
 image: '/images/community_extensions/social_preview/preview_community_extension_decide_onnx.png'
 layout: community_extension_doc
 ---
@@ -92,11 +92,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ |
 

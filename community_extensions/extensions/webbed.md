@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) with SAX streaming for large files, intelligent schema inference, XPath-based data extraction, and HTML table parsing.
-  version: 2.16.0
+  version: 2.16.1
   language: C++
   build: cmake
   license: MIT
@@ -24,7 +24,7 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_webbed
-  ref: 8ee389b53b2e32d16c51c86d9ee9a63ace7d904e
+  ref: 076cbb3c8f3c22e4d137867f64c7b8950bceb1b3
   # variegata: the v1.5.6 track. scripts/build.py:46-48 routes duckdb_version
   # v1.5.6 here. Held at v2.14.0, the last release tested on v1.5.6. webbed no
   # longer supports v1.5.6, and v2.15.0 fails 3 of its 171 test cases there.
@@ -37,7 +37,7 @@ repo:
   # restores prerelease validation if that job is re-enabled. A STALE ref_next is
   # worse than an absent one: it validates the PREVIOUS release while reporting
   # green, so it must never lag ref.
-  ref_next: 8ee389b53b2e32d16c51c86d9ee9a63ace7d904e
+  ref_next: 076cbb3c8f3c22e4d137867f64c7b8950bceb1b3
 docs:
   docs_url: https://duckdb-webbed.readthedocs.io
   hello_world: |
@@ -120,8 +120,8 @@ docs:
 
 extension_star_count: 78
 extension_star_count_pretty: 78
-extension_download_count: 23541
-extension_download_count_pretty: 23.5k
+extension_download_count: 23649
+extension_download_count_pretty: 23.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
@@ -133,13 +133,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ✅ | ✅ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

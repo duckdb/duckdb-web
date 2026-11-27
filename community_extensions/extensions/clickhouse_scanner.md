@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: altertable-ai/duckdb-clickhouse
-  ref: ce337c48c12d24630caeed151b79dc177d48eb86
+  ref: 762d0c75adddd51c6ab4687e7ab5241fd64d1423
   variegata: bb11b7ce640de14b9f7565f588bfd3cd08c99266
 
 docs:
@@ -60,8 +60,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 1238
-extension_download_count_pretty: 1.2k
+extension_download_count: 1262
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_clickhouse_scanner.png'
 layout: community_extension_doc
 ---

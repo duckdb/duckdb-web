@@ -8,17 +8,18 @@ excerpt: |
 extension:
   name: stac
   description: DuckDB extension for reading data from SpatioTemporal Asset Catalogs (STAC) using SQL.
-  version: 0.4.0
+  version: 0.5.0
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw"
+  opt_in_platforms: "osx_amd64"
   license: MIT
   maintainers:
     - ahuarte47
 
 repo:
   github: ahuarte47/duckdb-stac
-  ref: 477b25b9296adad9381f1f7a64c35e37a1e4fcc9
+  ref: bc36146e05dbe5debe78bdc72f72fdf7e1410764
 
 docs:
   hello_world: |
@@ -137,8 +138,8 @@ docs:
 
 extension_star_count: 28
 extension_star_count_pretty: 28
-extension_download_count: 937
-extension_download_count_pretty: 937
+extension_download_count: 953
+extension_download_count_pretty: 953
 image: '/images/community_extensions/social_preview/preview_community_extension_stac.png'
 layout: community_extension_doc
 ---
@@ -152,7 +153,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ❌ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ❌ | ✅ |
 | macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |

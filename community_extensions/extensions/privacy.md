@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: "alitrack/duckdb-privacy"
-  ref: "7f3fadc89fed930c17a50c0f9eba291ee806c9e7"
-  variegata: "7f3fadc89fed930c17a50c0f9eba291ee806c9e7"
+  ref: "a3175e255d60c903559e0d5ad061cde87042a4a3"
+  variegata: "a3175e255d60c903559e0d5ad061cde87042a4a3"
 
 docs:
   hello_world: |
@@ -41,8 +41,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 81
-extension_download_count_pretty: 81
+extension_download_count: 179
+extension_download_count_pretty: 179
 image: '/images/community_extensions/social_preview/preview_community_extension_privacy.png'
 layout: community_extension_doc
 ---
@@ -84,7 +84,11 @@ LOAD {{ page.extension.name }};
 
 | function_name  | function_type | description | comment | examples |
 |----------------|---------------|-------------|---------|----------|
+| dateoffset     | scalar        | NULL        | NULL    |          |
 | dateshift      | scalar        | NULL        | NULL    |          |
+| dp_alloc       | scalar        | NULL        | NULL    |          |
+| dp_budget      | scalar        | NULL        | NULL    |          |
+| dp_compose     | scalar        | NULL        | NULL    |          |
 | dp_count       | scalar        | NULL        | NULL    |          |
 | dp_sum         | scalar        | NULL        | NULL    |          |
 | fpe_decode     | scalar        | NULL        | NULL    |          |
@@ -94,6 +98,7 @@ LOAD {{ page.extension.name }};
 | mask_cn        | scalar        | NULL        | NULL    |          |
 | privacy        | scalar        | NULL        | NULL    |          |
 | redact_secrets | scalar        | NULL        | NULL    |          |
+| redact_text    | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

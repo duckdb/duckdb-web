@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 120
 extension_star_count_pretty: 120
-extension_download_count: 1036
-extension_download_count_pretty: 1.0k
+extension_download_count: 1070
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_rusty_quack.png'
 layout: community_extension_doc
 ---
@@ -74,10 +74,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                        description                        | comment |    examples     |
-|---------------|---------------|-----------------------------------------------------------|---------|-----------------|
-| rusty_echo    | scalar        | Echo back the input you provided, but with a rusty twist! | NULL    | [echo('hello')] |
-| rusty_quack   | table         | NULL                                                      | NULL    |                 |
+| function_name  | function_type |                                              description                                               | comment |                                            examples                                             |
+|----------------|---------------|--------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------|
+| duck_count     | pragma        | Add the 🦆 in ducks to a running total and return the total.                                           | NULL    | [PRAGMA duck_count('🦆🦆')]                                                                     |
+| glaze          | table_macro   | A table macro with one row expressing how we feel about Rust.                                          | NULL    | [SELECT * FROM glaze()]                                                                         |
+| read_quackfile | table         | Read a quackfile as VARCHAR columns column0, column1, ...; FROM 'path.quackfile' calls it too.         | NULL    | [SELECT * FROM read_quackfile('ducks.quackfile'), SELECT * FROM 'ducks.quackfile']              |
+| rusty_echo     | scalar        | Echo back the input you provided, but with a rusty twist!                                              | NULL    | [SELECT rusty_echo('Jane')]                                                                     |
+| rusty_longest  | aggregate     | The longest non-NULL string in the group; ties go to the lexicographically smaller one.                | NULL    | [SELECT rusty_longest(name) FROM (VALUES ('a'), ('ccc'), ('bb')) t(name)]                       |
+| rusty_quack    | table         | One row per name, last name first, with a rotating icon and the names seen so far.                     | NULL    | [SELECT * FROM rusty_quack(['Jane', 'Doe', 'Loves', 'Ducks'])]                                  |
+| rusty_sequence | table         | count rows of i = 0, step, 2*step, ... with a label; filters on i < constant are pushed into the scan. | NULL    | [SELECT i FROM rusty_sequence(10000) WHERE i < 10, SELECT * FROM rusty_sequence(3, step := 10)] |
 
 ### Overloaded Functions
 
@@ -92,13 +97,15 @@ This extension does not add any function overloads.
 | type_name | type_size | logical_type | type_category | internal |
 |-----------|----------:|--------------|---------------|----------|
 | LIST      | 16        | LIST         | COMPOSITE     | true     |
+| QUACK     | 16        | VARCHAR      | STRING        | true     |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|      name      |                       description                       | input_type | scope  | aliases | typed_value |
-|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
-| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
+|      name      |                       description                       | input_type | scope  | aliases | typed_value  |
+|----------------|---------------------------------------------------------|------------|--------|---------|--------------|
+| quack_emojis   | The list of emojis to use for the quack table function  | VARCHAR[]  | GLOBAL | []      | [🐤, 🦀, 🐥] |
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp  |
 
 

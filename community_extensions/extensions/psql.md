@@ -75,8 +75,8 @@ docs:
 
 extension_star_count: 111
 extension_star_count_pretty: 111
-extension_download_count: 876
-extension_download_count_pretty: 876
+extension_download_count: 884
+extension_download_count_pretty: 884
 image: '/images/community_extensions/social_preview/preview_community_extension_psql.png'
 layout: community_extension_doc
 ---

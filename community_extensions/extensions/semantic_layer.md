@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: semantic_layer
   description: Define metrics, dimensions and relationships once in SQL, then query them at the right grain
-  version: "0.2.0"
+  version: "0.2.1"
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: altertable-ai/duckdb-semantic_layer
-  ref: 2b2a186cfb94f6f90ee70fc24e61469975fa1ab7
+  ref: b33793b61506ee95df179a1cc782c0f950a22a9d
   variegata: 1cea189f6d4f9e6af30c09ecb085883784cd04e0
 
 docs:
@@ -132,8 +132,8 @@ docs:
 
 extension_star_count: 26
 extension_star_count_pretty: 26
-extension_download_count: 637
-extension_download_count_pretty: 637
+extension_download_count: 650
+extension_download_count_pretty: 650
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_layer.png'
 layout: community_extension_doc
 ---
@@ -145,13 +145,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

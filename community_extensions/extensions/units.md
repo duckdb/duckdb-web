@@ -95,8 +95,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 919
-extension_download_count_pretty: 919
+extension_download_count: 986
+extension_download_count_pretty: 986
 image: '/images/community_extensions/social_preview/preview_community_extension_units.png'
 layout: community_extension_doc
 ---

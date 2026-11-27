@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: oracle_scanner
   description: Read and write Oracle Database with no Oracle client
-  version: '0.8.3'
+  version: '0.9.0'
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,9 +19,9 @@ extension:
 
 repo:
   github: krokozyab/quack-oracle
-  # The commit tagged v0.8.3, built for DuckDB v2.0.0 and v2.0.1, pinned by SHA so what is
+  # The commit tagged v0.9.0, built for DuckDB v2.0.1, pinned by SHA so what is
   # built cannot move.
-  ref: fcf53d04c65b4e223fdb19fd66643be6386ba76a
+  ref: 57de4095cca6840038bb89ca436f1aeba7b4a0df
   # DuckDB 1.5.6 stays on v0.4.0, the last release built for that line.
   variegata: d4aa50f9bf23ca44b44f0df48fb0065ba751f5be
 
@@ -91,7 +91,7 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 1384
+extension_download_count: 1424
 extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc
@@ -104,11 +104,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
@@ -135,6 +135,7 @@ LOAD {{ page.extension.name }};
 |            function_name             | function_type |                                                                                                                                                description                                                                                                                                                | comment |                                                                                                          examples                                                                                                          |
 |--------------------------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | __oracle_scanner_default             | scalar        | NULL                                                                                                                                                                                                                                                                                                      | NULL    |                                                                                                                                                                                                                            |
+| __oracle_scanner_finalize_average    | scalar        | NULL                                                                                                                                                                                                                                                                                                      | NULL    |                                                                                                                                                                                                                            |
 | oracle_arguments                     | table         | Lists the arguments of every overload of an Oracle procedure or function, with the reason for any argument type this client cannot bind.                                                                                                                                                                  | NULL    | [SELECT * FROM oracle_arguments('demo', 'QUACK_DEMO_ADD');]                                                                                                                                                                |
 | oracle_call                          | table         | Calls an Oracle procedure whose only argument is an OUT SYS_REFCURSOR, and returns a cursor handle rather than the cursor's rows.                                                                                                                                                                         | NULL    | [SELECT * FROM oracle_call('demo', 'QUACK_DEMO_LIST', 'P_ROWS');]                                                                                                                                                          |
 | oracle_call_auto                     | table         | Reads an Oracle procedure's or function's signature from the data dictionary and calls it with the given values in argument declaration order.                                                                                                                                                            | NULL    | [SELECT * FROM oracle_call_auto('demo', 'QUACK_DEMO_ADD', ['2', '3']);]                                                                                                                                                    |

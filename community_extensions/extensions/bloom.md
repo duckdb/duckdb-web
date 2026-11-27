@@ -38,8 +38,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 600
-extension_download_count_pretty: 600
+extension_download_count: 597
+extension_download_count_pretty: 597
 image: '/images/community_extensions/social_preview/preview_community_extension_bloom.png'
 layout: community_extension_doc
 ---
