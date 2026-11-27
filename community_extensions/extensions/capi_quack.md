@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: duckdb/extension-template-c
-  ref: 7f71365c5ce61b2b346717af07c9d448cfc9d3c3
+  ref: e1a633c7450152fd501d95c908e4060bd5540d0f
 
 docs:
   extended_description: |
@@ -27,8 +27,8 @@ docs:
 
 extension_star_count: 33
 extension_star_count_pretty: 33
-extension_download_count: 1215
-extension_download_count_pretty: 1.2k
+extension_download_count: 1411
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_capi_quack.png'
 layout: community_extension_doc
 ---

@@ -7,7 +7,7 @@ excerpt: |
 
 extension:
   name: anofox_scenario
-  version: 2026.11.23
+  version: 2026.11.24
   description: Git-like branching for analytical databases. Attach isolated what-if scenarios as catalogs, edit them with ordinary SQL on copy-on-write delta storage, branch, diff, and merge them back.
   language: C++
   build: cmake
@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: DataZooDE/anofox-scenario
-  ref: c15eea920f731379161826e1ddb62e29d726f1f1
-  variegata: c15eea920f731379161826e1ddb62e29d726f1f1
+  ref: 342d6fe5ced34b124f4639080502d09e70ad5079
+  variegata: 342d6fe5ced34b124f4639080502d09e70ad5079
 
 docs:
   hello_world: |
@@ -82,8 +82,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 1210
-extension_download_count_pretty: 1.2k
+extension_download_count: 1266
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_scenario.png'
 layout: community_extension_doc
 ---

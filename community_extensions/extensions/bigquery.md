@@ -15,7 +15,7 @@ extension:
   vcpkg_commit: "ef7dbf94b9198bc58f45951adcf1f041fcbc5ea0"
   requires_toolchains: "parser_tools"
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw"
-  opt_in_platforms: "linux_amd64_musl;linux_arm64_musl"
+  opt_in_platforms: "linux_amd64_musl;linux_arm64_musl;osx_amd64;osx_arm64"
   maintainers:
     - hafenkran
 
@@ -75,8 +75,8 @@ docs:
 
 extension_star_count: 173
 extension_star_count_pretty: 173
-extension_download_count: 107293
-extension_download_count_pretty: 107.3k
+extension_download_count: 127951
+extension_download_count_pretty: 128.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---
@@ -90,7 +90,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |

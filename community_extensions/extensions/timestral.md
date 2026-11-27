@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: altertable-ai/duckdb-timestral
-  ref: 8f0bc7fe5e83d127abd4ea1b4115fa1ab121006b
+  ref: 3ec65c74a992f64b9f9335a1094378e9d8504301
   variegata: 7d6486900113e4271f8e32324adf27776b63a02b
 
 docs:
@@ -61,8 +61,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 632
-extension_download_count_pretty: 632
+extension_download_count: 648
+extension_download_count_pretty: 648
 image: '/images/community_extensions/social_preview/preview_community_extension_timestral.png'
 layout: community_extension_doc
 ---
@@ -74,11 +74,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ |
 

@@ -76,8 +76,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 951
-extension_download_count_pretty: 951
+extension_download_count: 987
+extension_download_count_pretty: 987
 image: '/images/community_extensions/social_preview/preview_community_extension_petgraph_ext.png'
 layout: community_extension_doc
 ---

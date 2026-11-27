@@ -83,10 +83,10 @@ docs:
     [THIRDPARTY.yml](https://github.com/gridpin/duckdb-gridpin/blob/main/THIRDPARTY.yml),
     which carries their licence texts.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 777
-extension_download_count_pretty: 777
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 790
+extension_download_count_pretty: 790
 image: '/images/community_extensions/social_preview/preview_community_extension_gridpin_ext.png'
 layout: community_extension_doc
 ---

@@ -21,7 +21,7 @@ extension:
 
 repo:
   github: tobilg/duckdb-differential
-  ref: 43203569f46b3a7f0c3a88fa8b4c34a50052ceb0
+  ref: 561518d6b7f006776fec1d32c8fe32bd6edfe633
 
 docs:
   hello_world: |
@@ -224,7 +224,7 @@ docs:
     (`BRANCH`, `SNAPSHOT_VERSION`, `SNAPSHOT_TIME`, `SNAPSHOT_NAME`, `DATA_PATH`),
     `SET differential_*` settings and database-first `differential_*` functions.
 
-    Built for DuckDB 2.0. Store format 2 has been used since 1.0.0, which refuses repositories
+    Built for DuckDB 2.0.1. Store format 2 has been used since 1.0.0, which refuses repositories
     and exports written by 0.1.0; there is no migration. 1.1.0 opens 1.0.0 repositories, but once
     1.1.0 has written to a repository, downgrading to 1.0.0 is not supported.
 
@@ -236,8 +236,8 @@ docs:
 
 extension_star_count: 50
 extension_star_count_pretty: 50
-extension_download_count: 723
-extension_download_count_pretty: 723
+extension_download_count: 721
+extension_download_count_pretty: 721
 image: '/images/community_extensions/social_preview/preview_community_extension_differential.png'
 layout: community_extension_doc
 ---
@@ -249,10 +249,10 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ |

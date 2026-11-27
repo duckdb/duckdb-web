@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: paimon
   description: Query Apache Paimon tables directly from DuckDB
-  version: 0.1.3
+  version: 0.1.4
   language: C++
   build: cmake
   license: Apache-2.0
@@ -18,9 +18,9 @@ extension:
 
 repo:
   github: polardb/duckdb-paimon
-  andium: 37f984782c17df9e7a1abbd04548eaf97866156b
-  variegata: dbaf0f1b39b78a8f2043a70450d2441c7c69aa5e
-  ref: 6762e34b3f805f00511e5a21c6a04c9c9a904f35
+  andium: 31a6eaf0a88dc0fbe2088a24ca6fed1a3c35ae6e
+  variegata: b44e65dabbae5f550e7996378d8bcbd8d1183509
+  ref: 587ede2442d5938cd2c107e9bf88aedb363fc0d6
 
 docs:
   hello_world: |
@@ -75,8 +75,8 @@ docs:
 
 extension_star_count: 50
 extension_star_count_pretty: 50
-extension_download_count: 4608
-extension_download_count_pretty: 4.6k
+extension_download_count: 4105
+extension_download_count_pretty: 4.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_paimon.png'
 layout: community_extension_doc
 ---

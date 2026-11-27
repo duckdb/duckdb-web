@@ -113,10 +113,10 @@ docs:
     with tunable sf_retry_max/sf_retry_backoff_ms, and well-known Salesforce
     errorCodes surface with embedded remedy hints.
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 841
-extension_download_count_pretty: 841
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 867
+extension_download_count_pretty: 867
 image: '/images/community_extensions/social_preview/preview_community_extension_salesforce.png'
 layout: community_extension_doc
 ---
