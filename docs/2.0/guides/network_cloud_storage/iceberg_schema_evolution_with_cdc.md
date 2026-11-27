@@ -1,0 +1,241 @@
+---
+layout: docu
+title: Iceberg Schema Evolution with CDC Replication
+how_to_topic: network-cloud-storage
+---
+
+Schema changes in operational databases — added columns, widened types, and dropped fields — typically force manual pipeline updates. Apache Iceberg's metadata-only schema evolution removes that burden: a CDC tool propagates the change, and DuckDB reads the new schema on the next query with no manual step.
+
+This guide walks the complete path using [OLake Go](https://olake.io/olake-go/) — an [open-source EL platform](https://olake.io/docs/) for CDC and incremental replication to Apache Iceberg — with DuckDB querying the results through an [Iceberg REST Catalog]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}).
+
+> Note This example uses PostgreSQL. OLake Go supports the same replication workflow for [MySQL, MongoDB, Oracle, MSSQL, DB2, Kafka, and S3](https://olake.io/docs/category/sources) — only `source.json` changes.
+
+## Prerequisites
+
+* DuckDB with the [`iceberg`]({% link docs/2.0/core_extensions/iceberg/overview.md %}) extension
+* [Docker](https://docs.docker.com/get-started/get-docker/)
+* An Iceberg REST Catalog service and an S3-compatible object store
+* PostgreSQL with logical replication enabled (`wal_level = logical`)
+
+## Configure OLake Go
+
+OLake Go reads from three configuration files: `source.json` (source connection), `destination.json` (the Iceberg catalog), and `selected_streams.json` (which tables to replicate and how). See the [OLake Docker CLI reference](https://olake.io/docs/install/docker-cli/) for the full list of options.
+
+Create a config directory:
+
+```bash
+mkdir -p ~/olake-config
+```
+
+### Source Configuration
+
+Create `~/olake-config/source.json` with the PostgreSQL connection and CDC settings. See the [OLake PostgreSQL connector reference](https://olake.io/docs/connectors/postgres/) for all available fields:
+
+```json
+{
+  "host": "⟨db_host⟩",
+  "port": 5432,
+  "database": "⟨db_name⟩",
+  "username": "⟨db_user⟩",
+  "password": "⟨db_password⟩",
+  "update_method": {
+    "replication_slot": "olake_slot",
+    "publication": "olake_pub",
+    "initial_wait_time": 120
+  }
+}
+```
+
+Before running OLake Go, create the replication slot and publication in PostgreSQL:
+
+```sql
+SELECT pg_create_logical_replication_slot('olake_slot', 'pgoutput');
+CREATE PUBLICATION olake_pub FOR ALL TABLES;
+```
+
+### Destination Configuration
+
+Create `~/olake-config/destination.json` with the Iceberg REST Catalog and S3 as storage. See the [OLake Iceberg REST catalog reference](https://olake.io/docs/writers/iceberg/catalog/rest/) for all available fields:
+
+```json
+{
+  "type": "ICEBERG",
+  "writer": {
+    "catalog_type": "rest",
+    "rest_catalog_url": "http://⟨rest_endpoint⟩:8181",
+    "iceberg_s3_path": "⟨s3_bucket_name⟩",
+    "aws_access_key": "⟨s3_access_key⟩",
+    "aws_secret_key": "⟨s3_secret_key⟩",
+    "aws_region": "⟨s3_region⟩",
+    "s3_endpoint": "http://⟨minio_host⟩:9090",
+    "arrow_writes": false
+  }
+}
+```
+
+> Note Omit `s3_endpoint` when using AWS S3. It is required only for S3-compatible stores such as MinIO.
+
+## Discover Streams
+
+Run `discover` to inspect the source and generate `selected_streams.json` and `available_streams.json` in the config directory:
+
+```bash
+docker run --pull=always \
+  -v ~/olake-config:/mnt/config \
+  olakego/source-postgres:latest \
+  discover \
+  --config /mnt/config/source.json
+```
+
+Edit `selected_streams.json` to configure the `orders` table. The top-level key is `selected_streams`; each namespace maps to an array of stream objects. Set `sync_new_columns` to `true` so OLake Go automatically picks up columns added to the source after the initial sync. See the [OLake streams config reference](https://olake.io/docs/install/docker-cli/#streams-config) for all available fields:
+
+```json
+{
+  "selected_streams": {
+    "public": [
+      {
+        "stream_name": "orders",
+        "sync_mode": "cdc",
+        "selected_columns": {
+          "sync_new_columns": true
+        }
+      }
+    ]
+  }
+}
+```
+
+## Start the Sync
+
+Run `sync` to perform the initial full load and then continue in CDC mode. The sync process runs until it reaches the end of the WAL and then exits:
+
+```bash
+docker run --pull=always \
+  -v ~/olake-config:/mnt/config \
+  olakego/source-postgres:latest \
+  sync \
+  --config /mnt/config/source.json \
+  --selected-streams /mnt/config/selected_streams.json \
+  --available-streams /mnt/config/available_streams.json \
+  --destination /mnt/config/destination.json
+```
+
+OLake Go creates `state.json` after the first run. On subsequent runs, add `--state /mnt/config/state.json` to resume from the saved WAL position instead of performing a full reload:
+
+```bash
+docker run --pull=always \
+  -v ~/olake-config:/mnt/config \
+  olakego/source-postgres:latest \
+  sync \
+  --config /mnt/config/source.json \
+  --selected-streams /mnt/config/selected_streams.json \
+  --available-streams /mnt/config/available_streams.json \
+  --destination /mnt/config/destination.json \
+  --state /mnt/config/state.json
+```
+
+## Attach the Catalog in DuckDB
+
+```sql
+INSTALL iceberg;
+LOAD iceberg;
+
+CREATE SECRET s3_secret (
+    TYPE s3,
+    KEY_ID '⟨s3_access_key⟩',
+    SECRET '⟨s3_secret_key⟩',
+    REGION '⟨s3_region⟩',
+    ENDPOINT '⟨minio_host⟩:9090',
+    URL_STYLE 'path',
+    USE_SSL false
+);
+
+ATTACH '⟨s3_bucket_name⟩' AS iceberg_catalog (
+    TYPE iceberg,
+    URI 'http://⟨rest_endpoint⟩:8181',
+    AUTHORIZATION_TYPE 'none',
+    ACCESS_DELEGATION_MODE 'none'
+);
+```
+
+> Note The `ENDPOINT`, `URL_STYLE`, and `USE_SSL` options in the S3 secret are needed only for S3-compatible stores such as MinIO. Omit them when using AWS S3. For catalogs that require OAuth2 authentication, see [Attaching an Iceberg REST Catalog]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}#attaching-an-iceberg-rest-catalog).
+
+OLake Go maps each source table to an Iceberg namespace derived from the source database and schema — for example, a table in the PostgreSQL database `mydb`, schema `public` lands in the Iceberg namespace `mydb_public`. Tables are then accessible with the three-part name `iceberg_catalog.⟨namespace⟩.orders`.
+
+## Schema Change 1: Adding a Column
+
+Add a `region` column to the source table:
+
+```sql
+ALTER TABLE orders ADD COLUMN region VARCHAR(50);
+```
+
+Rerun the sync command with `--state` and then query from DuckDB. OLake Go adds the new field to the Iceberg schema with a new field ID:
+
+```sql
+SELECT order_id, region
+FROM iceberg_catalog.⟨namespace⟩.orders
+ORDER BY order_id
+LIMIT 5;
+```
+
+Rows inserted before the `ALTER TABLE` return `NULL` for `region`. New rows carry the actual value. The existing Parquet files are never rewritten — Iceberg stores the schema change in a new `metadata.json`, not in the data files.
+
+> Note `sync_new_columns: true` in `selected_streams.json` is required for OLake Go to pick up the new column automatically. Without it, add the column name to the stream's `selected_columns.columns` array in `selected_streams.json` manually before the next sync.
+
+## Schema Change 2: Widening a Type
+
+Promote `customer_id` from `INTEGER` to `BIGINT`:
+
+```sql
+ALTER TABLE orders ALTER COLUMN customer_id TYPE BIGINT;
+```
+
+Iceberg v2 supports widening type promotions natively: `INT` to `BIGINT`, `FLOAT` to `DOUBLE`, `DATE` to `TIMESTAMP` or `TIMESTAMP_NS`, and `DECIMAL` precision increases. OLake Go propagates the type change to the Iceberg schema on the next sync. Iceberg records the new type in a fresh `metadata.json` without rewriting existing data files. DuckDB reflects the new type on the next query:
+
+```sql
+DESCRIBE iceberg_catalog.⟨namespace⟩.orders;
+```
+
+The `customer_id` column now shows as `BIGINT`. Existing Parquet files that stored the column as 32-bit integers are still readable: DuckDB widens the values on read.
+
+## Schema Change 3: Dropping a Column
+
+Drop `amount` from the source table:
+
+```sql
+ALTER TABLE orders DROP COLUMN amount;
+```
+
+After the next sync, OLake Go writes incoming rows without the dropped column. The column remains in the Iceberg schema — Iceberg does not remove columns from existing data files, and OLake Go does not propagate `DROP COLUMN` as an Iceberg schema change. Rows inserted after the drop return `NULL` for `amount`, while older rows retain their original values.
+
+Use `iceberg_snapshots` to find the snapshot committed before the drop:
+
+```sql
+SELECT snapshot_id, timestamp_ms
+FROM iceberg_snapshots(iceberg_catalog.⟨namespace⟩.orders)
+ORDER BY timestamp_ms;
+```
+
+Then query a historical snapshot directly with `AT (VERSION => ...)`:
+
+```sql
+SELECT order_id, amount
+FROM iceberg_catalog.⟨namespace⟩.orders
+AT (VERSION => ⟨snapshot_id_before_drop⟩)
+LIMIT 5;
+```
+
+The historical snapshot returns the original `amount` values for every row.
+
+In each case, DuckDB resolves the schema from the catalog on every query — when OLake Go commits a schema change, DuckDB picks it up automatically with no manual step.
+
+## Further Reading
+
+* [Iceberg Catalogs Supported by DuckDB]({% link docs/2.0/core_extensions/iceberg/catalogs.md %})
+* [Attaching an Iceberg REST Catalog]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}#attaching-an-iceberg-rest-catalog)
+* [Writing to Iceberg with DuckDB — Schema Evolution]({% link docs/2.0/core_extensions/iceberg/writing_to_iceberg.md %}#alter-table-and-schema-evolution)
+* [What Is Inside an Iceberg Table?]({% post_url 2026-10-13-inside-iceberg-table %})
+* [OLake Go documentation](https://olake.io/olake-go/)
+* [OLake Go schema evolution](https://olake.io/docs/features/schema/)
+* [OLake Go supported catalogs](https://olake.io/docs/understanding/compatibility-catalogs/)
