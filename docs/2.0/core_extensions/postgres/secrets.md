@@ -214,7 +214,7 @@ When `IN postgres_⟨attached_database⟩`{:.language-sql .highlight} clause of 
 Different table name (for example, in a different schema) can be specified in the `SECRET_STORAGE_TABLE` parameter to the `ATTACH` command.
 
 When the default `duckdb_secrets` table is used, it is not necessary to specify the `SECRET_STORAGE_TABLE` parameter.
-When a PostgreSQL database is attached, the table with the default name `duckdb_secrets` is probed automatically. If it exists then the Secret Storage instance is registerd for this attached database making all the stored secrets available in the current session. This allows to use such persistent secrets with “direct attach” scenarios, when only a connection string is specified to the `duckdb` command (other DuckDB clients may require slightly different syntax):
+When a PostgreSQL database is attached, the table with the default name `duckdb_secrets` is probed automatically. If it exists then the Secret Storage instance is registered for this attached database making all the stored secrets available in the current session. This allows to use such persistent secrets with “direct attach” scenarios, when only a connection string is specified to the `duckdb` command (other DuckDB clients may require slightly different syntax):
 
 ```bash
 duckdb postgres:postgresql://username:password@127.0.0.1:5432/db1
@@ -226,7 +226,7 @@ This method can also be used with [DuckLake](https://ducklake.select/) (with Pos
 duckdb ducklake:postgres:postgresql://username:password@127.0.0.1:5432/db1
 ```
 
-Secrets the are stored in the specific attached database can be listed using the following query:
+Secrets that are stored in the specific attached database can be listed using the following query:
 
 ```sql
 FROM duckdb_secrets() WHERE storage = 'postgres_⟨attached_database⟩';
