@@ -60,7 +60,7 @@ Macros may declare parameters. The parameter declarations appear as a comma-sepa
 
 Macros support overloading:
 
-* A single `CREATE MACRO` statement can define multiple implementations (sometimes called 'overloads'), each having its own parameter list, `AS` keyword, and expression. Note that all of the implementations are defined in the same `CREATE MACRO` statement: it is not possible to add, remove, or alter individual implementations after the macro is created.
+* A single `CREATE MACRO` statement can define multiple implementations (sometimes called 'overloads'), each having its own parameter list, `AS` keyword, and expression. Note that all of the implementations are defined in the same `CREATE MACRO` statement: it is not possible to add or alter individual implementations after the macro is created. To remove one implementation, [drop that overload by its parameter types]({% link docs/2.0/sql/statements/drop.md %}#dropping-a-single-overload).
 * Multiple implementations are separated from one another by a comma.
 * Each implementation must have a unique parameter-type signature: that is, in one `CREATE MACRO` statement, all implementations having the same number of parameters must each have a unique sequence of parameter types - regardless of the parameter names. If a parameter type signature is not unique, it results in a `Ambiguity in macro overloads` error.
 * Overloading only applies to the parameter-types, but not to the macro type itself: for a single macro, all of its implementations are either scalar or `TABLE`.
