@@ -64,6 +64,7 @@
 		{%- assign normalized_href = href | replace: ".html", "" -%}
 		{%- assign last_char = normalized_href | slice: -1 -%}
 		{%- if last_char == "/" -%}{%- assign normalized_href = normalized_href | append: "index" -%}{%- endif -%}
-		<li class="nav-item"><a class="nav-row" href="{{ href }}"{% if normalized_href == nav_page and nav_found == false %}{% assign nav_found = true %} aria-current="page"{% endif %}>{{ item.page }}</a></li>
+		{%- case item.page -%}{%- when "Installation" -%}{%- assign nav_icon = "download-01" -%}{%- when "Quickstart" -%}{%- assign nav_icon = "zap" -%}{%- else -%}{%- assign nav_icon = "" -%}{%- endcase -%}
+		<li class="nav-item"><a class="nav-row{% if nav_icon != "" %} has-icon{% endif %}" href="{{ href }}"{% if normalized_href == nav_page and nav_found == false %}{% assign nav_found = true %} aria-current="page"{% endif %}>{% if nav_icon != "" %}<svg class="nav-icon" aria-hidden="true"><use href="#{{ nav_icon }}"></use></svg>{% endif %}{{ item.page }}</a></li>
 	{%- endif -%}
 {%- endfor -%}

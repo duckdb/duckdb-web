@@ -47,20 +47,16 @@
 				</div>
 				<div class="landingmenu">
 					
-					{% include menu_secondary.html %}
+					{% include megamenu.html %}
 					
-					<div class="hamburger hamburger--squeeze">
-						<div class="hamburger-box">
-							<div class="hamburger-inner"></div>
-						</div>
-					</div>
+					<button type="button" class="hamburger mm-burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
 				</div>
 				<div class="options">
-					<a class="button yellow" href="{% link community_support.md %}" target="_blank">Support</a>
 					<button class="mode" data-mode="dark" aria-label="Toggle dark mode">
 						<svg class="icon icon-sun"><use href="#sun"></use></svg>
 						<svg class="icon icon-moon"><use href="#moon-01"></use></svg>
 					</button>
+					<a class="button yellow" href="{% link community_support.md %}" target="_blank">Support</a>
 				</div>
 			</div>
 		</div>
@@ -87,6 +83,7 @@
 	<script src="/js/isotope.pkgd.min.js" defer></script>
 	<script src="{{ '/js/noteboxes.js' | fingerprint }}" defer></script>
 	<script src="{{ '/js/script.js' | fingerprint }}" defer></script>
+	<script src="{{ '/js/megamenu.js' | fingerprint }}" defer></script>
 	<script src="{{ '/js/copy_button.js' | fingerprint }}" defer></script>
 	
 </body>
