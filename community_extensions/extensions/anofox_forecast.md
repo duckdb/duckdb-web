@@ -7,7 +7,7 @@ excerpt: |
 
 extension:
   name: anofox_forecast
-  version: 2026.11.19
+  version: 2026.11.26
   description: Statistical timeseries forecasting in DuckDB. Supports ARIMA, ETS, Theta, TBATS, MFLES, MSTL, Croston, GARCH, and other models.
   language: C++
   build: cmake
@@ -18,12 +18,12 @@ extension:
     - sipemu
 repo:
   github: DataZooDE/anofox-forecast
-  ref: 3e15b3f4d76a9f190f85ac8792f04a449d42a554
+  ref: 796db55f006db6704d12ff349ced8810ea64fdaf
 
 extension_star_count: 49
 extension_star_count_pretty: 49
-extension_download_count: 104870
-extension_download_count_pretty: 104.9k
+extension_download_count: 91052
+extension_download_count_pretty: 91.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
@@ -35,13 +35,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.5.5 | 1.5.6 | 2.0.0 | 2.0.1 |
 | :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ✅ | ✅ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

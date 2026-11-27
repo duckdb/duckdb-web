@@ -70,8 +70,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 819
-extension_download_count_pretty: 819
+extension_download_count: 806
+extension_download_count_pretty: 806
 image: '/images/community_extensions/social_preview/preview_community_extension_http_request.png'
 layout: community_extension_doc
 ---

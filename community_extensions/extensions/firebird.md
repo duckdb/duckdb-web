@@ -220,8 +220,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 2685
-extension_download_count_pretty: 2.7k
+extension_download_count: 3019
+extension_download_count_pretty: 3.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_firebird.png'
 layout: community_extension_doc
 ---

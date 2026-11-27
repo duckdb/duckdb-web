@@ -110,10 +110,10 @@ docs:
 
     →  [GitHub](https://github.com/alitrack/duckdb-tantivy)
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 734
-extension_download_count_pretty: 734
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 891
+extension_download_count_pretty: 891
 image: '/images/community_extensions/social_preview/preview_community_extension_tantivy.png'
 layout: community_extension_doc
 ---
