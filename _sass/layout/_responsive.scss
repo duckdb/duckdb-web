@@ -819,8 +819,9 @@
 		gap: 16px;
 
 		>div:last-child {
-			justify-content: space-between;
-			column-gap: 8px;
+			flex-wrap: wrap;
+			column-gap: 16px;
+			row-gap: 8px;
 		}
 	}
 

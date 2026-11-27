@@ -1,5 +1,5 @@
 {% assign menu = include.data | default: site.data.megamenu %}
-<nav class="megamenu" aria-label="Main">
+<nav class="megamenu" aria-label="Main"{% if menu.panel_width %} style="--mm-panel-width: {{ menu.panel_width }}"{% endif %}>
 	<div class="mm-tools">
 		<button type="button" class="mm-search search_icon"><svg class="icon"><use href="#search-md"></use></svg>Search</button>
 		<button type="button" class="mode" data-mode="dark" aria-label="Toggle dark mode">
@@ -53,5 +53,5 @@
 		{% endif %}
 		{% endfor %}
 	</ul>
-	<div class="mm-support"><a href="{% link community_support.md %}" target="_blank">Support</a></div>
+	{% if menu.support %}<div class="mm-support{% if menu.support.style %} {{ menu.support.style }}{% endif %}"><a href="{{ menu.support.url }}" target="_blank">{{ menu.support.label }}</a></div>{% endif %}
 </nav>

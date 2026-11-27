@@ -214,7 +214,7 @@ h1, h2, h3, h4, h5, h6 {
 		width: 14px;
 		height: 14px;
 		margin-left: 8px;
-		vertical-align: -2px;
+		vertical-align: calc(0.35em - 7px);
 		fill: none;
 		stroke-width: 2;
 		cursor: pointer;

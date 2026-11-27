@@ -3,6 +3,11 @@
 @use '../abstracts/mixins' as *;
 
 $docs-sidebar-width: 280px;
+$docs-content-width: 872px;
+$docs-toc-width: 200px;
+$docs-toc-gap: 48px;
+$docs-toc-width-wide: 240px;
+$docs-toc-gap-wide: 64px;
 
 // Base styles
 body {
@@ -72,7 +77,7 @@ body.documentation {
         &.sidenav-drilldown main .wrap {
             width: calc(100% - $docs-sidebar-width);
             margin-left: $docs-sidebar-width;
-            padding-left: 32px;
+            padding: 0 32px;
         }
 
         &.sidenav-drilldown header .opensearch {
@@ -84,23 +89,36 @@ body.documentation {
         width: calc(100% - $docs-sidebar-width);
         min-height: 100vh;
         display: grid;
-        grid-template-columns: minmax(0, 1000px) min(22%, 315px);
+        grid-template-columns: minmax(0, $docs-content-width) $docs-toc-width;
+        column-gap: $docs-toc-gap;
         justify-content: center;
         max-width: unset;
         margin-left: $docs-sidebar-width;
-        padding: 0 0 0 30px;
+        padding: 0 32px;
         position: relative;
 
+        &:not(:has(> #sidebar)) {
+            grid-template-columns: minmax(0, $docs-content-width + $docs-toc-gap + $docs-toc-width);
+        }
+
+        @media only screen and (min-width: 1520px) {
+            grid-template-columns: minmax(0, $docs-content-width) $docs-toc-width-wide;
+            column-gap: $docs-toc-gap-wide;
+
+            &:not(:has(> #sidebar)) {
+                grid-template-columns: minmax(0, $docs-content-width + $docs-toc-gap-wide + $docs-toc-width-wide);
+            }
+        }
+
         @media only screen and (max-width: 1200px) {
-            grid-template-columns: minmax(0, 1fr);
+            grid-template-columns: minmax(0, $docs-content-width);
         }
 
         #main_content_wrap {
             width: 100%;
             margin-inline: auto;
             margin-top: calc($site-header-height + var(--docbanner-height, 0px));
-            padding: 30px 30px 30px 0;
-
+            padding: 30px 0;
         }
     }
     
@@ -202,7 +220,7 @@ body.documentation {
         background: transparent;
         position: relative;
         min-width: 0;
-        padding: calc($site-header-height + 30px + var(--docbanner-height, 0px)) 20px 20px 20px;
+        padding: calc($site-header-height + 30px + var(--docbanner-height, 0px)) 0 20px;
 
         @media only screen and (max-width: 1200px) {
             display: none;

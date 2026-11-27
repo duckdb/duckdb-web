@@ -223,6 +223,40 @@ body.documentation {
     }
 }
 
+$table-fade: 48px;
+
+@property --fade-start {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+}
+
+@property --fade-end {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+}
+
+@keyframes table-scroll-fade {
+    0% {
+        --fade-start: 0px;
+        --fade-end: #{$table-fade};
+    }
+
+    8% {
+        --fade-start: #{$table-fade};
+    }
+
+    92% {
+        --fade-end: #{$table-fade};
+    }
+
+    100% {
+        --fade-start: #{$table-fade};
+        --fade-end: 0px;
+    }
+}
+
 body.documentation,
 body.post,
 body.duckcon,
@@ -249,6 +283,20 @@ body.layout_default.blog_typography {
 
         &::-webkit-scrollbar-thumb {
             background: var(--doc-scrollbar-slider, #CCC);
+        }
+
+        @supports (animation-timeline: scroll()) {
+            $scrollbar: linear-gradient(#000, #000) bottom / 100% 5px no-repeat;
+            $fade-mask: linear-gradient(to right, transparent, #000 var(--fade-start), #000 calc(100% - var(--fade-end)), transparent);
+            -webkit-mask: $scrollbar, $fade-mask;
+                    mask: $scrollbar, $fade-mask;
+            animation: table-scroll-fade linear both;
+            animation-timeline: scroll(self inline);
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--main-text-primary-color, #0D0D0D);
+            outline-offset: 2px;
         }
 
         &.narrow {
@@ -405,6 +453,9 @@ body.layout_default.blog_typography {
         @media (min-width: 768px) {
             display: table;
             overflow: visible;
+            -webkit-mask: none;
+                    mask: none;
+            animation: none;
 
             thead tr {
                 border-bottom: 0;

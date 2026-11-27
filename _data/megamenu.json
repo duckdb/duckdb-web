@@ -1,4 +1,5 @@
 {
+  "support": { "label": "Support", "url": "/community_support.html" },
   "items": [
     {
       "id": "documentation",
