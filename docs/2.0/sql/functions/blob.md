@@ -21,8 +21,8 @@ This section describes functions and operators for examining and manipulating [`
 |:--|:-------|
 | [`arg1 || arg2`](#arg1--arg2) | Concatenates two strings, lists, or blobs. Any `NULL` input results in `NULL`. See also [`concat(arg1, arg2, ...)`]({% link docs/2.0/sql/functions/text.md %}#concatvalue-) and [`list_concat(list1, list2, ...)`]({% link docs/2.0/sql/functions/list.md %}#list_concatlist_1--list_n). |
 | [`base64(blob)`](#to_base64blob) | Alias for `to_base64`. |
-| [`decode(blob[, on_error])`](#decodeblob-on_error) | Converts `blob` to `VARCHAR`. The optional `on_error` parameter controls handling of invalid UTF-8: `'strict'` (default, throws error), `'replace'` (replaces invalid characters with `?`), or `'ignore'` (removes invalid characters). |
-| [`encode(string)`](#encodestring) | Converts the `string` to `BLOB`. Converts UTF-8 characters into literal encoding. |
+| [`decode(blob[, encoding])`](#decodeblob-encoding) | Converts `blob` to `VARCHAR`. The optional second argument is an encoding name or an error option for invalid UTF-8: `'strict'` (default, throws error), `'replace'` (replaces invalid characters with `?`), or `'ignore'` (removes invalid characters). An encoding name (for example, `'latin-1'`; see the `system.encodings` schema) decodes `blob` from that encoding instead. |
+| [`encode(string[, encoding])`](#encodestring-encoding) | Converts the `string` to `BLOB`. Converts UTF-8 characters into literal encoding, or into the named encoding (for example, `'latin-1'`; see the `system.encodings` schema). |
 | [`from_base64(string)`](#from_base64string) | Converts a base64 encoded `string` to a character string (`BLOB`). |
 | [`from_binary(value)`](#unbinvalue) | Alias for `unbin`. |
 | [`from_hex(value)`](#unhexvalue) | Alias for `unhex`. |
@@ -53,23 +53,35 @@ This section describes functions and operators for examining and manipulating [`
 | **Example 3** | `'\xAA'::BLOB || '\xBB'::BLOB` |
 | **Result** | `\xAA\xBB` |
 
-#### `decode(blob[, on_error])`
+#### `decode(blob[, encoding])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts `blob` to `VARCHAR`. The optional `on_error` parameter controls handling of invalid UTF-8: `'strict'` (default, throws error), `'replace'` (replaces invalid characters with `?`), or `'ignore'` (removes invalid characters). |
-| **Example** | `decode('\xC3\xBC'::BLOB)` |
+| **Description** | Converts `blob` to `VARCHAR`. The optional second argument is an encoding name or an error option for invalid UTF-8: `'strict'` (default, throws error), `'replace'` (replaces invalid characters with `?`), or `'ignore'` (removes invalid characters). An encoding name (for example, `'latin-1'`; see the `system.encodings` schema) decodes `blob` from that encoding instead. |
+| **Example 1** | `decode('\xC3\xBC'::BLOB)` |
 | **Result** | `ü` |
-| **Example** | `decode('\xAA'::BLOB, 'replace')` |
+| **Example 2** | `decode('\xAA'::BLOB, 'replace')` |
 | **Result** | `?` |
+| **Example 3** | `decode('\xFC'::BLOB, 'latin-1')` |
+| **Result** | `ü` |
+| **Example 4** | `decode(encode('日本語', 'utf-16'), 'utf-16')` |
+| **Result** | `日本語` |
 
-#### `encode(string)`
+> New Decoding from a named encoding was introduced in DuckDB 2.1 and is currently available in nightly builds. `'strict'`, `'replace'`, and `'ignore'` remain UTF-8 error options and are not encoding names. A non-constant second argument keeps that UTF-8 behavior. `utf-8` is the same as `decode` with one argument. `latin-1` and `utf-16` are built in; other names come from the [`encodings` extension]({% link docs/2.0/core_extensions/encodings.md %}), which is [autoloaded]({% link docs/2.0/extensions/overview.md %}#autoloading-extensions). Bytes that are not valid in that encoding raise an error. An unknown name raises an error listing the supported encodings.
+
+#### `encode(string[, encoding])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Converts the `string` to `BLOB`. Converts UTF-8 characters into literal encoding. |
-| **Example** | `encode('my_string_with_ü')` |
+| **Description** | Converts the `string` to `BLOB`. Converts UTF-8 characters into literal encoding, or into the named encoding (for example, `'latin-1'`; see the `system.encodings` schema). |
+| **Example 1** | `encode('my_string_with_ü')` |
 | **Result** | `my_string_with_\xC3\xBC` |
+| **Example 2** | `encode('café', 'latin-1')` |
+| **Result** | `caf\xE9` |
+| **Example 3** | `encode('my_string_with_ü', 'latin-1')` |
+| **Result** | `my_string_with_\xFC` |
+
+> New Encoding to a named encoding was introduced in DuckDB 2.1 and is currently available in nightly builds. The encoding must be a constant. `utf-8` is the same as `encode` with one argument. `latin-1` and `utf-16` are built in; other names come from the [`encodings` extension]({% link docs/2.0/core_extensions/encodings.md %}), which is [autoloaded]({% link docs/2.0/extensions/overview.md %}#autoloading-extensions). A character the encoding cannot represent raises a conversion error. An unknown name raises an error listing the supported encodings.
 
 #### `from_base64(string)`
 
