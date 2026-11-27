@@ -22,13 +22,13 @@ In the Netherlands, nature-monitoring data comes from many organizations: the tw
 
 [BIJ12](https://www.bij12.nl/), which supports the Netherlands' provinces in standardizing environmental and biodiversity information, is building a data platform to solve this problem. The platform's goal is audacious: preserve this data in a form that researchers can find, query and reanalyze for the next 50 to 100 years—without tying the archive's long-term readability to any particular database product or vendor.
 
-Bart Zwemmer, a data engineer working with BIJ12, explains the architectural strategy: store normalized data as open-format files (GeoParquet) on object storage, use DuckDB as the SQL interface for ingestion and querying, and maintain the data lake independently from any single query engine. As Bart puts it, "We can store data as Parquet files on S3 but still allow SQL access to the data." This keeps the barrier to entry low for future maintainers and preserves flexibility as technology evolves.
+Bart Zwemmer, a data engineer working with BIJ12, explains the architectural strategy: store normalized data as open-format files (GeoParquet) on object storage, a metadata JSON file as sidecar, use DuckDB as the SQL interface for ingestion and querying, and maintain the data lake independently from any single query engine. As Bart puts it, "We can store data as Parquet files on S3 but still allow SQL access to the data." This keeps the barrier to entry low for future maintainers and preserves flexibility as technology evolves.
 
 ## The Problem: Fragmented Data Across Jurisdictions
 
 Monitoring biodiversity and habitat health across a country requires long historical records. Changes in endangered species populations, wetland composition or bird migration patterns can take decades to observe with confidence. But the Netherlands' nature-monitoring ecosystem is fragmented: CSV files, Excel sheets, specialized GIS formats (GeoPackage), Parquet tables and web service APIs all coexist across the 14-organization network.
 
-> **Note:** BIJ12 is part of the "[Verbeterprogramma VHR-monitoring](https://www.bij12.nl/actueel/kijk-de-demosessie-van-9-juli-terug/)" (VVM), an intergovernmental effort to make national nature-monitoring data consistent and available. The platform is designed to support [Natura 2000](https://ec.europa.eu/environment/nature/natura2000/) site monitoring. The organization's data platform, version 1.0, launched publicly in June 2026.
+> **Note:** "[Verbeterprogramma VHR-monitoring](https://www.bij12.nl/actueel/kijk-de-demosessie-van-9-juli-terug/)" (VVM) is part of BIJ12, an intergovernmental effort to make national nature-monitoring data consistent and available. The platform is designed to support [Natura 2000](https://ec.europa.eu/environment/nature/natura2000/) site monitoring. The organization's data platform, version 1.0, launched publicly in June 2026.
 
 Even when data exists, researchers spend enormous effort locating it. Bart observed that stakeholders at coordination meetings report spending most of their research time on data discovery—not analysis. A centralized catalog with unified query access can change that.
 
@@ -41,12 +41,13 @@ The BIJ12 platform's design prioritizes long-term maintainability and vendor ind
 1. **Ingest sources** include CSV, Excel, GeoPackage, Parquet, web services and specialized APIs.
 2. **Lightweight orchestration** uses Python and TypeScript code, scheduled with Apache Airflow. Many transformation operations run as DuckDB SQL queries.
 3. **Normalization to [GeoParquet](https://duckdb.org/docs/extensions/spatial/overview.html)** creates a standardized, archival data lake stored as files on S3-compatible object storage. Bart describes the standardization process: "We transform all of those to GeoParquet." The files themselves form the durable archive, independent of any query engine.
-4. **A catalog layer** provides discoverability, descriptions and policy-aware access control.
-5. **Query paths** include DuckDB for SQL-based analysis and joins across Parquet files, and a companion PostgreSQL instance for use cases that need richer spatial functionality or dashboard integrations.
+4. Each data file is accompanied by a **JSON containing metadata**, lineage and other information to allow discoverability and understanding of the contents.
+5. **A catalog layer** provides discoverability, descriptions and policy-aware access control.
+6. **Query paths** include DuckDB for SQL-based analysis and joins across Parquet files, and a companion PostgreSQL instance for use cases that need richer spatial functionality or dashboard integrations.
 
-> **Why file-first?** Bart notes that "storing the data separate from the query engine in this case was very beneficial." Parquet files on object storage remain readable even if the query engine changes. Future maintainers can query the same files with whatever SQL tools are available in 2050 or 2075. It's a bet on file formats and SQL as long-lived standards, compared to proprietary database schemas.
+> **Why file-first?** Bart notes that "storing the data separate from the query engine in this case was very beneficial." Parquet files on object storage remain readable even if the query engine changes. Future maintainers can query the same files with whatever SQL tools are available in 2050 or 2075. It's a bet on file formats and SQL as long-lived standards, compared to proprietary database schemas. Migrating to a new file format in flat storage should be less invasive than migrating database technologies.
 
-This design serves another goal: **operational simplicity for handover**. BIJ12 is currently staffed by freelance data engineers, but the platform will eventually need to be maintained by BIJ12's own team. Standardizing around SQL and DuckDB means future operators need to understand fewer moving parts. Bart emphasizes that the team "doesn't want to have many services running," which reduces the surface area for long-term maintenance and succession planning.
+This design serves another goal: **operational simplicity for handover**. BIJ12 is currently mainly staffed by freelance engineers, but the platform will eventually need to be maintained by BIJ12's own team. Standardizing around SQL and DuckDB means future operators need to understand fewer moving parts. Bart emphasizes that the team "doesn't want to have many services running," which reduces the surface area for long-term maintenance and succession planning.
 
 ## DuckDB's Role: SQL Processing and Standardization
 
