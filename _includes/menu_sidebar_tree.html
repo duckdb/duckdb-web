@@ -12,7 +12,7 @@
 		{%- assign crumb_href = "" -%}
 		{%- if first.page == "Overview" and first.subfolderitems[0] == nil -%}{%- if first.path -%}{%- assign crumb_href = first.path -%}{%- else -%}{%- assign crumb_href = nav_base | append: item.slug | append: first.url -%}{%- endif -%}{%- endif -%}
 		{%- assign section_href = item.overview | default: crumb_href -%}
-		{%- capture item_crumb -%}{{ " " }}<span class="slash">/</span> <span>{% if crumb_href != "" %}<a href="{{ crumb_href }}">{{ item.page }}</a>{% else %}{{ item.page }}{% endif %}</span>{%- endcapture -%}
+		{%- capture item_crumb -%}{{ " " }}<span class="slash">/</span> <span>{% if section_href != "" %}<a href="{{ section_href }}">{{ item.page }}</a>{% else %}{{ item.page }}{% endif %}</span>{%- endcapture -%}
 		{%- capture l2_items -%}
 		{%- for main in item.mainfolderitems -%}
 			{%- if main.subfolderitems[0] -%}
