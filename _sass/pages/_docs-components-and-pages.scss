@@ -419,11 +419,15 @@ body.documentation {
         padding-left: 0;
         list-style: none;
         display: grid;
-        grid-template-columns: repeat(2, max-content);
+        grid-template-columns: minmax(0, max-content);
         column-gap: 24px;
         row-gap: 10px;
 
-        @container page-actions (min-width: 600px) {
+        @container page-actions (min-width: 520px) {
+            grid-template-columns: repeat(2, max-content);
+        }
+
+        @container page-actions (min-width: 800px) {
             grid-template-columns: repeat(4, max-content);
         }
     }

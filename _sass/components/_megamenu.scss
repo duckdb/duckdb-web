@@ -102,7 +102,7 @@ header .headerline .headercontent .landingmenu nav.megamenu {
 		position: absolute;
 		top: 100%;
 		left: 50%;
-		width: 700px;
+		width: var(--mm-panel-width, 700px);
 		padding-top: 8px;
 		transform: translateX(-50%);
 		opacity: 0;
@@ -232,7 +232,7 @@ header .headerline .headercontent .landingmenu nav.megamenu {
 		position: absolute;
 		top: 100%;
 		left: 50%;
-		width: 700px;
+		width: var(--mm-panel-width, 700px);
 		padding-top: 8px;
 		transform: translateX(-50%);
 		visibility: hidden;
