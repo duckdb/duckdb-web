@@ -1,4 +1,5 @@
 @use '../../abstracts/variables' as *;
+@use '../../abstracts/mixins' as *;
 
 /* ===========================================================================
    Box: in-process
@@ -40,7 +41,7 @@ body.overview #in-process {
 		gap: 6px;
 		padding: 16px 20px 0;
 		font-family: $fontMono;
-		font-size: var(--type-tiny, 12px);
+		font-size: var(--type-code-small, 12px);
 		letter-spacing: 0.24px;
 		color: var(--main-text-tertiary-color, #666666);
 
@@ -66,7 +67,7 @@ body.overview #in-process {
 			border: 1px solid var(--border-color);
 			border-radius: var(--page-radius-pill);
 			background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
-			font-size: 12px;
+			font-size: var(--type-label-2, 12px);
 			line-height: 1.2;
 		}
 
@@ -105,10 +106,8 @@ body.overview #in-process {
 	}
 
 	.ip-logo {
-		display: block;
 		width: 44px;
 		height: 44px;
-		flex-shrink: 0;
 	}
 
 	.ip-duckdb-text {
@@ -119,14 +118,12 @@ body.overview #in-process {
 	}
 
 	.ip-duckdb-name {
-		font-size: 18px;
-		font-weight: 600;
-		line-height: 1.2;
+		@include headline-3;
 		color: var(--main-text-primary-color-strong, #050505);
 	}
 
 	.ip-duckdb-sub {
-		font-size: 12px;
+		font-size: var(--type-label-2, 12px);
 		line-height: 1.3;
 		color: var(--quack-text-secondary);
 	}
@@ -145,7 +142,7 @@ body.overview #in-process {
 		margin: 0 0 4px -20px;
 		padding: 0;
 		font-family: $fontMono;
-		font-size: 12px;
+		font-size: var(--type-code-small, 12px);
 		line-height: 1;
 		color: var(--quack-text-secondary);
 	}
@@ -186,7 +183,7 @@ body.overview #in-process {
 		left: 50%;
 		transform: translateX(-50%);
 		font-family: $fontMono;
-		font-size: 12px;
+		font-size: var(--type-code-small, 12px);
 		line-height: 1;
 		color: var(--main-text-primary-color, #0d0d0d);
 		white-space: nowrap;

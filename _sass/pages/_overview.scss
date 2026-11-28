@@ -50,9 +50,8 @@ body.overview {
 		}
 
 		p {
+			@include body-standard;
 			margin: 0;
-			font-size: 16px;
-			line-height: 1.5;
 			color: var(--main-text-primary-color, #0d0d0d);
 		}
 	}
@@ -97,9 +96,7 @@ body.overview {
 		gap: 7px;
 		margin-top: auto;
 		padding-top: 8px;
-		font-size: var(--type-label-1, 14px);
-		font-weight: var(--type-weight-standard, 450);
-		line-height: 1;
+		@include label-1;
 		color: var(--main-text-secondary-color, #333333);
 		text-decoration: none;
 
@@ -114,6 +111,14 @@ body.overview {
 		&:hover {
 			color: var(--main-text-primary-color, #0d0d0d);
 		}
+	}
+
+	/* DuckDB logo, from the #source-duckdb sprite symbol (_includes/icons/sources.svg) */
+	.duckdb-logo {
+		display: block;
+		flex-shrink: 0;
+		width: 16px;
+		height: 16px;
 	}
 
 	.overview-box-illustration {
