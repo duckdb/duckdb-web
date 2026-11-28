@@ -138,8 +138,8 @@ docs:
 
 extension_star_count: 28
 extension_star_count_pretty: 28
-extension_download_count: 1109
-extension_download_count_pretty: 1.1k
+extension_download_count: 1190
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_stac.png'
 layout: community_extension_doc
 ---

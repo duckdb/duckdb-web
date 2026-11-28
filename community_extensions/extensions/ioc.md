@@ -54,8 +54,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 702
-extension_download_count_pretty: 702
+extension_download_count: 775
+extension_download_count_pretty: 775
 image: '/images/community_extensions/social_preview/preview_community_extension_ioc.png'
 layout: community_extension_doc
 ---

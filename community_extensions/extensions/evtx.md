@@ -51,8 +51,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 665
-extension_download_count_pretty: 665
+extension_download_count: 759
+extension_download_count_pretty: 759
 image: '/images/community_extensions/social_preview/preview_community_extension_evtx.png'
 layout: community_extension_doc
 ---

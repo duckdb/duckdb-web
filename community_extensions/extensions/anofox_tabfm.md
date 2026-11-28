@@ -159,8 +159,8 @@ docs:
 
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 897
-extension_download_count_pretty: 897
+extension_download_count: 915
+extension_download_count_pretty: 915
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabfm.png'
 layout: community_extension_doc
 ---

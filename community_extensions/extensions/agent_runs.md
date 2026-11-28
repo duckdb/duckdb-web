@@ -52,8 +52,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 1811
-extension_download_count_pretty: 1.8k
+extension_download_count: 1685
+extension_download_count_pretty: 1.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_agent_runs.png'
 layout: community_extension_doc
 ---

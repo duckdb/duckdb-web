@@ -275,8 +275,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 873
-extension_download_count_pretty: 873
+extension_download_count: 925
+extension_download_count_pretty: 925
 image: '/images/community_extensions/social_preview/preview_community_extension_whisper.png'
 layout: community_extension_doc
 ---
