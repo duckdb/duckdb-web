@@ -69,8 +69,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 685
-extension_download_count_pretty: 685
+extension_download_count: 794
+extension_download_count_pretty: 794
 image: '/images/community_extensions/social_preview/preview_community_extension_tresor.png'
 layout: community_extension_doc
 ---

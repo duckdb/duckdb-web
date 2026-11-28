@@ -61,8 +61,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 681
-extension_download_count_pretty: 681
+extension_download_count: 758
+extension_download_count_pretty: 758
 image: '/images/community_extensions/social_preview/preview_community_extension_jasp_ext.png'
 layout: community_extension_doc
 ---

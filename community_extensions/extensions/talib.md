@@ -106,8 +106,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 989
-extension_download_count_pretty: 989
+extension_download_count: 961
+extension_download_count_pretty: 961
 image: '/images/community_extensions/social_preview/preview_community_extension_talib.png'
 layout: community_extension_doc
 ---

@@ -44,10 +44,10 @@ docs:
     as the `duckwaked` server and the `duckwake` CLI. It needs a DuckLake catalog in PostgreSQL and Kafka
     (JSON messages). Documentation: https://duckwake.github.io
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 666
-extension_download_count_pretty: 666
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 746
+extension_download_count_pretty: 746
 image: '/images/community_extensions/social_preview/preview_community_extension_duckwake.png'
 layout: community_extension_doc
 ---
