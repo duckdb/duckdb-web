@@ -1,0 +1,74 @@
+<section class="overview-box" id="everywhere">
+	<div class="wrap">
+		<div class="overview-box-card">
+			<div class="overview-box-text">
+				<p class="pre-title">05</p>
+				<h2>Runs everywhere</h2>
+				<p>DuckDB has no external dependencies and compiles to WebAssembly, so it also runs in the browser – try it at <a href="https://shell.duckdb.org">shell.duckdb.org</a>.</p>
+				<p>DuckDB runs <a href="{% link everywhere/index.html %}">everywhere</a>: on <a href="{% post_url 2024-12-06-duckdb-tpch-sf100-on-mobile %}">phones</a>, on single-board computers such as the <a href="{% post_url 2025-01-17-raspberryi-pi-tpch %}">Raspberry Pi</a>, and on laptops and servers with Linux, macOS, and Windows.</p>
+				<div class="overview-box-links">
+					<a class="tag" href="{% link docs/2.0/clients/wasm/overview.md %}">DuckDB-Wasm</a>
+					<a class="tag" href="{% link docs/2.0/operations_manual/installing_duckdb/requirements.md %}#supported-platforms">Supported platforms</a>
+					<a class="tag" href="{% link docs/2.0/dev/building/android.md %}">Android</a>
+					<a class="tag" href="{% link docs/2.0/clients/tertiary_clients/swift.md %}">Swift</a>
+					<a class="tag" href="{% link docs/2.0/dev/building/raspberry_pi.md %}">Raspberry Pi</a>
+				</div>
+				<a class="overview-box-blog" href="{% post_url 2021-10-29-duckdb-wasm %}">Read the blog post<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="overview-box-illustration">
+				<div class="ev-diagram">
+
+					<div class="codecard ev-browser">
+						<div class="codecard-header">
+							<span class="ev-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<a class="ev-url" href="https://shell.duckdb.org" target="_blank"><svg class="icon" aria-hidden="true"><use href="#lock-01"></use></svg>shell.duckdb.org</a>
+							<span class="ev-badge">Wasm</span>
+						</div>
+						<div class="codecard-body">
+{% highlight sql %}
+SELECT country, count(*) AS stations
+FROM 'https://blobs.duckdb.org/stations.parquet'
+GROUP BY country ORDER BY stations DESC LIMIT 3;
+{% endhighlight %}
+							<div class="ev-output">
+{% highlight text %}
+┌─────────┬──────────┐
+│ country │ stations │
+├─────────┼──────────┤
+│ NL      │      397 │
+│ DE      │      105 │
+│ BE      │       48 │
+└─────────┴──────────┘
+{% endhighlight %}
+							</div>
+						</div>
+					</div>
+
+					<ul class="ev-devices" aria-label="Other platforms DuckDB runs on">
+						<li class="ev-device">
+							<svg class="icon" aria-hidden="true"><use href="#phone-01"></use></svg>
+							<span class="ev-device-name">Phones</span>
+							<span class="ev-device-sub">iOS, Android</span>
+						</li>
+						<li class="ev-device">
+							<svg class="icon" aria-hidden="true"><use href="#cpu-chip-01"></use></svg>
+							<span class="ev-device-name">Single-board</span>
+							<span class="ev-device-sub">Raspberry Pi</span>
+						</li>
+						<li class="ev-device">
+							<svg class="icon" aria-hidden="true"><use href="#laptop-01"></use></svg>
+							<span class="ev-device-name">Laptops</span>
+							<span class="ev-device-sub">macOS, Windows</span>
+						</li>
+						<li class="ev-device">
+							<svg class="icon" aria-hidden="true"><use href="#server-01"></use></svg>
+							<span class="ev-device-name">Servers</span>
+							<span class="ev-device-sub">x86_64, ARM64</span>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
