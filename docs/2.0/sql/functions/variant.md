@@ -12,7 +12,7 @@ title: Variant Functions
 
 This section describes functions that operate on the [`VARIANT` type]({% link docs/2.0/sql/data_types/variant.md %}).
 
-> New Most `variant_*` functions were introduced in DuckDB 2.0. The `variant_extract`, `variant_normalize`, and `variant_typeof` functions were already available in DuckDB 1.5.
+> New Most `variant_*` functions were introduced in DuckDB 2.0. The `variant_extract`, `variant_normalize`, and `variant_typeof` functions were already available in DuckDB 1.5. The `variant_value` function was introduced in DuckDB 2.1 and is currently available in nightly builds.
 
 | Name | Description |
 |:--|:-------|
@@ -21,6 +21,7 @@ This section describes functions that operate on the [`VARIANT` type]({% link do
 | [`variant_keys(v[, path])`](#variant_keysv-path) | Returns the keys of a `VARIANT` object, or of the object at `path`, as a list. |
 | [`variant_extract(v, field)`](#variant_extractv-field) | Returns the value of an object field or a list element as a `VARIANT`. |
 | [`variant_extract_string(v, path)`](#variant_extract_stringv-path) | Returns the value at `path` as a `VARCHAR`; objects and arrays are rendered as JSON text. |
+| [`variant_value(v, path)`](#variant_valuev-path) | Returns the scalar value at `path`, or at an array index, as a `VARIANT`. |
 | [`variant_array_length(v[, path])`](#variant_array_lengthv-path) | Returns the number of elements of a `VARIANT` array, or of the array at `path`. |
 | [`variant_exists(v, path)`](#variant_existsv-path) | Returns whether `path` exists in a `VARIANT` value. |
 | [`variant_contains(haystack, needle)`](#variant_containshaystack-needle) | Returns whether `needle` is contained in `haystack`, at any depth and regardless of key or element order. |
@@ -29,7 +30,7 @@ This section describes functions that operate on the [`VARIANT` type]({% link do
 | [`variant_group_object(key, value)`](#variant_group_objectkey-value) | Aggregate. Returns a `VARIANT` object with one field per `key`, `value` pair in the group. |
 | [`variant_group_array(x)`](#variant_group_arrayx) | Aggregate. Collects all values of `x` into a `VARIANT` array. |
 
-The functions `variant_type`, `variant_keys`, `variant_extract_string`, `variant_array_length` and `variant_exists` take a `path` argument that refers to a field inside the `VARIANT` value. A path is the name of a field; the empty string `''` refers to the value itself. Instead of a single path, a list of paths can be passed. In that case, the result is a list with one result per path. If a path does not exist, the result for that path is `NULL`, except for `variant_exists`, which returns `false`. A `NULL` path returns `NULL`, while a list of paths that contains `NULL` raises an error.
+The functions `variant_type`, `variant_keys`, `variant_extract_string`, `variant_value`, `variant_array_length` and `variant_exists` take a `path` argument that refers to a field inside the `VARIANT` value. A path is the name of a field; the empty string `''` refers to the value itself. Instead of a single path, a list of paths can be passed. In that case, the result is a list with one result per path. If a path does not exist, the result for that path is `NULL`, except for `variant_exists`, which returns `false`. A `NULL` path returns `NULL`, while a list of paths that contains `NULL` raises an error.
 
 #### `variant_typeof(v)`
 
@@ -80,6 +81,22 @@ The functions `variant_type`, `variant_keys`, `variant_extract_string`, `variant
 | **Result** | `{"c":12}` |
 | **Example 2** | `variant_extract_string(['duck', 'goose']::VARIANT, '')` |
 | **Result** | `["duck","goose"]` |
+
+#### `variant_value(v, path)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the scalar value at `path` as a `VARIANT`, keeping the type of the selected value. This is the `VARIANT` counterpart of [`json_value`]({% link docs/2.0/data/json/json_functions.md %}#json-extraction-functions). `path` is a `VARCHAR` object key. A `VARCHAR[]` list of keys returns a `VARIANT[]` with one value per key. A `BIGINT` index selects an array element instead. Indexes are 0-based, and a negative index counts from the end. The result is `NULL` when the selected value is an object, an array, or a `VARIANT` null (`VARIANT_NULL`), when the key is missing or the index is out of range, and when a key is used on a non-object or an index on a non-array. A path is a single object key. The empty string `''` selects the value itself, and JSONPath is not supported. The path or index must be a constant expression. A `NULL` path or index returns `NULL`. A list of paths that contains `NULL` raises a binder error. Only a `VARIANT` value is accepted: a `VARCHAR` or `JSON` value is not implicitly cast. A string literal is cast to a `VARCHAR` `VARIANT` and is not parsed as JSON. |
+| **Example 1** | `variant_value({'a': 42, 'b': [1, 2]}::VARIANT, 'a')` |
+| **Result** | `42` |
+| **Example 2** | `variant_value({'a': 42, 'b': [1, 2]}::VARIANT, 'b')` |
+| **Result** | `NULL` |
+| **Example 3** | `variant_value({'a': 42, 'b': 'duck'}::VARIANT, ['b', 'a'])` |
+| **Result** | `[duck, 42]` |
+| **Example 4** | `variant_value([10, 20, 30]::VARIANT, -1)` |
+| **Result** | `30` |
+
+> New The `variant_value` function was introduced in DuckDB 2.1 and is currently available in nightly builds.
 
 #### `variant_array_length(v[, path])`
 
